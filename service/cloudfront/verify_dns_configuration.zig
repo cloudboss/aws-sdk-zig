@@ -40,17 +40,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifyDnsCo
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: VerifyDnsConfigurationInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: VerifyDnsConfigurationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -59,17 +59,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: VerifyDnsConfigurationInput
     const path = "/2020-05-31/verify-dns-configuration";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<VerifyDnsConfigurationRequest>");
+    try body_buf.appendSlice(allocator, "<VerifyDnsConfigurationRequest>");
     if (input.domain) |v| {
-        try body_buf.appendSlice(alloc, "<Domain>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</Domain>");
+        try body_buf.appendSlice(allocator, "<Domain>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Domain>");
     }
-    try body_buf.appendSlice(alloc, "<Identifier>");
-    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.identifier);
-    try body_buf.appendSlice(alloc, "</Identifier>");
-    try body_buf.appendSlice(alloc, "</VerifyDnsConfigurationRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "<Identifier>");
+    try aws.xml.appendXmlEscaped(allocator, &body_buf, input.identifier);
+    try body_buf.appendSlice(allocator, "</Identifier>");
+    try body_buf.appendSlice(allocator, "</VerifyDnsConfigurationRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -77,12 +77,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: VerifyDnsConfigurationInput
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !VerifyDnsConfigurationOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !VerifyDnsConfigurationOutput {
     var result: VerifyDnsConfigurationOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -98,7 +98,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DnsConfigurationList")) {
-                    result.dns_configuration_list = try serde.deserializeDnsConfigurationList(&reader, alloc, "DnsConfiguration");
+                    result.dns_configuration_list = try serde.deserializeDnsConfigurationList(allocator, &reader, "DnsConfiguration");
                 } else {
                     try reader.skipElement();
                 }
@@ -112,11 +112,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

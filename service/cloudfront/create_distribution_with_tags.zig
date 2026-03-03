@@ -43,17 +43,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDistr
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateDistributionWithTagsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateDistributionWithTagsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -63,15 +63,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDistributionWithTagsI
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "WithTags");
+    try query_buf.appendSlice(allocator, "WithTags");
     query_has_prev = true;
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<DistributionConfigWithTags xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
-    try serde.serializeDistributionConfigWithTags(alloc, &body_buf, input.distribution_config_with_tags);
-    try body_buf.appendSlice(alloc, "</DistributionConfigWithTags>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "<DistributionConfigWithTags xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializeDistributionConfigWithTags(allocator, &body_buf, input.distribution_config_with_tags);
+    try body_buf.appendSlice(allocator, "</DistributionConfigWithTags>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -80,30 +80,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDistributionWithTagsI
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDistributionWithTagsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDistributionWithTagsOutput {
     var result: CreateDistributionWithTagsOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("etag")) |value| {
-        result.e_tag = try alloc.dupe(u8, value);
+        result.e_tag = try allocator.dupe(u8, value);
     }
     if (headers.get("location")) |value| {
-        result.location = try alloc.dupe(u8, value);
+        result.location = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

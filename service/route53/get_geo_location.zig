@@ -72,17 +72,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGeoLocat
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetGeoLocationInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("route53", "Route 53", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetGeoLocationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("route53", "Route 53", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -93,24 +93,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetGeoLocationInput, config
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.continent_code) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "continentcode=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "continentcode=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.country_code) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "countrycode=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "countrycode=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.subdivision_code) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "subdivisioncode=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "subdivisioncode=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -121,12 +121,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetGeoLocationInput, config
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetGeoLocationOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGeoLocationOutput {
     var result: GetGeoLocationOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -142,7 +142,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "GeoLocationDetails")) {
-                    result.geo_location_details = try serde.deserializeGeoLocationDetails(&reader, alloc);
+                    result.geo_location_details = try serde.deserializeGeoLocationDetails(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -156,11 +156,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

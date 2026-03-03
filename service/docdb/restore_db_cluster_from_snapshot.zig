@@ -171,17 +171,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreDBCl
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: RestoreDBClusterFromSnapshotInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("docdb", "DocDB", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterFromSnapshotInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("docdb", "DocDB", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -189,72 +189,72 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreDBClusterFromSnapsho
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=RestoreDBClusterFromSnapshot&Version=2014-10-31");
+    try body_buf.appendSlice(allocator, "Action=RestoreDBClusterFromSnapshot&Version=2014-10-31");
     if (input.availability_zones) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZones.AvailabilityZone.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
-    try body_buf.appendSlice(alloc, "&DBClusterIdentifier=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.db_cluster_identifier);
+    try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_cluster_identifier);
     if (input.db_cluster_parameter_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&DBClusterParameterGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DBClusterParameterGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.db_subnet_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&DBSubnetGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DBSubnetGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.deletion_protection) |v| {
-        try body_buf.appendSlice(alloc, "&DeletionProtection=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DeletionProtection=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.enable_cloudwatch_logs_exports) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EnableCloudwatchLogsExports.member.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
-    try body_buf.appendSlice(alloc, "&Engine=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.engine);
+    try body_buf.appendSlice(allocator, "&Engine=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.engine);
     if (input.engine_version) |v| {
-        try body_buf.appendSlice(alloc, "&EngineVersion=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&EngineVersion=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.kms_key_id) |v| {
-        try body_buf.appendSlice(alloc, "&KmsKeyId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&KmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.network_type) |v| {
-        try body_buf.appendSlice(alloc, "&NetworkType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NetworkType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.port) |v| {
-        try body_buf.appendSlice(alloc, "&Port=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&Port=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.serverless_v2_scaling_configuration) |v| {
         if (v.max_capacity) |sv| {
-            try body_buf.appendSlice(alloc, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.min_capacity) |sv| {
-            try body_buf.appendSlice(alloc, "&ServerlessV2ScalingConfiguration.MinCapacity=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MinCapacity=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
-    try body_buf.appendSlice(alloc, "&SnapshotIdentifier=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.snapshot_identifier);
+    try body_buf.appendSlice(allocator, "&SnapshotIdentifier=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.snapshot_identifier);
     if (input.storage_type) |v| {
-        try body_buf.appendSlice(alloc, "&StorageType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&StorageType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.tags) |list| {
         for (list, 0..) |item, idx| {
@@ -262,17 +262,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreDBClusterFromSnapsho
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
         }
@@ -282,12 +282,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreDBClusterFromSnapsho
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&VpcSecurityGroupIds.VpcSecurityGroupId.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -295,12 +295,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreDBClusterFromSnapsho
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RestoreDBClusterFromSnapshotOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RestoreDBClusterFromSnapshotOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -319,7 +319,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DBCluster")) {
-                    result.db_cluster = try serde.deserializeDBCluster(&reader, alloc);
+                    result.db_cluster = try serde.deserializeDBCluster(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -332,11 +332,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

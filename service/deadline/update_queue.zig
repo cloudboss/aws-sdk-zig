@@ -95,96 +95,96 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQueue
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateQueueInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("deadline", "deadline", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateQueueInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("deadline", "deadline", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/2023-10-12/farms/");
-    try path_buf.appendSlice(alloc, input.farm_id);
-    try path_buf.appendSlice(alloc, "/queues/");
-    try path_buf.appendSlice(alloc, input.queue_id);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/2023-10-12/farms/");
+    try path_buf.appendSlice(allocator, input.farm_id);
+    try path_buf.appendSlice(allocator, "/queues/");
+    try path_buf.appendSlice(allocator, input.queue_id);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
     if (input.allowed_storage_profile_ids_to_add) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"allowedStorageProfileIdsToAdd\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"allowedStorageProfileIdsToAdd\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.allowed_storage_profile_ids_to_remove) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"allowedStorageProfileIdsToRemove\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"allowedStorageProfileIdsToRemove\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.default_budget_action) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"defaultBudgetAction\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"defaultBudgetAction\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.description) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"description\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.display_name) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"displayName\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"displayName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.job_attachment_settings) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"jobAttachmentSettings\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"jobAttachmentSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.job_run_as_user) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"jobRunAsUser\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"jobRunAsUser\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.required_file_system_location_names_to_add) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"requiredFileSystemLocationNamesToAdd\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"requiredFileSystemLocationNamesToAdd\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.required_file_system_location_names_to_remove) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"requiredFileSystemLocationNamesToRemove\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"requiredFileSystemLocationNamesToRemove\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.role_arn) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"roleArn\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"roleArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .PATCH;
@@ -192,16 +192,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateQueueInput, config: *
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.client_token) |v| {
-        try request.headers.put(alloc, "X-Amz-Client-Token", v);
+        try request.headers.put(allocator, "X-Amz-Client-Token", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateQueueOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateQueueOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -210,7 +210,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -219,7 +219,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -70,17 +70,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartAttach
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: StartAttachmentUploadInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("connectparticipant", "ConnectParticipant", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: StartAttachmentUploadInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("connectparticipant", "ConnectParticipant", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -90,27 +90,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartAttachmentUploadInput,
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"AttachmentName\":");
-    try aws.json.writeValue(@TypeOf(input.attachment_name), input.attachment_name, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"AttachmentName\":");
+    try aws.json.writeValue(@TypeOf(input.attachment_name), input.attachment_name, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"AttachmentSizeInBytes\":");
-    try aws.json.writeValue(@TypeOf(input.attachment_size_in_bytes), input.attachment_size_in_bytes, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"AttachmentSizeInBytes\":");
+    try aws.json.writeValue(@TypeOf(input.attachment_size_in_bytes), input.attachment_size_in_bytes, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"ClientToken\":");
-    try aws.json.writeValue(@TypeOf(input.client_token), input.client_token, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"ClientToken\":");
+    try aws.json.writeValue(@TypeOf(input.client_token), input.client_token, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"ContentType\":");
-    try aws.json.writeValue(@TypeOf(input.content_type), input.content_type, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"ContentType\":");
+    try aws.json.writeValue(@TypeOf(input.content_type), input.content_type, allocator, &body_buf);
     has_prev = true;
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -118,16 +118,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartAttachmentUploadInput,
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
-    try request.headers.put(alloc, "X-Amz-Bearer", input.connection_token);
+    try request.headers.put(allocator, "Content-Type", "application/json");
+    try request.headers.put(allocator, "X-Amz-Bearer", input.connection_token);
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartAttachmentUploadOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartAttachmentUploadOutput {
     var result: StartAttachmentUploadOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartAttachmentUploadOutput, body, alloc);
+        result = try aws.json.parseJsonObject(StartAttachmentUploadOutput, body, allocator);
     }
     _ = status;
     _ = headers;
@@ -135,7 +135,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -144,7 +144,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

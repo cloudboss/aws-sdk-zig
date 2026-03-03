@@ -71,61 +71,61 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutGroupInp
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PutGroupInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("qbusiness", "QBusiness", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PutGroupInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("qbusiness", "QBusiness", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/applications/");
-    try path_buf.appendSlice(alloc, input.application_id);
-    try path_buf.appendSlice(alloc, "/indices/");
-    try path_buf.appendSlice(alloc, input.index_id);
-    try path_buf.appendSlice(alloc, "/groups");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/applications/");
+    try path_buf.appendSlice(allocator, input.application_id);
+    try path_buf.appendSlice(allocator, "/indices/");
+    try path_buf.appendSlice(allocator, input.index_id);
+    try path_buf.appendSlice(allocator, "/groups");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
     if (input.data_source_id) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"dataSourceId\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dataSourceId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"groupMembers\":");
-    try aws.json.writeValue(@TypeOf(input.group_members), input.group_members, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"groupMembers\":");
+    try aws.json.writeValue(@TypeOf(input.group_members), input.group_members, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"groupName\":");
-    try aws.json.writeValue(@TypeOf(input.group_name), input.group_name, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"groupName\":");
+    try aws.json.writeValue(@TypeOf(input.group_name), input.group_name, allocator, &body_buf);
     has_prev = true;
     if (input.role_arn) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"roleArn\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"roleArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"type\":");
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
     has_prev = true;
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;
@@ -133,13 +133,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutGroupInput, config: *aws
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutGroupOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutGroupOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -148,7 +148,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -157,7 +157,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

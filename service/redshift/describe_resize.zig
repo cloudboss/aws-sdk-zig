@@ -127,17 +127,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRes
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DescribeResizeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("redshift", "Redshift", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DescribeResizeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("redshift", "Redshift", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -145,11 +145,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeResizeInput, config
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=DescribeResize&Version=2012-12-01");
-    try body_buf.appendSlice(alloc, "&ClusterIdentifier=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.cluster_identifier);
+    try body_buf.appendSlice(allocator, "Action=DescribeResize&Version=2012-12-01");
+    try body_buf.appendSlice(allocator, "&ClusterIdentifier=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.cluster_identifier);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -157,12 +157,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeResizeInput, config
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeResizeOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeResizeOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -189,25 +189,25 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "EstimatedTimeToCompletionInSeconds")) {
                     result.estimated_time_to_completion_in_seconds = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ImportTablesCompleted")) {
-                    result.import_tables_completed = try serde.deserializeImportTablesCompleted(&reader, alloc, "member");
+                    result.import_tables_completed = try serde.deserializeImportTablesCompleted(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ImportTablesInProgress")) {
-                    result.import_tables_in_progress = try serde.deserializeImportTablesInProgress(&reader, alloc, "member");
+                    result.import_tables_in_progress = try serde.deserializeImportTablesInProgress(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ImportTablesNotStarted")) {
-                    result.import_tables_not_started = try serde.deserializeImportTablesNotStarted(&reader, alloc, "member");
+                    result.import_tables_not_started = try serde.deserializeImportTablesNotStarted(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Message")) {
-                    result.message = try alloc.dupe(u8, try reader.readElementText());
+                    result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProgressInMegaBytes")) {
                     result.progress_in_mega_bytes = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ResizeType")) {
-                    result.resize_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.resize_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = try alloc.dupe(u8, try reader.readElementText());
+                    result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetClusterType")) {
-                    result.target_cluster_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.target_cluster_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetEncryptionType")) {
-                    result.target_encryption_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.target_encryption_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetNodeType")) {
-                    result.target_node_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.target_node_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetNumberOfNodes")) {
                     result.target_number_of_nodes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "TotalResizeDataInMegaBytes")) {
@@ -224,11 +224,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

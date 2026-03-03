@@ -36,17 +36,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRecei
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateReceiptFilterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptFilterInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -54,15 +54,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateReceiptFilterInput, c
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreateReceiptFilter&Version=2010-12-01");
-    try body_buf.appendSlice(alloc, "&Filter.IpFilter.Cidr=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.filter.ip_filter.cidr);
-    try body_buf.appendSlice(alloc, "&Filter.IpFilter.Policy=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.filter.ip_filter.policy));
-    try body_buf.appendSlice(alloc, "&Filter.Name=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.filter.name);
+    try body_buf.appendSlice(allocator, "Action=CreateReceiptFilter&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "&Filter.IpFilter.Cidr=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.filter.ip_filter.cidr);
+    try body_buf.appendSlice(allocator, "&Filter.IpFilter.Policy=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.filter.ip_filter.policy));
+    try body_buf.appendSlice(allocator, "&Filter.Name=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.filter.name);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -70,26 +70,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateReceiptFilterInput, c
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateReceiptFilterOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateReceiptFilterOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: CreateReceiptFilterOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

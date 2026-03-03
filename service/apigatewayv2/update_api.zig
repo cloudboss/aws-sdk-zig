@@ -200,106 +200,106 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateApiIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateApiInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("apigatewayv2", "ApiGatewayV2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApiInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("apigatewayv2", "ApiGatewayV2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/v2/apis/");
-    try path_buf.appendSlice(alloc, input.api_id);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/v2/apis/");
+    try path_buf.appendSlice(allocator, input.api_id);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
     if (input.api_key_selection_expression) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"ApiKeySelectionExpression\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ApiKeySelectionExpression\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.cors_configuration) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"CorsConfiguration\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"CorsConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.credentials_arn) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"CredentialsArn\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"CredentialsArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.description) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Description\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.disable_execute_api_endpoint) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"DisableExecuteApiEndpoint\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DisableExecuteApiEndpoint\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.disable_schema_validation) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"DisableSchemaValidation\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DisableSchemaValidation\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.ip_address_type) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"IpAddressType\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"IpAddressType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.name) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Name\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Name\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.route_key) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"RouteKey\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RouteKey\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.route_selection_expression) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"RouteSelectionExpression\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RouteSelectionExpression\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.target) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Target\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Target\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.version) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Version\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Version\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .PATCH;
@@ -307,15 +307,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateApiInput, config: *aw
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateApiOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApiOutput {
     var result: UpdateApiOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateApiOutput, body, alloc);
+        result = try aws.json.parseJsonObject(UpdateApiOutput, body, allocator);
     }
     _ = status;
     _ = headers;
@@ -323,7 +323,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -332,7 +332,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

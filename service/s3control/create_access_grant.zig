@@ -133,17 +133,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAcces
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateAccessGrantInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3control", "S3 Control", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessGrantInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3control", "S3 Control", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -152,38 +152,38 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAccessGrantInput, con
     const path = "/v20180820/accessgrantsinstance/grant";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<CreateAccessGrantRequest>");
+    try body_buf.appendSlice(allocator, "<CreateAccessGrantRequest>");
     if (input.access_grants_location_configuration) |v| {
-        try body_buf.appendSlice(alloc, "<AccessGrantsLocationConfiguration>");
-        try serde.serializeAccessGrantsLocationConfiguration(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</AccessGrantsLocationConfiguration>");
+        try body_buf.appendSlice(allocator, "<AccessGrantsLocationConfiguration>");
+        try serde.serializeAccessGrantsLocationConfiguration(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</AccessGrantsLocationConfiguration>");
     }
-    try body_buf.appendSlice(alloc, "<AccessGrantsLocationId>");
-    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.access_grants_location_id);
-    try body_buf.appendSlice(alloc, "</AccessGrantsLocationId>");
+    try body_buf.appendSlice(allocator, "<AccessGrantsLocationId>");
+    try aws.xml.appendXmlEscaped(allocator, &body_buf, input.access_grants_location_id);
+    try body_buf.appendSlice(allocator, "</AccessGrantsLocationId>");
     if (input.application_arn) |v| {
-        try body_buf.appendSlice(alloc, "<ApplicationArn>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</ApplicationArn>");
+        try body_buf.appendSlice(allocator, "<ApplicationArn>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</ApplicationArn>");
     }
-    try body_buf.appendSlice(alloc, "<Grantee>");
-    try serde.serializeGrantee(alloc, &body_buf, input.grantee);
-    try body_buf.appendSlice(alloc, "</Grantee>");
-    try body_buf.appendSlice(alloc, "<Permission>");
-    try body_buf.appendSlice(alloc, @tagName(input.permission));
-    try body_buf.appendSlice(alloc, "</Permission>");
+    try body_buf.appendSlice(allocator, "<Grantee>");
+    try serde.serializeGrantee(allocator, &body_buf, input.grantee);
+    try body_buf.appendSlice(allocator, "</Grantee>");
+    try body_buf.appendSlice(allocator, "<Permission>");
+    try body_buf.appendSlice(allocator, @tagName(input.permission));
+    try body_buf.appendSlice(allocator, "</Permission>");
     if (input.s3_prefix_type) |v| {
-        try body_buf.appendSlice(alloc, "<S3PrefixType>");
-        try body_buf.appendSlice(alloc, @tagName(v));
-        try body_buf.appendSlice(alloc, "</S3PrefixType>");
+        try body_buf.appendSlice(allocator, "<S3PrefixType>");
+        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, "</S3PrefixType>");
     }
     if (input.tags) |v| {
-        try body_buf.appendSlice(alloc, "<Tags>");
-        try serde.serializeTagList(alloc, &body_buf, v, "Tag");
-        try body_buf.appendSlice(alloc, "</Tags>");
+        try body_buf.appendSlice(allocator, "<Tags>");
+        try serde.serializeTagList(allocator, &body_buf, v, "Tag");
+        try body_buf.appendSlice(allocator, "</Tags>");
     }
-    try body_buf.appendSlice(alloc, "</CreateAccessGrantRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "</CreateAccessGrantRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -191,13 +191,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAccessGrantInput, con
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
-    try request.headers.put(alloc, "x-amz-account-id", input.account_id);
+    try request.headers.put(allocator, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "x-amz-account-id", input.account_id);
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateAccessGrantOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAccessGrantOutput {
     var result: CreateAccessGrantOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -213,21 +213,21 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessGrantArn")) {
-                    result.access_grant_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.access_grant_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AccessGrantId")) {
-                    result.access_grant_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.access_grant_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AccessGrantsLocationConfiguration")) {
-                    result.access_grants_location_configuration = try serde.deserializeAccessGrantsLocationConfiguration(&reader, alloc);
+                    result.access_grants_location_configuration = try serde.deserializeAccessGrantsLocationConfiguration(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "AccessGrantsLocationId")) {
-                    result.access_grants_location_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.access_grants_location_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ApplicationArn")) {
-                    result.application_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreatedAt")) {
                     result.created_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Grantee")) {
-                    result.grantee = try serde.deserializeGrantee(&reader, alloc);
+                    result.grantee = try serde.deserializeGrantee(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "GrantScope")) {
-                    result.grant_scope = try alloc.dupe(u8, try reader.readElementText());
+                    result.grant_scope = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Permission")) {
                     result.permission = std.meta.stringToEnum(Permission, try reader.readElementText());
                 } else {
@@ -243,11 +243,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

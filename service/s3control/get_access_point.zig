@@ -100,26 +100,26 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessPo
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessPointInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3control", "S3 Control", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetAccessPointInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3control", "S3 Control", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/v20180820/accesspoint/");
-    try path_buf.appendSlice(alloc, input.name);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/v20180820/accesspoint/");
+    try path_buf.appendSlice(allocator, input.name);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -129,13 +129,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessPointInput, config
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
-    try request.headers.put(alloc, "x-amz-account-id", input.account_id);
+    try request.headers.put(allocator, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "x-amz-account-id", input.account_id);
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccessPointOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccessPointOutput {
     var result: GetAccessPointOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -151,29 +151,29 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessPointArn")) {
-                    result.access_point_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.access_point_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Alias")) {
-                    result.alias = try alloc.dupe(u8, try reader.readElementText());
+                    result.alias = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Bucket")) {
-                    result.bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.bucket = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "BucketAccountId")) {
-                    result.bucket_account_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.bucket_account_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreationDate")) {
                     result.creation_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DataSourceId")) {
-                    result.data_source_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.data_source_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DataSourceType")) {
-                    result.data_source_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.data_source_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Endpoints")) {
-                    result.endpoints = try serde.deserializeEndpoints(&reader, alloc, "entry");
+                    result.endpoints = try serde.deserializeEndpoints(allocator, &reader, "entry");
                 } else if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NetworkOrigin")) {
                     result.network_origin = std.meta.stringToEnum(NetworkOrigin, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublicAccessBlockConfiguration")) {
-                    result.public_access_block_configuration = try serde.deserializePublicAccessBlockConfiguration(&reader, alloc);
+                    result.public_access_block_configuration = try serde.deserializePublicAccessBlockConfiguration(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "VpcConfiguration")) {
-                    result.vpc_configuration = try serde.deserializeVpcConfiguration(&reader, alloc);
+                    result.vpc_configuration = try serde.deserializeVpcConfiguration(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -187,11 +187,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

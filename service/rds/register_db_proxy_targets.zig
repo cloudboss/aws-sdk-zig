@@ -47,17 +47,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterDBP
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: RegisterDBProxyTargetsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("rds", "RDS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: RegisterDBProxyTargetsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("rds", "RDS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -65,14 +65,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterDBProxyTargetsInput
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=RegisterDBProxyTargets&Version=2014-10-31");
+    try body_buf.appendSlice(allocator, "Action=RegisterDBProxyTargets&Version=2014-10-31");
     if (input.db_cluster_identifiers) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DBClusterIdentifiers.member.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.db_instance_identifiers) |list| {
@@ -80,18 +80,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterDBProxyTargetsInput
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DBInstanceIdentifiers.member.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
-    try body_buf.appendSlice(alloc, "&DBProxyName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.db_proxy_name);
+    try body_buf.appendSlice(allocator, "&DBProxyName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_proxy_name);
     if (input.target_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&TargetGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&TargetGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -99,12 +99,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterDBProxyTargetsInput
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RegisterDBProxyTargetsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterDBProxyTargetsOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -123,7 +123,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DBProxyTargets")) {
-                    result.db_proxy_targets = try serde.deserializeTargetList(&reader, alloc, "member");
+                    result.db_proxy_targets = try serde.deserializeTargetList(allocator, &reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -136,11 +136,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -108,66 +108,66 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PublishInpu
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PublishInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iotdataplane", "IoT Data Plane", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PublishInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("iotdataplane", "IoT Data Plane", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/topics/");
-    try path_buf.appendSlice(alloc, input.topic);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/topics/");
+    try path_buf.appendSlice(allocator, input.topic);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.content_type) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "contentType=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "contentType=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.message_expiry) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "messageExpiry=");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "messageExpiry=");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try query_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(allocator, num_str);
         }
         query_has_prev = true;
     }
     if (input.qos) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "qos=");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "qos=");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try query_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(allocator, num_str);
         }
         query_has_prev = true;
     }
     if (input.response_topic) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "responseTopic=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "responseTopic=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.retain) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "retain=");
-        try query_buf.appendSlice(alloc, if (v) "true" else "false");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "retain=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body = input.payload orelse "";
 
@@ -178,22 +178,22 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishInput, config: *aws.
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.correlation_data) |v| {
-        try request.headers.put(alloc, "x-amz-mqtt5-correlation-data", v);
+        try request.headers.put(allocator, "x-amz-mqtt5-correlation-data", v);
     }
     if (input.payload_format_indicator) |v| {
-        try request.headers.put(alloc, "x-amz-mqtt5-payload-format-indicator", @tagName(v));
+        try request.headers.put(allocator, "x-amz-mqtt5-payload-format-indicator", @tagName(v));
     }
     if (input.user_properties) |v| {
-        try request.headers.put(alloc, "x-amz-mqtt5-user-properties", v);
+        try request.headers.put(allocator, "x-amz-mqtt5-user-properties", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PublishOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PublishOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -202,7 +202,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -211,7 +211,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

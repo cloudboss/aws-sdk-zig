@@ -51,17 +51,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListConnect
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListConnectionFunctionsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectionFunctionsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -70,27 +70,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListConnectionFunctionsInpu
     const path = "/2020-05-31/connection-functions";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<ListConnectionFunctionsRequest>");
+    try body_buf.appendSlice(allocator, "<ListConnectionFunctionsRequest>");
     if (input.marker) |v| {
-        try body_buf.appendSlice(alloc, "<Marker>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</Marker>");
+        try body_buf.appendSlice(allocator, "<Marker>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Marker>");
     }
     if (input.max_items) |v| {
-        try body_buf.appendSlice(alloc, "<MaxItems>");
+        try body_buf.appendSlice(allocator, "<MaxItems>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try body_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try body_buf.appendSlice(allocator, num_str);
         }
-        try body_buf.appendSlice(alloc, "</MaxItems>");
+        try body_buf.appendSlice(allocator, "</MaxItems>");
     }
     if (input.stage) |v| {
-        try body_buf.appendSlice(alloc, "<Stage>");
-        try body_buf.appendSlice(alloc, @tagName(v));
-        try body_buf.appendSlice(alloc, "</Stage>");
+        try body_buf.appendSlice(allocator, "<Stage>");
+        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, "</Stage>");
     }
-    try body_buf.appendSlice(alloc, "</ListConnectionFunctionsRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "</ListConnectionFunctionsRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -98,12 +98,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListConnectionFunctionsInpu
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListConnectionFunctionsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConnectionFunctionsOutput {
     var result: ListConnectionFunctionsOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -119,9 +119,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ConnectionFunctions")) {
-                    result.connection_functions = try serde.deserializeConnectionFunctionSummaryList(&reader, alloc, "ConnectionFunctionSummary");
+                    result.connection_functions = try serde.deserializeConnectionFunctionSummaryList(allocator, &reader, "ConnectionFunctionSummary");
                 } else if (std.mem.eql(u8, e.local, "NextMarker")) {
-                    result.next_marker = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_marker = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -135,11 +135,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

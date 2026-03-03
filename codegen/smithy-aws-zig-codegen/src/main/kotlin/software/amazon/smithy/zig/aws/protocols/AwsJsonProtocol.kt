@@ -14,7 +14,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         val amzTarget = "$targetPrefix.${ctx.operationName}"
 
         writer.openBlock(
-            "fn serializeRequest(alloc: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
+            "fn serializeRequest(allocator: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
             inputName,
         )
 
@@ -26,7 +26,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         // Build endpoint
         writer.write(
-            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", alloc);",
+            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", allocator);",
             ctx.settings.packageName, ctx.settings.sdkId,
         )
         writer.blankLine()
@@ -39,7 +39,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         // Build JSON body
         if (hasMembers) {
-            writer.write("const body = try aws.json.jsonStringify(input, alloc);")
+            writer.write("const body = try aws.json.jsonStringify(input, allocator);")
         } else {
             writer.write("const body = \"{}\";")
         }
@@ -52,8 +52,8 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.write("request.tls = tls;")
         writer.write("request.port = port;")
         writer.write("request.body = body;")
-        writer.write("try request.headers.put(alloc, \"Content-Type\", \"\$L\");", contentType())
-        writer.write("try request.headers.put(alloc, \"X-Amz-Target\", \"\$L\");", amzTarget)
+        writer.write("try request.headers.put(allocator, \"Content-Type\", \"\$L\");", contentType())
+        writer.write("try request.headers.put(allocator, \"X-Amz-Target\", \"\$L\");", amzTarget)
         writer.blankLine()
 
         writer.write("return request;")
@@ -65,7 +65,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         val hasMembers = ctx.outputShape.allMembers.isNotEmpty()
 
         writer.openBlock(
-            "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !\$L {",
             outputName,
         )
         writer.write("_ = status;")
@@ -73,21 +73,21 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         if (!hasMembers) {
             writer.write("_ = body;")
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
             writer.write("return .{};")
         } else {
             val allOptional = ctx.outputShape.allMembers.values.all { !it.isRequired }
             if (allOptional) {
                 writer.write("if (body.len == 0) return .{};")
             }
-            writer.write("return aws.json.parseJsonObject(\$L, body, alloc);", outputName)
+            writer.write("return aws.json.parseJsonObject(\$L, body, allocator);", outputName)
         }
 
         writer.closeBlock("}")
     }
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
+        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
@@ -100,7 +100,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         // Extract error message (try both "message" and "Message")
         writer.write("const error_message = aws.json.findJsonValue(body, \"message\") orelse aws.json.findJsonValue(body, \"Message\") orelse \"\";")
-        writer.write("var arena = std.heap.ArenaAllocator.init(alloc);")
+        writer.write("var arena = std.heap.ArenaAllocator.init(allocator);")
         writer.write("errdefer arena.deinit();")
         writer.write("const arena_alloc = arena.allocator();")
         writer.write("const owned_message = try arena_alloc.dupe(u8, error_message);")

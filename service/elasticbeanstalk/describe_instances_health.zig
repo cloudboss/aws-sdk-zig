@@ -59,17 +59,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeIns
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstancesHealthInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstancesHealthInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -77,30 +77,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstancesHealthInpu
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=DescribeInstancesHealth&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "Action=DescribeInstancesHealth&Version=2010-12-01");
     if (input.attribute_names) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AttributeNames.member.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.environment_id) |v| {
-        try body_buf.appendSlice(alloc, "&EnvironmentId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&EnvironmentId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.environment_name) |v| {
-        try body_buf.appendSlice(alloc, "&EnvironmentName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&EnvironmentName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.next_token) |v| {
-        try body_buf.appendSlice(alloc, "&NextToken=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NextToken=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -108,12 +108,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstancesHealthInpu
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeInstancesHealthOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeInstancesHealthOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -132,9 +132,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "InstanceHealthList")) {
-                    result.instance_health_list = try serde.deserializeInstanceHealthList(&reader, alloc, "member");
+                    result.instance_health_list = try serde.deserializeInstanceHealthList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "NextToken")) {
-                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RefreshedAt")) {
                     result.refreshed_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -149,11 +149,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

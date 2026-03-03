@@ -88,17 +88,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateJobIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateJobInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3control", "S3 Control", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateJobInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3control", "S3 Control", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -107,47 +107,47 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateJobInput, config: *aw
     const path = "/v20180820/jobs";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<CreateJobRequest>");
-    try body_buf.appendSlice(alloc, "<ClientRequestToken>");
-    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.client_request_token);
-    try body_buf.appendSlice(alloc, "</ClientRequestToken>");
+    try body_buf.appendSlice(allocator, "<CreateJobRequest>");
+    try body_buf.appendSlice(allocator, "<ClientRequestToken>");
+    try aws.xml.appendXmlEscaped(allocator, &body_buf, input.client_request_token);
+    try body_buf.appendSlice(allocator, "</ClientRequestToken>");
     if (input.confirmation_required) |v| {
-        try body_buf.appendSlice(alloc, "<ConfirmationRequired>");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
-        try body_buf.appendSlice(alloc, "</ConfirmationRequired>");
+        try body_buf.appendSlice(allocator, "<ConfirmationRequired>");
+        try body_buf.appendSlice(allocator, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "</ConfirmationRequired>");
     }
     if (input.description) |v| {
-        try body_buf.appendSlice(alloc, "<Description>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</Description>");
+        try body_buf.appendSlice(allocator, "<Description>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Description>");
     }
     if (input.manifest) |v| {
-        try body_buf.appendSlice(alloc, "<Manifest>");
-        try serde.serializeJobManifest(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</Manifest>");
+        try body_buf.appendSlice(allocator, "<Manifest>");
+        try serde.serializeJobManifest(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Manifest>");
     }
-    try body_buf.appendSlice(alloc, "<Operation>");
-    try serde.serializeJobOperation(alloc, &body_buf, input.operation);
-    try body_buf.appendSlice(alloc, "</Operation>");
-    try body_buf.appendSlice(alloc, "<Priority>");
+    try body_buf.appendSlice(allocator, "<Operation>");
+    try serde.serializeJobOperation(allocator, &body_buf, input.operation);
+    try body_buf.appendSlice(allocator, "</Operation>");
+    try body_buf.appendSlice(allocator, "<Priority>");
     {
-        const num_str = std.fmt.allocPrint(alloc, "{d}", .{input.priority}) catch "";
-        try body_buf.appendSlice(alloc, num_str);
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{input.priority}) catch "";
+        try body_buf.appendSlice(allocator, num_str);
     }
-    try body_buf.appendSlice(alloc, "</Priority>");
-    try body_buf.appendSlice(alloc, "<Report>");
-    try serde.serializeJobReport(alloc, &body_buf, input.report);
-    try body_buf.appendSlice(alloc, "</Report>");
-    try body_buf.appendSlice(alloc, "<RoleArn>");
-    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.role_arn);
-    try body_buf.appendSlice(alloc, "</RoleArn>");
+    try body_buf.appendSlice(allocator, "</Priority>");
+    try body_buf.appendSlice(allocator, "<Report>");
+    try serde.serializeJobReport(allocator, &body_buf, input.report);
+    try body_buf.appendSlice(allocator, "</Report>");
+    try body_buf.appendSlice(allocator, "<RoleArn>");
+    try aws.xml.appendXmlEscaped(allocator, &body_buf, input.role_arn);
+    try body_buf.appendSlice(allocator, "</RoleArn>");
     if (input.tags) |v| {
-        try body_buf.appendSlice(alloc, "<Tags>");
-        try serde.serializeS3TagSet(alloc, &body_buf, v, "member");
-        try body_buf.appendSlice(alloc, "</Tags>");
+        try body_buf.appendSlice(allocator, "<Tags>");
+        try serde.serializeS3TagSet(allocator, &body_buf, v, "member");
+        try body_buf.appendSlice(allocator, "</Tags>");
     }
-    try body_buf.appendSlice(alloc, "</CreateJobRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "</CreateJobRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -155,13 +155,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateJobInput, config: *aw
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
-    try request.headers.put(alloc, "x-amz-account-id", input.account_id);
+    try request.headers.put(allocator, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "x-amz-account-id", input.account_id);
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateJobOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateJobOutput {
     var result: CreateJobOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -177,7 +177,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "JobId")) {
-                    result.job_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.job_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -191,11 +191,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -45,17 +45,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyUsage
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyUsageLimitInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("redshift", "Redshift", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyUsageLimitInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("redshift", "Redshift", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -63,19 +63,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyUsageLimitInput, conf
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyUsageLimit&Version=2012-12-01");
+    try body_buf.appendSlice(allocator, "Action=ModifyUsageLimit&Version=2012-12-01");
     if (input.amount) |v| {
-        try body_buf.appendSlice(alloc, "&Amount=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&Amount=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.breach_action) |v| {
-        try body_buf.appendSlice(alloc, "&BreachAction=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&BreachAction=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
-    try body_buf.appendSlice(alloc, "&UsageLimitId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.usage_limit_id);
+    try body_buf.appendSlice(allocator, "&UsageLimitId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.usage_limit_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -83,12 +83,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyUsageLimitInput, conf
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyUsageLimitOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyUsageLimitOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -111,7 +111,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "BreachAction")) {
                     result.breach_action = std.meta.stringToEnum(UsageLimitBreachAction, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ClusterIdentifier")) {
-                    result.cluster_identifier = try alloc.dupe(u8, try reader.readElementText());
+                    result.cluster_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FeatureType")) {
                     result.feature_type = std.meta.stringToEnum(UsageLimitFeatureType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LimitType")) {
@@ -119,9 +119,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "Period")) {
                     result.period = std.meta.stringToEnum(UsageLimitPeriod, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
-                    result.tags = try serde.deserializeTagList(&reader, alloc, "Tag");
+                    result.tags = try serde.deserializeTagList(allocator, &reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "UsageLimitId")) {
-                    result.usage_limit_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.usage_limit_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -134,11 +134,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -101,17 +101,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTypeVer
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListTypeVersionsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListTypeVersionsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -119,37 +119,37 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTypeVersionsInput, conf
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ListTypeVersions&Version=2010-05-15");
+    try body_buf.appendSlice(allocator, "Action=ListTypeVersions&Version=2010-05-15");
     if (input.arn) |v| {
-        try body_buf.appendSlice(alloc, "&Arn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Arn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.deprecated_status) |v| {
-        try body_buf.appendSlice(alloc, "&DeprecatedStatus=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&DeprecatedStatus=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.max_results) |v| {
-        try body_buf.appendSlice(alloc, "&MaxResults=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&MaxResults=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.next_token) |v| {
-        try body_buf.appendSlice(alloc, "&NextToken=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NextToken=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.publisher_id) |v| {
-        try body_buf.appendSlice(alloc, "&PublisherId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PublisherId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.@"type") |v| {
-        try body_buf.appendSlice(alloc, "&Type=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&Type=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.type_name) |v| {
-        try body_buf.appendSlice(alloc, "&TypeName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&TypeName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -157,12 +157,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTypeVersionsInput, conf
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListTypeVersionsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTypeVersionsOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -181,9 +181,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "NextToken")) {
-                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeVersionSummaries")) {
-                    result.type_version_summaries = try serde.deserializeTypeVersionSummaries(&reader, alloc, "member");
+                    result.type_version_summaries = try serde.deserializeTypeVersionSummaries(allocator, &reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -196,11 +196,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

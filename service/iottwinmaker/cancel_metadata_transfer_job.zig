@@ -60,27 +60,27 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelMetad
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CancelMetadataTransferJobInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iottwinmaker", "IoTTwinMaker", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CancelMetadataTransferJobInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("iottwinmaker", "IoTTwinMaker", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/metadata-transfer-jobs/");
-    try path_buf.appendSlice(alloc, input.metadata_transfer_job_id);
-    try path_buf.appendSlice(alloc, "/cancel");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/metadata-transfer-jobs/");
+    try path_buf.appendSlice(allocator, input.metadata_transfer_job_id);
+    try path_buf.appendSlice(allocator, "/cancel");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -90,15 +90,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CancelMetadataTransferJobIn
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CancelMetadataTransferJobOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelMetadataTransferJobOutput {
     var result: CancelMetadataTransferJobOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelMetadataTransferJobOutput, body, alloc);
+        result = try aws.json.parseJsonObject(CancelMetadataTransferJobOutput, body, allocator);
     }
     _ = status;
     _ = headers;
@@ -106,7 +106,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -115,7 +115,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

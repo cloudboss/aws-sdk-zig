@@ -121,17 +121,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePolic
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreatePolicyInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iam", "IAM", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreatePolicyInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("iam", "IAM", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -139,38 +139,38 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePolicyInput, config: 
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreatePolicy&Version=2010-05-08");
+    try body_buf.appendSlice(allocator, "Action=CreatePolicy&Version=2010-05-08");
     if (input.description) |v| {
-        try body_buf.appendSlice(alloc, "&Description=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Description=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.path) |v| {
-        try body_buf.appendSlice(alloc, "&Path=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Path=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&PolicyDocument=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.policy_document);
-    try body_buf.appendSlice(alloc, "&PolicyName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.policy_name);
+    try body_buf.appendSlice(allocator, "&PolicyDocument=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.policy_document);
+    try body_buf.appendSlice(allocator, "&PolicyName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.policy_name);
     if (input.tags) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Key=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.key);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.key);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.value);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.value);
             }
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -178,12 +178,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePolicyInput, config: 
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreatePolicyOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePolicyOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -202,7 +202,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Policy")) {
-                    result.policy = try serde.deserializePolicy(&reader, alloc);
+                    result.policy = try serde.deserializePolicy(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -215,11 +215,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

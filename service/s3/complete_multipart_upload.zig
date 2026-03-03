@@ -352,44 +352,44 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteMul
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CompleteMultipartUploadInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.key);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.key);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-    try query_buf.appendSlice(alloc, "uploadId=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, input.upload_id);
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "uploadId=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.upload_id);
     query_has_prev = true;
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = blk: {
         if (input.multipart_upload) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(alloc, "<CompletedMultipartUpload xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
-            try serde.serializeCompletedMultipartUpload(alloc, &body_buf, payload);
-            try body_buf.appendSlice(alloc, "</CompletedMultipartUpload>");
-            break :blk try body_buf.toOwnedSlice(alloc);
+            try body_buf.appendSlice(allocator, "<CompletedMultipartUpload xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeCompletedMultipartUpload(allocator, &body_buf, payload);
+            try body_buf.appendSlice(allocator, "</CompletedMultipartUpload>");
+            break :blk try body_buf.toOwnedSlice(allocator);
         }
         break :blk null;
     };
@@ -401,57 +401,57 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInpu
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_crc32) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-crc32", v);
+        try request.headers.put(allocator, "x-amz-checksum-crc32", v);
     }
     if (input.checksum_crc32_c) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-crc32c", v);
+        try request.headers.put(allocator, "x-amz-checksum-crc32c", v);
     }
     if (input.checksum_crc64_nvme) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-crc64nvme", v);
+        try request.headers.put(allocator, "x-amz-checksum-crc64nvme", v);
     }
     if (input.checksum_sha1) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-sha1", v);
+        try request.headers.put(allocator, "x-amz-checksum-sha1", v);
     }
     if (input.checksum_sha256) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-sha256", v);
+        try request.headers.put(allocator, "x-amz-checksum-sha256", v);
     }
     if (input.checksum_type) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-type", @tagName(v));
+        try request.headers.put(allocator, "x-amz-checksum-type", @tagName(v));
     }
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.if_match) |v| {
-        try request.headers.put(alloc, "If-Match", v);
+        try request.headers.put(allocator, "If-Match", v);
     }
     if (input.if_none_match) |v| {
-        try request.headers.put(alloc, "If-None-Match", v);
+        try request.headers.put(allocator, "If-None-Match", v);
     }
     if (input.mpu_object_size) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-mp-object-size", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-mp-object-size", num_str);
         }
     }
     if (input.request_payer) |v| {
-        try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
     }
     if (input.sse_customer_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-algorithm", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
     }
     if (input.sse_customer_key) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key", v);
     }
     if (input.sse_customer_key_md5) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key-MD5", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key-MD5", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CompleteMultipartUploadOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CompleteMultipartUploadOutput {
     var result: CompleteMultipartUploadOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -467,25 +467,25 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Bucket")) {
-                    result.bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.bucket = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC32")) {
-                    result.checksum_crc32 = try alloc.dupe(u8, try reader.readElementText());
+                    result.checksum_crc32 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC32C")) {
-                    result.checksum_crc32_c = try alloc.dupe(u8, try reader.readElementText());
+                    result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
-                    result.checksum_crc64_nvme = try alloc.dupe(u8, try reader.readElementText());
+                    result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
-                    result.checksum_sha1 = try alloc.dupe(u8, try reader.readElementText());
+                    result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
-                    result.checksum_sha256 = try alloc.dupe(u8, try reader.readElementText());
+                    result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
                     result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
-                    result.e_tag = try alloc.dupe(u8, try reader.readElementText());
+                    result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Key")) {
-                    result.key = try alloc.dupe(u8, try reader.readElementText());
+                    result.key = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Location")) {
-                    result.location = try alloc.dupe(u8, try reader.readElementText());
+                    result.location = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -498,7 +498,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         result.bucket_key_enabled = std.mem.eql(u8, value, "true");
     }
     if (headers.get("x-amz-expiration")) |value| {
-        result.expiration = try alloc.dupe(u8, value);
+        result.expiration = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
@@ -507,20 +507,20 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
     }
     if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
-        result.ssekms_key_id = try alloc.dupe(u8, value);
+        result.ssekms_key_id = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-version-id")) |value| {
-        result.version_id = try alloc.dupe(u8, value);
+        result.version_id = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

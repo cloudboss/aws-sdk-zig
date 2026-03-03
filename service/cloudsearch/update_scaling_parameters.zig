@@ -37,17 +37,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateScali
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateScalingParametersInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudsearch", "CloudSearch", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateScalingParametersInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudsearch", "CloudSearch", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -55,23 +55,23 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateScalingParametersInpu
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=UpdateScalingParameters&Version=2013-01-01");
-    try body_buf.appendSlice(alloc, "&DomainName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.domain_name);
+    try body_buf.appendSlice(allocator, "Action=UpdateScalingParameters&Version=2013-01-01");
+    try body_buf.appendSlice(allocator, "&DomainName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.domain_name);
     if (input.scaling_parameters.desired_instance_type) |sv| {
-        try body_buf.appendSlice(alloc, "&ScalingParameters.DesiredInstanceType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        try body_buf.appendSlice(allocator, "&ScalingParameters.DesiredInstanceType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
     }
     if (input.scaling_parameters.desired_partition_count) |sv| {
-        try body_buf.appendSlice(alloc, "&ScalingParameters.DesiredPartitionCount=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+        try body_buf.appendSlice(allocator, "&ScalingParameters.DesiredPartitionCount=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
     }
     if (input.scaling_parameters.desired_replication_count) |sv| {
-        try body_buf.appendSlice(alloc, "&ScalingParameters.DesiredReplicationCount=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+        try body_buf.appendSlice(allocator, "&ScalingParameters.DesiredReplicationCount=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -79,12 +79,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateScalingParametersInpu
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateScalingParametersOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateScalingParametersOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -103,7 +103,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ScalingParameters")) {
-                    result.scaling_parameters = try serde.deserializeScalingParametersStatus(&reader, alloc);
+                    result.scaling_parameters = try serde.deserializeScalingParametersStatus(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -116,11 +116,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

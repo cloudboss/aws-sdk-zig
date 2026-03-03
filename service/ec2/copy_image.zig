@@ -182,17 +182,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyImageIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CopyImageInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CopyImageInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -200,62 +200,62 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyImageInput, config: *aw
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CopyImage&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=CopyImage&Version=2016-11-15");
     if (input.client_token) |v| {
-        try body_buf.appendSlice(alloc, "&ClientToken=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ClientToken=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.copy_image_tags) |v| {
-        try body_buf.appendSlice(alloc, "&CopyImageTags=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&CopyImageTags=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.description) |v| {
-        try body_buf.appendSlice(alloc, "&Description=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Description=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.destination_availability_zone) |v| {
-        try body_buf.appendSlice(alloc, "&DestinationAvailabilityZone=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DestinationAvailabilityZone=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.destination_availability_zone_id) |v| {
-        try body_buf.appendSlice(alloc, "&DestinationAvailabilityZoneId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DestinationAvailabilityZoneId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.destination_outpost_arn) |v| {
-        try body_buf.appendSlice(alloc, "&DestinationOutpostArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DestinationOutpostArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.encrypted) |v| {
-        try body_buf.appendSlice(alloc, "&Encrypted=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&Encrypted=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.kms_key_id) |v| {
-        try body_buf.appendSlice(alloc, "&KmsKeyId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&KmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&Name=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.name);
+    try body_buf.appendSlice(allocator, "&Name=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.name);
     if (input.snapshot_copy_completion_duration_minutes) |v| {
-        try body_buf.appendSlice(alloc, "&SnapshotCopyCompletionDurationMinutes=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&SnapshotCopyCompletionDurationMinutes=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
-    try body_buf.appendSlice(alloc, "&SourceImageId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.source_image_id);
-    try body_buf.appendSlice(alloc, "&SourceRegion=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.source_region);
+    try body_buf.appendSlice(allocator, "&SourceImageId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.source_image_id);
+    try body_buf.appendSlice(allocator, "&SourceRegion=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.source_region);
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
                 }
             }
             if (item.tags) |lst_1| {
@@ -264,17 +264,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyImageInput, config: *aw
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                 }
@@ -282,7 +282,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyImageInput, config: *aw
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -290,12 +290,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyImageInput, config: *aw
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CopyImageOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CopyImageOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -312,7 +312,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "imageId")) {
-                    result.image_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.image_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -325,11 +325,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

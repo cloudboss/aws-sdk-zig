@@ -104,17 +104,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSta
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DescribeStackDriftDetectionStatusInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DescribeStackDriftDetectionStatusInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -122,11 +122,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeStackDriftDetection
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=DescribeStackDriftDetectionStatus&Version=2010-05-15");
-    try body_buf.appendSlice(alloc, "&StackDriftDetectionId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.stack_drift_detection_id);
+    try body_buf.appendSlice(allocator, "Action=DescribeStackDriftDetectionStatus&Version=2010-05-15");
+    try body_buf.appendSlice(allocator, "&StackDriftDetectionId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.stack_drift_detection_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -134,12 +134,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeStackDriftDetection
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeStackDriftDetectionStatusOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeStackDriftDetectionStatusOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -160,15 +160,15 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "DetectionStatus")) {
                     result.detection_status = std.meta.stringToEnum(StackDriftDetectionStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DetectionStatusReason")) {
-                    result.detection_status_reason = try alloc.dupe(u8, try reader.readElementText());
+                    result.detection_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DriftedStackResourceCount")) {
                     result.drifted_stack_resource_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StackDriftDetectionId")) {
-                    result.stack_drift_detection_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.stack_drift_detection_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackDriftStatus")) {
                     result.stack_drift_status = std.meta.stringToEnum(StackDriftStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackId")) {
-                    result.stack_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.stack_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {
                     result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -183,11 +183,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

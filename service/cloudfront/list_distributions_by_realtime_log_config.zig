@@ -49,17 +49,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDistrib
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListDistributionsByRealtimeLogConfigInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListDistributionsByRealtimeLogConfigInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -68,32 +68,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListDistributionsByRealtime
     const path = "/2020-05-31/distributionsByRealtimeLogConfig";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<ListDistributionsByRealtimeLogConfigRequest>");
+    try body_buf.appendSlice(allocator, "<ListDistributionsByRealtimeLogConfigRequest>");
     if (input.marker) |v| {
-        try body_buf.appendSlice(alloc, "<Marker>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</Marker>");
+        try body_buf.appendSlice(allocator, "<Marker>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Marker>");
     }
     if (input.max_items) |v| {
-        try body_buf.appendSlice(alloc, "<MaxItems>");
+        try body_buf.appendSlice(allocator, "<MaxItems>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try body_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try body_buf.appendSlice(allocator, num_str);
         }
-        try body_buf.appendSlice(alloc, "</MaxItems>");
+        try body_buf.appendSlice(allocator, "</MaxItems>");
     }
     if (input.realtime_log_config_arn) |v| {
-        try body_buf.appendSlice(alloc, "<RealtimeLogConfigArn>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</RealtimeLogConfigArn>");
+        try body_buf.appendSlice(allocator, "<RealtimeLogConfigArn>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</RealtimeLogConfigArn>");
     }
     if (input.realtime_log_config_name) |v| {
-        try body_buf.appendSlice(alloc, "<RealtimeLogConfigName>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</RealtimeLogConfigName>");
+        try body_buf.appendSlice(allocator, "<RealtimeLogConfigName>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</RealtimeLogConfigName>");
     }
-    try body_buf.appendSlice(alloc, "</ListDistributionsByRealtimeLogConfigRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "</ListDistributionsByRealtimeLogConfigRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -101,13 +101,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListDistributionsByRealtime
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListDistributionsByRealtimeLogConfigOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDistributionsByRealtimeLogConfigOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -116,11 +116,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

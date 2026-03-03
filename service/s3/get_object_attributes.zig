@@ -180,40 +180,40 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectAt
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectAttributesInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.key);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.key);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "attributes");
+    try query_buf.appendSlice(allocator, "attributes");
     query_has_prev = true;
     if (input.version_id) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "versionId=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "versionId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -224,44 +224,44 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, c
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.max_parts) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-max-parts", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-max-parts", num_str);
         }
     }
     {
         var header_buf: std.ArrayList(u8) = .{};
         for (input.object_attributes) |item| {
-            if (header_buf.items.len > 0) try header_buf.appendSlice(alloc, ", ");
-            try header_buf.appendSlice(alloc, @tagName(item));
+            if (header_buf.items.len > 0) try header_buf.appendSlice(allocator, ", ");
+            try header_buf.appendSlice(allocator, @tagName(item));
         }
-        try request.headers.put(alloc, "x-amz-object-attributes", header_buf.items);
+        try request.headers.put(allocator, "x-amz-object-attributes", header_buf.items);
     }
     if (input.part_number_marker) |v| {
-        try request.headers.put(alloc, "x-amz-part-number-marker", v);
+        try request.headers.put(allocator, "x-amz-part-number-marker", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
     }
     if (input.sse_customer_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-algorithm", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
     }
     if (input.sse_customer_key) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key", v);
     }
     if (input.sse_customer_key_md5) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key-MD5", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key-MD5", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectAttributesOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetObjectAttributesOutput {
     var result: GetObjectAttributesOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -277,11 +277,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Checksum")) {
-                    result.checksum = try serde.deserializeChecksum(&reader, alloc);
+                    result.checksum = try serde.deserializeChecksum(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
-                    result.e_tag = try alloc.dupe(u8, try reader.readElementText());
+                    result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ObjectParts")) {
-                    result.object_parts = try serde.deserializeGetObjectAttributesParts(&reader, alloc);
+                    result.object_parts = try serde.deserializeGetObjectAttributesParts(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "ObjectSize")) {
                     result.object_size = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
@@ -304,17 +304,17 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
     }
     if (headers.get("x-amz-version-id")) |value| {
-        result.version_id = try alloc.dupe(u8, value);
+        result.version_id = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

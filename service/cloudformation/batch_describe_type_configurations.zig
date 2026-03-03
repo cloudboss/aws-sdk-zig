@@ -50,17 +50,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDescri
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: BatchDescribeTypeConfigurationsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: BatchDescribeTypeConfigurationsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -68,52 +68,52 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchDescribeTypeConfigurat
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=BatchDescribeTypeConfigurations&Version=2010-05-15");
+    try body_buf.appendSlice(allocator, "Action=BatchDescribeTypeConfigurations&Version=2010-05-15");
     for (input.type_configuration_identifiers, 0..) |item, idx| {
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.Type=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.@"type") |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeArn=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_arn) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeConfigurationAlias=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_configuration_alias) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeConfigurationArn=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_configuration_arn) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeName=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_name) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -121,12 +121,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchDescribeTypeConfigurat
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !BatchDescribeTypeConfigurationsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDescribeTypeConfigurationsOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -145,11 +145,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Errors")) {
-                    result.errors = try serde.deserializeBatchDescribeTypeConfigurationsErrors(&reader, alloc, "member");
+                    result.errors = try serde.deserializeBatchDescribeTypeConfigurationsErrors(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "TypeConfigurations")) {
-                    result.type_configurations = try serde.deserializeTypeConfigurationDetailsList(&reader, alloc, "member");
+                    result.type_configurations = try serde.deserializeTypeConfigurationDetailsList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "UnprocessedTypeConfigurations")) {
-                    result.unprocessed_type_configurations = try serde.deserializeUnprocessedTypeConfigurations(&reader, alloc, "member");
+                    result.unprocessed_type_configurations = try serde.deserializeUnprocessedTypeConfigurations(allocator, &reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -162,11 +162,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

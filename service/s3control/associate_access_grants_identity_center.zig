@@ -38,17 +38,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateAc
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: AssociateAccessGrantsIdentityCenterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3control", "S3 Control", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: AssociateAccessGrantsIdentityCenterInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3control", "S3 Control", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -57,12 +57,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssociateAccessGrantsIdenti
     const path = "/v20180820/accessgrantsinstance/identitycenter";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<AssociateAccessGrantsIdentityCenterRequest>");
-    try body_buf.appendSlice(alloc, "<IdentityCenterArn>");
-    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.identity_center_arn);
-    try body_buf.appendSlice(alloc, "</IdentityCenterArn>");
-    try body_buf.appendSlice(alloc, "</AssociateAccessGrantsIdentityCenterRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "<AssociateAccessGrantsIdentityCenterRequest>");
+    try body_buf.appendSlice(allocator, "<IdentityCenterArn>");
+    try aws.xml.appendXmlEscaped(allocator, &body_buf, input.identity_center_arn);
+    try body_buf.appendSlice(allocator, "</IdentityCenterArn>");
+    try body_buf.appendSlice(allocator, "</AssociateAccessGrantsIdentityCenterRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -70,14 +70,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssociateAccessGrantsIdenti
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
-    try request.headers.put(alloc, "x-amz-account-id", input.account_id);
+    try request.headers.put(allocator, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "x-amz-account-id", input.account_id);
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssociateAccessGrantsIdentityCenterOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateAccessGrantsIdentityCenterOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -86,11 +86,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

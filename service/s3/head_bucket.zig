@@ -112,12 +112,12 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: HeadBucketI
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
@@ -145,17 +145,17 @@ pub fn presign(client: *Client, allocator: std.mem.Allocator, input: HeadBucketI
     );
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: HeadBucketInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: HeadBucketInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -165,15 +165,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: HeadBucketInput, config: *a
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !HeadBucketOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !HeadBucketOutput {
     var result: HeadBucketOutput = .{};
     _ = status;
     _ = body;
@@ -181,26 +181,26 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         result.access_point_alias = std.mem.eql(u8, value, "true");
     }
     if (headers.get("x-amz-bucket-arn")) |value| {
-        result.bucket_arn = try alloc.dupe(u8, value);
+        result.bucket_arn = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-bucket-location-name")) |value| {
-        result.bucket_location_name = try alloc.dupe(u8, value);
+        result.bucket_location_name = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-bucket-location-type")) |value| {
         result.bucket_location_type = std.meta.stringToEnum(LocationType, value);
     }
     if (headers.get("x-amz-bucket-region")) |value| {
-        result.bucket_region = try alloc.dupe(u8, value);
+        result.bucket_region = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

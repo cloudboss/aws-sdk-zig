@@ -59,62 +59,62 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCACer
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCACertificateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iot", "IoT", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCACertificateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("iot", "IoT", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/cacertificate/");
-    try path_buf.appendSlice(alloc, input.certificate_id);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/cacertificate/");
+    try path_buf.appendSlice(allocator, input.certificate_id);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.new_auto_registration_status) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "newAutoRegistrationStatus=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "newAutoRegistrationStatus=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
         query_has_prev = true;
     }
     if (input.new_status) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "newStatus=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "newStatus=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
     if (input.registration_config) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"registrationConfig\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"registrationConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.remove_auto_registration) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"removeAutoRegistration\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"removeAutoRegistration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;
@@ -123,13 +123,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCACertificateInput, c
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateCACertificateOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCACertificateOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -138,7 +138,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -147,7 +147,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

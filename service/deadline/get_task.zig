@@ -105,34 +105,34 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTaskInpu
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetTaskInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("deadline", "deadline", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetTaskInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("deadline", "deadline", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/2023-10-12/farms/");
-    try path_buf.appendSlice(alloc, input.farm_id);
-    try path_buf.appendSlice(alloc, "/queues/");
-    try path_buf.appendSlice(alloc, input.queue_id);
-    try path_buf.appendSlice(alloc, "/jobs/");
-    try path_buf.appendSlice(alloc, input.job_id);
-    try path_buf.appendSlice(alloc, "/steps/");
-    try path_buf.appendSlice(alloc, input.step_id);
-    try path_buf.appendSlice(alloc, "/tasks/");
-    try path_buf.appendSlice(alloc, input.task_id);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/2023-10-12/farms/");
+    try path_buf.appendSlice(allocator, input.farm_id);
+    try path_buf.appendSlice(allocator, "/queues/");
+    try path_buf.appendSlice(allocator, input.queue_id);
+    try path_buf.appendSlice(allocator, "/jobs/");
+    try path_buf.appendSlice(allocator, input.job_id);
+    try path_buf.appendSlice(allocator, "/steps/");
+    try path_buf.appendSlice(allocator, input.step_id);
+    try path_buf.appendSlice(allocator, "/tasks/");
+    try path_buf.appendSlice(allocator, input.task_id);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -142,15 +142,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetTaskInput, config: *aws.
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetTaskOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTaskOutput {
     var result: GetTaskOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTaskOutput, body, alloc);
+        result = try aws.json.parseJsonObject(GetTaskOutput, body, allocator);
     }
     _ = status;
     _ = headers;
@@ -158,7 +158,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -167,7 +167,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

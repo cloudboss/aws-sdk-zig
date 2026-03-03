@@ -102,40 +102,40 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateObjec
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateObjectEncryptionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateObjectEncryptionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.key);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.key);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "encryption");
+    try query_buf.appendSlice(allocator, "encryption");
     query_has_prev = true;
     if (input.version_id) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "versionId=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "versionId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -146,25 +146,25 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateObjectEncryptionInput
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
     }
     if (input.content_md5) |v| {
-        try request.headers.put(alloc, "Content-MD5", v);
+        try request.headers.put(allocator, "Content-MD5", v);
     }
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateObjectEncryptionOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateObjectEncryptionOutput {
+    _ = allocator;
     var result: UpdateObjectEncryptionOutput = .{};
     _ = status;
     _ = body;
@@ -175,11 +175,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -30,17 +30,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsFor
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListTagsForResourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourceInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -50,11 +50,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTagsForResourceInput, c
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-    try query_buf.appendSlice(alloc, "Resource=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, input.resource);
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "Resource=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.resource);
     query_has_prev = true;
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -65,13 +65,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTagsForResourceInput, c
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListTagsForResourceOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTagsForResourceOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -80,11 +80,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

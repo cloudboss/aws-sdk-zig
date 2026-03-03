@@ -61,17 +61,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySched
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyScheduledActionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("redshift", "Redshift", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyScheduledActionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("redshift", "Redshift", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -79,73 +79,73 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyScheduledActionInput,
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyScheduledAction&Version=2012-12-01");
+    try body_buf.appendSlice(allocator, "Action=ModifyScheduledAction&Version=2012-12-01");
     if (input.enable) |v| {
-        try body_buf.appendSlice(alloc, "&Enable=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&Enable=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.end_time) |v| {
-        try body_buf.appendSlice(alloc, "&EndTime=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&EndTime=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.iam_role) |v| {
-        try body_buf.appendSlice(alloc, "&IamRole=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&IamRole=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.schedule) |v| {
-        try body_buf.appendSlice(alloc, "&Schedule=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Schedule=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.scheduled_action_description) |v| {
-        try body_buf.appendSlice(alloc, "&ScheduledActionDescription=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ScheduledActionDescription=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&ScheduledActionName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.scheduled_action_name);
+    try body_buf.appendSlice(allocator, "&ScheduledActionName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.scheduled_action_name);
     if (input.start_time) |v| {
-        try body_buf.appendSlice(alloc, "&StartTime=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&StartTime=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.target_action) |v| {
         if (v.pause_cluster) |sv| {
-            try body_buf.appendSlice(alloc, "&TargetAction.PauseCluster.ClusterIdentifier=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv.cluster_identifier);
+            try body_buf.appendSlice(allocator, "&TargetAction.PauseCluster.ClusterIdentifier=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.cluster_identifier);
         }
         if (v.resize_cluster) |sv| {
             if (sv.classic) |sv2| {
-                try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.Classic=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
+                try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.Classic=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv2) "true" else "false");
             }
-            try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.ClusterIdentifier=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv.cluster_identifier);
+            try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.ClusterIdentifier=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.cluster_identifier);
             if (sv.cluster_type) |sv2| {
-                try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.ClusterType=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);
+                try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.ClusterType=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
             }
             if (sv.node_type) |sv2| {
-                try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.NodeType=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);
+                try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.NodeType=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
             }
             if (sv.number_of_nodes) |sv2| {
-                try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.NumberOfNodes=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+                try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.NumberOfNodes=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
             }
             if (sv.reserved_node_id) |sv2| {
-                try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.ReservedNodeId=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);
+                try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.ReservedNodeId=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
             }
             if (sv.target_reserved_node_offering_id) |sv2| {
-                try body_buf.appendSlice(alloc, "&TargetAction.ResizeCluster.TargetReservedNodeOfferingId=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);
+                try body_buf.appendSlice(allocator, "&TargetAction.ResizeCluster.TargetReservedNodeOfferingId=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
             }
         }
         if (v.resume_cluster) |sv| {
-            try body_buf.appendSlice(alloc, "&TargetAction.ResumeCluster.ClusterIdentifier=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv.cluster_identifier);
+            try body_buf.appendSlice(allocator, "&TargetAction.ResumeCluster.ClusterIdentifier=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.cluster_identifier);
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -153,12 +153,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyScheduledActionInput,
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyScheduledActionOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyScheduledActionOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -179,21 +179,21 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "EndTime")) {
                     result.end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "IamRole")) {
-                    result.iam_role = try alloc.dupe(u8, try reader.readElementText());
+                    result.iam_role = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NextInvocations")) {
-                    result.next_invocations = try serde.deserializeScheduledActionTimeList(&reader, alloc, "ScheduledActionTime");
+                    result.next_invocations = try serde.deserializeScheduledActionTimeList(allocator, &reader, "ScheduledActionTime");
                 } else if (std.mem.eql(u8, e.local, "Schedule")) {
-                    result.schedule = try alloc.dupe(u8, try reader.readElementText());
+                    result.schedule = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ScheduledActionDescription")) {
-                    result.scheduled_action_description = try alloc.dupe(u8, try reader.readElementText());
+                    result.scheduled_action_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ScheduledActionName")) {
-                    result.scheduled_action_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.scheduled_action_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "State")) {
                     result.state = std.meta.stringToEnum(ScheduledActionState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetAction")) {
-                    result.target_action = try serde.deserializeScheduledActionType(&reader, alloc);
+                    result.target_action = try serde.deserializeScheduledActionType(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -206,11 +206,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

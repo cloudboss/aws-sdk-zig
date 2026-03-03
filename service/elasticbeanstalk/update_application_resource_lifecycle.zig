@@ -42,17 +42,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAppli
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateApplicationResourceLifecycleInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApplicationResourceLifecycleInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -60,41 +60,41 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateApplicationResourceLi
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=UpdateApplicationResourceLifecycle&Version=2010-12-01");
-    try body_buf.appendSlice(alloc, "&ApplicationName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.application_name);
+    try body_buf.appendSlice(allocator, "Action=UpdateApplicationResourceLifecycle&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "&ApplicationName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.application_name);
     if (input.resource_lifecycle_config.service_role) |sv| {
-        try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.ServiceRole=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+        try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.ServiceRole=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
     }
     if (input.resource_lifecycle_config.version_lifecycle_config) |sv| {
         if (sv.max_age_rule) |sv2| {
             if (sv2.delete_source_from_s3) |sv3| {
-                try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.DeleteSourceFromS3=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv3) "true" else "false");
+                try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.DeleteSourceFromS3=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv3) "true" else "false");
             }
-            try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.Enabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv2.enabled) "true" else "false");
+            try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv2.enabled) "true" else "false");
             if (sv2.max_age_in_days) |sv3| {
-                try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.MaxAgeInDays=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.MaxAgeInDays=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
             }
         }
         if (sv.max_count_rule) |sv2| {
             if (sv2.delete_source_from_s3) |sv3| {
-                try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.DeleteSourceFromS3=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv3) "true" else "false");
+                try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.DeleteSourceFromS3=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv3) "true" else "false");
             }
-            try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.Enabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv2.enabled) "true" else "false");
+            try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv2.enabled) "true" else "false");
             if (sv2.max_count) |sv3| {
-                try body_buf.appendSlice(alloc, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.MaxCount=");
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                try body_buf.appendSlice(allocator, "&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.MaxCount=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
             }
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -102,12 +102,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateApplicationResourceLi
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateApplicationResourceLifecycleOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApplicationResourceLifecycleOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -126,9 +126,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceLifecycleConfig")) {
-                    result.resource_lifecycle_config = try serde.deserializeApplicationResourceLifecycleConfig(&reader, alloc);
+                    result.resource_lifecycle_config = try serde.deserializeApplicationResourceLifecycleConfig(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -141,11 +141,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

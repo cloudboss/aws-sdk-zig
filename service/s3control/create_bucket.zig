@@ -80,34 +80,34 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBucke
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateBucketInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3control", "S3 Control", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3control", "S3 Control", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/v20180820/bucket/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/v20180820/bucket/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = blk: {
         if (input.create_bucket_configuration) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(alloc, "<CreateBucketConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://awss3control.amazonaws.com/doc/2018-08-20/" ++ &[_]u8{0x22} ++ ">");
-            try serde.serializeCreateBucketConfiguration(alloc, &body_buf, payload);
-            try body_buf.appendSlice(alloc, "</CreateBucketConfiguration>");
-            break :blk try body_buf.toOwnedSlice(alloc);
+            try body_buf.appendSlice(allocator, "<CreateBucketConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://awss3control.amazonaws.com/doc/2018-08-20/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeCreateBucketConfiguration(allocator, &body_buf, payload);
+            try body_buf.appendSlice(allocator, "</CreateBucketConfiguration>");
+            break :blk try body_buf.toOwnedSlice(allocator);
         }
         break :blk null;
     };
@@ -118,36 +118,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateBucketInput, config: 
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(alloc, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
     }
     if (input.grant_full_control) |v| {
-        try request.headers.put(alloc, "x-amz-grant-full-control", v);
+        try request.headers.put(allocator, "x-amz-grant-full-control", v);
     }
     if (input.grant_read) |v| {
-        try request.headers.put(alloc, "x-amz-grant-read", v);
+        try request.headers.put(allocator, "x-amz-grant-read", v);
     }
     if (input.grant_read_acp) |v| {
-        try request.headers.put(alloc, "x-amz-grant-read-acp", v);
+        try request.headers.put(allocator, "x-amz-grant-read-acp", v);
     }
     if (input.grant_write) |v| {
-        try request.headers.put(alloc, "x-amz-grant-write", v);
+        try request.headers.put(allocator, "x-amz-grant-write", v);
     }
     if (input.grant_write_acp) |v| {
-        try request.headers.put(alloc, "x-amz-grant-write-acp", v);
+        try request.headers.put(allocator, "x-amz-grant-write-acp", v);
     }
     if (input.object_lock_enabled_for_bucket) |v| {
-        try request.headers.put(alloc, "x-amz-bucket-object-lock-enabled", if (v) "true" else "false");
+        try request.headers.put(allocator, "x-amz-bucket-object-lock-enabled", if (v) "true" else "false");
     }
     if (input.outpost_id) |v| {
-        try request.headers.put(alloc, "x-amz-outpost-id", v);
+        try request.headers.put(allocator, "x-amz-outpost-id", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateBucketOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBucketOutput {
     var result: CreateBucketOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -163,7 +163,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "BucketArn")) {
-                    result.bucket_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.bucket_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -173,17 +173,17 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
     if (headers.get("location")) |value| {
-        result.location = try alloc.dupe(u8, value);
+        result.location = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

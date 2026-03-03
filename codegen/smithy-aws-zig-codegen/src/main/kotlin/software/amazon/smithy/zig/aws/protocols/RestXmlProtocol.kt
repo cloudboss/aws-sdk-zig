@@ -106,7 +106,7 @@ class RestXmlProtocol : ProtocolGenerator {
         val bindings = resolveInputBindings(ctx)
 
         writer.openBlock(
-            "fn serializeRequest(alloc: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
+            "fn serializeRequest(allocator: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
             inputName,
         )
 
@@ -124,7 +124,7 @@ class RestXmlProtocol : ProtocolGenerator {
 
         // Build endpoint
         writer.write(
-            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", alloc);",
+            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", allocator);",
             ctx.settings.packageName, ctx.settings.sdkId,
         )
         writer.blankLine()
@@ -164,7 +164,7 @@ class RestXmlProtocol : ProtocolGenerator {
             writer.write("request.query = query;")
         }
 
-        writer.write("try request.headers.put(alloc, \"Content-Type\", \"\$L\");", contentType())
+        writer.write("try request.headers.put(allocator, \"Content-Type\", \"\$L\");", contentType())
 
         // Set bound headers
         for ((memberName, memberShape) in bindings.headers) {
@@ -193,25 +193,25 @@ class RestXmlProtocol : ProtocolGenerator {
 
         when {
             zigType == "[]const u8" -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", \$L);", headerName, varName)
             }
             isEnum -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", @tagName(\$L));", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", @tagName(\$L));", headerName, varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
-                writer.write("try request.headers.put(alloc, \"\$L\", num_str);", headerName)
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", num_str);", headerName)
                 writer.closeBlock("}")
             }
             zigType == "bool" -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", if (\$L) \"true\" else \"false\");", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", if (\$L) \"true\" else \"false\");", headerName, varName)
             }
             targetShape is ListShape -> {
                 writeListHeaderPut(writer, ctx, targetShape, headerName, varName)
             }
             else -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", \$L);", headerName, varName)
             }
         }
     }
@@ -225,29 +225,29 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.openBlock("{")
         writer.write("var header_buf: std.ArrayList(u8) = .{};")
         writer.openBlock("for (\$L) |item| {", varName)
-        writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(alloc, \", \");")
+        writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(allocator, \", \");")
 
         when {
             isElementEnum -> {
-                writer.write("try header_buf.appendSlice(alloc, @tagName(item));")
+                writer.write("try header_buf.appendSlice(allocator, @tagName(item));")
             }
             elementZigType == "[]const u8" -> {
-                writer.write("try header_buf.appendSlice(alloc, item);")
+                writer.write("try header_buf.appendSlice(allocator, item);")
             }
             elementZigType in listOf("i32", "i64", "i16", "i8") -> {
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{item}) catch \"\";")
-                writer.write("try header_buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{item}) catch \"\";")
+                writer.write("try header_buf.appendSlice(allocator, num_str);")
             }
             elementZigType == "bool" -> {
-                writer.write("try header_buf.appendSlice(alloc, if (item) \"true\" else \"false\");")
+                writer.write("try header_buf.appendSlice(allocator, if (item) \"true\" else \"false\");")
             }
             else -> {
-                writer.write("try header_buf.appendSlice(alloc, item);")
+                writer.write("try header_buf.appendSlice(allocator, item);")
             }
         }
 
         writer.closeBlock("}")
-        writer.write("try request.headers.put(alloc, \"\$L\", header_buf.items);", headerName)
+        writer.write("try request.headers.put(allocator, \"\$L\", header_buf.items);", headerName)
         writer.closeBlock("}")
     }
 
@@ -283,17 +283,17 @@ class RestXmlProtocol : ProtocolGenerator {
         for (part in parts) {
             when (part) {
                 is String -> {
-                    writer.write("try path_buf.appendSlice(alloc, \"\$L\");", part)
+                    writer.write("try path_buf.appendSlice(allocator, \"\$L\");", part)
                 }
                 is Pair<*, *> -> {
                     val memberName = part.first as String
                     val fieldName = NamingUtil.toFieldName(memberName)
-                    writer.write("try path_buf.appendSlice(alloc, input.\$L);", fieldName)
+                    writer.write("try path_buf.appendSlice(allocator, input.\$L);", fieldName)
                 }
             }
         }
 
-        writer.write("const path = try path_buf.toOwnedSlice(alloc);")
+        writer.write("const path = try path_buf.toOwnedSlice(allocator);")
     }
 
     private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings, staticQuery: String? = null) {
@@ -303,7 +303,7 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.write("var query_has_prev = false;")
 
         if (staticQuery != null) {
-            writer.write("try query_buf.appendSlice(alloc, \"\$L\");", staticQuery)
+            writer.write("try query_buf.appendSlice(allocator, \"\$L\");", staticQuery)
             writer.write("query_has_prev = true;")
         }
 
@@ -312,21 +312,21 @@ class RestXmlProtocol : ProtocolGenerator {
             val fieldName = NamingUtil.toFieldName(memberName)
 
             if (memberShape.isRequired) {
-                writer.write("if (query_has_prev) try query_buf.appendSlice(alloc, \"&\");")
-                writer.write("try query_buf.appendSlice(alloc, \"\$L=\");", queryKey)
+                writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+                writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
                 writeQueryValueAppend(writer, ctx, memberShape, "input.$fieldName")
                 writer.write("query_has_prev = true;")
             } else {
                 writer.openBlock("if (input.\$L) |v| {", fieldName)
-                writer.write("if (query_has_prev) try query_buf.appendSlice(alloc, \"&\");")
-                writer.write("try query_buf.appendSlice(alloc, \"\$L=\");", queryKey)
+                writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+                writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
                 writeQueryValueAppend(writer, ctx, memberShape, "v")
                 writer.write("query_has_prev = true;")
                 writer.closeBlock("}")
             }
         }
 
-        writer.write("const query = try query_buf.toOwnedSlice(alloc);")
+        writer.write("const query = try query_buf.toOwnedSlice(allocator);")
         writer.blankLine()
     }
 
@@ -338,22 +338,22 @@ class RestXmlProtocol : ProtocolGenerator {
 
         when {
             zigType == "[]const u8" -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L);", varName)
             }
             isEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(\$L));", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(\$L));", varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
-                writer.write("try query_buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", varName)
+                writer.write("try query_buf.appendSlice(allocator, num_str);")
                 writer.closeBlock("}")
             }
             zigType == "bool" -> {
-                writer.write("try query_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", varName)
+                writer.write("try query_buf.appendSlice(allocator, if (\$L) \"true\" else \"false\");", varName)
             }
             else -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L);", varName)
             }
         }
     }
@@ -384,17 +384,17 @@ class RestXmlProtocol : ProtocolGenerator {
                 if (memberShape.isRequired) {
                     writer.write("var body_buf: std.ArrayList(u8) = .{};")
                     writeXmlRootOpen(writer, rootName, ns)
-                    writer.write("try serde.serialize\$L(alloc, &body_buf, input.\$L);", targetShape.id.name, fieldName)
-                    writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", rootName)
-                    writer.write("const body = try body_buf.toOwnedSlice(alloc);")
+                    writer.write("try serde.serialize\$L(allocator, &body_buf, input.\$L);", targetShape.id.name, fieldName)
+                    writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", rootName)
+                    writer.write("const body = try body_buf.toOwnedSlice(allocator);")
                 } else {
                     writer.openBlock("const body: ?[]const u8 = blk: {")
                     writer.openBlock("if (input.\$L) |payload| {", fieldName)
                     writer.write("var body_buf: std.ArrayList(u8) = .{};")
                     writeXmlRootOpen(writer, rootName, ns)
-                    writer.write("try serde.serialize\$L(alloc, &body_buf, payload);", targetShape.id.name)
-                    writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", rootName)
-                    writer.write("break :blk try body_buf.toOwnedSlice(alloc);")
+                    writer.write("try serde.serialize\$L(allocator, &body_buf, payload);", targetShape.id.name)
+                    writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", rootName)
+                    writer.write("break :blk try body_buf.toOwnedSlice(allocator);")
                     writer.closeBlock("}")
                     writer.write("break :blk null;")
                     writer.closeBlock("};")
@@ -423,7 +423,7 @@ class RestXmlProtocol : ProtocolGenerator {
             .orElse(ctx.inputShape.id.name)
 
         writer.write("var body_buf: std.ArrayList(u8) = .{};")
-        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", rootElementName)
+        writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", rootElementName)
 
         for ((memberName, memberShape) in bindings.bodyMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
@@ -443,14 +443,14 @@ class RestXmlProtocol : ProtocolGenerator {
                 }
                 targetShape is StructureShape -> {
                     if (memberShape.isRequired) {
-                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                        writer.write("try serde.serialize\$L(alloc, &body_buf, input.\$L);", targetShape.id.name, fieldName)
-                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                        writer.write("try serde.serialize\$L(allocator, &body_buf, input.\$L);", targetShape.id.name, fieldName)
+                        writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                     } else {
                         writer.openBlock("if (input.\$L) |v| {", fieldName)
-                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                        writer.write("try serde.serialize\$L(alloc, &body_buf, v);", targetShape.id.name)
-                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                        writer.write("try serde.serialize\$L(allocator, &body_buf, v);", targetShape.id.name)
+                        writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                         writer.closeBlock("}")
                     }
                 }
@@ -460,24 +460,24 @@ class RestXmlProtocol : ProtocolGenerator {
 
                     if (memberShape.isRequired) {
                         if (isFlattened) {
-                            writer.write("try serde.\$L(alloc, &body_buf, input.\$L, \"\$L\");", listFnName, fieldName, xmlName)
+                            writer.write("try serde.\$L(allocator, &body_buf, input.\$L, \"\$L\");", listFnName, fieldName, xmlName)
                         } else {
                             val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
                                 .map { it.value }.orElse("member")
-                            writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                            writer.write("try serde.\$L(alloc, &body_buf, input.\$L, \"\$L\");", listFnName, fieldName, itemTag)
-                            writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                            writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                            writer.write("try serde.\$L(allocator, &body_buf, input.\$L, \"\$L\");", listFnName, fieldName, itemTag)
+                            writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                         }
                     } else {
                         writer.openBlock("if (input.\$L) |v| {", fieldName)
                         if (isFlattened) {
-                            writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", listFnName, xmlName)
+                            writer.write("try serde.\$L(allocator, &body_buf, v, \"\$L\");", listFnName, xmlName)
                         } else {
                             val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
                                 .map { it.value }.orElse("member")
-                            writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                            writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", listFnName, itemTag)
-                            writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                            writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                            writer.write("try serde.\$L(allocator, &body_buf, v, \"\$L\");", listFnName, itemTag)
+                            writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                         }
                         writer.closeBlock("}")
                     }
@@ -487,33 +487,33 @@ class RestXmlProtocol : ProtocolGenerator {
                     val entryTag = "entry"
 
                     if (memberShape.isRequired) {
-                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                        writer.write("try serde.\$L(alloc, &body_buf, input.\$L, \"\$L\");", mapFnName, fieldName, entryTag)
-                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                        writer.write("try serde.\$L(allocator, &body_buf, input.\$L, \"\$L\");", mapFnName, fieldName, entryTag)
+                        writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                     } else {
                         writer.openBlock("if (input.\$L) |v| {", fieldName)
-                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                        writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", mapFnName, entryTag)
-                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                        writer.write("try serde.\$L(allocator, &body_buf, v, \"\$L\");", mapFnName, entryTag)
+                        writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                         writer.closeBlock("}")
                     }
                 }
             }
         }
 
-        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", rootElementName)
-        writer.write("const body = try body_buf.toOwnedSlice(alloc);")
+        writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", rootElementName)
+        writer.write("const body = try body_buf.toOwnedSlice(allocator);")
         writer.blankLine()
     }
 
     private fun writeXmlRootOpen(writer: ZigWriter, rootName: String, ns: XmlNamespaceTrait?) {
         if (ns != null) {
             writer.write(
-                "try body_buf.appendSlice(alloc, \"<\$L xmlns=\" ++ &[_]u8{0x22} ++ \"\$L\" ++ &[_]u8{0x22} ++ \">\");",
+                "try body_buf.appendSlice(allocator, \"<\$L xmlns=\" ++ &[_]u8{0x22} ++ \"\$L\" ++ &[_]u8{0x22} ++ \">\");",
                 rootName, ns.uri,
             )
         } else {
-            writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", rootName)
+            writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", rootName)
         }
     }
 
@@ -526,28 +526,28 @@ class RestXmlProtocol : ProtocolGenerator {
     private fun writeXmlElement(writer: ZigWriter, xmlName: String, zigType: String, accessor: String) {
         when (zigType) {
             "[]const u8" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                writer.write("try aws.xml.appendXmlEscaped(alloc, &body_buf, \$L);", accessor)
-                writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                writer.write("try aws.xml.appendXmlEscaped(allocator, &body_buf, \$L);", accessor)
+                writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             "bool" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                writer.write("try body_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", accessor)
-                writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, if (\$L) \"true\" else \"false\");", accessor)
+                writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             "i32", "i64", "i16", "i8" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
-                writer.write("try body_buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", accessor)
+                writer.write("try body_buf.appendSlice(allocator, num_str);")
                 writer.closeBlock("}")
-                writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             else -> {
                 // Enum types and other named types -- serialize as their tag name
-                writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                writer.write("try body_buf.appendSlice(alloc, @tagName(\$L));", accessor)
-                writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(allocator, @tagName(\$L));", accessor)
+                writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
         }
     }
@@ -557,7 +557,7 @@ class RestXmlProtocol : ProtocolGenerator {
         val bindings = resolveOutputBindings(ctx)
 
         writer.openBlock(
-            "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !\$L {",
             outputName,
         )
 
@@ -584,7 +584,7 @@ class RestXmlProtocol : ProtocolGenerator {
         }
         val allocUsed = bodyNeedsAlloc || payloadUsesBody || headersNeedAlloc
         if (!allocUsed) {
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
         }
 
         if (!resultMutated) {
@@ -617,10 +617,10 @@ class RestXmlProtocol : ProtocolGenerator {
 
                 if (zigType == "[]const u8") {
                     if (memberShape.isRequired) {
-                        writer.write("result.\$L = try alloc.dupe(u8, body);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, body);", fieldName)
                     } else {
                         writer.openBlock("if (body.len > 0) {")
-                        writer.write("result.\$L = try alloc.dupe(u8, body);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, body);", fieldName)
                         writer.closeBlock("}")
                     }
                 }
@@ -716,7 +716,7 @@ class RestXmlProtocol : ProtocolGenerator {
         // Assign accumulated flattened lists to result fields
         for ((fieldName, _, _) in flattenedLists) {
             writer.write(
-                "result.\$L = if (\${L}_list.items.len > 0) try \${L}_list.toOwnedSlice(alloc) else null;",
+                "result.\$L = if (\${L}_list.items.len > 0) try \${L}_list.toOwnedSlice(allocator) else null;",
                 fieldName, fieldName, fieldName,
             )
         }
@@ -749,7 +749,7 @@ class RestXmlProtocol : ProtocolGenerator {
         when (targetShape) {
             is StructureShape -> {
                 writer.write(
-                    "result.\$L = try serde.deserialize\$L(&reader, alloc);",
+                    "result.\$L = try serde.deserialize\$L(allocator, &reader);",
                     fieldName, targetShape.id.name,
                 )
             }
@@ -765,7 +765,7 @@ class RestXmlProtocol : ProtocolGenerator {
                         .map { it.value }
                         .orElse("member")
                     writer.write(
-                        "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
+                        "result.\$L = try serde.\$L(allocator, &reader, \"\$L\");",
                         fieldName, listFnName, itemTag,
                     )
                 }
@@ -773,7 +773,7 @@ class RestXmlProtocol : ProtocolGenerator {
             is MapShape -> {
                 val mapFnName = "deserialize${targetShape.id.name}"
                 writer.write(
-                    "result.\$L = try serde.\$L(&reader, alloc, \"entry\");",
+                    "result.\$L = try serde.\$L(allocator, &reader, \"entry\");",
                     fieldName, mapFnName,
                 )
             }
@@ -791,7 +791,7 @@ class RestXmlProtocol : ProtocolGenerator {
                     )
                 } else {
                     writer.write(
-                        "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                        "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
                         fieldName,
                     )
                 }
@@ -834,7 +834,7 @@ class RestXmlProtocol : ProtocolGenerator {
             }
             is BlobShape -> {
                 writer.write(
-                    "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                    "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
                     fieldName,
                 )
             }
@@ -853,44 +853,44 @@ class RestXmlProtocol : ProtocolGenerator {
         when (elementShape) {
             is StructureShape -> {
                 writer.write(
-                    "try \${L}_list.append(alloc, try serde.deserialize\$L(&reader, alloc));",
+                    "try \${L}_list.append(allocator, try serde.deserialize\$L(allocator, &reader));",
                     fieldName, elementShape.id.name,
                 )
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write(
-                    "try \${L}_list.append(alloc, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
+                    "try \${L}_list.append(allocator, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
                     fieldName, elementShape.id.name,
                 )
             }
             is StringShape -> {
                 if (ctx.isEnumType(elementShape)) {
                     writer.write(
-                        "try \${L}_list.append(alloc, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
+                        "try \${L}_list.append(allocator, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
                         fieldName, elementShape.id.name,
                     )
                 } else {
                     writer.write(
-                        "try \${L}_list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));",
+                        "try \${L}_list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));",
                         fieldName,
                     )
                 }
             }
             is BooleanShape -> {
                 writer.write(
-                    "try \${L}_list.append(alloc, std.mem.eql(u8, try reader.readElementText(), \"true\"));",
+                    "try \${L}_list.append(allocator, std.mem.eql(u8, try reader.readElementText(), \"true\"));",
                     fieldName,
                 )
             }
             is IntegerShape, is ShortShape -> {
                 writer.write(
-                    "try \${L}_list.append(alloc, std.fmt.parseInt(i32, try reader.readElementText(), 10) catch continue);",
+                    "try \${L}_list.append(allocator, std.fmt.parseInt(i32, try reader.readElementText(), 10) catch continue);",
                     fieldName,
                 )
             }
             is LongShape -> {
                 writer.write(
-                    "try \${L}_list.append(alloc, std.fmt.parseInt(i64, try reader.readElementText(), 10) catch continue);",
+                    "try \${L}_list.append(allocator, std.fmt.parseInt(i64, try reader.readElementText(), 10) catch continue);",
                     fieldName,
                 )
             }
@@ -915,7 +915,7 @@ class RestXmlProtocol : ProtocolGenerator {
             writer.openBlock("if (headers.get(\"\$L\")) |value| {", headerName)
             when {
                 zigType == "[]const u8" -> {
-                    writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                    writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                 }
                 isEnum -> {
                     val typeName = ctx.resolveBaseZigType(targetShape)
@@ -928,7 +928,7 @@ class RestXmlProtocol : ProtocolGenerator {
                     writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
                 }
                 else -> {
-                    writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                    writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                 }
             }
             writer.closeBlock("}")
@@ -940,17 +940,17 @@ class RestXmlProtocol : ProtocolGenerator {
         val bindings = resolveOutputBindings(ctx)
 
         writer.openBlock(
-            "fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !\$L {",
             outputName,
         )
 
-        // Check if alloc is actually used (only string headers need it)
+        // Check if allocator is actually used (only string headers need it)
         val allocUsedInStreaming = bindings.headers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
         if (!allocUsedInStreaming) {
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
         }
 
         writer.write("var result: \$L = .{};", outputName)
@@ -978,7 +978,7 @@ class RestXmlProtocol : ProtocolGenerator {
                 writer.openBlock("if (stream_resp.headers.get(\"\$L\")) |value| {", headerName)
                 when {
                     zigType == "[]const u8" -> {
-                        writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                     }
                     isEnum -> {
                         val typeName = ctx.resolveBaseZigType(targetShape)
@@ -991,7 +991,7 @@ class RestXmlProtocol : ProtocolGenerator {
                         writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
                     }
                     else -> {
-                        writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                     }
                 }
                 writer.closeBlock("}")
@@ -1008,12 +1008,12 @@ class RestXmlProtocol : ProtocolGenerator {
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         // REST-XML error format: <Error><Code>...</Code><Message>...</Message><RequestId>...</RequestId></Error>
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
+        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
 
         writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
         writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
         writer.write("const request_id = aws.xml.findElement(body, \"RequestId\") orelse \"\";")
-        writer.write("var arena = std.heap.ArenaAllocator.init(alloc);")
+        writer.write("var arena = std.heap.ArenaAllocator.init(allocator);")
         writer.write("errdefer arena.deinit();")
         writer.write("const arena_alloc = arena.allocator();")
         writer.write("const owned_message = try arena_alloc.dupe(u8, error_message);")

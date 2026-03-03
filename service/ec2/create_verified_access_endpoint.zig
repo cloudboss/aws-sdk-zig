@@ -110,17 +110,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVerif
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpointInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEndpointInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -128,17 +128,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreateVerifiedAccessEndpoint&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=CreateVerifiedAccessEndpoint&Version=2016-11-15");
     if (input.application_domain) |v| {
-        try body_buf.appendSlice(alloc, "&ApplicationDomain=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ApplicationDomain=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&AttachmentType=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.attachment_type));
+    try body_buf.appendSlice(allocator, "&AttachmentType=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.attachment_type));
     if (input.cidr_options) |v| {
         if (v.cidr) |sv| {
-            try body_buf.appendSlice(alloc, "&CidrOptions.Cidr=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&CidrOptions.Cidr=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.port_ranges) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -146,65 +146,65 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
             }
         }
         if (v.protocol) |sv| {
-            try body_buf.appendSlice(alloc, "&CidrOptions.Protocol=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&CidrOptions.Protocol=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.SubnetIds.item.{d}=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
     }
     if (input.client_token) |v| {
-        try body_buf.appendSlice(alloc, "&ClientToken=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ClientToken=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.description) |v| {
-        try body_buf.appendSlice(alloc, "&Description=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Description=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.domain_certificate_arn) |v| {
-        try body_buf.appendSlice(alloc, "&DomainCertificateArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DomainCertificateArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.endpoint_domain_prefix) |v| {
-        try body_buf.appendSlice(alloc, "&EndpointDomainPrefix=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&EndpointDomainPrefix=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&EndpointType=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.endpoint_type));
+    try body_buf.appendSlice(allocator, "&EndpointType=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.endpoint_type));
     if (input.load_balancer_options) |v| {
         if (v.load_balancer_arn) |sv| {
-            try body_buf.appendSlice(alloc, "&LoadBalancerOptions.LoadBalancerArn=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&LoadBalancerOptions.LoadBalancerArn=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.port) |sv| {
-            try body_buf.appendSlice(alloc, "&LoadBalancerOptions.Port=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&LoadBalancerOptions.Port=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.port_ranges) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -212,43 +212,43 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
             }
         }
         if (v.protocol) |sv| {
-            try body_buf.appendSlice(alloc, "&LoadBalancerOptions.Protocol=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&LoadBalancerOptions.Protocol=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.SubnetIds.item.{d}=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
     }
     if (input.network_interface_options) |v| {
         if (v.network_interface_id) |sv| {
-            try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.NetworkInterfaceId=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&NetworkInterfaceOptions.NetworkInterfaceId=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.port) |sv| {
-            try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.Port=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&NetworkInterfaceOptions.Port=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.port_ranges) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -256,62 +256,62 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
             }
         }
         if (v.protocol) |sv| {
-            try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.Protocol=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&NetworkInterfaceOptions.Protocol=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
     }
     if (input.policy_document) |v| {
-        try body_buf.appendSlice(alloc, "&PolicyDocument=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PolicyDocument=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.rds_options) |v| {
         if (v.port) |sv| {
-            try body_buf.appendSlice(alloc, "&RdsOptions.Port=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&RdsOptions.Port=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.protocol) |sv| {
-            try body_buf.appendSlice(alloc, "&RdsOptions.Protocol=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&RdsOptions.Protocol=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.rds_db_cluster_arn) |sv| {
-            try body_buf.appendSlice(alloc, "&RdsOptions.RdsDbClusterArn=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&RdsOptions.RdsDbClusterArn=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.rds_db_instance_arn) |sv| {
-            try body_buf.appendSlice(alloc, "&RdsOptions.RdsDbInstanceArn=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&RdsOptions.RdsDbInstanceArn=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.rds_db_proxy_arn) |sv| {
-            try body_buf.appendSlice(alloc, "&RdsOptions.RdsDbProxyArn=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&RdsOptions.RdsDbProxyArn=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.rds_endpoint) |sv| {
-            try body_buf.appendSlice(alloc, "&RdsOptions.RdsEndpoint=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&RdsOptions.RdsEndpoint=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RdsOptions.SubnetIds.item.{d}=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
     }
@@ -320,18 +320,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupId.item.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.sse_specification) |v| {
         if (v.customer_managed_key_enabled) |sv| {
-            try body_buf.appendSlice(alloc, "&SseSpecification.CustomerManagedKeyEnabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&SseSpecification.CustomerManagedKeyEnabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
         if (v.kms_key_arn) |sv| {
-            try body_buf.appendSlice(alloc, "&SseSpecification.KmsKeyArn=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SseSpecification.KmsKeyArn=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.tag_specifications) |list| {
@@ -340,9 +340,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
                 }
             }
             if (item.tags) |lst_1| {
@@ -351,27 +351,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                 }
             }
         }
     }
-    try body_buf.appendSlice(alloc, "&VerifiedAccessGroupId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.verified_access_group_id);
+    try body_buf.appendSlice(allocator, "&VerifiedAccessGroupId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.verified_access_group_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -379,12 +379,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessEndpoin
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateVerifiedAccessEndpointOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVerifiedAccessEndpointOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -401,7 +401,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "verifiedAccessEndpoint")) {
-                    result.verified_access_endpoint = try serde.deserializeVerifiedAccessEndpoint(&reader, alloc);
+                    result.verified_access_endpoint = try serde.deserializeVerifiedAccessEndpoint(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -414,11 +414,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

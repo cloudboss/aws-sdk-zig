@@ -74,17 +74,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyManag
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyManagedPrefixListInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -92,47 +92,47 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInpu
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyManagedPrefixList&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=ModifyManagedPrefixList&Version=2016-11-15");
     if (input.add_entries) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntry.member.{d}.Cidr=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.cidr);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.cidr);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntry.member.{d}.Description=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.description) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
         }
     }
     if (input.current_version) |v| {
-        try body_buf.appendSlice(alloc, "&CurrentVersion=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&CurrentVersion=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.ipam_prefix_list_resolver_sync_enabled) |v| {
-        try body_buf.appendSlice(alloc, "&IpamPrefixListResolverSyncEnabled=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&IpamPrefixListResolverSyncEnabled=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.max_entries) |v| {
-        try body_buf.appendSlice(alloc, "&MaxEntries=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&MaxEntries=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
-    try body_buf.appendSlice(alloc, "&PrefixListId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.prefix_list_id);
+    try body_buf.appendSlice(allocator, "&PrefixListId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.prefix_list_id);
     if (input.prefix_list_name) |v| {
-        try body_buf.appendSlice(alloc, "&PrefixListName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PrefixListName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.remove_entries) |list| {
         for (list, 0..) |item, idx| {
@@ -140,13 +140,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInpu
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveEntry.member.{d}.Cidr=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.cidr);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.cidr);
             }
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -154,12 +154,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInpu
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyManagedPrefixListOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyManagedPrefixListOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -176,7 +176,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "prefixList")) {
-                    result.prefix_list = try serde.deserializeManagedPrefixList(&reader, alloc);
+                    result.prefix_list = try serde.deserializeManagedPrefixList(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -189,11 +189,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

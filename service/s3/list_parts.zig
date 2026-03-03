@@ -225,53 +225,53 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPartsIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListPartsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListPartsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.key);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.key);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "x-id=ListParts");
+    try query_buf.appendSlice(allocator, "x-id=ListParts");
     query_has_prev = true;
     if (input.max_parts) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "max-parts=");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "max-parts=");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try query_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(allocator, num_str);
         }
         query_has_prev = true;
     }
     if (input.part_number_marker) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "part-number-marker=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "part-number-marker=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-    try query_buf.appendSlice(alloc, "uploadId=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, input.upload_id);
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "uploadId=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.upload_id);
     query_has_prev = true;
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -282,27 +282,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListPartsInput, config: *aw
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
     }
     if (input.sse_customer_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-algorithm", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
     }
     if (input.sse_customer_key) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key", v);
     }
     if (input.sse_customer_key_md5) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key-MD5", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key-MD5", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListPartsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPartsOutput {
     var result: ListPartsOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -319,31 +319,31 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Bucket")) {
-                    result.bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.bucket = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumAlgorithm")) {
                     result.checksum_algorithm = std.meta.stringToEnum(ChecksumAlgorithm, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
                     result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Initiator")) {
-                    result.initiator = try serde.deserializeInitiator(&reader, alloc);
+                    result.initiator = try serde.deserializeInitiator(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "Key")) {
-                    result.key = try alloc.dupe(u8, try reader.readElementText());
+                    result.key = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MaxParts")) {
                     result.max_parts = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "NextPartNumberMarker")) {
-                    result.next_part_number_marker = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_part_number_marker = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Owner")) {
-                    result.owner = try serde.deserializeOwner(&reader, alloc);
+                    result.owner = try serde.deserializeOwner(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "PartNumberMarker")) {
-                    result.part_number_marker = try alloc.dupe(u8, try reader.readElementText());
+                    result.part_number_marker = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Part")) {
-                    try parts_list.append(alloc, try serde.deserializePart(&reader, alloc));
+                    try parts_list.append(allocator, try serde.deserializePart(allocator, &reader));
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
                     result.storage_class = std.meta.stringToEnum(StorageClass, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadId")) {
-                    result.upload_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.upload_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -352,12 +352,12 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
-    result.parts = if (parts_list.items.len > 0) try parts_list.toOwnedSlice(alloc) else null;
+    result.parts = if (parts_list.items.len > 0) try parts_list.toOwnedSlice(allocator) else null;
     if (headers.get("x-amz-abort-date")) |value| {
         result.abort_date = std.fmt.parseInt(i64, value, 10) catch null;
     }
     if (headers.get("x-amz-abort-rule-id")) |value| {
-        result.abort_rule_id = try alloc.dupe(u8, value);
+        result.abort_rule_id = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
@@ -366,11 +366,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

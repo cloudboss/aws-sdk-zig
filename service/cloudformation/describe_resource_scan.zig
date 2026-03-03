@@ -114,17 +114,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRes
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DescribeResourceScanInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DescribeResourceScanInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudformation", "CloudFormation", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -132,11 +132,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeResourceScanInput, 
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=DescribeResourceScan&Version=2010-05-15");
-    try body_buf.appendSlice(alloc, "&ResourceScanId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.resource_scan_id);
+    try body_buf.appendSlice(allocator, "Action=DescribeResourceScan&Version=2010-05-15");
+    try body_buf.appendSlice(allocator, "&ResourceScanId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.resource_scan_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -144,12 +144,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeResourceScanInput, 
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeResourceScanOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeResourceScanOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -172,21 +172,21 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "PercentageCompleted")) {
                     result.percentage_completed = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ResourceScanId")) {
-                    result.resource_scan_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.resource_scan_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourcesRead")) {
                     result.resources_read = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ResourcesScanned")) {
                     result.resources_scanned = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ResourceTypes")) {
-                    result.resource_types = try serde.deserializeResourceTypes(&reader, alloc, "member");
+                    result.resource_types = try serde.deserializeResourceTypes(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ScanFilters")) {
-                    result.scan_filters = try serde.deserializeScanFilters(&reader, alloc, "member");
+                    result.scan_filters = try serde.deserializeScanFilters(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(ResourceScanStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusReason")) {
-                    result.status_reason = try alloc.dupe(u8, try reader.readElementText());
+                    result.status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -199,11 +199,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

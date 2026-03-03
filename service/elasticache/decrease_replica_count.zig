@@ -71,17 +71,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DecreaseRep
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticache", "ElastiCache", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DecreaseReplicaCountInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("elasticache", "ElastiCache", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -89,12 +89,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, 
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=DecreaseReplicaCount&Version=2015-02-02");
-    try body_buf.appendSlice(alloc, "&ApplyImmediately=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, if (input.apply_immediately) "true" else "false");
+    try body_buf.appendSlice(allocator, "Action=DecreaseReplicaCount&Version=2015-02-02");
+    try body_buf.appendSlice(allocator, "&ApplyImmediately=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, if (input.apply_immediately) "true" else "false");
     if (input.new_replica_count) |v| {
-        try body_buf.appendSlice(alloc, "&NewReplicaCount=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&NewReplicaCount=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.replica_configuration) |list| {
         for (list, 0..) |item, idx| {
@@ -102,14 +102,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, 
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReplicaConfiguration.ConfigureShard.{d}.NewReplicaCount=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{item.new_replica_count}) catch "");
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item.new_replica_count}) catch "");
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReplicaConfiguration.ConfigureShard.{d}.NodeGroupId=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.node_group_id);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.node_group_id);
             }
             if (item.preferred_availability_zones) |lst_1| {
                 for (lst_1, 0..) |item_1, idx_1| {
@@ -117,8 +117,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, 
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReplicaConfiguration.ConfigureShard.{d}.PreferredAvailabilityZones.PreferredAvailabilityZone.{d}=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
                 }
             }
@@ -128,8 +128,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, 
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReplicaConfiguration.ConfigureShard.{d}.PreferredOutpostArns.PreferredOutpostArn.{d}=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
                 }
             }
@@ -140,14 +140,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, 
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReplicasToRemove.member.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
-    try body_buf.appendSlice(alloc, "&ReplicationGroupId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.replication_group_id);
+    try body_buf.appendSlice(allocator, "&ReplicationGroupId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.replication_group_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -155,12 +155,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DecreaseReplicaCountInput, 
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DecreaseReplicaCountOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DecreaseReplicaCountOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -179,7 +179,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ReplicationGroup")) {
-                    result.replication_group = try serde.deserializeReplicationGroup(&reader, alloc);
+                    result.replication_group = try serde.deserializeReplicationGroup(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -192,11 +192,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

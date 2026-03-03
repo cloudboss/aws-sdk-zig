@@ -36,17 +36,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdentity
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetIdentityVerificationAttributesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetIdentityVerificationAttributesInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -54,16 +54,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetIdentityVerificationAttr
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=GetIdentityVerificationAttributes&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "Action=GetIdentityVerificationAttributes&Version=2010-12-01");
     for (input.identities, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Identities.member.{d}=", .{n}) catch continue;
-        try body_buf.appendSlice(alloc, field_prefix);
-        try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+        try body_buf.appendSlice(allocator, field_prefix);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -71,12 +71,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetIdentityVerificationAttr
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetIdentityVerificationAttributesOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIdentityVerificationAttributesOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -95,7 +95,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "VerificationAttributes")) {
-                    result.verification_attributes = try serde.deserializeVerificationAttributes(&reader, alloc, "entry");
+                    result.verification_attributes = try serde.deserializeVerificationAttributes(allocator, &reader, "entry");
                 } else {
                     try reader.skipElement();
                 }
@@ -108,11 +108,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

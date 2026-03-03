@@ -115,17 +115,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAnomalyD
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatch", "CloudWatch", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PutAnomalyDetectorInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudwatch", "CloudWatch", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -133,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=PutAnomalyDetector&Version=2010-08-01");
+    try body_buf.appendSlice(allocator, "Action=PutAnomalyDetector&Version=2010-08-01");
     if (input.configuration) |v| {
         if (v.excluded_time_ranges) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -141,20 +141,20 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Configuration.ExcludedTimeRanges.member.{d}.EndTime=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{item.end_time}) catch "");
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item.end_time}) catch "");
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Configuration.ExcludedTimeRanges.member.{d}.StartTime=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{item.start_time}) catch "");
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item.start_time}) catch "");
                 }
             }
         }
         if (v.metric_timezone) |sv| {
-            try body_buf.appendSlice(alloc, "&Configuration.MetricTimezone=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&Configuration.MetricTimezone=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.dimensions) |list| {
@@ -163,21 +163,21 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Dimensions.member.{d}.Name=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.name);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.name);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Dimensions.member.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.value);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.value);
             }
         }
     }
     if (input.metric_characteristics) |v| {
         if (v.periodic_spikes) |sv| {
-            try body_buf.appendSlice(alloc, "&MetricCharacteristics.PeriodicSpikes=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&MetricCharacteristics.PeriodicSpikes=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.metric_math_anomaly_detector) |v| {
@@ -187,31 +187,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.AccountId=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.account_id) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.Expression=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.expression) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.Id=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.id);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.id);
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.Label=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.label) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 if (item.metric_stat) |sv_1| {
@@ -221,85 +221,85 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
                             {
                                 var prefix_buf: [256]u8 = undefined;
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Dimensions.member.{d}.Name=", .{n, n_3}) catch continue;
-                                try body_buf.appendSlice(alloc, field_prefix);
-                                try aws.url.appendUrlEncoded(alloc, &body_buf, item_3.name);
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.name);
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Dimensions.member.{d}.Value=", .{n, n_3}) catch continue;
-                                try body_buf.appendSlice(alloc, field_prefix);
-                                try aws.url.appendUrlEncoded(alloc, &body_buf, item_3.value);
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.value);
                             }
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.MetricName=", .{n}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_1.metric.metric_name) |fv_3| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Namespace=", .{n}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_1.metric.namespace) |fv_3| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Period=", .{n}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv_1.period}) catch "");
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.period}) catch "");
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Stat=", .{n}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, sv_1.stat);
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.stat);
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_1.unit) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
                         }
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.Period=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.period) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.ReturnData=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.return_data) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
                     }
                 }
             }
         }
     }
     if (input.metric_name) |v| {
-        try body_buf.appendSlice(alloc, "&MetricName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MetricName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.namespace) |v| {
-        try body_buf.appendSlice(alloc, "&Namespace=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Namespace=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.single_metric_anomaly_detector) |v| {
         if (v.account_id) |sv| {
-            try body_buf.appendSlice(alloc, "&SingleMetricAnomalyDetector.AccountId=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SingleMetricAnomalyDetector.AccountId=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.dimensions) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -307,36 +307,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SingleMetricAnomalyDetector.Dimensions.member.{d}.Name=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.name);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.name);
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SingleMetricAnomalyDetector.Dimensions.member.{d}.Value=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.value);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.value);
                 }
             }
         }
         if (v.metric_name) |sv| {
-            try body_buf.appendSlice(alloc, "&SingleMetricAnomalyDetector.MetricName=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SingleMetricAnomalyDetector.MetricName=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.namespace) |sv| {
-            try body_buf.appendSlice(alloc, "&SingleMetricAnomalyDetector.Namespace=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SingleMetricAnomalyDetector.Namespace=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.stat) |sv| {
-            try body_buf.appendSlice(alloc, "&SingleMetricAnomalyDetector.Stat=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SingleMetricAnomalyDetector.Stat=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.stat) |v| {
-        try body_buf.appendSlice(alloc, "&Stat=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Stat=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -344,26 +344,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutAnomalyDetectorInput, co
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutAnomalyDetectorOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutAnomalyDetectorOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: PutAnomalyDetectorOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

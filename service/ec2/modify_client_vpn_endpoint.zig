@@ -135,17 +135,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyClien
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClientVpnEndpointInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClientVpnEndpointInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -153,56 +153,56 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClientVpnEndpointInpu
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyClientVpnEndpoint&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=ModifyClientVpnEndpoint&Version=2016-11-15");
     if (input.client_connect_options) |v| {
         if (v.enabled) |sv| {
-            try body_buf.appendSlice(alloc, "&ClientConnectOptions.Enabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&ClientConnectOptions.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
         if (v.lambda_function_arn) |sv| {
-            try body_buf.appendSlice(alloc, "&ClientConnectOptions.LambdaFunctionArn=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ClientConnectOptions.LambdaFunctionArn=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.client_login_banner_options) |v| {
         if (v.banner_text) |sv| {
-            try body_buf.appendSlice(alloc, "&ClientLoginBannerOptions.BannerText=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ClientLoginBannerOptions.BannerText=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.enabled) |sv| {
-            try body_buf.appendSlice(alloc, "&ClientLoginBannerOptions.Enabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&ClientLoginBannerOptions.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.client_route_enforcement_options) |v| {
         if (v.enforced) |sv| {
-            try body_buf.appendSlice(alloc, "&ClientRouteEnforcementOptions.Enforced=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&ClientRouteEnforcementOptions.Enforced=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
-    try body_buf.appendSlice(alloc, "&ClientVpnEndpointId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.client_vpn_endpoint_id);
+    try body_buf.appendSlice(allocator, "&ClientVpnEndpointId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.client_vpn_endpoint_id);
     if (input.connection_log_options) |v| {
         if (v.cloudwatch_log_group) |sv| {
-            try body_buf.appendSlice(alloc, "&ConnectionLogOptions.CloudwatchLogGroup=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ConnectionLogOptions.CloudwatchLogGroup=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.cloudwatch_log_stream) |sv| {
-            try body_buf.appendSlice(alloc, "&ConnectionLogOptions.CloudwatchLogStream=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ConnectionLogOptions.CloudwatchLogStream=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.enabled) |sv| {
-            try body_buf.appendSlice(alloc, "&ConnectionLogOptions.Enabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&ConnectionLogOptions.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.description) |v| {
-        try body_buf.appendSlice(alloc, "&Description=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Description=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.disconnect_on_session_timeout) |v| {
-        try body_buf.appendSlice(alloc, "&DisconnectOnSessionTimeout=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DisconnectOnSessionTimeout=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.dns_servers) |v| {
         if (v.custom_dns_servers) |list_d0| {
@@ -210,54 +210,54 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClientVpnEndpointInpu
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsServers.CustomDnsServers.item.{d}=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
         if (v.enabled) |sv| {
-            try body_buf.appendSlice(alloc, "&DnsServers.Enabled=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&DnsServers.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.security_group_ids) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupId.item.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.self_service_portal) |v| {
-        try body_buf.appendSlice(alloc, "&SelfServicePortal=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&SelfServicePortal=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.server_certificate_arn) |v| {
-        try body_buf.appendSlice(alloc, "&ServerCertificateArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ServerCertificateArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.session_timeout_hours) |v| {
-        try body_buf.appendSlice(alloc, "&SessionTimeoutHours=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&SessionTimeoutHours=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.split_tunnel) |v| {
-        try body_buf.appendSlice(alloc, "&SplitTunnel=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&SplitTunnel=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.vpc_id) |v| {
-        try body_buf.appendSlice(alloc, "&VpcId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&VpcId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.vpn_port) |v| {
-        try body_buf.appendSlice(alloc, "&VpnPort=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&VpnPort=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -265,15 +265,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClientVpnEndpointInpu
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyClientVpnEndpointOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyClientVpnEndpointOutput {
     _ = status;
     _ = headers;
-    _ = alloc;
+    _ = allocator;
     var reader = aws.xml.Reader.init(body);
 
     while (try reader.next()) |event| {
@@ -301,11 +301,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

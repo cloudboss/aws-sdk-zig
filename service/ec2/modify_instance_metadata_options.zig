@@ -111,17 +111,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyInsta
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceMetadataOptionsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceMetadataOptionsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -129,35 +129,35 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceMetadataOptio
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyInstanceMetadataOptions&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=ModifyInstanceMetadataOptions&Version=2016-11-15");
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.http_endpoint) |v| {
-        try body_buf.appendSlice(alloc, "&HttpEndpoint=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&HttpEndpoint=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.http_protocol_ipv_6) |v| {
-        try body_buf.appendSlice(alloc, "&HttpProtocolIpv6=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&HttpProtocolIpv6=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.http_put_response_hop_limit) |v| {
-        try body_buf.appendSlice(alloc, "&HttpPutResponseHopLimit=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&HttpPutResponseHopLimit=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.http_tokens) |v| {
-        try body_buf.appendSlice(alloc, "&HttpTokens=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&HttpTokens=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
-    try body_buf.appendSlice(alloc, "&InstanceId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.instance_id);
+    try body_buf.appendSlice(allocator, "&InstanceId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_id);
     if (input.instance_metadata_tags) |v| {
-        try body_buf.appendSlice(alloc, "&InstanceMetadataTags=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&InstanceMetadataTags=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -165,12 +165,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceMetadataOptio
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyInstanceMetadataOptionsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyInstanceMetadataOptionsOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -187,9 +187,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "instanceId")) {
-                    result.instance_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceMetadataOptions")) {
-                    result.instance_metadata_options = try serde.deserializeInstanceMetadataOptionsResponse(&reader, alloc);
+                    result.instance_metadata_options = try serde.deserializeInstanceMetadataOptionsResponse(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -202,11 +202,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

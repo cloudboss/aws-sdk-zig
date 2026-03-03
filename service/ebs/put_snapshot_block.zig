@@ -108,28 +108,28 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSnapshot
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PutSnapshotBlockInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ebs", "EBS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PutSnapshotBlockInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ebs", "EBS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/snapshots/");
-    try path_buf.appendSlice(alloc, input.snapshot_id);
-    try path_buf.appendSlice(alloc, "/blocks/");
-    try path_buf.appendSlice(alloc, input.block_index);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/snapshots/");
+    try path_buf.appendSlice(allocator, input.snapshot_id);
+    try path_buf.appendSlice(allocator, "/blocks/");
+    try path_buf.appendSlice(allocator, input.block_index);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body = input.block_data;
 
@@ -139,29 +139,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutSnapshotBlockInput, conf
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
-    try request.headers.put(alloc, "x-amz-Checksum", input.checksum);
-    try request.headers.put(alloc, "x-amz-Checksum-Algorithm", @tagName(input.checksum_algorithm));
+    try request.headers.put(allocator, "Content-Type", "application/json");
+    try request.headers.put(allocator, "x-amz-Checksum", input.checksum);
+    try request.headers.put(allocator, "x-amz-Checksum-Algorithm", @tagName(input.checksum_algorithm));
     {
-        const num_str = std.fmt.allocPrint(alloc, "{d}", .{input.data_length}) catch "";
-        try request.headers.put(alloc, "x-amz-Data-Length", num_str);
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{input.data_length}) catch "";
+        try request.headers.put(allocator, "x-amz-Data-Length", num_str);
     }
     if (input.progress) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-Progress", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-Progress", num_str);
         }
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutSnapshotBlockOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutSnapshotBlockOutput {
     var result: PutSnapshotBlockOutput = .{};
     _ = body;
     _ = status;
     if (headers.get("x-amz-checksum")) |value| {
-        result.checksum = try alloc.dupe(u8, value);
+        result.checksum = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-algorithm")) |value| {
         result.checksum_algorithm = std.meta.stringToEnum(ChecksumAlgorithm, value);
@@ -170,7 +170,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -179,7 +179,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

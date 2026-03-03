@@ -125,17 +125,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -143,50 +143,50 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreateVpc&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=CreateVpc&Version=2016-11-15");
     if (input.amazon_provided_ipv_6_cidr_block) |v| {
-        try body_buf.appendSlice(alloc, "&AmazonProvidedIpv6CidrBlock=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&AmazonProvidedIpv6CidrBlock=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.cidr_block) |v| {
-        try body_buf.appendSlice(alloc, "&CidrBlock=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&CidrBlock=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.instance_tenancy) |v| {
-        try body_buf.appendSlice(alloc, "&InstanceTenancy=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&InstanceTenancy=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.ipv_4_ipam_pool_id) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv4IpamPoolId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Ipv4IpamPoolId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.ipv_4_netmask_length) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv4NetmaskLength=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&Ipv4NetmaskLength=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.ipv_6_cidr_block) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv6CidrBlock=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Ipv6CidrBlock=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.ipv_6_cidr_block_network_border_group) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv6CidrBlockNetworkBorderGroup=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Ipv6CidrBlockNetworkBorderGroup=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.ipv_6_ipam_pool_id) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv6IpamPoolId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Ipv6IpamPoolId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.ipv_6_netmask_length) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv6NetmaskLength=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&Ipv6NetmaskLength=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.ipv_6_pool) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv6Pool=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Ipv6Pool=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
@@ -194,9 +194,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
                 }
             }
             if (item.tags) |lst_1| {
@@ -205,17 +205,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
+                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                 }
@@ -224,42 +224,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
     }
     if (input.vpc_encryption_control) |v| {
         if (v.egress_only_internet_gateway_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.EgressOnlyInternetGatewayExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.EgressOnlyInternetGatewayExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.elastic_file_system_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.ElasticFileSystemExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.ElasticFileSystemExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.internet_gateway_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.InternetGatewayExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.InternetGatewayExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.lambda_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.LambdaExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.LambdaExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
-        try body_buf.appendSlice(alloc, "&VpcEncryptionControl.Mode=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v.mode));
+        try body_buf.appendSlice(allocator, "&VpcEncryptionControl.Mode=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v.mode));
         if (v.nat_gateway_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.NatGatewayExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.NatGatewayExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.virtual_private_gateway_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VirtualPrivateGatewayExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.VirtualPrivateGatewayExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.vpc_lattice_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VpcLatticeExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.VpcLatticeExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
         if (v.vpc_peering_exclusion) |sv| {
-            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VpcPeeringExclusion=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try body_buf.appendSlice(allocator, "&VpcEncryptionControl.VpcPeeringExclusion=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -267,12 +267,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateVpcOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVpcOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -289,7 +289,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "vpc")) {
-                    result.vpc = try serde.deserializeVpc(&reader, alloc);
+                    result.vpc = try serde.deserializeVpc(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -302,11 +302,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -104,17 +104,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListHostedZ
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListHostedZonesByNameInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("route53", "Route 53", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZonesByNameInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("route53", "Route 53", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -125,27 +125,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListHostedZonesByNameInput,
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.dns_name) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "dnsname=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "dnsname=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.hosted_zone_id) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "hostedzoneid=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "hostedzoneid=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.max_items) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "maxitems=");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "maxitems=");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try query_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(allocator, num_str);
         }
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -156,12 +156,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListHostedZonesByNameInput,
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListHostedZonesByNameOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListHostedZonesByNameOutput {
     var result: ListHostedZonesByNameOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -177,19 +177,19 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DNSName")) {
-                    result.dns_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.dns_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HostedZoneId")) {
-                    result.hosted_zone_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.hosted_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HostedZones")) {
-                    result.hosted_zones = try serde.deserializeHostedZones(&reader, alloc, "HostedZone");
+                    result.hosted_zones = try serde.deserializeHostedZones(allocator, &reader, "HostedZone");
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "MaxItems")) {
                     result.max_items = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "NextDNSName")) {
-                    result.next_dns_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_dns_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NextHostedZoneId")) {
-                    result.next_hosted_zone_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_hosted_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -203,11 +203,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

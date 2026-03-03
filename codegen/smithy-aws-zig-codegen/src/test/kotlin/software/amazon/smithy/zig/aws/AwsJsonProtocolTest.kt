@@ -239,7 +239,7 @@ class AwsJsonProtocolTest {
 
         assertTrue(op.contains("fn serializeRequest("), "Missing serializeRequest")
         assertTrue(
-            op.contains("aws.json.jsonStringify(input, alloc)"),
+            op.contains("aws.json.jsonStringify(input, allocator)"),
             "Should use runtime JSON serializer",
         )
     }
@@ -275,7 +275,7 @@ class AwsJsonProtocolTest {
 
         assertTrue(op.contains("fn deserializeResponse("), "Missing deserializeResponse")
         assertTrue(
-            op.contains("aws.json.parseJsonObject(PutItemOutput, body, alloc)"),
+            op.contains("aws.json.parseJsonObject(PutItemOutput, body, allocator)"),
             "Should use runtime JSON parser for response deserialization",
         )
     }
@@ -286,7 +286,7 @@ class AwsJsonProtocolTest {
         val op = files["put_item.zig"]!!
 
         assertTrue(
-            op.contains("fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator)"),
+            op.contains("fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype)"),
             "deserializeResponse should accept headers parameter",
         )
         assertTrue(
@@ -301,7 +301,7 @@ class AwsJsonProtocolTest {
         val op = files["list_tables.zig"]!!
 
         assertTrue(
-            op.contains("aws.json.parseJsonObject(ListTablesOutput, body, alloc)"),
+            op.contains("aws.json.parseJsonObject(ListTablesOutput, body, allocator)"),
             "Should use runtime JSON parser for response deserialization",
         )
     }
@@ -318,7 +318,7 @@ class AwsJsonProtocolTest {
             op.contains("__type"),
             "Should extract error code from __type field",
         )
-        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test
@@ -467,7 +467,7 @@ class AwsJsonProtocolTest {
             "Output with required fields should NOT have empty body shortcut",
         )
         assertTrue(
-            op.contains("aws.json.parseJsonObject(GetItemOutput, body, alloc)"),
+            op.contains("aws.json.parseJsonObject(GetItemOutput, body, allocator)"),
             "Should still use JSON parser",
         )
     }

@@ -237,63 +237,63 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionI
         const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
         defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+            d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeStreamingResponse(&stream_resp, allocator);
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PutSessionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("lexruntimeservice", "Lex Runtime Service", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PutSessionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("lexruntimeservice", "Lex Runtime Service", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/bot/");
-    try path_buf.appendSlice(alloc, input.bot_name);
-    try path_buf.appendSlice(alloc, "/alias/");
-    try path_buf.appendSlice(alloc, input.bot_alias);
-    try path_buf.appendSlice(alloc, "/user/");
-    try path_buf.appendSlice(alloc, input.user_id);
-    try path_buf.appendSlice(alloc, "/session");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/bot/");
+    try path_buf.appendSlice(allocator, input.bot_name);
+    try path_buf.appendSlice(allocator, "/alias/");
+    try path_buf.appendSlice(allocator, input.bot_alias);
+    try path_buf.appendSlice(allocator, "/user/");
+    try path_buf.appendSlice(allocator, input.user_id);
+    try path_buf.appendSlice(allocator, "/session");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
     if (input.active_contexts) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"activeContexts\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"activeContexts\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.dialog_action) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"dialogAction\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dialogAction\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.recent_intent_summary_view) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"recentIntentSummaryView\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"recentIntentSummaryView\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.session_attributes) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"sessionAttributes\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"sessionAttributes\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -301,56 +301,56 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutSessionInput, config: *a
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.accept) |v| {
-        try request.headers.put(alloc, "Accept", v);
+        try request.headers.put(allocator, "Accept", v);
     }
 
     return request;
 }
 
-fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !PutSessionOutput {
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !PutSessionOutput {
     var result: PutSessionOutput = .{};
     result.audio_stream = stream_resp.body;
     if (stream_resp.headers.get("x-amz-lex-active-contexts")) |value| {
-        result.active_contexts = try alloc.dupe(u8, value);
+        result.active_contexts = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("content-type")) |value| {
-        result.content_type = try alloc.dupe(u8, value);
+        result.content_type = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-dialog-state")) |value| {
         result.dialog_state = std.meta.stringToEnum(DialogState, value);
     }
     if (stream_resp.headers.get("x-amz-lex-encoded-message")) |value| {
-        result.encoded_message = try alloc.dupe(u8, value);
+        result.encoded_message = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-intent-name")) |value| {
-        result.intent_name = try alloc.dupe(u8, value);
+        result.intent_name = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-message")) |value| {
-        result.message = try alloc.dupe(u8, value);
+        result.message = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-message-format")) |value| {
         result.message_format = std.meta.stringToEnum(MessageFormatType, value);
     }
     if (stream_resp.headers.get("x-amz-lex-session-attributes")) |value| {
-        result.session_attributes = try alloc.dupe(u8, value);
+        result.session_attributes = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-session-id")) |value| {
-        result.session_id = try alloc.dupe(u8, value);
+        result.session_id = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-slots")) |value| {
-        result.slots = try alloc.dupe(u8, value);
+        result.slots = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-slot-to-elicit")) |value| {
-        result.slot_to_elicit = try alloc.dupe(u8, value);
+        result.slot_to_elicit = try allocator.dupe(u8, value);
     }
     stream_resp.deinitHeaders();
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -359,7 +359,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

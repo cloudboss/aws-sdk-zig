@@ -518,7 +518,7 @@ class RestXmlProtocolTest {
         val op = files["put_object.zig"]!!
 
         assertTrue(
-            op.contains("fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator)"),
+            op.contains("fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype)"),
             "deserializeResponse should accept headers parameter",
         )
     }
@@ -663,7 +663,7 @@ class RestXmlProtocolTest {
         val op = files["list_objects.zig"]!!
 
         assertTrue(
-            op.contains("alloc.dupe(u8, try reader.readElementText())"),
+            op.contains("allocator.dupe(u8, try reader.readElementText())"),
             "Should dupe string element text for output",
         )
     }
@@ -680,7 +680,7 @@ class RestXmlProtocolTest {
             op.contains("aws.xml.findElement(body, \"Code\")"),
             "Should extract error code from XML <Code> element",
         )
-        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
         assertTrue(
             op.contains("aws.xml.findElement(body, \"Message\")"),
             "Should extract error message from XML <Message> element",

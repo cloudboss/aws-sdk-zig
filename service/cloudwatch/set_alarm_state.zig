@@ -54,17 +54,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetAlarmSta
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: SetAlarmStateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatch", "CloudWatch", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: SetAlarmStateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudwatch", "CloudWatch", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -72,19 +72,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SetAlarmStateInput, config:
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=SetAlarmState&Version=2010-08-01");
-    try body_buf.appendSlice(alloc, "&AlarmName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.alarm_name);
-    try body_buf.appendSlice(alloc, "&StateReason=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.state_reason);
+    try body_buf.appendSlice(allocator, "Action=SetAlarmState&Version=2010-08-01");
+    try body_buf.appendSlice(allocator, "&AlarmName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.alarm_name);
+    try body_buf.appendSlice(allocator, "&StateReason=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.state_reason);
     if (input.state_reason_data) |v| {
-        try body_buf.appendSlice(alloc, "&StateReasonData=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&StateReasonData=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&StateValue=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.state_value));
+    try body_buf.appendSlice(allocator, "&StateValue=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.state_value));
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -92,26 +92,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SetAlarmStateInput, config:
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !SetAlarmStateOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SetAlarmStateOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: SetAlarmStateOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

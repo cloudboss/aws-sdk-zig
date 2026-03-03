@@ -88,17 +88,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetwo
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkAclEntryInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateNetworkAclEntryInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -106,51 +106,51 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkAclEntryInput,
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreateNetworkAclEntry&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=CreateNetworkAclEntry&Version=2016-11-15");
     if (input.cidr_block) |v| {
-        try body_buf.appendSlice(alloc, "&CidrBlock=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&CidrBlock=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(alloc, "&Egress=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, if (input.egress) "true" else "false");
+    try body_buf.appendSlice(allocator, "&Egress=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, if (input.egress) "true" else "false");
     if (input.icmp_type_code) |v| {
         if (v.code) |sv| {
-            try body_buf.appendSlice(alloc, "&Icmp.Code=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&Icmp.Code=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.@"type") |sv| {
-            try body_buf.appendSlice(alloc, "&Icmp.Type=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&Icmp.Type=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
     }
     if (input.ipv_6_cidr_block) |v| {
-        try body_buf.appendSlice(alloc, "&Ipv6CidrBlock=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Ipv6CidrBlock=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&NetworkAclId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.network_acl_id);
+    try body_buf.appendSlice(allocator, "&NetworkAclId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.network_acl_id);
     if (input.port_range) |v| {
         if (v.from) |sv| {
-            try body_buf.appendSlice(alloc, "&PortRange.From=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&PortRange.From=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.to) |sv| {
-            try body_buf.appendSlice(alloc, "&PortRange.To=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&PortRange.To=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
     }
-    try body_buf.appendSlice(alloc, "&Protocol=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.protocol);
-    try body_buf.appendSlice(alloc, "&RuleAction=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.rule_action));
-    try body_buf.appendSlice(alloc, "&RuleNumber=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.rule_number}) catch "");
+    try body_buf.appendSlice(allocator, "&Protocol=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.protocol);
+    try body_buf.appendSlice(allocator, "&RuleAction=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.rule_action));
+    try body_buf.appendSlice(allocator, "&RuleNumber=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.rule_number}) catch "");
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -158,26 +158,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkAclEntryInput,
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateNetworkAclEntryOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateNetworkAclEntryOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: CreateNetworkAclEntryOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

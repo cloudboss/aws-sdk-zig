@@ -162,17 +162,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCloud
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateCloudWatchAlarmTemplateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("medialive", "MediaLive", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateCloudWatchAlarmTemplateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("medialive", "MediaLive", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -182,75 +182,75 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCloudWatchAlarmTempla
 
     var body_buf: std.ArrayList(u8) = .{};
     var has_prev = false;
-    try body_buf.appendSlice(alloc, "{");
+    try body_buf.appendSlice(allocator, "{");
 
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"ComparisonOperator\":");
-    try aws.json.writeValue(@TypeOf(input.comparison_operator), input.comparison_operator, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"ComparisonOperator\":");
+    try aws.json.writeValue(@TypeOf(input.comparison_operator), input.comparison_operator, allocator, &body_buf);
     has_prev = true;
     if (input.datapoints_to_alarm) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"DatapointsToAlarm\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DatapointsToAlarm\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
     if (input.description) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Description\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"EvaluationPeriods\":");
-    try aws.json.writeValue(@TypeOf(input.evaluation_periods), input.evaluation_periods, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"EvaluationPeriods\":");
+    try aws.json.writeValue(@TypeOf(input.evaluation_periods), input.evaluation_periods, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"GroupIdentifier\":");
-    try aws.json.writeValue(@TypeOf(input.group_identifier), input.group_identifier, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"GroupIdentifier\":");
+    try aws.json.writeValue(@TypeOf(input.group_identifier), input.group_identifier, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"MetricName\":");
-    try aws.json.writeValue(@TypeOf(input.metric_name), input.metric_name, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"MetricName\":");
+    try aws.json.writeValue(@TypeOf(input.metric_name), input.metric_name, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"Name\":");
-    try aws.json.writeValue(@TypeOf(input.name), input.name, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"Name\":");
+    try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"Period\":");
-    try aws.json.writeValue(@TypeOf(input.period), input.period, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"Period\":");
+    try aws.json.writeValue(@TypeOf(input.period), input.period, allocator, &body_buf);
     has_prev = true;
     if (input.request_id) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"RequestId\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RequestId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"Statistic\":");
-    try aws.json.writeValue(@TypeOf(input.statistic), input.statistic, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"Statistic\":");
+    try aws.json.writeValue(@TypeOf(input.statistic), input.statistic, allocator, &body_buf);
     has_prev = true;
     if (input.tags) |v| {
-        if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Tags\":");
-        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"TargetResourceType\":");
-    try aws.json.writeValue(@TypeOf(input.target_resource_type), input.target_resource_type, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"TargetResourceType\":");
+    try aws.json.writeValue(@TypeOf(input.target_resource_type), input.target_resource_type, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"Threshold\":");
-    try aws.json.writeValue(@TypeOf(input.threshold), input.threshold, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"Threshold\":");
+    try aws.json.writeValue(@TypeOf(input.threshold), input.threshold, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"TreatMissingData\":");
-    try aws.json.writeValue(@TypeOf(input.treat_missing_data), input.treat_missing_data, alloc, &body_buf);
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"TreatMissingData\":");
+    try aws.json.writeValue(@TypeOf(input.treat_missing_data), input.treat_missing_data, allocator, &body_buf);
     has_prev = true;
 
-    try body_buf.appendSlice(alloc, "}");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -258,15 +258,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCloudWatchAlarmTempla
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateCloudWatchAlarmTemplateOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCloudWatchAlarmTemplateOutput {
     var result: CreateCloudWatchAlarmTemplateOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCloudWatchAlarmTemplateOutput, body, alloc);
+        result = try aws.json.parseJsonObject(CreateCloudWatchAlarmTemplateOutput, body, allocator);
     }
     _ = status;
     _ = headers;
@@ -274,7 +274,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -283,7 +283,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

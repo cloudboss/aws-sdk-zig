@@ -34,7 +34,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         val inputName = "${ctx.operationName}Input"
 
         writer.openBlock(
-            "fn serializeRequest(alloc: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
+            "fn serializeRequest(allocator: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
             inputName,
         )
 
@@ -45,7 +45,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
         // Build endpoint
         writer.write(
-            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", alloc);",
+            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", allocator);",
             ctx.settings.packageName, ctx.settings.sdkId,
         )
         writer.blankLine()
@@ -60,7 +60,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.write("var body_buf: std.ArrayList(u8) = .{};")
         writer.blankLine()
         writer.write(
-            "try body_buf.appendSlice(alloc, \"Action=\$L&Version=\$L\");",
+            "try body_buf.appendSlice(allocator, \"Action=\$L&Version=\$L\");",
             ctx.operationName, ctx.apiVersion,
         )
 
@@ -82,7 +82,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         }
 
         writer.blankLine()
-        writer.write("const body = try body_buf.toOwnedSlice(alloc);")
+        writer.write("const body = try body_buf.toOwnedSlice(allocator);")
         writer.blankLine()
 
         // Build request
@@ -92,7 +92,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.write("request.tls = tls;")
         writer.write("request.port = port;")
         writer.write("request.body = body;")
-        writer.write("try request.headers.put(alloc, \"Content-Type\", \"application/x-www-form-urlencoded\");")
+        writer.write("try request.headers.put(allocator, \"Content-Type\", \"application/x-www-form-urlencoded\");")
         writer.blankLine()
 
         writer.write("return request;")
@@ -192,13 +192,13 @@ open class AwsQueryProtocol : ProtocolGenerator {
             else -> {
                 // Scalar field
                 if (memberShape.isRequired) {
-                    writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", smithyName)
-                    writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                    writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", smithyName)
+                    writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                         ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                 } else {
                     writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
-                    writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", smithyName)
-                    writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                    writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", smithyName)
+                    writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                         ctx.scalarFormatExprForOptional(targetShape, "v"))
                     writer.closeBlock("}")
                 }
@@ -222,14 +222,14 @@ open class AwsQueryProtocol : ProtocolGenerator {
             when {
                 ctx.isScalarType(targetShape) -> {
                     if (memberShape.isRequired) {
-                        writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", qualifiedName)
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", qualifiedName)
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                     } else {
                         val captureVar = if (depth == 0) "sv" else "sv${depth + 1}"
                         writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
-                        writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", qualifiedName)
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", qualifiedName)
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                             ctx.scalarFormatExprForOptional(targetShape, captureVar))
                         writer.closeBlock("}")
                     }
@@ -296,8 +296,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}=\", .{n}) catch continue;",
                 prefix, xmlName,
             )
-            writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-            writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, item);")
+            writer.write("try body_buf.appendSlice(allocator, field_prefix);")
+            writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, item);")
             writer.closeBlock("}")
         }
     }
@@ -326,13 +326,13 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
                         qualifiedPrefix, formatArgs,
                     )
-                    writer.write("try body_buf.appendSlice(alloc, field_prefix);")
+                    writer.write("try body_buf.appendSlice(allocator, field_prefix);")
                     if (memberShape.isRequired) {
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                     } else {
                         writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                             ctx.scalarFormatExprForOptional(targetShape, captureVar))
                         writer.closeBlock("}")
                     }
@@ -383,8 +383,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
                             "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
                             innerPrefix, formatArgs,
                         )
-                        writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);", innerVar)
+                        writer.write("try body_buf.appendSlice(allocator, field_prefix);")
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);", innerVar)
                         writer.closeBlock("}")
                     }
 
@@ -419,8 +419,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
             "const key_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.\$L=\", .{n}) catch continue;",
             prefix, keyTag,
         )
-        writer.write("try body_buf.appendSlice(alloc, key_prefix);")
-        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);")
+        writer.write("try body_buf.appendSlice(allocator, key_prefix);")
+        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.key);")
         writer.closeBlock("}")
 
         writer.openBlock("{")
@@ -429,24 +429,24 @@ open class AwsQueryProtocol : ProtocolGenerator {
             "const val_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.\$L=\", .{n}) catch continue;",
             prefix, valueTag,
         )
-        writer.write("try body_buf.appendSlice(alloc, val_prefix);")
+        writer.write("try body_buf.appendSlice(allocator, val_prefix);")
 
         when {
             isValueEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(entry.value));")
+                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(entry.value));")
             }
             valueZigType == "[]const u8" -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value);")
+                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value);")
             }
             valueZigType in listOf("i32", "i64", "i16", "i8") -> {
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{entry.value}) catch \"\";")
-                writer.write("try body_buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{entry.value}) catch \"\";")
+                writer.write("try body_buf.appendSlice(allocator, num_str);")
             }
             valueZigType == "bool" -> {
-                writer.write("try body_buf.appendSlice(alloc, if (entry.value) \"true\" else \"false\");")
+                writer.write("try body_buf.appendSlice(allocator, if (entry.value) \"true\" else \"false\");")
             }
             else -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value);")
+                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value);")
             }
         }
 
@@ -473,8 +473,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
             "const key_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.key=\", .{n}) catch continue;",
             prefix,
         )
-        writer.write("try body_buf.appendSlice(alloc, key_prefix);")
-        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);")
+        writer.write("try body_buf.appendSlice(allocator, key_prefix);")
+        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.key);")
         writer.closeBlock("}")
         
         // Serialize struct fields within the map entry
@@ -505,8 +505,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
                             "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{n}) catch continue;",
                             qualifiedName,
                         )
-                        writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try body_buf.appendSlice(allocator, field_prefix);")
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                         writer.closeBlock("}")
                     } else {
@@ -517,8 +517,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
                             "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{n}) catch continue;",
                             qualifiedName,
                         )
-                        writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try body_buf.appendSlice(allocator, field_prefix);")
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
                             ctx.scalarFormatExprForOptional(targetShape, "v"))
                         writer.closeBlock("}")
                         writer.closeBlock("}")
@@ -536,7 +536,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         }
 
         writer.openBlock(
-            "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !\$L {",
             outputName,
         )
         writer.write("_ = status;")
@@ -544,7 +544,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
         if (!hasMembers || !resultMutated) {
             writer.write("_ = body;")
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
             writer.write("const result: \$L = .{};", outputName)
         } else {
             val allocUsed = ctx.outputShape.allMembers.values.any { ms ->
@@ -554,7 +554,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     target is MapShape
             }
             if (!allocUsed) {
-                writer.write("_ = alloc;")
+                writer.write("_ = allocator;")
             }
             writer.write("var reader = aws.xml.Reader.init(body);")
             writer.blankLine()
@@ -648,7 +648,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         when (targetShape) {
             is StructureShape -> {
                 writer.write(
-                    "result.\$L = try serde.deserialize\$L(&reader, alloc);",
+                    "result.\$L = try serde.deserialize\$L(allocator, &reader);",
                     fieldName, targetShape.id.name,
                 )
             }
@@ -658,14 +658,14 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     .map { it.value }
                     .orElse("member")
                 writer.write(
-                    "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
+                    "result.\$L = try serde.\$L(allocator, &reader, \"\$L\");",
                     fieldName, listFnName, itemTag,
                 )
             }
             is MapShape -> {
                 val mapFnName = "deserialize${targetShape.id.name}"
                 writer.write(
-                    "result.\$L = try serde.\$L(&reader, alloc, \"entry\");",
+                    "result.\$L = try serde.\$L(allocator, &reader, \"entry\");",
                     fieldName, mapFnName,
                 )
             }
@@ -683,7 +683,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     )
                 } else {
                     writer.write(
-                        "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                        "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
                         fieldName,
                     )
                 }
@@ -726,7 +726,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
             }
             is BlobShape -> {
                 writer.write(
-                    "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                    "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
                     fieldName,
                 )
             }
@@ -737,12 +737,12 @@ open class AwsQueryProtocol : ProtocolGenerator {
     }
 
     override open fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
+        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
 
         writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
         writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
         writer.write("const request_id = aws.xml.findElement(body, \"RequestId\") orelse \"\";")
-        writer.write("var arena = std.heap.ArenaAllocator.init(alloc);")
+        writer.write("var arena = std.heap.ArenaAllocator.init(allocator);")
         writer.write("errdefer arena.deinit();")
         writer.write("const arena_alloc = arena.allocator();")
         writer.write("const owned_message = try arena_alloc.dupe(u8, error_message);")

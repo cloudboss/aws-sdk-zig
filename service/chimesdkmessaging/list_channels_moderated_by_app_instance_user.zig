@@ -64,17 +64,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListChannel
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListChannelsModeratedByAppInstanceUserInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("chimesdkmessaging", "Chime SDK Messaging", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListChannelsModeratedByAppInstanceUserInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("chimesdkmessaging", "Chime SDK Messaging", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -84,30 +84,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListChannelsModeratedByAppI
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "scope=app-instance-user-moderated-channels");
+    try query_buf.appendSlice(allocator, "scope=app-instance-user-moderated-channels");
     query_has_prev = true;
     if (input.app_instance_user_arn) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "app-instance-user-arn=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "app-instance-user-arn=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.max_results) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "max-results=");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "max-results=");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try query_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(allocator, num_str);
         }
         query_has_prev = true;
     }
     if (input.next_token) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "next-token=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "next-token=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -118,16 +118,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListChannelsModeratedByAppI
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/json");
-    try request.headers.put(alloc, "x-amz-chime-bearer", input.chime_bearer);
+    try request.headers.put(allocator, "Content-Type", "application/json");
+    try request.headers.put(allocator, "x-amz-chime-bearer", input.chime_bearer);
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListChannelsModeratedByAppInstanceUserOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListChannelsModeratedByAppInstanceUserOutput {
     var result: ListChannelsModeratedByAppInstanceUserOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListChannelsModeratedByAppInstanceUserOutput, body, alloc);
+        result = try aws.json.parseJsonObject(ListChannelsModeratedByAppInstanceUserOutput, body, allocator);
     }
     _ = status;
     _ = headers;
@@ -135,7 +135,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -144,7 +144,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -115,27 +115,27 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeEndpo
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: InvokeEndpointAsyncInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemakerruntime", "SageMaker Runtime", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointAsyncInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sagemakerruntime", "SageMaker Runtime", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/endpoints/");
-    try path_buf.appendSlice(alloc, input.endpoint_name);
-    try path_buf.appendSlice(alloc, "/async-invocations");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/endpoints/");
+    try path_buf.appendSlice(allocator, input.endpoint_name);
+    try path_buf.appendSlice(allocator, "/async-invocations");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -145,53 +145,53 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeEndpointAsyncInput, c
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.accept) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Accept", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Accept", v);
     }
     if (input.content_type) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Content-Type", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Content-Type", v);
     }
     if (input.custom_attributes) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Custom-Attributes", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Custom-Attributes", v);
     }
     if (input.inference_id) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Inference-Id", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Id", v);
     }
-    try request.headers.put(alloc, "X-Amzn-SageMaker-InputLocation", input.input_location);
+    try request.headers.put(allocator, "X-Amzn-SageMaker-InputLocation", input.input_location);
     if (input.invocation_timeout_seconds) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "X-Amzn-SageMaker-InvocationTimeoutSeconds", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "X-Amzn-SageMaker-InvocationTimeoutSeconds", num_str);
         }
     }
     if (input.request_ttl_seconds) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "X-Amzn-SageMaker-RequestTTLSeconds", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "X-Amzn-SageMaker-RequestTTLSeconds", num_str);
         }
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeEndpointAsyncOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeEndpointAsyncOutput {
     var result: InvokeEndpointAsyncOutput = .{};
     if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InvokeEndpointAsyncOutput, body, alloc);
+        result = try aws.json.parseJsonObject(InvokeEndpointAsyncOutput, body, allocator);
     }
     _ = status;
     if (headers.get("x-amzn-sagemaker-failurelocation")) |value| {
-        result.failure_location = try alloc.dupe(u8, value);
+        result.failure_location = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amzn-sagemaker-outputlocation")) |value| {
-        result.output_location = try alloc.dupe(u8, value);
+        result.output_location = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -200,7 +200,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

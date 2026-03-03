@@ -95,82 +95,82 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTileInpu
         const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
         defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+            d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeStreamingResponse(&stream_resp, allocator);
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetTileInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemakergeospatial", "SageMaker Geospatial", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetTileInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sagemakergeospatial", "SageMaker Geospatial", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/tile/");
-    try path_buf.appendSlice(alloc, input.z);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.x);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.y);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/tile/");
+    try path_buf.appendSlice(allocator, input.z);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.x);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.y);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-    try query_buf.appendSlice(alloc, "Arn=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, input.arn);
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "Arn=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.arn);
     query_has_prev = true;
     if (input.execution_role_arn) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "ExecutionRoleArn=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "ExecutionRoleArn=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-    try query_buf.appendSlice(alloc, "ImageAssets=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, input.image_assets);
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "ImageAssets=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.image_assets);
     query_has_prev = true;
     if (input.image_mask) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "ImageMask=");
-        try query_buf.appendSlice(alloc, if (v) "true" else "false");
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "ImageMask=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
         query_has_prev = true;
     }
     if (input.output_data_type) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "OutputDataType=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "OutputDataType=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
         query_has_prev = true;
     }
     if (input.output_format) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "OutputFormat=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "OutputFormat=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.property_filters) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "PropertyFilters=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "PropertyFilters=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-    try query_buf.appendSlice(alloc, "Target=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.target));
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "Target=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.target));
     query_has_prev = true;
     if (input.time_range_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "TimeRangeFilter=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "TimeRangeFilter=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -181,13 +181,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetTileInput, config: *aws.
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !GetTileOutput {
-    _ = alloc;
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !GetTileOutput {
+    _ = allocator;
     var result: GetTileOutput = .{};
     result.binary_file = stream_resp.body;
     stream_resp.deinitHeaders();
@@ -195,7 +195,7 @@ fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc:
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -204,7 +204,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

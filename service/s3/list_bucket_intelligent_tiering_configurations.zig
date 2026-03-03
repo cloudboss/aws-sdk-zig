@@ -65,38 +65,38 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListBucketI
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ListBucketIntelligentTieringConfigurationsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ListBucketIntelligentTieringConfigurationsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "intelligent-tiering&x-id=ListBucketIntelligentTieringConfigurations");
+    try query_buf.appendSlice(allocator, "intelligent-tiering&x-id=ListBucketIntelligentTieringConfigurations");
     query_has_prev = true;
     if (input.continuation_token) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "continuation-token=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "continuation-token=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -107,15 +107,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListBucketIntelligentTierin
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListBucketIntelligentTieringConfigurationsOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBucketIntelligentTieringConfigurationsOutput {
     var result: ListBucketIntelligentTieringConfigurationsOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -132,13 +132,13 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ContinuationToken")) {
-                    result.continuation_token = try alloc.dupe(u8, try reader.readElementText());
+                    result.continuation_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IntelligentTieringConfiguration")) {
-                    try intelligent_tiering_configuration_list_list.append(alloc, try serde.deserializeIntelligentTieringConfiguration(&reader, alloc));
+                    try intelligent_tiering_configuration_list_list.append(allocator, try serde.deserializeIntelligentTieringConfiguration(allocator, &reader));
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "NextContinuationToken")) {
-                    result.next_continuation_token = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_continuation_token = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -147,17 +147,17 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
-    result.intelligent_tiering_configuration_list = if (intelligent_tiering_configuration_list_list.items.len > 0) try intelligent_tiering_configuration_list_list.toOwnedSlice(alloc) else null;
+    result.intelligent_tiering_configuration_list = if (intelligent_tiering_configuration_list_list.items.len > 0) try intelligent_tiering_configuration_list_list.toOwnedSlice(allocator) else null;
     _ = headers;
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

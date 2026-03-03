@@ -38,17 +38,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessKe
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessKeyInfoInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sts", "STS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetAccessKeyInfoInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sts", "STS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -56,11 +56,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessKeyInfoInput, conf
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=GetAccessKeyInfo&Version=2011-06-15");
-    try body_buf.appendSlice(alloc, "&AccessKeyId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.access_key_id);
+    try body_buf.appendSlice(allocator, "Action=GetAccessKeyInfo&Version=2011-06-15");
+    try body_buf.appendSlice(allocator, "&AccessKeyId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.access_key_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -68,12 +68,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessKeyInfoInput, conf
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccessKeyInfoOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccessKeyInfoOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -92,7 +92,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Account")) {
-                    result.account = try alloc.dupe(u8, try reader.readElementText());
+                    result.account = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -105,11 +105,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

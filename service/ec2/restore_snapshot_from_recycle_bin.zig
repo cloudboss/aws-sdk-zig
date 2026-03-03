@@ -76,17 +76,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreSnap
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleBinInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: RestoreSnapshotFromRecycleBinInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -94,15 +94,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleB
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=RestoreSnapshotFromRecycleBin&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=RestoreSnapshotFromRecycleBin&Version=2016-11-15");
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(alloc, "&SnapshotId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.snapshot_id);
+    try body_buf.appendSlice(allocator, "&SnapshotId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.snapshot_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -110,12 +110,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleB
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RestoreSnapshotFromRecycleBinOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RestoreSnapshotFromRecycleBinOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -132,17 +132,17 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encrypted")) {
                     result.encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "outpostArn")) {
-                    result.outpost_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.outpost_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
-                    result.owner_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "progress")) {
-                    result.progress = try alloc.dupe(u8, try reader.readElementText());
+                    result.progress = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
-                    result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
                     result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
@@ -150,7 +150,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
-                    result.volume_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {
                     result.volume_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -165,11 +165,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

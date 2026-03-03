@@ -152,43 +152,43 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAgent
         const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
         defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+            d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeStreamingResponse(&stream_resp, allocator);
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: InvokeAgentRuntimeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bedrockagentcore", "Bedrock AgentCore", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: InvokeAgentRuntimeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("bedrockagentcore", "Bedrock AgentCore", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/runtimes/");
-    try path_buf.appendSlice(alloc, input.agent_runtime_arn);
-    try path_buf.appendSlice(alloc, "/invocations");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/runtimes/");
+    try path_buf.appendSlice(allocator, input.agent_runtime_arn);
+    try path_buf.appendSlice(allocator, "/invocations");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.account_id) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "accountId=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "accountId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
     if (input.qualifier) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "qualifier=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "qualifier=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body = input.payload;
 
@@ -199,75 +199,75 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeAgentRuntimeInput, co
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.accept) |v| {
-        try request.headers.put(alloc, "Accept", v);
+        try request.headers.put(allocator, "Accept", v);
     }
     if (input.baggage) |v| {
-        try request.headers.put(alloc, "baggage", v);
+        try request.headers.put(allocator, "baggage", v);
     }
     if (input.content_type) |v| {
-        try request.headers.put(alloc, "Content-Type", v);
+        try request.headers.put(allocator, "Content-Type", v);
     }
     if (input.mcp_protocol_version) |v| {
-        try request.headers.put(alloc, "Mcp-Protocol-Version", v);
+        try request.headers.put(allocator, "Mcp-Protocol-Version", v);
     }
     if (input.mcp_session_id) |v| {
-        try request.headers.put(alloc, "Mcp-Session-Id", v);
+        try request.headers.put(allocator, "Mcp-Session-Id", v);
     }
     if (input.runtime_session_id) |v| {
-        try request.headers.put(alloc, "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id", v);
+        try request.headers.put(allocator, "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id", v);
     }
     if (input.runtime_user_id) |v| {
-        try request.headers.put(alloc, "X-Amzn-Bedrock-AgentCore-Runtime-User-Id", v);
+        try request.headers.put(allocator, "X-Amzn-Bedrock-AgentCore-Runtime-User-Id", v);
     }
     if (input.trace_id) |v| {
-        try request.headers.put(alloc, "X-Amzn-Trace-Id", v);
+        try request.headers.put(allocator, "X-Amzn-Trace-Id", v);
     }
     if (input.trace_parent) |v| {
-        try request.headers.put(alloc, "traceparent", v);
+        try request.headers.put(allocator, "traceparent", v);
     }
     if (input.trace_state) |v| {
-        try request.headers.put(alloc, "tracestate", v);
+        try request.headers.put(allocator, "tracestate", v);
     }
 
     return request;
 }
 
-fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !InvokeAgentRuntimeOutput {
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeAgentRuntimeOutput {
     var result: InvokeAgentRuntimeOutput = .{};
     result.response = stream_resp.body;
     result.status_code = @intCast(stream_resp.status);
     if (stream_resp.headers.get("baggage")) |value| {
-        result.baggage = try alloc.dupe(u8, value);
+        result.baggage = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("content-type")) |value| {
-        result.content_type = try alloc.dupe(u8, value);
+        result.content_type = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("mcp-protocol-version")) |value| {
-        result.mcp_protocol_version = try alloc.dupe(u8, value);
+        result.mcp_protocol_version = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("mcp-session-id")) |value| {
-        result.mcp_session_id = try alloc.dupe(u8, value);
+        result.mcp_session_id = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amzn-bedrock-agentcore-runtime-session-id")) |value| {
-        result.runtime_session_id = try alloc.dupe(u8, value);
+        result.runtime_session_id = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amzn-trace-id")) |value| {
-        result.trace_id = try alloc.dupe(u8, value);
+        result.trace_id = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("traceparent")) |value| {
-        result.trace_parent = try alloc.dupe(u8, value);
+        result.trace_parent = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("tracestate")) |value| {
-        result.trace_state = try alloc.dupe(u8, value);
+        result.trace_state = try allocator.dupe(u8, value);
     }
     stream_resp.deinitHeaders();
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -276,7 +276,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

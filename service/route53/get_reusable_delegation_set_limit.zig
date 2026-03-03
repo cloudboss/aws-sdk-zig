@@ -49,28 +49,28 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReusable
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetReusableDelegationSetLimitInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("route53", "Route 53", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetReusableDelegationSetLimitInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("route53", "Route 53", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/2013-04-01/reusabledelegationsetlimit/");
-    try path_buf.appendSlice(alloc, input.delegation_set_id);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.@"type");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/2013-04-01/reusabledelegationsetlimit/");
+    try path_buf.appendSlice(allocator, input.delegation_set_id);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.@"type");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
 
@@ -80,12 +80,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetReusableDelegationSetLim
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetReusableDelegationSetLimitOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReusableDelegationSetLimitOutput {
     var result: GetReusableDelegationSetLimitOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -103,7 +103,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "Count")) {
                     result.count = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Limit")) {
-                    result.limit = try serde.deserializeReusableDelegationSetLimit(&reader, alloc);
+                    result.limit = try serde.deserializeReusableDelegationSetLimit(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -117,11 +117,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

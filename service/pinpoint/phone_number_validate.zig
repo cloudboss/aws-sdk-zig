@@ -42,17 +42,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PhoneNumber
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PhoneNumberValidateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("pinpoint", "Pinpoint", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PhoneNumberValidateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("pinpoint", "Pinpoint", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -60,7 +60,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PhoneNumberValidateInput, c
 
     const path = "/v1/phone/number/validate";
 
-    const body = try aws.json.jsonStringify(input.number_validate_request, alloc);
+    const body = try aws.json.jsonStringify(input.number_validate_request, allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -68,13 +68,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PhoneNumberValidateInput, c
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PhoneNumberValidateOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PhoneNumberValidateOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -83,7 +83,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -92,7 +92,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

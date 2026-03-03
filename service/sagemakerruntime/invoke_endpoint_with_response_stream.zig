@@ -179,7 +179,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeEndpo
         const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
         defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+            d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
         }
         return error.ServiceError;
     }
@@ -191,18 +191,18 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeEndpo
     return .{ .body = body };
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: InvokeEndpointWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemakerruntime", "SageMaker Runtime", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sagemakerruntime", "SageMaker Runtime", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/endpoints/");
-    try path_buf.appendSlice(alloc, input.endpoint_name);
-    try path_buf.appendSlice(alloc, "/invocations-response-stream");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/endpoints/");
+    try path_buf.appendSlice(allocator, input.endpoint_name);
+    try path_buf.appendSlice(allocator, "/invocations-response-stream");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     const body = input.body;
 
@@ -212,36 +212,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeEndpointWithResponseS
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.accept) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Accept", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Accept", v);
     }
     if (input.content_type) |v| {
-        try request.headers.put(alloc, "Content-Type", v);
+        try request.headers.put(allocator, "Content-Type", v);
     }
     if (input.custom_attributes) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Custom-Attributes", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Custom-Attributes", v);
     }
     if (input.inference_component_name) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Inference-Component", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Component", v);
     }
     if (input.inference_id) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Inference-Id", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Id", v);
     }
     if (input.session_id) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Session-Id", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Session-Id", v);
     }
     if (input.target_container_hostname) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Target-Container-Hostname", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Target-Container-Hostname", v);
     }
     if (input.target_variant) |v| {
-        try request.headers.put(alloc, "X-Amzn-SageMaker-Target-Variant", v);
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Target-Variant", v);
     }
 
     return request;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -250,7 +250,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

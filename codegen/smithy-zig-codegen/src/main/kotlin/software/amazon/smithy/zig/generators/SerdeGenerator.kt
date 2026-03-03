@@ -511,7 +511,7 @@ class SerdeGenerator(
         val hasMembers = shape.allMembers.isNotEmpty()
 
         writer.openBlock(
-            "pub fn \$L(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !\$L {",
+            "pub fn \$L(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !\$L {",
             fnName, typeName,
         )
 
@@ -527,7 +527,7 @@ class SerdeGenerator(
         }
 
         if (!needsAlloc) {
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
         }
         if (hasMembers) {
             writer.write("var result: \$L = undefined;", typeName)
@@ -612,7 +612,7 @@ class SerdeGenerator(
                     )
                 } else {
                     writer.write(
-                        "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                        "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
                         fieldName,
                     )
                 }
@@ -697,14 +697,14 @@ class SerdeGenerator(
             }
             is BlobShape -> {
                 writer.write(
-                    "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                    "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
                     fieldName,
                 )
             }
             is StructureShape -> {
                 val typeName = targetShape.id.name
                 writer.write(
-                    "result.\$L = try deserialize\$L(reader, alloc);",
+                    "result.\$L = try deserialize\$L(allocator, reader);",
                     fieldName, typeName,
                 )
             }
@@ -712,7 +712,7 @@ class SerdeGenerator(
                 val listFnName = listDeserializerName(targetShape)
                 val itemTag = getListItemTag(targetShape)
                 writer.write(
-                    "result.\$L = try \$L(reader, alloc, \"\$L\");",
+                    "result.\$L = try \$L(allocator, reader, \"\$L\");",
                     fieldName, listFnName, itemTag,
                 )
             }
@@ -720,7 +720,7 @@ class SerdeGenerator(
                 val mapFnName = "deserialize${targetShape.id.name}"
                 val entryTag = getMapEntryTag(targetShape)
                 writer.write(
-                    "result.\$L = try \$L(reader, alloc, \"\$L\");",
+                    "result.\$L = try \$L(allocator, reader, \"\$L\");",
                     fieldName, mapFnName, entryTag,
                 )
             }
@@ -739,7 +739,7 @@ class SerdeGenerator(
         val returnType = "[]const $elementTypeName"
 
         writer.openBlock(
-            "pub fn \$L(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) !\$L {",
+            "pub fn \$L(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) !\$L {",
             fnName, returnType,
         )
 
@@ -752,49 +752,49 @@ class SerdeGenerator(
         when (elementShape) {
             is StructureShape -> {
                 val typeName = elementShape.id.name
-                writer.write("try list.append(alloc, try deserialize\$L(reader, alloc));", typeName)
+                writer.write("try list.append(allocator, try deserialize\$L(allocator, reader));", typeName)
             }
             is StringShape -> {
                 if (isEnumType(elementShape)) {
                     val enumName = elementShape.id.name
                     writer.write(
-                        "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| try list.append(alloc, v);",
+                        "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| try list.append(allocator, v);",
                         enumName,
                     )
                 } else {
-                    writer.write("try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));")
+                    writer.write("try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));")
                 }
             }
             is EnumShape, is IntEnumShape -> {
                 val enumName = elementShape.id.name
                 writer.write(
-                    "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| try list.append(alloc, v);",
+                    "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| try list.append(allocator, v);",
                     enumName,
                 )
             }
             is IntegerShape, is ShortShape -> {
-                writer.write("if (std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null) |v| try list.append(alloc, v);")
+                writer.write("if (std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null) |v| try list.append(allocator, v);")
             }
             is LongShape -> {
-                writer.write("if (std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null) |v| try list.append(alloc, v);")
+                writer.write("if (std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null) |v| try list.append(allocator, v);")
             }
             is TimestampShape -> {
-                writer.write("if (aws.date.parseIso8601(try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
+                writer.write("if (aws.date.parseIso8601(try reader.readElementText()) catch null) |v| try list.append(allocator, v);")
             }
             is FloatShape -> {
-                writer.write("if (std.fmt.parseFloat(f32, try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
+                writer.write("if (std.fmt.parseFloat(f32, try reader.readElementText()) catch null) |v| try list.append(allocator, v);")
             }
             is DoubleShape -> {
-                writer.write("if (std.fmt.parseFloat(f64, try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
+                writer.write("if (std.fmt.parseFloat(f64, try reader.readElementText()) catch null) |v| try list.append(allocator, v);")
             }
             is BooleanShape -> {
-                writer.write("try list.append(alloc, std.mem.eql(u8, try reader.readElementText(), \"true\"));")
+                writer.write("try list.append(allocator, std.mem.eql(u8, try reader.readElementText(), \"true\"));")
             }
             is BlobShape -> {
-                writer.write("try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));")
+                writer.write("try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));")
             }
             else -> {
-                writer.write("try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));")
+                writer.write("try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));")
             }
         }
 
@@ -807,7 +807,7 @@ class SerdeGenerator(
         writer.closeBlock("}") // switch
         writer.closeBlock("}") // while
 
-        writer.write("return list.toOwnedSlice(alloc);")
+        writer.write("return list.toOwnedSlice(allocator);")
         writer.closeBlock("}") // fn
     }
 
@@ -854,7 +854,7 @@ class SerdeGenerator(
         val valueTag = getMapValueTag(mapShape)
 
         writer.openBlock(
-            "pub fn \$L(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime entry_tag: []const u8) !\$L {",
+            "pub fn \$L(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) !\$L {",
             fnName, returnType,
         )
 
@@ -881,7 +881,7 @@ class SerdeGenerator(
 
         // Key parsing
         writer.openBlock("if (std.mem.eql(u8, ie.local, \"\$L\")) {", keyTag)
-        writer.write("entry_key = try alloc.dupe(u8, try reader.readElementText());")
+        writer.write("entry_key = try allocator.dupe(u8, try reader.readElementText());")
         writer.dedent()
         writer.openBlock("} else if (std.mem.eql(u8, ie.local, \"\$L\")) {", valueTag)
 
@@ -898,7 +898,7 @@ class SerdeGenerator(
         writer.closeBlock("}") // switch
         writer.closeBlock("}") // while
 
-        writer.write("try list.append(alloc, .{ .key = entry_key, .value = entry_value });")
+        writer.write("try list.append(allocator, .{ .key = entry_key, .value = entry_value });")
 
         writer.closeBlock("} else {") // if eql
         writer.write("    try reader.skipElement();")
@@ -909,7 +909,7 @@ class SerdeGenerator(
         writer.closeBlock("}") // switch
         writer.closeBlock("}") // while
 
-        writer.write("return list.toOwnedSlice(alloc);")
+        writer.write("return list.toOwnedSlice(allocator);")
         writer.closeBlock("}") // fn
     }
 
@@ -922,7 +922,7 @@ class SerdeGenerator(
                         valueShape.id.name,
                     )
                 } else {
-                    writer.write("entry_value = try alloc.dupe(u8, try reader.readElementText());")
+                    writer.write("entry_value = try allocator.dupe(u8, try reader.readElementText());")
                 }
             }
             is BooleanShape -> {
@@ -941,7 +941,7 @@ class SerdeGenerator(
                 writer.write("entry_value = std.fmt.parseFloat(f64, try reader.readElementText()) catch 0;")
             }
             is StructureShape -> {
-                writer.write("entry_value = try deserialize\$L(reader, alloc);", valueShape.id.name)
+                writer.write("entry_value = try deserialize\$L(allocator, reader);", valueShape.id.name)
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write(
@@ -950,7 +950,7 @@ class SerdeGenerator(
                 )
             }
             else -> {
-                writer.write("entry_value = try alloc.dupe(u8, try reader.readElementText());")
+                writer.write("entry_value = try allocator.dupe(u8, try reader.readElementText());")
             }
         }
     }
@@ -968,26 +968,26 @@ class SerdeGenerator(
         val valueTag = getMapValueTag(mapShape)
 
         writer.openBlock(
-            "pub fn \$L(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), entries: []const \$L, comptime entry_tag: []const u8) !void {",
+            "pub fn \$L(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), entries: []const \$L, comptime entry_tag: []const u8) !void {",
             fnName, entryType,
         )
 
         writer.openBlock("for (entries) |entry| {")
-        writer.write("try buf.appendSlice(alloc, \"<\");")
-        writer.write("try buf.appendSlice(alloc, entry_tag);")
-        writer.write("try buf.appendSlice(alloc, \">\");")
+        writer.write("try buf.appendSlice(allocator, \"<\");")
+        writer.write("try buf.appendSlice(allocator, entry_tag);")
+        writer.write("try buf.appendSlice(allocator, \">\");")
 
         // Serialize key
-        writer.write("try buf.appendSlice(alloc, \"<\$L>\");", keyTag)
-        writer.write("try aws.xml.appendXmlEscaped(alloc, buf, entry.key);")
-        writer.write("try buf.appendSlice(alloc, \"</\$L>\");", keyTag)
+        writer.write("try buf.appendSlice(allocator, \"<\$L>\");", keyTag)
+        writer.write("try aws.xml.appendXmlEscaped(allocator, buf, entry.key);")
+        writer.write("try buf.appendSlice(allocator, \"</\$L>\");", keyTag)
 
         // Serialize value
         writeMapValueSerializer(writer, valueShape, valueTag)
 
-        writer.write("try buf.appendSlice(alloc, \"</\");")
-        writer.write("try buf.appendSlice(alloc, entry_tag);")
-        writer.write("try buf.appendSlice(alloc, \">\");")
+        writer.write("try buf.appendSlice(allocator, \"</\");")
+        writer.write("try buf.appendSlice(allocator, entry_tag);")
+        writer.write("try buf.appendSlice(allocator, \">\");")
         writer.closeBlock("}") // for
 
         writer.closeBlock("}") // fn
@@ -997,42 +997,42 @@ class SerdeGenerator(
         when (valueShape) {
             is StringShape -> {
                 if (isEnumType(valueShape)) {
-                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
-                    writer.write("try buf.appendSlice(alloc, @tagName(entry.value));")
-                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                    writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
+                    writer.write("try buf.appendSlice(allocator, @tagName(entry.value));")
+                    writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
                 } else {
-                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
-                    writer.write("try aws.xml.appendXmlEscaped(alloc, buf, entry.value);")
-                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                    writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
+                    writer.write("try aws.xml.appendXmlEscaped(allocator, buf, entry.value);")
+                    writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
                 }
             }
             is BooleanShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
-                writer.write("try buf.appendSlice(alloc, if (entry.value) \"true\" else \"false\");")
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, if (entry.value) \"true\" else \"false\");")
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
             }
             is IntegerShape, is ShortShape, is LongShape, is FloatShape, is DoubleShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{entry.value}) catch \"\";")
-                writer.write("try buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{entry.value}) catch \"\";")
+                writer.write("try buf.appendSlice(allocator, num_str);")
                 writer.closeBlock("}")
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
             }
             is EnumShape, is IntEnumShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
-                writer.write("try buf.appendSlice(alloc, @tagName(entry.value));")
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, @tagName(entry.value));")
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
             }
             is StructureShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
-                writer.write("try serialize\$L(alloc, buf, entry.value);", valueShape.id.name)
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
+                writer.write("try serialize\$L(allocator, buf, entry.value);", valueShape.id.name)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
             }
             else -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
-                writer.write("try aws.xml.appendXmlEscaped(alloc, buf, entry.value);")
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
+                writer.write("try aws.xml.appendXmlEscaped(allocator, buf, entry.value);")
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
             }
         }
     }
@@ -1053,7 +1053,7 @@ class SerdeGenerator(
         val fnName = "serialize$typeName"
 
         writer.openBlock(
-            "pub fn \$L(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: \$L) !void {",
+            "pub fn \$L(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: \$L) !void {",
             fnName, typeName,
         )
 
@@ -1062,7 +1062,7 @@ class SerdeGenerator(
         }
 
         if (serializableMembers.isEmpty()) {
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
             writer.write("_ = buf;")
             writer.write("_ = value;")
         } else {
@@ -1096,69 +1096,69 @@ class SerdeGenerator(
         when (targetShape) {
             is StringShape -> {
                 if (isEnumType(targetShape)) {
-                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                    writer.write("try buf.appendSlice(alloc, @tagName(\$L));", accessor)
-                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                    writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                    writer.write("try buf.appendSlice(allocator, @tagName(\$L));", accessor)
+                    writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                 } else {
-                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                    writer.write("try aws.xml.appendXmlEscaped(alloc, buf, \$L);", accessor)
-                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                    writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                    writer.write("try aws.xml.appendXmlEscaped(allocator, buf, \$L);", accessor)
+                    writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                 }
             }
             is BooleanShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                writer.write("try buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", accessor)
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, if (\$L) \"true\" else \"false\");", accessor)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             is IntegerShape, is ShortShape, is LongShape, is FloatShape, is DoubleShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
-                writer.write("try buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", accessor)
+                writer.write("try buf.appendSlice(allocator, num_str);")
                 writer.closeBlock("}")
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             is EnumShape, is IntEnumShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                writer.write("try buf.appendSlice(alloc, @tagName(\$L));", accessor)
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, @tagName(\$L));", accessor)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             is TimestampShape -> {
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
                 writer.openBlock("{")
-                writer.write("const ts_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
-                writer.write("try buf.appendSlice(alloc, ts_str);")
+                writer.write("const ts_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", accessor)
+                writer.write("try buf.appendSlice(allocator, ts_str);")
                 writer.closeBlock("}")
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             is StructureShape -> {
                 val nestedTypeName = targetShape.id.name
-                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                writer.write("try serialize\$L(alloc, buf, \$L);", nestedTypeName, accessor)
-                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                writer.write("try serialize\$L(allocator, buf, \$L);", nestedTypeName, accessor)
+                writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             is ListShape -> {
                 val listFnName = "serialize${targetShape.id.name}"
                 if (memberShape.hasTrait(XmlFlattenedTrait::class.java)) {
                     // Flattened: no wrapper element, item tag from member's xmlName
-                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", listFnName, accessor, xmlName)
+                    writer.write("try \$L(allocator, buf, \$L, \"\$L\");", listFnName, accessor, xmlName)
                 } else {
                     // Non-flattened: wrapper element + item tag from list member
                     val itemTag = getListItemTag(targetShape)
-                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", listFnName, accessor, itemTag)
-                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                    writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                    writer.write("try \$L(allocator, buf, \$L, \"\$L\");", listFnName, accessor, itemTag)
+                    writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                 }
             }
             is MapShape -> {
                 val mapFnName = "serialize${targetShape.id.name}"
                 val entryTag = getMapEntryTag(targetShape)
                 if (memberShape.hasTrait(XmlFlattenedTrait::class.java)) {
-                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", mapFnName, accessor, xmlName)
+                    writer.write("try \$L(allocator, buf, \$L, \"\$L\");", mapFnName, accessor, xmlName)
                 } else {
-                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", mapFnName, accessor, entryTag)
-                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                    writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
+                    writer.write("try \$L(allocator, buf, \$L, \"\$L\");", mapFnName, accessor, entryTag)
+                    writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                 }
             }
             else -> {}
@@ -1172,47 +1172,47 @@ class SerdeGenerator(
         val paramType = "[]const $elementTypeName"
 
         writer.openBlock(
-            "pub fn \$L(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: \$L, comptime item_tag: []const u8) !void {",
+            "pub fn \$L(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: \$L, comptime item_tag: []const u8) !void {",
             fnName, paramType,
         )
 
         writer.openBlock("for (value) |item| {")
-        writer.write("try buf.appendSlice(alloc, \"<\");")
-        writer.write("try buf.appendSlice(alloc, item_tag);")
-        writer.write("try buf.appendSlice(alloc, \">\");")
+        writer.write("try buf.appendSlice(allocator, \"<\");")
+        writer.write("try buf.appendSlice(allocator, item_tag);")
+        writer.write("try buf.appendSlice(allocator, \">\");")
 
         when (elementShape) {
             is StructureShape -> {
                 val typeName = elementShape.id.name
-                writer.write("try serialize\$L(alloc, buf, item);", typeName)
+                writer.write("try serialize\$L(allocator, buf, item);", typeName)
             }
             is StringShape -> {
                 if (isEnumType(elementShape)) {
-                    writer.write("try buf.appendSlice(alloc, @tagName(item));")
+                    writer.write("try buf.appendSlice(allocator, @tagName(item));")
                 } else {
-                    writer.write("try aws.xml.appendXmlEscaped(alloc, buf, item);")
+                    writer.write("try aws.xml.appendXmlEscaped(allocator, buf, item);")
                 }
             }
             is EnumShape, is IntEnumShape -> {
-                writer.write("try buf.appendSlice(alloc, @tagName(item));")
+                writer.write("try buf.appendSlice(allocator, @tagName(item));")
             }
             is BooleanShape -> {
-                writer.write("try buf.appendSlice(alloc, if (item) \"true\" else \"false\");")
+                writer.write("try buf.appendSlice(allocator, if (item) \"true\" else \"false\");")
             }
             is IntegerShape, is ShortShape, is LongShape, is FloatShape, is DoubleShape -> {
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{item}) catch \"\";")
-                writer.write("try buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{item}) catch \"\";")
+                writer.write("try buf.appendSlice(allocator, num_str);")
                 writer.closeBlock("}")
             }
             else -> {
-                writer.write("try aws.xml.appendXmlEscaped(alloc, buf, item);")
+                writer.write("try aws.xml.appendXmlEscaped(allocator, buf, item);")
             }
         }
 
-        writer.write("try buf.appendSlice(alloc, \"</\");")
-        writer.write("try buf.appendSlice(alloc, item_tag);")
-        writer.write("try buf.appendSlice(alloc, \">\");")
+        writer.write("try buf.appendSlice(allocator, \"</\");")
+        writer.write("try buf.appendSlice(allocator, item_tag);")
+        writer.write("try buf.appendSlice(allocator, \">\");")
         writer.closeBlock("}") // for
 
         writer.closeBlock("}") // fn

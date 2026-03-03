@@ -60,17 +60,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCusto
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DeleteCustomDBEngineVersionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("rds", "RDS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DeleteCustomDBEngineVersionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("rds", "RDS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -78,13 +78,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteCustomDBEngineVersion
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=DeleteCustomDBEngineVersion&Version=2014-10-31");
-    try body_buf.appendSlice(alloc, "&Engine=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.engine);
-    try body_buf.appendSlice(alloc, "&EngineVersion=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.engine_version);
+    try body_buf.appendSlice(allocator, "Action=DeleteCustomDBEngineVersion&Version=2014-10-31");
+    try body_buf.appendSlice(allocator, "&Engine=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.engine);
+    try body_buf.appendSlice(allocator, "&EngineVersion=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.engine_version);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -92,12 +92,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteCustomDBEngineVersion
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteCustomDBEngineVersionOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteCustomDBEngineVersionOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -118,55 +118,55 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "CreateTime")) {
                     result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "CustomDBEngineVersionManifest")) {
-                    result.custom_db_engine_version_manifest = try alloc.dupe(u8, try reader.readElementText());
+                    result.custom_db_engine_version_manifest = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DatabaseInstallationFiles")) {
-                    result.database_installation_files = try serde.deserializeStringList(&reader, alloc, "member");
+                    result.database_installation_files = try serde.deserializeStringList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DatabaseInstallationFilesS3BucketName")) {
-                    result.database_installation_files_s3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.database_installation_files_s3_bucket_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DatabaseInstallationFilesS3Prefix")) {
-                    result.database_installation_files_s3_prefix = try alloc.dupe(u8, try reader.readElementText());
+                    result.database_installation_files_s3_prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DBEngineDescription")) {
-                    result.db_engine_description = try alloc.dupe(u8, try reader.readElementText());
+                    result.db_engine_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DBEngineMediaType")) {
-                    result.db_engine_media_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.db_engine_media_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DBEngineVersionArn")) {
-                    result.db_engine_version_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.db_engine_version_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DBEngineVersionDescription")) {
-                    result.db_engine_version_description = try alloc.dupe(u8, try reader.readElementText());
+                    result.db_engine_version_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DBParameterGroupFamily")) {
-                    result.db_parameter_group_family = try alloc.dupe(u8, try reader.readElementText());
+                    result.db_parameter_group_family = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DefaultCharacterSet")) {
-                    result.default_character_set = try serde.deserializeCharacterSet(&reader, alloc);
+                    result.default_character_set = try serde.deserializeCharacterSet(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "Engine")) {
-                    result.engine = try alloc.dupe(u8, try reader.readElementText());
+                    result.engine = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EngineVersion")) {
-                    result.engine_version = try alloc.dupe(u8, try reader.readElementText());
+                    result.engine_version = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExportableLogTypes")) {
-                    result.exportable_log_types = try serde.deserializeLogTypeList(&reader, alloc, "member");
+                    result.exportable_log_types = try serde.deserializeLogTypeList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "FailureReason")) {
-                    result.failure_reason = try alloc.dupe(u8, try reader.readElementText());
+                    result.failure_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Image")) {
-                    result.image = try serde.deserializeCustomDBEngineVersionAMI(&reader, alloc);
+                    result.image = try serde.deserializeCustomDBEngineVersionAMI(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "KMSKeyId")) {
-                    result.kms_key_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.kms_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MajorEngineVersion")) {
-                    result.major_engine_version = try alloc.dupe(u8, try reader.readElementText());
+                    result.major_engine_version = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServerlessV2FeaturesSupport")) {
-                    result.serverless_v2_features_support = try serde.deserializeServerlessV2FeaturesSupport(&reader, alloc);
+                    result.serverless_v2_features_support = try serde.deserializeServerlessV2FeaturesSupport(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = try alloc.dupe(u8, try reader.readElementText());
+                    result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SupportedCACertificateIdentifiers")) {
-                    result.supported_ca_certificate_identifiers = try serde.deserializeCACertificateIdentifiersList(&reader, alloc, "member");
+                    result.supported_ca_certificate_identifiers = try serde.deserializeCACertificateIdentifiersList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SupportedCharacterSets")) {
-                    result.supported_character_sets = try serde.deserializeSupportedCharacterSetsList(&reader, alloc, "CharacterSet");
+                    result.supported_character_sets = try serde.deserializeSupportedCharacterSetsList(allocator, &reader, "CharacterSet");
                 } else if (std.mem.eql(u8, e.local, "SupportedEngineModes")) {
-                    result.supported_engine_modes = try serde.deserializeEngineModeList(&reader, alloc, "member");
+                    result.supported_engine_modes = try serde.deserializeEngineModeList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SupportedFeatureNames")) {
-                    result.supported_feature_names = try serde.deserializeFeatureNameList(&reader, alloc, "member");
+                    result.supported_feature_names = try serde.deserializeFeatureNameList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SupportedNcharCharacterSets")) {
-                    result.supported_nchar_character_sets = try serde.deserializeSupportedCharacterSetsList(&reader, alloc, "CharacterSet");
+                    result.supported_nchar_character_sets = try serde.deserializeSupportedCharacterSetsList(allocator, &reader, "CharacterSet");
                 } else if (std.mem.eql(u8, e.local, "SupportedTimezones")) {
-                    result.supported_timezones = try serde.deserializeSupportedTimezonesList(&reader, alloc, "Timezone");
+                    result.supported_timezones = try serde.deserializeSupportedTimezonesList(allocator, &reader, "Timezone");
                 } else if (std.mem.eql(u8, e.local, "SupportsBabelfish")) {
                     result.supports_babelfish = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "SupportsCertificateRotationWithoutRestart")) {
@@ -186,9 +186,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "SupportsReadReplica")) {
                     result.supports_read_replica = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "TagList")) {
-                    result.tag_list = try serde.deserializeTagList(&reader, alloc, "Tag");
+                    result.tag_list = try serde.deserializeTagList(allocator, &reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "ValidUpgradeTarget")) {
-                    result.valid_upgrade_target = try serde.deserializeValidUpgradeTargetList(&reader, alloc, "UpgradeTarget");
+                    result.valid_upgrade_target = try serde.deserializeValidUpgradeTargetList(allocator, &reader, "UpgradeTarget");
                 } else {
                     try reader.skipElement();
                 }
@@ -201,11 +201,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

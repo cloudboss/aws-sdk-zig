@@ -57,17 +57,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCusto
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCustomVerificationEmailTemplateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCustomVerificationEmailTemplateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -75,31 +75,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCustomVerificationEma
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=UpdateCustomVerificationEmailTemplate&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "Action=UpdateCustomVerificationEmailTemplate&Version=2010-12-01");
     if (input.failure_redirection_url) |v| {
-        try body_buf.appendSlice(alloc, "&FailureRedirectionURL=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&FailureRedirectionURL=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.from_email_address) |v| {
-        try body_buf.appendSlice(alloc, "&FromEmailAddress=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&FromEmailAddress=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.success_redirection_url) |v| {
-        try body_buf.appendSlice(alloc, "&SuccessRedirectionURL=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&SuccessRedirectionURL=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.template_content) |v| {
-        try body_buf.appendSlice(alloc, "&TemplateContent=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&TemplateContent=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&TemplateName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.template_name);
+    try body_buf.appendSlice(allocator, "&TemplateName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.template_name);
     if (input.template_subject) |v| {
-        try body_buf.appendSlice(alloc, "&TemplateSubject=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&TemplateSubject=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -107,26 +107,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCustomVerificationEma
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateCustomVerificationEmailTemplateOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCustomVerificationEmailTemplateOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: UpdateCustomVerificationEmailTemplateOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -65,40 +65,40 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyDistrib
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CopyDistributionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CopyDistributionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/2020-05-31/distribution/");
-    try path_buf.appendSlice(alloc, input.primary_distribution_id);
-    try path_buf.appendSlice(alloc, "/copy");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/2020-05-31/distribution/");
+    try path_buf.appendSlice(allocator, input.primary_distribution_id);
+    try path_buf.appendSlice(allocator, "/copy");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<CopyDistributionRequest>");
-    try body_buf.appendSlice(alloc, "<CallerReference>");
-    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.caller_reference);
-    try body_buf.appendSlice(alloc, "</CallerReference>");
+    try body_buf.appendSlice(allocator, "<CopyDistributionRequest>");
+    try body_buf.appendSlice(allocator, "<CallerReference>");
+    try aws.xml.appendXmlEscaped(allocator, &body_buf, input.caller_reference);
+    try body_buf.appendSlice(allocator, "</CallerReference>");
     if (input.enabled) |v| {
-        try body_buf.appendSlice(alloc, "<Enabled>");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
-        try body_buf.appendSlice(alloc, "</Enabled>");
+        try body_buf.appendSlice(allocator, "<Enabled>");
+        try body_buf.appendSlice(allocator, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "</Enabled>");
     }
-    try body_buf.appendSlice(alloc, "</CopyDistributionRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "</CopyDistributionRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -106,36 +106,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyDistributionInput, conf
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.if_match) |v| {
-        try request.headers.put(alloc, "If-Match", v);
+        try request.headers.put(allocator, "If-Match", v);
     }
     if (input.staging) |v| {
-        try request.headers.put(alloc, "Staging", if (v) "true" else "false");
+        try request.headers.put(allocator, "Staging", if (v) "true" else "false");
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CopyDistributionOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CopyDistributionOutput {
     var result: CopyDistributionOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("etag")) |value| {
-        result.e_tag = try alloc.dupe(u8, value);
+        result.e_tag = try allocator.dupe(u8, value);
     }
     if (headers.get("location")) |value| {
-        result.location = try alloc.dupe(u8, value);
+        result.location = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

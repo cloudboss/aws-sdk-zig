@@ -109,7 +109,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithR
         const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
         defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+            d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
         }
         return error.ServiceError;
     }
@@ -121,28 +121,28 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithR
     return .{ .event_stream = event_stream };
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("lambda", "Lambda", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: InvokeWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("lambda", "Lambda", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/2021-11-15/functions/");
-    try path_buf.appendSlice(alloc, input.function_name);
-    try path_buf.appendSlice(alloc, "/response-streaming-invocations");
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/2021-11-15/functions/");
+    try path_buf.appendSlice(allocator, input.function_name);
+    try path_buf.appendSlice(allocator, "/response-streaming-invocations");
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.qualifier) |v| {
-        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
-        try query_buf.appendSlice(alloc, "Qualifier=");
-        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "Qualifier=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body = input.payload orelse "";
 
@@ -153,24 +153,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInp
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/json");
+    try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.client_context) |v| {
-        try request.headers.put(alloc, "X-Amz-Client-Context", v);
+        try request.headers.put(allocator, "X-Amz-Client-Context", v);
     }
     if (input.invocation_type) |v| {
-        try request.headers.put(alloc, "X-Amz-Invocation-Type", @tagName(v));
+        try request.headers.put(allocator, "X-Amz-Invocation-Type", @tagName(v));
     }
     if (input.log_type) |v| {
-        try request.headers.put(alloc, "X-Amz-Log-Type", @tagName(v));
+        try request.headers.put(allocator, "X-Amz-Log-Type", @tagName(v));
     }
     if (input.tenant_id) |v| {
-        try request.headers.put(alloc, "X-Amz-Tenant-Id", v);
+        try request.headers.put(allocator, "X-Amz-Tenant-Id", v);
     }
 
     return request;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -179,7 +179,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

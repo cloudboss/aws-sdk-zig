@@ -115,17 +115,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfi
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationTemplateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigurationTemplateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -133,16 +133,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationTemplate
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreateConfigurationTemplate&Version=2010-12-01");
-    try body_buf.appendSlice(alloc, "&ApplicationName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.application_name);
+    try body_buf.appendSlice(allocator, "Action=CreateConfigurationTemplate&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "&ApplicationName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.application_name);
     if (input.description) |v| {
-        try body_buf.appendSlice(alloc, "&Description=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Description=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.environment_id) |v| {
-        try body_buf.appendSlice(alloc, "&EnvironmentId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&EnvironmentId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.option_settings) |list| {
         for (list, 0..) |item, idx| {
@@ -150,53 +150,53 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationTemplate
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionSettings.member.{d}.Namespace=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.namespace) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionSettings.member.{d}.OptionName=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.option_name) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionSettings.member.{d}.ResourceName=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_name) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionSettings.member.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
         }
     }
     if (input.platform_arn) |v| {
-        try body_buf.appendSlice(alloc, "&PlatformArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PlatformArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.solution_stack_name) |v| {
-        try body_buf.appendSlice(alloc, "&SolutionStackName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&SolutionStackName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.source_configuration) |v| {
         if (v.application_name) |sv| {
-            try body_buf.appendSlice(alloc, "&SourceConfiguration.ApplicationName=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SourceConfiguration.ApplicationName=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.template_name) |sv| {
-            try body_buf.appendSlice(alloc, "&SourceConfiguration.TemplateName=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&SourceConfiguration.TemplateName=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.tags) |list| {
@@ -205,25 +205,25 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationTemplate
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Key=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
         }
     }
-    try body_buf.appendSlice(alloc, "&TemplateName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.template_name);
+    try body_buf.appendSlice(allocator, "&TemplateName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.template_name);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -231,12 +231,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationTemplate
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateConfigurationTemplateOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConfigurationTemplateOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -255,7 +255,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DateCreated")) {
                     result.date_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
@@ -263,17 +263,17 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "DeploymentStatus")) {
                     result.deployment_status = std.meta.stringToEnum(ConfigurationDeploymentStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
-                    result.environment_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OptionSettings")) {
-                    result.option_settings = try serde.deserializeConfigurationOptionSettingsList(&reader, alloc, "member");
+                    result.option_settings = try serde.deserializeConfigurationOptionSettingsList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
-                    result.platform_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SolutionStackName")) {
-                    result.solution_stack_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.solution_stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateName")) {
-                    result.template_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.template_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -286,11 +286,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

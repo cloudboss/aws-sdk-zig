@@ -120,23 +120,23 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRul
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: DescribeRuleGroupMetadataInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("networkfirewall", "Network Firewall", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRuleGroupMetadataInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("networkfirewall", "Network Firewall", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const body = try aws.json.jsonStringify(input, alloc);
+    const body = try aws.json.jsonStringify(input, allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -144,19 +144,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeRuleGroupMetadataIn
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.0");
-    try request.headers.put(alloc, "X-Amz-Target", "NetworkFirewall_20201112.DescribeRuleGroupMetadata");
+    try request.headers.put(allocator, "Content-Type", "application/x-amz-json-1.0");
+    try request.headers.put(allocator, "X-Amz-Target", "NetworkFirewall_20201112.DescribeRuleGroupMetadata");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeRuleGroupMetadataOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRuleGroupMetadataOutput {
     _ = status;
     _ = headers;
-    return aws.json.parseJsonObject(DescribeRuleGroupMetadataOutput, body, alloc);
+    return aws.json.parseJsonObject(DescribeRuleGroupMetadataOutput, body, allocator);
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -165,7 +165,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

@@ -754,12 +754,12 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutObjectIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
@@ -787,25 +787,25 @@ pub fn presign(client: *Client, allocator: std.mem.Allocator, input: PutObjectIn
     );
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.bucket);
-    try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.key);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.bucket);
+    try path_buf.appendSlice(allocator, "/");
+    try path_buf.appendSlice(allocator, input.key);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    try query_buf.appendSlice(alloc, "x-id=PutObject");
+    try query_buf.appendSlice(allocator, "x-id=PutObject");
     query_has_prev = true;
-    const query = try query_buf.toOwnedSlice(alloc);
+    const query = try query_buf.toOwnedSlice(allocator);
 
     const body = input.body orelse "";
 
@@ -816,132 +816,132 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectInput, config: *aw
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(alloc, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
     }
     if (input.bucket_key_enabled) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
+        try request.headers.put(allocator, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
     }
     if (input.cache_control) |v| {
-        try request.headers.put(alloc, "Cache-Control", v);
+        try request.headers.put(allocator, "Cache-Control", v);
     }
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
     }
     if (input.checksum_crc32) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-crc32", v);
+        try request.headers.put(allocator, "x-amz-checksum-crc32", v);
     }
     if (input.checksum_crc32_c) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-crc32c", v);
+        try request.headers.put(allocator, "x-amz-checksum-crc32c", v);
     }
     if (input.checksum_crc64_nvme) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-crc64nvme", v);
+        try request.headers.put(allocator, "x-amz-checksum-crc64nvme", v);
     }
     if (input.checksum_sha1) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-sha1", v);
+        try request.headers.put(allocator, "x-amz-checksum-sha1", v);
     }
     if (input.checksum_sha256) |v| {
-        try request.headers.put(alloc, "x-amz-checksum-sha256", v);
+        try request.headers.put(allocator, "x-amz-checksum-sha256", v);
     }
     if (input.content_disposition) |v| {
-        try request.headers.put(alloc, "Content-Disposition", v);
+        try request.headers.put(allocator, "Content-Disposition", v);
     }
     if (input.content_encoding) |v| {
-        try request.headers.put(alloc, "Content-Encoding", v);
+        try request.headers.put(allocator, "Content-Encoding", v);
     }
     if (input.content_language) |v| {
-        try request.headers.put(alloc, "Content-Language", v);
+        try request.headers.put(allocator, "Content-Language", v);
     }
     if (input.content_length) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "Content-Length", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "Content-Length", num_str);
         }
     }
     if (input.content_md5) |v| {
-        try request.headers.put(alloc, "Content-MD5", v);
+        try request.headers.put(allocator, "Content-MD5", v);
     }
     if (input.content_type) |v| {
-        try request.headers.put(alloc, "Content-Type", v);
+        try request.headers.put(allocator, "Content-Type", v);
     }
     if (input.expected_bucket_owner) |v| {
-        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+        try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.expires) |v| {
-        try request.headers.put(alloc, "Expires", v);
+        try request.headers.put(allocator, "Expires", v);
     }
     if (input.grant_full_control) |v| {
-        try request.headers.put(alloc, "x-amz-grant-full-control", v);
+        try request.headers.put(allocator, "x-amz-grant-full-control", v);
     }
     if (input.grant_read) |v| {
-        try request.headers.put(alloc, "x-amz-grant-read", v);
+        try request.headers.put(allocator, "x-amz-grant-read", v);
     }
     if (input.grant_read_acp) |v| {
-        try request.headers.put(alloc, "x-amz-grant-read-acp", v);
+        try request.headers.put(allocator, "x-amz-grant-read-acp", v);
     }
     if (input.grant_write_acp) |v| {
-        try request.headers.put(alloc, "x-amz-grant-write-acp", v);
+        try request.headers.put(allocator, "x-amz-grant-write-acp", v);
     }
     if (input.if_match) |v| {
-        try request.headers.put(alloc, "If-Match", v);
+        try request.headers.put(allocator, "If-Match", v);
     }
     if (input.if_none_match) |v| {
-        try request.headers.put(alloc, "If-None-Match", v);
+        try request.headers.put(allocator, "If-None-Match", v);
     }
     if (input.object_lock_legal_hold_status) |v| {
-        try request.headers.put(alloc, "x-amz-object-lock-legal-hold", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-lock-legal-hold", @tagName(v));
     }
     if (input.object_lock_mode) |v| {
-        try request.headers.put(alloc, "x-amz-object-lock-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-lock-mode", @tagName(v));
     }
     if (input.object_lock_retain_until_date) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-object-lock-retain-until-date", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-object-lock-retain-until-date", num_str);
         }
     }
     if (input.request_payer) |v| {
-        try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
     }
     if (input.server_side_encryption) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption", @tagName(v));
+        try request.headers.put(allocator, "x-amz-server-side-encryption", @tagName(v));
     }
     if (input.sse_customer_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-algorithm", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
     }
     if (input.sse_customer_key) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key", v);
     }
     if (input.sse_customer_key_md5) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key-MD5", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-customer-key-MD5", v);
     }
     if (input.ssekms_encryption_context) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-context", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-context", v);
     }
     if (input.ssekms_key_id) |v| {
-        try request.headers.put(alloc, "x-amz-server-side-encryption-aws-kms-key-id", v);
+        try request.headers.put(allocator, "x-amz-server-side-encryption-aws-kms-key-id", v);
     }
     if (input.storage_class) |v| {
-        try request.headers.put(alloc, "x-amz-storage-class", @tagName(v));
+        try request.headers.put(allocator, "x-amz-storage-class", @tagName(v));
     }
     if (input.tagging) |v| {
-        try request.headers.put(alloc, "x-amz-tagging", v);
+        try request.headers.put(allocator, "x-amz-tagging", v);
     }
     if (input.website_redirect_location) |v| {
-        try request.headers.put(alloc, "x-amz-website-redirect-location", v);
+        try request.headers.put(allocator, "x-amz-website-redirect-location", v);
     }
     if (input.write_offset_bytes) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-write-offset-bytes", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-write-offset-bytes", num_str);
         }
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutObjectOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutObjectOutput {
     var result: PutObjectOutput = .{};
     _ = status;
     _ = body;
@@ -949,28 +949,28 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         result.bucket_key_enabled = std.mem.eql(u8, value, "true");
     }
     if (headers.get("x-amz-checksum-crc32")) |value| {
-        result.checksum_crc32 = try alloc.dupe(u8, value);
+        result.checksum_crc32 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-crc32c")) |value| {
-        result.checksum_crc32_c = try alloc.dupe(u8, value);
+        result.checksum_crc32_c = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-crc64nvme")) |value| {
-        result.checksum_crc64_nvme = try alloc.dupe(u8, value);
+        result.checksum_crc64_nvme = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-sha1")) |value| {
-        result.checksum_sha1 = try alloc.dupe(u8, value);
+        result.checksum_sha1 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-sha256")) |value| {
-        result.checksum_sha256 = try alloc.dupe(u8, value);
+        result.checksum_sha256 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-type")) |value| {
         result.checksum_type = std.meta.stringToEnum(ChecksumType, value);
     }
     if (headers.get("etag")) |value| {
-        result.e_tag = try alloc.dupe(u8, value);
+        result.e_tag = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-expiration")) |value| {
-        result.expiration = try alloc.dupe(u8, value);
+        result.expiration = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
@@ -982,29 +982,29 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         result.size = std.fmt.parseInt(i64, value, 10) catch null;
     }
     if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
-        result.sse_customer_algorithm = try alloc.dupe(u8, value);
+        result.sse_customer_algorithm = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-server-side-encryption-customer-key-md5")) |value| {
-        result.sse_customer_key_md5 = try alloc.dupe(u8, value);
+        result.sse_customer_key_md5 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-server-side-encryption-context")) |value| {
-        result.ssekms_encryption_context = try alloc.dupe(u8, value);
+        result.ssekms_encryption_context = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
-        result.ssekms_key_id = try alloc.dupe(u8, value);
+        result.ssekms_key_id = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-version-id")) |value| {
-        result.version_id = try alloc.dupe(u8, value);
+        result.version_id = try allocator.dupe(u8, value);
     }
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

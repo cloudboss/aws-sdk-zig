@@ -455,7 +455,7 @@ class RestJsonProtocolTest {
         val op = files["invoke.zig"]!!
 
         assertTrue(
-            op.contains("fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator)"),
+            op.contains("fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype)"),
             "deserializeResponse should accept headers parameter",
         )
     }
@@ -470,7 +470,7 @@ class RestJsonProtocolTest {
             "Should have deserializeResponse function",
         )
         assertTrue(
-            op.contains("alloc.dupe(u8, body)"),
+            op.contains("allocator.dupe(u8, body)"),
             "Should dupe payload body for output",
         )
     }
@@ -495,7 +495,7 @@ class RestJsonProtocolTest {
         val op = files["list_functions.zig"]!!
 
         assertTrue(
-            op.contains("aws.json.parseJsonObject(ListFunctionsOutput, body, alloc)"),
+            op.contains("aws.json.parseJsonObject(ListFunctionsOutput, body, allocator)"),
             "Should use runtime JSON parser for response deserialization",
         )
     }
@@ -512,7 +512,7 @@ class RestJsonProtocolTest {
             op.contains("__type"),
             "Should extract error code from __type field (same as AWS JSON)",
         )
-        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test

@@ -70,7 +70,7 @@ class SerdeGeneratorTest {
                     .id("test#Marker")
                     .build()
             )
-            // Settings struct (only scalar fields -- no alloc needed)
+            // Settings struct (only scalar fields -- no allocator needed)
             .addShape(
                 StructureShape.builder()
                     .id("test#Settings")
@@ -260,7 +260,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn deserializeUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !User {"),
+            serde.contains("pub fn deserializeUser(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !User {"),
             "Should generate deserializeUser function",
         )
     }
@@ -270,7 +270,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn deserializeTag(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tag {"),
+            serde.contains("pub fn deserializeTag(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Tag {"),
             "Should generate deserializeTag function",
         )
     }
@@ -284,8 +284,8 @@ class SerdeGeneratorTest {
             "Should match on XML element name UserName",
         )
         assertTrue(
-            serde.contains("result.user_name = try alloc.dupe(u8, try reader.readElementText());"),
-            "Should deserialize string with alloc.dupe",
+            serde.contains("result.user_name = try allocator.dupe(u8, try reader.readElementText());"),
+            "Should deserialize string with allocator.dupe",
         )
     }
 
@@ -328,7 +328,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("result.tags = try deserializeTagList(reader, alloc, \"member\");"),
+            serde.contains("result.tags = try deserializeTagList(allocator, reader, \"member\");"),
             "Should call list deserializer for tags",
         )
     }
@@ -339,7 +339,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("deserializeTag(reader, alloc)"),
+            serde.contains("deserializeTag(allocator, reader)"),
             "Tag list deserializer should call deserializeTag",
         )
     }
@@ -381,7 +381,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn deserializeTagList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const Tag {"),
+            serde.contains("pub fn deserializeTagList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Tag {"),
             "Should generate deserializeTagList function",
         )
     }
@@ -401,7 +401,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("return list.toOwnedSlice(alloc);"),
+            serde.contains("return list.toOwnedSlice(allocator);"),
             "Should convert to owned slice",
         )
     }
@@ -411,7 +411,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn deserializeUserList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const User {"),
+            serde.contains("pub fn deserializeUserList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const User {"),
             "Should generate deserializeUserList function",
         )
     }
@@ -459,23 +459,23 @@ class SerdeGeneratorTest {
         )
     }
 
-    // ---- Unused alloc suppression ----
+    // ---- Unused allocator suppression ----
 
     @Test
     fun scalarOnlyStructSuppressesUnusedAlloc() {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
-        // Settings has only integer + boolean fields -- alloc is unused
+        // Settings has only integer + boolean fields -- allocator is unused
         assertTrue(
             serde.contains("pub fn deserializeSettings("),
             "Should generate deserializeSettings",
         )
-        // Find the deserializeSettings function body and check for _ = alloc
+        // Find the deserializeSettings function body and check for _ = allocator
         val fnStart = serde.indexOf("pub fn deserializeSettings(")
         val fnBody = serde.substring(fnStart, serde.indexOf("}\n", fnStart + 200) + 1)
         assertTrue(
-            fnBody.contains("_ = alloc;"),
-            "Scalar-only struct deserializer should suppress unused alloc",
+            fnBody.contains("_ = allocator;"),
+            "Scalar-only struct deserializer should suppress unused allocator",
         )
     }
 
@@ -483,12 +483,12 @@ class SerdeGeneratorTest {
     fun stringStructDoesNotSuppressAlloc() {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
-        // Tag has string fields -- alloc IS used
+        // Tag has string fields -- allocator IS used
         val fnStart = serde.indexOf("pub fn deserializeTag(")
         val fnBody = serde.substring(fnStart, serde.indexOf("}\n", fnStart + 100) + 1)
         assertFalse(
-            fnBody.contains("_ = alloc;"),
-            "String-containing struct deserializer should NOT suppress alloc",
+            fnBody.contains("_ = allocator;"),
+            "String-containing struct deserializer should NOT suppress allocator",
         )
     }
 
@@ -513,7 +513,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {"),
+            serde.contains("pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {"),
             "Should generate serializeTag function",
         )
     }
@@ -523,7 +523,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn serializeUser(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: User) !void {"),
+            serde.contains("pub fn serializeUser(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: User) !void {"),
             "Should generate serializeUser function",
         )
     }
@@ -534,7 +534,7 @@ class SerdeGeneratorTest {
         val serde = files["serde.zig"]!!
         // Tag.Key is optional, so serializer wraps in if/else with |v|
         assertTrue(
-            serde.contains("aws.xml.appendXmlEscaped(alloc, buf, v)"),
+            serde.contains("aws.xml.appendXmlEscaped(allocator, buf, v)"),
             "String fields should use appendXmlEscaped",
         )
     }
@@ -556,7 +556,7 @@ class SerdeGeneratorTest {
         val serde = files["serde.zig"]!!
         // Tags is optional, so unwrapped as v
         assertTrue(
-            serde.contains("serializeTagList(alloc, buf, v, \"member\")"),
+            serde.contains("serializeTagList(allocator, buf, v, \"member\")"),
             "List fields should call list serializer",
         )
     }
@@ -578,7 +578,7 @@ class SerdeGeneratorTest {
         val serde = files["serde.zig"]!!
         // Settings is optional, so unwrapped as v
         assertTrue(
-            serde.contains("serializeSettings(alloc, buf, v)"),
+            serde.contains("serializeSettings(allocator, buf, v)"),
             "Nested struct fields should call struct serializer",
         )
     }
@@ -590,7 +590,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("pub fn serializeTagList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {"),
+            serde.contains("pub fn serializeTagList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {"),
             "Should generate serializeTagList function",
         )
     }
@@ -603,7 +603,7 @@ class SerdeGeneratorTest {
         assertTrue(fnStart >= 0)
         val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
         assertTrue(
-            fnBody.contains("try serializeTag(alloc, buf, item)"),
+            fnBody.contains("try serializeTag(allocator, buf, item)"),
             "List serializer should call element serializer for struct elements",
         )
     }
@@ -617,7 +617,7 @@ class SerdeGeneratorTest {
         val fnStart = serde.indexOf("pub fn serializeMarker(")
         assertTrue(fnStart >= 0, "Should generate serializeMarker")
         val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
-        assertTrue(fnBody.contains("_ = alloc;"), "Empty struct serializer should suppress alloc")
+        assertTrue(fnBody.contains("_ = allocator;"), "Empty struct serializer should suppress allocator")
         assertTrue(fnBody.contains("_ = buf;"), "Empty struct serializer should suppress buf")
         assertTrue(fnBody.contains("_ = value;"), "Empty struct serializer should suppress value")
     }
@@ -725,7 +725,7 @@ class SerdeGeneratorTest {
 
         // Flattened list should NOT have wrapper element, and Items is optional -> v
         assertTrue(
-            serde.contains("serializeItemList(alloc, buf, v, \"Items\")"),
+            serde.contains("serializeItemList(allocator, buf, v, \"Items\")"),
             "Flattened list should use member name as item tag directly",
         )
     }
@@ -865,7 +865,7 @@ class SerdeGeneratorTest {
         assertTrue(fnStart >= 0)
         val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
         assertTrue(
-            fnBody.contains("return list.toOwnedSlice(alloc);"),
+            fnBody.contains("return list.toOwnedSlice(allocator);"),
             "Map deserializer should call toOwnedSlice",
         )
     }
@@ -897,7 +897,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("serializeStringMap(alloc, buf,"),
+            serde.contains("serializeStringMap(allocator, buf,"),
             "User serializer should call serializeStringMap for Metadata field",
         )
     }

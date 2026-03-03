@@ -227,17 +227,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PublishInpu
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: PublishInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sns", "SNS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: PublishInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sns", "SNS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -245,72 +245,72 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishInput, config: *aws.
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=Publish&Version=2010-03-31");
-    try body_buf.appendSlice(alloc, "&Message=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.message);
+    try body_buf.appendSlice(allocator, "Action=Publish&Version=2010-03-31");
+    try body_buf.appendSlice(allocator, "&Message=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.message);
     if (input.message_attributes) |entries| {
         for (entries, 0..) |entry, idx| {
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
                 const key_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.key=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, key_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);
+                try body_buf.appendSlice(allocator, key_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, entry.key);
             }
             if (entry.value.binary_value) |v| {
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.BinaryValue=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, v);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.DataType=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value.data_type);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value.data_type);
             }
             if (entry.value.string_value) |v| {
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.StringValue=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, v);
                 }
             }
         }
     }
     if (input.message_deduplication_id) |v| {
-        try body_buf.appendSlice(alloc, "&MessageDeduplicationId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MessageDeduplicationId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.message_group_id) |v| {
-        try body_buf.appendSlice(alloc, "&MessageGroupId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MessageGroupId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.message_structure) |v| {
-        try body_buf.appendSlice(alloc, "&MessageStructure=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MessageStructure=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.phone_number) |v| {
-        try body_buf.appendSlice(alloc, "&PhoneNumber=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PhoneNumber=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.subject) |v| {
-        try body_buf.appendSlice(alloc, "&Subject=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Subject=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.target_arn) |v| {
-        try body_buf.appendSlice(alloc, "&TargetArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&TargetArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.topic_arn) |v| {
-        try body_buf.appendSlice(alloc, "&TopicArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&TopicArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -318,12 +318,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishInput, config: *aws.
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PublishOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PublishOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -342,9 +342,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "MessageId")) {
-                    result.message_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.message_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SequenceNumber")) {
-                    result.sequence_number = try alloc.dupe(u8, try reader.readElementText());
+                    result.sequence_number = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -357,11 +357,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

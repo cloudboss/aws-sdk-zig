@@ -60,7 +60,7 @@ data class OperationContext(
             "[]const u8" -> "$accessor.$fieldName"
             "bool" -> "if ($accessor.$fieldName) \"true\" else \"false\""
             "i32", "i64", "i16", "i8" ->
-                "std.fmt.allocPrint(alloc, \"{d}\", .{$accessor.$fieldName}) catch \"\""
+                "std.fmt.allocPrint(allocator, \"{d}\", .{$accessor.$fieldName}) catch \"\""
             else -> "$accessor.$fieldName"
         }
     }
@@ -72,7 +72,7 @@ data class OperationContext(
             "[]const u8" -> varName
             "bool" -> "if ($varName) \"true\" else \"false\""
             "i32", "i64", "i16", "i8" ->
-                "std.fmt.allocPrint(alloc, \"{d}\", .{$varName}) catch \"\""
+                "std.fmt.allocPrint(allocator, \"{d}\", .{$varName}) catch \"\""
             else -> varName
         }
     }

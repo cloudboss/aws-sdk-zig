@@ -391,123 +391,123 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHealt
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: UpdateHealthCheckInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("route53", "Route 53", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHealthCheckInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("route53", "Route 53", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(alloc, "/2013-04-01/healthcheck/");
-    try path_buf.appendSlice(alloc, input.health_check_id);
-    const path = try path_buf.toOwnedSlice(alloc);
+    try path_buf.appendSlice(allocator, "/2013-04-01/healthcheck/");
+    try path_buf.appendSlice(allocator, input.health_check_id);
+    const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<UpdateHealthCheckRequest>");
+    try body_buf.appendSlice(allocator, "<UpdateHealthCheckRequest>");
     if (input.alarm_identifier) |v| {
-        try body_buf.appendSlice(alloc, "<AlarmIdentifier>");
-        try serde.serializeAlarmIdentifier(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</AlarmIdentifier>");
+        try body_buf.appendSlice(allocator, "<AlarmIdentifier>");
+        try serde.serializeAlarmIdentifier(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</AlarmIdentifier>");
     }
     if (input.child_health_checks) |v| {
-        try body_buf.appendSlice(alloc, "<ChildHealthChecks>");
-        try serde.serializeChildHealthCheckList(alloc, &body_buf, v, "ChildHealthCheck");
-        try body_buf.appendSlice(alloc, "</ChildHealthChecks>");
+        try body_buf.appendSlice(allocator, "<ChildHealthChecks>");
+        try serde.serializeChildHealthCheckList(allocator, &body_buf, v, "ChildHealthCheck");
+        try body_buf.appendSlice(allocator, "</ChildHealthChecks>");
     }
     if (input.disabled) |v| {
-        try body_buf.appendSlice(alloc, "<Disabled>");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
-        try body_buf.appendSlice(alloc, "</Disabled>");
+        try body_buf.appendSlice(allocator, "<Disabled>");
+        try body_buf.appendSlice(allocator, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "</Disabled>");
     }
     if (input.enable_sni) |v| {
-        try body_buf.appendSlice(alloc, "<EnableSNI>");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
-        try body_buf.appendSlice(alloc, "</EnableSNI>");
+        try body_buf.appendSlice(allocator, "<EnableSNI>");
+        try body_buf.appendSlice(allocator, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "</EnableSNI>");
     }
     if (input.failure_threshold) |v| {
-        try body_buf.appendSlice(alloc, "<FailureThreshold>");
+        try body_buf.appendSlice(allocator, "<FailureThreshold>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try body_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try body_buf.appendSlice(allocator, num_str);
         }
-        try body_buf.appendSlice(alloc, "</FailureThreshold>");
+        try body_buf.appendSlice(allocator, "</FailureThreshold>");
     }
     if (input.fully_qualified_domain_name) |v| {
-        try body_buf.appendSlice(alloc, "<FullyQualifiedDomainName>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</FullyQualifiedDomainName>");
+        try body_buf.appendSlice(allocator, "<FullyQualifiedDomainName>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</FullyQualifiedDomainName>");
     }
     if (input.health_check_version) |v| {
-        try body_buf.appendSlice(alloc, "<HealthCheckVersion>");
+        try body_buf.appendSlice(allocator, "<HealthCheckVersion>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try body_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try body_buf.appendSlice(allocator, num_str);
         }
-        try body_buf.appendSlice(alloc, "</HealthCheckVersion>");
+        try body_buf.appendSlice(allocator, "</HealthCheckVersion>");
     }
     if (input.health_threshold) |v| {
-        try body_buf.appendSlice(alloc, "<HealthThreshold>");
+        try body_buf.appendSlice(allocator, "<HealthThreshold>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try body_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try body_buf.appendSlice(allocator, num_str);
         }
-        try body_buf.appendSlice(alloc, "</HealthThreshold>");
+        try body_buf.appendSlice(allocator, "</HealthThreshold>");
     }
     if (input.insufficient_data_health_status) |v| {
-        try body_buf.appendSlice(alloc, "<InsufficientDataHealthStatus>");
-        try body_buf.appendSlice(alloc, @tagName(v));
-        try body_buf.appendSlice(alloc, "</InsufficientDataHealthStatus>");
+        try body_buf.appendSlice(allocator, "<InsufficientDataHealthStatus>");
+        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, "</InsufficientDataHealthStatus>");
     }
     if (input.inverted) |v| {
-        try body_buf.appendSlice(alloc, "<Inverted>");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
-        try body_buf.appendSlice(alloc, "</Inverted>");
+        try body_buf.appendSlice(allocator, "<Inverted>");
+        try body_buf.appendSlice(allocator, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "</Inverted>");
     }
     if (input.ip_address) |v| {
-        try body_buf.appendSlice(alloc, "<IPAddress>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</IPAddress>");
+        try body_buf.appendSlice(allocator, "<IPAddress>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</IPAddress>");
     }
     if (input.port) |v| {
-        try body_buf.appendSlice(alloc, "<Port>");
+        try body_buf.appendSlice(allocator, "<Port>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try body_buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try body_buf.appendSlice(allocator, num_str);
         }
-        try body_buf.appendSlice(alloc, "</Port>");
+        try body_buf.appendSlice(allocator, "</Port>");
     }
     if (input.regions) |v| {
-        try body_buf.appendSlice(alloc, "<Regions>");
-        try serde.serializeHealthCheckRegionList(alloc, &body_buf, v, "Region");
-        try body_buf.appendSlice(alloc, "</Regions>");
+        try body_buf.appendSlice(allocator, "<Regions>");
+        try serde.serializeHealthCheckRegionList(allocator, &body_buf, v, "Region");
+        try body_buf.appendSlice(allocator, "</Regions>");
     }
     if (input.reset_elements) |v| {
-        try body_buf.appendSlice(alloc, "<ResetElements>");
-        try serde.serializeResettableElementNameList(alloc, &body_buf, v, "ResettableElementName");
-        try body_buf.appendSlice(alloc, "</ResetElements>");
+        try body_buf.appendSlice(allocator, "<ResetElements>");
+        try serde.serializeResettableElementNameList(allocator, &body_buf, v, "ResettableElementName");
+        try body_buf.appendSlice(allocator, "</ResetElements>");
     }
     if (input.resource_path) |v| {
-        try body_buf.appendSlice(alloc, "<ResourcePath>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</ResourcePath>");
+        try body_buf.appendSlice(allocator, "<ResourcePath>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</ResourcePath>");
     }
     if (input.search_string) |v| {
-        try body_buf.appendSlice(alloc, "<SearchString>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</SearchString>");
+        try body_buf.appendSlice(allocator, "<SearchString>");
+        try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</SearchString>");
     }
-    try body_buf.appendSlice(alloc, "</UpdateHealthCheckRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    try body_buf.appendSlice(allocator, "</UpdateHealthCheckRequest>");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -515,12 +515,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateHealthCheckInput, con
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateHealthCheckOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateHealthCheckOutput {
     var result: UpdateHealthCheckOutput = .{};
     _ = status;
     var reader = aws.xml.Reader.init(body);
@@ -536,7 +536,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "HealthCheck")) {
-                    result.health_check = try serde.deserializeHealthCheck(&reader, alloc);
+                    result.health_check = try serde.deserializeHealthCheck(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -550,11 +550,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

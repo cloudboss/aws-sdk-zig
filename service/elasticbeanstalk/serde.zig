@@ -76,13 +76,13 @@ const Trigger = @import("trigger.zig").Trigger;
 const ValidationMessage = @import("validation_message.zig").ValidationMessage;
 const ValidationSeverity = @import("validation_severity.zig").ValidationSeverity;
 
-pub fn deserializeApplicationDescriptionList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ApplicationDescription {
+pub fn deserializeApplicationDescriptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ApplicationDescription {
     var list: std.ArrayList(ApplicationDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeApplicationDescription(reader, alloc));
+                    try list.append(allocator, try deserializeApplicationDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -91,16 +91,16 @@ pub fn deserializeApplicationDescriptionList(reader: *aws.xml.Reader, alloc: std
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeApplicationVersionDescriptionList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ApplicationVersionDescription {
+pub fn deserializeApplicationVersionDescriptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ApplicationVersionDescription {
     var list: std.ArrayList(ApplicationVersionDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeApplicationVersionDescription(reader, alloc));
+                    try list.append(allocator, try deserializeApplicationVersionDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -109,16 +109,16 @@ pub fn deserializeApplicationVersionDescriptionList(reader: *aws.xml.Reader, all
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeAutoScalingGroupList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const AutoScalingGroup {
+pub fn deserializeAutoScalingGroupList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AutoScalingGroup {
     var list: std.ArrayList(AutoScalingGroup) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeAutoScalingGroup(reader, alloc));
+                    try list.append(allocator, try deserializeAutoScalingGroup(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -127,16 +127,16 @@ pub fn deserializeAutoScalingGroupList(reader: *aws.xml.Reader, alloc: std.mem.A
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeAvailableSolutionStackDetailsList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const SolutionStackDescription {
+pub fn deserializeAvailableSolutionStackDetailsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SolutionStackDescription {
     var list: std.ArrayList(SolutionStackDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeSolutionStackDescription(reader, alloc));
+                    try list.append(allocator, try deserializeSolutionStackDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -145,16 +145,16 @@ pub fn deserializeAvailableSolutionStackDetailsList(reader: *aws.xml.Reader, all
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeAvailableSolutionStackNamesList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeAvailableSolutionStackNamesList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -163,16 +163,16 @@ pub fn deserializeAvailableSolutionStackNamesList(reader: *aws.xml.Reader, alloc
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeCauses(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeCauses(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -181,16 +181,16 @@ pub fn deserializeCauses(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comp
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeConfigurationOptionDescriptionsList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ConfigurationOptionDescription {
+pub fn deserializeConfigurationOptionDescriptionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ConfigurationOptionDescription {
     var list: std.ArrayList(ConfigurationOptionDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeConfigurationOptionDescription(reader, alloc));
+                    try list.append(allocator, try deserializeConfigurationOptionDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -199,16 +199,16 @@ pub fn deserializeConfigurationOptionDescriptionsList(reader: *aws.xml.Reader, a
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeConfigurationOptionPossibleValues(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeConfigurationOptionPossibleValues(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -217,16 +217,16 @@ pub fn deserializeConfigurationOptionPossibleValues(reader: *aws.xml.Reader, all
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeConfigurationOptionSettingsList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ConfigurationOptionSetting {
+pub fn deserializeConfigurationOptionSettingsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ConfigurationOptionSetting {
     var list: std.ArrayList(ConfigurationOptionSetting) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeConfigurationOptionSetting(reader, alloc));
+                    try list.append(allocator, try deserializeConfigurationOptionSetting(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -235,16 +235,16 @@ pub fn deserializeConfigurationOptionSettingsList(reader: *aws.xml.Reader, alloc
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeConfigurationSettingsDescriptionList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ConfigurationSettingsDescription {
+pub fn deserializeConfigurationSettingsDescriptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ConfigurationSettingsDescription {
     var list: std.ArrayList(ConfigurationSettingsDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeConfigurationSettingsDescription(reader, alloc));
+                    try list.append(allocator, try deserializeConfigurationSettingsDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -253,16 +253,16 @@ pub fn deserializeConfigurationSettingsDescriptionList(reader: *aws.xml.Reader, 
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeConfigurationTemplateNamesList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeConfigurationTemplateNamesList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -271,16 +271,16 @@ pub fn deserializeConfigurationTemplateNamesList(reader: *aws.xml.Reader, alloc:
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeCustomAmiList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const CustomAmi {
+pub fn deserializeCustomAmiList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const CustomAmi {
     var list: std.ArrayList(CustomAmi) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeCustomAmi(reader, alloc));
+                    try list.append(allocator, try deserializeCustomAmi(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -289,16 +289,16 @@ pub fn deserializeCustomAmiList(reader: *aws.xml.Reader, alloc: std.mem.Allocato
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeEnvironmentDescriptionsList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const EnvironmentDescription {
+pub fn deserializeEnvironmentDescriptionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EnvironmentDescription {
     var list: std.ArrayList(EnvironmentDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeEnvironmentDescription(reader, alloc));
+                    try list.append(allocator, try deserializeEnvironmentDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -307,16 +307,16 @@ pub fn deserializeEnvironmentDescriptionsList(reader: *aws.xml.Reader, alloc: st
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeEnvironmentInfoDescriptionList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const EnvironmentInfoDescription {
+pub fn deserializeEnvironmentInfoDescriptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EnvironmentInfoDescription {
     var list: std.ArrayList(EnvironmentInfoDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeEnvironmentInfoDescription(reader, alloc));
+                    try list.append(allocator, try deserializeEnvironmentInfoDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -325,16 +325,16 @@ pub fn deserializeEnvironmentInfoDescriptionList(reader: *aws.xml.Reader, alloc:
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeEnvironmentLinks(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const EnvironmentLink {
+pub fn deserializeEnvironmentLinks(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EnvironmentLink {
     var list: std.ArrayList(EnvironmentLink) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeEnvironmentLink(reader, alloc));
+                    try list.append(allocator, try deserializeEnvironmentLink(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -343,16 +343,16 @@ pub fn deserializeEnvironmentLinks(reader: *aws.xml.Reader, alloc: std.mem.Alloc
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeEventDescriptionList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const EventDescription {
+pub fn deserializeEventDescriptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EventDescription {
     var list: std.ArrayList(EventDescription) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeEventDescription(reader, alloc));
+                    try list.append(allocator, try deserializeEventDescription(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -361,16 +361,16 @@ pub fn deserializeEventDescriptionList(reader: *aws.xml.Reader, alloc: std.mem.A
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeInstanceHealthList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const SingleInstanceHealth {
+pub fn deserializeInstanceHealthList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SingleInstanceHealth {
     var list: std.ArrayList(SingleInstanceHealth) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeSingleInstanceHealth(reader, alloc));
+                    try list.append(allocator, try deserializeSingleInstanceHealth(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -379,16 +379,16 @@ pub fn deserializeInstanceHealthList(reader: *aws.xml.Reader, alloc: std.mem.All
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeInstanceList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const Instance {
+pub fn deserializeInstanceList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Instance {
     var list: std.ArrayList(Instance) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeInstance(reader, alloc));
+                    try list.append(allocator, try deserializeInstance(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -397,16 +397,16 @@ pub fn deserializeInstanceList(reader: *aws.xml.Reader, alloc: std.mem.Allocator
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeLaunchConfigurationList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const LaunchConfiguration {
+pub fn deserializeLaunchConfigurationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const LaunchConfiguration {
     var list: std.ArrayList(LaunchConfiguration) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeLaunchConfiguration(reader, alloc));
+                    try list.append(allocator, try deserializeLaunchConfiguration(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -415,16 +415,16 @@ pub fn deserializeLaunchConfigurationList(reader: *aws.xml.Reader, alloc: std.me
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeLaunchTemplateList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const LaunchTemplate {
+pub fn deserializeLaunchTemplateList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const LaunchTemplate {
     var list: std.ArrayList(LaunchTemplate) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeLaunchTemplate(reader, alloc));
+                    try list.append(allocator, try deserializeLaunchTemplate(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -433,16 +433,16 @@ pub fn deserializeLaunchTemplateList(reader: *aws.xml.Reader, alloc: std.mem.All
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeLoadAverage(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const f64 {
+pub fn deserializeLoadAverage(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const f64 {
     var list: std.ArrayList(f64) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.fmt.parseFloat(f64, try reader.readElementText()) catch null) |v| try list.append(alloc, v);
+                    if (std.fmt.parseFloat(f64, try reader.readElementText()) catch null) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -451,16 +451,16 @@ pub fn deserializeLoadAverage(reader: *aws.xml.Reader, alloc: std.mem.Allocator,
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeLoadBalancerList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const LoadBalancer {
+pub fn deserializeLoadBalancerList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const LoadBalancer {
     var list: std.ArrayList(LoadBalancer) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeLoadBalancer(reader, alloc));
+                    try list.append(allocator, try deserializeLoadBalancer(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -469,16 +469,16 @@ pub fn deserializeLoadBalancerList(reader: *aws.xml.Reader, alloc: std.mem.Alloc
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeLoadBalancerListenersDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const Listener {
+pub fn deserializeLoadBalancerListenersDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Listener {
     var list: std.ArrayList(Listener) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeListener(reader, alloc));
+                    try list.append(allocator, try deserializeListener(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -487,16 +487,16 @@ pub fn deserializeLoadBalancerListenersDescription(reader: *aws.xml.Reader, allo
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeManagedActionHistoryItems(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ManagedActionHistoryItem {
+pub fn deserializeManagedActionHistoryItems(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ManagedActionHistoryItem {
     var list: std.ArrayList(ManagedActionHistoryItem) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeManagedActionHistoryItem(reader, alloc));
+                    try list.append(allocator, try deserializeManagedActionHistoryItem(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -505,16 +505,16 @@ pub fn deserializeManagedActionHistoryItems(reader: *aws.xml.Reader, alloc: std.
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeManagedActions(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ManagedAction {
+pub fn deserializeManagedActions(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ManagedAction {
     var list: std.ArrayList(ManagedAction) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeManagedAction(reader, alloc));
+                    try list.append(allocator, try deserializeManagedAction(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -523,16 +523,16 @@ pub fn deserializeManagedActions(reader: *aws.xml.Reader, alloc: std.mem.Allocat
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializePlatformBranchSummaryList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const PlatformBranchSummary {
+pub fn deserializePlatformBranchSummaryList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PlatformBranchSummary {
     var list: std.ArrayList(PlatformBranchSummary) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializePlatformBranchSummary(reader, alloc));
+                    try list.append(allocator, try deserializePlatformBranchSummary(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -541,16 +541,16 @@ pub fn deserializePlatformBranchSummaryList(reader: *aws.xml.Reader, alloc: std.
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializePlatformFrameworks(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const PlatformFramework {
+pub fn deserializePlatformFrameworks(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PlatformFramework {
     var list: std.ArrayList(PlatformFramework) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializePlatformFramework(reader, alloc));
+                    try list.append(allocator, try deserializePlatformFramework(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -559,16 +559,16 @@ pub fn deserializePlatformFrameworks(reader: *aws.xml.Reader, alloc: std.mem.All
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializePlatformProgrammingLanguages(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const PlatformProgrammingLanguage {
+pub fn deserializePlatformProgrammingLanguages(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PlatformProgrammingLanguage {
     var list: std.ArrayList(PlatformProgrammingLanguage) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializePlatformProgrammingLanguage(reader, alloc));
+                    try list.append(allocator, try deserializePlatformProgrammingLanguage(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -577,16 +577,16 @@ pub fn deserializePlatformProgrammingLanguages(reader: *aws.xml.Reader, alloc: s
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializePlatformSummaryList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const PlatformSummary {
+pub fn deserializePlatformSummaryList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PlatformSummary {
     var list: std.ArrayList(PlatformSummary) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializePlatformSummary(reader, alloc));
+                    try list.append(allocator, try deserializePlatformSummary(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -595,16 +595,16 @@ pub fn deserializePlatformSummaryList(reader: *aws.xml.Reader, alloc: std.mem.Al
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeQueueList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const Queue {
+pub fn deserializeQueueList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Queue {
     var list: std.ArrayList(Queue) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeQueue(reader, alloc));
+                    try list.append(allocator, try deserializeQueue(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -613,16 +613,16 @@ pub fn deserializeQueueList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, c
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeSolutionStackFileTypeList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeSolutionStackFileTypeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -631,16 +631,16 @@ pub fn deserializeSolutionStackFileTypeList(reader: *aws.xml.Reader, alloc: std.
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeSupportedAddonList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeSupportedAddonList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -649,16 +649,16 @@ pub fn deserializeSupportedAddonList(reader: *aws.xml.Reader, alloc: std.mem.All
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeSupportedTierList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeSupportedTierList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -667,16 +667,16 @@ pub fn deserializeSupportedTierList(reader: *aws.xml.Reader, alloc: std.mem.Allo
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeTagList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const Tag {
+pub fn deserializeTagList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Tag {
     var list: std.ArrayList(Tag) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeTag(reader, alloc));
+                    try list.append(allocator, try deserializeTag(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -685,16 +685,16 @@ pub fn deserializeTagList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, com
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeTriggerList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const Trigger {
+pub fn deserializeTriggerList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Trigger {
     var list: std.ArrayList(Trigger) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeTrigger(reader, alloc));
+                    try list.append(allocator, try deserializeTrigger(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -703,16 +703,16 @@ pub fn deserializeTriggerList(reader: *aws.xml.Reader, alloc: std.mem.Allocator,
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeValidationMessagesList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ValidationMessage {
+pub fn deserializeValidationMessagesList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ValidationMessage {
     var list: std.ArrayList(ValidationMessage) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try deserializeValidationMessage(reader, alloc));
+                    try list.append(allocator, try deserializeValidationMessage(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -721,16 +721,16 @@ pub fn deserializeValidationMessagesList(reader: *aws.xml.Reader, alloc: std.mem
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeVersionLabelsList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
+pub fn deserializeVersionLabelsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -739,10 +739,10 @@ pub fn deserializeVersionLabelsList(reader: *aws.xml.Reader, alloc: std.mem.Allo
             else => {},
         }
     }
-    return list.toOwnedSlice(alloc);
+    return list.toOwnedSlice(allocator);
 }
 
-pub fn deserializeApplicationDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ApplicationDescription {
+pub fn deserializeApplicationDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ApplicationDescription {
     var result: ApplicationDescription = undefined;
     result.application_arn = null;
     result.application_name = null;
@@ -756,21 +756,21 @@ pub fn deserializeApplicationDescription(reader: *aws.xml.Reader, alloc: std.mem
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationArn")) {
-                    result.application_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ConfigurationTemplates")) {
-                    result.configuration_templates = try deserializeConfigurationTemplateNamesList(reader, alloc, "member");
+                    result.configuration_templates = try deserializeConfigurationTemplateNamesList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DateCreated")) {
                     result.date_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
                     result.date_updated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceLifecycleConfig")) {
-                    result.resource_lifecycle_config = try deserializeApplicationResourceLifecycleConfig(reader, alloc);
+                    result.resource_lifecycle_config = try deserializeApplicationResourceLifecycleConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Versions")) {
-                    result.versions = try deserializeVersionLabelsList(reader, alloc, "member");
+                    result.versions = try deserializeVersionLabelsList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -782,7 +782,7 @@ pub fn deserializeApplicationDescription(reader: *aws.xml.Reader, alloc: std.mem
     return result;
 }
 
-pub fn deserializeApplicationMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ApplicationMetrics {
+pub fn deserializeApplicationMetrics(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ApplicationMetrics {
     var result: ApplicationMetrics = undefined;
     result.duration = null;
     result.latency = null;
@@ -794,11 +794,11 @@ pub fn deserializeApplicationMetrics(reader: *aws.xml.Reader, alloc: std.mem.All
                 if (std.mem.eql(u8, e.local, "Duration")) {
                     result.duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Latency")) {
-                    result.latency = try deserializeLatency(reader, alloc);
+                    result.latency = try deserializeLatency(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "RequestCount")) {
                     result.request_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StatusCodes")) {
-                    result.status_codes = try deserializeStatusCodes(reader, alloc);
+                    result.status_codes = try deserializeStatusCodes(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -810,7 +810,7 @@ pub fn deserializeApplicationMetrics(reader: *aws.xml.Reader, alloc: std.mem.All
     return result;
 }
 
-pub fn deserializeApplicationResourceLifecycleConfig(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ApplicationResourceLifecycleConfig {
+pub fn deserializeApplicationResourceLifecycleConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ApplicationResourceLifecycleConfig {
     var result: ApplicationResourceLifecycleConfig = undefined;
     result.service_role = null;
     result.version_lifecycle_config = null;
@@ -818,9 +818,9 @@ pub fn deserializeApplicationResourceLifecycleConfig(reader: *aws.xml.Reader, al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ServiceRole")) {
-                    result.service_role = try alloc.dupe(u8, try reader.readElementText());
+                    result.service_role = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VersionLifecycleConfig")) {
-                    result.version_lifecycle_config = try deserializeApplicationVersionLifecycleConfig(reader, alloc);
+                    result.version_lifecycle_config = try deserializeApplicationVersionLifecycleConfig(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -832,7 +832,7 @@ pub fn deserializeApplicationResourceLifecycleConfig(reader: *aws.xml.Reader, al
     return result;
 }
 
-pub fn deserializeApplicationVersionDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ApplicationVersionDescription {
+pub fn deserializeApplicationVersionDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ApplicationVersionDescription {
     var result: ApplicationVersionDescription = undefined;
     result.application_name = null;
     result.application_version_arn = null;
@@ -848,25 +848,25 @@ pub fn deserializeApplicationVersionDescription(reader: *aws.xml.Reader, alloc: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ApplicationVersionArn")) {
-                    result.application_version_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_version_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "BuildArn")) {
-                    result.build_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.build_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DateCreated")) {
                     result.date_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
                     result.date_updated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceBuildInformation")) {
-                    result.source_build_information = try deserializeSourceBuildInformation(reader, alloc);
+                    result.source_build_information = try deserializeSourceBuildInformation(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "SourceBundle")) {
-                    result.source_bundle = try deserializeS3Location(reader, alloc);
+                    result.source_bundle = try deserializeS3Location(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(ApplicationVersionStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VersionLabel")) {
-                    result.version_label = try alloc.dupe(u8, try reader.readElementText());
+                    result.version_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -878,7 +878,7 @@ pub fn deserializeApplicationVersionDescription(reader: *aws.xml.Reader, alloc: 
     return result;
 }
 
-pub fn deserializeApplicationVersionLifecycleConfig(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ApplicationVersionLifecycleConfig {
+pub fn deserializeApplicationVersionLifecycleConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ApplicationVersionLifecycleConfig {
     var result: ApplicationVersionLifecycleConfig = undefined;
     result.max_age_rule = null;
     result.max_count_rule = null;
@@ -886,9 +886,9 @@ pub fn deserializeApplicationVersionLifecycleConfig(reader: *aws.xml.Reader, all
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "MaxAgeRule")) {
-                    result.max_age_rule = try deserializeMaxAgeRule(reader, alloc);
+                    result.max_age_rule = try deserializeMaxAgeRule(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "MaxCountRule")) {
-                    result.max_count_rule = try deserializeMaxCountRule(reader, alloc);
+                    result.max_count_rule = try deserializeMaxCountRule(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -900,14 +900,14 @@ pub fn deserializeApplicationVersionLifecycleConfig(reader: *aws.xml.Reader, all
     return result;
 }
 
-pub fn deserializeAutoScalingGroup(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AutoScalingGroup {
+pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AutoScalingGroup {
     var result: AutoScalingGroup = undefined;
     result.name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -919,14 +919,14 @@ pub fn deserializeAutoScalingGroup(reader: *aws.xml.Reader, alloc: std.mem.Alloc
     return result;
 }
 
-pub fn deserializeBuilder(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Builder {
+pub fn deserializeBuilder(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Builder {
     var result: Builder = undefined;
     result.arn = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ARN")) {
-                    result.arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -938,8 +938,8 @@ pub fn deserializeBuilder(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Bu
     return result;
 }
 
-pub fn deserializeCPUUtilization(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !CPUUtilization {
-    _ = alloc;
+pub fn deserializeCPUUtilization(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CPUUtilization {
+    _ = allocator;
     var result: CPUUtilization = undefined;
     result.idle = null;
     result.io_wait = null;
@@ -979,7 +979,7 @@ pub fn deserializeCPUUtilization(reader: *aws.xml.Reader, alloc: std.mem.Allocat
     return result;
 }
 
-pub fn deserializeConfigurationOptionDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ConfigurationOptionDescription {
+pub fn deserializeConfigurationOptionDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ConfigurationOptionDescription {
     var result: ConfigurationOptionDescription = undefined;
     result.change_severity = null;
     result.default_value = null;
@@ -996,9 +996,9 @@ pub fn deserializeConfigurationOptionDescription(reader: *aws.xml.Reader, alloc:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ChangeSeverity")) {
-                    result.change_severity = try alloc.dupe(u8, try reader.readElementText());
+                    result.change_severity = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DefaultValue")) {
-                    result.default_value = try alloc.dupe(u8, try reader.readElementText());
+                    result.default_value = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MaxLength")) {
                     result.max_length = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "MaxValue")) {
@@ -1006,15 +1006,15 @@ pub fn deserializeConfigurationOptionDescription(reader: *aws.xml.Reader, alloc:
                 } else if (std.mem.eql(u8, e.local, "MinValue")) {
                     result.min_value = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Namespace")) {
-                    result.namespace = try alloc.dupe(u8, try reader.readElementText());
+                    result.namespace = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Regex")) {
-                    result.regex = try deserializeOptionRestrictionRegex(reader, alloc);
+                    result.regex = try deserializeOptionRestrictionRegex(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "UserDefined")) {
                     result.user_defined = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "ValueOptions")) {
-                    result.value_options = try deserializeConfigurationOptionPossibleValues(reader, alloc, "member");
+                    result.value_options = try deserializeConfigurationOptionPossibleValues(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ValueType")) {
                     result.value_type = std.meta.stringToEnum(ConfigurationOptionValueType, try reader.readElementText());
                 } else {
@@ -1028,7 +1028,7 @@ pub fn deserializeConfigurationOptionDescription(reader: *aws.xml.Reader, alloc:
     return result;
 }
 
-pub fn deserializeConfigurationOptionSetting(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ConfigurationOptionSetting {
+pub fn deserializeConfigurationOptionSetting(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ConfigurationOptionSetting {
     var result: ConfigurationOptionSetting = undefined;
     result.namespace = null;
     result.option_name = null;
@@ -1038,13 +1038,13 @@ pub fn deserializeConfigurationOptionSetting(reader: *aws.xml.Reader, alloc: std
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Namespace")) {
-                    result.namespace = try alloc.dupe(u8, try reader.readElementText());
+                    result.namespace = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OptionName")) {
-                    result.option_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.option_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceName")) {
-                    result.resource_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.resource_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
-                    result.value = try alloc.dupe(u8, try reader.readElementText());
+                    result.value = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1056,7 +1056,7 @@ pub fn deserializeConfigurationOptionSetting(reader: *aws.xml.Reader, alloc: std
     return result;
 }
 
-pub fn deserializeConfigurationSettingsDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ConfigurationSettingsDescription {
+pub fn deserializeConfigurationSettingsDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ConfigurationSettingsDescription {
     var result: ConfigurationSettingsDescription = undefined;
     result.application_name = null;
     result.date_created = null;
@@ -1072,7 +1072,7 @@ pub fn deserializeConfigurationSettingsDescription(reader: *aws.xml.Reader, allo
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DateCreated")) {
                     result.date_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
@@ -1080,17 +1080,17 @@ pub fn deserializeConfigurationSettingsDescription(reader: *aws.xml.Reader, allo
                 } else if (std.mem.eql(u8, e.local, "DeploymentStatus")) {
                     result.deployment_status = std.meta.stringToEnum(ConfigurationDeploymentStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
-                    result.environment_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OptionSettings")) {
-                    result.option_settings = try deserializeConfigurationOptionSettingsList(reader, alloc, "member");
+                    result.option_settings = try deserializeConfigurationOptionSettingsList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
-                    result.platform_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SolutionStackName")) {
-                    result.solution_stack_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.solution_stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateName")) {
-                    result.template_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.template_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1102,7 +1102,7 @@ pub fn deserializeConfigurationSettingsDescription(reader: *aws.xml.Reader, allo
     return result;
 }
 
-pub fn deserializeCustomAmi(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !CustomAmi {
+pub fn deserializeCustomAmi(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CustomAmi {
     var result: CustomAmi = undefined;
     result.image_id = null;
     result.virtualization_type = null;
@@ -1110,9 +1110,9 @@ pub fn deserializeCustomAmi(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ImageId")) {
-                    result.image_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.image_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VirtualizationType")) {
-                    result.virtualization_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.virtualization_type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1124,7 +1124,7 @@ pub fn deserializeCustomAmi(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
     return result;
 }
 
-pub fn deserializeDeployment(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Deployment {
+pub fn deserializeDeployment(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Deployment {
     var result: Deployment = undefined;
     result.deployment_id = null;
     result.deployment_time = null;
@@ -1138,9 +1138,9 @@ pub fn deserializeDeployment(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "DeploymentTime")) {
                     result.deployment_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = try alloc.dupe(u8, try reader.readElementText());
+                    result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VersionLabel")) {
-                    result.version_label = try alloc.dupe(u8, try reader.readElementText());
+                    result.version_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1152,7 +1152,7 @@ pub fn deserializeDeployment(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     return result;
 }
 
-pub fn deserializeEnvironmentDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentDescription {
+pub fn deserializeEnvironmentDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentDescription {
     var result: EnvironmentDescription = undefined;
     result.abortable_operation_in_progress = null;
     result.application_name = null;
@@ -1181,45 +1181,45 @@ pub fn deserializeEnvironmentDescription(reader: *aws.xml.Reader, alloc: std.mem
                 if (std.mem.eql(u8, e.local, "AbortableOperationInProgress")) {
                     result.abortable_operation_in_progress = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CNAME")) {
-                    result.cname = try alloc.dupe(u8, try reader.readElementText());
+                    result.cname = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DateCreated")) {
                     result.date_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
                     result.date_updated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EndpointURL")) {
-                    result.endpoint_url = try alloc.dupe(u8, try reader.readElementText());
+                    result.endpoint_url = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentArn")) {
-                    result.environment_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentId")) {
-                    result.environment_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentLinks")) {
-                    result.environment_links = try deserializeEnvironmentLinks(reader, alloc, "member");
+                    result.environment_links = try deserializeEnvironmentLinks(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
-                    result.environment_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Health")) {
                     result.health = std.meta.stringToEnum(EnvironmentHealth, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HealthStatus")) {
                     result.health_status = std.meta.stringToEnum(EnvironmentHealthStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OperationsRole")) {
-                    result.operations_role = try alloc.dupe(u8, try reader.readElementText());
+                    result.operations_role = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
-                    result.platform_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Resources")) {
-                    result.resources = try deserializeEnvironmentResourcesDescription(reader, alloc);
+                    result.resources = try deserializeEnvironmentResourcesDescription(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "SolutionStackName")) {
-                    result.solution_stack_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.solution_stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(EnvironmentStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateName")) {
-                    result.template_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.template_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tier")) {
-                    result.tier = try deserializeEnvironmentTier(reader, alloc);
+                    result.tier = try deserializeEnvironmentTier(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "VersionLabel")) {
-                    result.version_label = try alloc.dupe(u8, try reader.readElementText());
+                    result.version_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1231,7 +1231,7 @@ pub fn deserializeEnvironmentDescription(reader: *aws.xml.Reader, alloc: std.mem
     return result;
 }
 
-pub fn deserializeEnvironmentInfoDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentInfoDescription {
+pub fn deserializeEnvironmentInfoDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentInfoDescription {
     var result: EnvironmentInfoDescription = undefined;
     result.ec_2_instance_id = null;
     result.info_type = null;
@@ -1241,11 +1241,11 @@ pub fn deserializeEnvironmentInfoDescription(reader: *aws.xml.Reader, alloc: std
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Ec2InstanceId")) {
-                    result.ec_2_instance_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.ec_2_instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InfoType")) {
                     result.info_type = std.meta.stringToEnum(EnvironmentInfoType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Message")) {
-                    result.message = try alloc.dupe(u8, try reader.readElementText());
+                    result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SampleTimestamp")) {
                     result.sample_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -1259,7 +1259,7 @@ pub fn deserializeEnvironmentInfoDescription(reader: *aws.xml.Reader, alloc: std
     return result;
 }
 
-pub fn deserializeEnvironmentLink(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentLink {
+pub fn deserializeEnvironmentLink(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentLink {
     var result: EnvironmentLink = undefined;
     result.environment_name = null;
     result.link_name = null;
@@ -1267,9 +1267,9 @@ pub fn deserializeEnvironmentLink(reader: *aws.xml.Reader, alloc: std.mem.Alloca
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EnvironmentName")) {
-                    result.environment_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LinkName")) {
-                    result.link_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.link_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1281,7 +1281,7 @@ pub fn deserializeEnvironmentLink(reader: *aws.xml.Reader, alloc: std.mem.Alloca
     return result;
 }
 
-pub fn deserializeEnvironmentResourceDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentResourceDescription {
+pub fn deserializeEnvironmentResourceDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentResourceDescription {
     var result: EnvironmentResourceDescription = undefined;
     result.auto_scaling_groups = null;
     result.environment_name = null;
@@ -1295,21 +1295,21 @@ pub fn deserializeEnvironmentResourceDescription(reader: *aws.xml.Reader, alloc:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AutoScalingGroups")) {
-                    result.auto_scaling_groups = try deserializeAutoScalingGroupList(reader, alloc, "member");
+                    result.auto_scaling_groups = try deserializeAutoScalingGroupList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
-                    result.environment_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Instances")) {
-                    result.instances = try deserializeInstanceList(reader, alloc, "member");
+                    result.instances = try deserializeInstanceList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LaunchConfigurations")) {
-                    result.launch_configurations = try deserializeLaunchConfigurationList(reader, alloc, "member");
+                    result.launch_configurations = try deserializeLaunchConfigurationList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LaunchTemplates")) {
-                    result.launch_templates = try deserializeLaunchTemplateList(reader, alloc, "member");
+                    result.launch_templates = try deserializeLaunchTemplateList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LoadBalancers")) {
-                    result.load_balancers = try deserializeLoadBalancerList(reader, alloc, "member");
+                    result.load_balancers = try deserializeLoadBalancerList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Queues")) {
-                    result.queues = try deserializeQueueList(reader, alloc, "member");
+                    result.queues = try deserializeQueueList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Triggers")) {
-                    result.triggers = try deserializeTriggerList(reader, alloc, "member");
+                    result.triggers = try deserializeTriggerList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -1321,14 +1321,14 @@ pub fn deserializeEnvironmentResourceDescription(reader: *aws.xml.Reader, alloc:
     return result;
 }
 
-pub fn deserializeEnvironmentResourcesDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentResourcesDescription {
+pub fn deserializeEnvironmentResourcesDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentResourcesDescription {
     var result: EnvironmentResourcesDescription = undefined;
     result.load_balancer = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "LoadBalancer")) {
-                    result.load_balancer = try deserializeLoadBalancerDescription(reader, alloc);
+                    result.load_balancer = try deserializeLoadBalancerDescription(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -1340,7 +1340,7 @@ pub fn deserializeEnvironmentResourcesDescription(reader: *aws.xml.Reader, alloc
     return result;
 }
 
-pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentTier {
+pub fn deserializeEnvironmentTier(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentTier {
     var result: EnvironmentTier = undefined;
     result.name = null;
     result.@"type" = null;
@@ -1349,11 +1349,11 @@ pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Alloca
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
-                    result.version = try alloc.dupe(u8, try reader.readElementText());
+                    result.version = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1365,7 +1365,7 @@ pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Alloca
     return result;
 }
 
-pub fn deserializeEventDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EventDescription {
+pub fn deserializeEventDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EventDescription {
     var result: EventDescription = undefined;
     result.application_name = null;
     result.environment_name = null;
@@ -1380,23 +1380,23 @@ pub fn deserializeEventDescription(reader: *aws.xml.Reader, alloc: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationName")) {
-                    result.application_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.application_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
-                    result.environment_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EventDate")) {
                     result.event_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Message")) {
-                    result.message = try alloc.dupe(u8, try reader.readElementText());
+                    result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
-                    result.platform_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RequestId")) {
-                    result.request_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.request_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Severity")) {
                     result.severity = std.meta.stringToEnum(EventSeverity, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateName")) {
-                    result.template_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.template_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VersionLabel")) {
-                    result.version_label = try alloc.dupe(u8, try reader.readElementText());
+                    result.version_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1408,14 +1408,14 @@ pub fn deserializeEventDescription(reader: *aws.xml.Reader, alloc: std.mem.Alloc
     return result;
 }
 
-pub fn deserializeInstance(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Instance {
+pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Instance {
     var result: Instance = undefined;
     result.id = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Id")) {
-                    result.id = try alloc.dupe(u8, try reader.readElementText());
+                    result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1427,8 +1427,8 @@ pub fn deserializeInstance(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !I
     return result;
 }
 
-pub fn deserializeInstanceHealthSummary(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !InstanceHealthSummary {
-    _ = alloc;
+pub fn deserializeInstanceHealthSummary(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InstanceHealthSummary {
+    _ = allocator;
     var result: InstanceHealthSummary = undefined;
     result.degraded = null;
     result.info = null;
@@ -1468,8 +1468,8 @@ pub fn deserializeInstanceHealthSummary(reader: *aws.xml.Reader, alloc: std.mem.
     return result;
 }
 
-pub fn deserializeLatency(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Latency {
-    _ = alloc;
+pub fn deserializeLatency(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Latency {
+    _ = allocator;
     var result: Latency = undefined;
     result.p10 = null;
     result.p50 = null;
@@ -1509,14 +1509,14 @@ pub fn deserializeLatency(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !La
     return result;
 }
 
-pub fn deserializeLaunchConfiguration(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LaunchConfiguration {
+pub fn deserializeLaunchConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LaunchConfiguration {
     var result: LaunchConfiguration = undefined;
     result.name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1528,14 +1528,14 @@ pub fn deserializeLaunchConfiguration(reader: *aws.xml.Reader, alloc: std.mem.Al
     return result;
 }
 
-pub fn deserializeLaunchTemplate(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LaunchTemplate {
+pub fn deserializeLaunchTemplate(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LaunchTemplate {
     var result: LaunchTemplate = undefined;
     result.id = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Id")) {
-                    result.id = try alloc.dupe(u8, try reader.readElementText());
+                    result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1547,7 +1547,7 @@ pub fn deserializeLaunchTemplate(reader: *aws.xml.Reader, alloc: std.mem.Allocat
     return result;
 }
 
-pub fn deserializeListener(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Listener {
+pub fn deserializeListener(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Listener {
     var result: Listener = undefined;
     result.port = 0;
     result.protocol = null;
@@ -1557,7 +1557,7 @@ pub fn deserializeListener(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !L
                 if (std.mem.eql(u8, e.local, "Port")) {
                     result.port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Protocol")) {
-                    result.protocol = try alloc.dupe(u8, try reader.readElementText());
+                    result.protocol = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1569,14 +1569,14 @@ pub fn deserializeListener(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !L
     return result;
 }
 
-pub fn deserializeLoadBalancer(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LoadBalancer {
+pub fn deserializeLoadBalancer(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LoadBalancer {
     var result: LoadBalancer = undefined;
     result.name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1588,7 +1588,7 @@ pub fn deserializeLoadBalancer(reader: *aws.xml.Reader, alloc: std.mem.Allocator
     return result;
 }
 
-pub fn deserializeLoadBalancerDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LoadBalancerDescription {
+pub fn deserializeLoadBalancerDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LoadBalancerDescription {
     var result: LoadBalancerDescription = undefined;
     result.domain = null;
     result.listeners = null;
@@ -1597,11 +1597,11 @@ pub fn deserializeLoadBalancerDescription(reader: *aws.xml.Reader, alloc: std.me
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Domain")) {
-                    result.domain = try alloc.dupe(u8, try reader.readElementText());
+                    result.domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Listeners")) {
-                    result.listeners = try deserializeLoadBalancerListenersDescription(reader, alloc, "member");
+                    result.listeners = try deserializeLoadBalancerListenersDescription(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LoadBalancerName")) {
-                    result.load_balancer_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.load_balancer_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1613,7 +1613,7 @@ pub fn deserializeLoadBalancerDescription(reader: *aws.xml.Reader, alloc: std.me
     return result;
 }
 
-pub fn deserializeManagedAction(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ManagedAction {
+pub fn deserializeManagedAction(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ManagedAction {
     var result: ManagedAction = undefined;
     result.action_description = null;
     result.action_id = null;
@@ -1624,9 +1624,9 @@ pub fn deserializeManagedAction(reader: *aws.xml.Reader, alloc: std.mem.Allocato
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ActionDescription")) {
-                    result.action_description = try alloc.dupe(u8, try reader.readElementText());
+                    result.action_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ActionId")) {
-                    result.action_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.action_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ActionType")) {
                     result.action_type = std.meta.stringToEnum(ActionType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
@@ -1644,7 +1644,7 @@ pub fn deserializeManagedAction(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     return result;
 }
 
-pub fn deserializeManagedActionHistoryItem(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ManagedActionHistoryItem {
+pub fn deserializeManagedActionHistoryItem(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ManagedActionHistoryItem {
     var result: ManagedActionHistoryItem = undefined;
     result.action_description = null;
     result.action_id = null;
@@ -1658,15 +1658,15 @@ pub fn deserializeManagedActionHistoryItem(reader: *aws.xml.Reader, alloc: std.m
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ActionDescription")) {
-                    result.action_description = try alloc.dupe(u8, try reader.readElementText());
+                    result.action_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ActionId")) {
-                    result.action_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.action_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ActionType")) {
                     result.action_type = std.meta.stringToEnum(ActionType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExecutedTime")) {
                     result.executed_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "FailureDescription")) {
-                    result.failure_description = try alloc.dupe(u8, try reader.readElementText());
+                    result.failure_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FailureType")) {
                     result.failure_type = std.meta.stringToEnum(FailureType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FinishedTime")) {
@@ -1684,8 +1684,8 @@ pub fn deserializeManagedActionHistoryItem(reader: *aws.xml.Reader, alloc: std.m
     return result;
 }
 
-pub fn deserializeMaxAgeRule(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !MaxAgeRule {
-    _ = alloc;
+pub fn deserializeMaxAgeRule(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !MaxAgeRule {
+    _ = allocator;
     var result: MaxAgeRule = undefined;
     result.delete_source_from_s3 = null;
     result.max_age_in_days = null;
@@ -1709,8 +1709,8 @@ pub fn deserializeMaxAgeRule(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     return result;
 }
 
-pub fn deserializeMaxCountRule(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !MaxCountRule {
-    _ = alloc;
+pub fn deserializeMaxCountRule(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !MaxCountRule {
+    _ = allocator;
     var result: MaxCountRule = undefined;
     result.delete_source_from_s3 = null;
     result.max_count = null;
@@ -1734,7 +1734,7 @@ pub fn deserializeMaxCountRule(reader: *aws.xml.Reader, alloc: std.mem.Allocator
     return result;
 }
 
-pub fn deserializeOptionRestrictionRegex(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !OptionRestrictionRegex {
+pub fn deserializeOptionRestrictionRegex(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !OptionRestrictionRegex {
     var result: OptionRestrictionRegex = undefined;
     result.label = null;
     result.pattern = null;
@@ -1742,9 +1742,9 @@ pub fn deserializeOptionRestrictionRegex(reader: *aws.xml.Reader, alloc: std.mem
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Label")) {
-                    result.label = try alloc.dupe(u8, try reader.readElementText());
+                    result.label = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Pattern")) {
-                    result.pattern = try alloc.dupe(u8, try reader.readElementText());
+                    result.pattern = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1756,7 +1756,7 @@ pub fn deserializeOptionRestrictionRegex(reader: *aws.xml.Reader, alloc: std.mem
     return result;
 }
 
-pub fn deserializePlatformBranchSummary(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PlatformBranchSummary {
+pub fn deserializePlatformBranchSummary(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !PlatformBranchSummary {
     var result: PlatformBranchSummary = undefined;
     result.branch_name = null;
     result.branch_order = 0;
@@ -1767,15 +1767,15 @@ pub fn deserializePlatformBranchSummary(reader: *aws.xml.Reader, alloc: std.mem.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "BranchName")) {
-                    result.branch_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.branch_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "BranchOrder")) {
                     result.branch_order = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "LifecycleState")) {
-                    result.lifecycle_state = try alloc.dupe(u8, try reader.readElementText());
+                    result.lifecycle_state = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformName")) {
-                    result.platform_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SupportedTierList")) {
-                    result.supported_tier_list = try deserializeSupportedTierList(reader, alloc, "member");
+                    result.supported_tier_list = try deserializeSupportedTierList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -1787,7 +1787,7 @@ pub fn deserializePlatformBranchSummary(reader: *aws.xml.Reader, alloc: std.mem.
     return result;
 }
 
-pub fn deserializePlatformDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PlatformDescription {
+pub fn deserializePlatformDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !PlatformDescription {
     var result: PlatformDescription = undefined;
     result.custom_ami_list = null;
     result.date_created = null;
@@ -1814,47 +1814,47 @@ pub fn deserializePlatformDescription(reader: *aws.xml.Reader, alloc: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CustomAmiList")) {
-                    result.custom_ami_list = try deserializeCustomAmiList(reader, alloc, "member");
+                    result.custom_ami_list = try deserializeCustomAmiList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DateCreated")) {
                     result.date_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
                     result.date_updated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Description")) {
-                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Frameworks")) {
-                    result.frameworks = try deserializePlatformFrameworks(reader, alloc, "member");
+                    result.frameworks = try deserializePlatformFrameworks(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Maintainer")) {
-                    result.maintainer = try alloc.dupe(u8, try reader.readElementText());
+                    result.maintainer = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OperatingSystemName")) {
-                    result.operating_system_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.operating_system_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OperatingSystemVersion")) {
-                    result.operating_system_version = try alloc.dupe(u8, try reader.readElementText());
+                    result.operating_system_version = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
-                    result.platform_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformBranchLifecycleState")) {
-                    result.platform_branch_lifecycle_state = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_branch_lifecycle_state = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformBranchName")) {
-                    result.platform_branch_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_branch_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformCategory")) {
-                    result.platform_category = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_category = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformLifecycleState")) {
-                    result.platform_lifecycle_state = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_lifecycle_state = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformName")) {
-                    result.platform_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformOwner")) {
-                    result.platform_owner = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_owner = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformStatus")) {
                     result.platform_status = std.meta.stringToEnum(PlatformStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformVersion")) {
-                    result.platform_version = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_version = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProgrammingLanguages")) {
-                    result.programming_languages = try deserializePlatformProgrammingLanguages(reader, alloc, "member");
+                    result.programming_languages = try deserializePlatformProgrammingLanguages(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SolutionStackName")) {
-                    result.solution_stack_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.solution_stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SupportedAddonList")) {
-                    result.supported_addon_list = try deserializeSupportedAddonList(reader, alloc, "member");
+                    result.supported_addon_list = try deserializeSupportedAddonList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SupportedTierList")) {
-                    result.supported_tier_list = try deserializeSupportedTierList(reader, alloc, "member");
+                    result.supported_tier_list = try deserializeSupportedTierList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -1866,7 +1866,7 @@ pub fn deserializePlatformDescription(reader: *aws.xml.Reader, alloc: std.mem.Al
     return result;
 }
 
-pub fn deserializePlatformFramework(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PlatformFramework {
+pub fn deserializePlatformFramework(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !PlatformFramework {
     var result: PlatformFramework = undefined;
     result.name = null;
     result.version = null;
@@ -1874,9 +1874,9 @@ pub fn deserializePlatformFramework(reader: *aws.xml.Reader, alloc: std.mem.Allo
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
-                    result.version = try alloc.dupe(u8, try reader.readElementText());
+                    result.version = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1888,7 +1888,7 @@ pub fn deserializePlatformFramework(reader: *aws.xml.Reader, alloc: std.mem.Allo
     return result;
 }
 
-pub fn deserializePlatformProgrammingLanguage(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PlatformProgrammingLanguage {
+pub fn deserializePlatformProgrammingLanguage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !PlatformProgrammingLanguage {
     var result: PlatformProgrammingLanguage = undefined;
     result.name = null;
     result.version = null;
@@ -1896,9 +1896,9 @@ pub fn deserializePlatformProgrammingLanguage(reader: *aws.xml.Reader, alloc: st
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
-                    result.version = try alloc.dupe(u8, try reader.readElementText());
+                    result.version = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1910,7 +1910,7 @@ pub fn deserializePlatformProgrammingLanguage(reader: *aws.xml.Reader, alloc: st
     return result;
 }
 
-pub fn deserializePlatformSummary(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PlatformSummary {
+pub fn deserializePlatformSummary(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !PlatformSummary {
     var result: PlatformSummary = undefined;
     result.operating_system_name = null;
     result.operating_system_version = null;
@@ -1928,29 +1928,29 @@ pub fn deserializePlatformSummary(reader: *aws.xml.Reader, alloc: std.mem.Alloca
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "OperatingSystemName")) {
-                    result.operating_system_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.operating_system_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OperatingSystemVersion")) {
-                    result.operating_system_version = try alloc.dupe(u8, try reader.readElementText());
+                    result.operating_system_version = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
-                    result.platform_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformBranchLifecycleState")) {
-                    result.platform_branch_lifecycle_state = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_branch_lifecycle_state = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformBranchName")) {
-                    result.platform_branch_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_branch_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformCategory")) {
-                    result.platform_category = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_category = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformLifecycleState")) {
-                    result.platform_lifecycle_state = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_lifecycle_state = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformOwner")) {
-                    result.platform_owner = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_owner = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformStatus")) {
                     result.platform_status = std.meta.stringToEnum(PlatformStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformVersion")) {
-                    result.platform_version = try alloc.dupe(u8, try reader.readElementText());
+                    result.platform_version = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SupportedAddonList")) {
-                    result.supported_addon_list = try deserializeSupportedAddonList(reader, alloc, "member");
+                    result.supported_addon_list = try deserializeSupportedAddonList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SupportedTierList")) {
-                    result.supported_tier_list = try deserializeSupportedTierList(reader, alloc, "member");
+                    result.supported_tier_list = try deserializeSupportedTierList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -1962,7 +1962,7 @@ pub fn deserializePlatformSummary(reader: *aws.xml.Reader, alloc: std.mem.Alloca
     return result;
 }
 
-pub fn deserializeQueue(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Queue {
+pub fn deserializeQueue(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Queue {
     var result: Queue = undefined;
     result.name = null;
     result.url = null;
@@ -1970,9 +1970,9 @@ pub fn deserializeQueue(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Queu
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "URL")) {
-                    result.url = try alloc.dupe(u8, try reader.readElementText());
+                    result.url = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1984,8 +1984,8 @@ pub fn deserializeQueue(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Queu
     return result;
 }
 
-pub fn deserializeResourceQuota(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ResourceQuota {
-    _ = alloc;
+pub fn deserializeResourceQuota(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ResourceQuota {
+    _ = allocator;
     var result: ResourceQuota = undefined;
     result.maximum = null;
     while (try reader.next()) |event| {
@@ -2004,7 +2004,7 @@ pub fn deserializeResourceQuota(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     return result;
 }
 
-pub fn deserializeResourceQuotas(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ResourceQuotas {
+pub fn deserializeResourceQuotas(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ResourceQuotas {
     var result: ResourceQuotas = undefined;
     result.application_quota = null;
     result.application_version_quota = null;
@@ -2015,15 +2015,15 @@ pub fn deserializeResourceQuotas(reader: *aws.xml.Reader, alloc: std.mem.Allocat
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationQuota")) {
-                    result.application_quota = try deserializeResourceQuota(reader, alloc);
+                    result.application_quota = try deserializeResourceQuota(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ApplicationVersionQuota")) {
-                    result.application_version_quota = try deserializeResourceQuota(reader, alloc);
+                    result.application_version_quota = try deserializeResourceQuota(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ConfigurationTemplateQuota")) {
-                    result.configuration_template_quota = try deserializeResourceQuota(reader, alloc);
+                    result.configuration_template_quota = try deserializeResourceQuota(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "CustomPlatformQuota")) {
-                    result.custom_platform_quota = try deserializeResourceQuota(reader, alloc);
+                    result.custom_platform_quota = try deserializeResourceQuota(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "EnvironmentQuota")) {
-                    result.environment_quota = try deserializeResourceQuota(reader, alloc);
+                    result.environment_quota = try deserializeResourceQuota(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -2035,7 +2035,7 @@ pub fn deserializeResourceQuotas(reader: *aws.xml.Reader, alloc: std.mem.Allocat
     return result;
 }
 
-pub fn deserializeS3Location(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !S3Location {
+pub fn deserializeS3Location(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3Location {
     var result: S3Location = undefined;
     result.s3_bucket = null;
     result.s3_key = null;
@@ -2043,9 +2043,9 @@ pub fn deserializeS3Location(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "S3Bucket")) {
-                    result.s3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "S3Key")) {
-                    result.s3_key = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_key = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2057,7 +2057,7 @@ pub fn deserializeS3Location(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     return result;
 }
 
-pub fn deserializeSingleInstanceHealth(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SingleInstanceHealth {
+pub fn deserializeSingleInstanceHealth(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SingleInstanceHealth {
     var result: SingleInstanceHealth = undefined;
     result.application_metrics = null;
     result.availability_zone = null;
@@ -2073,25 +2073,25 @@ pub fn deserializeSingleInstanceHealth(reader: *aws.xml.Reader, alloc: std.mem.A
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationMetrics")) {
-                    result.application_metrics = try deserializeApplicationMetrics(reader, alloc);
+                    result.application_metrics = try deserializeApplicationMetrics(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZone")) {
-                    result.availability_zone = try alloc.dupe(u8, try reader.readElementText());
+                    result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Causes")) {
-                    result.causes = try deserializeCauses(reader, alloc, "member");
+                    result.causes = try deserializeCauses(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Color")) {
-                    result.color = try alloc.dupe(u8, try reader.readElementText());
+                    result.color = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Deployment")) {
-                    result.deployment = try deserializeDeployment(reader, alloc);
+                    result.deployment = try deserializeDeployment(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "HealthStatus")) {
-                    result.health_status = try alloc.dupe(u8, try reader.readElementText());
+                    result.health_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InstanceId")) {
-                    result.instance_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InstanceType")) {
-                    result.instance_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.instance_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LaunchedAt")) {
                     result.launched_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "System")) {
-                    result.system = try deserializeSystemStatus(reader, alloc);
+                    result.system = try deserializeSystemStatus(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -2103,7 +2103,7 @@ pub fn deserializeSingleInstanceHealth(reader: *aws.xml.Reader, alloc: std.mem.A
     return result;
 }
 
-pub fn deserializeSolutionStackDescription(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SolutionStackDescription {
+pub fn deserializeSolutionStackDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SolutionStackDescription {
     var result: SolutionStackDescription = undefined;
     result.permitted_file_types = null;
     result.solution_stack_name = null;
@@ -2111,9 +2111,9 @@ pub fn deserializeSolutionStackDescription(reader: *aws.xml.Reader, alloc: std.m
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PermittedFileTypes")) {
-                    result.permitted_file_types = try deserializeSolutionStackFileTypeList(reader, alloc, "member");
+                    result.permitted_file_types = try deserializeSolutionStackFileTypeList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SolutionStackName")) {
-                    result.solution_stack_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.solution_stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2125,13 +2125,13 @@ pub fn deserializeSolutionStackDescription(reader: *aws.xml.Reader, alloc: std.m
     return result;
 }
 
-pub fn deserializeSourceBuildInformation(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SourceBuildInformation {
+pub fn deserializeSourceBuildInformation(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SourceBuildInformation {
     var result: SourceBuildInformation = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "SourceLocation")) {
-                    result.source_location = try alloc.dupe(u8, try reader.readElementText());
+                    result.source_location = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceRepository")) {
                     result.source_repository = std.meta.stringToEnum(SourceRepository, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceType")) {
@@ -2147,8 +2147,8 @@ pub fn deserializeSourceBuildInformation(reader: *aws.xml.Reader, alloc: std.mem
     return result;
 }
 
-pub fn deserializeStatusCodes(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !StatusCodes {
-    _ = alloc;
+pub fn deserializeStatusCodes(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !StatusCodes {
+    _ = allocator;
     var result: StatusCodes = undefined;
     result.status_2_xx = null;
     result.status_3_xx = null;
@@ -2176,7 +2176,7 @@ pub fn deserializeStatusCodes(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
     return result;
 }
 
-pub fn deserializeSystemStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SystemStatus {
+pub fn deserializeSystemStatus(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SystemStatus {
     var result: SystemStatus = undefined;
     result.cpu_utilization = null;
     result.load_average = null;
@@ -2184,9 +2184,9 @@ pub fn deserializeSystemStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CPUUtilization")) {
-                    result.cpu_utilization = try deserializeCPUUtilization(reader, alloc);
+                    result.cpu_utilization = try deserializeCPUUtilization(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "LoadAverage")) {
-                    result.load_average = try deserializeLoadAverage(reader, alloc, "member");
+                    result.load_average = try deserializeLoadAverage(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -2198,7 +2198,7 @@ pub fn deserializeSystemStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocator
     return result;
 }
 
-pub fn deserializeTag(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tag {
+pub fn deserializeTag(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Tag {
     var result: Tag = undefined;
     result.key = null;
     result.value = null;
@@ -2206,9 +2206,9 @@ pub fn deserializeTag(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tag {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Key")) {
-                    result.key = try alloc.dupe(u8, try reader.readElementText());
+                    result.key = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
-                    result.value = try alloc.dupe(u8, try reader.readElementText());
+                    result.value = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2220,14 +2220,14 @@ pub fn deserializeTag(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tag {
     return result;
 }
 
-pub fn deserializeTrigger(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Trigger {
+pub fn deserializeTrigger(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Trigger {
     var result: Trigger = undefined;
     result.name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Name")) {
-                    result.name = try alloc.dupe(u8, try reader.readElementText());
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2239,7 +2239,7 @@ pub fn deserializeTrigger(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tr
     return result;
 }
 
-pub fn deserializeValidationMessage(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ValidationMessage {
+pub fn deserializeValidationMessage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ValidationMessage {
     var result: ValidationMessage = undefined;
     result.message = null;
     result.namespace = null;
@@ -2249,11 +2249,11 @@ pub fn deserializeValidationMessage(reader: *aws.xml.Reader, alloc: std.mem.Allo
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Message")) {
-                    result.message = try alloc.dupe(u8, try reader.readElementText());
+                    result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Namespace")) {
-                    result.namespace = try alloc.dupe(u8, try reader.readElementText());
+                    result.namespace = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OptionName")) {
-                    result.option_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.option_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Severity")) {
                     result.severity = std.meta.stringToEnum(ValidationSeverity, try reader.readElementText());
                 } else {
@@ -2267,432 +2267,432 @@ pub fn deserializeValidationMessage(reader: *aws.xml.Reader, alloc: std.mem.Allo
     return result;
 }
 
-pub fn serializeApplicationNamesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeApplicationNamesList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeConfigurationOptionSettingsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ConfigurationOptionSetting, comptime item_tag: []const u8) !void {
+pub fn serializeConfigurationOptionSettingsList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ConfigurationOptionSetting, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try serializeConfigurationOptionSetting(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeConfigurationOptionSetting(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeEnvironmentHealthAttributes(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const EnvironmentHealthAttribute, comptime item_tag: []const u8) !void {
+pub fn serializeEnvironmentHealthAttributes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const EnvironmentHealthAttribute, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try buf.appendSlice(alloc, @tagName(item));
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeEnvironmentIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeEnvironmentIdList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeEnvironmentNamesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeEnvironmentNamesList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeInstancesHealthAttributes(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstancesHealthAttribute, comptime item_tag: []const u8) !void {
+pub fn serializeInstancesHealthAttributes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstancesHealthAttribute, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try buf.appendSlice(alloc, @tagName(item));
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeOptionsSpecifierList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const OptionSpecification, comptime item_tag: []const u8) !void {
+pub fn serializeOptionsSpecifierList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const OptionSpecification, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try serializeOptionSpecification(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeOptionSpecification(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializePlatformFilterValueList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializePlatformFilterValueList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializePlatformFilters(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PlatformFilter, comptime item_tag: []const u8) !void {
+pub fn serializePlatformFilters(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PlatformFilter, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try serializePlatformFilter(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializePlatformFilter(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeSearchFilterValues(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeSearchFilterValues(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeSearchFilters(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SearchFilter, comptime item_tag: []const u8) !void {
+pub fn serializeSearchFilters(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SearchFilter, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try serializeSearchFilter(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeSearchFilter(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeTagKeyList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeTagKeyList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeTagList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
+pub fn serializeTagList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try serializeTag(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeTag(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeTags(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
+pub fn serializeTags(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try serializeTag(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeTag(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeVersionLabels(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeVersionLabels(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeVersionLabelsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+pub fn serializeVersionLabelsList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
-        try buf.appendSlice(alloc, "<");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
-        try aws.xml.appendXmlEscaped(alloc, buf, item);
-        try buf.appendSlice(alloc, "</");
-        try buf.appendSlice(alloc, item_tag);
-        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
     }
 }
 
-pub fn serializeApplicationResourceLifecycleConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ApplicationResourceLifecycleConfig) !void {
+pub fn serializeApplicationResourceLifecycleConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ApplicationResourceLifecycleConfig) !void {
     if (value.service_role) |v| {
-        try buf.appendSlice(alloc, "<ServiceRole>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</ServiceRole>");
+        try buf.appendSlice(allocator, "<ServiceRole>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ServiceRole>");
     }
     if (value.version_lifecycle_config) |v| {
-        try buf.appendSlice(alloc, "<VersionLifecycleConfig>");
-        try serializeApplicationVersionLifecycleConfig(alloc, buf, v);
-        try buf.appendSlice(alloc, "</VersionLifecycleConfig>");
+        try buf.appendSlice(allocator, "<VersionLifecycleConfig>");
+        try serializeApplicationVersionLifecycleConfig(allocator, buf, v);
+        try buf.appendSlice(allocator, "</VersionLifecycleConfig>");
     }
 }
 
-pub fn serializeApplicationVersionLifecycleConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ApplicationVersionLifecycleConfig) !void {
+pub fn serializeApplicationVersionLifecycleConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ApplicationVersionLifecycleConfig) !void {
     if (value.max_age_rule) |v| {
-        try buf.appendSlice(alloc, "<MaxAgeRule>");
-        try serializeMaxAgeRule(alloc, buf, v);
-        try buf.appendSlice(alloc, "</MaxAgeRule>");
+        try buf.appendSlice(allocator, "<MaxAgeRule>");
+        try serializeMaxAgeRule(allocator, buf, v);
+        try buf.appendSlice(allocator, "</MaxAgeRule>");
     }
     if (value.max_count_rule) |v| {
-        try buf.appendSlice(alloc, "<MaxCountRule>");
-        try serializeMaxCountRule(alloc, buf, v);
-        try buf.appendSlice(alloc, "</MaxCountRule>");
+        try buf.appendSlice(allocator, "<MaxCountRule>");
+        try serializeMaxCountRule(allocator, buf, v);
+        try buf.appendSlice(allocator, "</MaxCountRule>");
     }
 }
 
-pub fn serializeBuildConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BuildConfiguration) !void {
+pub fn serializeBuildConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: BuildConfiguration) !void {
     if (value.artifact_name) |v| {
-        try buf.appendSlice(alloc, "<ArtifactName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</ArtifactName>");
+        try buf.appendSlice(allocator, "<ArtifactName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ArtifactName>");
     }
-    try buf.appendSlice(alloc, "<CodeBuildServiceRole>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.code_build_service_role);
-    try buf.appendSlice(alloc, "</CodeBuildServiceRole>");
+    try buf.appendSlice(allocator, "<CodeBuildServiceRole>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.code_build_service_role);
+    try buf.appendSlice(allocator, "</CodeBuildServiceRole>");
     if (value.compute_type) |v| {
-        try buf.appendSlice(alloc, "<ComputeType>");
-        try buf.appendSlice(alloc, @tagName(v));
-        try buf.appendSlice(alloc, "</ComputeType>");
+        try buf.appendSlice(allocator, "<ComputeType>");
+        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, "</ComputeType>");
     }
-    try buf.appendSlice(alloc, "<Image>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.image);
-    try buf.appendSlice(alloc, "</Image>");
+    try buf.appendSlice(allocator, "<Image>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.image);
+    try buf.appendSlice(allocator, "</Image>");
     if (value.timeout_in_minutes) |v| {
-        try buf.appendSlice(alloc, "<TimeoutInMinutes>");
+        try buf.appendSlice(allocator, "<TimeoutInMinutes>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
         }
-        try buf.appendSlice(alloc, "</TimeoutInMinutes>");
+        try buf.appendSlice(allocator, "</TimeoutInMinutes>");
     }
 }
 
-pub fn serializeConfigurationOptionSetting(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ConfigurationOptionSetting) !void {
+pub fn serializeConfigurationOptionSetting(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ConfigurationOptionSetting) !void {
     if (value.namespace) |v| {
-        try buf.appendSlice(alloc, "<Namespace>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Namespace>");
+        try buf.appendSlice(allocator, "<Namespace>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Namespace>");
     }
     if (value.option_name) |v| {
-        try buf.appendSlice(alloc, "<OptionName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</OptionName>");
+        try buf.appendSlice(allocator, "<OptionName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</OptionName>");
     }
     if (value.resource_name) |v| {
-        try buf.appendSlice(alloc, "<ResourceName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</ResourceName>");
+        try buf.appendSlice(allocator, "<ResourceName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ResourceName>");
     }
     if (value.value) |v| {
-        try buf.appendSlice(alloc, "<Value>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Value>");
+        try buf.appendSlice(allocator, "<Value>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Value>");
     }
 }
 
-pub fn serializeEnvironmentTier(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnvironmentTier) !void {
+pub fn serializeEnvironmentTier(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnvironmentTier) !void {
     if (value.name) |v| {
-        try buf.appendSlice(alloc, "<Name>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Name>");
+        try buf.appendSlice(allocator, "<Name>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Name>");
     }
     if (value.@"type") |v| {
-        try buf.appendSlice(alloc, "<Type>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Type>");
+        try buf.appendSlice(allocator, "<Type>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Type>");
     }
     if (value.version) |v| {
-        try buf.appendSlice(alloc, "<Version>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Version>");
+        try buf.appendSlice(allocator, "<Version>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Version>");
     }
 }
 
-pub fn serializeMaxAgeRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MaxAgeRule) !void {
+pub fn serializeMaxAgeRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: MaxAgeRule) !void {
     if (value.delete_source_from_s3) |v| {
-        try buf.appendSlice(alloc, "<DeleteSourceFromS3>");
-        try buf.appendSlice(alloc, if (v) "true" else "false");
-        try buf.appendSlice(alloc, "</DeleteSourceFromS3>");
+        try buf.appendSlice(allocator, "<DeleteSourceFromS3>");
+        try buf.appendSlice(allocator, if (v) "true" else "false");
+        try buf.appendSlice(allocator, "</DeleteSourceFromS3>");
     }
-    try buf.appendSlice(alloc, "<Enabled>");
-    try buf.appendSlice(alloc, if (value.enabled) "true" else "false");
-    try buf.appendSlice(alloc, "</Enabled>");
+    try buf.appendSlice(allocator, "<Enabled>");
+    try buf.appendSlice(allocator, if (value.enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</Enabled>");
     if (value.max_age_in_days) |v| {
-        try buf.appendSlice(alloc, "<MaxAgeInDays>");
+        try buf.appendSlice(allocator, "<MaxAgeInDays>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
         }
-        try buf.appendSlice(alloc, "</MaxAgeInDays>");
+        try buf.appendSlice(allocator, "</MaxAgeInDays>");
     }
 }
 
-pub fn serializeMaxCountRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MaxCountRule) !void {
+pub fn serializeMaxCountRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: MaxCountRule) !void {
     if (value.delete_source_from_s3) |v| {
-        try buf.appendSlice(alloc, "<DeleteSourceFromS3>");
-        try buf.appendSlice(alloc, if (v) "true" else "false");
-        try buf.appendSlice(alloc, "</DeleteSourceFromS3>");
+        try buf.appendSlice(allocator, "<DeleteSourceFromS3>");
+        try buf.appendSlice(allocator, if (v) "true" else "false");
+        try buf.appendSlice(allocator, "</DeleteSourceFromS3>");
     }
-    try buf.appendSlice(alloc, "<Enabled>");
-    try buf.appendSlice(alloc, if (value.enabled) "true" else "false");
-    try buf.appendSlice(alloc, "</Enabled>");
+    try buf.appendSlice(allocator, "<Enabled>");
+    try buf.appendSlice(allocator, if (value.enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</Enabled>");
     if (value.max_count) |v| {
-        try buf.appendSlice(alloc, "<MaxCount>");
+        try buf.appendSlice(allocator, "<MaxCount>");
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try buf.appendSlice(alloc, num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
         }
-        try buf.appendSlice(alloc, "</MaxCount>");
+        try buf.appendSlice(allocator, "</MaxCount>");
     }
 }
 
-pub fn serializeOptionSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OptionSpecification) !void {
+pub fn serializeOptionSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: OptionSpecification) !void {
     if (value.namespace) |v| {
-        try buf.appendSlice(alloc, "<Namespace>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Namespace>");
+        try buf.appendSlice(allocator, "<Namespace>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Namespace>");
     }
     if (value.option_name) |v| {
-        try buf.appendSlice(alloc, "<OptionName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</OptionName>");
+        try buf.appendSlice(allocator, "<OptionName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</OptionName>");
     }
     if (value.resource_name) |v| {
-        try buf.appendSlice(alloc, "<ResourceName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</ResourceName>");
+        try buf.appendSlice(allocator, "<ResourceName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ResourceName>");
     }
 }
 
-pub fn serializePlatformFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PlatformFilter) !void {
+pub fn serializePlatformFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PlatformFilter) !void {
     if (value.operator) |v| {
-        try buf.appendSlice(alloc, "<Operator>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Operator>");
+        try buf.appendSlice(allocator, "<Operator>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Operator>");
     }
     if (value.@"type") |v| {
-        try buf.appendSlice(alloc, "<Type>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Type>");
+        try buf.appendSlice(allocator, "<Type>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Type>");
     }
     if (value.values) |v| {
-        try buf.appendSlice(alloc, "<Values>");
-        try serializePlatformFilterValueList(alloc, buf, v, "member");
-        try buf.appendSlice(alloc, "</Values>");
+        try buf.appendSlice(allocator, "<Values>");
+        try serializePlatformFilterValueList(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</Values>");
     }
 }
 
-pub fn serializeS3Location(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Location) !void {
+pub fn serializeS3Location(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Location) !void {
     if (value.s3_bucket) |v| {
-        try buf.appendSlice(alloc, "<S3Bucket>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</S3Bucket>");
+        try buf.appendSlice(allocator, "<S3Bucket>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</S3Bucket>");
     }
     if (value.s3_key) |v| {
-        try buf.appendSlice(alloc, "<S3Key>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</S3Key>");
+        try buf.appendSlice(allocator, "<S3Key>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</S3Key>");
     }
 }
 
-pub fn serializeSearchFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SearchFilter) !void {
+pub fn serializeSearchFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SearchFilter) !void {
     if (value.attribute) |v| {
-        try buf.appendSlice(alloc, "<Attribute>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Attribute>");
+        try buf.appendSlice(allocator, "<Attribute>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Attribute>");
     }
     if (value.operator) |v| {
-        try buf.appendSlice(alloc, "<Operator>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Operator>");
+        try buf.appendSlice(allocator, "<Operator>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Operator>");
     }
     if (value.values) |v| {
-        try buf.appendSlice(alloc, "<Values>");
-        try serializeSearchFilterValues(alloc, buf, v, "member");
-        try buf.appendSlice(alloc, "</Values>");
+        try buf.appendSlice(allocator, "<Values>");
+        try serializeSearchFilterValues(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</Values>");
     }
 }
 
-pub fn serializeSourceBuildInformation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SourceBuildInformation) !void {
-    try buf.appendSlice(alloc, "<SourceLocation>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.source_location);
-    try buf.appendSlice(alloc, "</SourceLocation>");
-    try buf.appendSlice(alloc, "<SourceRepository>");
-    try buf.appendSlice(alloc, @tagName(value.source_repository));
-    try buf.appendSlice(alloc, "</SourceRepository>");
-    try buf.appendSlice(alloc, "<SourceType>");
-    try buf.appendSlice(alloc, @tagName(value.source_type));
-    try buf.appendSlice(alloc, "</SourceType>");
+pub fn serializeSourceBuildInformation(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SourceBuildInformation) !void {
+    try buf.appendSlice(allocator, "<SourceLocation>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.source_location);
+    try buf.appendSlice(allocator, "</SourceLocation>");
+    try buf.appendSlice(allocator, "<SourceRepository>");
+    try buf.appendSlice(allocator, @tagName(value.source_repository));
+    try buf.appendSlice(allocator, "</SourceRepository>");
+    try buf.appendSlice(allocator, "<SourceType>");
+    try buf.appendSlice(allocator, @tagName(value.source_type));
+    try buf.appendSlice(allocator, "</SourceType>");
 }
 
-pub fn serializeSourceConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SourceConfiguration) !void {
+pub fn serializeSourceConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SourceConfiguration) !void {
     if (value.application_name) |v| {
-        try buf.appendSlice(alloc, "<ApplicationName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</ApplicationName>");
+        try buf.appendSlice(allocator, "<ApplicationName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ApplicationName>");
     }
     if (value.template_name) |v| {
-        try buf.appendSlice(alloc, "<TemplateName>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</TemplateName>");
+        try buf.appendSlice(allocator, "<TemplateName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</TemplateName>");
     }
 }
 
-pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
+pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
     if (value.key) |v| {
-        try buf.appendSlice(alloc, "<Key>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Key>");
+        try buf.appendSlice(allocator, "<Key>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Key>");
     }
     if (value.value) |v| {
-        try buf.appendSlice(alloc, "<Value>");
-        try aws.xml.appendXmlEscaped(alloc, buf, v);
-        try buf.appendSlice(alloc, "</Value>");
+        try buf.appendSlice(allocator, "<Value>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Value>");
     }
 }
 

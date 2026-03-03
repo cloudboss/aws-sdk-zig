@@ -112,17 +112,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySubne
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifySubnetAttributeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifySubnetAttributeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -130,65 +130,65 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifySubnetAttributeInput,
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifySubnetAttribute&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=ModifySubnetAttribute&Version=2016-11-15");
     if (input.assign_ipv_6_address_on_creation) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&AssignIpv6AddressOnCreation.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&AssignIpv6AddressOnCreation.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.customer_owned_ipv_4_pool) |v| {
-        try body_buf.appendSlice(alloc, "&CustomerOwnedIpv4Pool=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&CustomerOwnedIpv4Pool=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.disable_lni_at_device_index) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&DisableLniAtDeviceIndex.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&DisableLniAtDeviceIndex.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.enable_dns_64) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&EnableDns64.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&EnableDns64.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.enable_lni_at_device_index) |v| {
-        try body_buf.appendSlice(alloc, "&EnableLniAtDeviceIndex=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&EnableLniAtDeviceIndex=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.enable_resource_name_dns_aaaa_record_on_launch) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&EnableResourceNameDnsAAAARecordOnLaunch.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&EnableResourceNameDnsAAAARecordOnLaunch.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.enable_resource_name_dns_a_record_on_launch) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&EnableResourceNameDnsARecordOnLaunch.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&EnableResourceNameDnsARecordOnLaunch.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.map_customer_owned_ip_on_launch) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&MapCustomerOwnedIpOnLaunch.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&MapCustomerOwnedIpOnLaunch.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.map_public_ip_on_launch) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&MapPublicIpOnLaunch.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try body_buf.appendSlice(allocator, "&MapPublicIpOnLaunch.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }
     if (input.private_dns_hostname_type_on_launch) |v| {
-        try body_buf.appendSlice(alloc, "&PrivateDnsHostnameTypeOnLaunch=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&PrivateDnsHostnameTypeOnLaunch=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
-    try body_buf.appendSlice(alloc, "&SubnetId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.subnet_id);
+    try body_buf.appendSlice(allocator, "&SubnetId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.subnet_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -196,26 +196,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifySubnetAttributeInput,
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifySubnetAttributeOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifySubnetAttributeOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: ModifySubnetAttributeOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

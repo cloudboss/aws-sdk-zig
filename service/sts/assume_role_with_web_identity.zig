@@ -282,17 +282,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssumeRoleW
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithWebIdentityInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sts", "STS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleWithWebIdentityInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sts", "STS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -300,14 +300,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithWebIdentityIn
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=AssumeRoleWithWebIdentity&Version=2011-06-15");
+    try body_buf.appendSlice(allocator, "Action=AssumeRoleWithWebIdentity&Version=2011-06-15");
     if (input.duration_seconds) |v| {
-        try body_buf.appendSlice(alloc, "&DurationSeconds=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&DurationSeconds=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.policy) |v| {
-        try body_buf.appendSlice(alloc, "&Policy=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Policy=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.policy_arns) |list| {
         for (list, 0..) |item, idx| {
@@ -315,25 +315,25 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithWebIdentityIn
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyArns.member.{d}.arn=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.arn) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
         }
     }
     if (input.provider_id) |v| {
-        try body_buf.appendSlice(alloc, "&ProviderId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ProviderId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&RoleArn=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.role_arn);
-    try body_buf.appendSlice(alloc, "&RoleSessionName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.role_session_name);
-    try body_buf.appendSlice(alloc, "&WebIdentityToken=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.web_identity_token);
+    try body_buf.appendSlice(allocator, "&RoleArn=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.role_arn);
+    try body_buf.appendSlice(allocator, "&RoleSessionName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.role_session_name);
+    try body_buf.appendSlice(allocator, "&WebIdentityToken=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.web_identity_token);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -341,12 +341,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithWebIdentityIn
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssumeRoleWithWebIdentityOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssumeRoleWithWebIdentityOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -365,19 +365,19 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AssumedRoleUser")) {
-                    result.assumed_role_user = try serde.deserializeAssumedRoleUser(&reader, alloc);
+                    result.assumed_role_user = try serde.deserializeAssumedRoleUser(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "Audience")) {
-                    result.audience = try alloc.dupe(u8, try reader.readElementText());
+                    result.audience = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Credentials")) {
-                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                    result.credentials = try serde.deserializeCredentials(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
                     result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Provider")) {
-                    result.provider = try alloc.dupe(u8, try reader.readElementText());
+                    result.provider = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
-                    result.source_identity = try alloc.dupe(u8, try reader.readElementText());
+                    result.source_identity = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SubjectFromWebIdentityToken")) {
-                    result.subject_from_web_identity_token = try alloc.dupe(u8, try reader.readElementText());
+                    result.subject_from_web_identity_token = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -390,11 +390,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

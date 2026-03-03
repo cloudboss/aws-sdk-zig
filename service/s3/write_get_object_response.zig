@@ -308,17 +308,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: WriteGetObj
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: WriteGetObjectResponseInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -334,147 +334,147 @@ fn serializeRequest(alloc: std.mem.Allocator, input: WriteGetObjectResponseInput
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/xml");
+    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.accept_ranges) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-accept-ranges", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-accept-ranges", v);
     }
     if (input.bucket_key_enabled) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
     }
     if (input.cache_control) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Cache-Control", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Cache-Control", v);
     }
     if (input.checksum_crc32) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-checksum-crc32", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-crc32", v);
     }
     if (input.checksum_crc32_c) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-checksum-crc32c", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-crc32c", v);
     }
     if (input.checksum_crc64_nvme) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-checksum-crc64nvme", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-crc64nvme", v);
     }
     if (input.checksum_sha1) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-checksum-sha1", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-sha1", v);
     }
     if (input.checksum_sha256) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-checksum-sha256", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-sha256", v);
     }
     if (input.content_disposition) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Content-Disposition", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Content-Disposition", v);
     }
     if (input.content_encoding) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Content-Encoding", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Content-Encoding", v);
     }
     if (input.content_language) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Content-Language", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Content-Language", v);
     }
     if (input.content_length) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "Content-Length", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "Content-Length", num_str);
         }
     }
     if (input.content_range) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Content-Range", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Content-Range", v);
     }
     if (input.content_type) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Content-Type", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Content-Type", v);
     }
     if (input.delete_marker) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-delete-marker", if (v) "true" else "false");
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-delete-marker", if (v) "true" else "false");
     }
     if (input.error_code) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-error-code", v);
+        try request.headers.put(allocator, "x-amz-fwd-error-code", v);
     }
     if (input.error_message) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-error-message", v);
+        try request.headers.put(allocator, "x-amz-fwd-error-message", v);
     }
     if (input.e_tag) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-ETag", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-ETag", v);
     }
     if (input.expiration) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-expiration", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-expiration", v);
     }
     if (input.expires) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-Expires", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-Expires", v);
     }
     if (input.last_modified) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-fwd-header-Last-Modified", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-fwd-header-Last-Modified", num_str);
         }
     }
     if (input.missing_meta) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-fwd-header-x-amz-missing-meta", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-fwd-header-x-amz-missing-meta", num_str);
         }
     }
     if (input.object_lock_legal_hold_status) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-object-lock-legal-hold", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-legal-hold", @tagName(v));
     }
     if (input.object_lock_mode) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-object-lock-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-mode", @tagName(v));
     }
     if (input.object_lock_retain_until_date) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-fwd-header-x-amz-object-lock-retain-until-date", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-retain-until-date", num_str);
         }
     }
     if (input.parts_count) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-fwd-header-x-amz-mp-parts-count", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-fwd-header-x-amz-mp-parts-count", num_str);
         }
     }
     if (input.replication_status) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-replication-status", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-replication-status", @tagName(v));
     }
     if (input.request_charged) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-request-charged", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-request-charged", @tagName(v));
     }
-    try request.headers.put(alloc, "x-amz-request-route", input.request_route);
-    try request.headers.put(alloc, "x-amz-request-token", input.request_token);
+    try request.headers.put(allocator, "x-amz-request-route", input.request_route);
+    try request.headers.put(allocator, "x-amz-request-token", input.request_token);
     if (input.restore) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-restore", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-restore", v);
     }
     if (input.server_side_encryption) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-server-side-encryption", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption", @tagName(v));
     }
     if (input.sse_customer_algorithm) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm", v);
     }
     if (input.sse_customer_key_md5) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-server-side-encryption-customer-key-MD5", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption-customer-key-MD5", v);
     }
     if (input.ssekms_key_id) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id", v);
     }
     if (input.status_code) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-fwd-status", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-fwd-status", num_str);
         }
     }
     if (input.storage_class) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-storage-class", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-storage-class", @tagName(v));
     }
     if (input.tag_count) |v| {
         {
-            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
-            try request.headers.put(alloc, "x-amz-fwd-header-x-amz-tagging-count", num_str);
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-fwd-header-x-amz-tagging-count", num_str);
         }
     }
     if (input.version_id) |v| {
-        try request.headers.put(alloc, "x-amz-fwd-header-x-amz-version-id", v);
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-version-id", v);
     }
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !WriteGetObjectResponseOutput {
-    _ = alloc;
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !WriteGetObjectResponseOutput {
+    _ = allocator;
     _ = body;
     _ = status;
     _ = headers;
@@ -483,11 +483,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

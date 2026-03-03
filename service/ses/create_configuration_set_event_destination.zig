@@ -41,17 +41,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfi
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationSetEventDestinationInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigurationSetEventDestinationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -59,57 +59,57 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationSetEvent
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreateConfigurationSetEventDestination&Version=2010-12-01");
-    try body_buf.appendSlice(alloc, "&ConfigurationSetName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.configuration_set_name);
+    try body_buf.appendSlice(allocator, "Action=CreateConfigurationSetEventDestination&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "&ConfigurationSetName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.configuration_set_name);
     if (input.event_destination.cloud_watch_destination) |sv| {
         for (sv.dimension_configurations, 0..) |item, idx| {
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DefaultDimensionValue=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.default_dimension_value);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.default_dimension_value);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DimensionName=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.dimension_name);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.dimension_name);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DimensionValueSource=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.dimension_value_source));
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.dimension_value_source));
             }
         }
     }
     if (input.event_destination.enabled) |sv| {
-        try body_buf.appendSlice(alloc, "&EventDestination.Enabled=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        try body_buf.appendSlice(allocator, "&EventDestination.Enabled=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
     }
     if (input.event_destination.kinesis_firehose_destination) |sv| {
-        try body_buf.appendSlice(alloc, "&EventDestination.KinesisFirehoseDestination.DeliveryStreamARN=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, sv.delivery_stream_arn);
-        try body_buf.appendSlice(alloc, "&EventDestination.KinesisFirehoseDestination.IAMRoleARN=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, sv.iam_role_arn);
+        try body_buf.appendSlice(allocator, "&EventDestination.KinesisFirehoseDestination.DeliveryStreamARN=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.delivery_stream_arn);
+        try body_buf.appendSlice(allocator, "&EventDestination.KinesisFirehoseDestination.IAMRoleARN=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.iam_role_arn);
     }
     for (input.event_destination.matching_event_types, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.MatchingEventTypes.member.{d}=", .{n}) catch continue;
-        try body_buf.appendSlice(alloc, field_prefix);
-        try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+        try body_buf.appendSlice(allocator, field_prefix);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }
-    try body_buf.appendSlice(alloc, "&EventDestination.Name=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.event_destination.name);
+    try body_buf.appendSlice(allocator, "&EventDestination.Name=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.event_destination.name);
     if (input.event_destination.sns_destination) |sv| {
-        try body_buf.appendSlice(alloc, "&EventDestination.SNSDestination.TopicARN=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, sv.topic_arn);
+        try body_buf.appendSlice(allocator, "&EventDestination.SNSDestination.TopicARN=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.topic_arn);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -117,26 +117,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationSetEvent
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateConfigurationSetEventDestinationOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConfigurationSetEventDestinationOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: CreateConfigurationSetEventDestinationOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

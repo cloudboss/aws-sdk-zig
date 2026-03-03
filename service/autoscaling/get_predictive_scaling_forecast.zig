@@ -62,17 +62,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPredicti
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetPredictiveScalingForecastInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("autoscaling", "Auto Scaling", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetPredictiveScalingForecastInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("autoscaling", "Auto Scaling", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -80,17 +80,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPredictiveScalingForecas
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=GetPredictiveScalingForecast&Version=2011-01-01");
-    try body_buf.appendSlice(alloc, "&AutoScalingGroupName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.auto_scaling_group_name);
-    try body_buf.appendSlice(alloc, "&EndTime=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.end_time}) catch "");
-    try body_buf.appendSlice(alloc, "&PolicyName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.policy_name);
-    try body_buf.appendSlice(alloc, "&StartTime=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.start_time}) catch "");
+    try body_buf.appendSlice(allocator, "Action=GetPredictiveScalingForecast&Version=2011-01-01");
+    try body_buf.appendSlice(allocator, "&AutoScalingGroupName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.auto_scaling_group_name);
+    try body_buf.appendSlice(allocator, "&EndTime=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.end_time}) catch "");
+    try body_buf.appendSlice(allocator, "&PolicyName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.policy_name);
+    try body_buf.appendSlice(allocator, "&StartTime=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.start_time}) catch "");
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -98,12 +98,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPredictiveScalingForecas
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetPredictiveScalingForecastOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPredictiveScalingForecastOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -122,9 +122,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CapacityForecast")) {
-                    result.capacity_forecast = try serde.deserializeCapacityForecast(&reader, alloc);
+                    result.capacity_forecast = try serde.deserializeCapacityForecast(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "LoadForecast")) {
-                    result.load_forecast = try serde.deserializeLoadForecasts(&reader, alloc, "member");
+                    result.load_forecast = try serde.deserializeLoadForecasts(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "UpdateTime")) {
                     result.update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -139,11 +139,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

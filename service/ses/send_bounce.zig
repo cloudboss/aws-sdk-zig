@@ -67,17 +67,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendBounceI
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: SendBounceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: SendBounceInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -85,44 +85,44 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendBounceInput, config: *a
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=SendBounce&Version=2010-12-01");
+    try body_buf.appendSlice(allocator, "Action=SendBounce&Version=2010-12-01");
     for (input.bounced_recipient_info_list, 0..) |item, idx| {
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.BounceType=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.bounce_type) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.Recipient=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item.recipient);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.recipient);
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientArn=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.recipient_arn) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         if (item.recipient_dsn_fields) |sv_1| {
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.Action=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv_1.action));
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.action));
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.DiagnosticCode=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.diagnostic_code) |fv_2| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
             if (sv_1.extension_fields) |lst_2| {
@@ -131,63 +131,63 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendBounceInput, config: *a
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.ExtensionFields.member.{d}.Name=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.name);
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.name);
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.ExtensionFields.member.{d}.Value=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(alloc, field_prefix);
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.value);
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.value);
                     }
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.FinalRecipient=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.final_recipient) |fv_2| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.LastAttemptDate=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.last_attempt_date) |fv_2| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.RemoteMta=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.remote_mta) |fv_2| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.Status=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, sv_1.status);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.status);
             }
         }
     }
-    try body_buf.appendSlice(alloc, "&BounceSender=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.bounce_sender);
+    try body_buf.appendSlice(allocator, "&BounceSender=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.bounce_sender);
     if (input.bounce_sender_arn) |v| {
-        try body_buf.appendSlice(alloc, "&BounceSenderArn=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&BounceSenderArn=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.explanation) |v| {
-        try body_buf.appendSlice(alloc, "&Explanation=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Explanation=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.message_dsn) |v| {
         if (v.arrival_date) |sv| {
-            try body_buf.appendSlice(alloc, "&MessageDsn.ArrivalDate=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try body_buf.appendSlice(allocator, "&MessageDsn.ArrivalDate=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.extension_fields) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -195,24 +195,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendBounceInput, config: *a
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageDsn.ExtensionFields.member.{d}.Name=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.name);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.name);
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageDsn.ExtensionFields.member.{d}.Value=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.value);
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.value);
                 }
             }
         }
-        try body_buf.appendSlice(alloc, "&MessageDsn.ReportingMta=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v.reporting_mta);
+        try body_buf.appendSlice(allocator, "&MessageDsn.ReportingMta=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.reporting_mta);
     }
-    try body_buf.appendSlice(alloc, "&OriginalMessageId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.original_message_id);
+    try body_buf.appendSlice(allocator, "&OriginalMessageId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.original_message_id);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -220,12 +220,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendBounceInput, config: *a
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !SendBounceOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendBounceOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -244,7 +244,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "MessageId")) {
-                    result.message_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.message_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -257,11 +257,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

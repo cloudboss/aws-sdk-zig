@@ -92,7 +92,7 @@ class RestJsonProtocol : ProtocolGenerator {
         val bindings = resolveInputBindings(ctx)
 
         writer.openBlock(
-            "fn serializeRequest(alloc: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
+            "fn serializeRequest(allocator: std.mem.Allocator, input: \$L, config: *aws.Config) !aws.http.Request {",
             inputName,
         )
 
@@ -107,7 +107,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // Build endpoint
         writer.write(
-            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", alloc);",
+            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", allocator);",
             ctx.settings.packageName, ctx.settings.sdkId,
         )
         writer.blankLine()
@@ -147,7 +147,7 @@ class RestJsonProtocol : ProtocolGenerator {
             writer.write("request.query = query;")
         }
 
-        writer.write("try request.headers.put(alloc, \"Content-Type\", \"\$L\");", contentType())
+        writer.write("try request.headers.put(allocator, \"Content-Type\", \"\$L\");", contentType())
 
         // Set bound headers
         for ((memberName, memberShape) in bindings.headers) {
@@ -176,25 +176,25 @@ class RestJsonProtocol : ProtocolGenerator {
 
         when {
             zigType == "[]const u8" -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", \$L);", headerName, varName)
             }
             isEnum -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", @tagName(\$L));", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", @tagName(\$L));", headerName, varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
-                writer.write("try request.headers.put(alloc, \"\$L\", num_str);", headerName)
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", num_str);", headerName)
                 writer.closeBlock("}")
             }
             zigType == "bool" -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", if (\$L) \"true\" else \"false\");", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", if (\$L) \"true\" else \"false\");", headerName, varName)
             }
             targetShape is ListShape -> {
                 writeListHeaderPut(writer, ctx, targetShape, headerName, varName)
             }
             else -> {
-                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", \$L);", headerName, varName)
             }
         }
     }
@@ -208,29 +208,29 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.openBlock("{")
         writer.write("var header_buf: std.ArrayList(u8) = .{};")
         writer.openBlock("for (\$L) |item| {", varName)
-        writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(alloc, \", \");")
+        writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(allocator, \", \");")
 
         when {
             isElementEnum -> {
-                writer.write("try header_buf.appendSlice(alloc, @tagName(item));")
+                writer.write("try header_buf.appendSlice(allocator, @tagName(item));")
             }
             elementZigType == "[]const u8" -> {
-                writer.write("try header_buf.appendSlice(alloc, item);")
+                writer.write("try header_buf.appendSlice(allocator, item);")
             }
             elementZigType in listOf("i32", "i64", "i16", "i8") -> {
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{item}) catch \"\";")
-                writer.write("try header_buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{item}) catch \"\";")
+                writer.write("try header_buf.appendSlice(allocator, num_str);")
             }
             elementZigType == "bool" -> {
-                writer.write("try header_buf.appendSlice(alloc, if (item) \"true\" else \"false\");")
+                writer.write("try header_buf.appendSlice(allocator, if (item) \"true\" else \"false\");")
             }
             else -> {
-                writer.write("try header_buf.appendSlice(alloc, item);")
+                writer.write("try header_buf.appendSlice(allocator, item);")
             }
         }
 
         writer.closeBlock("}")
-        writer.write("try request.headers.put(alloc, \"\$L\", header_buf.items);", headerName)
+        writer.write("try request.headers.put(allocator, \"\$L\", header_buf.items);", headerName)
         writer.closeBlock("}")
     }
 
@@ -269,17 +269,17 @@ class RestJsonProtocol : ProtocolGenerator {
         for (part in parts) {
             when (part) {
                 is String -> {
-                    writer.write("try path_buf.appendSlice(alloc, \"\$L\");", part)
+                    writer.write("try path_buf.appendSlice(allocator, \"\$L\");", part)
                 }
                 is Pair<*, *> -> {
                     val memberName = part.first as String
                     val fieldName = NamingUtil.toFieldName(memberName)
-                    writer.write("try path_buf.appendSlice(alloc, input.\$L);", fieldName)
+                    writer.write("try path_buf.appendSlice(allocator, input.\$L);", fieldName)
                 }
             }
         }
 
-        writer.write("const path = try path_buf.toOwnedSlice(alloc);")
+        writer.write("const path = try path_buf.toOwnedSlice(allocator);")
     }
 
     private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings, staticQuery: String? = null) {
@@ -289,7 +289,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.write("var query_has_prev = false;")
 
         if (staticQuery != null) {
-            writer.write("try query_buf.appendSlice(alloc, \"\$L\");", staticQuery)
+            writer.write("try query_buf.appendSlice(allocator, \"\$L\");", staticQuery)
             writer.write("query_has_prev = true;")
         }
 
@@ -298,21 +298,21 @@ class RestJsonProtocol : ProtocolGenerator {
             val fieldName = NamingUtil.toFieldName(memberName)
 
             if (memberShape.isRequired) {
-                writer.write("if (query_has_prev) try query_buf.appendSlice(alloc, \"&\");")
-                writer.write("try query_buf.appendSlice(alloc, \"\$L=\");", queryKey)
+                writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+                writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
                 writeQueryValueAppend(writer, ctx, memberShape, "input.$fieldName")
                 writer.write("query_has_prev = true;")
             } else {
                 writer.openBlock("if (input.\$L) |v| {", fieldName)
-                writer.write("if (query_has_prev) try query_buf.appendSlice(alloc, \"&\");")
-                writer.write("try query_buf.appendSlice(alloc, \"\$L=\");", queryKey)
+                writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+                writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
                 writeQueryValueAppend(writer, ctx, memberShape, "v")
                 writer.write("query_has_prev = true;")
                 writer.closeBlock("}")
             }
         }
 
-        writer.write("const query = try query_buf.toOwnedSlice(alloc);")
+        writer.write("const query = try query_buf.toOwnedSlice(allocator);")
         writer.blankLine()
     }
 
@@ -328,22 +328,22 @@ class RestJsonProtocol : ProtocolGenerator {
 
         when {
             zigType == "[]const u8" -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L);", varName)
             }
             isEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(\$L));", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(\$L));", varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
-                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
-                writer.write("try query_buf.appendSlice(alloc, num_str);")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";", varName)
+                writer.write("try query_buf.appendSlice(allocator, num_str);")
                 writer.closeBlock("}")
             }
             zigType == "bool" -> {
-                writer.write("try query_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", varName)
+                writer.write("try query_buf.appendSlice(allocator, if (\$L) \"true\" else \"false\");", varName)
             }
             else -> {
-                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L);", varName)
             }
         }
     }
@@ -366,10 +366,10 @@ class RestJsonProtocol : ProtocolGenerator {
             } else {
                 // Structure/union payload: serialize the member as JSON
                 if (memberShape.isRequired) {
-                    writer.write("const body = try aws.json.jsonStringify(input.\$L, alloc);", fieldName)
+                    writer.write("const body = try aws.json.jsonStringify(input.\$L, allocator);", fieldName)
                 } else {
                     writer.write(
-                        "const body: ?[]const u8 = if (input.\$L) |v| try aws.json.jsonStringify(v, alloc) else null;",
+                        "const body: ?[]const u8 = if (input.\$L) |v| try aws.json.jsonStringify(v, allocator) else null;",
                         fieldName,
                     )
                 }
@@ -387,30 +387,30 @@ class RestJsonProtocol : ProtocolGenerator {
 
         writer.write("var body_buf: std.ArrayList(u8) = .{};")
         writer.write("var has_prev = false;")
-        writer.write("try body_buf.appendSlice(alloc, \"{\");")
+        writer.write("try body_buf.appendSlice(allocator, \"{\");")
         writer.blankLine()
 
         for ((memberName, memberShape) in bindings.bodyMembers) {
             val fieldName = NamingUtil.toFieldName(memberName)
 
             if (memberShape.isRequired) {
-                writer.write("if (has_prev) try body_buf.appendSlice(alloc, \",\");")
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", memberName)
-                writer.write("try aws.json.writeValue(@TypeOf(input.\$L), input.\$L, alloc, &body_buf);", fieldName, fieldName)
+                writer.write("if (has_prev) try body_buf.appendSlice(allocator, \",\");")
+                writer.write("try body_buf.appendSlice(allocator, \"\\\"\$L\\\":\");", memberName)
+                writer.write("try aws.json.writeValue(@TypeOf(input.\$L), input.\$L, allocator, &body_buf);", fieldName, fieldName)
                 writer.write("has_prev = true;")
             } else {
                 writer.openBlock("if (input.\$L) |v| {", fieldName)
-                writer.write("if (has_prev) try body_buf.appendSlice(alloc, \",\");")
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", memberName)
-                writer.write("try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);")
+                writer.write("if (has_prev) try body_buf.appendSlice(allocator, \",\");")
+                writer.write("try body_buf.appendSlice(allocator, \"\\\"\$L\\\":\");", memberName)
+                writer.write("try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);")
                 writer.write("has_prev = true;")
                 writer.closeBlock("}")
             }
         }
 
         writer.blankLine()
-        writer.write("try body_buf.appendSlice(alloc, \"}\");")
-        writer.write("const body = try body_buf.toOwnedSlice(alloc);")
+        writer.write("try body_buf.appendSlice(allocator, \"}\");")
+        writer.write("const body = try body_buf.toOwnedSlice(allocator);")
         writer.blankLine()
     }
 
@@ -419,7 +419,7 @@ class RestJsonProtocol : ProtocolGenerator {
         val bindings = resolveOutputBindings(ctx)
 
         writer.openBlock(
-            "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !\$L {",
             outputName,
         )
 
@@ -437,7 +437,7 @@ class RestJsonProtocol : ProtocolGenerator {
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
         if (!allocUsed) {
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
         }
 
         if (!resultMutated) {
@@ -457,10 +457,10 @@ class RestJsonProtocol : ProtocolGenerator {
 
                 if (zigType == "[]const u8") {
                     if (memberShape.isRequired) {
-                        writer.write("result.\$L = try alloc.dupe(u8, body);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, body);", fieldName)
                     } else {
                         writer.openBlock("if (body.len > 0) {")
-                        writer.write("result.\$L = try alloc.dupe(u8, body);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, body);", fieldName)
                         writer.closeBlock("}")
                     }
                 } else {
@@ -468,7 +468,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 }
             } else if (hasBodyMembers) {
                 writer.openBlock("if (body.len > 0) {")
-                writer.write("result = try aws.json.parseJsonObject(\$L, body, alloc);", outputName)
+                writer.write("result = try aws.json.parseJsonObject(\$L, body, allocator);", outputName)
                 writer.closeBlock("}")
             } else {
                 writer.write("_ = body;")
@@ -511,7 +511,7 @@ class RestJsonProtocol : ProtocolGenerator {
             writer.openBlock("if (headers.get(\"\$L\")) |value| {", headerName)
             when {
                 zigType == "[]const u8" -> {
-                    writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                    writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                 }
                 isEnum -> {
                     val typeName = ctx.resolveBaseZigType(targetShape)
@@ -524,7 +524,7 @@ class RestJsonProtocol : ProtocolGenerator {
                     writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
                 }
                 else -> {
-                    writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                    writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                 }
             }
             writer.closeBlock("}")
@@ -536,17 +536,17 @@ class RestJsonProtocol : ProtocolGenerator {
         val bindings = resolveOutputBindings(ctx)
 
         writer.openBlock(
-            "fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !\$L {",
             outputName,
         )
 
-        // Check if alloc is actually used (only string headers need it)
+        // Check if allocator is actually used (only string headers need it)
         val allocUsedInStreaming = bindings.headers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
         if (!allocUsedInStreaming) {
-            writer.write("_ = alloc;")
+            writer.write("_ = allocator;")
         }
 
         writer.write("var result: \$L = .{};", outputName)
@@ -581,7 +581,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.openBlock("if (stream_resp.headers.get(\"\$L\")) |value| {", headerName)
                 when {
                     zigType == "[]const u8" -> {
-                        writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                     }
                     isEnum -> {
                         val typeName = ctx.resolveBaseZigType(targetShape)
@@ -594,7 +594,7 @@ class RestJsonProtocol : ProtocolGenerator {
                         writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
                     }
                     else -> {
-                        writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                        writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                     }
                 }
                 writer.closeBlock("}")
@@ -611,7 +611,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         // Error parsing is the same as AWS JSON: __type field or x-amzn-ErrorType header
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
+        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
@@ -624,7 +624,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // Extract error message
         writer.write("const error_message = aws.json.findJsonValue(body, \"message\") orelse aws.json.findJsonValue(body, \"Message\") orelse \"\";")
-        writer.write("var arena = std.heap.ArenaAllocator.init(alloc);")
+        writer.write("var arena = std.heap.ArenaAllocator.init(allocator);")
         writer.write("errdefer arena.deinit();")
         writer.write("const arena_alloc = arena.allocator();")
         writer.write("const owned_message = try arena_alloc.dupe(u8, error_message);")

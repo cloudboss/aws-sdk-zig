@@ -140,17 +140,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCapacity
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityReservationUsageInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: GetCapacityReservationUsageInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -158,23 +158,23 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityReservationUsage
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=GetCapacityReservationUsage&Version=2016-11-15");
-    try body_buf.appendSlice(alloc, "&CapacityReservationId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.capacity_reservation_id);
+    try body_buf.appendSlice(allocator, "Action=GetCapacityReservationUsage&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "&CapacityReservationId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.capacity_reservation_id);
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.max_results) |v| {
-        try body_buf.appendSlice(alloc, "&MaxResults=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&MaxResults=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.next_token) |v| {
-        try body_buf.appendSlice(alloc, "&NextToken=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NextToken=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -182,12 +182,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityReservationUsage
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCapacityReservationUsageOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCapacityReservationUsageOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -206,19 +206,19 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "availableInstanceCount")) {
                     result.available_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityReservationId")) {
-                    result.capacity_reservation_id = try alloc.dupe(u8, try reader.readElementText());
+                    result.capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.instance_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceUsageSet")) {
-                    result.instance_usages = try serde.deserializeInstanceUsageSet(&reader, alloc, "item");
+                    result.instance_usages = try serde.deserializeInstanceUsageSet(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "interruptible")) {
                     result.interruptible = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "interruptibleCapacityAllocation")) {
-                    result.interruptible_capacity_allocation = try serde.deserializeInterruptibleCapacityAllocation(&reader, alloc);
+                    result.interruptible_capacity_allocation = try serde.deserializeInterruptibleCapacityAllocation(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "interruptionInfo")) {
-                    result.interruption_info = try serde.deserializeInterruptionInfo(&reader, alloc);
+                    result.interruption_info = try serde.deserializeInterruptionInfo(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "nextToken")) {
-                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                    result.next_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(CapacityReservationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalInstanceCount")) {
@@ -235,11 +235,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

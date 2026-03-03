@@ -245,17 +245,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssumeRoleW
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithSAMLInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sts", "STS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleWithSAMLInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sts", "STS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -263,14 +263,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithSAMLInput, co
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=AssumeRoleWithSAML&Version=2011-06-15");
+    try body_buf.appendSlice(allocator, "Action=AssumeRoleWithSAML&Version=2011-06-15");
     if (input.duration_seconds) |v| {
-        try body_buf.appendSlice(alloc, "&DurationSeconds=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&DurationSeconds=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.policy) |v| {
-        try body_buf.appendSlice(alloc, "&Policy=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Policy=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.policy_arns) |list| {
         for (list, 0..) |item, idx| {
@@ -278,21 +278,21 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithSAMLInput, co
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyArns.member.{d}.arn=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
+                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.arn) |fv_1| {
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
         }
     }
-    try body_buf.appendSlice(alloc, "&PrincipalArn=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.principal_arn);
-    try body_buf.appendSlice(alloc, "&RoleArn=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.role_arn);
-    try body_buf.appendSlice(alloc, "&SAMLAssertion=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.saml_assertion);
+    try body_buf.appendSlice(allocator, "&PrincipalArn=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.principal_arn);
+    try body_buf.appendSlice(allocator, "&RoleArn=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.role_arn);
+    try body_buf.appendSlice(allocator, "&SAMLAssertion=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.saml_assertion);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -300,12 +300,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithSAMLInput, co
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssumeRoleWithSAMLOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssumeRoleWithSAMLOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -324,23 +324,23 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AssumedRoleUser")) {
-                    result.assumed_role_user = try serde.deserializeAssumedRoleUser(&reader, alloc);
+                    result.assumed_role_user = try serde.deserializeAssumedRoleUser(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "Audience")) {
-                    result.audience = try alloc.dupe(u8, try reader.readElementText());
+                    result.audience = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Credentials")) {
-                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                    result.credentials = try serde.deserializeCredentials(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "Issuer")) {
-                    result.issuer = try alloc.dupe(u8, try reader.readElementText());
+                    result.issuer = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NameQualifier")) {
-                    result.name_qualifier = try alloc.dupe(u8, try reader.readElementText());
+                    result.name_qualifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
                     result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
-                    result.source_identity = try alloc.dupe(u8, try reader.readElementText());
+                    result.source_identity = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Subject")) {
-                    result.subject = try alloc.dupe(u8, try reader.readElementText());
+                    result.subject = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SubjectType")) {
-                    result.subject_type = try alloc.dupe(u8, try reader.readElementText());
+                    result.subject_type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -353,11 +353,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

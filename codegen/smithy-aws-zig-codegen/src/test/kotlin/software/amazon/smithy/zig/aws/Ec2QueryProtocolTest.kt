@@ -200,7 +200,7 @@ class Ec2QueryProtocolTest {
             op.contains("\"InvalidParameterException\""),
             "Missing error code matching for InvalidParameterException",
         )
-        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     // ---- Helper functions are present ----
@@ -375,8 +375,8 @@ class Ec2QueryProtocolTest {
         val op = files["create_instance.zig"]!!
 
         assertTrue(
-            op.contains("appendUrlEncoded(alloc, &body_buf, entry.value)") ||
-                op.contains("appendUrlEncoded(alloc, &body_buf, entry.key)"),
+            op.contains("appendUrlEncoded(allocator, &body_buf, entry.value)") ||
+                op.contains("appendUrlEncoded(allocator, &body_buf, entry.key)"),
             "Map serializer should URL-encode map entry values",
         )
     }

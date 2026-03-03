@@ -42,17 +42,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchPutSch
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: BatchPutScheduledUpdateGroupActionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("autoscaling", "Auto Scaling", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: BatchPutScheduledUpdateGroupActionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("autoscaling", "Auto Scaling", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -60,76 +60,76 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchPutScheduledUpdateGrou
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=BatchPutScheduledUpdateGroupAction&Version=2011-01-01");
-    try body_buf.appendSlice(alloc, "&AutoScalingGroupName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.auto_scaling_group_name);
+    try body_buf.appendSlice(allocator, "Action=BatchPutScheduledUpdateGroupAction&Version=2011-01-01");
+    try body_buf.appendSlice(allocator, "&AutoScalingGroupName=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.auto_scaling_group_name);
     for (input.scheduled_update_group_actions, 0..) |item, idx| {
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.DesiredCapacity=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.desired_capacity) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.EndTime=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.end_time) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.MaxSize=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.max_size) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.MinSize=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.min_size) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.Recurrence=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.recurrence) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.ScheduledActionName=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item.scheduled_action_name);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.scheduled_action_name);
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.StartTime=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.start_time) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ScheduledUpdateGroupActions.member.{d}.TimeZone=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
+            try body_buf.appendSlice(allocator, field_prefix);
             if (item.time_zone) |fv_1| {
-                try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -137,12 +137,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchPutScheduledUpdateGrou
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !BatchPutScheduledUpdateGroupActionOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchPutScheduledUpdateGroupActionOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -161,7 +161,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "FailedScheduledUpdateGroupActions")) {
-                    result.failed_scheduled_update_group_actions = try serde.deserializeFailedScheduledUpdateGroupActionRequests(&reader, alloc, "member");
+                    result.failed_scheduled_update_group_actions = try serde.deserializeFailedScheduledUpdateGroupActionRequests(allocator, &reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -174,11 +174,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

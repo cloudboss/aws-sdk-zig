@@ -103,17 +103,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyImage
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyImageAttributeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ec2", "EC2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -121,27 +121,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyImageAttribute&Version=2016-11-15");
+    try body_buf.appendSlice(allocator, "Action=ModifyImageAttribute&Version=2016-11-15");
     if (input.attribute) |v| {
-        try body_buf.appendSlice(alloc, "&Attribute=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Attribute=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.description) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&Description.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&Description.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.dry_run) |v| {
-        try body_buf.appendSlice(alloc, "&DryRun=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(alloc, "&ImageId=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.image_id);
+    try body_buf.appendSlice(allocator, "&ImageId=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.image_id);
     if (input.imds_support) |v| {
         if (v.value) |sv| {
-            try body_buf.appendSlice(alloc, "&ImdsSupport.Value=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ImdsSupport.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.launch_permission) |v| {
@@ -151,33 +151,33 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.Group=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.OrganizationalUnitArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.organizational_unit_arn) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.OrganizationArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.organization_arn) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.UserId=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.user_id) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
             }
@@ -188,49 +188,49 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.Group=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.OrganizationalUnitArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.organizational_unit_arn) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.OrganizationArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.organization_arn) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.UserId=", .{n}) catch continue;
-                    try body_buf.appendSlice(alloc, field_prefix);
+                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.user_id) |fv_1| {
-                        try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
             }
         }
     }
     if (input.operation_type) |v| {
-        try body_buf.appendSlice(alloc, "&OperationType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try body_buf.appendSlice(allocator, "&OperationType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
     }
     if (input.organizational_unit_arns) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OrganizationalUnitArn.OrganizationalUnitArn.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.organization_arns) |list| {
@@ -238,8 +238,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OrganizationArn.OrganizationArn.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.product_codes) |list| {
@@ -247,8 +247,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProductCode.ProductCode.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.user_groups) |list| {
@@ -256,8 +256,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&UserGroup.UserGroup.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.user_ids) |list| {
@@ -265,16 +265,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&UserId.UserId.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.value) |v| {
-        try body_buf.appendSlice(alloc, "&Value=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&Value=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -282,26 +282,26 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyImageAttributeOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyImageAttributeOutput {
     _ = status;
     _ = headers;
     _ = body;
-    _ = alloc;
+    _ = allocator;
     const result: ModifyImageAttributeOutput = .{};
 
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

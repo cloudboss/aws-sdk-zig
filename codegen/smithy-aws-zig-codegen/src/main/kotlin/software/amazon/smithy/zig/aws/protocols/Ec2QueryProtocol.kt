@@ -16,12 +16,12 @@ class Ec2QueryProtocol : AwsQueryProtocol() {
     }
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
+        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
 
         writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
         writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
         writer.write("const request_id = aws.xml.findElement(body, \"RequestID\") orelse \"\";")
-        writer.write("var arena = std.heap.ArenaAllocator.init(alloc);")
+        writer.write("var arena = std.heap.ArenaAllocator.init(allocator);")
         writer.write("errdefer arena.deinit();")
         writer.write("const arena_alloc = arena.allocator();")
         writer.write("const owned_message = try arena_alloc.dupe(u8, error_message);")

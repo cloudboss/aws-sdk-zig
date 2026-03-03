@@ -341,17 +341,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyClust
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClusterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("redshift", "Redshift", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClusterInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("redshift", "Redshift", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -359,137 +359,137 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClusterInput, config:
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyCluster&Version=2012-12-01");
+    try body_buf.appendSlice(allocator, "Action=ModifyCluster&Version=2012-12-01");
     if (input.allow_version_upgrade) |v| {
-        try body_buf.appendSlice(alloc, "&AllowVersionUpgrade=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&AllowVersionUpgrade=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.automated_snapshot_retention_period) |v| {
-        try body_buf.appendSlice(alloc, "&AutomatedSnapshotRetentionPeriod=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&AutomatedSnapshotRetentionPeriod=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.availability_zone) |v| {
-        try body_buf.appendSlice(alloc, "&AvailabilityZone=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&AvailabilityZone=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.availability_zone_relocation) |v| {
-        try body_buf.appendSlice(alloc, "&AvailabilityZoneRelocation=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&AvailabilityZoneRelocation=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(alloc, "&ClusterIdentifier=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.cluster_identifier);
+    try body_buf.appendSlice(allocator, "&ClusterIdentifier=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.cluster_identifier);
     if (input.cluster_parameter_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&ClusterParameterGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ClusterParameterGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.cluster_security_groups) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ClusterSecurityGroups.ClusterSecurityGroupName.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.cluster_type) |v| {
-        try body_buf.appendSlice(alloc, "&ClusterType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ClusterType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.cluster_version) |v| {
-        try body_buf.appendSlice(alloc, "&ClusterVersion=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ClusterVersion=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.elastic_ip) |v| {
-        try body_buf.appendSlice(alloc, "&ElasticIp=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&ElasticIp=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.encrypted) |v| {
-        try body_buf.appendSlice(alloc, "&Encrypted=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&Encrypted=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.enhanced_vpc_routing) |v| {
-        try body_buf.appendSlice(alloc, "&EnhancedVpcRouting=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&EnhancedVpcRouting=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.extra_compute_for_automatic_optimization) |v| {
-        try body_buf.appendSlice(alloc, "&ExtraComputeForAutomaticOptimization=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&ExtraComputeForAutomaticOptimization=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.hsm_client_certificate_identifier) |v| {
-        try body_buf.appendSlice(alloc, "&HsmClientCertificateIdentifier=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&HsmClientCertificateIdentifier=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.hsm_configuration_identifier) |v| {
-        try body_buf.appendSlice(alloc, "&HsmConfigurationIdentifier=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&HsmConfigurationIdentifier=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.ip_address_type) |v| {
-        try body_buf.appendSlice(alloc, "&IpAddressType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&IpAddressType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.kms_key_id) |v| {
-        try body_buf.appendSlice(alloc, "&KmsKeyId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&KmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.maintenance_track_name) |v| {
-        try body_buf.appendSlice(alloc, "&MaintenanceTrackName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MaintenanceTrackName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.manage_master_password) |v| {
-        try body_buf.appendSlice(alloc, "&ManageMasterPassword=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&ManageMasterPassword=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.manual_snapshot_retention_period) |v| {
-        try body_buf.appendSlice(alloc, "&ManualSnapshotRetentionPeriod=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&ManualSnapshotRetentionPeriod=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.master_password_secret_kms_key_id) |v| {
-        try body_buf.appendSlice(alloc, "&MasterPasswordSecretKmsKeyId=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MasterPasswordSecretKmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.master_user_password) |v| {
-        try body_buf.appendSlice(alloc, "&MasterUserPassword=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MasterUserPassword=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.multi_az) |v| {
-        try body_buf.appendSlice(alloc, "&MultiAZ=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&MultiAZ=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.new_cluster_identifier) |v| {
-        try body_buf.appendSlice(alloc, "&NewClusterIdentifier=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NewClusterIdentifier=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.node_type) |v| {
-        try body_buf.appendSlice(alloc, "&NodeType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NodeType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.number_of_nodes) |v| {
-        try body_buf.appendSlice(alloc, "&NumberOfNodes=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&NumberOfNodes=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.port) |v| {
-        try body_buf.appendSlice(alloc, "&Port=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&Port=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.preferred_maintenance_window) |v| {
-        try body_buf.appendSlice(alloc, "&PreferredMaintenanceWindow=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PreferredMaintenanceWindow=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.publicly_accessible) |v| {
-        try body_buf.appendSlice(alloc, "&PubliclyAccessible=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&PubliclyAccessible=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.vpc_security_group_ids) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&VpcSecurityGroupIds.VpcSecurityGroupId.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -497,12 +497,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClusterInput, config:
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyClusterOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyClusterOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -521,7 +521,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Cluster")) {
-                    result.cluster = try serde.deserializeCluster(&reader, alloc);
+                    result.cluster = try serde.deserializeCluster(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -534,11 +534,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

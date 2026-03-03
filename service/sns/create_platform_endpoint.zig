@@ -57,17 +57,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePlatf
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: CreatePlatformEndpointInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sns", "SNS", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: CreatePlatformEndpointInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sns", "SNS", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -75,34 +75,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePlatformEndpointInput
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=CreatePlatformEndpoint&Version=2010-03-31");
+    try body_buf.appendSlice(allocator, "Action=CreatePlatformEndpoint&Version=2010-03-31");
     if (input.attributes) |entries| {
         for (entries, 0..) |entry, idx| {
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
                 const key_prefix = std.fmt.bufPrint(&prefix_buf, "&Attributes.entry.{d}.key=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, key_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);
+                try body_buf.appendSlice(allocator, key_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, entry.key);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const val_prefix = std.fmt.bufPrint(&prefix_buf, "&Attributes.entry.{d}.value=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, val_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value);
+                try body_buf.appendSlice(allocator, val_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value);
             }
         }
     }
     if (input.custom_user_data) |v| {
-        try body_buf.appendSlice(alloc, "&CustomUserData=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&CustomUserData=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(alloc, "&PlatformApplicationArn=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.platform_application_arn);
-    try body_buf.appendSlice(alloc, "&Token=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.token);
+    try body_buf.appendSlice(allocator, "&PlatformApplicationArn=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.platform_application_arn);
+    try body_buf.appendSlice(allocator, "&Token=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.token);
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -110,12 +110,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePlatformEndpointInput
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreatePlatformEndpointOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePlatformEndpointOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -134,7 +134,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EndpointArn")) {
-                    result.endpoint_arn = try alloc.dupe(u8, try reader.readElementText());
+                    result.endpoint_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -147,11 +147,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

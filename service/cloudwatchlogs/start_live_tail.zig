@@ -98,7 +98,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
         const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
         defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+            d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
         }
         return error.ServiceError;
     }
@@ -110,14 +110,14 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
     return .{ .response_stream = response_stream };
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: StartLiveTailInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatchlogs", "CloudWatch Logs", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: StartLiveTailInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudwatchlogs", "CloudWatch Logs", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const body = try aws.json.jsonStringify(input, alloc);
+    const body = try aws.json.jsonStringify(input, allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -125,13 +125,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartLiveTailInput, config:
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
-    try request.headers.put(alloc, "X-Amz-Target", "Logs_20140328.StartLiveTail");
+    try request.headers.put(allocator, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(allocator, "X-Amz-Target", "Logs_20140328.StartLiveTail");
 
     return request;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -140,7 +140,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);

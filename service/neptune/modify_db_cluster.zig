@@ -240,17 +240,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBClu
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
     return result;
 }
 
-fn serializeRequest(alloc: std.mem.Allocator, input: ModifyDBClusterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("neptune", "Neptune", alloc);
+fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBClusterInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("neptune", "Neptune", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -258,18 +258,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyDBClusterInput, confi
 
     var body_buf: std.ArrayList(u8) = .{};
 
-    try body_buf.appendSlice(alloc, "Action=ModifyDBCluster&Version=2014-10-31");
+    try body_buf.appendSlice(allocator, "Action=ModifyDBCluster&Version=2014-10-31");
     if (input.allow_major_version_upgrade) |v| {
-        try body_buf.appendSlice(alloc, "&AllowMajorVersionUpgrade=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&AllowMajorVersionUpgrade=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.apply_immediately) |v| {
-        try body_buf.appendSlice(alloc, "&ApplyImmediately=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&ApplyImmediately=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.backup_retention_period) |v| {
-        try body_buf.appendSlice(alloc, "&BackupRetentionPeriod=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&BackupRetentionPeriod=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.cloudwatch_logs_export_configuration) |v| {
         if (v.disable_log_types) |list_d0| {
@@ -277,8 +277,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyDBClusterInput, confi
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CloudwatchLogsExportConfiguration.DisableLogTypes.member.{d}=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
         if (v.enable_log_types) |list_d0| {
@@ -286,86 +286,86 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyDBClusterInput, confi
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CloudwatchLogsExportConfiguration.EnableLogTypes.member.{d}=", .{n}) catch continue;
-                try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
     }
     if (input.copy_tags_to_snapshot) |v| {
-        try body_buf.appendSlice(alloc, "&CopyTagsToSnapshot=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(alloc, "&DBClusterIdentifier=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.db_cluster_identifier);
+    try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_cluster_identifier);
     if (input.db_cluster_parameter_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&DBClusterParameterGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DBClusterParameterGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.db_instance_parameter_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&DBInstanceParameterGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&DBInstanceParameterGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.deletion_protection) |v| {
-        try body_buf.appendSlice(alloc, "&DeletionProtection=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&DeletionProtection=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.enable_iam_database_authentication) |v| {
-        try body_buf.appendSlice(alloc, "&EnableIAMDatabaseAuthentication=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "&EnableIAMDatabaseAuthentication=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.engine_version) |v| {
-        try body_buf.appendSlice(alloc, "&EngineVersion=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&EngineVersion=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.master_user_password) |v| {
-        try body_buf.appendSlice(alloc, "&MasterUserPassword=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&MasterUserPassword=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.new_db_cluster_identifier) |v| {
-        try body_buf.appendSlice(alloc, "&NewDBClusterIdentifier=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&NewDBClusterIdentifier=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.option_group_name) |v| {
-        try body_buf.appendSlice(alloc, "&OptionGroupName=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&OptionGroupName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.port) |v| {
-        try body_buf.appendSlice(alloc, "&Port=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try body_buf.appendSlice(allocator, "&Port=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.preferred_backup_window) |v| {
-        try body_buf.appendSlice(alloc, "&PreferredBackupWindow=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PreferredBackupWindow=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.preferred_maintenance_window) |v| {
-        try body_buf.appendSlice(alloc, "&PreferredMaintenanceWindow=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&PreferredMaintenanceWindow=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.serverless_v2_scaling_configuration) |v| {
         if (v.max_capacity) |sv| {
-            try body_buf.appendSlice(alloc, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
         if (v.min_capacity) |sv| {
-            try body_buf.appendSlice(alloc, "&ServerlessV2ScalingConfiguration.MinCapacity=");
-            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
+            try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MinCapacity=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
     }
     if (input.storage_type) |v| {
-        try body_buf.appendSlice(alloc, "&StorageType=");
-        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+        try body_buf.appendSlice(allocator, "&StorageType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.vpc_security_group_ids) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&VpcSecurityGroupIds.VpcSecurityGroupId.{d}=", .{n}) catch continue;
-            try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
 
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
@@ -373,12 +373,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyDBClusterInput, confi
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+    try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyDBClusterOutput {
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyDBClusterOutput {
     _ = status;
     _ = headers;
     var reader = aws.xml.Reader.init(body);
@@ -397,7 +397,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DBCluster")) {
-                    result.db_cluster = try serde.deserializeDBCluster(&reader, alloc);
+                    result.db_cluster = try serde.deserializeDBCluster(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -410,11 +410,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(alloc);
+    var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
