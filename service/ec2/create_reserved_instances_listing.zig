@@ -82,7 +82,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReservedInstances
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.item.{d}.CurrencyCode=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.currency_code) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {

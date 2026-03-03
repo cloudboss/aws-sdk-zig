@@ -52,7 +52,7 @@ pub const ClusterRunningWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "RUNNING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "RUNNING")) {
                         return .success;
                     }
                 }
@@ -61,7 +61,7 @@ pub const ClusterRunningWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "WAITING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "WAITING")) {
                         return .success;
                     }
                 }
@@ -70,7 +70,7 @@ pub const ClusterRunningWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "TERMINATING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "TERMINATING")) {
                         return .failure;
                     }
                 }
@@ -79,7 +79,7 @@ pub const ClusterRunningWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "TERMINATED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "TERMINATED")) {
                         return .failure;
                     }
                 }
@@ -88,7 +88,7 @@ pub const ClusterRunningWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "TERMINATED_WITH_ERRORS")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "TERMINATED_WITH_ERRORS")) {
                         return .failure;
                     }
                 }
@@ -144,7 +144,7 @@ pub const ClusterTerminatedWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "TERMINATED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "TERMINATED")) {
                         return .success;
                     }
                 }
@@ -153,7 +153,7 @@ pub const ClusterTerminatedWaiter = struct {
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "TERMINATED_WITH_ERRORS")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "TERMINATED_WITH_ERRORS")) {
                         return .failure;
                     }
                 }
@@ -209,7 +209,7 @@ pub const StepCompleteWaiter = struct {
         if (output.step) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "COMPLETED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "COMPLETED")) {
                         return .success;
                     }
                 }
@@ -218,7 +218,7 @@ pub const StepCompleteWaiter = struct {
         if (output.step) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "FAILED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "FAILED")) {
                         return .failure;
                     }
                 }
@@ -227,7 +227,7 @@ pub const StepCompleteWaiter = struct {
         if (output.step) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.state) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "CANCELLED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "CANCELLED")) {
                         return .failure;
                     }
                 }

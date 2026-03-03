@@ -195,7 +195,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotInstancesInp
     }
     if (input.instance_interruption_behavior) |v| {
         try body_buf.appendSlice(allocator, "&InstanceInterruptionBehavior=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.launch_group) |v| {
         try body_buf.appendSlice(allocator, "&LaunchGroup=");
@@ -319,7 +319,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotInstancesInp
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.item.{d}.Ebs.VolumeType=", .{n}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_1.volume_type) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                 }
@@ -361,7 +361,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotInstancesInp
         }
         if (v.instance_type) |sv| {
             try body_buf.appendSlice(allocator, "&LaunchSpecification.InstanceType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.kernel_id) |sv| {
             try body_buf.appendSlice(allocator, "&LaunchSpecification.KernelId=");
@@ -648,7 +648,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotInstancesInp
             }
             if (sv.tenancy) |sv2| {
                 try body_buf.appendSlice(allocator, "&LaunchSpecification.Placement.Tenancy=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
         }
         if (v.ramdisk_id) |sv| {
@@ -694,7 +694,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotInstancesInp
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -722,7 +722,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotInstancesInp
     }
     if (input.@"type") |v| {
         try body_buf.appendSlice(allocator, "&Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.valid_from) |v| {
         try body_buf.appendSlice(allocator, "&ValidFrom=");

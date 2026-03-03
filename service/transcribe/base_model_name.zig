@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const BaseModelName = enum {
     narrow_band,
     wide_band,
 
     pub const json_field_names = .{
-        .narrow_band = "NARROW_BAND",
-        .wide_band = "WIDE_BAND",
+        .narrow_band = "NarrowBand",
+        .wide_band = "WideBand",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .narrow_band => "NarrowBand",
+            .wide_band => "WideBand",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

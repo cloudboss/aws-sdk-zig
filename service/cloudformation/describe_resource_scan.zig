@@ -181,7 +181,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ResourceScanStatus, try reader.readElementText());
+                    result.status = ResourceScanStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusReason")) {
                     result.status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {

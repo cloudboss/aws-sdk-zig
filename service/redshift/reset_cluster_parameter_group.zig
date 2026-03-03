@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetClusterParameterGr
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Parameters.Parameter.{d}.ApplyType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.apply_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {

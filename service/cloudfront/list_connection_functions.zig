@@ -83,7 +83,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectionFunctions
     }
     if (input.stage) |v| {
         try body_buf.appendSlice(allocator, "<Stage>");
-        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, v.wireName());
         try body_buf.appendSlice(allocator, "</Stage>");
     }
     try body_buf.appendSlice(allocator, "</ListConnectionFunctionsRequest>");

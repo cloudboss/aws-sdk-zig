@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RecoveryInstanceDataReplicationInitiationStepName = enum {
     link_failback_client_with_recovery_instance,
     complete_volume_mapping,
@@ -38,4 +40,36 @@ pub const RecoveryInstanceDataReplicationInitiationStepName = enum {
         .connect_agent_to_replication_server = "CONNECT_AGENT_TO_REPLICATION_SERVER",
         .start_data_transfer = "START_DATA_TRANSFER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .link_failback_client_with_recovery_instance => "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE",
+            .complete_volume_mapping => "COMPLETE_VOLUME_MAPPING",
+            .establish_recovery_instance_communication => "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION",
+            .download_replication_software_to_failback_client => "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT",
+            .configure_replication_software => "CONFIGURE_REPLICATION_SOFTWARE",
+            .pair_agent_with_replication_software => "PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
+            .establish_agent_replicator_software_communication => "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
+            .wait => "WAIT",
+            .create_security_group => "CREATE_SECURITY_GROUP",
+            .launch_replication_server => "LAUNCH_REPLICATION_SERVER",
+            .boot_replication_server => "BOOT_REPLICATION_SERVER",
+            .authenticate_with_service => "AUTHENTICATE_WITH_SERVICE",
+            .download_replication_software => "DOWNLOAD_REPLICATION_SOFTWARE",
+            .create_staging_disks => "CREATE_STAGING_DISKS",
+            .attach_staging_disks => "ATTACH_STAGING_DISKS",
+            .pair_replication_server_with_agent => "PAIR_REPLICATION_SERVER_WITH_AGENT",
+            .connect_agent_to_replication_server => "CONNECT_AGENT_TO_REPLICATION_SERVER",
+            .start_data_transfer => "START_DATA_TRANSFER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

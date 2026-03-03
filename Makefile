@@ -5,7 +5,7 @@ DIR_OUT = _output
 ZIG_VERSION = 0.15.2
 GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = alpine:3.21
-LOCALSTACK_IMG = localstack/localstack:4.3.0
+LOCALSTACK_IMG = localstack/localstack:4.14.0
 
 AWS_MODELS_COMMIT = fc44394485733bfdbe094a708e4b3963d31bd75d
 

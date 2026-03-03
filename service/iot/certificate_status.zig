@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CertificateStatus = enum {
     active,
     inactive,
@@ -14,4 +16,24 @@ pub const CertificateStatus = enum {
         .register_inactive = "REGISTER_INACTIVE",
         .pending_activation = "PENDING_ACTIVATION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .active => "ACTIVE",
+            .inactive => "INACTIVE",
+            .revoked => "REVOKED",
+            .pending_transfer => "PENDING_TRANSFER",
+            .register_inactive => "REGISTER_INACTIVE",
+            .pending_activation => "PENDING_ACTIVATION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

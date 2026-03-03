@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetAlarmStateInput, con
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&StateValue=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.state_value));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.state_value.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

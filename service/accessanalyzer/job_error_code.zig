@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const JobErrorCode = enum {
     authorization_error,
     resource_not_found_error,
@@ -10,4 +12,22 @@ pub const JobErrorCode = enum {
         .service_quota_exceeded_error = "SERVICE_QUOTA_EXCEEDED_ERROR",
         .service_error = "SERVICE_ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .authorization_error => "AUTHORIZATION_ERROR",
+            .resource_not_found_error => "RESOURCE_NOT_FOUND_ERROR",
+            .service_quota_exceeded_error => "SERVICE_QUOTA_EXCEEDED_ERROR",
+            .service_error => "SERVICE_ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const LimitName = enum {
     products_per_account,
     data_sets_per_account,
@@ -31,35 +33,79 @@ pub const LimitName = enum {
     pending_data_grants_per_consumer,
 
     pub const json_field_names = .{
-        .products_per_account = "Products_per_account",
-        .data_sets_per_account = "Data_sets_per_account",
-        .data_sets_per_product = "Data_sets_per_product",
-        .revisions_per_data_set = "Revisions_per_data_set",
-        .assets_per_revision = "Assets_per_revision",
-        .assets_per_import_job_from_amazon_s3 = "Assets_per_import_job_from_Amazon_S3",
-        .asset_per_export_job_from_amazon_s3 = "Asset_per_export_job_from_Amazon_S3",
-        .asset_size_in_gb = "Asset_size_in_GB",
-        .concurrent_in_progress_jobs_to_export_assets_to_amazon_s3 = "Concurrent_in_progress_jobs_to_export_assets_to_Amazon_S3",
-        .concurrent_in_progress_jobs_to_export_assets_to_a_signed_url = "Concurrent_in_progress_jobs_to_export_assets_to_a_signed_URL",
-        .concurrent_in_progress_jobs_to_import_assets_from_amazon_s3 = "Concurrent_in_progress_jobs_to_import_assets_from_Amazon_S3",
-        .concurrent_in_progress_jobs_to_import_assets_from_a_signed_url = "Concurrent_in_progress_jobs_to_import_assets_from_a_signed_URL",
-        .concurrent_in_progress_jobs_to_export_revisions_to_amazon_s3 = "Concurrent_in_progress_jobs_to_export_revisions_to_Amazon_S3",
-        .event_actions_per_account = "Event_actions_per_account",
-        .auto_export_event_actions_per_data_set = "Auto_export_event_actions_per_data_set",
-        .amazon_redshift_datashare_assets_per_import_job_from_redshift = "Amazon_Redshift_datashare_assets_per_import_job_from_Redshift",
-        .concurrent_in_progress_jobs_to_import_assets_from_amazon_redshift_datashares = "Concurrent_in_progress_jobs_to_import_assets_from_Amazon_Redshift_datashares",
-        .revisions_per_amazon_redshift_datashare_data_set = "Revisions_per_Amazon_Redshift_datashare_data_set",
-        .amazon_redshift_datashare_assets_per_revision = "Amazon_Redshift_datashare_assets_per_revision",
-        .concurrent_in_progress_jobs_to_import_assets_from_an_api_gateway_api = "Concurrent_in_progress_jobs_to_import_assets_from_an_API_Gateway_API",
-        .amazon_api_gateway_api_assets_per_revision = "Amazon_API_Gateway_API_assets_per_revision",
-        .revisions_per_amazon_api_gateway_api_data_set = "Revisions_per_Amazon_API_Gateway_API_data_set",
-        .concurrent_in_progress_jobs_to_import_assets_from_an_aws_lake_formation_tag_policy = "Concurrent_in_progress_jobs_to_import_assets_from_an_AWS_Lake_Formation_tag_policy",
-        .aws_lake_formation_data_permission_assets_per_revision = "AWS_Lake_Formation_data_permission_assets_per_revision",
-        .revisions_per_aws_lake_formation_data_permission_data_set = "Revisions_per_AWS_Lake_Formation_data_permission_data_set",
-        .revisions_per_amazon_s3_data_access_data_set = "Revisions_per_Amazon_S3_data_access_data_set",
-        .amazon_s3_data_access_assets_per_revision = "Amazon_S3_data_access_assets_per_revision",
-        .concurrent_in_progress_jobs_to_create_amazon_s3_data_access_assets_from_s3_buckets = "Concurrent_in_progress_jobs_to_create_Amazon_S3_data_access_assets_from_S3_buckets",
-        .active_and_pending_data_grants = "Active_and_pending_data_grants",
-        .pending_data_grants_per_consumer = "Pending_data_grants_per_consumer",
+        .products_per_account = "Products per account",
+        .data_sets_per_account = "Data sets per account",
+        .data_sets_per_product = "Data sets per product",
+        .revisions_per_data_set = "Revisions per data set",
+        .assets_per_revision = "Assets per revision",
+        .assets_per_import_job_from_amazon_s3 = "Assets per import job from Amazon S3",
+        .asset_per_export_job_from_amazon_s3 = "Asset per export job from Amazon S3",
+        .asset_size_in_gb = "Asset size in GB",
+        .concurrent_in_progress_jobs_to_export_assets_to_amazon_s3 = "Concurrent in progress jobs to export assets to Amazon S3",
+        .concurrent_in_progress_jobs_to_export_assets_to_a_signed_url = "Concurrent in progress jobs to export assets to a signed URL",
+        .concurrent_in_progress_jobs_to_import_assets_from_amazon_s3 = "Concurrent in progress jobs to import assets from Amazon S3",
+        .concurrent_in_progress_jobs_to_import_assets_from_a_signed_url = "Concurrent in progress jobs to import assets from a signed URL",
+        .concurrent_in_progress_jobs_to_export_revisions_to_amazon_s3 = "Concurrent in progress jobs to export revisions to Amazon S3",
+        .event_actions_per_account = "Event actions per account",
+        .auto_export_event_actions_per_data_set = "Auto export event actions per data set",
+        .amazon_redshift_datashare_assets_per_import_job_from_redshift = "Amazon Redshift datashare assets per import job from Redshift",
+        .concurrent_in_progress_jobs_to_import_assets_from_amazon_redshift_datashares = "Concurrent in progress jobs to import assets from Amazon Redshift datashares",
+        .revisions_per_amazon_redshift_datashare_data_set = "Revisions per Amazon Redshift datashare data set",
+        .amazon_redshift_datashare_assets_per_revision = "Amazon Redshift datashare assets per revision",
+        .concurrent_in_progress_jobs_to_import_assets_from_an_api_gateway_api = "Concurrent in progress jobs to import assets from an API Gateway API",
+        .amazon_api_gateway_api_assets_per_revision = "Amazon API Gateway API assets per revision",
+        .revisions_per_amazon_api_gateway_api_data_set = "Revisions per Amazon API Gateway API data set",
+        .concurrent_in_progress_jobs_to_import_assets_from_an_aws_lake_formation_tag_policy = "Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy",
+        .aws_lake_formation_data_permission_assets_per_revision = "AWS Lake Formation data permission assets per revision",
+        .revisions_per_aws_lake_formation_data_permission_data_set = "Revisions per AWS Lake Formation data permission data set",
+        .revisions_per_amazon_s3_data_access_data_set = "Revisions per Amazon S3 data access data set",
+        .amazon_s3_data_access_assets_per_revision = "Amazon S3 data access assets per revision",
+        .concurrent_in_progress_jobs_to_create_amazon_s3_data_access_assets_from_s3_buckets = "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets",
+        .active_and_pending_data_grants = "Active and pending data grants",
+        .pending_data_grants_per_consumer = "Pending data grants per consumer",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .products_per_account => "Products per account",
+            .data_sets_per_account => "Data sets per account",
+            .data_sets_per_product => "Data sets per product",
+            .revisions_per_data_set => "Revisions per data set",
+            .assets_per_revision => "Assets per revision",
+            .assets_per_import_job_from_amazon_s3 => "Assets per import job from Amazon S3",
+            .asset_per_export_job_from_amazon_s3 => "Asset per export job from Amazon S3",
+            .asset_size_in_gb => "Asset size in GB",
+            .concurrent_in_progress_jobs_to_export_assets_to_amazon_s3 => "Concurrent in progress jobs to export assets to Amazon S3",
+            .concurrent_in_progress_jobs_to_export_assets_to_a_signed_url => "Concurrent in progress jobs to export assets to a signed URL",
+            .concurrent_in_progress_jobs_to_import_assets_from_amazon_s3 => "Concurrent in progress jobs to import assets from Amazon S3",
+            .concurrent_in_progress_jobs_to_import_assets_from_a_signed_url => "Concurrent in progress jobs to import assets from a signed URL",
+            .concurrent_in_progress_jobs_to_export_revisions_to_amazon_s3 => "Concurrent in progress jobs to export revisions to Amazon S3",
+            .event_actions_per_account => "Event actions per account",
+            .auto_export_event_actions_per_data_set => "Auto export event actions per data set",
+            .amazon_redshift_datashare_assets_per_import_job_from_redshift => "Amazon Redshift datashare assets per import job from Redshift",
+            .concurrent_in_progress_jobs_to_import_assets_from_amazon_redshift_datashares => "Concurrent in progress jobs to import assets from Amazon Redshift datashares",
+            .revisions_per_amazon_redshift_datashare_data_set => "Revisions per Amazon Redshift datashare data set",
+            .amazon_redshift_datashare_assets_per_revision => "Amazon Redshift datashare assets per revision",
+            .concurrent_in_progress_jobs_to_import_assets_from_an_api_gateway_api => "Concurrent in progress jobs to import assets from an API Gateway API",
+            .amazon_api_gateway_api_assets_per_revision => "Amazon API Gateway API assets per revision",
+            .revisions_per_amazon_api_gateway_api_data_set => "Revisions per Amazon API Gateway API data set",
+            .concurrent_in_progress_jobs_to_import_assets_from_an_aws_lake_formation_tag_policy => "Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy",
+            .aws_lake_formation_data_permission_assets_per_revision => "AWS Lake Formation data permission assets per revision",
+            .revisions_per_aws_lake_formation_data_permission_data_set => "Revisions per AWS Lake Formation data permission data set",
+            .revisions_per_amazon_s3_data_access_data_set => "Revisions per Amazon S3 data access data set",
+            .amazon_s3_data_access_assets_per_revision => "Amazon S3 data access assets per revision",
+            .concurrent_in_progress_jobs_to_create_amazon_s3_data_access_assets_from_s3_buckets => "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets",
+            .active_and_pending_data_grants => "Active and pending data grants",
+            .pending_data_grants_per_consumer => "Pending data grants per consumer",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

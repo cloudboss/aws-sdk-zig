@@ -146,7 +146,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCapacityReserva
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&Role=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.role));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.role.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

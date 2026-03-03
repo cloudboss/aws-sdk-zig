@@ -178,7 +178,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTrafficPolicyInstan
     if (input.traffic_policy_instance_type_marker) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "trafficpolicyinstancetype=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -230,7 +230,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyInstances")) {
                     result.traffic_policy_instances = try serde.deserializeTrafficPolicyInstances(allocator, &reader, "TrafficPolicyInstance");
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyInstanceTypeMarker")) {
-                    result.traffic_policy_instance_type_marker = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.traffic_policy_instance_type_marker = RRType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

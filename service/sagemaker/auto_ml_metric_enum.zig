@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AutoMLMetricEnum = enum {
     accuracy,
     mse,
@@ -18,22 +20,53 @@ pub const AutoMLMetricEnum = enum {
     average_weighted_quantile_loss,
 
     pub const json_field_names = .{
-        .accuracy = "ACCURACY",
+        .accuracy = "Accuracy",
         .mse = "MSE",
         .f1 = "F1",
-        .f1_macro = "F1_MACRO",
+        .f1_macro = "F1macro",
         .auc = "AUC",
         .rmse = "RMSE",
-        .balanced_accuracy = "BALANCED_ACCURACY",
+        .balanced_accuracy = "BalancedAccuracy",
         .r2 = "R2",
-        .recall = "RECALL",
-        .recall_macro = "RECALL_MACRO",
-        .precision = "PRECISION",
-        .precision_macro = "PRECISION_MACRO",
+        .recall = "Recall",
+        .recall_macro = "RecallMacro",
+        .precision = "Precision",
+        .precision_macro = "PrecisionMacro",
         .mae = "MAE",
         .mape = "MAPE",
         .mase = "MASE",
         .wape = "WAPE",
-        .average_weighted_quantile_loss = "AVERAGE_WEIGHTED_QUANTILE_LOSS",
+        .average_weighted_quantile_loss = "AverageWeightedQuantileLoss",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .accuracy => "Accuracy",
+            .mse => "MSE",
+            .f1 => "F1",
+            .f1_macro => "F1macro",
+            .auc => "AUC",
+            .rmse => "RMSE",
+            .balanced_accuracy => "BalancedAccuracy",
+            .r2 => "R2",
+            .recall => "Recall",
+            .recall_macro => "RecallMacro",
+            .precision => "Precision",
+            .precision_macro => "PrecisionMacro",
+            .mae => "MAE",
+            .mape => "MAPE",
+            .mase => "MASE",
+            .wape => "WAPE",
+            .average_weighted_quantile_loss => "AverageWeightedQuantileLoss",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

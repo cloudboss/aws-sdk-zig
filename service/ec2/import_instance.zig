@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.member.{d}.Image.Format=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.format));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.format.wireName());
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
@@ -127,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
         }
         if (v.architecture) |sv| {
             try body_buf.appendSlice(allocator, "&LaunchSpecification.Architecture=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.group_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -149,11 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
         }
         if (v.instance_initiated_shutdown_behavior) |sv| {
             try body_buf.appendSlice(allocator, "&LaunchSpecification.InstanceInitiatedShutdownBehavior=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.instance_type) |sv| {
             try body_buf.appendSlice(allocator, "&LaunchSpecification.InstanceType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.monitoring) |sv| {
             try body_buf.appendSlice(allocator, "&LaunchSpecification.Monitoring=");
@@ -198,7 +198,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
             }
             if (sv.tenancy) |sv2| {
                 try body_buf.appendSlice(allocator, "&LaunchSpecification.Placement.Tenancy=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
         }
         if (v.private_ip_address) |sv| {
@@ -217,7 +217,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
         }
     }
     try body_buf.appendSlice(allocator, "&Platform=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.platform));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.platform.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

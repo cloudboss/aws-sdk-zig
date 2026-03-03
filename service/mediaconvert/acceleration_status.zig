@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Describes whether the current job is running with accelerated transcoding.
 /// For jobs that have Acceleration (AccelerationMode) set to DISABLED,
 /// AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration
@@ -22,4 +24,22 @@ pub const AccelerationStatus = enum {
         .accelerated = "ACCELERATED",
         .not_accelerated = "NOT_ACCELERATED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .not_applicable => "NOT_APPLICABLE",
+            .in_progress => "IN_PROGRESS",
+            .accelerated => "ACCELERATED",
+            .not_accelerated => "NOT_ACCELERATED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

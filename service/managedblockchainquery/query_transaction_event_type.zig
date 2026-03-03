@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const QueryTransactionEventType = enum {
     /// An ERC20 transfer type
     erc20_transfer,
@@ -35,4 +37,29 @@ pub const QueryTransactionEventType = enum {
         .internal_eth_transfer = "INTERNAL_ETH_TRANSFER",
         .eth_transfer = "ETH_TRANSFER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .erc20_transfer => "ERC20_TRANSFER",
+            .erc20_mint => "ERC20_MINT",
+            .erc20_burn => "ERC20_BURN",
+            .erc20_deposit => "ERC20_DEPOSIT",
+            .erc20_withdrawal => "ERC20_WITHDRAWAL",
+            .erc721_transfer => "ERC721_TRANSFER",
+            .erc1155_transfer => "ERC1155_TRANSFER",
+            .bitcoin_vin => "BITCOIN_VIN",
+            .bitcoin_vout => "BITCOIN_VOUT",
+            .internal_eth_transfer => "INTERNAL_ETH_TRANSFER",
+            .eth_transfer => "ETH_TRANSFER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

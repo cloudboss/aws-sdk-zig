@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Only use this setting when you change the default value, Auto, for the
 /// setting H264AdaptiveQuantization. When you keep all defaults, excluding
 /// H264AdaptiveQuantization and all other adaptive quantization from your JSON
@@ -30,4 +32,20 @@ pub const H264SpatialAdaptiveQuantization = enum {
         .disabled = "DISABLED",
         .enabled = "ENABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .enabled => "ENABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

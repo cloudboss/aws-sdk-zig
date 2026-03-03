@@ -216,7 +216,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAssetModelInput, 
         try request.headers.put(allocator, "If-None-Match", v);
     }
     if (input.match_for_version_type) |v| {
-        try request.headers.put(allocator, "Match-For-Version-Type", @tagName(v));
+        try request.headers.put(allocator, "Match-For-Version-Type", v.wireName());
     }
 
     return request;

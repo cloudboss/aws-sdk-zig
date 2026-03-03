@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MetricQueryResultStatus = enum {
     complete,
     truncated,
@@ -5,9 +7,27 @@ pub const MetricQueryResultStatus = enum {
     validation_error,
 
     pub const json_field_names = .{
-        .complete = "COMPLETE",
-        .truncated = "TRUNCATED",
-        .internal_error = "INTERNAL_ERROR",
-        .validation_error = "VALIDATION_ERROR",
+        .complete = "Complete",
+        .truncated = "Truncated",
+        .internal_error = "InternalError",
+        .validation_error = "ValidationError",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .complete => "Complete",
+            .truncated => "Truncated",
+            .internal_error => "InternalError",
+            .validation_error => "ValidationError",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

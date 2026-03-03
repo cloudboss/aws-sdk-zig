@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AccessDeniedErrorCode = enum {
     access_denied_to_assessment_target,
     access_denied_to_assessment_template,
@@ -18,4 +20,26 @@ pub const AccessDeniedErrorCode = enum {
         .access_denied_to_sns_topic = "ACCESS_DENIED_TO_SNS_TOPIC",
         .access_denied_to_iam_role = "ACCESS_DENIED_TO_IAM_ROLE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .access_denied_to_assessment_target => "ACCESS_DENIED_TO_ASSESSMENT_TARGET",
+            .access_denied_to_assessment_template => "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE",
+            .access_denied_to_assessment_run => "ACCESS_DENIED_TO_ASSESSMENT_RUN",
+            .access_denied_to_finding => "ACCESS_DENIED_TO_FINDING",
+            .access_denied_to_resource_group => "ACCESS_DENIED_TO_RESOURCE_GROUP",
+            .access_denied_to_rules_package => "ACCESS_DENIED_TO_RULES_PACKAGE",
+            .access_denied_to_sns_topic => "ACCESS_DENIED_TO_SNS_TOPIC",
+            .access_denied_to_iam_role => "ACCESS_DENIED_TO_IAM_ROLE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

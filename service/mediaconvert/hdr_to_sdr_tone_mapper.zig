@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how MediaConvert maps brightness and colors from your HDR input to
 /// your SDR output. The mode that you select represents a creative choice, with
 /// different tradeoffs in the details and tones of your output. To maintain
@@ -18,4 +20,20 @@ pub const HDRToSDRToneMapper = enum {
         .preserve_details = "PRESERVE_DETAILS",
         .vibrant = "VIBRANT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .preserve_details => "PRESERVE_DETAILS",
+            .vibrant => "VIBRANT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -515,7 +515,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchInput, config: *a
     if (input.query_parser) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "q.parser=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.@"return") |v| {

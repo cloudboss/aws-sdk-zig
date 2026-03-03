@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AnomalyFeedbackType = enum {
     yes,
     no,
@@ -8,4 +10,21 @@ pub const AnomalyFeedbackType = enum {
         .no = "NO",
         .planned_activity = "PLANNED_ACTIVITY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .yes => "YES",
+            .no => "NO",
+            .planned_activity => "PLANNED_ACTIVITY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

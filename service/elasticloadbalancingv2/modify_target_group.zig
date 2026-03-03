@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTargetGroupInput,
     }
     if (input.health_check_protocol) |v| {
         try body_buf.appendSlice(allocator, "&HealthCheckProtocol=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.health_check_timeout_seconds) |v| {
         try body_buf.appendSlice(allocator, "&HealthCheckTimeoutSeconds=");

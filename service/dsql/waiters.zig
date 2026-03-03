@@ -49,7 +49,7 @@ pub const ClusterActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }

@@ -82,27 +82,27 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayInp
         }
         if (v.auto_accept_shared_attachments) |sv| {
             try body_buf.appendSlice(allocator, "&Options.AutoAcceptSharedAttachments=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.default_route_table_association) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DefaultRouteTableAssociation=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.default_route_table_propagation) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DefaultRouteTablePropagation=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.dns_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DnsSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.multicast_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.MulticastSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.security_group_referencing_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.SecurityGroupReferencingSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.transit_gateway_cidr_blocks) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -115,7 +115,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayInp
         }
         if (v.vpn_ecmp_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.VpnEcmpSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.tag_specifications) |list| {
@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayInp
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

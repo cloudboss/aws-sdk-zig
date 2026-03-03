@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AssetBundleImportJobStatus = enum {
     queued_for_immediate_execution,
     in_progress,
@@ -16,4 +18,25 @@ pub const AssetBundleImportJobStatus = enum {
         .failed_rollback_completed = "FAILED_ROLLBACK_COMPLETED",
         .failed_rollback_error = "FAILED_ROLLBACK_ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .queued_for_immediate_execution => "QUEUED_FOR_IMMEDIATE_EXECUTION",
+            .in_progress => "IN_PROGRESS",
+            .successful => "SUCCESSFUL",
+            .failed => "FAILED",
+            .failed_rollback_in_progress => "FAILED_ROLLBACK_IN_PROGRESS",
+            .failed_rollback_completed => "FAILED_ROLLBACK_COMPLETED",
+            .failed_rollback_error => "FAILED_ROLLBACK_ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

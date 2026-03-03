@@ -324,7 +324,7 @@ pub fn deserializeJobManifestFieldList(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(JobManifestFieldName, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (JobManifestFieldName.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -486,7 +486,7 @@ pub fn deserializeObjectLambdaAllowedFeaturesList(allocator: std.mem.Allocator, 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(ObjectLambdaAllowedFeature, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (ObjectLambdaAllowedFeature.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -504,7 +504,7 @@ pub fn deserializeObjectLambdaTransformationConfigurationActionsList(allocator: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(ObjectLambdaTransformationConfigurationAction, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (ObjectLambdaTransformationConfigurationAction.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -702,7 +702,7 @@ pub fn deserializeScopePermissionList(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(ScopePermission, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (ScopePermission.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -972,7 +972,7 @@ pub fn deserializeAccessControlTranslation(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Owner")) {
-                    result.owner = std.meta.stringToEnum(OwnerOverride, try reader.readElementText());
+                    result.owner = OwnerOverride.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1029,7 +1029,7 @@ pub fn deserializeAccessPoint(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NetworkOrigin")) {
-                    result.network_origin = std.meta.stringToEnum(NetworkOrigin, try reader.readElementText());
+                    result.network_origin = NetworkOrigin.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VpcConfiguration")) {
                     result.vpc_configuration = try deserializeVpcConfiguration(allocator, reader);
                 } else {
@@ -1201,7 +1201,7 @@ pub fn deserializeAsyncOperation(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "CreationTime")) {
                     result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Operation")) {
-                    result.operation = std.meta.stringToEnum(AsyncOperationName, try reader.readElementText());
+                    result.operation = AsyncOperationName.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RequestParameters")) {
                     result.request_parameters = try deserializeAsyncRequestParameters(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "RequestStatus")) {
@@ -1379,7 +1379,7 @@ pub fn deserializeDeleteMarkerReplication(allocator: std.mem.Allocator, reader: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(DeleteMarkerReplicationStatus, try reader.readElementText());
+                    result.status = DeleteMarkerReplicationStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1433,7 +1433,7 @@ pub fn deserializeDestination(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "ReplicationTime")) {
                     result.replication_time = try deserializeReplicationTime(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
-                    result.storage_class = std.meta.stringToEnum(ReplicationStorageClass, try reader.readElementText());
+                    result.storage_class = ReplicationStorageClass.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1532,7 +1532,7 @@ pub fn deserializeExistingObjectReplication(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ExistingObjectReplicationStatus, try reader.readElementText());
+                    result.status = ExistingObjectReplicationStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1554,7 +1554,7 @@ pub fn deserializeGrantee(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 if (std.mem.eql(u8, e.local, "GranteeIdentifier")) {
                     result.grantee_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GranteeType")) {
-                    result.grantee_type = std.meta.stringToEnum(GranteeType, try reader.readElementText());
+                    result.grantee_type = GranteeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1641,7 +1641,7 @@ pub fn deserializeJobDescriptor(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "RoleArn")) {
                     result.role_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(JobStatus, try reader.readElementText());
+                    result.status = JobStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusUpdateReason")) {
                     result.status_update_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SuspendedCause")) {
@@ -1703,13 +1703,13 @@ pub fn deserializeJobListDescriptor(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "JobId")) {
                     result.job_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Operation")) {
-                    result.operation = std.meta.stringToEnum(OperationName, try reader.readElementText());
+                    result.operation = OperationName.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Priority")) {
                     result.priority = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ProgressSummary")) {
                     result.progress_summary = try deserializeJobProgressSummary(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(JobStatus, try reader.readElementText());
+                    result.status = JobStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TerminationDate")) {
                     result.termination_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -1775,7 +1775,7 @@ pub fn deserializeJobManifestSpec(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Fields")) {
                     result.fields = try deserializeJobManifestFieldList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = std.meta.stringToEnum(JobManifestFormat, try reader.readElementText());
+                    result.format = JobManifestFormat.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1881,11 +1881,11 @@ pub fn deserializeJobReport(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "ExpectedBucketOwner")) {
                     result.expected_bucket_owner = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = std.meta.stringToEnum(JobReportFormat, try reader.readElementText());
+                    result.format = JobReportFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ReportScope")) {
-                    result.report_scope = std.meta.stringToEnum(JobReportScope, try reader.readElementText());
+                    result.report_scope = JobReportScope.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1993,7 +1993,7 @@ pub fn deserializeLifecycleRule(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "NoncurrentVersionTransitions")) {
                     result.noncurrent_version_transitions = try deserializeNoncurrentVersionTransitionList(allocator, reader, "NoncurrentVersionTransition");
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ExpirationStatus, try reader.readElementText());
+                    result.status = ExpirationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Transitions")) {
                     result.transitions = try deserializeTransitionList(allocator, reader, "Transition");
                 } else {
@@ -2097,7 +2097,7 @@ pub fn deserializeListAccessGrantEntry(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "GrantScope")) {
                     result.grant_scope = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Permission")) {
-                    result.permission = std.meta.stringToEnum(Permission, try reader.readElementText());
+                    result.permission = Permission.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2187,7 +2187,7 @@ pub fn deserializeListCallerAccessGrantsEntry(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "GrantScope")) {
                     result.grant_scope = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Permission")) {
-                    result.permission = std.meta.stringToEnum(Permission, try reader.readElementText());
+                    result.permission = Permission.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2301,7 +2301,7 @@ pub fn deserializeMetrics(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 if (std.mem.eql(u8, e.local, "EventThreshold")) {
                     result.event_threshold = try deserializeReplicationTimeValue(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(MetricsStatus, try reader.readElementText());
+                    result.status = MetricsStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2379,7 +2379,7 @@ pub fn deserializeMultiRegionAccessPointReport(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "Regions")) {
                     result.regions = try deserializeRegionReportList(allocator, reader, "Region");
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(MultiRegionAccessPointStatus, try reader.readElementText());
+                    result.status = MultiRegionAccessPointStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2468,7 +2468,7 @@ pub fn deserializeNoncurrentVersionTransition(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "NoncurrentDays")) {
                     result.noncurrent_days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
-                    result.storage_class = std.meta.stringToEnum(TransitionStorageClass, try reader.readElementText());
+                    result.storage_class = TransitionStorageClass.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2531,7 +2531,7 @@ pub fn deserializeObjectLambdaAccessPointAlias(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ObjectLambdaAccessPointAliasStatus, try reader.readElementText());
+                    result.status = ObjectLambdaAccessPointAliasStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2800,7 +2800,7 @@ pub fn deserializeReplicaModifications(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ReplicaModificationsStatus, try reader.readElementText());
+                    result.status = ReplicaModificationsStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2863,7 +2863,7 @@ pub fn deserializeReplicationRule(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "SourceSelectionCriteria")) {
                     result.source_selection_criteria = try deserializeSourceSelectionCriteria(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ReplicationRuleStatus, try reader.readElementText());
+                    result.status = ReplicationRuleStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2928,7 +2928,7 @@ pub fn deserializeReplicationTime(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ReplicationTimeStatus, try reader.readElementText());
+                    result.status = ReplicationTimeStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Time")) {
                     result.time = try deserializeReplicationTimeValue(allocator, reader);
                 } else {
@@ -2993,7 +2993,7 @@ pub fn deserializeS3AccessControlPolicy(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "AccessControlList")) {
                     result.access_control_list = try deserializeS3AccessControlList(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "CannedAccessControlList")) {
-                    result.canned_access_control_list = std.meta.stringToEnum(S3CannedAccessControlList, try reader.readElementText());
+                    result.canned_access_control_list = S3CannedAccessControlList.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3019,9 +3019,9 @@ pub fn deserializeS3BucketDestination(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "Encryption")) {
                     result.encryption = try deserializeStorageLensDataExportEncryption(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = std.meta.stringToEnum(Format, try reader.readElementText());
+                    result.format = Format.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OutputSchemaVersion")) {
-                    result.output_schema_version = std.meta.stringToEnum(OutputSchemaVersion, try reader.readElementText());
+                    result.output_schema_version = OutputSchemaVersion.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -3044,9 +3044,9 @@ pub fn deserializeS3ComputeObjectChecksumOperation(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ChecksumAlgorithm")) {
-                    result.checksum_algorithm = std.meta.stringToEnum(ComputeObjectChecksumAlgorithm, try reader.readElementText());
+                    result.checksum_algorithm = ComputeObjectChecksumAlgorithm.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
-                    result.checksum_type = std.meta.stringToEnum(ComputeObjectChecksumType, try reader.readElementText());
+                    result.checksum_type = ComputeObjectChecksumType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3086,11 +3086,11 @@ pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "BucketKeyEnabled")) {
                     result.bucket_key_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "CannedAccessControlList")) {
-                    result.canned_access_control_list = std.meta.stringToEnum(S3CannedAccessControlList, try reader.readElementText());
+                    result.canned_access_control_list = S3CannedAccessControlList.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumAlgorithm")) {
-                    result.checksum_algorithm = std.meta.stringToEnum(S3ChecksumAlgorithm, try reader.readElementText());
+                    result.checksum_algorithm = S3ChecksumAlgorithm.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MetadataDirective")) {
-                    result.metadata_directive = std.meta.stringToEnum(S3MetadataDirective, try reader.readElementText());
+                    result.metadata_directive = S3MetadataDirective.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ModifiedSinceConstraint")) {
                     result.modified_since_constraint = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "NewObjectMetadata")) {
@@ -3098,9 +3098,9 @@ pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "NewObjectTagging")) {
                     result.new_object_tagging = try deserializeS3TagSet(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ObjectLockLegalHoldStatus")) {
-                    result.object_lock_legal_hold_status = std.meta.stringToEnum(S3ObjectLockLegalHoldStatus, try reader.readElementText());
+                    result.object_lock_legal_hold_status = S3ObjectLockLegalHoldStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ObjectLockMode")) {
-                    result.object_lock_mode = std.meta.stringToEnum(S3ObjectLockMode, try reader.readElementText());
+                    result.object_lock_mode = S3ObjectLockMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ObjectLockRetainUntilDate")) {
                     result.object_lock_retain_until_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "RedirectLocation")) {
@@ -3110,7 +3110,7 @@ pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "SSEAwsKmsKeyId")) {
                     result.sse_aws_kms_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
-                    result.storage_class = std.meta.stringToEnum(S3StorageClass, try reader.readElementText());
+                    result.storage_class = S3StorageClass.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetKeyPrefix")) {
                     result.target_key_prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetResource")) {
@@ -3151,7 +3151,7 @@ pub fn deserializeS3GeneratedManifestDescriptor(allocator: std.mem.Allocator, re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = std.meta.stringToEnum(GeneratedManifestFormat, try reader.readElementText());
+                    result.format = GeneratedManifestFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Location")) {
                     result.location = try deserializeJobManifestLocation(allocator, reader);
                 } else {
@@ -3175,7 +3175,7 @@ pub fn deserializeS3Grant(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 if (std.mem.eql(u8, e.local, "Grantee")) {
                     result.grantee = try deserializeS3Grantee(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Permission")) {
-                    result.permission = std.meta.stringToEnum(S3Permission, try reader.readElementText());
+                    result.permission = S3Permission.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3200,7 +3200,7 @@ pub fn deserializeS3Grantee(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "Identifier")) {
                     result.identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeIdentifier")) {
-                    result.type_identifier = std.meta.stringToEnum(S3GranteeTypeIdentifier, try reader.readElementText());
+                    result.type_identifier = S3GranteeTypeIdentifier.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3223,7 +3223,7 @@ pub fn deserializeS3InitiateRestoreObjectOperation(allocator: std.mem.Allocator,
                 if (std.mem.eql(u8, e.local, "ExpirationInDays")) {
                     result.expiration_in_days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "GlacierJobTier")) {
-                    result.glacier_job_tier = std.meta.stringToEnum(S3GlacierJobTier, try reader.readElementText());
+                    result.glacier_job_tier = S3GlacierJobTier.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3242,7 +3242,7 @@ pub fn deserializeS3ObjectLockLegalHold(allocator: std.mem.Allocator, reader: *a
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(S3ObjectLockLegalHoldStatus, try reader.readElementText());
+                    result.status = S3ObjectLockLegalHoldStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3289,7 +3289,7 @@ pub fn deserializeS3ObjectMetadata(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "RequesterCharged")) {
                     result.requester_charged = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "SSEAlgorithm")) {
-                    result.sse_algorithm = std.meta.stringToEnum(S3SSEAlgorithm, try reader.readElementText());
+                    result.sse_algorithm = S3SSEAlgorithm.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UserMetadata")) {
                     result.user_metadata = try deserializeS3UserMetadata(allocator, reader, "entry");
                 } else {
@@ -3349,7 +3349,7 @@ pub fn deserializeS3Retention(allocator: std.mem.Allocator, reader: *aws.xml.Rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Mode")) {
-                    result.mode = std.meta.stringToEnum(S3ObjectLockRetentionMode, try reader.readElementText());
+                    result.mode = S3ObjectLockRetentionMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RetainUntilDate")) {
                     result.retain_until_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -3609,7 +3609,7 @@ pub fn deserializeSseKmsEncryptedObjects(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(SseKmsEncryptedObjectsStatus, try reader.readElementText());
+                    result.status = SseKmsEncryptedObjectsStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3989,7 +3989,7 @@ pub fn deserializeTransition(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "Days")) {
                     result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
-                    result.storage_class = std.meta.stringToEnum(TransitionStorageClass, try reader.readElementText());
+                    result.storage_class = TransitionStorageClass.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -4036,7 +4036,7 @@ pub fn serializeJobManifestFieldList(allocator: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4048,7 +4048,7 @@ pub fn serializeJobStatusList(allocator: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4120,7 +4120,7 @@ pub fn serializeObjectLambdaAllowedFeaturesList(allocator: std.mem.Allocator, bu
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4132,7 +4132,7 @@ pub fn serializeObjectLambdaTransformationConfigurationActionsList(allocator: st
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4240,7 +4240,7 @@ pub fn serializeScopePermissionList(allocator: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4366,7 +4366,7 @@ pub fn serializeAbortIncompleteMultipartUpload(allocator: std.mem.Allocator, buf
 
 pub fn serializeAccessControlTranslation(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AccessControlTranslation) !void {
     try buf.appendSlice(allocator, "<Owner>");
-    try buf.appendSlice(allocator, @tagName(value.owner));
+    try buf.appendSlice(allocator, value.owner.wireName());
     try buf.appendSlice(allocator, "</Owner>");
 }
 
@@ -4488,7 +4488,7 @@ pub fn serializeCloudWatchMetrics(allocator: std.mem.Allocator, buf: *std.ArrayL
 pub fn serializeCreateBucketConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateBucketConfiguration) !void {
     if (value.location_constraint) |v| {
         try buf.appendSlice(allocator, "<LocationConstraint>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</LocationConstraint>");
     }
 }
@@ -4509,7 +4509,7 @@ pub fn serializeCreateMultiRegionAccessPointInput(allocator: std.mem.Allocator, 
 
 pub fn serializeDeleteMarkerReplication(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DeleteMarkerReplication) !void {
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -4550,7 +4550,7 @@ pub fn serializeDestination(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
     }
     if (value.storage_class) |v| {
         try buf.appendSlice(allocator, "<StorageClass>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StorageClass>");
     }
 }
@@ -4586,7 +4586,7 @@ pub fn serializeExclude(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), v
 
 pub fn serializeExistingObjectReplication(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExistingObjectReplication) !void {
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -4598,7 +4598,7 @@ pub fn serializeGrantee(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), v
     }
     if (value.grantee_type) |v| {
         try buf.appendSlice(allocator, "<GranteeType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</GranteeType>");
     }
 }
@@ -4646,7 +4646,7 @@ pub fn serializeJobManifestSpec(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(allocator, "</Fields>");
     }
     try buf.appendSlice(allocator, "<Format>");
-    try buf.appendSlice(allocator, @tagName(value.format));
+    try buf.appendSlice(allocator, value.format.wireName());
     try buf.appendSlice(allocator, "</Format>");
 }
 
@@ -4724,7 +4724,7 @@ pub fn serializeJobReport(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.format) |v| {
         try buf.appendSlice(allocator, "<Format>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Format>");
     }
     if (value.prefix) |v| {
@@ -4734,7 +4734,7 @@ pub fn serializeJobReport(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.report_scope) |v| {
         try buf.appendSlice(allocator, "<ReportScope>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ReportScope>");
     }
 }
@@ -4821,7 +4821,7 @@ pub fn serializeLifecycleRule(allocator: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(allocator, "</NoncurrentVersionTransitions>");
     }
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
     if (value.transitions) |v| {
         try buf.appendSlice(allocator, "<Transitions>");
@@ -4938,7 +4938,7 @@ pub fn serializeMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(allocator, "</EventThreshold>");
     }
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -4991,7 +4991,7 @@ pub fn serializeNoncurrentVersionTransition(allocator: std.mem.Allocator, buf: *
     }
     if (value.storage_class) |v| {
         try buf.appendSlice(allocator, "<StorageClass>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StorageClass>");
     }
 }
@@ -5093,7 +5093,7 @@ pub fn serializeRegion(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), va
 
 pub fn serializeReplicaModifications(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicaModifications) !void {
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -5152,7 +5152,7 @@ pub fn serializeReplicationRule(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(allocator, "</SourceSelectionCriteria>");
     }
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -5189,7 +5189,7 @@ pub fn serializeReplicationRuleFilter(allocator: std.mem.Allocator, buf: *std.Ar
 
 pub fn serializeReplicationTime(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationTime) !void {
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
     try buf.appendSlice(allocator, "<Time>");
     try serializeReplicationTimeValue(allocator, buf, value.time);
@@ -5226,7 +5226,7 @@ pub fn serializeS3AccessControlPolicy(allocator: std.mem.Allocator, buf: *std.Ar
     }
     if (value.canned_access_control_list) |v| {
         try buf.appendSlice(allocator, "<CannedAccessControlList>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</CannedAccessControlList>");
     }
 }
@@ -5244,10 +5244,10 @@ pub fn serializeS3BucketDestination(allocator: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(allocator, "</Encryption>");
     }
     try buf.appendSlice(allocator, "<Format>");
-    try buf.appendSlice(allocator, @tagName(value.format));
+    try buf.appendSlice(allocator, value.format.wireName());
     try buf.appendSlice(allocator, "</Format>");
     try buf.appendSlice(allocator, "<OutputSchemaVersion>");
-    try buf.appendSlice(allocator, @tagName(value.output_schema_version));
+    try buf.appendSlice(allocator, value.output_schema_version.wireName());
     try buf.appendSlice(allocator, "</OutputSchemaVersion>");
     if (value.prefix) |v| {
         try buf.appendSlice(allocator, "<Prefix>");
@@ -5259,12 +5259,12 @@ pub fn serializeS3BucketDestination(allocator: std.mem.Allocator, buf: *std.Arra
 pub fn serializeS3ComputeObjectChecksumOperation(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ComputeObjectChecksumOperation) !void {
     if (value.checksum_algorithm) |v| {
         try buf.appendSlice(allocator, "<ChecksumAlgorithm>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ChecksumAlgorithm>");
     }
     if (value.checksum_type) |v| {
         try buf.appendSlice(allocator, "<ChecksumType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ChecksumType>");
     }
 }
@@ -5282,17 +5282,17 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
     }
     if (value.canned_access_control_list) |v| {
         try buf.appendSlice(allocator, "<CannedAccessControlList>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</CannedAccessControlList>");
     }
     if (value.checksum_algorithm) |v| {
         try buf.appendSlice(allocator, "<ChecksumAlgorithm>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ChecksumAlgorithm>");
     }
     if (value.metadata_directive) |v| {
         try buf.appendSlice(allocator, "<MetadataDirective>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</MetadataDirective>");
     }
     if (value.modified_since_constraint) |v| {
@@ -5315,12 +5315,12 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
     }
     if (value.object_lock_legal_hold_status) |v| {
         try buf.appendSlice(allocator, "<ObjectLockLegalHoldStatus>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ObjectLockLegalHoldStatus>");
     }
     if (value.object_lock_mode) |v| {
         try buf.appendSlice(allocator, "<ObjectLockMode>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ObjectLockMode>");
     }
     if (value.object_lock_retain_until_date) |v| {
@@ -5348,7 +5348,7 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
     }
     if (value.storage_class) |v| {
         try buf.appendSlice(allocator, "<StorageClass>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StorageClass>");
     }
     if (value.target_key_prefix) |v| {
@@ -5385,7 +5385,7 @@ pub fn serializeS3Grant(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), v
     }
     if (value.permission) |v| {
         try buf.appendSlice(allocator, "<Permission>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Permission>");
     }
 }
@@ -5403,7 +5403,7 @@ pub fn serializeS3Grantee(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.type_identifier) |v| {
         try buf.appendSlice(allocator, "<TypeIdentifier>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TypeIdentifier>");
     }
 }
@@ -5419,14 +5419,14 @@ pub fn serializeS3InitiateRestoreObjectOperation(allocator: std.mem.Allocator, b
     }
     if (value.glacier_job_tier) |v| {
         try buf.appendSlice(allocator, "<GlacierJobTier>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</GlacierJobTier>");
     }
 }
 
 pub fn serializeS3ObjectLockLegalHold(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectLockLegalHold) !void {
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -5484,7 +5484,7 @@ pub fn serializeS3ObjectMetadata(allocator: std.mem.Allocator, buf: *std.ArrayLi
     }
     if (value.sse_algorithm) |v| {
         try buf.appendSlice(allocator, "<SSEAlgorithm>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SSEAlgorithm>");
     }
     if (value.user_metadata) |v| {
@@ -5516,7 +5516,7 @@ pub fn serializeS3ReplicateObjectOperation(allocator: std.mem.Allocator, buf: *s
 pub fn serializeS3Retention(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Retention) !void {
     if (value.mode) |v| {
         try buf.appendSlice(allocator, "<Mode>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Mode>");
     }
     if (value.retain_until_date) |v| {
@@ -5654,7 +5654,7 @@ pub fn serializeSourceSelectionCriteria(allocator: std.mem.Allocator, buf: *std.
 
 pub fn serializeSseKmsEncryptedObjects(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SseKmsEncryptedObjects) !void {
     try buf.appendSlice(allocator, "<Status>");
-    try buf.appendSlice(allocator, @tagName(value.status));
+    try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
 }
 
@@ -5938,7 +5938,7 @@ pub fn serializeTransition(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
     }
     if (value.storage_class) |v| {
         try buf.appendSlice(allocator, "<StorageClass>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StorageClass>");
     }
 }
@@ -5946,12 +5946,12 @@ pub fn serializeTransition(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
 pub fn serializeVersioningConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: VersioningConfiguration) !void {
     if (value.mfa_delete) |v| {
         try buf.appendSlice(allocator, "<MfaDelete>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</MfaDelete>");
     }
     if (value.status) |v| {
         try buf.appendSlice(allocator, "<Status>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Status>");
     }
 }

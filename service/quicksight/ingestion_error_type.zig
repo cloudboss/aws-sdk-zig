@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const IngestionErrorType = enum {
     failure_to_assume_role,
     ingestion_superseded,
@@ -92,4 +94,63 @@ pub const IngestionErrorType = enum {
         .cursor_not_enabled = "CURSOR_NOT_ENABLED",
         .duplicate_column_names_found = "DUPLICATE_COLUMN_NAMES_FOUND",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .failure_to_assume_role => "FAILURE_TO_ASSUME_ROLE",
+            .ingestion_superseded => "INGESTION_SUPERSEDED",
+            .ingestion_canceled => "INGESTION_CANCELED",
+            .data_set_deleted => "DATA_SET_DELETED",
+            .data_set_not_spice => "DATA_SET_NOT_SPICE",
+            .s3_uploaded_file_deleted => "S3_UPLOADED_FILE_DELETED",
+            .s3_manifest_error => "S3_MANIFEST_ERROR",
+            .data_tolerance_exception => "DATA_TOLERANCE_EXCEPTION",
+            .spice_table_not_found => "SPICE_TABLE_NOT_FOUND",
+            .data_set_size_limit_exceeded => "DATA_SET_SIZE_LIMIT_EXCEEDED",
+            .row_size_limit_exceeded => "ROW_SIZE_LIMIT_EXCEEDED",
+            .account_capacity_limit_exceeded => "ACCOUNT_CAPACITY_LIMIT_EXCEEDED",
+            .customer_error => "CUSTOMER_ERROR",
+            .data_source_not_found => "DATA_SOURCE_NOT_FOUND",
+            .iam_role_not_available => "IAM_ROLE_NOT_AVAILABLE",
+            .connection_failure => "CONNECTION_FAILURE",
+            .sql_table_not_found => "SQL_TABLE_NOT_FOUND",
+            .permission_denied => "PERMISSION_DENIED",
+            .ssl_certificate_validation_failure => "SSL_CERTIFICATE_VALIDATION_FAILURE",
+            .oauth_token_failure => "OAUTH_TOKEN_FAILURE",
+            .source_api_limit_exceeded_failure => "SOURCE_API_LIMIT_EXCEEDED_FAILURE",
+            .password_authentication_failure => "PASSWORD_AUTHENTICATION_FAILURE",
+            .sql_schema_mismatch_error => "SQL_SCHEMA_MISMATCH_ERROR",
+            .invalid_date_format => "INVALID_DATE_FORMAT",
+            .invalid_dataprep_syntax => "INVALID_DATAPREP_SYNTAX",
+            .source_resource_limit_exceeded => "SOURCE_RESOURCE_LIMIT_EXCEEDED",
+            .sql_invalid_parameter_value => "SQL_INVALID_PARAMETER_VALUE",
+            .query_timeout => "QUERY_TIMEOUT",
+            .sql_numeric_overflow => "SQL_NUMERIC_OVERFLOW",
+            .unresolvable_host => "UNRESOLVABLE_HOST",
+            .unroutable_host => "UNROUTABLE_HOST",
+            .sql_exception => "SQL_EXCEPTION",
+            .s3_file_inaccessible => "S3_FILE_INACCESSIBLE",
+            .iot_file_not_found => "IOT_FILE_NOT_FOUND",
+            .iot_data_set_file_empty => "IOT_DATA_SET_FILE_EMPTY",
+            .invalid_data_source_config => "INVALID_DATA_SOURCE_CONFIG",
+            .data_source_auth_failed => "DATA_SOURCE_AUTH_FAILED",
+            .data_source_connection_failed => "DATA_SOURCE_CONNECTION_FAILED",
+            .failure_to_process_json_file => "FAILURE_TO_PROCESS_JSON_FILE",
+            .internal_service_error => "INTERNAL_SERVICE_ERROR",
+            .refresh_suppressed_by_edit => "REFRESH_SUPPRESSED_BY_EDIT",
+            .permission_not_found => "PERMISSION_NOT_FOUND",
+            .elasticsearch_cursor_not_enabled => "ELASTICSEARCH_CURSOR_NOT_ENABLED",
+            .cursor_not_enabled => "CURSOR_NOT_ENABLED",
+            .duplicate_column_names_found => "DUPLICATE_COLUMN_NAMES_FOUND",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

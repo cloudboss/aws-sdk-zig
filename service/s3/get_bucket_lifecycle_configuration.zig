@@ -141,7 +141,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     }
     result.rules = if (rules_list.items.len > 0) try rules_list.toOwnedSlice(allocator) else null;
     if (headers.get("x-amz-transition-default-minimum-object-size")) |value| {
-        result.transition_default_minimum_object_size = std.meta.stringToEnum(TransitionDefaultMinimumObjectSize, value);
+        result.transition_default_minimum_object_size = TransitionDefaultMinimumObjectSize.fromWireName(value);
     }
 
     return result;

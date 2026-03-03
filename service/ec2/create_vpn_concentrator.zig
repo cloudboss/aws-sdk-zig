@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConcentratorIn
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -110,7 +110,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConcentratorIn
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&Type=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.@"type"));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.@"type".wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

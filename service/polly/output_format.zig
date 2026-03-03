@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const OutputFormat = enum {
     json,
     mp3,
@@ -6,10 +8,29 @@ pub const OutputFormat = enum {
     pcm,
 
     pub const json_field_names = .{
-        .json = "JSON",
-        .mp3 = "MP3",
-        .ogg_opus = "OGG_OPUS",
-        .ogg_vorbis = "OGG_VORBIS",
-        .pcm = "PCM",
+        .json = "json",
+        .mp3 = "mp3",
+        .ogg_opus = "ogg_opus",
+        .ogg_vorbis = "ogg_vorbis",
+        .pcm = "pcm",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .json => "json",
+            .mp3 => "mp3",
+            .ogg_opus => "ogg_opus",
+            .ogg_vorbis => "ogg_vorbis",
+            .pcm => "pcm",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

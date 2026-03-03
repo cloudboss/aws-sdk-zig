@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const LambdaFunctionRecommendationFindingReasonCode = enum {
     memory_over_provisioned,
     memory_under_provisioned,
@@ -5,9 +7,27 @@ pub const LambdaFunctionRecommendationFindingReasonCode = enum {
     inconclusive,
 
     pub const json_field_names = .{
-        .memory_over_provisioned = "MEMORY_OVER_PROVISIONED",
-        .memory_under_provisioned = "MEMORY_UNDER_PROVISIONED",
-        .insufficient_data = "INSUFFICIENT_DATA",
-        .inconclusive = "INCONCLUSIVE",
+        .memory_over_provisioned = "MemoryOverprovisioned",
+        .memory_under_provisioned = "MemoryUnderprovisioned",
+        .insufficient_data = "InsufficientData",
+        .inconclusive = "Inconclusive",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .memory_over_provisioned => "MemoryOverprovisioned",
+            .memory_under_provisioned => "MemoryUnderprovisioned",
+            .insufficient_data => "InsufficientData",
+            .inconclusive => "Inconclusive",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

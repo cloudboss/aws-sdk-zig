@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// OAuth 2.0 error codes returned by the server
 ///
 /// Standard OAuth 2.0 error codes used in error responses to indicate
@@ -22,7 +24,27 @@ pub const OAuth2ErrorCode = enum {
         .user_credentials_changed = "USER_CREDENTIALS_CHANGED",
         .insufficient_permissions = "INSUFFICIENT_PERMISSIONS",
         .authcode_expired = "AUTHCODE_EXPIRED",
-        .server_error = "SERVER_ERROR",
+        .server_error = "server_error",
         .invalid_request = "INVALID_REQUEST",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .token_expired => "TOKEN_EXPIRED",
+            .user_credentials_changed => "USER_CREDENTIALS_CHANGED",
+            .insufficient_permissions => "INSUFFICIENT_PERMISSIONS",
+            .authcode_expired => "AUTHCODE_EXPIRED",
+            .server_error => "server_error",
+            .invalid_request => "INVALID_REQUEST",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

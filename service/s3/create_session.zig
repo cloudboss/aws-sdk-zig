@@ -187,10 +187,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSessionInput, con
         try request.headers.put(allocator, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
     }
     if (input.server_side_encryption) |v| {
-        try request.headers.put(allocator, "x-amz-server-side-encryption", @tagName(v));
+        try request.headers.put(allocator, "x-amz-server-side-encryption", v.wireName());
     }
     if (input.session_mode) |v| {
-        try request.headers.put(allocator, "x-amz-create-session-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-create-session-mode", v.wireName());
     }
     if (input.ssekms_encryption_context) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-context", v);
@@ -231,7 +231,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.bucket_key_enabled = std.mem.eql(u8, value, "true");
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-context")) |value| {
         result.ssekms_encryption_context = try allocator.dupe(u8, value);

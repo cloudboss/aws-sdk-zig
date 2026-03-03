@@ -104,7 +104,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeFleetHistoryInp
     }
     if (input.event_type) |v| {
         try body_buf.appendSlice(allocator, "&EventType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&FleetId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.fleet_id);

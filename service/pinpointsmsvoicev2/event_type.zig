@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EventType = enum {
     all,
     text_all,
@@ -88,4 +90,61 @@ pub const EventType = enum {
         .media_file_type_unsupported = "MEDIA_FILE_TYPE_UNSUPPORTED",
         .media_file_size_exceeded = "MEDIA_FILE_SIZE_EXCEEDED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .all => "ALL",
+            .text_all => "TEXT_ALL",
+            .text_sent => "TEXT_SENT",
+            .text_pending => "TEXT_PENDING",
+            .text_queued => "TEXT_QUEUED",
+            .text_successful => "TEXT_SUCCESSFUL",
+            .text_delivered => "TEXT_DELIVERED",
+            .text_invalid => "TEXT_INVALID",
+            .text_invalid_message => "TEXT_INVALID_MESSAGE",
+            .text_unreachable => "TEXT_UNREACHABLE",
+            .text_carrier_unreachable => "TEXT_CARRIER_UNREACHABLE",
+            .text_blocked => "TEXT_BLOCKED",
+            .text_carrier_blocked => "TEXT_CARRIER_BLOCKED",
+            .text_spam => "TEXT_SPAM",
+            .text_unknown => "TEXT_UNKNOWN",
+            .text_ttl_expired => "TEXT_TTL_EXPIRED",
+            .text_protect_blocked => "TEXT_PROTECT_BLOCKED",
+            .voice_all => "VOICE_ALL",
+            .voice_initiated => "VOICE_INITIATED",
+            .voice_ringing => "VOICE_RINGING",
+            .voice_answered => "VOICE_ANSWERED",
+            .voice_completed => "VOICE_COMPLETED",
+            .voice_busy => "VOICE_BUSY",
+            .voice_no_answer => "VOICE_NO_ANSWER",
+            .voice_failed => "VOICE_FAILED",
+            .voice_ttl_expired => "VOICE_TTL_EXPIRED",
+            .media_all => "MEDIA_ALL",
+            .media_pending => "MEDIA_PENDING",
+            .media_queued => "MEDIA_QUEUED",
+            .media_successful => "MEDIA_SUCCESSFUL",
+            .media_delivered => "MEDIA_DELIVERED",
+            .media_invalid => "MEDIA_INVALID",
+            .media_invalid_message => "MEDIA_INVALID_MESSAGE",
+            .media_unreachable => "MEDIA_UNREACHABLE",
+            .media_carrier_unreachable => "MEDIA_CARRIER_UNREACHABLE",
+            .media_blocked => "MEDIA_BLOCKED",
+            .media_carrier_blocked => "MEDIA_CARRIER_BLOCKED",
+            .media_spam => "MEDIA_SPAM",
+            .media_unknown => "MEDIA_UNKNOWN",
+            .media_ttl_expired => "MEDIA_TTL_EXPIRED",
+            .media_file_inaccessible => "MEDIA_FILE_INACCESSIBLE",
+            .media_file_type_unsupported => "MEDIA_FILE_TYPE_UNSUPPORTED",
+            .media_file_size_exceeded => "MEDIA_FILE_SIZE_EXCEEDED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

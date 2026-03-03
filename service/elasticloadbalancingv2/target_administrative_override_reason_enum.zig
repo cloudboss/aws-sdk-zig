@@ -1,6 +1,33 @@
+const std = @import("std");
+
 pub const TargetAdministrativeOverrideReasonEnum = enum {
     internal_error,
     no_override_engaged,
     zonal_shift_engaged,
     zonal_shift_delegated_to_dns,
+
+    pub const json_field_names = .{
+        .internal_error = "AdministrativeOverride.Unknown",
+        .no_override_engaged = "AdministrativeOverride.NoOverride",
+        .zonal_shift_engaged = "AdministrativeOverride.ZonalShiftActive",
+        .zonal_shift_delegated_to_dns = "AdministrativeOverride.ZonalShiftDelegatedToDns",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .internal_error => "AdministrativeOverride.Unknown",
+            .no_override_engaged => "AdministrativeOverride.NoOverride",
+            .zonal_shift_engaged => "AdministrativeOverride.ZonalShiftActive",
+            .zonal_shift_delegated_to_dns => "AdministrativeOverride.ZonalShiftDelegatedToDns",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DataReplicationErrorString = enum {
     agent_not_seen,
     snapshots_failure,
@@ -34,4 +36,34 @@ pub const DataReplicationErrorString = enum {
         .unsupported_vm_configuration = "UNSUPPORTED_VM_CONFIGURATION",
         .last_snapshot_job_failed = "LAST_SNAPSHOT_JOB_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .agent_not_seen => "AGENT_NOT_SEEN",
+            .snapshots_failure => "SNAPSHOTS_FAILURE",
+            .not_converging => "NOT_CONVERGING",
+            .unstable_network => "UNSTABLE_NETWORK",
+            .failed_to_create_security_group => "FAILED_TO_CREATE_SECURITY_GROUP",
+            .failed_to_launch_replication_server => "FAILED_TO_LAUNCH_REPLICATION_SERVER",
+            .failed_to_boot_replication_server => "FAILED_TO_BOOT_REPLICATION_SERVER",
+            .failed_to_authenticate_with_service => "FAILED_TO_AUTHENTICATE_WITH_SERVICE",
+            .failed_to_download_replication_software => "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
+            .failed_to_create_staging_disks => "FAILED_TO_CREATE_STAGING_DISKS",
+            .failed_to_attach_staging_disks => "FAILED_TO_ATTACH_STAGING_DISKS",
+            .failed_to_pair_replication_server_with_agent => "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
+            .failed_to_connect_agent_to_replication_server => "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
+            .failed_to_start_data_transfer => "FAILED_TO_START_DATA_TRANSFER",
+            .unsupported_vm_configuration => "UNSUPPORTED_VM_CONFIGURATION",
+            .last_snapshot_job_failed => "LAST_SNAPSHOT_JOB_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Dimension = enum {
     az,
     instance_type,
@@ -68,4 +70,51 @@ pub const Dimension = enum {
         .tag_key = "TAG_KEY",
         .cost_category_name = "COST_CATEGORY_NAME",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .az => "AZ",
+            .instance_type => "INSTANCE_TYPE",
+            .linked_account => "LINKED_ACCOUNT",
+            .linked_account_name => "LINKED_ACCOUNT_NAME",
+            .operation => "OPERATION",
+            .purchase_type => "PURCHASE_TYPE",
+            .region => "REGION",
+            .service => "SERVICE",
+            .service_code => "SERVICE_CODE",
+            .usage_type => "USAGE_TYPE",
+            .usage_type_group => "USAGE_TYPE_GROUP",
+            .record_type => "RECORD_TYPE",
+            .operating_system => "OPERATING_SYSTEM",
+            .tenancy => "TENANCY",
+            .scope => "SCOPE",
+            .platform => "PLATFORM",
+            .subscription_id => "SUBSCRIPTION_ID",
+            .legal_entity_name => "LEGAL_ENTITY_NAME",
+            .invoicing_entity => "INVOICING_ENTITY",
+            .deployment_option => "DEPLOYMENT_OPTION",
+            .database_engine => "DATABASE_ENGINE",
+            .cache_engine => "CACHE_ENGINE",
+            .instance_type_family => "INSTANCE_TYPE_FAMILY",
+            .billing_entity => "BILLING_ENTITY",
+            .reservation_id => "RESERVATION_ID",
+            .resource_id => "RESOURCE_ID",
+            .rightsizing_type => "RIGHTSIZING_TYPE",
+            .savings_plans_type => "SAVINGS_PLANS_TYPE",
+            .savings_plan_arn => "SAVINGS_PLAN_ARN",
+            .payment_option => "PAYMENT_OPTION",
+            .reservation_modified => "RESERVATION_MODIFIED",
+            .tag_key => "TAG_KEY",
+            .cost_category_name => "COST_CATEGORY_NAME",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -94,23 +94,23 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTransitGatewayInp
         }
         if (v.auto_accept_shared_attachments) |sv| {
             try body_buf.appendSlice(allocator, "&Options.AutoAcceptSharedAttachments=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.default_route_table_association) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DefaultRouteTableAssociation=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.default_route_table_propagation) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DefaultRouteTablePropagation=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.dns_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DnsSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.encryption_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.EncryptionSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.propagation_default_route_table_id) |sv| {
             try body_buf.appendSlice(allocator, "&Options.PropagationDefaultRouteTableId=");
@@ -127,11 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTransitGatewayInp
         }
         if (v.security_group_referencing_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.SecurityGroupReferencingSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.vpn_ecmp_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.VpnEcmpSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     try body_buf.appendSlice(allocator, "&TransitGatewayId=");

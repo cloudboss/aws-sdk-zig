@@ -51,14 +51,14 @@ pub const ImageScanCompleteWaiter = struct {
 
         if (output.image_scan_status) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETE")) {
                     return .success;
                 }
             }
         }
         if (output.image_scan_status) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -111,12 +111,12 @@ pub const LifecyclePolicyPreviewCompleteWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "COMPLETE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }

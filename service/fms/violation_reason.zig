@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ViolationReason = enum {
     web_acl_missing_rule_group,
     resource_missing_web_acl,
@@ -31,35 +33,79 @@ pub const ViolationReason = enum {
     web_acl_configuration_or_scope_of_use,
 
     pub const json_field_names = .{
-        .web_acl_missing_rule_group = "WebAclMissingRuleGroup",
-        .resource_missing_web_acl = "ResourceMissingWebAcl",
-        .resource_incorrect_web_acl = "ResourceIncorrectWebAcl",
-        .resource_missing_shield_protection = "ResourceMissingShieldProtection",
-        .resource_missing_webacl_or_shield_protection = "ResourceMissingWebaclOrShieldProtection",
-        .resource_missing_security_group = "ResourceMissingSecurityGroup",
-        .resource_violates_audit_security_group = "ResourceViolatesAuditSecurityGroup",
-        .security_group_unused = "SecurityGroupUnused",
-        .security_group_redundant = "SecurityGroupRedundant",
-        .fms_created_security_group_edited = "FMSCreatedSecurityGroupEdited",
-        .missing_firewall = "MissingFirewall",
-        .missing_firewall_subnet_in_az = "MissingFirewallSubnetInAZ",
-        .missing_expected_route_table = "MissingExpectedRouteTable",
-        .network_firewall_policy_modified = "NetworkFirewallPolicyModified",
-        .firewall_subnet_is_out_of_scope = "FirewallSubnetIsOutOfScope",
-        .internet_gateway_missing_expected_route = "InternetGatewayMissingExpectedRoute",
-        .firewall_subnet_missing_expected_route = "FirewallSubnetMissingExpectedRoute",
-        .unexpected_firewall_routes = "UnexpectedFirewallRoutes",
-        .unexpected_target_gateway_routes = "UnexpectedTargetGatewayRoutes",
-        .traffic_inspection_crosses_az_boundary = "TrafficInspectionCrossesAZBoundary",
-        .invalid_route_configuration = "InvalidRouteConfiguration",
-        .missing_target_gateway = "MissingTargetGateway",
-        .internet_traffic_not_inspected = "InternetTrafficNotInspected",
-        .black_hole_route_detected = "BlackHoleRouteDetected",
-        .black_hole_route_detected_in_firewall_subnet = "BlackHoleRouteDetectedInFirewallSubnet",
-        .resource_missing_dns_firewall = "ResourceMissingDnsFirewall",
-        .route_has_out_of_scope_endpoint = "RouteHasOutOfScopeEndpoint",
-        .firewall_subnet_missing_vpc_endpoint = "FirewallSubnetMissingVPCEndpoint",
-        .invalid_network_acl_entry = "InvalidNetworkAclEntry",
-        .web_acl_configuration_or_scope_of_use = "WebACLConfigurationOrScopeOfUse",
+        .web_acl_missing_rule_group = "WEB_ACL_MISSING_RULE_GROUP",
+        .resource_missing_web_acl = "RESOURCE_MISSING_WEB_ACL",
+        .resource_incorrect_web_acl = "RESOURCE_INCORRECT_WEB_ACL",
+        .resource_missing_shield_protection = "RESOURCE_MISSING_SHIELD_PROTECTION",
+        .resource_missing_webacl_or_shield_protection = "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION",
+        .resource_missing_security_group = "RESOURCE_MISSING_SECURITY_GROUP",
+        .resource_violates_audit_security_group = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP",
+        .security_group_unused = "SECURITY_GROUP_UNUSED",
+        .security_group_redundant = "SECURITY_GROUP_REDUNDANT",
+        .fms_created_security_group_edited = "FMS_CREATED_SECURITY_GROUP_EDITED",
+        .missing_firewall = "MISSING_FIREWALL",
+        .missing_firewall_subnet_in_az = "MISSING_FIREWALL_SUBNET_IN_AZ",
+        .missing_expected_route_table = "MISSING_EXPECTED_ROUTE_TABLE",
+        .network_firewall_policy_modified = "NETWORK_FIREWALL_POLICY_MODIFIED",
+        .firewall_subnet_is_out_of_scope = "FIREWALL_SUBNET_IS_OUT_OF_SCOPE",
+        .internet_gateway_missing_expected_route = "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE",
+        .firewall_subnet_missing_expected_route = "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE",
+        .unexpected_firewall_routes = "UNEXPECTED_FIREWALL_ROUTES",
+        .unexpected_target_gateway_routes = "UNEXPECTED_TARGET_GATEWAY_ROUTES",
+        .traffic_inspection_crosses_az_boundary = "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY",
+        .invalid_route_configuration = "INVALID_ROUTE_CONFIGURATION",
+        .missing_target_gateway = "MISSING_TARGET_GATEWAY",
+        .internet_traffic_not_inspected = "INTERNET_TRAFFIC_NOT_INSPECTED",
+        .black_hole_route_detected = "BLACK_HOLE_ROUTE_DETECTED",
+        .black_hole_route_detected_in_firewall_subnet = "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET",
+        .resource_missing_dns_firewall = "RESOURCE_MISSING_DNS_FIREWALL",
+        .route_has_out_of_scope_endpoint = "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT",
+        .firewall_subnet_missing_vpc_endpoint = "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT",
+        .invalid_network_acl_entry = "INVALID_NETWORK_ACL_ENTRY",
+        .web_acl_configuration_or_scope_of_use = "WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .web_acl_missing_rule_group => "WEB_ACL_MISSING_RULE_GROUP",
+            .resource_missing_web_acl => "RESOURCE_MISSING_WEB_ACL",
+            .resource_incorrect_web_acl => "RESOURCE_INCORRECT_WEB_ACL",
+            .resource_missing_shield_protection => "RESOURCE_MISSING_SHIELD_PROTECTION",
+            .resource_missing_webacl_or_shield_protection => "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION",
+            .resource_missing_security_group => "RESOURCE_MISSING_SECURITY_GROUP",
+            .resource_violates_audit_security_group => "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP",
+            .security_group_unused => "SECURITY_GROUP_UNUSED",
+            .security_group_redundant => "SECURITY_GROUP_REDUNDANT",
+            .fms_created_security_group_edited => "FMS_CREATED_SECURITY_GROUP_EDITED",
+            .missing_firewall => "MISSING_FIREWALL",
+            .missing_firewall_subnet_in_az => "MISSING_FIREWALL_SUBNET_IN_AZ",
+            .missing_expected_route_table => "MISSING_EXPECTED_ROUTE_TABLE",
+            .network_firewall_policy_modified => "NETWORK_FIREWALL_POLICY_MODIFIED",
+            .firewall_subnet_is_out_of_scope => "FIREWALL_SUBNET_IS_OUT_OF_SCOPE",
+            .internet_gateway_missing_expected_route => "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE",
+            .firewall_subnet_missing_expected_route => "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE",
+            .unexpected_firewall_routes => "UNEXPECTED_FIREWALL_ROUTES",
+            .unexpected_target_gateway_routes => "UNEXPECTED_TARGET_GATEWAY_ROUTES",
+            .traffic_inspection_crosses_az_boundary => "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY",
+            .invalid_route_configuration => "INVALID_ROUTE_CONFIGURATION",
+            .missing_target_gateway => "MISSING_TARGET_GATEWAY",
+            .internet_traffic_not_inspected => "INTERNET_TRAFFIC_NOT_INSPECTED",
+            .black_hole_route_detected => "BLACK_HOLE_ROUTE_DETECTED",
+            .black_hole_route_detected_in_firewall_subnet => "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET",
+            .resource_missing_dns_firewall => "RESOURCE_MISSING_DNS_FIREWALL",
+            .route_has_out_of_scope_endpoint => "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT",
+            .firewall_subnet_missing_vpc_endpoint => "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT",
+            .invalid_network_acl_entry => "INVALID_NETWORK_ACL_ENTRY",
+            .web_acl_configuration_or_scope_of_use => "WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

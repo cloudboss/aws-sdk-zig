@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteRumMetricsDestina
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "destination=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.destination));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.destination.wireName());
     query_has_prev = true;
     if (input.destination_arn) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

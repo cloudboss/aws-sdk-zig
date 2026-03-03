@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SelfManageTargetDestination = enum {
     none_specified,
     amazon_elastic_cloud_compute,
@@ -5,9 +7,27 @@ pub const SelfManageTargetDestination = enum {
     amazon_elastic_kubernetes_service,
 
     pub const json_field_names = .{
-        .none_specified = "NONE_SPECIFIED",
-        .amazon_elastic_cloud_compute = "AMAZON_ELASTIC_CLOUD_COMPUTE",
-        .amazon_elastic_container_service = "AMAZON_ELASTIC_CONTAINER_SERVICE",
-        .amazon_elastic_kubernetes_service = "AMAZON_ELASTIC_KUBERNETES_SERVICE",
+        .none_specified = "None specified",
+        .amazon_elastic_cloud_compute = "Amazon Elastic Cloud Compute (EC2)",
+        .amazon_elastic_container_service = "Amazon Elastic Container Service (ECS)",
+        .amazon_elastic_kubernetes_service = "Amazon Elastic Kubernetes Service (EKS)",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none_specified => "None specified",
+            .amazon_elastic_cloud_compute => "Amazon Elastic Cloud Compute (EC2)",
+            .amazon_elastic_container_service => "Amazon Elastic Container Service (ECS)",
+            .amazon_elastic_kubernetes_service => "Amazon Elastic Kubernetes Service (EKS)",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

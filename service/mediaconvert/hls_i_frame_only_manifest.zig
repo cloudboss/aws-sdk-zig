@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Generate a variant manifest that lists only the I-frames for this rendition.
 /// You might use this manifest as part of a workflow that creates preview
 /// functions for your video. MediaConvert adds both the I-frame only variant
@@ -17,4 +19,21 @@ pub const HlsIFrameOnlyManifest = enum {
         .include_as_ts = "INCLUDE_AS_TS",
         .exclude = "EXCLUDE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .include => "INCLUDE",
+            .include_as_ts => "INCLUDE_AS_TS",
+            .exclude => "EXCLUDE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DkimSigningAttributesOrigin = enum {
     aws_ses,
     external,
@@ -60,4 +62,47 @@ pub const DkimSigningAttributesOrigin = enum {
         .aws_ses_ap_southeast_5 = "AWS_SES_AP_SOUTHEAST_5",
         .aws_ses_ca_west_1 = "AWS_SES_CA_WEST_1",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .aws_ses => "AWS_SES",
+            .external => "EXTERNAL",
+            .aws_ses_af_south_1 => "AWS_SES_AF_SOUTH_1",
+            .aws_ses_eu_north_1 => "AWS_SES_EU_NORTH_1",
+            .aws_ses_ap_south_1 => "AWS_SES_AP_SOUTH_1",
+            .aws_ses_eu_west_3 => "AWS_SES_EU_WEST_3",
+            .aws_ses_eu_west_2 => "AWS_SES_EU_WEST_2",
+            .aws_ses_eu_south_1 => "AWS_SES_EU_SOUTH_1",
+            .aws_ses_eu_west_1 => "AWS_SES_EU_WEST_1",
+            .aws_ses_ap_northeast_3 => "AWS_SES_AP_NORTHEAST_3",
+            .aws_ses_ap_northeast_2 => "AWS_SES_AP_NORTHEAST_2",
+            .aws_ses_me_south_1 => "AWS_SES_ME_SOUTH_1",
+            .aws_ses_ap_northeast_1 => "AWS_SES_AP_NORTHEAST_1",
+            .aws_ses_il_central_1 => "AWS_SES_IL_CENTRAL_1",
+            .aws_ses_sa_east_1 => "AWS_SES_SA_EAST_1",
+            .aws_ses_ca_central_1 => "AWS_SES_CA_CENTRAL_1",
+            .aws_ses_ap_southeast_1 => "AWS_SES_AP_SOUTHEAST_1",
+            .aws_ses_ap_southeast_2 => "AWS_SES_AP_SOUTHEAST_2",
+            .aws_ses_ap_southeast_3 => "AWS_SES_AP_SOUTHEAST_3",
+            .aws_ses_eu_central_1 => "AWS_SES_EU_CENTRAL_1",
+            .aws_ses_us_east_1 => "AWS_SES_US_EAST_1",
+            .aws_ses_us_east_2 => "AWS_SES_US_EAST_2",
+            .aws_ses_us_west_1 => "AWS_SES_US_WEST_1",
+            .aws_ses_us_west_2 => "AWS_SES_US_WEST_2",
+            .aws_ses_me_central_1 => "AWS_SES_ME_CENTRAL_1",
+            .aws_ses_ap_south_2 => "AWS_SES_AP_SOUTH_2",
+            .aws_ses_eu_central_2 => "AWS_SES_EU_CENTRAL_2",
+            .aws_ses_ap_southeast_5 => "AWS_SES_AP_SOUTHEAST_5",
+            .aws_ses_ca_west_1 => "AWS_SES_CA_WEST_1",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

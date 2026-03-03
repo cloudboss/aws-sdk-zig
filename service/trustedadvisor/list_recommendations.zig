@@ -156,25 +156,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendationsInpu
     if (input.pillar) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "pillar=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.source) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "source=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "status=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);

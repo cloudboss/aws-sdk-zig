@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourceType = enum {
     aws_s3_bucket,
     aws_iam_role,
@@ -18,22 +20,53 @@ pub const ResourceType = enum {
     aws_iam_user,
 
     pub const json_field_names = .{
-        .aws_s3_bucket = "AWS_S3_BUCKET",
-        .aws_iam_role = "AWS_IAM_ROLE",
-        .aws_sqs_queue = "AWS_SQS_QUEUE",
-        .aws_lambda_function = "AWS_LAMBDA_FUNCTION",
-        .aws_lambda_layerversion = "AWS_LAMBDA_LAYERVERSION",
-        .aws_kms_key = "AWS_KMS_KEY",
-        .aws_secretsmanager_secret = "AWS_SECRETSMANAGER_SECRET",
-        .aws_efs_filesystem = "AWS_EFS_FILESYSTEM",
-        .aws_ec2_snapshot = "AWS_EC2_SNAPSHOT",
-        .aws_ecr_repository = "AWS_ECR_REPOSITORY",
-        .aws_rds_dbsnapshot = "AWS_RDS_DBSNAPSHOT",
-        .aws_rds_dbclustersnapshot = "AWS_RDS_DBCLUSTERSNAPSHOT",
-        .aws_sns_topic = "AWS_SNS_TOPIC",
-        .aws_s3_express_directorybucket = "AWS_S3EXPRESS_DIRECTORYBUCKET",
-        .aws_dynamodb_table = "AWS_DYNAMODB_TABLE",
-        .aws_dynamodb_stream = "AWS_DYNAMODB_STREAM",
-        .aws_iam_user = "AWS_IAM_USER",
+        .aws_s3_bucket = "AWS::S3::Bucket",
+        .aws_iam_role = "AWS::IAM::Role",
+        .aws_sqs_queue = "AWS::SQS::Queue",
+        .aws_lambda_function = "AWS::Lambda::Function",
+        .aws_lambda_layerversion = "AWS::Lambda::LayerVersion",
+        .aws_kms_key = "AWS::KMS::Key",
+        .aws_secretsmanager_secret = "AWS::SecretsManager::Secret",
+        .aws_efs_filesystem = "AWS::EFS::FileSystem",
+        .aws_ec2_snapshot = "AWS::EC2::Snapshot",
+        .aws_ecr_repository = "AWS::ECR::Repository",
+        .aws_rds_dbsnapshot = "AWS::RDS::DBSnapshot",
+        .aws_rds_dbclustersnapshot = "AWS::RDS::DBClusterSnapshot",
+        .aws_sns_topic = "AWS::SNS::Topic",
+        .aws_s3_express_directorybucket = "AWS::S3Express::DirectoryBucket",
+        .aws_dynamodb_table = "AWS::DynamoDB::Table",
+        .aws_dynamodb_stream = "AWS::DynamoDB::Stream",
+        .aws_iam_user = "AWS::IAM::User",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .aws_s3_bucket => "AWS::S3::Bucket",
+            .aws_iam_role => "AWS::IAM::Role",
+            .aws_sqs_queue => "AWS::SQS::Queue",
+            .aws_lambda_function => "AWS::Lambda::Function",
+            .aws_lambda_layerversion => "AWS::Lambda::LayerVersion",
+            .aws_kms_key => "AWS::KMS::Key",
+            .aws_secretsmanager_secret => "AWS::SecretsManager::Secret",
+            .aws_efs_filesystem => "AWS::EFS::FileSystem",
+            .aws_ec2_snapshot => "AWS::EC2::Snapshot",
+            .aws_ecr_repository => "AWS::ECR::Repository",
+            .aws_rds_dbsnapshot => "AWS::RDS::DBSnapshot",
+            .aws_rds_dbclustersnapshot => "AWS::RDS::DBClusterSnapshot",
+            .aws_sns_topic => "AWS::SNS::Topic",
+            .aws_s3_express_directorybucket => "AWS::S3Express::DirectoryBucket",
+            .aws_dynamodb_table => "AWS::DynamoDB::Table",
+            .aws_dynamodb_stream => "AWS::DynamoDB::Stream",
+            .aws_iam_user => "AWS::IAM::User",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

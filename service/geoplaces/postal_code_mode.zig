@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const PostalCodeMode = enum {
     merge_all_spanned_localities,
     enumerate_spanned_localities,
 
     pub const json_field_names = .{
-        .merge_all_spanned_localities = "MERGE_ALL_SPANNED_LOCALITIES",
-        .enumerate_spanned_localities = "ENUMERATE_SPANNED_LOCALITIES",
+        .merge_all_spanned_localities = "MergeAllSpannedLocalities",
+        .enumerate_spanned_localities = "EnumerateSpannedLocalities",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .merge_all_spanned_localities => "MergeAllSpannedLocalities",
+            .enumerate_spanned_localities => "EnumerateSpannedLocalities",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

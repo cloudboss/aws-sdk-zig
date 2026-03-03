@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into
 /// the two channels.
 pub const Eac3SurroundMode = enum {
@@ -10,4 +12,21 @@ pub const Eac3SurroundMode = enum {
         .enabled = "ENABLED",
         .disabled = "DISABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .not_indicated => "NOT_INDICATED",
+            .enabled => "ENABLED",
+            .disabled => "DISABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

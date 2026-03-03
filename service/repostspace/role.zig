@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Role = enum {
     expert,
     moderator,
@@ -10,4 +12,22 @@ pub const Role = enum {
         .administrator = "ADMINISTRATOR",
         .supportrequestor = "SUPPORTREQUESTOR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .expert => "EXPERT",
+            .moderator => "MODERATOR",
+            .administrator => "ADMINISTRATOR",
+            .supportrequestor => "SUPPORTREQUESTOR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

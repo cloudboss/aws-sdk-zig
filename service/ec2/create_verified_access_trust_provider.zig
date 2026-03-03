@@ -128,7 +128,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessTru
     }
     if (input.device_trust_provider_type) |v| {
         try body_buf.appendSlice(allocator, "&DeviceTrustProviderType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
@@ -218,7 +218,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessTru
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -245,10 +245,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessTru
         }
     }
     try body_buf.appendSlice(allocator, "&TrustProviderType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.trust_provider_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.trust_provider_type.wireName());
     if (input.user_trust_provider_type) |v| {
         try body_buf.appendSlice(allocator, "&UserTrustProviderType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

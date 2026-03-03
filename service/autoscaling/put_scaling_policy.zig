@@ -249,7 +249,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
     if (input.predictive_scaling_configuration) |v| {
         if (v.max_capacity_breach_behavior) |sv| {
             try body_buf.appendSlice(allocator, "&PredictiveScalingConfiguration.MaxCapacityBreachBehavior=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.max_capacity_buffer) |sv| {
             try body_buf.appendSlice(allocator, "&PredictiveScalingConfiguration.MaxCapacityBuffer=");
@@ -502,7 +502,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedLoadMetricSpecification.PredefinedMetricType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.predefined_metric_type));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.predefined_metric_type.wireName());
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
@@ -518,7 +518,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedMetricPairSpecification.PredefinedMetricType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.predefined_metric_type));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.predefined_metric_type.wireName());
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
@@ -534,7 +534,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedScalingMetricSpecification.PredefinedMetricType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.predefined_metric_type));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.predefined_metric_type.wireName());
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
@@ -554,7 +554,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
         }
         if (v.mode) |sv| {
             try body_buf.appendSlice(allocator, "&PredictiveScalingConfiguration.Mode=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.scheduling_buffer_time) |sv| {
             try body_buf.appendSlice(allocator, "&PredictiveScalingConfiguration.SchedulingBufferTime=");
@@ -721,7 +721,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
             }
             if (sv.statistic) |sv2| {
                 try body_buf.appendSlice(allocator, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Statistic=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
             if (sv.unit) |sv2| {
                 try body_buf.appendSlice(allocator, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Unit=");
@@ -734,7 +734,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
         }
         if (v.predefined_metric_specification) |sv| {
             try body_buf.appendSlice(allocator, "&TargetTrackingConfiguration.PredefinedMetricSpecification.PredefinedMetricType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv.predefined_metric_type));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.predefined_metric_type.wireName());
             if (sv.resource_label) |sv2| {
                 try body_buf.appendSlice(allocator, "&TargetTrackingConfiguration.PredefinedMetricSpecification.ResourceLabel=");
                 try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);

@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyUsageLimitInput, 
     }
     if (input.breach_action) |v| {
         try body_buf.appendSlice(allocator, "&BreachAction=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&UsageLimitId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.usage_limit_id);
@@ -106,15 +106,15 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Amount")) {
                     result.amount = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "BreachAction")) {
-                    result.breach_action = std.meta.stringToEnum(UsageLimitBreachAction, try reader.readElementText());
+                    result.breach_action = UsageLimitBreachAction.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ClusterIdentifier")) {
                     result.cluster_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FeatureType")) {
-                    result.feature_type = std.meta.stringToEnum(UsageLimitFeatureType, try reader.readElementText());
+                    result.feature_type = UsageLimitFeatureType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LimitType")) {
-                    result.limit_type = std.meta.stringToEnum(UsageLimitLimitType, try reader.readElementText());
+                    result.limit_type = UsageLimitLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Period")) {
-                    result.period = std.meta.stringToEnum(UsageLimitPeriod, try reader.readElementText());
+                    result.period = UsageLimitPeriod.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try serde.deserializeTagList(allocator, &reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "UsageLimitId")) {

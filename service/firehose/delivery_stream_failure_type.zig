@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DeliveryStreamFailureType = enum {
     vpc_endpoint_service_name_not_found,
     vpc_interface_endpoint_service_access_denied,
@@ -36,4 +38,35 @@ pub const DeliveryStreamFailureType = enum {
         .security_group_access_denied = "SECURITY_GROUP_ACCESS_DENIED",
         .unknown_error = "UNKNOWN_ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .vpc_endpoint_service_name_not_found => "VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND",
+            .vpc_interface_endpoint_service_access_denied => "VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED",
+            .retire_kms_grant_failed => "RETIRE_KMS_GRANT_FAILED",
+            .create_kms_grant_failed => "CREATE_KMS_GRANT_FAILED",
+            .kms_access_denied => "KMS_ACCESS_DENIED",
+            .disabled_kms_key => "DISABLED_KMS_KEY",
+            .invalid_kms_key => "INVALID_KMS_KEY",
+            .kms_key_not_found => "KMS_KEY_NOT_FOUND",
+            .kms_opt_in_required => "KMS_OPT_IN_REQUIRED",
+            .create_eni_failed => "CREATE_ENI_FAILED",
+            .delete_eni_failed => "DELETE_ENI_FAILED",
+            .subnet_not_found => "SUBNET_NOT_FOUND",
+            .security_group_not_found => "SECURITY_GROUP_NOT_FOUND",
+            .eni_access_denied => "ENI_ACCESS_DENIED",
+            .subnet_access_denied => "SUBNET_ACCESS_DENIED",
+            .security_group_access_denied => "SECURITY_GROUP_ACCESS_DENIED",
+            .unknown_error => "UNKNOWN_ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

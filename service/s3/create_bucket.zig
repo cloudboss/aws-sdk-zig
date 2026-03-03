@@ -145,7 +145,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketInput, conf
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }
     if (input.grant_full_control) |v| {
         try request.headers.put(allocator, "x-amz-grant-full-control", v);
@@ -166,7 +166,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketInput, conf
         try request.headers.put(allocator, "x-amz-bucket-object-lock-enabled", if (v) "true" else "false");
     }
     if (input.object_ownership) |v| {
-        try request.headers.put(allocator, "x-amz-object-ownership", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-ownership", v.wireName());
     }
 
     return request;

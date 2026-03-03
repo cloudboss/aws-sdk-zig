@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DecisionType = enum {
     schedule_activity_task,
     request_cancel_activity_task,
@@ -28,4 +30,31 @@ pub const DecisionType = enum {
         .start_child_workflow_execution = "StartChildWorkflowExecution",
         .schedule_lambda_function = "ScheduleLambdaFunction",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .schedule_activity_task => "ScheduleActivityTask",
+            .request_cancel_activity_task => "RequestCancelActivityTask",
+            .complete_workflow_execution => "CompleteWorkflowExecution",
+            .fail_workflow_execution => "FailWorkflowExecution",
+            .cancel_workflow_execution => "CancelWorkflowExecution",
+            .continue_as_new_workflow_execution => "ContinueAsNewWorkflowExecution",
+            .record_marker => "RecordMarker",
+            .start_timer => "StartTimer",
+            .cancel_timer => "CancelTimer",
+            .signal_external_workflow_execution => "SignalExternalWorkflowExecution",
+            .request_cancel_external_workflow_execution => "RequestCancelExternalWorkflowExecution",
+            .start_child_workflow_execution => "StartChildWorkflowExecution",
+            .schedule_lambda_function => "ScheduleLambdaFunction",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

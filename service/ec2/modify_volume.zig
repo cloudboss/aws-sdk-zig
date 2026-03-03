@@ -155,7 +155,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVolumeInput, conf
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.volume_id);
     if (input.volume_type) |v| {
         try body_buf.appendSlice(allocator, "&VolumeType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const JobLogEvent = enum {
     job_start,
     server_skipped,
@@ -56,4 +58,45 @@ pub const JobLogEvent = enum {
         .update_launch_template_failed = "UPDATE_LAUNCH_TEMPLATE_FAILED",
         .network_recovery_fail = "NETWORK_RECOVERY_FAIL",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .job_start => "JOB_START",
+            .server_skipped => "SERVER_SKIPPED",
+            .cleanup_start => "CLEANUP_START",
+            .cleanup_end => "CLEANUP_END",
+            .cleanup_fail => "CLEANUP_FAIL",
+            .snapshot_start => "SNAPSHOT_START",
+            .snapshot_end => "SNAPSHOT_END",
+            .snapshot_fail => "SNAPSHOT_FAIL",
+            .using_previous_snapshot => "USING_PREVIOUS_SNAPSHOT",
+            .using_previous_snapshot_failed => "USING_PREVIOUS_SNAPSHOT_FAILED",
+            .conversion_start => "CONVERSION_START",
+            .conversion_end => "CONVERSION_END",
+            .conversion_fail => "CONVERSION_FAIL",
+            .launch_start => "LAUNCH_START",
+            .launch_failed => "LAUNCH_FAILED",
+            .job_cancel => "JOB_CANCEL",
+            .job_end => "JOB_END",
+            .deploy_network_configuration_start => "DEPLOY_NETWORK_CONFIGURATION_START",
+            .deploy_network_configuration_end => "DEPLOY_NETWORK_CONFIGURATION_END",
+            .deploy_network_configuration_failed => "DEPLOY_NETWORK_CONFIGURATION_FAILED",
+            .update_network_configuration_start => "UPDATE_NETWORK_CONFIGURATION_START",
+            .update_network_configuration_end => "UPDATE_NETWORK_CONFIGURATION_END",
+            .update_network_configuration_failed => "UPDATE_NETWORK_CONFIGURATION_FAILED",
+            .update_launch_template_start => "UPDATE_LAUNCH_TEMPLATE_START",
+            .update_launch_template_end => "UPDATE_LAUNCH_TEMPLATE_END",
+            .update_launch_template_failed => "UPDATE_LAUNCH_TEMPLATE_FAILED",
+            .network_recovery_fail => "NETWORK_RECOVERY_FAIL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

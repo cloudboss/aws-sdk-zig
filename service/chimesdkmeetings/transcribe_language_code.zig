@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const TranscribeLanguageCode = enum {
     en_us,
     en_gb,
@@ -15,19 +17,47 @@ pub const TranscribeLanguageCode = enum {
     hi_in,
 
     pub const json_field_names = .{
-        .en_us = "EN_US",
-        .en_gb = "EN_GB",
-        .es_us = "ES_US",
-        .fr_ca = "FR_CA",
-        .fr_fr = "FR_FR",
-        .en_au = "EN_AU",
-        .it_it = "IT_IT",
-        .de_de = "DE_DE",
-        .pt_br = "PT_BR",
-        .ja_jp = "JA_JP",
-        .ko_kr = "KO_KR",
-        .zh_cn = "ZH_CN",
-        .th_th = "TH_TH",
-        .hi_in = "HI_IN",
+        .en_us = "en-US",
+        .en_gb = "en-GB",
+        .es_us = "es-US",
+        .fr_ca = "fr-CA",
+        .fr_fr = "fr-FR",
+        .en_au = "en-AU",
+        .it_it = "it-IT",
+        .de_de = "de-DE",
+        .pt_br = "pt-BR",
+        .ja_jp = "ja-JP",
+        .ko_kr = "ko-KR",
+        .zh_cn = "zh-CN",
+        .th_th = "th-TH",
+        .hi_in = "hi-IN",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .en_us => "en-US",
+            .en_gb => "en-GB",
+            .es_us => "es-US",
+            .fr_ca => "fr-CA",
+            .fr_fr => "fr-FR",
+            .en_au => "en-AU",
+            .it_it => "it-IT",
+            .de_de => "de-DE",
+            .pt_br => "pt-BR",
+            .ja_jp => "ja-JP",
+            .ko_kr => "ko-KR",
+            .zh_cn => "zh-CN",
+            .th_th => "th-TH",
+            .hi_in => "hi-IN",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

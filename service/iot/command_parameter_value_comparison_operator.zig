@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CommandParameterValueComparisonOperator = enum {
     equals,
     not_equals,
@@ -22,4 +24,28 @@ pub const CommandParameterValueComparisonOperator = enum {
         .in_range = "IN_RANGE",
         .not_in_range = "NOT_IN_RANGE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .equals => "EQUALS",
+            .not_equals => "NOT_EQUALS",
+            .less_than => "LESS_THAN",
+            .less_than_equals => "LESS_THAN_EQUALS",
+            .greater_than => "GREATER_THAN",
+            .greater_than_equals => "GREATER_THAN_EQUALS",
+            .in_set => "IN_SET",
+            .not_in_set => "NOT_IN_SET",
+            .in_range => "IN_RANGE",
+            .not_in_range => "NOT_IN_RANGE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

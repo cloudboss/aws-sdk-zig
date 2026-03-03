@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportImageInput, confi
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&DiskImageFormat=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.disk_image_format));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.disk_image_format.wireName());
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
@@ -151,7 +151,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportImageInput, confi
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -210,7 +210,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "diskImageFormat")) {
-                    result.disk_image_format = std.meta.stringToEnum(DiskImageFormat, try reader.readElementText());
+                    result.disk_image_format = DiskImageFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "exportImageTaskId")) {
                     result.export_image_task_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imageId")) {

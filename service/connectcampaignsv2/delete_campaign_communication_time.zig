@@ -61,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteCampaignCommunica
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "config=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.config));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.config.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

@@ -143,7 +143,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.LambdaAction.InvocationType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.invocation_type) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
@@ -201,7 +201,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.SNSAction.Encoding=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.encoding) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
@@ -216,7 +216,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.StopAction.Scope=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.scope));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.scope.wireName());
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
@@ -266,7 +266,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
     }
     if (input.rule.tls_policy) |sv| {
         try body_buf.appendSlice(allocator, "&Rule.TlsPolicy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     try body_buf.appendSlice(allocator, "&RuleSetName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.rule_set_name);

@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateHostsInput, con
     }
     if (input.auto_placement) |v| {
         try body_buf.appendSlice(allocator, "&AutoPlacement=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.availability_zone) |v| {
         try body_buf.appendSlice(allocator, "&AvailabilityZone=");
@@ -183,11 +183,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateHostsInput, con
     }
     if (input.host_maintenance) |v| {
         try body_buf.appendSlice(allocator, "&HostMaintenance=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.host_recovery) |v| {
         try body_buf.appendSlice(allocator, "&HostRecovery=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.instance_family) |v| {
         try body_buf.appendSlice(allocator, "&InstanceFamily=");
@@ -213,7 +213,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateHostsInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

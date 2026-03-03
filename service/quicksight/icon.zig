@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Icon = enum {
     caret_up,
     caret_down,
@@ -54,4 +56,44 @@ pub const Icon = enum {
         .checkmark = "CHECKMARK",
         .x = "X",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .caret_up => "CARET_UP",
+            .caret_down => "CARET_DOWN",
+            .plus => "PLUS",
+            .minus => "MINUS",
+            .arrow_up => "ARROW_UP",
+            .arrow_down => "ARROW_DOWN",
+            .arrow_left => "ARROW_LEFT",
+            .arrow_up_left => "ARROW_UP_LEFT",
+            .arrow_down_left => "ARROW_DOWN_LEFT",
+            .arrow_right => "ARROW_RIGHT",
+            .arrow_up_right => "ARROW_UP_RIGHT",
+            .arrow_down_right => "ARROW_DOWN_RIGHT",
+            .face_up => "FACE_UP",
+            .face_down => "FACE_DOWN",
+            .face_flat => "FACE_FLAT",
+            .one_bar => "ONE_BAR",
+            .two_bar => "TWO_BAR",
+            .three_bar => "THREE_BAR",
+            .circle => "CIRCLE",
+            .triangle => "TRIANGLE",
+            .square => "SQUARE",
+            .flag => "FLAG",
+            .thumbs_up => "THUMBS_UP",
+            .thumbs_down => "THUMBS_DOWN",
+            .checkmark => "CHECKMARK",
+            .x => "X",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how MediaConvert handles gaps between media segments in your TAMS
 /// source. Gaps can occur in live streams due to network issues or other
 /// interruptions. Choose from the following options: * Skip gaps - Default.
@@ -17,4 +19,21 @@ pub const TamsGapHandling = enum {
         .fill_with_black = "FILL_WITH_BLACK",
         .hold_last_frame = "HOLD_LAST_FRAME",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .skip_gaps => "SKIP_GAPS",
+            .fill_with_black => "FILL_WITH_BLACK",
+            .hold_last_frame => "HOLD_LAST_FRAME",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

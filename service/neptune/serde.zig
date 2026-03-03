@@ -1872,7 +1872,7 @@ pub fn deserializeEvent(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "SourceIdentifier")) {
                     result.source_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceType")) {
-                    result.source_type = std.meta.stringToEnum(SourceType, try reader.readElementText());
+                    result.source_type = SourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1966,7 +1966,7 @@ pub fn deserializeFailoverState(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "IsDataLossAllowed")) {
                     result.is_data_loss_allowed = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(FailoverStatus, try reader.readElementText());
+                    result.status = FailoverStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ToDbClusterArn")) {
                     result.to_db_cluster_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2170,7 +2170,7 @@ pub fn deserializeParameter(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 if (std.mem.eql(u8, e.local, "AllowedValues")) {
                     result.allowed_values = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ApplyMethod")) {
-                    result.apply_method = std.meta.stringToEnum(ApplyMethod, try reader.readElementText());
+                    result.apply_method = ApplyMethod.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ApplyType")) {
                     result.apply_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DataType")) {
@@ -2750,7 +2750,7 @@ pub fn serializeParameter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.apply_method) |v| {
         try buf.appendSlice(allocator, "<ApplyMethod>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ApplyMethod>");
     }
     if (value.apply_type) |v| {

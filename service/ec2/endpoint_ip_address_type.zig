@@ -1,5 +1,30 @@
+const std = @import("std");
+
 pub const EndpointIpAddressType = enum {
     ipv_4,
     ipv_6,
     dual_stack,
+
+    pub const json_field_names = .{
+        .ipv_4 = "ipv4",
+        .ipv_6 = "ipv6",
+        .dual_stack = "dual-stack",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ipv_4 => "ipv4",
+            .ipv_6 => "ipv6",
+            .dual_stack => "dual-stack",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

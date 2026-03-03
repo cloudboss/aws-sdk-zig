@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListVirtualMFADevicesIn
     try body_buf.appendSlice(allocator, "Action=ListVirtualMFADevices&Version=2010-05-08");
     if (input.assignment_status) |v| {
         try body_buf.appendSlice(allocator, "&AssignmentStatus=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.marker) |v| {
         try body_buf.appendSlice(allocator, "&Marker=");

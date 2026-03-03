@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// When you set Noise reducer to Temporal, the bandwidth and sharpness of your
 /// output is reduced. You can optionally use Post temporal sharpening to apply
 /// sharpening to the edges of your output. Note that Post temporal sharpening
@@ -17,4 +19,21 @@ pub const NoiseFilterPostTemporalSharpening = enum {
         .enabled = "ENABLED",
         .auto = "AUTO",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .enabled => "ENABLED",
+            .auto => "AUTO",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

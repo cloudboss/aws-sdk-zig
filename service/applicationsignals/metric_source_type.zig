@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const MetricSourceType = enum {
     service_operation,
     cloudwatch_metric,
     service_dependency,
 
     pub const json_field_names = .{
-        .service_operation = "SERVICE_OPERATION",
-        .cloudwatch_metric = "CLOUDWATCH_METRIC",
-        .service_dependency = "SERVICE_DEPENDENCY",
+        .service_operation = "ServiceOperation",
+        .cloudwatch_metric = "CloudWatchMetric",
+        .service_dependency = "ServiceDependency",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .service_operation => "ServiceOperation",
+            .cloudwatch_metric => "CloudWatchMetric",
+            .service_dependency => "ServiceDependency",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

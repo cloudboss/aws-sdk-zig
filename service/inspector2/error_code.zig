@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ErrorCode = enum {
     already_enabled,
     enable_in_progress,
@@ -36,4 +38,35 @@ pub const ErrorCode = enum {
         .ec2_ssm_association_version_limit_exceeded = "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED",
         .blocked_by_organization_policy = "BLOCKED_BY_ORGANIZATION_POLICY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .already_enabled => "ALREADY_ENABLED",
+            .enable_in_progress => "ENABLE_IN_PROGRESS",
+            .disable_in_progress => "DISABLE_IN_PROGRESS",
+            .suspend_in_progress => "SUSPEND_IN_PROGRESS",
+            .resource_not_found => "RESOURCE_NOT_FOUND",
+            .access_denied => "ACCESS_DENIED",
+            .internal_error => "INTERNAL_ERROR",
+            .ssm_unavailable => "SSM_UNAVAILABLE",
+            .ssm_throttled => "SSM_THROTTLED",
+            .eventbridge_unavailable => "EVENTBRIDGE_UNAVAILABLE",
+            .eventbridge_throttled => "EVENTBRIDGE_THROTTLED",
+            .resource_scan_not_disabled => "RESOURCE_SCAN_NOT_DISABLED",
+            .disassociate_all_members => "DISASSOCIATE_ALL_MEMBERS",
+            .account_is_isolated => "ACCOUNT_IS_ISOLATED",
+            .ec2_ssm_resource_data_sync_limit_exceeded => "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED",
+            .ec2_ssm_association_version_limit_exceeded => "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED",
+            .blocked_by_organization_policy => "BLOCKED_BY_ORGANIZATION_POLICY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

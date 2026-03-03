@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The color space transfer characteristics of the video track, defining the
 /// relationship between linear light values and the encoded signal values. This
 /// affects brightness and contrast reproduction.
@@ -43,4 +45,37 @@ pub const TransferCharacteristics = enum {
         .arib_b67 = "ARIB_B67",
         .last = "LAST",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .itu_709 => "ITU_709",
+            .unspecified => "UNSPECIFIED",
+            .reserved => "RESERVED",
+            .itu_470_m => "ITU_470M",
+            .itu_470_bg => "ITU_470BG",
+            .smpte_170_m => "SMPTE_170M",
+            .smpte_240_m => "SMPTE_240M",
+            .linear => "LINEAR",
+            .log10_2 => "LOG10_2",
+            .loc10_2_5 => "LOC10_2_5",
+            .iec_61966_2_4 => "IEC_61966_2_4",
+            .itu_1361 => "ITU_1361",
+            .iec_61966_2_1 => "IEC_61966_2_1",
+            .itu_2020_10_bit => "ITU_2020_10bit",
+            .itu_2020_12_bit => "ITU_2020_12bit",
+            .smpte_2084 => "SMPTE_2084",
+            .smpte_428_1 => "SMPTE_428_1",
+            .arib_b67 => "ARIB_B67",
+            .last => "LAST",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DashboardErrorType = enum {
     access_denied,
     source_not_found,
@@ -22,4 +24,28 @@ pub const DashboardErrorType = enum {
         .column_geographic_role_mismatch = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
         .column_replacement_missing = "COLUMN_REPLACEMENT_MISSING",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .access_denied => "ACCESS_DENIED",
+            .source_not_found => "SOURCE_NOT_FOUND",
+            .data_set_not_found => "DATA_SET_NOT_FOUND",
+            .internal_failure => "INTERNAL_FAILURE",
+            .parameter_value_incompatible => "PARAMETER_VALUE_INCOMPATIBLE",
+            .parameter_type_invalid => "PARAMETER_TYPE_INVALID",
+            .parameter_not_found => "PARAMETER_NOT_FOUND",
+            .column_type_mismatch => "COLUMN_TYPE_MISMATCH",
+            .column_geographic_role_mismatch => "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
+            .column_replacement_missing => "COLUMN_REPLACEMENT_MISSING",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -303,7 +303,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVolumeInput, conf
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -339,7 +339,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVolumeInput, conf
     }
     if (input.volume_type) |v| {
         try body_buf.appendSlice(allocator, "&VolumeType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);
@@ -400,9 +400,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "sourceVolumeId")) {
                     result.source_volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(VolumeState, try reader.readElementText());
+                    result.state = VolumeState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try serde.deserializeTagList(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "throughput")) {
@@ -412,7 +412,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "volumeInitializationRate")) {
                     result.volume_initialization_rate = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "volumeType")) {
-                    result.volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

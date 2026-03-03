@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Timezone = enum {
     utc,
     africa_johannesburg,
@@ -130,4 +132,82 @@ pub const Timezone = enum {
         .us_mountain = "US_MOUNTAIN",
         .us_pacific = "US_PACIFIC",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .utc => "UTC",
+            .africa_johannesburg => "AFRICA_JOHANNESBURG",
+            .america_montreal => "AMERICA_MONTREAL",
+            .america_sao_paulo => "AMERICA_SAO_PAULO",
+            .asia_bahrain => "ASIA_BAHRAIN",
+            .asia_bangkok => "ASIA_BANGKOK",
+            .asia_calcutta => "ASIA_CALCUTTA",
+            .asia_dubai => "ASIA_DUBAI",
+            .asia_hong_kong => "ASIA_HONG_KONG",
+            .asia_jakarta => "ASIA_JAKARTA",
+            .asia_kuala_lumpur => "ASIA_KUALA_LUMPUR",
+            .asia_seoul => "ASIA_SEOUL",
+            .asia_shanghai => "ASIA_SHANGHAI",
+            .asia_singapore => "ASIA_SINGAPORE",
+            .asia_taipei => "ASIA_TAIPEI",
+            .asia_tokyo => "ASIA_TOKYO",
+            .australia_melbourne => "AUSTRALIA_MELBOURNE",
+            .australia_sydney => "AUSTRALIA_SYDNEY",
+            .canada_central => "CANADA_CENTRAL",
+            .cet => "CET",
+            .cst6_cdt => "CST6CDT",
+            .etc_gmt => "ETC_GMT",
+            .etc_gmt0 => "ETC_GMT0",
+            .etc_gmt_add_0 => "ETC_GMT_ADD_0",
+            .etc_gmt_add_1 => "ETC_GMT_ADD_1",
+            .etc_gmt_add_10 => "ETC_GMT_ADD_10",
+            .etc_gmt_add_11 => "ETC_GMT_ADD_11",
+            .etc_gmt_add_12 => "ETC_GMT_ADD_12",
+            .etc_gmt_add_2 => "ETC_GMT_ADD_2",
+            .etc_gmt_add_3 => "ETC_GMT_ADD_3",
+            .etc_gmt_add_4 => "ETC_GMT_ADD_4",
+            .etc_gmt_add_5 => "ETC_GMT_ADD_5",
+            .etc_gmt_add_6 => "ETC_GMT_ADD_6",
+            .etc_gmt_add_7 => "ETC_GMT_ADD_7",
+            .etc_gmt_add_8 => "ETC_GMT_ADD_8",
+            .etc_gmt_add_9 => "ETC_GMT_ADD_9",
+            .etc_gmt_neg_0 => "ETC_GMT_NEG_0",
+            .etc_gmt_neg_1 => "ETC_GMT_NEG_1",
+            .etc_gmt_neg_10 => "ETC_GMT_NEG_10",
+            .etc_gmt_neg_11 => "ETC_GMT_NEG_11",
+            .etc_gmt_neg_12 => "ETC_GMT_NEG_12",
+            .etc_gmt_neg_13 => "ETC_GMT_NEG_13",
+            .etc_gmt_neg_14 => "ETC_GMT_NEG_14",
+            .etc_gmt_neg_2 => "ETC_GMT_NEG_2",
+            .etc_gmt_neg_3 => "ETC_GMT_NEG_3",
+            .etc_gmt_neg_4 => "ETC_GMT_NEG_4",
+            .etc_gmt_neg_5 => "ETC_GMT_NEG_5",
+            .etc_gmt_neg_6 => "ETC_GMT_NEG_6",
+            .etc_gmt_neg_7 => "ETC_GMT_NEG_7",
+            .etc_gmt_neg_8 => "ETC_GMT_NEG_8",
+            .etc_gmt_neg_9 => "ETC_GMT_NEG_9",
+            .europe_dublin => "EUROPE_DUBLIN",
+            .europe_london => "EUROPE_LONDON",
+            .europe_paris => "EUROPE_PARIS",
+            .europe_stockholm => "EUROPE_STOCKHOLM",
+            .europe_zurich => "EUROPE_ZURICH",
+            .israel => "ISRAEL",
+            .mexico_general => "MEXICO_GENERAL",
+            .mst7_mdt => "MST7MDT",
+            .pacific_auckland => "PACIFIC_AUCKLAND",
+            .us_central => "US_CENTRAL",
+            .us_eastern => "US_EASTERN",
+            .us_mountain => "US_MOUNTAIN",
+            .us_pacific => "US_PACIFIC",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

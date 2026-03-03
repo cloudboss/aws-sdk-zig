@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSSLPoliciesInpu
     try body_buf.appendSlice(allocator, "Action=DescribeSSLPolicies&Version=2015-12-01");
     if (input.load_balancer_type) |v| {
         try body_buf.appendSlice(allocator, "&LoadBalancerType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.marker) |v| {
         try body_buf.appendSlice(allocator, "&Marker=");

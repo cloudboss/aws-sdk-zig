@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AgentParameterField = enum {
     /// Sampling interval in milliseconds used to sample profiles.
     sampling_interval_in_milliseconds,
@@ -12,10 +14,29 @@ pub const AgentParameterField = enum {
     max_stack_depth,
 
     pub const json_field_names = .{
-        .sampling_interval_in_milliseconds = "SAMPLING_INTERVAL_IN_MILLISECONDS",
-        .reporting_interval_in_milliseconds = "REPORTING_INTERVAL_IN_MILLISECONDS",
-        .minimum_time_for_reporting_in_milliseconds = "MINIMUM_TIME_FOR_REPORTING_IN_MILLISECONDS",
-        .memory_usage_limit_percent = "MEMORY_USAGE_LIMIT_PERCENT",
-        .max_stack_depth = "MAX_STACK_DEPTH",
+        .sampling_interval_in_milliseconds = "SamplingIntervalInMilliseconds",
+        .reporting_interval_in_milliseconds = "ReportingIntervalInMilliseconds",
+        .minimum_time_for_reporting_in_milliseconds = "MinimumTimeForReportingInMilliseconds",
+        .memory_usage_limit_percent = "MemoryUsageLimitPercent",
+        .max_stack_depth = "MaxStackDepth",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .sampling_interval_in_milliseconds => "SamplingIntervalInMilliseconds",
+            .reporting_interval_in_milliseconds => "ReportingIntervalInMilliseconds",
+            .minimum_time_for_reporting_in_milliseconds => "MinimumTimeForReportingInMilliseconds",
+            .memory_usage_limit_percent => "MemoryUsageLimitPercent",
+            .max_stack_depth => "MaxStackDepth",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

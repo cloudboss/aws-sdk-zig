@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourcesNumberField = enum {
     total_findings,
     severity_other,
@@ -10,14 +12,37 @@ pub const ResourcesNumberField = enum {
     severity_unknown,
 
     pub const json_field_names = .{
-        .total_findings = "TOTAL_FINDINGS",
-        .severity_other = "SEVERITY_OTHER",
-        .severity_fatal = "SEVERITY_FATAL",
-        .severity_critical = "SEVERITY_CRITICAL",
-        .severity_high = "SEVERITY_HIGH",
-        .severity_medium = "SEVERITY_MEDIUM",
-        .severity_low = "SEVERITY_LOW",
-        .severity_informational = "SEVERITY_INFORMATIONAL",
-        .severity_unknown = "SEVERITY_UNKNOWN",
+        .total_findings = "FindingsSummary.TotalFindings",
+        .severity_other = "FindingsSummary.Severities.Other",
+        .severity_fatal = "FindingsSummary.Severities.Fatal",
+        .severity_critical = "FindingsSummary.Severities.Critical",
+        .severity_high = "FindingsSummary.Severities.High",
+        .severity_medium = "FindingsSummary.Severities.Medium",
+        .severity_low = "FindingsSummary.Severities.Low",
+        .severity_informational = "FindingsSummary.Severities.Informational",
+        .severity_unknown = "FindingsSummary.Severities.Unknown",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .total_findings => "FindingsSummary.TotalFindings",
+            .severity_other => "FindingsSummary.Severities.Other",
+            .severity_fatal => "FindingsSummary.Severities.Fatal",
+            .severity_critical => "FindingsSummary.Severities.Critical",
+            .severity_high => "FindingsSummary.Severities.High",
+            .severity_medium => "FindingsSummary.Severities.Medium",
+            .severity_low => "FindingsSummary.Severities.Low",
+            .severity_informational => "FindingsSummary.Severities.Informational",
+            .severity_unknown => "FindingsSummary.Severities.Unknown",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

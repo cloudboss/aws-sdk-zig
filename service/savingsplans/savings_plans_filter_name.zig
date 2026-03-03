@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SavingsPlansFilterName = enum {
     region,
     ec2_instance_family,
@@ -11,15 +13,39 @@ pub const SavingsPlansFilterName = enum {
     instance_family,
 
     pub const json_field_names = .{
-        .region = "REGION",
-        .ec2_instance_family = "EC2_INSTANCE_FAMILY",
-        .commitment = "COMMITMENT",
-        .upfront = "UPFRONT",
-        .term = "TERM",
-        .savings_plan_type = "SAVINGS_PLAN_TYPE",
-        .payment_option = "PAYMENT_OPTION",
-        .start = "START",
-        .end = "END",
-        .instance_family = "INSTANCE_FAMILY",
+        .region = "region",
+        .ec2_instance_family = "ec2-instance-family",
+        .commitment = "commitment",
+        .upfront = "upfront",
+        .term = "term",
+        .savings_plan_type = "savings-plan-type",
+        .payment_option = "payment-option",
+        .start = "start",
+        .end = "end",
+        .instance_family = "instance-family",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .region => "region",
+            .ec2_instance_family => "ec2-instance-family",
+            .commitment => "commitment",
+            .upfront => "upfront",
+            .term => "term",
+            .savings_plan_type => "savings-plan-type",
+            .payment_option => "payment-option",
+            .start => "start",
+            .end => "end",
+            .instance_family => "instance-family",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

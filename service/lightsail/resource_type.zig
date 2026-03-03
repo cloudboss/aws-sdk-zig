@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourceType = enum {
     container_service,
     instance,
@@ -42,4 +44,38 @@ pub const ResourceType = enum {
         .certificate = "Certificate",
         .bucket = "Bucket",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .container_service => "ContainerService",
+            .instance => "Instance",
+            .static_ip => "StaticIp",
+            .key_pair => "KeyPair",
+            .instance_snapshot => "InstanceSnapshot",
+            .domain => "Domain",
+            .peered_vpc => "PeeredVpc",
+            .load_balancer => "LoadBalancer",
+            .load_balancer_tls_certificate => "LoadBalancerTlsCertificate",
+            .disk => "Disk",
+            .disk_snapshot => "DiskSnapshot",
+            .relational_database => "RelationalDatabase",
+            .relational_database_snapshot => "RelationalDatabaseSnapshot",
+            .export_snapshot_record => "ExportSnapshotRecord",
+            .cloud_formation_stack_record => "CloudFormationStackRecord",
+            .alarm => "Alarm",
+            .contact_method => "ContactMethod",
+            .distribution => "Distribution",
+            .certificate => "Certificate",
+            .bucket => "Bucket",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

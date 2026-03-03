@@ -50,7 +50,7 @@ pub const ResourceRecordSetsChangedWaiter = struct {
 
         if (output.change_info) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "INSYNC")) {
+                if (std.mem.eql(u8, val_1.wireName(), "INSYNC")) {
                     return .success;
                 }
             }

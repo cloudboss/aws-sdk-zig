@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// When you set Adaptive Quantization to Auto, or leave blank, MediaConvert
 /// automatically applies quantization to improve the video quality of your
 /// output. Set Adaptive Quantization to Low, Medium, High, Higher, or Max to
@@ -24,4 +26,25 @@ pub const H265AdaptiveQuantization = enum {
         .max = "MAX",
         .auto = "AUTO",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .off => "OFF",
+            .low => "LOW",
+            .medium => "MEDIUM",
+            .high => "HIGH",
+            .higher => "HIGHER",
+            .max => "MAX",
+            .auto => "AUTO",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

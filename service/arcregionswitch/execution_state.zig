@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExecutionState = enum {
     in_progress,
     paused_by_failed_step,
@@ -12,16 +14,41 @@ pub const ExecutionState = enum {
     completed_monitoring_application_health,
 
     pub const json_field_names = .{
-        .in_progress = "IN_PROGRESS",
-        .paused_by_failed_step = "PAUSED_BY_FAILED_STEP",
-        .paused_by_operator = "PAUSED_BY_OPERATOR",
-        .completed = "COMPLETED",
-        .completed_with_exceptions = "COMPLETED_WITH_EXCEPTIONS",
-        .cancelled = "CANCELLED",
-        .plan_execution_timed_out = "PLAN_EXECUTION_TIMED_OUT",
-        .pending_manual_approval = "PENDING_MANUAL_APPROVAL",
-        .failed = "FAILED",
-        .pending = "PENDING",
-        .completed_monitoring_application_health = "COMPLETED_MONITORING_APPLICATION_HEALTH",
+        .in_progress = "inProgress",
+        .paused_by_failed_step = "pausedByFailedStep",
+        .paused_by_operator = "pausedByOperator",
+        .completed = "completed",
+        .completed_with_exceptions = "completedWithExceptions",
+        .cancelled = "canceled",
+        .plan_execution_timed_out = "planExecutionTimedOut",
+        .pending_manual_approval = "pendingManualApproval",
+        .failed = "failed",
+        .pending = "pending",
+        .completed_monitoring_application_health = "completedMonitoringApplicationHealth",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .in_progress => "inProgress",
+            .paused_by_failed_step => "pausedByFailedStep",
+            .paused_by_operator => "pausedByOperator",
+            .completed => "completed",
+            .completed_with_exceptions => "completedWithExceptions",
+            .cancelled => "canceled",
+            .plan_execution_timed_out => "planExecutionTimedOut",
+            .pending_manual_approval => "pendingManualApproval",
+            .failed => "failed",
+            .pending => "pending",
+            .completed_monitoring_application_health => "completedMonitoringApplicationHealth",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

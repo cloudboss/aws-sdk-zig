@@ -96,7 +96,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "ebsEncryptionByDefault")) {
                     result.ebs_encryption_by_default = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

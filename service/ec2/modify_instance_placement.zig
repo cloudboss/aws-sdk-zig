@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstancePlacement
     try body_buf.appendSlice(allocator, "Action=ModifyInstancePlacement&Version=2016-11-15");
     if (input.affinity) |v| {
         try body_buf.appendSlice(allocator, "&Affinity=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.group_id) |v| {
         try body_buf.appendSlice(allocator, "&GroupId=");
@@ -120,7 +120,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstancePlacement
     }
     if (input.tenancy) |v| {
         try body_buf.appendSlice(allocator, "&Tenancy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

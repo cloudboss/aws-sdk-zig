@@ -187,7 +187,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowLogsInput, co
     if (input.destination_options) |v| {
         if (v.file_format) |sv| {
             try body_buf.appendSlice(allocator, "&DestinationOptions.FileFormat=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.hive_compatible_partitions) |sv| {
             try body_buf.appendSlice(allocator, "&DestinationOptions.HiveCompatiblePartitions=");
@@ -208,7 +208,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowLogsInput, co
     }
     if (input.log_destination_type) |v| {
         try body_buf.appendSlice(allocator, "&LogDestinationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.log_format) |v| {
         try body_buf.appendSlice(allocator, "&LogFormat=");
@@ -230,7 +230,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowLogsInput, co
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }
     try body_buf.appendSlice(allocator, "&ResourceType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.resource_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.resource_type.wireName());
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
@@ -239,7 +239,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowLogsInput, co
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -267,7 +267,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowLogsInput, co
     }
     if (input.traffic_type) |v| {
         try body_buf.appendSlice(allocator, "&TrafficType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

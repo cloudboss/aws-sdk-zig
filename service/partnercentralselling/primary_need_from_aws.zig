@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PrimaryNeedFromAws = enum {
     co_sell_architectural_validation,
     co_sell_business_presentation,
@@ -9,13 +11,35 @@ pub const PrimaryNeedFromAws = enum {
     co_sell_support_for_public_tender_rfx,
 
     pub const json_field_names = .{
-        .co_sell_architectural_validation = "CO_SELL_ARCHITECTURAL_VALIDATION",
-        .co_sell_business_presentation = "CO_SELL_BUSINESS_PRESENTATION",
-        .co_sell_competitive_information = "CO_SELL_COMPETITIVE_INFORMATION",
-        .co_sell_pricing_assistance = "CO_SELL_PRICING_ASSISTANCE",
-        .co_sell_technical_consultation = "CO_SELL_TECHNICAL_CONSULTATION",
-        .co_sell_total_cost_of_ownership_evaluation = "CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION",
-        .co_sell_deal_support = "CO_SELL_DEAL_SUPPORT",
-        .co_sell_support_for_public_tender_rfx = "CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX",
+        .co_sell_architectural_validation = "Co-Sell - Architectural Validation",
+        .co_sell_business_presentation = "Co-Sell - Business Presentation",
+        .co_sell_competitive_information = "Co-Sell - Competitive Information",
+        .co_sell_pricing_assistance = "Co-Sell - Pricing Assistance",
+        .co_sell_technical_consultation = "Co-Sell - Technical Consultation",
+        .co_sell_total_cost_of_ownership_evaluation = "Co-Sell - Total Cost of Ownership Evaluation",
+        .co_sell_deal_support = "Co-Sell - Deal Support",
+        .co_sell_support_for_public_tender_rfx = "Co-Sell - Support for Public Tender / RFx",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .co_sell_architectural_validation => "Co-Sell - Architectural Validation",
+            .co_sell_business_presentation => "Co-Sell - Business Presentation",
+            .co_sell_competitive_information => "Co-Sell - Competitive Information",
+            .co_sell_pricing_assistance => "Co-Sell - Pricing Assistance",
+            .co_sell_technical_consultation => "Co-Sell - Technical Consultation",
+            .co_sell_total_cost_of_ownership_evaluation => "Co-Sell - Total Cost of Ownership Evaluation",
+            .co_sell_deal_support => "Co-Sell - Deal Support",
+            .co_sell_support_for_public_tender_rfx => "Co-Sell - Support for Public Tender / RFx",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

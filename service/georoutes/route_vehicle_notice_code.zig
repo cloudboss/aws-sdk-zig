@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RouteVehicleNoticeCode = enum {
     accurate_polyline_unavailable,
     other,
@@ -28,32 +30,73 @@ pub const RouteVehicleNoticeCode = enum {
     violated_zone_restriction,
 
     pub const json_field_names = .{
-        .accurate_polyline_unavailable = "ACCURATE_POLYLINE_UNAVAILABLE",
-        .other = "OTHER",
-        .potential_violated_avoid_toll_road_usage = "POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE",
-        .potential_violated_carpool_usage = "POTENTIAL_VIOLATED_CARPOOL_USAGE",
-        .potential_violated_turn_restriction_usage = "POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE",
-        .potential_violated_vehicle_restriction_usage = "POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE",
-        .potential_violated_zone_restriction_usage = "POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE",
-        .seasonal_closure = "SEASONAL_CLOSURE",
-        .tolls_data_temporarily_unavailable = "TOLLS_DATA_TEMPORARILY_UNAVAILABLE",
-        .tolls_data_unavailable = "TOLLS_DATA_UNAVAILABLE",
-        .toll_transponder = "TOLL_TRANSPONDER",
-        .violated_avoid_controlled_access_highway = "VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY",
-        .violated_avoid_difficult_turns = "VIOLATED_AVOID_DIFFICULT_TURNS",
-        .violated_avoid_dirt_road = "VIOLATED_AVOID_DIRT_ROAD",
-        .violated_avoid_seasonal_closure = "VIOLATED_AVOID_SEASONAL_CLOSURE",
-        .violated_avoid_toll_road = "VIOLATED_AVOID_TOLL_ROAD",
-        .violated_avoid_toll_transponder = "VIOLATED_AVOID_TOLL_TRANSPONDER",
-        .violated_avoid_truck_road_type = "VIOLATED_AVOID_TRUCK_ROAD_TYPE",
-        .violated_avoid_tunnel = "VIOLATED_AVOID_TUNNEL",
-        .violated_avoid_u_turns = "VIOLATED_AVOID_U_TURNS",
-        .violated_blocked_road = "VIOLATED_BLOCKED_ROAD",
-        .violated_carpool = "VIOLATED_CARPOOL",
-        .violated_emergency_gate = "VIOLATED_EMERGENCY_GATE",
-        .violated_start_direction = "VIOLATED_START_DIRECTION",
-        .violated_turn_restriction = "VIOLATED_TURN_RESTRICTION",
-        .violated_vehicle_restriction = "VIOLATED_VEHICLE_RESTRICTION",
-        .violated_zone_restriction = "VIOLATED_ZONE_RESTRICTION",
+        .accurate_polyline_unavailable = "AccuratePolylineUnavailable",
+        .other = "Other",
+        .potential_violated_avoid_toll_road_usage = "PotentialViolatedAvoidTollRoadUsage",
+        .potential_violated_carpool_usage = "PotentialViolatedCarpoolUsage",
+        .potential_violated_turn_restriction_usage = "PotentialViolatedTurnRestrictionUsage",
+        .potential_violated_vehicle_restriction_usage = "PotentialViolatedVehicleRestrictionUsage",
+        .potential_violated_zone_restriction_usage = "PotentialViolatedZoneRestrictionUsage",
+        .seasonal_closure = "SeasonalClosure",
+        .tolls_data_temporarily_unavailable = "TollsDataTemporarilyUnavailable",
+        .tolls_data_unavailable = "TollsDataUnavailable",
+        .toll_transponder = "TollTransponder",
+        .violated_avoid_controlled_access_highway = "ViolatedAvoidControlledAccessHighway",
+        .violated_avoid_difficult_turns = "ViolatedAvoidDifficultTurns",
+        .violated_avoid_dirt_road = "ViolatedAvoidDirtRoad",
+        .violated_avoid_seasonal_closure = "ViolatedAvoidSeasonalClosure",
+        .violated_avoid_toll_road = "ViolatedAvoidTollRoad",
+        .violated_avoid_toll_transponder = "ViolatedAvoidTollTransponder",
+        .violated_avoid_truck_road_type = "ViolatedAvoidTruckRoadType",
+        .violated_avoid_tunnel = "ViolatedAvoidTunnel",
+        .violated_avoid_u_turns = "ViolatedAvoidUTurns",
+        .violated_blocked_road = "ViolatedBlockedRoad",
+        .violated_carpool = "ViolatedCarpool",
+        .violated_emergency_gate = "ViolatedEmergencyGate",
+        .violated_start_direction = "ViolatedStartDirection",
+        .violated_turn_restriction = "ViolatedTurnRestriction",
+        .violated_vehicle_restriction = "ViolatedVehicleRestriction",
+        .violated_zone_restriction = "ViolatedZoneRestriction",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .accurate_polyline_unavailable => "AccuratePolylineUnavailable",
+            .other => "Other",
+            .potential_violated_avoid_toll_road_usage => "PotentialViolatedAvoidTollRoadUsage",
+            .potential_violated_carpool_usage => "PotentialViolatedCarpoolUsage",
+            .potential_violated_turn_restriction_usage => "PotentialViolatedTurnRestrictionUsage",
+            .potential_violated_vehicle_restriction_usage => "PotentialViolatedVehicleRestrictionUsage",
+            .potential_violated_zone_restriction_usage => "PotentialViolatedZoneRestrictionUsage",
+            .seasonal_closure => "SeasonalClosure",
+            .tolls_data_temporarily_unavailable => "TollsDataTemporarilyUnavailable",
+            .tolls_data_unavailable => "TollsDataUnavailable",
+            .toll_transponder => "TollTransponder",
+            .violated_avoid_controlled_access_highway => "ViolatedAvoidControlledAccessHighway",
+            .violated_avoid_difficult_turns => "ViolatedAvoidDifficultTurns",
+            .violated_avoid_dirt_road => "ViolatedAvoidDirtRoad",
+            .violated_avoid_seasonal_closure => "ViolatedAvoidSeasonalClosure",
+            .violated_avoid_toll_road => "ViolatedAvoidTollRoad",
+            .violated_avoid_toll_transponder => "ViolatedAvoidTollTransponder",
+            .violated_avoid_truck_road_type => "ViolatedAvoidTruckRoadType",
+            .violated_avoid_tunnel => "ViolatedAvoidTunnel",
+            .violated_avoid_u_turns => "ViolatedAvoidUTurns",
+            .violated_blocked_road => "ViolatedBlockedRoad",
+            .violated_carpool => "ViolatedCarpool",
+            .violated_emergency_gate => "ViolatedEmergencyGate",
+            .violated_start_direction => "ViolatedStartDirection",
+            .violated_turn_restriction => "ViolatedTurnRestriction",
+            .violated_vehicle_restriction => "ViolatedVehicleRestriction",
+            .violated_zone_restriction => "ViolatedZoneRestriction",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
     }
     if (input.spot_fleet_request_config.allocation_strategy) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.AllocationStrategy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.spot_fleet_request_config.client_token) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.ClientToken=");
@@ -77,7 +77,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
     }
     if (input.spot_fleet_request_config.excess_capacity_termination_policy) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.ExcessCapacityTerminationPolicy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.spot_fleet_request_config.fulfilled_capacity) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.FulfilledCapacity=");
@@ -87,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.spot_fleet_request_config.iam_fleet_role);
     if (input.spot_fleet_request_config.instance_interruption_behavior) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.InstanceInterruptionBehavior=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.spot_fleet_request_config.instance_pools_to_use_count) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.InstancePoolsToUseCount=");
@@ -217,7 +217,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.BlockDeviceMappings.item.{d}.Ebs.VolumeType=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.volume_type) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                     }
@@ -359,7 +359,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.InstanceRequirements.BareMetal=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.bare_metal) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 if (sv_1.baseline_ebs_bandwidth_mbps) |sv_2| {
@@ -402,7 +402,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.InstanceRequirements.BurstablePerformance=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.burstable_performance) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 if (sv_1.cpu_manufacturers) |lst_2| {
@@ -443,7 +443,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.InstanceRequirements.LocalStorage=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.local_storage) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 if (sv_1.local_storage_types) |lst_2| {
@@ -611,7 +611,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.InstanceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.instance_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -928,7 +928,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.Placement.Tenancy=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.tenancy) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
             }
@@ -985,7 +985,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchSpecifications.item.{d}.TagSpecifications.item.{d}.ResourceType=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.resource_type) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     if (item_1.tags) |lst_2| {
@@ -1163,7 +1163,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BareMetal=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bare_metal) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.baseline_ebs_bandwidth_mbps) |sv_3| {
@@ -1206,7 +1206,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BurstablePerformance=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.burstable_performance) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.cpu_manufacturers) |lst_3| {
@@ -1247,7 +1247,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.LocalStorage=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.local_storage) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.local_storage_types) |lst_3| {
@@ -1415,7 +1415,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceType=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.instance_type) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     {
@@ -1488,7 +1488,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
     }
     if (input.spot_fleet_request_config.on_demand_allocation_strategy) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.OnDemandAllocationStrategy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.spot_fleet_request_config.on_demand_fulfilled_capacity) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.OnDemandFulfilledCapacity=");
@@ -1510,7 +1510,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
         if (sv.capacity_rebalance) |sv2| {
             if (sv2.replacement_strategy) |sv3| {
                 try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.SpotMaintenanceStrategies.CapacityRebalance.ReplacementStrategy=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv3));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv3.wireName());
             }
             if (sv2.termination_delay) |sv3| {
                 try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.SpotMaintenanceStrategies.CapacityRebalance.TerminationDelay=");
@@ -1534,7 +1534,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SpotFleetRequestConfig.TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -1564,7 +1564,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.spot_fleet_request_config.target_capacity}) catch "");
     if (input.spot_fleet_request_config.target_capacity_unit_type) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.TargetCapacityUnitType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.spot_fleet_request_config.terminate_instances_with_expiration) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.TerminateInstancesWithExpiration=");
@@ -1572,7 +1572,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RequestSpotFleetInput, 
     }
     if (input.spot_fleet_request_config.@"type") |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.spot_fleet_request_config.valid_from) |sv| {
         try body_buf.appendSlice(allocator, "&SpotFleetRequestConfig.ValidFrom=");

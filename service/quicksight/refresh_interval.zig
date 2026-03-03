@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RefreshInterval = enum {
     minute15,
     minute30,
@@ -14,4 +16,24 @@ pub const RefreshInterval = enum {
         .weekly = "WEEKLY",
         .monthly = "MONTHLY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .minute15 => "MINUTE15",
+            .minute30 => "MINUTE30",
+            .hourly => "HOURLY",
+            .daily => "DAILY",
+            .weekly => "WEEKLY",
+            .monthly => "MONTHLY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

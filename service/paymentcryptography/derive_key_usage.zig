@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DeriveKeyUsage = enum {
     tr31_b0_base_derivation_key,
     tr31_c0_card_verification_key,
@@ -40,4 +42,37 @@ pub const DeriveKeyUsage = enum {
         .tr31_v1_ibm3624_pin_verification_key = "TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
         .tr31_v2_visa_pin_verification_key = "TR31_V2_VISA_PIN_VERIFICATION_KEY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .tr31_b0_base_derivation_key => "TR31_B0_BASE_DERIVATION_KEY",
+            .tr31_c0_card_verification_key => "TR31_C0_CARD_VERIFICATION_KEY",
+            .tr31_d0_symmetric_data_encryption_key => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+            .tr31_e0_emv_mkey_app_cryptograms => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+            .tr31_e1_emv_mkey_confidentiality => "TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+            .tr31_e2_emv_mkey_integrity => "TR31_E2_EMV_MKEY_INTEGRITY",
+            .tr31_e4_emv_mkey_dynamic_numbers => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+            .tr31_e5_emv_mkey_card_personalization => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+            .tr31_e6_emv_mkey_other => "TR31_E6_EMV_MKEY_OTHER",
+            .tr31_k0_key_encryption_key => "TR31_K0_KEY_ENCRYPTION_KEY",
+            .tr31_k1_key_block_protection_key => "TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+            .tr31_m3_iso_9797_3_mac_key => "TR31_M3_ISO_9797_3_MAC_KEY",
+            .tr31_m1_iso_9797_1_mac_key => "TR31_M1_ISO_9797_1_MAC_KEY",
+            .tr31_m6_iso_9797_5_cmac_key => "TR31_M6_ISO_9797_5_CMAC_KEY",
+            .tr31_m7_hmac_key => "TR31_M7_HMAC_KEY",
+            .tr31_p0_pin_encryption_key => "TR31_P0_PIN_ENCRYPTION_KEY",
+            .tr31_p1_pin_generation_key => "TR31_P1_PIN_GENERATION_KEY",
+            .tr31_v1_ibm3624_pin_verification_key => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+            .tr31_v2_visa_pin_verification_key => "TR31_V2_VISA_PIN_VERIFICATION_KEY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutWarmPoolInput, confi
     }
     if (input.pool_state) |v| {
         try body_buf.appendSlice(allocator, "&PoolState=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

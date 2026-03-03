@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssetRelationshipsI
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "traversalType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.traversal_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.traversal_type.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

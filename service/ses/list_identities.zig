@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdentitiesInput, co
     try body_buf.appendSlice(allocator, "Action=ListIdentities&Version=2010-12-01");
     if (input.identity_type) |v| {
         try body_buf.appendSlice(allocator, "&IdentityType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.max_items) |v| {
         try body_buf.appendSlice(allocator, "&MaxItems=");

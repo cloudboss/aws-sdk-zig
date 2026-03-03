@@ -100,7 +100,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "publicIp")) {
                     result.public_ip = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(Status, try reader.readElementText());
+                    result.status = Status.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

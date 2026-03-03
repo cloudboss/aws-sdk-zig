@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Temporal Filter Strength
 pub const TemporalFilterStrength = enum {
     auto,
@@ -37,4 +39,35 @@ pub const TemporalFilterStrength = enum {
         .strength_15 = "STRENGTH_15",
         .strength_16 = "STRENGTH_16",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .auto => "AUTO",
+            .strength_1 => "STRENGTH_1",
+            .strength_2 => "STRENGTH_2",
+            .strength_3 => "STRENGTH_3",
+            .strength_4 => "STRENGTH_4",
+            .strength_5 => "STRENGTH_5",
+            .strength_6 => "STRENGTH_6",
+            .strength_7 => "STRENGTH_7",
+            .strength_8 => "STRENGTH_8",
+            .strength_9 => "STRENGTH_9",
+            .strength_10 => "STRENGTH_10",
+            .strength_11 => "STRENGTH_11",
+            .strength_12 => "STRENGTH_12",
+            .strength_13 => "STRENGTH_13",
+            .strength_14 => "STRENGTH_14",
+            .strength_15 => "STRENGTH_15",
+            .strength_16 => "STRENGTH_16",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

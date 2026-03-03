@@ -85,9 +85,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTpmEkPubInpu
     try body_buf.appendSlice(allocator, "&InstanceId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_id);
     try body_buf.appendSlice(allocator, "&KeyFormat=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.key_format));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.key_format.wireName());
     try body_buf.appendSlice(allocator, "&KeyType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.key_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.key_type.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -121,9 +121,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyFormat")) {
-                    result.key_format = std.meta.stringToEnum(EkPubKeyFormat, try reader.readElementText());
+                    result.key_format = EkPubKeyFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyType")) {
-                    result.key_type = std.meta.stringToEnum(EkPubKeyType, try reader.readElementText());
+                    result.key_type = EkPubKeyType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyValue")) {
                     result.key_value = try allocator.dupe(u8, try reader.readElementText());
                 } else {

@@ -120,7 +120,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeScheduledAction
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.ScheduledActionFilter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.name));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.name.wireName());
             }
             for (item.values, 0..) |item_1, idx_1| {
                 const n_1 = idx_1 + 1;
@@ -151,7 +151,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeScheduledAction
     }
     if (input.target_action_type) |v| {
         try body_buf.appendSlice(allocator, "&TargetActionType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

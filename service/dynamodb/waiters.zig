@@ -52,12 +52,12 @@ pub const ContributorInsightsEnabledWaiter = struct {
         };
 
         if (output.contributor_insights_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ENABLED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ENABLED")) {
                 return .success;
             }
         }
         if (output.contributor_insights_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
@@ -110,14 +110,14 @@ pub const ExportCompletedWaiter = struct {
 
         if (output.export_description) |val_0| {
             if (val_0.export_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.export_description) |val_0| {
             if (val_0.export_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -171,21 +171,21 @@ pub const ImportCompletedWaiter = struct {
 
         if (output.import_table_description) |val_0| {
             if (val_0.import_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.import_table_description) |val_0| {
             if (val_0.import_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.import_table_description) |val_0| {
             if (val_0.import_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CANCELLED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CANCELLED")) {
                     return .failure;
                 }
             }
@@ -246,7 +246,7 @@ pub const TableExistsWaiter = struct {
 
         if (output.table) |val_0| {
             if (val_0.table_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }

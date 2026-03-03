@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SelfGrantStatus = enum {
     grant_pending,
     revoke_pending,
@@ -16,4 +18,25 @@ pub const SelfGrantStatus = enum {
         .grant_failed = "GRANT_FAILED",
         .revoke_failed = "REVOKE_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .grant_pending => "GRANT_PENDING",
+            .revoke_pending => "REVOKE_PENDING",
+            .grant_in_progress => "GRANT_IN_PROGRESS",
+            .revoke_in_progress => "REVOKE_IN_PROGRESS",
+            .granted => "GRANTED",
+            .grant_failed => "GRANT_FAILED",
+            .revoke_failed => "REVOKE_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

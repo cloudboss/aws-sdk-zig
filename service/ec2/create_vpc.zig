@@ -155,7 +155,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcInput, config:
     }
     if (input.instance_tenancy) |v| {
         try body_buf.appendSlice(allocator, "&InstanceTenancy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ipv_4_ipam_pool_id) |v| {
         try body_buf.appendSlice(allocator, "&Ipv4IpamPoolId=");
@@ -193,7 +193,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcInput, config:
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -222,37 +222,37 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcInput, config:
     if (input.vpc_encryption_control) |v| {
         if (v.egress_only_internet_gateway_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.EgressOnlyInternetGatewayExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.elastic_file_system_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.ElasticFileSystemExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.internet_gateway_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.InternetGatewayExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.lambda_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.LambdaExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         try body_buf.appendSlice(allocator, "&VpcEncryptionControl.Mode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v.mode));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.mode.wireName());
         if (v.nat_gateway_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.NatGatewayExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.virtual_private_gateway_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.VirtualPrivateGatewayExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.vpc_lattice_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.VpcLatticeExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.vpc_peering_exclusion) |sv| {
             try body_buf.appendSlice(allocator, "&VpcEncryptionControl.VpcPeeringExclusion=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
 

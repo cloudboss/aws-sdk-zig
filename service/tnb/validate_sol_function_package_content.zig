@@ -101,7 +101,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ValidateSolFunctionPack
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.content_type) |v| {
-        try request.headers.put(allocator, "Content-Type", @tagName(v));
+        try request.headers.put(allocator, "Content-Type", v.wireName());
     }
 
     return request;

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExportableIdleField = enum {
     account_id,
     resource_arn,
@@ -24,28 +26,65 @@ pub const ExportableIdleField = enum {
     tags,
 
     pub const json_field_names = .{
-        .account_id = "ACCOUNT_ID",
-        .resource_arn = "RESOURCE_ARN",
-        .resource_id = "RESOURCE_ID",
-        .resource_type = "RESOURCE_TYPE",
-        .last_refresh_timestamp = "LAST_REFRESH_TIMESTAMP",
-        .lookback_period_in_days = "LOOKBACK_PERIOD_IN_DAYS",
-        .savings_opportunity = "SAVINGS_OPPORTUNITY",
-        .savings_opportunity_after_discount = "SAVINGS_OPPORTUNITY_AFTER_DISCOUNT",
-        .utilization_metrics_cpu_maximum = "UTILIZATION_METRICS_CPU_MAXIMUM",
-        .utilization_metrics_memory_maximum = "UTILIZATION_METRICS_MEMORY_MAXIMUM",
-        .utilization_metrics_network_out_bytes_per_second_maximum = "UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM",
-        .utilization_metrics_network_in_bytes_per_second_maximum = "UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM",
-        .utilization_metrics_database_connections_maximum = "UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM",
-        .utilization_metrics_ebs_volume_read_iops_maximum = "UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM",
-        .utilization_metrics_ebs_volume_write_iops_maximum = "UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM",
-        .utilization_metrics_volume_read_ops_per_second_maximum = "UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM",
-        .utilization_metrics_volume_write_ops_per_second_maximum = "UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM",
-        .utilization_metrics_active_connection_count_maximum = "UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM",
-        .utilization_metrics_packets_in_from_source_maximum = "UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM",
-        .utilization_metrics_packets_in_from_destination_maximum = "UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM",
-        .finding = "FINDING",
-        .finding_description = "FINDING_DESCRIPTION",
-        .tags = "TAGS",
+        .account_id = "AccountId",
+        .resource_arn = "ResourceArn",
+        .resource_id = "ResourceId",
+        .resource_type = "ResourceType",
+        .last_refresh_timestamp = "LastRefreshTimestamp",
+        .lookback_period_in_days = "LookbackPeriodInDays",
+        .savings_opportunity = "SavingsOpportunity",
+        .savings_opportunity_after_discount = "SavingsOpportunityAfterDiscount",
+        .utilization_metrics_cpu_maximum = "UtilizationMetricsCpuMaximum",
+        .utilization_metrics_memory_maximum = "UtilizationMetricsMemoryMaximum",
+        .utilization_metrics_network_out_bytes_per_second_maximum = "UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+        .utilization_metrics_network_in_bytes_per_second_maximum = "UtilizationMetricsNetworkInBytesPerSecondMaximum",
+        .utilization_metrics_database_connections_maximum = "UtilizationMetricsDatabaseConnectionsMaximum",
+        .utilization_metrics_ebs_volume_read_iops_maximum = "UtilizationMetricsEBSVolumeReadIOPSMaximum",
+        .utilization_metrics_ebs_volume_write_iops_maximum = "UtilizationMetricsEBSVolumeWriteIOPSMaximum",
+        .utilization_metrics_volume_read_ops_per_second_maximum = "UtilizationMetricsVolumeReadOpsPerSecondMaximum",
+        .utilization_metrics_volume_write_ops_per_second_maximum = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
+        .utilization_metrics_active_connection_count_maximum = "UtilizationMetricsActiveConnectionCountMaximum",
+        .utilization_metrics_packets_in_from_source_maximum = "UtilizationMetricsPacketsInFromSourceMaximum",
+        .utilization_metrics_packets_in_from_destination_maximum = "UtilizationMetricsPacketsInFromDestinationMaximum",
+        .finding = "Finding",
+        .finding_description = "FindingDescription",
+        .tags = "Tags",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .account_id => "AccountId",
+            .resource_arn => "ResourceArn",
+            .resource_id => "ResourceId",
+            .resource_type => "ResourceType",
+            .last_refresh_timestamp => "LastRefreshTimestamp",
+            .lookback_period_in_days => "LookbackPeriodInDays",
+            .savings_opportunity => "SavingsOpportunity",
+            .savings_opportunity_after_discount => "SavingsOpportunityAfterDiscount",
+            .utilization_metrics_cpu_maximum => "UtilizationMetricsCpuMaximum",
+            .utilization_metrics_memory_maximum => "UtilizationMetricsMemoryMaximum",
+            .utilization_metrics_network_out_bytes_per_second_maximum => "UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+            .utilization_metrics_network_in_bytes_per_second_maximum => "UtilizationMetricsNetworkInBytesPerSecondMaximum",
+            .utilization_metrics_database_connections_maximum => "UtilizationMetricsDatabaseConnectionsMaximum",
+            .utilization_metrics_ebs_volume_read_iops_maximum => "UtilizationMetricsEBSVolumeReadIOPSMaximum",
+            .utilization_metrics_ebs_volume_write_iops_maximum => "UtilizationMetricsEBSVolumeWriteIOPSMaximum",
+            .utilization_metrics_volume_read_ops_per_second_maximum => "UtilizationMetricsVolumeReadOpsPerSecondMaximum",
+            .utilization_metrics_volume_write_ops_per_second_maximum => "UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
+            .utilization_metrics_active_connection_count_maximum => "UtilizationMetricsActiveConnectionCountMaximum",
+            .utilization_metrics_packets_in_from_source_maximum => "UtilizationMetricsPacketsInFromSourceMaximum",
+            .utilization_metrics_packets_in_from_destination_maximum => "UtilizationMetricsPacketsInFromDestinationMaximum",
+            .finding => "Finding",
+            .finding_description => "FindingDescription",
+            .tags => "Tags",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -184,7 +184,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPackageVersionsInpu
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "format=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.format));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.format.wireName());
     query_has_prev = true;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -210,7 +210,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPackageVersionsInpu
     if (input.origin_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "originType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -224,13 +224,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPackageVersionsInpu
     if (input.sort_by) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "sortBy=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "status=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);

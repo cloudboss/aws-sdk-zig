@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ScanStatusReason = enum {
     pending_initial_scan,
     access_denied,
@@ -70,4 +72,52 @@ pub const ScanStatusReason = enum {
         .image_archived = "IMAGE_ARCHIVED",
         .unsupported_code_artifacts = "UNSUPPORTED_CODE_ARTIFACTS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .pending_initial_scan => "PENDING_INITIAL_SCAN",
+            .access_denied => "ACCESS_DENIED",
+            .internal_error => "INTERNAL_ERROR",
+            .unmanaged_ec2_instance => "UNMANAGED_EC2_INSTANCE",
+            .unsupported_os => "UNSUPPORTED_OS",
+            .scan_eligibility_expired => "SCAN_ELIGIBILITY_EXPIRED",
+            .resource_terminated => "RESOURCE_TERMINATED",
+            .successful => "SUCCESSFUL",
+            .no_resources_found => "NO_RESOURCES_FOUND",
+            .image_size_exceeded => "IMAGE_SIZE_EXCEEDED",
+            .scan_frequency_manual => "SCAN_FREQUENCY_MANUAL",
+            .scan_frequency_scan_on_push => "SCAN_FREQUENCY_SCAN_ON_PUSH",
+            .ec2_instance_stopped => "EC2_INSTANCE_STOPPED",
+            .pending_disable => "PENDING_DISABLE",
+            .no_inventory => "NO_INVENTORY",
+            .stale_inventory => "STALE_INVENTORY",
+            .excluded_by_tag => "EXCLUDED_BY_TAG",
+            .unsupported_runtime => "UNSUPPORTED_RUNTIME",
+            .unsupported_media_type => "UNSUPPORTED_MEDIA_TYPE",
+            .unsupported_config_file => "UNSUPPORTED_CONFIG_FILE",
+            .deep_inspection_package_collection_limit_exceeded => "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED",
+            .deep_inspection_daily_ssm_inventory_limit_exceeded => "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED",
+            .deep_inspection_collection_time_limit_exceeded => "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED",
+            .deep_inspection_no_inventory => "DEEP_INSPECTION_NO_INVENTORY",
+            .agentless_instance_storage_limit_exceeded => "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED",
+            .agentless_instance_collection_time_limit_exceeded => "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED",
+            .pending_revival_scan => "PENDING_REVIVAL_SCAN",
+            .integration_connection_lost => "INTEGRATION_CONNECTION_LOST",
+            .access_denied_to_encryption_key => "ACCESS_DENIED_TO_ENCRYPTION_KEY",
+            .unsupported_language => "UNSUPPORTED_LANGUAGE",
+            .no_scan_configuration_associated => "NO_SCAN_CONFIGURATION_ASSOCIATED",
+            .scan_in_progress => "SCAN_IN_PROGRESS",
+            .image_archived => "IMAGE_ARCHIVED",
+            .unsupported_code_artifacts => "UNSUPPORTED_CODE_ARTIFACTS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

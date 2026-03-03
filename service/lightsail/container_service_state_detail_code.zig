@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ContainerServiceStateDetailCode = enum {
     creating_system_resources,
     creating_network_infrastructure,
@@ -20,4 +22,27 @@ pub const ContainerServiceStateDetailCode = enum {
         .certificate_limit_exceeded = "CERTIFICATE_LIMIT_EXCEEDED",
         .unknown_error = "UNKNOWN_ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .creating_system_resources => "CREATING_SYSTEM_RESOURCES",
+            .creating_network_infrastructure => "CREATING_NETWORK_INFRASTRUCTURE",
+            .provisioning_certificate => "PROVISIONING_CERTIFICATE",
+            .provisioning_service => "PROVISIONING_SERVICE",
+            .creating_deployment => "CREATING_DEPLOYMENT",
+            .evaluating_health_check => "EVALUATING_HEALTH_CHECK",
+            .activating_deployment => "ACTIVATING_DEPLOYMENT",
+            .certificate_limit_exceeded => "CERTIFICATE_LIMIT_EXCEEDED",
+            .unknown_error => "UNKNOWN_ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const CpuManufacturer = enum {
     intel,
     amd,
     amazon_web_services,
 
     pub const json_field_names = .{
-        .intel = "INTEL",
-        .amd = "AMD",
-        .amazon_web_services = "AMAZON_WEB_SERVICES",
+        .intel = "intel",
+        .amd = "amd",
+        .amazon_web_services = "amazon-web-services",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .intel => "intel",
+            .amd => "amd",
+            .amazon_web_services => "amazon-web-services",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

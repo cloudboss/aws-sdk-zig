@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Represents the Profile and Tier, per the HEVC (H.265) specification.
 /// Selections are grouped as [Profile] / [Tier], so "Main/High" represents Main
 /// Profile with High Tier. 4:2:2 profiles are only available with the HEVC
@@ -22,4 +24,26 @@ pub const H265CodecProfile = enum {
         .main_422_10_bit_main = "MAIN_422_10BIT_MAIN",
         .main_422_10_bit_high = "MAIN_422_10BIT_HIGH",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .main_main => "MAIN_MAIN",
+            .main_high => "MAIN_HIGH",
+            .main10_main => "MAIN10_MAIN",
+            .main10_high => "MAIN10_HIGH",
+            .main_422_8_bit_main => "MAIN_422_8BIT_MAIN",
+            .main_422_8_bit_high => "MAIN_422_8BIT_HIGH",
+            .main_422_10_bit_main => "MAIN_422_10BIT_MAIN",
+            .main_422_10_bit_high => "MAIN_422_10BIT_HIGH",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

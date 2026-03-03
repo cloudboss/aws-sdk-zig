@@ -54,17 +54,17 @@ pub const BotAliasAvailableWaiter = struct {
         };
 
         if (output.bot_alias_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Available")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Available")) {
                 return .success;
             }
         }
         if (output.bot_alias_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.bot_alias_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
@@ -116,22 +116,22 @@ pub const BotAvailableWaiter = struct {
         };
 
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Available")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Available")) {
                 return .success;
             }
         }
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Inactive")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Inactive")) {
                 return .failure;
             }
         }
@@ -183,17 +183,17 @@ pub const BotExportCompletedWaiter = struct {
         };
 
         if (output.export_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Completed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Completed")) {
                 return .success;
             }
         }
         if (output.export_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.export_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -245,17 +245,17 @@ pub const BotImportCompletedWaiter = struct {
         };
 
         if (output.import_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Completed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Completed")) {
                 return .success;
             }
         }
         if (output.import_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.import_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -307,22 +307,22 @@ pub const BotLocaleBuiltWaiter = struct {
         };
 
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Built")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Built")) {
                 return .success;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "NotBuilt")) {
+            if (std.mem.eql(u8, val_0.wireName(), "NotBuilt")) {
                 return .failure;
             }
         }
@@ -374,27 +374,27 @@ pub const BotLocaleCreatedWaiter = struct {
         };
 
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Built")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Built")) {
                 return .success;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ReadyExpressTesting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ReadyExpressTesting")) {
                 return .success;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "NotBuilt")) {
+            if (std.mem.eql(u8, val_0.wireName(), "NotBuilt")) {
                 return .success;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -446,27 +446,27 @@ pub const BotLocaleExpressTestingAvailableWaiter = struct {
         };
 
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Built")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Built")) {
                 return .success;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ReadyExpressTesting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ReadyExpressTesting")) {
                 return .success;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.bot_locale_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "NotBuilt")) {
+            if (std.mem.eql(u8, val_0.wireName(), "NotBuilt")) {
                 return .failure;
             }
         }
@@ -525,17 +525,17 @@ pub const BotVersionAvailableWaiter = struct {
         };
 
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Available")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Available")) {
                 return .success;
             }
         }
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Deleting")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Deleting")) {
                 return .failure;
             }
         }
         if (output.bot_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }

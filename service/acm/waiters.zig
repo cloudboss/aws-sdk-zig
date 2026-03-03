@@ -57,7 +57,7 @@ pub const CertificateValidatedWaiter = struct {
 
         if (output.certificate) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }

@@ -136,7 +136,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApplicationVersio
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.code_build_service_role);
         if (v.compute_type) |sv| {
             try body_buf.appendSlice(allocator, "&BuildConfiguration.ComputeType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         try body_buf.appendSlice(allocator, "&BuildConfiguration.Image=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.image);
@@ -157,9 +157,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApplicationVersio
         try body_buf.appendSlice(allocator, "&SourceBuildInformation.SourceLocation=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.source_location);
         try body_buf.appendSlice(allocator, "&SourceBuildInformation.SourceRepository=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v.source_repository));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.source_repository.wireName());
         try body_buf.appendSlice(allocator, "&SourceBuildInformation.SourceType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v.source_type));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.source_type.wireName());
     }
     if (input.source_bundle) |v| {
         if (v.s3_bucket) |sv| {

@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceCapacityR
     try body_buf.appendSlice(allocator, "Action=ModifyInstanceCapacityReservationAttributes&Version=2016-11-15");
     if (input.capacity_reservation_specification.capacity_reservation_preference) |sv| {
         try body_buf.appendSlice(allocator, "&CapacityReservationSpecification.CapacityReservationPreference=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.capacity_reservation_specification.capacity_reservation_target) |sv| {
         if (sv.capacity_reservation_id) |sv2| {

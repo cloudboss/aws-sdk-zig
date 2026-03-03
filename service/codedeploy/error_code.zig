@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ErrorCode = enum {
     agent_issue,
     alarm_active,
@@ -70,4 +72,52 @@ pub const ErrorCode = enum {
         .timeout = "TIMEOUT",
         .cloudformation_stack_failure = "CLOUDFORMATION_STACK_FAILURE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .agent_issue => "AGENT_ISSUE",
+            .alarm_active => "ALARM_ACTIVE",
+            .application_missing => "APPLICATION_MISSING",
+            .autoscaling_validation_error => "AUTOSCALING_VALIDATION_ERROR",
+            .auto_scaling_configuration => "AUTO_SCALING_CONFIGURATION",
+            .auto_scaling_iam_role_permissions => "AUTO_SCALING_IAM_ROLE_PERMISSIONS",
+            .codedeploy_resource_cannot_be_found => "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND",
+            .customer_application_unhealthy => "CUSTOMER_APPLICATION_UNHEALTHY",
+            .deployment_group_missing => "DEPLOYMENT_GROUP_MISSING",
+            .ecs_update_error => "ECS_UPDATE_ERROR",
+            .elastic_load_balancing_invalid => "ELASTIC_LOAD_BALANCING_INVALID",
+            .elb_invalid_instance => "ELB_INVALID_INSTANCE",
+            .health_constraints => "HEALTH_CONSTRAINTS",
+            .health_constraints_invalid => "HEALTH_CONSTRAINTS_INVALID",
+            .hook_execution_failure => "HOOK_EXECUTION_FAILURE",
+            .iam_role_missing => "IAM_ROLE_MISSING",
+            .iam_role_permissions => "IAM_ROLE_PERMISSIONS",
+            .internal_error => "INTERNAL_ERROR",
+            .invalid_ecs_service => "INVALID_ECS_SERVICE",
+            .invalid_lambda_configuration => "INVALID_LAMBDA_CONFIGURATION",
+            .invalid_lambda_function => "INVALID_LAMBDA_FUNCTION",
+            .invalid_revision => "INVALID_REVISION",
+            .manual_stop => "MANUAL_STOP",
+            .missing_blue_green_deployment_configuration => "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION",
+            .missing_elb_information => "MISSING_ELB_INFORMATION",
+            .missing_github_token => "MISSING_GITHUB_TOKEN",
+            .no_ec2_subscription => "NO_EC2_SUBSCRIPTION",
+            .no_instances => "NO_INSTANCES",
+            .over_max_instances => "OVER_MAX_INSTANCES",
+            .resource_limit_exceeded => "RESOURCE_LIMIT_EXCEEDED",
+            .revision_missing => "REVISION_MISSING",
+            .throttled => "THROTTLED",
+            .timeout => "TIMEOUT",
+            .cloudformation_stack_failure => "CLOUDFORMATION_STACK_FAILURE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

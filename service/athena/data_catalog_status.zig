@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DataCatalogStatus = enum {
     create_in_progress,
     create_complete,
@@ -20,4 +22,27 @@ pub const DataCatalogStatus = enum {
         .delete_complete = "DELETE_COMPLETE",
         .delete_failed = "DELETE_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .create_in_progress => "CREATE_IN_PROGRESS",
+            .create_complete => "CREATE_COMPLETE",
+            .create_failed => "CREATE_FAILED",
+            .create_failed_cleanup_in_progress => "CREATE_FAILED_CLEANUP_IN_PROGRESS",
+            .create_failed_cleanup_complete => "CREATE_FAILED_CLEANUP_COMPLETE",
+            .create_failed_cleanup_failed => "CREATE_FAILED_CLEANUP_FAILED",
+            .delete_in_progress => "DELETE_IN_PROGRESS",
+            .delete_complete => "DELETE_COMPLETE",
+            .delete_failed => "DELETE_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

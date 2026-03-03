@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The container element for object ownership for a bucket's ownership
 /// controls.
 ///
@@ -35,4 +37,27 @@ pub const ObjectOwnership = enum {
     bucket_owner_preferred,
     object_writer,
     bucket_owner_enforced,
+
+    pub const json_field_names = .{
+        .bucket_owner_preferred = "BucketOwnerPreferred",
+        .object_writer = "ObjectWriter",
+        .bucket_owner_enforced = "BucketOwnerEnforced",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .bucket_owner_preferred => "BucketOwnerPreferred",
+            .object_writer => "ObjectWriter",
+            .bucket_owner_enforced => "BucketOwnerEnforced",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

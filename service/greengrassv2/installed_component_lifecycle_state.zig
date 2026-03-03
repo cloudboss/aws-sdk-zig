@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const InstalledComponentLifecycleState = enum {
     new,
     installed,
@@ -18,4 +20,26 @@ pub const InstalledComponentLifecycleState = enum {
         .broken = "BROKEN",
         .finished = "FINISHED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .new => "NEW",
+            .installed => "INSTALLED",
+            .starting => "STARTING",
+            .running => "RUNNING",
+            .stopping => "STOPPING",
+            .errored => "ERRORED",
+            .broken => "BROKEN",
+            .finished => "FINISHED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

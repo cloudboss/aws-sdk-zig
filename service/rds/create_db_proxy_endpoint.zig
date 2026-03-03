@@ -103,7 +103,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyEndpointIn
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_proxy_name);
     if (input.endpoint_network_type) |v| {
         try body_buf.appendSlice(allocator, "&EndpointNetworkType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.tags) |list| {
         for (list, 0..) |item, idx| {
@@ -128,7 +128,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyEndpointIn
     }
     if (input.target_role) |v| {
         try body_buf.appendSlice(allocator, "&TargetRole=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.vpc_security_group_ids) |list| {
         for (list, 0..) |item, idx| {

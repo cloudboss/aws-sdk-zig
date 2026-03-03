@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
     }
     if (input.excess_capacity_termination_policy) |v| {
         try body_buf.appendSlice(allocator, "&ExcessCapacityTerminationPolicy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&FleetId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.fleet_id);
@@ -213,7 +213,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n, n_1, n_2}) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_3.volume_type) |fv_4| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_4));
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                     }
                                 }
                             }
@@ -329,7 +329,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceRequirements.BareMetal=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bare_metal) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.baseline_ebs_bandwidth_mbps) |sv_3| {
@@ -372,7 +372,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceRequirements.BurstablePerformance=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.burstable_performance) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.cpu_manufacturers) |lst_3| {
@@ -413,7 +413,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceRequirements.LocalStorage=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.local_storage) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.local_storage_types) |lst_3| {
@@ -573,7 +573,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceType=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.instance_type) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     {
@@ -662,7 +662,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.Placement.Tenancy=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.tenancy) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                     }
@@ -697,7 +697,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
     if (input.target_capacity_specification) |v| {
         if (v.default_target_capacity_type) |sv| {
             try body_buf.appendSlice(allocator, "&TargetCapacitySpecification.DefaultTargetCapacityType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.on_demand_target_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&TargetCapacitySpecification.OnDemandTargetCapacity=");
@@ -709,7 +709,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
         }
         if (v.target_capacity_unit_type) |sv| {
             try body_buf.appendSlice(allocator, "&TargetCapacitySpecification.TargetCapacityUnitType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         try body_buf.appendSlice(allocator, "&TargetCapacitySpecification.TotalTargetCapacity=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v.total_target_capacity}) catch "");

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ProductType = enum {
     cloud_formation_template,
     marketplace,
@@ -12,4 +14,23 @@ pub const ProductType = enum {
         .terraform_cloud = "TERRAFORM_CLOUD",
         .external = "EXTERNAL",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cloud_formation_template => "CLOUD_FORMATION_TEMPLATE",
+            .marketplace => "MARKETPLACE",
+            .terraform_open_source => "TERRAFORM_OPEN_SOURCE",
+            .terraform_cloud => "TERRAFORM_CLOUD",
+            .external => "EXTERNAL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

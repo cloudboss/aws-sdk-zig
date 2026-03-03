@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RDSDBMetricName = enum {
     cpu,
     memory,
@@ -23,25 +25,60 @@ pub const RDSDBMetricName = enum {
 
     pub const json_field_names = .{
         .cpu = "CPU",
-        .memory = "MEMORY",
-        .ebs_volume_storage_space_utilization = "EBS_VOLUME_STORAGE_SPACE_UTILIZATION",
-        .network_receive_throughput = "NETWORK_RECEIVE_THROUGHPUT",
-        .network_transmit_throughput = "NETWORK_TRANSMIT_THROUGHPUT",
-        .ebs_volume_read_iops = "EBS_VOLUME_READ_IOPS",
-        .ebs_volume_write_iops = "EBS_VOLUME_WRITE_IOPS",
-        .ebs_volume_read_throughput = "EBS_VOLUME_READ_THROUGHPUT",
-        .ebs_volume_write_throughput = "EBS_VOLUME_WRITE_THROUGHPUT",
-        .database_connections = "DATABASE_CONNECTIONS",
-        .storage_network_receive_throughput = "STORAGE_NETWORK_RECEIVE_THROUGHPUT",
-        .storage_network_transmit_throughput = "STORAGE_NETWORK_TRANSMIT_THROUGHPUT",
-        .aurora_memory_health_state = "AURORA_MEMORY_HEALTH_STATE",
-        .aurora_memory_num_declined_sql = "AURORA_MEMORY_NUM_DECLINED_SQL",
-        .aurora_memory_num_kill_conn_total = "AURORA_MEMORY_NUM_KILL_CONN_TOTAL",
-        .aurora_memory_num_kill_query_total = "AURORA_MEMORY_NUM_KILL_QUERY_TOTAL",
-        .read_iops_ephemeral_storage = "READ_IOPS_EPHEMERAL_STORAGE",
-        .write_iops_ephemeral_storage = "WRITE_IOPS_EPHEMERAL_STORAGE",
-        .volume_read_iops = "VOLUME_READ_IOPS",
-        .volume_bytes_used = "VOLUME_BYTES_USED",
-        .volume_write_iops = "VOLUME_WRITE_IOPS",
+        .memory = "Memory",
+        .ebs_volume_storage_space_utilization = "EBSVolumeStorageSpaceUtilization",
+        .network_receive_throughput = "NetworkReceiveThroughput",
+        .network_transmit_throughput = "NetworkTransmitThroughput",
+        .ebs_volume_read_iops = "EBSVolumeReadIOPS",
+        .ebs_volume_write_iops = "EBSVolumeWriteIOPS",
+        .ebs_volume_read_throughput = "EBSVolumeReadThroughput",
+        .ebs_volume_write_throughput = "EBSVolumeWriteThroughput",
+        .database_connections = "DatabaseConnections",
+        .storage_network_receive_throughput = "StorageNetworkReceiveThroughput",
+        .storage_network_transmit_throughput = "StorageNetworkTransmitThroughput",
+        .aurora_memory_health_state = "AuroraMemoryHealthState",
+        .aurora_memory_num_declined_sql = "AuroraMemoryNumDeclinedSql",
+        .aurora_memory_num_kill_conn_total = "AuroraMemoryNumKillConnTotal",
+        .aurora_memory_num_kill_query_total = "AuroraMemoryNumKillQueryTotal",
+        .read_iops_ephemeral_storage = "ReadIOPSEphemeralStorage",
+        .write_iops_ephemeral_storage = "WriteIOPSEphemeralStorage",
+        .volume_read_iops = "VolumeReadIOPs",
+        .volume_bytes_used = "VolumeBytesUsed",
+        .volume_write_iops = "VolumeWriteIOPs",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cpu => "CPU",
+            .memory => "Memory",
+            .ebs_volume_storage_space_utilization => "EBSVolumeStorageSpaceUtilization",
+            .network_receive_throughput => "NetworkReceiveThroughput",
+            .network_transmit_throughput => "NetworkTransmitThroughput",
+            .ebs_volume_read_iops => "EBSVolumeReadIOPS",
+            .ebs_volume_write_iops => "EBSVolumeWriteIOPS",
+            .ebs_volume_read_throughput => "EBSVolumeReadThroughput",
+            .ebs_volume_write_throughput => "EBSVolumeWriteThroughput",
+            .database_connections => "DatabaseConnections",
+            .storage_network_receive_throughput => "StorageNetworkReceiveThroughput",
+            .storage_network_transmit_throughput => "StorageNetworkTransmitThroughput",
+            .aurora_memory_health_state => "AuroraMemoryHealthState",
+            .aurora_memory_num_declined_sql => "AuroraMemoryNumDeclinedSql",
+            .aurora_memory_num_kill_conn_total => "AuroraMemoryNumKillConnTotal",
+            .aurora_memory_num_kill_query_total => "AuroraMemoryNumKillQueryTotal",
+            .read_iops_ephemeral_storage => "ReadIOPSEphemeralStorage",
+            .write_iops_ephemeral_storage => "WriteIOPSEphemeralStorage",
+            .volume_read_iops => "VolumeReadIOPs",
+            .volume_bytes_used => "VolumeBytesUsed",
+            .volume_write_iops => "VolumeWriteIOPs",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

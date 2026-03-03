@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EntitySubType = enum {
     name,
     dx_name,
@@ -92,4 +94,63 @@ pub const EntitySubType = enum {
         .alcohol_consumption = "ALCOHOL_CONSUMPTION",
         .rec_drug_use = "REC_DRUG_USE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .name => "NAME",
+            .dx_name => "DX_NAME",
+            .dosage => "DOSAGE",
+            .route_or_mode => "ROUTE_OR_MODE",
+            .form => "FORM",
+            .frequency => "FREQUENCY",
+            .duration => "DURATION",
+            .generic_name => "GENERIC_NAME",
+            .brand_name => "BRAND_NAME",
+            .strength => "STRENGTH",
+            .rate => "RATE",
+            .acuity => "ACUITY",
+            .test_name => "TEST_NAME",
+            .test_value => "TEST_VALUE",
+            .test_units => "TEST_UNITS",
+            .test_unit => "TEST_UNIT",
+            .procedure_name => "PROCEDURE_NAME",
+            .treatment_name => "TREATMENT_NAME",
+            .date => "DATE",
+            .age => "AGE",
+            .contact_point => "CONTACT_POINT",
+            .phone_or_fax => "PHONE_OR_FAX",
+            .email => "EMAIL",
+            .identifier => "IDENTIFIER",
+            .id => "ID",
+            .url => "URL",
+            .address => "ADDRESS",
+            .profession => "PROFESSION",
+            .system_organ_site => "SYSTEM_ORGAN_SITE",
+            .direction => "DIRECTION",
+            .quality => "QUALITY",
+            .quantity => "QUANTITY",
+            .time_expression => "TIME_EXPRESSION",
+            .time_to_medication_name => "TIME_TO_MEDICATION_NAME",
+            .time_to_dx_name => "TIME_TO_DX_NAME",
+            .time_to_test_name => "TIME_TO_TEST_NAME",
+            .time_to_procedure_name => "TIME_TO_PROCEDURE_NAME",
+            .time_to_treatment_name => "TIME_TO_TREATMENT_NAME",
+            .amount => "AMOUNT",
+            .gender => "GENDER",
+            .race_ethnicity => "RACE_ETHNICITY",
+            .allergies => "ALLERGIES",
+            .tobacco_use => "TOBACCO_USE",
+            .alcohol_consumption => "ALCOHOL_CONSUMPTION",
+            .rec_drug_use => "REC_DRUG_USE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConnectionState = enum {
     creating,
     updating,
@@ -16,4 +18,25 @@ pub const ConnectionState = enum {
         .authorizing = "AUTHORIZING",
         .deauthorizing = "DEAUTHORIZING",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .creating => "CREATING",
+            .updating => "UPDATING",
+            .deleting => "DELETING",
+            .authorized => "AUTHORIZED",
+            .deauthorized => "DEAUTHORIZED",
+            .authorizing => "AUTHORIZING",
+            .deauthorizing => "DEAUTHORIZING",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

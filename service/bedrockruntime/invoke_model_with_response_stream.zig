@@ -176,13 +176,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelWithResponse
         try request.headers.put(allocator, "X-Amzn-Bedrock-GuardrailVersion", v);
     }
     if (input.performance_config_latency) |v| {
-        try request.headers.put(allocator, "X-Amzn-Bedrock-PerformanceConfig-Latency", @tagName(v));
+        try request.headers.put(allocator, "X-Amzn-Bedrock-PerformanceConfig-Latency", v.wireName());
     }
     if (input.service_tier) |v| {
-        try request.headers.put(allocator, "X-Amzn-Bedrock-Service-Tier", @tagName(v));
+        try request.headers.put(allocator, "X-Amzn-Bedrock-Service-Tier", v.wireName());
     }
     if (input.trace) |v| {
-        try request.headers.put(allocator, "X-Amzn-Bedrock-Trace", @tagName(v));
+        try request.headers.put(allocator, "X-Amzn-Bedrock-Trace", v.wireName());
     }
 
     return request;

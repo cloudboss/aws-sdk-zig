@@ -51,21 +51,21 @@ pub const CodeReviewCompletedWaiter = struct {
 
         if (output.code_review) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Completed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Completed")) {
                     return .success;
                 }
             }
         }
         if (output.code_review) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Failed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Failed")) {
                     return .failure;
                 }
             }
         }
         if (output.code_review) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Pending")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Pending")) {
                     return .retry;
                 }
             }
@@ -119,21 +119,21 @@ pub const RepositoryAssociationSucceededWaiter = struct {
 
         if (output.repository_association) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Associated")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Associated")) {
                     return .success;
                 }
             }
         }
         if (output.repository_association) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Failed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Failed")) {
                     return .failure;
                 }
             }
         }
         if (output.repository_association) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Associating")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Associating")) {
                     return .retry;
                 }
             }

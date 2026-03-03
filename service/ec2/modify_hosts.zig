@@ -102,7 +102,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyHostsInput, confi
     try body_buf.appendSlice(allocator, "Action=ModifyHosts&Version=2016-11-15");
     if (input.auto_placement) |v| {
         try body_buf.appendSlice(allocator, "&AutoPlacement=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     for (input.host_ids, 0..) |item, idx| {
         const n = idx + 1;
@@ -113,11 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyHostsInput, confi
     }
     if (input.host_maintenance) |v| {
         try body_buf.appendSlice(allocator, "&HostMaintenance=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.host_recovery) |v| {
         try body_buf.appendSlice(allocator, "&HostRecovery=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.instance_family) |v| {
         try body_buf.appendSlice(allocator, "&InstanceFamily=");

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MLModelFilterVariable = enum {
     created_at,
     last_updated_at,
@@ -11,15 +13,39 @@ pub const MLModelFilterVariable = enum {
     training_data_uri,
 
     pub const json_field_names = .{
-        .created_at = "CREATED_AT",
-        .last_updated_at = "LAST_UPDATED_AT",
-        .status = "STATUS",
-        .name = "NAME",
-        .iam_user = "IAM_USER",
-        .training_datasource_id = "TRAINING_DATASOURCE_ID",
-        .real_time_endpoint_status = "REAL_TIME_ENDPOINT_STATUS",
-        .ml_model_type = "ML_MODEL_TYPE",
-        .algorithm = "ALGORITHM",
-        .training_data_uri = "TRAINING_DATA_URI",
+        .created_at = "CreatedAt",
+        .last_updated_at = "LastUpdatedAt",
+        .status = "Status",
+        .name = "Name",
+        .iam_user = "IAMUser",
+        .training_datasource_id = "TrainingDataSourceId",
+        .real_time_endpoint_status = "RealtimeEndpointStatus",
+        .ml_model_type = "MLModelType",
+        .algorithm = "Algorithm",
+        .training_data_uri = "TrainingDataURI",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .created_at => "CreatedAt",
+            .last_updated_at => "LastUpdatedAt",
+            .status => "Status",
+            .name => "Name",
+            .iam_user => "IAMUser",
+            .training_datasource_id => "TrainingDataSourceId",
+            .real_time_endpoint_status => "RealtimeEndpointStatus",
+            .ml_model_type => "MLModelType",
+            .algorithm => "Algorithm",
+            .training_data_uri => "TrainingDataURI",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

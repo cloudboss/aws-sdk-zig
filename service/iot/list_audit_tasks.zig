@@ -123,13 +123,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAuditTasksInput, co
     if (input.task_status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "taskStatus=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.task_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "taskType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);

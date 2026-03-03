@@ -83,7 +83,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyPublicIpDnsNameOp
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&HostnameType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.hostname_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.hostname_type.wireName());
     try body_buf.appendSlice(allocator, "&NetworkInterfaceId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.network_interface_id);
 

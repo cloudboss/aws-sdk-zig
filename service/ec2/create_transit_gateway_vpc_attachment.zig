@@ -84,19 +84,19 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayVpc
     if (input.options) |v| {
         if (v.appliance_mode_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.ApplianceModeSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.dns_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.DnsSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.ipv_6_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.Ipv6Support=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.security_group_referencing_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.SecurityGroupReferencingSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     for (input.subnet_ids, 0..) |item, idx| {
@@ -114,7 +114,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayVpc
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

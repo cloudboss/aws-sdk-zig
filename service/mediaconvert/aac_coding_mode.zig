@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The Coding mode that you specify determines the number of audio channels and
 /// the audio channel layout metadata in your AAC output. Valid coding modes
 /// depend on the Rate control mode and Profile that you select. The following
@@ -24,4 +26,24 @@ pub const AacCodingMode = enum {
         .coding_mode_5_1 = "CODING_MODE_5_1",
         .coding_mode_auto = "CODING_MODE_AUTO",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ad_receiver_mix => "AD_RECEIVER_MIX",
+            .coding_mode_1_0 => "CODING_MODE_1_0",
+            .coding_mode_1_1 => "CODING_MODE_1_1",
+            .coding_mode_2_0 => "CODING_MODE_2_0",
+            .coding_mode_5_1 => "CODING_MODE_5_1",
+            .coding_mode_auto => "CODING_MODE_AUTO",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

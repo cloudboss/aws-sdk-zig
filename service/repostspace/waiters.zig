@@ -50,17 +50,17 @@ pub const ChannelCreatedWaiter = struct {
         };
 
         if (output.channel_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATED")) {
                 return .success;
             }
         }
         if (output.channel_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.channel_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATING")) {
                 return .retry;
             }
         }
@@ -119,17 +119,17 @@ pub const ChannelDeletedWaiter = struct {
         };
 
         if (output.channel_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .success;
             }
         }
         if (output.channel_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
         if (output.channel_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .retry;
             }
         }
@@ -181,17 +181,17 @@ pub const SpaceCreatedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATING")) {
                 return .retry;
             }
         }
@@ -250,17 +250,17 @@ pub const SpaceDeletedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .retry;
             }
         }

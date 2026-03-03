@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use Min top rendition size to specify a minimum size for the highest
 /// resolution in your ABR stack. * The highest resolution in your ABR stack
 /// will be equal to or greater than the value that you enter. For example: If
@@ -44,4 +46,22 @@ pub const RuleType = enum {
         .force_include_renditions = "FORCE_INCLUDE_RENDITIONS",
         .allowed_renditions = "ALLOWED_RENDITIONS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .min_top_rendition_size => "MIN_TOP_RENDITION_SIZE",
+            .min_bottom_rendition_size => "MIN_BOTTOM_RENDITION_SIZE",
+            .force_include_renditions => "FORCE_INCLUDE_RENDITIONS",
+            .allowed_renditions => "ALLOWED_RENDITIONS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

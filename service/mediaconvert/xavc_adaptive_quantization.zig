@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Keep the default value, Auto, for this setting to have MediaConvert
 /// automatically apply the best types of quantization for your video content.
 /// When you want to apply your quantization settings manually, you must set
@@ -26,4 +28,25 @@ pub const XavcAdaptiveQuantization = enum {
         .higher = "HIGHER",
         .max = "MAX",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .off => "OFF",
+            .auto => "AUTO",
+            .low => "LOW",
+            .medium => "MEDIUM",
+            .high => "HIGH",
+            .higher => "HIGHER",
+            .max => "MAX",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

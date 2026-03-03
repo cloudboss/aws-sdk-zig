@@ -184,7 +184,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.bucket_location_name = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-bucket-location-type")) |value| {
-        result.bucket_location_type = std.meta.stringToEnum(LocationType, value);
+        result.bucket_location_type = LocationType.fromWireName(value);
     }
     if (headers.get("x-amz-bucket-region")) |value| {
         result.bucket_region = try allocator.dupe(u8, value);

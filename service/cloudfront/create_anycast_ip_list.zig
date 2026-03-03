@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAnycastIpListInpu
     try body_buf.appendSlice(allocator, "<CreateAnycastIpListRequest>");
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "<IpAddressType>");
-        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, v.wireName());
         try body_buf.appendSlice(allocator, "</IpAddressType>");
     }
     if (input.ipam_cidr_configs) |v| {

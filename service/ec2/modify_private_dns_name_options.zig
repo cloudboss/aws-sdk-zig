@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyPrivateDnsNameOpt
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_id);
     if (input.private_dns_hostname_type) |v| {
         try body_buf.appendSlice(allocator, "&PrivateDnsHostnameType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

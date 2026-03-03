@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableAwsNetworkPerform
     }
     if (input.metric) |v| {
         try body_buf.appendSlice(allocator, "&Metric=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.source) |v| {
         try body_buf.appendSlice(allocator, "&Source=");
@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableAwsNetworkPerform
     }
     if (input.statistic) |v| {
         try body_buf.appendSlice(allocator, "&Statistic=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

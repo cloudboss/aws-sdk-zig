@@ -150,7 +150,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyImageAttributeInp
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
@@ -187,7 +187,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyImageAttributeInp
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
@@ -219,7 +219,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyImageAttributeInp
     }
     if (input.operation_type) |v| {
         try body_buf.appendSlice(allocator, "&OperationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.organizational_unit_arns) |list| {
         for (list, 0..) |item, idx| {

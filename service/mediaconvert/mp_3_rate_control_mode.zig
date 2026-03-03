@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify whether the service encodes this MP3 audio output with a constant
 /// bitrate (CBR) or a variable bitrate (VBR).
 pub const Mp3RateControlMode = enum {
@@ -8,4 +10,20 @@ pub const Mp3RateControlMode = enum {
         .cbr = "CBR",
         .vbr = "VBR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cbr => "CBR",
+            .vbr => "VBR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetAddressAttributeIn
     try body_buf.appendSlice(allocator, "&AllocationId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.allocation_id);
     try body_buf.appendSlice(allocator, "&Attribute=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.attribute));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.attribute.wireName());
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");

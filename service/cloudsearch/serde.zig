@@ -214,7 +214,7 @@ pub fn deserializeAnalysisOptions(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AlgorithmicStemming")) {
-                    result.algorithmic_stemming = std.meta.stringToEnum(AlgorithmicStemming, try reader.readElementText());
+                    result.algorithmic_stemming = AlgorithmicStemming.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "JapaneseTokenizationDictionary")) {
                     result.japanese_tokenization_dictionary = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StemmingDictionary")) {
@@ -243,7 +243,7 @@ pub fn deserializeAnalysisScheme(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "AnalysisOptions")) {
                     result.analysis_options = try deserializeAnalysisOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "AnalysisSchemeLanguage")) {
-                    result.analysis_scheme_language = std.meta.stringToEnum(AnalysisSchemeLanguage, try reader.readElementText());
+                    result.analysis_scheme_language = AnalysisSchemeLanguage.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AnalysisSchemeName")) {
                     result.analysis_scheme_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -370,7 +370,7 @@ pub fn deserializeDocumentSuggesterOptions(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "FuzzyMatching")) {
-                    result.fuzzy_matching = std.meta.stringToEnum(SuggesterFuzzyMatching, try reader.readElementText());
+                    result.fuzzy_matching = SuggesterFuzzyMatching.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SortExpression")) {
                     result.sort_expression = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceField")) {
@@ -397,7 +397,7 @@ pub fn deserializeDomainEndpointOptions(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "EnforceHTTPS")) {
                     result.enforce_https = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "TLSSecurityPolicy")) {
-                    result.tls_security_policy = std.meta.stringToEnum(TLSSecurityPolicy, try reader.readElementText());
+                    result.tls_security_policy = TLSSecurityPolicy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -613,7 +613,7 @@ pub fn deserializeIndexField(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "IndexFieldName")) {
                     result.index_field_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IndexFieldType")) {
-                    result.index_field_type = std.meta.stringToEnum(IndexFieldType, try reader.readElementText());
+                    result.index_field_type = IndexFieldType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IntArrayOptions")) {
                     result.int_array_options = try deserializeIntArrayOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "IntOptions")) {
@@ -857,7 +857,7 @@ pub fn deserializeOptionStatus(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "PendingDeletion")) {
                     result.pending_deletion = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "State")) {
-                    result.state = std.meta.stringToEnum(OptionState, try reader.readElementText());
+                    result.state = OptionState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UpdateDate")) {
                     result.update_date = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UpdateVersion")) {
@@ -883,7 +883,7 @@ pub fn deserializeScalingParameters(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DesiredInstanceType")) {
-                    result.desired_instance_type = std.meta.stringToEnum(PartitionInstanceType, try reader.readElementText());
+                    result.desired_instance_type = PartitionInstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DesiredPartitionCount")) {
                     result.desired_partition_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "DesiredReplicationCount")) {
@@ -1082,7 +1082,7 @@ pub fn serializeStandardNameList(allocator: std.mem.Allocator, buf: *std.ArrayLi
 pub fn serializeAnalysisOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnalysisOptions) !void {
     if (value.algorithmic_stemming) |v| {
         try buf.appendSlice(allocator, "<AlgorithmicStemming>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AlgorithmicStemming>");
     }
     if (value.japanese_tokenization_dictionary) |v| {
@@ -1114,7 +1114,7 @@ pub fn serializeAnalysisScheme(allocator: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(allocator, "</AnalysisOptions>");
     }
     try buf.appendSlice(allocator, "<AnalysisSchemeLanguage>");
-    try buf.appendSlice(allocator, @tagName(value.analysis_scheme_language));
+    try buf.appendSlice(allocator, value.analysis_scheme_language.wireName());
     try buf.appendSlice(allocator, "</AnalysisSchemeLanguage>");
     try buf.appendSlice(allocator, "<AnalysisSchemeName>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.analysis_scheme_name);
@@ -1185,7 +1185,7 @@ pub fn serializeDateOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
 pub fn serializeDocumentSuggesterOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DocumentSuggesterOptions) !void {
     if (value.fuzzy_matching) |v| {
         try buf.appendSlice(allocator, "<FuzzyMatching>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</FuzzyMatching>");
     }
     if (value.sort_expression) |v| {
@@ -1206,7 +1206,7 @@ pub fn serializeDomainEndpointOptions(allocator: std.mem.Allocator, buf: *std.Ar
     }
     if (value.tls_security_policy) |v| {
         try buf.appendSlice(allocator, "<TLSSecurityPolicy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TLSSecurityPolicy>");
     }
 }
@@ -1312,7 +1312,7 @@ pub fn serializeIndexField(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
     try aws.xml.appendXmlEscaped(allocator, buf, value.index_field_name);
     try buf.appendSlice(allocator, "</IndexFieldName>");
     try buf.appendSlice(allocator, "<IndexFieldType>");
-    try buf.appendSlice(allocator, @tagName(value.index_field_type));
+    try buf.appendSlice(allocator, value.index_field_type.wireName());
     try buf.appendSlice(allocator, "</IndexFieldType>");
     if (value.int_array_options) |v| {
         try buf.appendSlice(allocator, "<IntArrayOptions>");
@@ -1515,7 +1515,7 @@ pub fn serializeLiteralOptions(allocator: std.mem.Allocator, buf: *std.ArrayList
 pub fn serializeScalingParameters(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScalingParameters) !void {
     if (value.desired_instance_type) |v| {
         try buf.appendSlice(allocator, "<DesiredInstanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DesiredInstanceType>");
     }
     if (value.desired_partition_count) |v| {

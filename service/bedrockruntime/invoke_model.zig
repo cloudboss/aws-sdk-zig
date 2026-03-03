@@ -170,13 +170,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelInput, confi
         try request.headers.put(allocator, "X-Amzn-Bedrock-GuardrailVersion", v);
     }
     if (input.performance_config_latency) |v| {
-        try request.headers.put(allocator, "X-Amzn-Bedrock-PerformanceConfig-Latency", @tagName(v));
+        try request.headers.put(allocator, "X-Amzn-Bedrock-PerformanceConfig-Latency", v.wireName());
     }
     if (input.service_tier) |v| {
-        try request.headers.put(allocator, "X-Amzn-Bedrock-Service-Tier", @tagName(v));
+        try request.headers.put(allocator, "X-Amzn-Bedrock-Service-Tier", v.wireName());
     }
     if (input.trace) |v| {
-        try request.headers.put(allocator, "X-Amzn-Bedrock-Trace", @tagName(v));
+        try request.headers.put(allocator, "X-Amzn-Bedrock-Trace", v.wireName());
     }
 
     return request;
@@ -190,10 +190,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.content_type = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amzn-bedrock-performanceconfig-latency")) |value| {
-        result.performance_config_latency = std.meta.stringToEnum(PerformanceConfigLatency, value);
+        result.performance_config_latency = PerformanceConfigLatency.fromWireName(value);
     }
     if (headers.get("x-amzn-bedrock-service-tier")) |value| {
-        result.service_tier = std.meta.stringToEnum(ServiceTierType, value);
+        result.service_tier = ServiceTierType.fromWireName(value);
     }
 
     return result;

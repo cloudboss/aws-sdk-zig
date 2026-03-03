@@ -369,7 +369,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateStackInput, confi
     }
     if (input.on_failure) |v| {
         try body_buf.appendSlice(allocator, "&OnFailure=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.parameters) |list| {
         for (list, 0..) |item, idx| {

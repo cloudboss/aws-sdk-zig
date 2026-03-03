@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ReplicationConfigurationReplicatedDiskStagingDiskType = enum {
     auto,
     gp2,
@@ -18,4 +20,26 @@ pub const ReplicationConfigurationReplicatedDiskStagingDiskType = enum {
         .gp3 = "GP3",
         .io2 = "IO2",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .auto => "AUTO",
+            .gp2 => "GP2",
+            .io1 => "IO1",
+            .sc1 => "SC1",
+            .st1 => "ST1",
+            .standard => "STANDARD",
+            .gp3 => "GP3",
+            .io2 => "IO2",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

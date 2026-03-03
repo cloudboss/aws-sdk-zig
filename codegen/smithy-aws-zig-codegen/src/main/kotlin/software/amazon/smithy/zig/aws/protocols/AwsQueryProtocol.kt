@@ -433,7 +433,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
         when {
             isValueEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(entry.value));")
+                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value.wireName());")
             }
             valueZigType == "[]const u8" -> {
                 writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value);")
@@ -671,14 +671,14 @@ open class AwsQueryProtocol : ProtocolGenerator {
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write(
-                    "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                    "result.\$L = \$L.fromWireName(try reader.readElementText());",
                     fieldName, targetShape.id.name,
                 )
             }
             is StringShape -> {
                 if (ctx.isEnumType(targetShape)) {
                     writer.write(
-                        "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                        "result.\$L = \$L.fromWireName(try reader.readElementText());",
                         fieldName, targetShape.id.name,
                     )
                 } else {

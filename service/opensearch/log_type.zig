@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The type of log file. Can be one of the following:
 ///
 /// * **INDEX_SLOW_LOGS** - Index slow logs contain
@@ -27,4 +29,22 @@ pub const LogType = enum {
         .es_application_logs = "ES_APPLICATION_LOGS",
         .audit_logs = "AUDIT_LOGS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .index_slow_logs => "INDEX_SLOW_LOGS",
+            .search_slow_logs => "SEARCH_SLOW_LOGS",
+            .es_application_logs => "ES_APPLICATION_LOGS",
+            .audit_logs => "AUDIT_LOGS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

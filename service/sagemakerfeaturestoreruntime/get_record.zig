@@ -91,7 +91,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecordInput, config:
     if (input.expiration_time_response) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "ExpirationTimeResponse=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.feature_names) |v| {

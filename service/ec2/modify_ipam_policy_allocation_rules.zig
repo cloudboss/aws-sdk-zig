@@ -101,7 +101,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPolicyAllocat
     try body_buf.appendSlice(allocator, "&Locale=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.locale);
     try body_buf.appendSlice(allocator, "&ResourceType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.resource_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.resource_type.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

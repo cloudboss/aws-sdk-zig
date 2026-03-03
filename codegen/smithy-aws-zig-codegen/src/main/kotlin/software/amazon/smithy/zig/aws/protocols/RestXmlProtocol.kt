@@ -196,7 +196,7 @@ class RestXmlProtocol : ProtocolGenerator {
                 writer.write("try request.headers.put(allocator, \"\$L\", \$L);", headerName, varName)
             }
             isEnum -> {
-                writer.write("try request.headers.put(allocator, \"\$L\", @tagName(\$L));", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", \$L.wireName());", headerName, varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
@@ -229,7 +229,7 @@ class RestXmlProtocol : ProtocolGenerator {
 
         when {
             isElementEnum -> {
-                writer.write("try header_buf.appendSlice(allocator, @tagName(item));")
+                writer.write("try header_buf.appendSlice(allocator, item.wireName());")
             }
             elementZigType == "[]const u8" -> {
                 writer.write("try header_buf.appendSlice(allocator, item);")
@@ -341,7 +341,7 @@ class RestXmlProtocol : ProtocolGenerator {
                 writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L);", varName)
             }
             isEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(\$L));", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L.wireName());", varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
@@ -546,7 +546,7 @@ class RestXmlProtocol : ProtocolGenerator {
             else -> {
                 // Enum types and other named types -- serialize as their tag name
                 writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", xmlName)
-                writer.write("try body_buf.appendSlice(allocator, @tagName(\$L));", accessor)
+                writer.write("try body_buf.appendSlice(allocator, \$L.wireName());", accessor)
                 writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
         }
@@ -779,14 +779,14 @@ class RestXmlProtocol : ProtocolGenerator {
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write(
-                    "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                    "result.\$L = \$L.fromWireName(try reader.readElementText());",
                     fieldName, targetShape.id.name,
                 )
             }
             is StringShape -> {
                 if (ctx.isEnumType(targetShape)) {
                     writer.write(
-                        "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                        "result.\$L = \$L.fromWireName(try reader.readElementText());",
                         fieldName, targetShape.id.name,
                     )
                 } else {
@@ -859,14 +859,14 @@ class RestXmlProtocol : ProtocolGenerator {
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write(
-                    "try \${L}_list.append(allocator, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
+                    "try \${L}_list.append(allocator, \$L.fromWireName(try reader.readElementText()) orelse continue);",
                     fieldName, elementShape.id.name,
                 )
             }
             is StringShape -> {
                 if (ctx.isEnumType(elementShape)) {
                     writer.write(
-                        "try \${L}_list.append(allocator, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
+                        "try \${L}_list.append(allocator, \$L.fromWireName(try reader.readElementText()) orelse continue);",
                         fieldName, elementShape.id.name,
                     )
                 } else {
@@ -919,7 +919,7 @@ class RestXmlProtocol : ProtocolGenerator {
                 }
                 isEnum -> {
                     val typeName = ctx.resolveBaseZigType(targetShape)
-                    writer.write("result.\$L = std.meta.stringToEnum(\$L, value);", fieldName, typeName)
+                    writer.write("result.\$L = \$L.fromWireName(value);", fieldName, typeName)
                 }
                 zigType == "bool" -> {
                     writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)
@@ -982,7 +982,7 @@ class RestXmlProtocol : ProtocolGenerator {
                     }
                     isEnum -> {
                         val typeName = ctx.resolveBaseZigType(targetShape)
-                        writer.write("result.\$L = std.meta.stringToEnum(\$L, value);", fieldName, typeName)
+                        writer.write("result.\$L = \$L.fromWireName(value);", fieldName, typeName)
                     }
                     zigType == "bool" -> {
                         writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)

@@ -358,7 +358,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadPartInput, config
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.checksum_crc32) |v| {
         try request.headers.put(allocator, "x-amz-checksum-crc32", v);
@@ -388,7 +388,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadPartInput, config
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -429,10 +429,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.e_tag = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
         result.sse_customer_algorithm = try allocator.dupe(u8, value);

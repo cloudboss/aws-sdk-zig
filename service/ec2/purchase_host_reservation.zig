@@ -105,7 +105,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PurchaseHostReservation
     }
     if (input.currency_code) |v| {
         try body_buf.appendSlice(allocator, "&CurrencyCode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     for (input.host_id_set, 0..) |item, idx| {
         const n = idx + 1;
@@ -128,7 +128,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PurchaseHostReservation
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -187,7 +187,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "clientToken")) {
                     result.client_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "purchase")) {
                     result.purchase = try serde.deserializePurchaseSet(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "totalHourlyPrice")) {

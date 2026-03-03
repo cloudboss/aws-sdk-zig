@@ -179,9 +179,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "JobCreationDate")) {
                     result.job_creation_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "JobStatus")) {
-                    result.job_status = std.meta.stringToEnum(jobStatusType, try reader.readElementText());
+                    result.job_status = jobStatusType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "JobType")) {
-                    result.job_type = std.meta.stringToEnum(AccessAdvisorUsageGranularityType, try reader.readElementText());
+                    result.job_type = AccessAdvisorUsageGranularityType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Marker")) {
                     result.marker = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServicesLastAccessed")) {

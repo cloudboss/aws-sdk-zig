@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Operator = enum {
     equals,
     not_equals,
@@ -11,15 +13,39 @@ pub const Operator = enum {
     in,
 
     pub const json_field_names = .{
-        .equals = "EQUALS",
-        .not_equals = "NOT_EQUALS",
-        .greater_than = "GREATER_THAN",
-        .greater_than_or_equal_to = "GREATER_THAN_OR_EQUAL_TO",
-        .less_than = "LESS_THAN",
-        .less_than_or_equal_to = "LESS_THAN_OR_EQUAL_TO",
-        .contains = "CONTAINS",
-        .exists = "EXISTS",
-        .not_exists = "NOT_EXISTS",
-        .in = "IN",
+        .equals = "Equals",
+        .not_equals = "NotEquals",
+        .greater_than = "GreaterThan",
+        .greater_than_or_equal_to = "GreaterThanOrEqualTo",
+        .less_than = "LessThan",
+        .less_than_or_equal_to = "LessThanOrEqualTo",
+        .contains = "Contains",
+        .exists = "Exists",
+        .not_exists = "NotExists",
+        .in = "In",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .equals => "Equals",
+            .not_equals => "NotEquals",
+            .greater_than => "GreaterThan",
+            .greater_than_or_equal_to => "GreaterThanOrEqualTo",
+            .less_than => "LessThan",
+            .less_than_or_equal_to => "LessThanOrEqualTo",
+            .contains => "Contains",
+            .exists => "Exists",
+            .not_exists => "NotExists",
+            .in => "In",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

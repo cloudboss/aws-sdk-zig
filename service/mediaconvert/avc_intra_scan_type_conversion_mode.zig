@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use this setting for interlaced outputs, when your output frame rate is half
 /// of your input frame rate. In this situation, choose Optimized interlacing to
 /// create a better quality interlaced output. In this case, each progressive
@@ -18,4 +20,20 @@ pub const AvcIntraScanTypeConversionMode = enum {
         .interlaced = "INTERLACED",
         .interlaced_optimize = "INTERLACED_OPTIMIZE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .interlaced => "INTERLACED",
+            .interlaced_optimize => "INTERLACED_OPTIMIZE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

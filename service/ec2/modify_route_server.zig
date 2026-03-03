@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyRouteServerInput,
     }
     if (input.persist_routes) |v| {
         try body_buf.appendSlice(allocator, "&PersistRoutes=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.persist_routes_duration) |v| {
         try body_buf.appendSlice(allocator, "&PersistRoutesDuration=");

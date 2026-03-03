@@ -106,9 +106,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "MfaDelete")) {
-                    result.mfa_delete = std.meta.stringToEnum(MFADeleteStatus, try reader.readElementText());
+                    result.mfa_delete = MFADeleteStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(BucketVersioningStatus, try reader.readElementText());
+                    result.status = BucketVersioningStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

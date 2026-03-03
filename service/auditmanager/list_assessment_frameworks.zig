@@ -77,7 +77,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssessmentFramework
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "frameworkType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.framework_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.framework_type.wireName());
     query_has_prev = true;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

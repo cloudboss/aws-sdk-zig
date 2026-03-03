@@ -118,7 +118,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AssertionEncryptionMode")) {
-                    result.assertion_encryption_mode = std.meta.stringToEnum(assertionEncryptionModeType, try reader.readElementText());
+                    result.assertion_encryption_mode = assertionEncryptionModeType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
                     result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "PrivateKeyList")) {

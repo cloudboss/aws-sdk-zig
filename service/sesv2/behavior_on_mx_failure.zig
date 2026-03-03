@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The action to take if the required MX record can't be found when you send an
 /// email.
 /// When you set this value to `UseDefaultValue`, the mail is sent using
@@ -18,4 +20,20 @@ pub const BehaviorOnMxFailure = enum {
         .use_default_value = "USE_DEFAULT_VALUE",
         .reject_message = "REJECT_MESSAGE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .use_default_value => "USE_DEFAULT_VALUE",
+            .reject_message => "REJECT_MESSAGE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

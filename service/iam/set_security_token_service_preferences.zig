@@ -61,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetSecurityTokenService
 
     try body_buf.appendSlice(allocator, "Action=SetSecurityTokenServicePreferences&Version=2010-05-08");
     try body_buf.appendSlice(allocator, "&GlobalEndpointTokenVersion=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.global_endpoint_token_version));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.global_endpoint_token_version.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

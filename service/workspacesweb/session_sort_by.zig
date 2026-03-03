@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const SessionSortBy = enum {
     start_time_ascending,
     start_time_descending,
 
     pub const json_field_names = .{
-        .start_time_ascending = "START_TIME_ASCENDING",
-        .start_time_descending = "START_TIME_DESCENDING",
+        .start_time_ascending = "StartTimeAscending",
+        .start_time_descending = "StartTimeDescending",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .start_time_ascending => "StartTimeAscending",
+            .start_time_descending => "StartTimeDescending",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

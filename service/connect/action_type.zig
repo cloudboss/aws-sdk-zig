@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ActionType = enum {
     create_task,
     assign_contact_category,
@@ -20,4 +22,27 @@ pub const ActionType = enum {
         .end_associated_tasks = "END_ASSOCIATED_TASKS",
         .submit_auto_evaluation = "SUBMIT_AUTO_EVALUATION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .create_task => "CREATE_TASK",
+            .assign_contact_category => "ASSIGN_CONTACT_CATEGORY",
+            .generate_eventbridge_event => "GENERATE_EVENTBRIDGE_EVENT",
+            .send_notification => "SEND_NOTIFICATION",
+            .create_case => "CREATE_CASE",
+            .update_case => "UPDATE_CASE",
+            .assign_sla => "ASSIGN_SLA",
+            .end_associated_tasks => "END_ASSOCIATED_TASKS",
+            .submit_auto_evaluation => "SUBMIT_AUTO_EVALUATION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

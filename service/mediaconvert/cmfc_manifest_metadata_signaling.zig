@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// To add an InbandEventStream element in your output MPD manifest for each
 /// type of event message, set Manifest metadata signaling to Enabled. For ID3
 /// event messages, the InbandEventStream element schemeIdUri will be same value
@@ -15,4 +17,20 @@ pub const CmfcManifestMetadataSignaling = enum {
         .enabled = "ENABLED",
         .disabled = "DISABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .enabled => "ENABLED",
+            .disabled => "DISABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

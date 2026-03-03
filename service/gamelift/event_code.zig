@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EventCode = enum {
     generic_event,
     fleet_created,
@@ -114,4 +116,74 @@ pub const EventCode = enum {
         .location_state_deleting = "LOCATION_STATE_DELETING",
         .location_state_deleted = "LOCATION_STATE_DELETED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .generic_event => "GENERIC_EVENT",
+            .fleet_created => "FLEET_CREATED",
+            .fleet_deleted => "FLEET_DELETED",
+            .fleet_scaling_event => "FLEET_SCALING_EVENT",
+            .fleet_state_downloading => "FLEET_STATE_DOWNLOADING",
+            .fleet_state_validating => "FLEET_STATE_VALIDATING",
+            .fleet_state_building => "FLEET_STATE_BUILDING",
+            .fleet_state_activating => "FLEET_STATE_ACTIVATING",
+            .fleet_state_active => "FLEET_STATE_ACTIVE",
+            .fleet_state_error => "FLEET_STATE_ERROR",
+            .fleet_state_pending => "FLEET_STATE_PENDING",
+            .fleet_state_creating => "FLEET_STATE_CREATING",
+            .fleet_state_created => "FLEET_STATE_CREATED",
+            .fleet_state_updating => "FLEET_STATE_UPDATING",
+            .fleet_initialization_failed => "FLEET_INITIALIZATION_FAILED",
+            .fleet_binary_download_failed => "FLEET_BINARY_DOWNLOAD_FAILED",
+            .fleet_validation_launch_path_not_found => "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND",
+            .fleet_validation_executable_runtime_failure => "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE",
+            .fleet_validation_timed_out => "FLEET_VALIDATION_TIMED_OUT",
+            .fleet_activation_failed => "FLEET_ACTIVATION_FAILED",
+            .fleet_activation_failed_no_instances => "FLEET_ACTIVATION_FAILED_NO_INSTANCES",
+            .fleet_new_game_session_protection_policy_updated => "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED",
+            .server_process_invalid_path => "SERVER_PROCESS_INVALID_PATH",
+            .server_process_sdk_initialization_timeout => "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT",
+            .server_process_process_ready_timeout => "SERVER_PROCESS_PROCESS_READY_TIMEOUT",
+            .server_process_crashed => "SERVER_PROCESS_CRASHED",
+            .server_process_terminated_unhealthy => "SERVER_PROCESS_TERMINATED_UNHEALTHY",
+            .server_process_force_terminated => "SERVER_PROCESS_FORCE_TERMINATED",
+            .server_process_process_exit_timeout => "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT",
+            .server_process_sdk_initialization_failed => "SERVER_PROCESS_SDK_INITIALIZATION_FAILED",
+            .server_process_misconfigured_container_port => "SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT",
+            .game_session_activation_timeout => "GAME_SESSION_ACTIVATION_TIMEOUT",
+            .fleet_creation_extracting_build => "FLEET_CREATION_EXTRACTING_BUILD",
+            .fleet_creation_running_installer => "FLEET_CREATION_RUNNING_INSTALLER",
+            .fleet_creation_validating_runtime_config => "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG",
+            .fleet_vpc_peering_succeeded => "FLEET_VPC_PEERING_SUCCEEDED",
+            .fleet_vpc_peering_failed => "FLEET_VPC_PEERING_FAILED",
+            .fleet_vpc_peering_deleted => "FLEET_VPC_PEERING_DELETED",
+            .instance_interrupted => "INSTANCE_INTERRUPTED",
+            .instance_recycled => "INSTANCE_RECYCLED",
+            .instance_replaced_unhealthy => "INSTANCE_REPLACED_UNHEALTHY",
+            .fleet_creation_completed_installer => "FLEET_CREATION_COMPLETED_INSTALLER",
+            .fleet_creation_failed_installer => "FLEET_CREATION_FAILED_INSTALLER",
+            .compute_log_upload_failed => "COMPUTE_LOG_UPLOAD_FAILED",
+            .game_server_container_group_crashed => "GAME_SERVER_CONTAINER_GROUP_CRASHED",
+            .per_instance_container_group_crashed => "PER_INSTANCE_CONTAINER_GROUP_CRASHED",
+            .game_server_container_group_replaced_unhealthy => "GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY",
+            .location_state_pending => "LOCATION_STATE_PENDING",
+            .location_state_creating => "LOCATION_STATE_CREATING",
+            .location_state_created => "LOCATION_STATE_CREATED",
+            .location_state_activating => "LOCATION_STATE_ACTIVATING",
+            .location_state_active => "LOCATION_STATE_ACTIVE",
+            .location_state_updating => "LOCATION_STATE_UPDATING",
+            .location_state_error => "LOCATION_STATE_ERROR",
+            .location_state_deleting => "LOCATION_STATE_DELETING",
+            .location_state_deleted => "LOCATION_STATE_DELETED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

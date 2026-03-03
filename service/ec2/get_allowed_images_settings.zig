@@ -121,7 +121,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "imageCriterionSet")) {
                     result.image_criteria = try serde.deserializeImageCriterionList(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "managedBy")) {
-                    result.managed_by = std.meta.stringToEnum(ManagedBy, try reader.readElementText());
+                    result.managed_by = ManagedBy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = try allocator.dupe(u8, try reader.readElementText());
                 } else {

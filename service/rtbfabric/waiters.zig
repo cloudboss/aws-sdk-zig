@@ -53,27 +53,27 @@ pub const InboundExternalLinkActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "REJECTED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "REJECTED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ISOLATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ISOLATED")) {
                 return .failure;
             }
         }
@@ -125,22 +125,22 @@ pub const LinkAcceptedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACCEPTED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACCEPTED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "REJECTED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "REJECTED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .failure;
             }
         }
@@ -192,22 +192,22 @@ pub const LinkActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "REJECTED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "REJECTED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .failure;
             }
         }
@@ -259,27 +259,27 @@ pub const OutboundExternalLinkActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "REJECTED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "REJECTED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ISOLATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ISOLATED")) {
                 return .failure;
             }
         }
@@ -331,17 +331,17 @@ pub const RequesterGatewayActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }
@@ -393,12 +393,12 @@ pub const RequesterGatewayDeletedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }
@@ -450,17 +450,17 @@ pub const ResponderGatewayActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }
@@ -512,12 +512,12 @@ pub const ResponderGatewayDeletedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }

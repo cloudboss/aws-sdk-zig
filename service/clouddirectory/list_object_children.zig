@@ -118,7 +118,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListObjectChildrenInput
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.consistency_level) |v| {
-        try request.headers.put(allocator, "x-amz-consistency-level", @tagName(v));
+        try request.headers.put(allocator, "x-amz-consistency-level", v.wireName());
     }
     try request.headers.put(allocator, "x-amz-data-partition", input.directory_arn);
 

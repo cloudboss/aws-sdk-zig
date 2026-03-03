@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AutoPromotionResult = enum {
     model_promoted,
     model_not_promoted,
@@ -12,4 +14,23 @@ pub const AutoPromotionResult = enum {
         .retraining_customer_error = "RETRAINING_CUSTOMER_ERROR",
         .retraining_cancelled = "RETRAINING_CANCELLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .model_promoted => "MODEL_PROMOTED",
+            .model_not_promoted => "MODEL_NOT_PROMOTED",
+            .retraining_internal_error => "RETRAINING_INTERNAL_ERROR",
+            .retraining_customer_error => "RETRAINING_CUSTOMER_ERROR",
+            .retraining_cancelled => "RETRAINING_CANCELLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

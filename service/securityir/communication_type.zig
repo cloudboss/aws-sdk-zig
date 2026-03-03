@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CommunicationType = enum {
     case_created,
     case_updated,
@@ -17,21 +19,51 @@ pub const CommunicationType = enum {
     disable_aws_service_access,
 
     pub const json_field_names = .{
-        .case_created = "CASE_CREATED",
-        .case_updated = "CASE_UPDATED",
-        .case_acknowledged = "CASE_ACKNOWLEDGED",
-        .case_closed = "CASE_CLOSED",
-        .case_updated_to_service_managed = "CASE_UPDATED_TO_SERVICE_MANAGED",
-        .case_update_case_status = "CASE_UPDATE_CASE_STATUS",
-        .case_pending_customer_action_reminder = "CASE_PENDING_CUSTOMER_ACTION_REMINDER",
-        .case_attachment_url_uploaded = "CASE_ATTACHMENT_URL_UPLOADED",
-        .case_comment_added = "CASE_COMMENT_ADDED",
-        .case_comment_updated = "CASE_COMMENT_UPDATED",
-        .membership_created = "MEMBERSHIP_CREATED",
-        .membership_updated = "MEMBERSHIP_UPDATED",
-        .membership_cancelled = "MEMBERSHIP_CANCELLED",
-        .register_delegated_administrator = "REGISTER_DELEGATED_ADMINISTRATOR",
-        .deregister_delegated_administrator = "DEREGISTER_DELEGATED_ADMINISTRATOR",
-        .disable_aws_service_access = "DISABLE_AWS_SERVICE_ACCESS",
+        .case_created = "Case Created",
+        .case_updated = "Case Updated",
+        .case_acknowledged = "Case Acknowledged",
+        .case_closed = "Case Closed",
+        .case_updated_to_service_managed = "Case Updated To Service Managed",
+        .case_update_case_status = "Case Status Updated",
+        .case_pending_customer_action_reminder = "Case Pending Customer Action Reminder",
+        .case_attachment_url_uploaded = "Case Attachment Url Uploaded",
+        .case_comment_added = "Case Comment Added",
+        .case_comment_updated = "Case Comment Updated",
+        .membership_created = "Membership Created",
+        .membership_updated = "Membership Updated",
+        .membership_cancelled = "Membership Cancelled",
+        .register_delegated_administrator = "Register Delegated Administrator",
+        .deregister_delegated_administrator = "Deregister Delegated Administrator",
+        .disable_aws_service_access = "Disable AWS Service Access",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .case_created => "Case Created",
+            .case_updated => "Case Updated",
+            .case_acknowledged => "Case Acknowledged",
+            .case_closed => "Case Closed",
+            .case_updated_to_service_managed => "Case Updated To Service Managed",
+            .case_update_case_status => "Case Status Updated",
+            .case_pending_customer_action_reminder => "Case Pending Customer Action Reminder",
+            .case_attachment_url_uploaded => "Case Attachment Url Uploaded",
+            .case_comment_added => "Case Comment Added",
+            .case_comment_updated => "Case Comment Updated",
+            .membership_created => "Membership Created",
+            .membership_updated => "Membership Updated",
+            .membership_cancelled => "Membership Cancelled",
+            .register_delegated_administrator => "Register Delegated Administrator",
+            .deregister_delegated_administrator => "Deregister Delegated Administrator",
+            .disable_aws_service_access => "Disable AWS Service Access",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -100,7 +100,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStackSetsInput, con
     try body_buf.appendSlice(allocator, "Action=ListStackSets&Version=2010-05-15");
     if (input.call_as) |v| {
         try body_buf.appendSlice(allocator, "&CallAs=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.max_results) |v| {
         try body_buf.appendSlice(allocator, "&MaxResults=");
@@ -112,7 +112,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStackSetsInput, con
     }
     if (input.status) |v| {
         try body_buf.appendSlice(allocator, "&Status=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

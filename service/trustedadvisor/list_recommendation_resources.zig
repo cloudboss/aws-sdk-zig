@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendationResou
     if (input.exclusion_status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "exclusionStatus=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.max_results) |v| {
@@ -124,7 +124,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendationResou
     if (input.status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "status=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);

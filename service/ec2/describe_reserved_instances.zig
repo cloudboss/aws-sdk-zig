@@ -161,11 +161,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeReservedInstanc
     }
     if (input.offering_class) |v| {
         try body_buf.appendSlice(allocator, "&OfferingClass=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.offering_type) |v| {
         try body_buf.appendSlice(allocator, "&OfferingType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.reserved_instances_ids) |list| {
         for (list, 0..) |item, idx| {

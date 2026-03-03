@@ -50,7 +50,7 @@ pub const StreamExistsWaiter = struct {
 
         if (output.stream_description) |val_0| {
             if (val_0.stream_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }

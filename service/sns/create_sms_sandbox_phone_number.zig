@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSMSSandboxPhoneNu
     try body_buf.appendSlice(allocator, "Action=CreateSMSSandboxPhoneNumber&Version=2010-03-31");
     if (input.language_code) |v| {
         try body_buf.appendSlice(allocator, "&LanguageCode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&PhoneNumber=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.phone_number);

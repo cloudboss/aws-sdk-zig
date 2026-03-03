@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const HandlerErrorCode = enum {
     not_updatable,
     invalid_request,
@@ -17,21 +19,51 @@ pub const HandlerErrorCode = enum {
     internal_failure,
 
     pub const json_field_names = .{
-        .not_updatable = "NOT_UPDATABLE",
-        .invalid_request = "INVALID_REQUEST",
-        .access_denied = "ACCESS_DENIED",
-        .unauthorized_tagging_operation = "UNAUTHORIZED_TAGGING_OPERATION",
-        .invalid_credentials = "INVALID_CREDENTIALS",
-        .already_exists = "ALREADY_EXISTS",
-        .not_found = "NOT_FOUND",
-        .resource_conflict = "RESOURCE_CONFLICT",
-        .throttling = "THROTTLING",
-        .service_limit_exceeded = "SERVICE_LIMIT_EXCEEDED",
-        .not_stabilized = "NOT_STABILIZED",
-        .general_service_exception = "GENERAL_SERVICE_EXCEPTION",
-        .service_internal_error = "SERVICE_INTERNAL_ERROR",
-        .service_timeout = "SERVICE_TIMEOUT",
-        .network_failure = "NETWORK_FAILURE",
-        .internal_failure = "INTERNAL_FAILURE",
+        .not_updatable = "NotUpdatable",
+        .invalid_request = "InvalidRequest",
+        .access_denied = "AccessDenied",
+        .unauthorized_tagging_operation = "UnauthorizedTaggingOperation",
+        .invalid_credentials = "InvalidCredentials",
+        .already_exists = "AlreadyExists",
+        .not_found = "NotFound",
+        .resource_conflict = "ResourceConflict",
+        .throttling = "Throttling",
+        .service_limit_exceeded = "ServiceLimitExceeded",
+        .not_stabilized = "NotStabilized",
+        .general_service_exception = "GeneralServiceException",
+        .service_internal_error = "ServiceInternalError",
+        .service_timeout = "ServiceTimeout",
+        .network_failure = "NetworkFailure",
+        .internal_failure = "InternalFailure",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .not_updatable => "NotUpdatable",
+            .invalid_request => "InvalidRequest",
+            .access_denied => "AccessDenied",
+            .unauthorized_tagging_operation => "UnauthorizedTaggingOperation",
+            .invalid_credentials => "InvalidCredentials",
+            .already_exists => "AlreadyExists",
+            .not_found => "NotFound",
+            .resource_conflict => "ResourceConflict",
+            .throttling => "Throttling",
+            .service_limit_exceeded => "ServiceLimitExceeded",
+            .not_stabilized => "NotStabilized",
+            .general_service_exception => "GeneralServiceException",
+            .service_internal_error => "ServiceInternalError",
+            .service_timeout => "ServiceTimeout",
+            .network_failure => "NetworkFailure",
+            .internal_failure => "InternalFailure",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

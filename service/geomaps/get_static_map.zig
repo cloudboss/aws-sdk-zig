@@ -339,7 +339,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStaticMapInput, conf
     if (input.color_scheme) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "color-scheme=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.compact_overlay) |v| {
@@ -376,7 +376,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStaticMapInput, conf
     if (input.label_size) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "label-size=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.language) |v| {
@@ -397,7 +397,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStaticMapInput, conf
     if (input.points_of_interests) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "pois=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.political_view) |v| {
@@ -418,13 +418,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStaticMapInput, conf
     if (input.scale_bar_unit) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "scale-unit=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.style) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "style=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");

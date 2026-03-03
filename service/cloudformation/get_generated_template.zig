@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGeneratedTemplateInp
     try body_buf.appendSlice(allocator, "Action=GetGeneratedTemplate&Version=2010-05-15");
     if (input.format) |v| {
         try body_buf.appendSlice(allocator, "&Format=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&GeneratedTemplateName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.generated_template_name);
@@ -125,7 +125,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(GeneratedTemplateStatus, try reader.readElementText());
+                    result.status = GeneratedTemplateStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateBody")) {
                     result.template_body = try allocator.dupe(u8, try reader.readElementText());
                 } else {

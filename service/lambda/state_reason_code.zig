@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const StateReasonCode = enum {
     idle,
     creating,
@@ -68,14 +70,66 @@ pub const StateReasonCode = enum {
         .capacity_provider_scaling_limit_exceeded = "CapacityProviderScalingLimitExceeded",
         .insufficient_capacity = "InsufficientCapacity",
         .ec2_request_limit_exceeded = "EC2RequestLimitExceeded",
-        .function_error_init_timeout = "FunctionErrorInitTimeout",
-        .function_error_runtime_init_error = "FunctionErrorRuntimeInitError",
-        .function_error_extension_init_error = "FunctionErrorExtensionInitError",
-        .function_error_invalid_entry_point = "FunctionErrorInvalidEntryPoint",
-        .function_error_invalid_working_directory = "FunctionErrorInvalidWorkingDirectory",
-        .function_error_permission_denied = "FunctionErrorPermissionDenied",
-        .function_error_too_many_extensions = "FunctionErrorTooManyExtensions",
-        .function_error_init_resource_exhausted = "FunctionErrorInitResourceExhausted",
+        .function_error_init_timeout = "FunctionError.InitTimeout",
+        .function_error_runtime_init_error = "FunctionError.RuntimeInitError",
+        .function_error_extension_init_error = "FunctionError.ExtensionInitError",
+        .function_error_invalid_entry_point = "FunctionError.InvalidEntryPoint",
+        .function_error_invalid_working_directory = "FunctionError.InvalidWorkingDirectory",
+        .function_error_permission_denied = "FunctionError.PermissionDenied",
+        .function_error_too_many_extensions = "FunctionError.TooManyExtensions",
+        .function_error_init_resource_exhausted = "FunctionError.InitResourceExhausted",
         .disallowed_by_vpc_encryption_control = "DisallowedByVpcEncryptionControl",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .idle => "Idle",
+            .creating => "Creating",
+            .restoring => "Restoring",
+            .eni_limit_exceeded => "EniLimitExceeded",
+            .insufficient_role_permissions => "InsufficientRolePermissions",
+            .invalid_configuration => "InvalidConfiguration",
+            .internal_error => "InternalError",
+            .subnet_out_of_ip_addresses => "SubnetOutOfIPAddresses",
+            .invalid_subnet => "InvalidSubnet",
+            .invalid_security_group => "InvalidSecurityGroup",
+            .image_deleted => "ImageDeleted",
+            .image_access_denied => "ImageAccessDenied",
+            .invalid_image => "InvalidImage",
+            .kms_key_access_denied => "KMSKeyAccessDenied",
+            .kms_key_not_found => "KMSKeyNotFound",
+            .invalid_state_kms_key => "InvalidStateKMSKey",
+            .disabled_kms_key => "DisabledKMSKey",
+            .efsio_error => "EFSIOError",
+            .efs_mount_connectivity_error => "EFSMountConnectivityError",
+            .efs_mount_failure => "EFSMountFailure",
+            .efs_mount_timeout => "EFSMountTimeout",
+            .invalid_runtime => "InvalidRuntime",
+            .invalid_zip_file_exception => "InvalidZipFileException",
+            .function_error => "FunctionError",
+            .draining_durable_executions => "DrainingDurableExecutions",
+            .vcpu_limit_exceeded => "VcpuLimitExceeded",
+            .capacity_provider_scaling_limit_exceeded => "CapacityProviderScalingLimitExceeded",
+            .insufficient_capacity => "InsufficientCapacity",
+            .ec2_request_limit_exceeded => "EC2RequestLimitExceeded",
+            .function_error_init_timeout => "FunctionError.InitTimeout",
+            .function_error_runtime_init_error => "FunctionError.RuntimeInitError",
+            .function_error_extension_init_error => "FunctionError.ExtensionInitError",
+            .function_error_invalid_entry_point => "FunctionError.InvalidEntryPoint",
+            .function_error_invalid_working_directory => "FunctionError.InvalidWorkingDirectory",
+            .function_error_permission_denied => "FunctionError.PermissionDenied",
+            .function_error_too_many_extensions => "FunctionError.TooManyExtensions",
+            .function_error_init_resource_exhausted => "FunctionError.InitResourceExhausted",
+            .disallowed_by_vpc_encryption_control => "DisallowedByVpcEncryptionControl",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

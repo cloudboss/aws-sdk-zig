@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RandomKeySendVariantMask = enum {
     variant_mask_82_c0,
     variant_mask_82,
@@ -6,4 +8,20 @@ pub const RandomKeySendVariantMask = enum {
         .variant_mask_82_c0 = "VARIANT_MASK_82C0",
         .variant_mask_82 = "VARIANT_MASK_82",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .variant_mask_82_c0 => "VARIANT_MASK_82C0",
+            .variant_mask_82 => "VARIANT_MASK_82",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

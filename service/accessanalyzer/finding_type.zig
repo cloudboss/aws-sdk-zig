@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const FindingType = enum {
     external_access,
     unused_iam_role,
@@ -7,11 +9,31 @@ pub const FindingType = enum {
     internal_access,
 
     pub const json_field_names = .{
-        .external_access = "EXTERNAL_ACCESS",
-        .unused_iam_role = "UNUSED_IAM_ROLE",
-        .unused_iam_user_access_key = "UNUSED_IAM_USER_ACCESS_KEY",
-        .unused_iam_user_password = "UNUSED_IAM_USER_PASSWORD",
-        .unused_permission = "UNUSED_PERMISSION",
-        .internal_access = "INTERNAL_ACCESS",
+        .external_access = "ExternalAccess",
+        .unused_iam_role = "UnusedIAMRole",
+        .unused_iam_user_access_key = "UnusedIAMUserAccessKey",
+        .unused_iam_user_password = "UnusedIAMUserPassword",
+        .unused_permission = "UnusedPermission",
+        .internal_access = "InternalAccess",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .external_access => "ExternalAccess",
+            .unused_iam_role => "UnusedIAMRole",
+            .unused_iam_user_access_key => "UnusedIAMUserAccessKey",
+            .unused_iam_user_password => "UnusedIAMUserPassword",
+            .unused_permission => "UnusedPermission",
+            .internal_access => "InternalAccess",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

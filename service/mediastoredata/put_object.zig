@@ -153,10 +153,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
         try request.headers.put(allocator, "Content-Type", v);
     }
     if (input.storage_class) |v| {
-        try request.headers.put(allocator, "x-amz-storage-class", @tagName(v));
+        try request.headers.put(allocator, "x-amz-storage-class", v.wireName());
     }
     if (input.upload_availability) |v| {
-        try request.headers.put(allocator, "x-amz-upload-availability", @tagName(v));
+        try request.headers.put(allocator, "x-amz-upload-availability", v.wireName());
     }
 
     return request;

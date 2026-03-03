@@ -462,7 +462,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHealthCheckInput,
     }
     if (input.insufficient_data_health_status) |v| {
         try body_buf.appendSlice(allocator, "<InsufficientDataHealthStatus>");
-        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, v.wireName());
         try body_buf.appendSlice(allocator, "</InsufficientDataHealthStatus>");
     }
     if (input.inverted) |v| {

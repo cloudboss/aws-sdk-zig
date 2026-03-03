@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcTenancyInput, 
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&InstanceTenancy=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.instance_tenancy));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_tenancy.wireName());
     try body_buf.appendSlice(allocator, "&VpcId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.vpc_id);
 

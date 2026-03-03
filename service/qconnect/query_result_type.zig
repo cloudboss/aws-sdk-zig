@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const QueryResultType = enum {
     knowledge_content,
     intent_answer,
@@ -32,4 +34,33 @@ pub const QueryResultType = enum {
         .notes_chunk = "NOTES_CHUNK",
         .blocked_notes_chunk = "BLOCKED_NOTES_CHUNK",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .knowledge_content => "KNOWLEDGE_CONTENT",
+            .intent_answer => "INTENT_ANSWER",
+            .generative_answer => "GENERATIVE_ANSWER",
+            .generative_answer_chunk => "GENERATIVE_ANSWER_CHUNK",
+            .blocked_generative_answer_chunk => "BLOCKED_GENERATIVE_ANSWER_CHUNK",
+            .intent_answer_chunk => "INTENT_ANSWER_CHUNK",
+            .blocked_intent_answer_chunk => "BLOCKED_INTENT_ANSWER_CHUNK",
+            .email_response_chunk => "EMAIL_RESPONSE_CHUNK",
+            .email_overview_chunk => "EMAIL_OVERVIEW_CHUNK",
+            .email_generative_answer_chunk => "EMAIL_GENERATIVE_ANSWER_CHUNK",
+            .case_summarization_chunk => "CASE_SUMMARIZATION_CHUNK",
+            .blocked_case_summarization_chunk => "BLOCKED_CASE_SUMMARIZATION_CHUNK",
+            .notes => "NOTES",
+            .notes_chunk => "NOTES_CHUNK",
+            .blocked_notes_chunk => "BLOCKED_NOTES_CHUNK",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

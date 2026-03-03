@@ -109,10 +109,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteSnapshotInput, 
         try request.headers.put(allocator, "x-amz-Checksum", v);
     }
     if (input.checksum_aggregation_method) |v| {
-        try request.headers.put(allocator, "x-amz-Checksum-Aggregation-Method", @tagName(v));
+        try request.headers.put(allocator, "x-amz-Checksum-Aggregation-Method", v.wireName());
     }
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-Checksum-Algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-Checksum-Algorithm", v.wireName());
     }
 
     return request;

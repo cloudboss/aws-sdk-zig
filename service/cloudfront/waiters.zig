@@ -53,7 +53,7 @@ pub const DistributionDeployedWaiter = struct {
 
         if (output.distribution) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Deployed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Deployed")) {
                     return .success;
                 }
             }
@@ -107,7 +107,7 @@ pub const InvalidationCompletedWaiter = struct {
 
         if (output.invalidation) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Completed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Completed")) {
                     return .success;
                 }
             }
@@ -161,7 +161,7 @@ pub const InvalidationForDistributionTenantCompletedWaiter = struct {
 
         if (output.invalidation) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Completed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Completed")) {
                     return .success;
                 }
             }
@@ -215,7 +215,7 @@ pub const StreamingDistributionDeployedWaiter = struct {
 
         if (output.streaming_distribution) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Deployed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Deployed")) {
                     return .success;
                 }
             }

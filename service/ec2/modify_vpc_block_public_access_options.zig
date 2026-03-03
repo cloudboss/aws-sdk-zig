@@ -77,7 +77,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcBlockPublicAcc
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&InternetGatewayBlockMode=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.internet_gateway_block_mode));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.internet_gateway_block_mode.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

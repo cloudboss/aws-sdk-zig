@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetIdentityHeadersInNot
     try body_buf.appendSlice(allocator, "&Identity=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.identity);
     try body_buf.appendSlice(allocator, "&NotificationType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.notification_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.notification_type.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

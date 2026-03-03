@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ErrorResourceType = enum {
     environment,
     application,
@@ -40,4 +42,37 @@ pub const ErrorResourceType = enum {
         .resource_share = "RESOURCE_SHARE",
         .iam_role = "IAM_ROLE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .environment => "ENVIRONMENT",
+            .application => "APPLICATION",
+            .route => "ROUTE",
+            .service => "SERVICE",
+            .transit_gateway => "TRANSIT_GATEWAY",
+            .transit_gateway_attachment => "TRANSIT_GATEWAY_ATTACHMENT",
+            .api_gateway => "API_GATEWAY",
+            .nlb => "NLB",
+            .target_group => "TARGET_GROUP",
+            .load_balancer_listener => "LOAD_BALANCER_LISTENER",
+            .vpc_link => "VPC_LINK",
+            .lambda => "LAMBDA",
+            .vpc => "VPC",
+            .subnet => "SUBNET",
+            .route_table => "ROUTE_TABLE",
+            .security_group => "SECURITY_GROUP",
+            .vpc_endpoint_service_configuration => "VPC_ENDPOINT_SERVICE_CONFIGURATION",
+            .resource_share => "RESOURCE_SHARE",
+            .iam_role => "IAM_ROLE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

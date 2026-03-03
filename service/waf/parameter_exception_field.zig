@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ParameterExceptionField = enum {
     change_action,
     waf_action,
@@ -38,4 +40,36 @@ pub const ParameterExceptionField = enum {
         .tags = "TAGS",
         .tag_keys = "TAG_KEYS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .change_action => "CHANGE_ACTION",
+            .waf_action => "WAF_ACTION",
+            .waf_override_action => "WAF_OVERRIDE_ACTION",
+            .predicate_type => "PREDICATE_TYPE",
+            .ipset_type => "IPSET_TYPE",
+            .byte_match_field_type => "BYTE_MATCH_FIELD_TYPE",
+            .sql_injection_match_field_type => "SQL_INJECTION_MATCH_FIELD_TYPE",
+            .byte_match_text_transformation => "BYTE_MATCH_TEXT_TRANSFORMATION",
+            .byte_match_positional_constraint => "BYTE_MATCH_POSITIONAL_CONSTRAINT",
+            .size_constraint_comparison_operator => "SIZE_CONSTRAINT_COMPARISON_OPERATOR",
+            .geo_match_location_type => "GEO_MATCH_LOCATION_TYPE",
+            .geo_match_location_value => "GEO_MATCH_LOCATION_VALUE",
+            .rate_key => "RATE_KEY",
+            .rule_type => "RULE_TYPE",
+            .next_marker => "NEXT_MARKER",
+            .resource_arn => "RESOURCE_ARN",
+            .tags => "TAGS",
+            .tag_keys => "TAG_KEYS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

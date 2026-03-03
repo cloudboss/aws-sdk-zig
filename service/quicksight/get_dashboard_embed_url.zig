@@ -166,7 +166,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDashboardEmbedUrlInp
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "creds-type=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.identity_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.identity_type.wireName());
     query_has_prev = true;
     if (input.namespace) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

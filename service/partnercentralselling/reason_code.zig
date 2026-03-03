@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ReasonCode = enum {
     invitation_access_denied,
     invitation_validation_failed,
@@ -23,27 +25,63 @@ pub const ReasonCode = enum {
     disqualified_lead_not_permitted,
 
     pub const json_field_names = .{
-        .invitation_access_denied = "INVITATION_ACCESS_DENIED",
-        .invitation_validation_failed = "INVITATION_VALIDATION_FAILED",
-        .engagement_access_denied = "ENGAGEMENT_ACCESS_DENIED",
-        .opportunity_access_denied = "OPPORTUNITY_ACCESS_DENIED",
-        .resource_snapshot_job_access_denied = "RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED",
-        .resource_snapshot_job_validation_failed = "RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED",
-        .resource_snapshot_job_conflict = "RESOURCE_SNAPSHOT_JOB_CONFLICT",
-        .engagement_validation_failed = "ENGAGEMENT_VALIDATION_FAILED",
-        .engagement_conflict = "ENGAGEMENT_CONFLICT",
-        .opportunity_submission_failed = "OPPORTUNITY_SUBMISSION_FAILED",
-        .engagement_invitation_conflict = "ENGAGEMENT_INVITATION_CONFLICT",
-        .internal_error = "INTERNAL_ERROR",
-        .opportunity_validation_failed = "OPPORTUNITY_VALIDATION_FAILED",
-        .opportunity_conflict = "OPPORTUNITY_CONFLICT",
-        .resource_snapshot_access_denied = "RESOURCE_SNAPSHOT_ACCESS_DENIED",
-        .resource_snapshot_validation_failed = "RESOURCE_SNAPSHOT_VALIDATION_FAILED",
-        .resource_snapshot_conflict = "RESOURCE_SNAPSHOT_CONFLICT",
-        .service_quota_exceeded = "SERVICE_QUOTA_EXCEEDED",
-        .request_throttled = "REQUEST_THROTTLED",
-        .context_not_found = "CONTEXT_NOT_FOUND",
-        .customer_project_context_not_permitted = "CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED",
-        .disqualified_lead_not_permitted = "DISQUALIFIED_LEAD_NOT_PERMITTED",
+        .invitation_access_denied = "InvitationAccessDenied",
+        .invitation_validation_failed = "InvitationValidationFailed",
+        .engagement_access_denied = "EngagementAccessDenied",
+        .opportunity_access_denied = "OpportunityAccessDenied",
+        .resource_snapshot_job_access_denied = "ResourceSnapshotJobAccessDenied",
+        .resource_snapshot_job_validation_failed = "ResourceSnapshotJobValidationFailed",
+        .resource_snapshot_job_conflict = "ResourceSnapshotJobConflict",
+        .engagement_validation_failed = "EngagementValidationFailed",
+        .engagement_conflict = "EngagementConflict",
+        .opportunity_submission_failed = "OpportunitySubmissionFailed",
+        .engagement_invitation_conflict = "EngagementInvitationConflict",
+        .internal_error = "InternalError",
+        .opportunity_validation_failed = "OpportunityValidationFailed",
+        .opportunity_conflict = "OpportunityConflict",
+        .resource_snapshot_access_denied = "ResourceSnapshotAccessDenied",
+        .resource_snapshot_validation_failed = "ResourceSnapshotValidationFailed",
+        .resource_snapshot_conflict = "ResourceSnapshotConflict",
+        .service_quota_exceeded = "ServiceQuotaExceeded",
+        .request_throttled = "RequestThrottled",
+        .context_not_found = "ContextNotFound",
+        .customer_project_context_not_permitted = "CustomerProjectContextNotPermitted",
+        .disqualified_lead_not_permitted = "DisqualifiedLeadNotPermitted",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .invitation_access_denied => "InvitationAccessDenied",
+            .invitation_validation_failed => "InvitationValidationFailed",
+            .engagement_access_denied => "EngagementAccessDenied",
+            .opportunity_access_denied => "OpportunityAccessDenied",
+            .resource_snapshot_job_access_denied => "ResourceSnapshotJobAccessDenied",
+            .resource_snapshot_job_validation_failed => "ResourceSnapshotJobValidationFailed",
+            .resource_snapshot_job_conflict => "ResourceSnapshotJobConflict",
+            .engagement_validation_failed => "EngagementValidationFailed",
+            .engagement_conflict => "EngagementConflict",
+            .opportunity_submission_failed => "OpportunitySubmissionFailed",
+            .engagement_invitation_conflict => "EngagementInvitationConflict",
+            .internal_error => "InternalError",
+            .opportunity_validation_failed => "OpportunityValidationFailed",
+            .opportunity_conflict => "OpportunityConflict",
+            .resource_snapshot_access_denied => "ResourceSnapshotAccessDenied",
+            .resource_snapshot_validation_failed => "ResourceSnapshotValidationFailed",
+            .resource_snapshot_conflict => "ResourceSnapshotConflict",
+            .service_quota_exceeded => "ServiceQuotaExceeded",
+            .request_throttled => "RequestThrottled",
+            .context_not_found => "ContextNotFound",
+            .customer_project_context_not_permitted => "CustomerProjectContextNotPermitted",
+            .disqualified_lead_not_permitted => "DisqualifiedLeadNotPermitted",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

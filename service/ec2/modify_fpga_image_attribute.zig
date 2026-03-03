@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
     try body_buf.appendSlice(allocator, "Action=ModifyFpgaImageAttribute&Version=2016-11-15");
     if (input.attribute) |v| {
         try body_buf.appendSlice(allocator, "&Attribute=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.item.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
@@ -134,7 +134,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.item.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
     }
     if (input.operation_type) |v| {
         try body_buf.appendSlice(allocator, "&OperationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.product_codes) |list| {
         for (list, 0..) |item, idx| {

@@ -815,7 +815,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }
     if (input.bucket_key_enabled) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
@@ -824,7 +824,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
         try request.headers.put(allocator, "Cache-Control", v);
     }
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.checksum_crc32) |v| {
         try request.headers.put(allocator, "x-amz-checksum-crc32", v);
@@ -887,10 +887,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
         try request.headers.put(allocator, "If-None-Match", v);
     }
     if (input.object_lock_legal_hold_status) |v| {
-        try request.headers.put(allocator, "x-amz-object-lock-legal-hold", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-lock-legal-hold", v.wireName());
     }
     if (input.object_lock_mode) |v| {
-        try request.headers.put(allocator, "x-amz-object-lock-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-lock-mode", v.wireName());
     }
     if (input.object_lock_retain_until_date) |v| {
         {
@@ -899,10 +899,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
         }
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.server_side_encryption) |v| {
-        try request.headers.put(allocator, "x-amz-server-side-encryption", @tagName(v));
+        try request.headers.put(allocator, "x-amz-server-side-encryption", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -920,7 +920,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
         try request.headers.put(allocator, "x-amz-server-side-encryption-aws-kms-key-id", v);
     }
     if (input.storage_class) |v| {
-        try request.headers.put(allocator, "x-amz-storage-class", @tagName(v));
+        try request.headers.put(allocator, "x-amz-storage-class", v.wireName());
     }
     if (input.tagging) |v| {
         try request.headers.put(allocator, "x-amz-tagging", v);
@@ -961,7 +961,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.checksum_sha256 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-type")) |value| {
-        result.checksum_type = std.meta.stringToEnum(ChecksumType, value);
+        result.checksum_type = ChecksumType.fromWireName(value);
     }
     if (headers.get("etag")) |value| {
         result.e_tag = try allocator.dupe(u8, value);
@@ -970,10 +970,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.expiration = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-object-size")) |value| {
         result.size = std.fmt.parseInt(i64, value, 10) catch null;

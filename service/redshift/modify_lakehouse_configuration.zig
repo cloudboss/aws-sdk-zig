@@ -117,11 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyLakehouseConfigur
     }
     if (input.lakehouse_idc_registration) |v| {
         try body_buf.appendSlice(allocator, "&LakehouseIdcRegistration=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.lakehouse_registration) |v| {
         try body_buf.appendSlice(allocator, "&LakehouseRegistration=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

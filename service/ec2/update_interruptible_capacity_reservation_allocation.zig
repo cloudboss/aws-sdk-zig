@@ -123,11 +123,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "interruptibleCapacityReservationId")) {
                     result.interruptible_capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "interruptionType")) {
-                    result.interruption_type = std.meta.stringToEnum(InterruptionType, try reader.readElementText());
+                    result.interruption_type = InterruptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceCapacityReservationId")) {
                     result.source_capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(InterruptibleCapacityReservationAllocationStatus, try reader.readElementText());
+                    result.status = InterruptibleCapacityReservationAllocationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "targetInstanceCount")) {
                     result.target_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {

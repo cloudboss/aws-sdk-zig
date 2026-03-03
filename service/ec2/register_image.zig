@@ -201,7 +201,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterImageInput, con
     try body_buf.appendSlice(allocator, "Action=RegisterImage&Version=2016-11-15");
     if (input.architecture) |v| {
         try body_buf.appendSlice(allocator, "&Architecture=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.billing_products) |list| {
         for (list, 0..) |item, idx| {
@@ -325,7 +325,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterImageInput, con
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_type) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
             }
@@ -349,7 +349,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterImageInput, con
     }
     if (input.boot_mode) |v| {
         try body_buf.appendSlice(allocator, "&BootMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
@@ -369,7 +369,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterImageInput, con
     }
     if (input.imds_support) |v| {
         try body_buf.appendSlice(allocator, "&ImdsSupport=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.kernel_id) |v| {
         try body_buf.appendSlice(allocator, "&KernelId=");
@@ -397,7 +397,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterImageInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -425,7 +425,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterImageInput, con
     }
     if (input.tpm_support) |v| {
         try body_buf.appendSlice(allocator, "&TpmSupport=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.uefi_data) |v| {
         try body_buf.appendSlice(allocator, "&UefiData=");

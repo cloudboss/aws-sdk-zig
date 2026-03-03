@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableSnapshotBlockPubl
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&State=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.state));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.state.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -117,7 +117,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SnapshotBlockPublicAccessState, try reader.readElementText());
+                    result.state = SnapshotBlockPublicAccessState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

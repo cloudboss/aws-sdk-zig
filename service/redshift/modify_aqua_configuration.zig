@@ -60,7 +60,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyAquaConfiguration
     try body_buf.appendSlice(allocator, "Action=ModifyAquaConfiguration&Version=2012-12-01");
     if (input.aqua_configuration_status) |v| {
         try body_buf.appendSlice(allocator, "&AquaConfigurationStatus=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&ClusterIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.cluster_identifier);

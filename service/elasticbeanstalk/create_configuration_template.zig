@@ -258,7 +258,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "DateUpdated")) {
                     result.date_updated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DeploymentStatus")) {
-                    result.deployment_status = std.meta.stringToEnum(ConfigurationDeploymentStatus, try reader.readElementText());
+                    result.deployment_status = ConfigurationDeploymentStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {

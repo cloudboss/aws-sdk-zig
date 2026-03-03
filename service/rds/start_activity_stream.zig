@@ -102,7 +102,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartActivityStreamInpu
     try body_buf.appendSlice(allocator, "&KmsKeyId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.kms_key_id);
     try body_buf.appendSlice(allocator, "&Mode=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.mode));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.mode.wireName());
     try body_buf.appendSlice(allocator, "&ResourceArn=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.resource_arn);
 
@@ -146,9 +146,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "KmsKeyId")) {
                     result.kms_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Mode")) {
-                    result.mode = std.meta.stringToEnum(ActivityStreamMode, try reader.readElementText());
+                    result.mode = ActivityStreamMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ActivityStreamStatus, try reader.readElementText());
+                    result.status = ActivityStreamStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

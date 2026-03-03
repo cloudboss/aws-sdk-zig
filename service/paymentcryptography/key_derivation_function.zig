@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const KeyDerivationFunction = enum {
     nist_sp800,
     ansi_x963,
@@ -6,4 +8,20 @@ pub const KeyDerivationFunction = enum {
         .nist_sp800 = "NIST_SP800",
         .ansi_x963 = "ANSI_X963",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .nist_sp800 => "NIST_SP800",
+            .ansi_x963 => "ANSI_X963",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

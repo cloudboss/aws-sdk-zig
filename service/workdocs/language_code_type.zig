@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const LanguageCodeType = enum {
     ar,
     bg,
@@ -64,4 +66,49 @@ pub const LanguageCodeType = enum {
         .zh = "ZH",
         .default = "DEFAULT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ar => "AR",
+            .bg => "BG",
+            .bn => "BN",
+            .da => "DA",
+            .de => "DE",
+            .cs => "CS",
+            .el => "EL",
+            .en => "EN",
+            .es => "ES",
+            .fa => "FA",
+            .fi => "FI",
+            .fr => "FR",
+            .hi => "HI",
+            .hu => "HU",
+            .id => "ID",
+            .it => "IT",
+            .ja => "JA",
+            .ko => "KO",
+            .lt => "LT",
+            .lv => "LV",
+            .nl => "NL",
+            .no => "NO",
+            .pt => "PT",
+            .ro => "RO",
+            .ru => "RU",
+            .sv => "SV",
+            .sw => "SW",
+            .th => "TH",
+            .tr => "TR",
+            .zh => "ZH",
+            .default => "DEFAULT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

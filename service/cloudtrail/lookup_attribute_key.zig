@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const LookupAttributeKey = enum {
     event_id,
     event_name,
@@ -9,13 +11,35 @@ pub const LookupAttributeKey = enum {
     access_key_id,
 
     pub const json_field_names = .{
-        .event_id = "EVENT_ID",
-        .event_name = "EVENT_NAME",
-        .read_only = "READ_ONLY",
-        .username = "USERNAME",
-        .resource_type = "RESOURCE_TYPE",
-        .resource_name = "RESOURCE_NAME",
-        .event_source = "EVENT_SOURCE",
-        .access_key_id = "ACCESS_KEY_ID",
+        .event_id = "EventId",
+        .event_name = "EventName",
+        .read_only = "ReadOnly",
+        .username = "Username",
+        .resource_type = "ResourceType",
+        .resource_name = "ResourceName",
+        .event_source = "EventSource",
+        .access_key_id = "AccessKeyId",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .event_id => "EventId",
+            .event_name => "EventName",
+            .read_only => "ReadOnly",
+            .username => "Username",
+            .resource_type => "ResourceType",
+            .resource_name => "ResourceName",
+            .event_source => "EventSource",
+            .access_key_id => "AccessKeyId",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

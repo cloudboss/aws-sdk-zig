@@ -53,7 +53,7 @@ pub const AnomalyDetectorActiveWaiter = struct {
         if (output.anomaly_detector) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "ACTIVE")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "ACTIVE")) {
                         return .success;
                     }
                 }
@@ -62,7 +62,7 @@ pub const AnomalyDetectorActiveWaiter = struct {
         if (output.anomaly_detector) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "CREATING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "CREATING")) {
                         return .retry;
                     }
                 }
@@ -71,7 +71,7 @@ pub const AnomalyDetectorActiveWaiter = struct {
         if (output.anomaly_detector) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "UPDATING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "UPDATING")) {
                         return .retry;
                     }
                 }
@@ -134,7 +134,7 @@ pub const AnomalyDetectorDeletedWaiter = struct {
         if (output.anomaly_detector) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "DELETING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "DELETING")) {
                         return .retry;
                     }
                 }
@@ -190,7 +190,7 @@ pub const ScraperActiveWaiter = struct {
         if (output.scraper) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "ACTIVE")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "ACTIVE")) {
                         return .success;
                     }
                 }
@@ -199,7 +199,7 @@ pub const ScraperActiveWaiter = struct {
         if (output.scraper) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "CREATION_FAILED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "CREATION_FAILED")) {
                         return .failure;
                     }
                 }
@@ -262,7 +262,7 @@ pub const ScraperDeletedWaiter = struct {
         if (output.scraper) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "DELETION_FAILED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "DELETION_FAILED")) {
                         return .failure;
                     }
                 }
@@ -318,7 +318,7 @@ pub const WorkspaceActiveWaiter = struct {
         if (output.workspace) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "ACTIVE")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "ACTIVE")) {
                         return .success;
                     }
                 }
@@ -327,7 +327,7 @@ pub const WorkspaceActiveWaiter = struct {
         if (output.workspace) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "UPDATING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "UPDATING")) {
                         return .retry;
                     }
                 }
@@ -336,7 +336,7 @@ pub const WorkspaceActiveWaiter = struct {
         if (output.workspace) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "CREATING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "CREATING")) {
                         return .retry;
                     }
                 }
@@ -399,7 +399,7 @@ pub const WorkspaceDeletedWaiter = struct {
         if (output.workspace) |val_0| {
             if (val_0.status) |val_1| {
                 if (val_1.status_code) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "DELETING")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "DELETING")) {
                         return .retry;
                     }
                 }

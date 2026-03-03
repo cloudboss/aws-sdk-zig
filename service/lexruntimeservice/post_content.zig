@@ -490,7 +490,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.content_type = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-dialog-state")) |value| {
-        result.dialog_state = std.meta.stringToEnum(DialogState, value);
+        result.dialog_state = DialogState.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-lex-encoded-input-transcript")) |value| {
         result.encoded_input_transcript = try allocator.dupe(u8, value);
@@ -508,7 +508,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.message = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-lex-message-format")) |value| {
-        result.message_format = std.meta.stringToEnum(MessageFormatType, value);
+        result.message_format = MessageFormatType.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-lex-nlu-intent-confidence")) |value| {
         result.nlu_intent_confidence = try allocator.dupe(u8, value);

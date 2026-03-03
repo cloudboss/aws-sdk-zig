@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RecommendationLanguage = enum {
     english,
     japanese,
@@ -12,16 +14,41 @@ pub const RecommendationLanguage = enum {
     bahasa_indonesia,
 
     pub const json_field_names = .{
-        .english = "ENGLISH",
-        .japanese = "JAPANESE",
-        .chinese = "CHINESE",
-        .french = "FRENCH",
-        .german = "GERMAN",
-        .korean = "KOREAN",
-        .traditional_chinese = "TRADITIONAL_CHINESE",
-        .italian = "ITALIAN",
-        .spanish = "SPANISH",
-        .brazilian_portuguese = "BRAZILIAN_PORTUGUESE",
-        .bahasa_indonesia = "BAHASA_INDONESIA",
+        .english = "en",
+        .japanese = "ja",
+        .chinese = "zh",
+        .french = "fr",
+        .german = "de",
+        .korean = "ko",
+        .traditional_chinese = "zh_TW",
+        .italian = "it",
+        .spanish = "es",
+        .brazilian_portuguese = "pt_BR",
+        .bahasa_indonesia = "id",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .english => "en",
+            .japanese => "ja",
+            .chinese => "zh",
+            .french => "fr",
+            .german => "de",
+            .korean => "ko",
+            .traditional_chinese => "zh_TW",
+            .italian => "it",
+            .spanish => "es",
+            .brazilian_portuguese => "pt_BR",
+            .bahasa_indonesia => "id",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

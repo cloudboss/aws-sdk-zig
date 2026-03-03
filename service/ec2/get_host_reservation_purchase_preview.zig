@@ -109,7 +109,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "purchase")) {
                     result.purchase = try serde.deserializePurchaseSet(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "totalHourlyPrice")) {

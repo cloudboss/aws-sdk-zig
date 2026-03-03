@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AutoMLMetricExtendedEnum = enum {
     accuracy,
     mse,
@@ -27,31 +29,71 @@ pub const AutoMLMetricExtendedEnum = enum {
     training_loss,
 
     pub const json_field_names = .{
-        .accuracy = "ACCURACY",
+        .accuracy = "Accuracy",
         .mse = "MSE",
         .f1 = "F1",
-        .f1_macro = "F1_MACRO",
+        .f1_macro = "F1macro",
         .auc = "AUC",
         .rmse = "RMSE",
         .mae = "MAE",
         .r2 = "R2",
-        .balanced_accuracy = "BALANCED_ACCURACY",
-        .precision = "PRECISION",
-        .precision_macro = "PRECISION_MACRO",
-        .recall = "RECALL",
-        .recall_macro = "RECALL_MACRO",
+        .balanced_accuracy = "BalancedAccuracy",
+        .precision = "Precision",
+        .precision_macro = "PrecisionMacro",
+        .recall = "Recall",
+        .recall_macro = "RecallMacro",
         .log_loss = "LogLoss",
-        .inference_latency = "INFERENCE_LATENCY",
+        .inference_latency = "InferenceLatency",
         .mape = "MAPE",
         .mase = "MASE",
         .wape = "WAPE",
-        .average_weighted_quantile_loss = "AVERAGE_WEIGHTED_QUANTILE_LOSS",
-        .rouge1 = "ROUGE1",
-        .rouge2 = "ROUGE2",
-        .rougel = "ROUGEL",
-        .rougel_sum = "ROUGEL_SUM",
-        .perplexity = "PERPLEXITY",
-        .validation_loss = "VALIDATION_LOSS",
-        .training_loss = "TRAINING_LOSS",
+        .average_weighted_quantile_loss = "AverageWeightedQuantileLoss",
+        .rouge1 = "Rouge1",
+        .rouge2 = "Rouge2",
+        .rougel = "RougeL",
+        .rougel_sum = "RougeLSum",
+        .perplexity = "Perplexity",
+        .validation_loss = "ValidationLoss",
+        .training_loss = "TrainingLoss",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .accuracy => "Accuracy",
+            .mse => "MSE",
+            .f1 => "F1",
+            .f1_macro => "F1macro",
+            .auc => "AUC",
+            .rmse => "RMSE",
+            .mae => "MAE",
+            .r2 => "R2",
+            .balanced_accuracy => "BalancedAccuracy",
+            .precision => "Precision",
+            .precision_macro => "PrecisionMacro",
+            .recall => "Recall",
+            .recall_macro => "RecallMacro",
+            .log_loss => "LogLoss",
+            .inference_latency => "InferenceLatency",
+            .mape => "MAPE",
+            .mase => "MASE",
+            .wape => "WAPE",
+            .average_weighted_quantile_loss => "AverageWeightedQuantileLoss",
+            .rouge1 => "Rouge1",
+            .rouge2 => "Rouge2",
+            .rougel => "RougeL",
+            .rougel_sum => "RougeLSum",
+            .perplexity => "Perplexity",
+            .validation_loss => "ValidationLoss",
+            .training_loss => "TrainingLoss",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExecutionType = enum {
     lambda,
     return_control,
@@ -6,4 +8,20 @@ pub const ExecutionType = enum {
         .lambda = "LAMBDA",
         .return_control = "RETURN_CONTROL",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .lambda => "LAMBDA",
+            .return_control => "RETURN_CONTROL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

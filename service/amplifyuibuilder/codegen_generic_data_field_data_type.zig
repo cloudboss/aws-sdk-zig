@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CodegenGenericDataFieldDataType = enum {
     id,
     string,
@@ -19,21 +21,52 @@ pub const CodegenGenericDataFieldDataType = enum {
 
     pub const json_field_names = .{
         .id = "ID",
-        .string = "STRING",
-        .int = "INT",
-        .float = "FLOAT",
-        .aws_date = "AWS_DATE",
-        .aws_time = "AWS_TIME",
-        .aws_date_time = "AWS_DATE_TIME",
-        .aws_timestamp = "AWS_TIMESTAMP",
-        .aws_email = "AWS_EMAIL",
-        .aws_url = "AWS_URL",
-        .aws_ip_address = "AWS_IP_ADDRESS",
-        .boolean = "BOOLEAN",
-        .aws_json = "AWS_JSON",
-        .aws_phone = "AWS_PHONE",
-        .@"enum" = "ENUM",
-        .model = "MODEL",
-        .non_model = "NON_MODEL",
+        .string = "String",
+        .int = "Int",
+        .float = "Float",
+        .aws_date = "AWSDate",
+        .aws_time = "AWSTime",
+        .aws_date_time = "AWSDateTime",
+        .aws_timestamp = "AWSTimestamp",
+        .aws_email = "AWSEmail",
+        .aws_url = "AWSURL",
+        .aws_ip_address = "AWSIPAddress",
+        .boolean = "Boolean",
+        .aws_json = "AWSJSON",
+        .aws_phone = "AWSPhone",
+        .@"enum" = "Enum",
+        .model = "Model",
+        .non_model = "NonModel",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .id => "ID",
+            .string => "String",
+            .int => "Int",
+            .float => "Float",
+            .aws_date => "AWSDate",
+            .aws_time => "AWSTime",
+            .aws_date_time => "AWSDateTime",
+            .aws_timestamp => "AWSTimestamp",
+            .aws_email => "AWSEmail",
+            .aws_url => "AWSURL",
+            .aws_ip_address => "AWSIPAddress",
+            .boolean => "Boolean",
+            .aws_json => "AWSJSON",
+            .aws_phone => "AWSPhone",
+            .@"enum" => "Enum",
+            .model => "Model",
+            .non_model => "NonModel",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

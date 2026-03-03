@@ -179,7 +179,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.write("try request.headers.put(allocator, \"\$L\", \$L);", headerName, varName)
             }
             isEnum -> {
-                writer.write("try request.headers.put(allocator, \"\$L\", @tagName(\$L));", headerName, varName)
+                writer.write("try request.headers.put(allocator, \"\$L\", \$L.wireName());", headerName, varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
@@ -212,7 +212,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
         when {
             isElementEnum -> {
-                writer.write("try header_buf.appendSlice(allocator, @tagName(item));")
+                writer.write("try header_buf.appendSlice(allocator, item.wireName());")
             }
             elementZigType == "[]const u8" -> {
                 writer.write("try header_buf.appendSlice(allocator, item);")
@@ -331,7 +331,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L);", varName)
             }
             isEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(\$L));", varName)
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, \$L.wireName());", varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
@@ -515,7 +515,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 }
                 isEnum -> {
                     val typeName = ctx.resolveBaseZigType(targetShape)
-                    writer.write("result.\$L = std.meta.stringToEnum(\$L, value);", fieldName, typeName)
+                    writer.write("result.\$L = \$L.fromWireName(value);", fieldName, typeName)
                 }
                 zigType == "bool" -> {
                     writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)
@@ -585,7 +585,7 @@ class RestJsonProtocol : ProtocolGenerator {
                     }
                     isEnum -> {
                         val typeName = ctx.resolveBaseZigType(targetShape)
-                        writer.write("result.\$L = std.meta.stringToEnum(\$L, value);", fieldName, typeName)
+                        writer.write("result.\$L = \$L.fromWireName(value);", fieldName, typeName)
                     }
                     zigType == "bool" -> {
                         writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)

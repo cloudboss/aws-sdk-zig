@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyCapacityReservati
     }
     if (input.end_date_type) |v| {
         try body_buf.appendSlice(allocator, "&EndDateType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.instance_count) |v| {
         try body_buf.appendSlice(allocator, "&InstanceCount=");
@@ -74,7 +74,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyCapacityReservati
     }
     if (input.instance_match_criteria) |v| {
         try body_buf.appendSlice(allocator, "&InstanceMatchCriteria=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

@@ -71,7 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetIpAddressTypeInput, 
 
     try body_buf.appendSlice(allocator, "Action=SetIpAddressType&Version=2015-12-01");
     try body_buf.appendSlice(allocator, "&IpAddressType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.ip_address_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.ip_address_type.wireName());
     try body_buf.appendSlice(allocator, "&LoadBalancerArn=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.load_balancer_arn);
 
@@ -108,7 +108,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "IpAddressType")) {
-                    result.ip_address_type = std.meta.stringToEnum(IpAddressType, try reader.readElementText());
+                    result.ip_address_type = IpAddressType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

@@ -101,7 +101,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "managedBy")) {
-                    result.managed_by = std.meta.stringToEnum(ManagedBy, try reader.readElementText());
+                    result.managed_by = ManagedBy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serialConsoleAccessEnabled")) {
                     result.serial_console_access_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {

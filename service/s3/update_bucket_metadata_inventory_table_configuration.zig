@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBucketMetadataInv
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.content_md5) |v| {
         try request.headers.put(allocator, "Content-MD5", v);

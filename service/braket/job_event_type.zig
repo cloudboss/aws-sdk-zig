@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const JobEventType = enum {
     waiting_for_priority,
     queued_for_execution,
@@ -24,4 +26,29 @@ pub const JobEventType = enum {
         .max_runtime_exceeded = "MAX_RUNTIME_EXCEEDED",
         .cancelled = "CANCELLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .waiting_for_priority => "WAITING_FOR_PRIORITY",
+            .queued_for_execution => "QUEUED_FOR_EXECUTION",
+            .starting_instance => "STARTING_INSTANCE",
+            .downloading_data => "DOWNLOADING_DATA",
+            .running => "RUNNING",
+            .deprioritized_due_to_inactivity => "DEPRIORITIZED_DUE_TO_INACTIVITY",
+            .uploading_results => "UPLOADING_RESULTS",
+            .completed => "COMPLETED",
+            .failed => "FAILED",
+            .max_runtime_exceeded => "MAX_RUNTIME_EXCEEDED",
+            .cancelled => "CANCELLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

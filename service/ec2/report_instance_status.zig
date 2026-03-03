@@ -127,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReportInstanceStatusInp
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     try body_buf.appendSlice(allocator, "&Status=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.status.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

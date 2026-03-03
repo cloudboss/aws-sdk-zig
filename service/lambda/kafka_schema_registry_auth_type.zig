@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const KafkaSchemaRegistryAuthType = enum {
     basic_auth,
     client_certificate_tls_auth,
@@ -8,4 +10,21 @@ pub const KafkaSchemaRegistryAuthType = enum {
         .client_certificate_tls_auth = "CLIENT_CERTIFICATE_TLS_AUTH",
         .server_root_ca_certificate = "SERVER_ROOT_CA_CERTIFICATE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .basic_auth => "BASIC_AUTH",
+            .client_certificate_tls_auth => "CLIENT_CERTIFICATE_TLS_AUTH",
+            .server_root_ca_certificate => "SERVER_ROOT_CA_CERTIFICATE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

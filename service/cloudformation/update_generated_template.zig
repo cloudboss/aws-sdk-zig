@@ -120,11 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGeneratedTemplate
     if (input.template_configuration) |v| {
         if (v.deletion_policy) |sv| {
             try body_buf.appendSlice(allocator, "&TemplateConfiguration.DeletionPolicy=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.update_replace_policy) |sv| {
             try body_buf.appendSlice(allocator, "&TemplateConfiguration.UpdateReplacePolicy=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
 

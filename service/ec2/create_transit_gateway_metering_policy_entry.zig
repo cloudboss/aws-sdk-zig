@@ -114,14 +114,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayMet
     }
     if (input.destination_transit_gateway_attachment_type) |v| {
         try body_buf.appendSlice(allocator, "&DestinationTransitGatewayAttachmentType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&MeteredAccount=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.metered_account));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.metered_account.wireName());
     try body_buf.appendSlice(allocator, "&PolicyRuleNumber=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.policy_rule_number}) catch "");
     if (input.protocol) |v| {
@@ -142,7 +142,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayMet
     }
     if (input.source_transit_gateway_attachment_type) |v| {
         try body_buf.appendSlice(allocator, "&SourceTransitGatewayAttachmentType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&TransitGatewayMeteringPolicyId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.transit_gateway_metering_policy_id);

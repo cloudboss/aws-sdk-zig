@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExecutionBlockType = enum {
     custom_action_lambda,
     execution_approval,
@@ -12,16 +14,41 @@ pub const ExecutionBlockType = enum {
     documentdb,
 
     pub const json_field_names = .{
-        .custom_action_lambda = "CUSTOM_ACTION_LAMBDA",
-        .execution_approval = "EXECUTION_APPROVAL",
-        .aurora = "AURORA",
-        .ec2_asg = "EC2_ASG",
-        .routing_control = "ROUTING_CONTROL",
-        .region_switch = "REGION_SWITCH",
-        .parallel = "PARALLEL",
-        .ecs = "ECS",
-        .eks_resource_scaling = "EKS_RESOURCE_SCALING",
-        .route53_health_check = "ROUTE53_HEALTH_CHECK",
-        .documentdb = "DOCUMENTDB",
+        .custom_action_lambda = "CustomActionLambda",
+        .execution_approval = "ManualApproval",
+        .aurora = "AuroraGlobalDatabase",
+        .ec2_asg = "EC2AutoScaling",
+        .routing_control = "ARCRoutingControl",
+        .region_switch = "ARCRegionSwitchPlan",
+        .parallel = "Parallel",
+        .ecs = "ECSServiceScaling",
+        .eks_resource_scaling = "EKSResourceScaling",
+        .route53_health_check = "Route53HealthCheck",
+        .documentdb = "DocumentDb",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .custom_action_lambda => "CustomActionLambda",
+            .execution_approval => "ManualApproval",
+            .aurora => "AuroraGlobalDatabase",
+            .ec2_asg => "EC2AutoScaling",
+            .routing_control => "ARCRoutingControl",
+            .region_switch => "ARCRegionSwitchPlan",
+            .parallel => "Parallel",
+            .ecs => "ECSServiceScaling",
+            .eks_resource_scaling => "EKSResourceScaling",
+            .route53_health_check => "Route53HealthCheck",
+            .documentdb => "DocumentDb",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInputDeviceThum
     request.port = port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
-    try request.headers.put(allocator, "accept", @tagName(input.accept));
+    try request.headers.put(allocator, "accept", input.accept.wireName());
 
     return request;
 }
@@ -111,7 +111,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.content_length = std.fmt.parseInt(i64, value, 10) catch null;
     }
     if (stream_resp.headers.get("content-type")) |value| {
-        result.content_type = std.meta.stringToEnum(ContentType, value);
+        result.content_type = ContentType.fromWireName(value);
     }
     if (stream_resp.headers.get("etag")) |value| {
         result.e_tag = try allocator.dupe(u8, value);

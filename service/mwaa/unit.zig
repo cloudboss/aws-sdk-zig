@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Unit = enum {
     seconds,
     microseconds,
@@ -28,32 +30,73 @@ pub const Unit = enum {
     none,
 
     pub const json_field_names = .{
-        .seconds = "SECONDS",
-        .microseconds = "MICROSECONDS",
-        .milliseconds = "MILLISECONDS",
-        .bytes = "BYTES",
-        .kilobytes = "KILOBYTES",
-        .megabytes = "MEGABYTES",
-        .gigabytes = "GIGABYTES",
-        .terabytes = "TERABYTES",
-        .bits = "BITS",
-        .kilobits = "KILOBITS",
-        .megabits = "MEGABITS",
-        .gigabits = "GIGABITS",
-        .terabits = "TERABITS",
-        .percent = "PERCENT",
-        .count = "COUNT",
-        .bytes_per_second = "BYTES_PER_SECOND",
-        .kilobytes_per_second = "KILOBYTES_PER_SECOND",
-        .megabytes_per_second = "MEGABYTES_PER_SECOND",
-        .gigabytes_per_second = "GIGABYTES_PER_SECOND",
-        .terabytes_per_second = "TERABYTES_PER_SECOND",
-        .bits_per_second = "BITS_PER_SECOND",
-        .kilobits_per_second = "KILOBITS_PER_SECOND",
-        .megabits_per_second = "MEGABITS_PER_SECOND",
-        .gigabits_per_second = "GIGABITS_PER_SECOND",
-        .terabits_per_second = "TERABITS_PER_SECOND",
-        .count_per_second = "COUNT_PER_SECOND",
-        .none = "NONE",
+        .seconds = "Seconds",
+        .microseconds = "Microseconds",
+        .milliseconds = "Milliseconds",
+        .bytes = "Bytes",
+        .kilobytes = "Kilobytes",
+        .megabytes = "Megabytes",
+        .gigabytes = "Gigabytes",
+        .terabytes = "Terabytes",
+        .bits = "Bits",
+        .kilobits = "Kilobits",
+        .megabits = "Megabits",
+        .gigabits = "Gigabits",
+        .terabits = "Terabits",
+        .percent = "Percent",
+        .count = "Count",
+        .bytes_per_second = "Bytes/Second",
+        .kilobytes_per_second = "Kilobytes/Second",
+        .megabytes_per_second = "Megabytes/Second",
+        .gigabytes_per_second = "Gigabytes/Second",
+        .terabytes_per_second = "Terabytes/Second",
+        .bits_per_second = "Bits/Second",
+        .kilobits_per_second = "Kilobits/Second",
+        .megabits_per_second = "Megabits/Second",
+        .gigabits_per_second = "Gigabits/Second",
+        .terabits_per_second = "Terabits/Second",
+        .count_per_second = "Count/Second",
+        .none = "None",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .seconds => "Seconds",
+            .microseconds => "Microseconds",
+            .milliseconds => "Milliseconds",
+            .bytes => "Bytes",
+            .kilobytes => "Kilobytes",
+            .megabytes => "Megabytes",
+            .gigabytes => "Gigabytes",
+            .terabytes => "Terabytes",
+            .bits => "Bits",
+            .kilobits => "Kilobits",
+            .megabits => "Megabits",
+            .gigabits => "Gigabits",
+            .terabits => "Terabits",
+            .percent => "Percent",
+            .count => "Count",
+            .bytes_per_second => "Bytes/Second",
+            .kilobytes_per_second => "Kilobytes/Second",
+            .megabytes_per_second => "Megabytes/Second",
+            .gigabytes_per_second => "Gigabytes/Second",
+            .terabytes_per_second => "Terabytes/Second",
+            .bits_per_second => "Bits/Second",
+            .kilobits_per_second => "Kilobits/Second",
+            .megabits_per_second => "Megabits/Second",
+            .gigabits_per_second => "Gigabits/Second",
+            .terabits_per_second => "Terabits/Second",
+            .count_per_second => "Count/Second",
+            .none => "None",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

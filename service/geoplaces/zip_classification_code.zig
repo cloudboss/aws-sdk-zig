@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const ZipClassificationCode = enum {
     military,
     post_office_boxes,
     unique,
 
     pub const json_field_names = .{
-        .military = "MILITARY",
-        .post_office_boxes = "POST_OFFICE_BOXES",
-        .unique = "UNIQUE",
+        .military = "Military",
+        .post_office_boxes = "PostOfficeBoxes",
+        .unique = "Unique",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .military => "Military",
+            .post_office_boxes => "PostOfficeBoxes",
+            .unique => "Unique",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DefineSuggesterInput, c
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.domain_name);
     if (input.suggester.document_suggester_options.fuzzy_matching) |sv2| {
         try body_buf.appendSlice(allocator, "&Suggester.DocumentSuggesterOptions.FuzzyMatching=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
     }
     if (input.suggester.document_suggester_options.sort_expression) |sv2| {
         try body_buf.appendSlice(allocator, "&Suggester.DocumentSuggesterOptions.SortExpression=");

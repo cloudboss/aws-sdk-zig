@@ -71,7 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetIdentityNotification
     try body_buf.appendSlice(allocator, "&Identity=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.identity);
     try body_buf.appendSlice(allocator, "&NotificationType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.notification_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.notification_type.wireName());
     if (input.sns_topic) |v| {
         try body_buf.appendSlice(allocator, "&SnsTopic=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);

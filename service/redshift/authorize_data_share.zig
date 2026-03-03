@@ -107,7 +107,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "DataShareAssociations")) {
                     result.data_share_associations = try serde.deserializeDataShareAssociationList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DataShareType")) {
-                    result.data_share_type = std.meta.stringToEnum(DataShareType, try reader.readElementText());
+                    result.data_share_type = DataShareType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ManagedBy")) {
                     result.managed_by = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProducerArn")) {

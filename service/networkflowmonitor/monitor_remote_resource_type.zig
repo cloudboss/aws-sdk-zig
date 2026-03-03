@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MonitorRemoteResourceType = enum {
     aws_vpc,
     aws_az,
@@ -6,10 +8,29 @@ pub const MonitorRemoteResourceType = enum {
     aws_region,
 
     pub const json_field_names = .{
-        .aws_vpc = "AWS_VPC",
-        .aws_az = "AWS_AZ",
-        .aws_subnet = "AWS_SUBNET",
-        .aws_service = "AWS_SERVICE",
-        .aws_region = "AWS_REGION",
+        .aws_vpc = "AWS::EC2::VPC",
+        .aws_az = "AWS::AvailabilityZone",
+        .aws_subnet = "AWS::EC2::Subnet",
+        .aws_service = "AWS::AWSService",
+        .aws_region = "AWS::Region",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .aws_vpc => "AWS::EC2::VPC",
+            .aws_az => "AWS::AvailabilityZone",
+            .aws_subnet => "AWS::EC2::Subnet",
+            .aws_service => "AWS::AWSService",
+            .aws_region => "AWS::Region",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

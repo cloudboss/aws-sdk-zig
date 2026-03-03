@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PackageFormat = enum {
     npm,
     pypi,
@@ -9,13 +11,35 @@ pub const PackageFormat = enum {
     cargo,
 
     pub const json_field_names = .{
-        .npm = "NPM",
-        .pypi = "PYPI",
-        .maven = "MAVEN",
-        .nuget = "NUGET",
-        .generic = "GENERIC",
-        .ruby = "RUBY",
-        .swift = "SWIFT",
-        .cargo = "CARGO",
+        .npm = "npm",
+        .pypi = "pypi",
+        .maven = "maven",
+        .nuget = "nuget",
+        .generic = "generic",
+        .ruby = "ruby",
+        .swift = "swift",
+        .cargo = "cargo",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .npm => "npm",
+            .pypi => "pypi",
+            .maven => "maven",
+            .nuget => "nuget",
+            .generic => "generic",
+            .ruby => "ruby",
+            .swift => "swift",
+            .cargo => "cargo",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

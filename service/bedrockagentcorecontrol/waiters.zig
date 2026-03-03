@@ -53,21 +53,21 @@ pub const MemoryCreatedWaiter = struct {
 
         if (output.memory) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATING")) {
                     return .retry;
                 }
             }
         }
         if (output.memory) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.memory) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -120,22 +120,22 @@ pub const PolicyActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "UPDATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "UPDATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
@@ -194,12 +194,12 @@ pub const PolicyDeletedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
@@ -251,22 +251,22 @@ pub const PolicyEngineActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "UPDATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "UPDATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
@@ -325,12 +325,12 @@ pub const PolicyEngineDeletedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
@@ -382,22 +382,22 @@ pub const PolicyGenerationCompletedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "GENERATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "GENERATED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "GENERATING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "GENERATING")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "GENERATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "GENERATE_FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }

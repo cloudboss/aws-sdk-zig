@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Av1 Level
 pub const Av1Level = enum {
     av1_level_2,
@@ -33,4 +35,33 @@ pub const Av1Level = enum {
         .av1_level_6_3 = "AV1_LEVEL_6_3",
         .av1_level_auto = "AV1_LEVEL_AUTO",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .av1_level_2 => "AV1_LEVEL_2",
+            .av1_level_2_1 => "AV1_LEVEL_2_1",
+            .av1_level_3 => "AV1_LEVEL_3",
+            .av1_level_3_1 => "AV1_LEVEL_3_1",
+            .av1_level_4 => "AV1_LEVEL_4",
+            .av1_level_4_1 => "AV1_LEVEL_4_1",
+            .av1_level_5 => "AV1_LEVEL_5",
+            .av1_level_5_1 => "AV1_LEVEL_5_1",
+            .av1_level_5_2 => "AV1_LEVEL_5_2",
+            .av1_level_5_3 => "AV1_LEVEL_5_3",
+            .av1_level_6 => "AV1_LEVEL_6",
+            .av1_level_6_1 => "AV1_LEVEL_6_1",
+            .av1_level_6_2 => "AV1_LEVEL_6_2",
+            .av1_level_6_3 => "AV1_LEVEL_6_3",
+            .av1_level_auto => "AV1_LEVEL_AUTO",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

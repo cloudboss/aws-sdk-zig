@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RouteLegAdditionalFeature = enum {
     elevation,
     incidents,
@@ -10,14 +12,37 @@ pub const RouteLegAdditionalFeature = enum {
     zones,
 
     pub const json_field_names = .{
-        .elevation = "ELEVATION",
-        .incidents = "INCIDENTS",
-        .pass_through_waypoints = "PASS_THROUGH_WAYPOINTS",
-        .summary = "SUMMARY",
-        .tolls = "TOLLS",
-        .travel_step_instructions = "TRAVEL_STEP_INSTRUCTIONS",
-        .truck_road_types = "TRUCK_ROAD_TYPES",
-        .typical_duration = "TYPICAL_DURATION",
-        .zones = "ZONES",
+        .elevation = "Elevation",
+        .incidents = "Incidents",
+        .pass_through_waypoints = "PassThroughWaypoints",
+        .summary = "Summary",
+        .tolls = "Tolls",
+        .travel_step_instructions = "TravelStepInstructions",
+        .truck_road_types = "TruckRoadTypes",
+        .typical_duration = "TypicalDuration",
+        .zones = "Zones",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .elevation => "Elevation",
+            .incidents => "Incidents",
+            .pass_through_waypoints => "PassThroughWaypoints",
+            .summary => "Summary",
+            .tolls => "Tolls",
+            .travel_step_instructions => "TravelStepInstructions",
+            .truck_road_types => "TruckRoadTypes",
+            .typical_duration => "TypicalDuration",
+            .zones => "Zones",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

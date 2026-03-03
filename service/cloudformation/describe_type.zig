@@ -362,7 +362,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTypeInput, conf
     }
     if (input.@"type") |v| {
         try body_buf.appendSlice(allocator, "&Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.type_name) |v| {
         try body_buf.appendSlice(allocator, "&TypeName=");
@@ -413,7 +413,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "DefaultVersionId")) {
                     result.default_version_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DeprecatedStatus")) {
-                    result.deprecated_status = std.meta.stringToEnum(DeprecatedStatus, try reader.readElementText());
+                    result.deprecated_status = DeprecatedStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DocumentationUrl")) {
@@ -435,7 +435,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "OriginalTypeName")) {
                     result.original_type_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProvisioningType")) {
-                    result.provisioning_type = std.meta.stringToEnum(ProvisioningType, try reader.readElementText());
+                    result.provisioning_type = ProvisioningType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublicVersionNumber")) {
                     result.public_version_number = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublisherId")) {
@@ -449,15 +449,15 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "TimeCreated")) {
                     result.time_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(RegistryType, try reader.readElementText());
+                    result.@"type" = RegistryType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeName")) {
                     result.type_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeTestsStatus")) {
-                    result.type_tests_status = std.meta.stringToEnum(TypeTestsStatus, try reader.readElementText());
+                    result.type_tests_status = TypeTestsStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeTestsStatusDescription")) {
                     result.type_tests_status_description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Visibility")) {
-                    result.visibility = std.meta.stringToEnum(Visibility, try reader.readElementText());
+                    result.visibility = Visibility.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

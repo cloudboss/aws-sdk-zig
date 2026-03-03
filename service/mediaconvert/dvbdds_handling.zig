@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how MediaConvert handles the display definition segment (DDS). To
 /// exclude the DDS from this set of captions: Keep the default, None. To
 /// include the DDS: Choose Specified. When you do, also specify the offset
@@ -26,4 +28,22 @@ pub const DvbddsHandling = enum {
         .no_display_window = "NO_DISPLAY_WINDOW",
         .specified_optimal = "SPECIFIED_OPTIMAL",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "NONE",
+            .specified => "SPECIFIED",
+            .no_display_window => "NO_DISPLAY_WINDOW",
+            .specified_optimal => "SPECIFIED_OPTIMAL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -147,12 +147,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTypesInput, config:
     try body_buf.appendSlice(allocator, "Action=ListTypes&Version=2010-05-15");
     if (input.deprecated_status) |v| {
         try body_buf.appendSlice(allocator, "&DeprecatedStatus=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.filters) |v| {
         if (v.category) |sv| {
             try body_buf.appendSlice(allocator, "&Filters.Category=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.publisher_id) |sv| {
             try body_buf.appendSlice(allocator, "&Filters.PublisherId=");
@@ -173,15 +173,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTypesInput, config:
     }
     if (input.provisioning_type) |v| {
         try body_buf.appendSlice(allocator, "&ProvisioningType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.@"type") |v| {
         try body_buf.appendSlice(allocator, "&Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.visibility) |v| {
         try body_buf.appendSlice(allocator, "&Visibility=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

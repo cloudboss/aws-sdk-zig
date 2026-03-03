@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConflictExceptionReason = enum {
     zonal_shift_already_exists,
     zonal_shift_status_not_active,
@@ -13,17 +15,43 @@ pub const ConflictExceptionReason = enum {
     practice_outside_allowed_windows,
 
     pub const json_field_names = .{
-        .zonal_shift_already_exists = "ZONAL_SHIFT_ALREADY_EXISTS",
-        .zonal_shift_status_not_active = "ZONAL_SHIFT_STATUS_NOT_ACTIVE",
-        .simultaneous_zonal_shifts_conflict = "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT",
-        .practice_configuration_already_exists = "PRACTICE_CONFIGURATION_ALREADY_EXISTS",
-        .autoshift_enabled = "AUTOSHIFT_ENABLED",
-        .practice_configuration_does_not_exist = "PRACTICE_CONFIGURATION_DOES_NOT_EXIST",
-        .zonal_autoshift_active = "ZONAL_AUTOSHIFT_ACTIVE",
-        .practice_outcome_alarms_red = "PRACTICE_OUTCOME_ALARMS_RED",
-        .practice_blocking_alarms_red = "PRACTICE_BLOCKING_ALARMS_RED",
-        .practice_in_blocked_dates = "PRACTICE_IN_BLOCKED_DATES",
-        .practice_in_blocked_windows = "PRACTICE_IN_BLOCKED_WINDOWS",
-        .practice_outside_allowed_windows = "PRACTICE_OUTSIDE_ALLOWED_WINDOWS",
+        .zonal_shift_already_exists = "ZonalShiftAlreadyExists",
+        .zonal_shift_status_not_active = "ZonalShiftStatusNotActive",
+        .simultaneous_zonal_shifts_conflict = "SimultaneousZonalShiftsConflict",
+        .practice_configuration_already_exists = "PracticeConfigurationAlreadyExists",
+        .autoshift_enabled = "AutoShiftEnabled",
+        .practice_configuration_does_not_exist = "PracticeConfigurationDoesNotExist",
+        .zonal_autoshift_active = "ZonalAutoshiftActive",
+        .practice_outcome_alarms_red = "PracticeOutcomeAlarmsRed",
+        .practice_blocking_alarms_red = "PracticeBlockingAlarmsRed",
+        .practice_in_blocked_dates = "PracticeInBlockedDates",
+        .practice_in_blocked_windows = "PracticeInBlockedWindows",
+        .practice_outside_allowed_windows = "PracticeOutsideAllowedWindows",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .zonal_shift_already_exists => "ZonalShiftAlreadyExists",
+            .zonal_shift_status_not_active => "ZonalShiftStatusNotActive",
+            .simultaneous_zonal_shifts_conflict => "SimultaneousZonalShiftsConflict",
+            .practice_configuration_already_exists => "PracticeConfigurationAlreadyExists",
+            .autoshift_enabled => "AutoShiftEnabled",
+            .practice_configuration_does_not_exist => "PracticeConfigurationDoesNotExist",
+            .zonal_autoshift_active => "ZonalAutoshiftActive",
+            .practice_outcome_alarms_red => "PracticeOutcomeAlarmsRed",
+            .practice_blocking_alarms_red => "PracticeBlockingAlarmsRed",
+            .practice_in_blocked_dates => "PracticeInBlockedDates",
+            .practice_in_blocked_windows => "PracticeInBlockedWindows",
+            .practice_outside_allowed_windows => "PracticeOutsideAllowedWindows",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

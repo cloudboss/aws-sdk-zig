@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Engine = enum {
     standard,
     neural,
@@ -5,9 +7,27 @@ pub const Engine = enum {
     generative,
 
     pub const json_field_names = .{
-        .standard = "STANDARD",
-        .neural = "NEURAL",
-        .long_form = "LONG_FORM",
-        .generative = "GENERATIVE",
+        .standard = "standard",
+        .neural = "neural",
+        .long_form = "long-form",
+        .generative = "generative",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .standard => "standard",
+            .neural => "neural",
+            .long_form => "long-form",
+            .generative => "generative",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

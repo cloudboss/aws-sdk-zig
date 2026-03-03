@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ManifestServiceExcludeEventType = enum {
     generated_manifest,
     origin_manifest,
@@ -66,4 +68,50 @@ pub const ManifestServiceExcludeEventType = enum {
         .error_bumper_start_interpolation = "ERROR_BUMPER_START_INTERPOLATION",
         .error_bumper_end_interpolation = "ERROR_BUMPER_END_INTERPOLATION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .generated_manifest => "GENERATED_MANIFEST",
+            .origin_manifest => "ORIGIN_MANIFEST",
+            .session_initialized => "SESSION_INITIALIZED",
+            .tracking_response => "TRACKING_RESPONSE",
+            .config_syntax_error => "CONFIG_SYNTAX_ERROR",
+            .config_security_error => "CONFIG_SECURITY_ERROR",
+            .unknown_host => "UNKNOWN_HOST",
+            .timeout_error => "TIMEOUT_ERROR",
+            .connection_error => "CONNECTION_ERROR",
+            .io_error => "IO_ERROR",
+            .unknown_error => "UNKNOWN_ERROR",
+            .host_disallowed => "HOST_DISALLOWED",
+            .parsing_error => "PARSING_ERROR",
+            .manifest_error => "MANIFEST_ERROR",
+            .no_master_or_media_playlist => "NO_MASTER_OR_MEDIA_PLAYLIST",
+            .no_master_playlist => "NO_MASTER_PLAYLIST",
+            .no_media_playlist => "NO_MEDIA_PLAYLIST",
+            .incompatible_hls_version => "INCOMPATIBLE_HLS_VERSION",
+            .scte35_parsing_error => "SCTE35_PARSING_ERROR",
+            .invalid_single_period_dash_manifest => "INVALID_SINGLE_PERIOD_DASH_MANIFEST",
+            .unsupported_single_period_dash_manifest => "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST",
+            .last_period_missing_audio => "LAST_PERIOD_MISSING_AUDIO",
+            .last_period_missing_audio_warning => "LAST_PERIOD_MISSING_AUDIO_WARNING",
+            .error_origin_prefix_interpolation => "ERROR_ORIGIN_PREFIX_INTERPOLATION",
+            .error_ads_interpolation => "ERROR_ADS_INTERPOLATION",
+            .error_live_pre_roll_ads_interpolation => "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION",
+            .error_cdn_ad_segment_interpolation => "ERROR_CDN_AD_SEGMENT_INTERPOLATION",
+            .error_cdn_content_segment_interpolation => "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION",
+            .error_slate_ad_url_interpolation => "ERROR_SLATE_AD_URL_INTERPOLATION",
+            .error_profile_name_interpolation => "ERROR_PROFILE_NAME_INTERPOLATION",
+            .error_bumper_start_interpolation => "ERROR_BUMPER_START_INTERPOLATION",
+            .error_bumper_end_interpolation => "ERROR_BUMPER_END_INTERPOLATION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

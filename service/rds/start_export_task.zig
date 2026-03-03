@@ -185,7 +185,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "SourceArn")) {
                     result.source_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceType")) {
-                    result.source_type = std.meta.stringToEnum(ExportSourceType, try reader.readElementText());
+                    result.source_type = ExportSourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TaskEndTime")) {

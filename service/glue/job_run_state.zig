@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const JobRunState = enum {
     starting,
     running,
@@ -22,4 +24,28 @@ pub const JobRunState = enum {
         .waiting = "WAITING",
         .expired = "EXPIRED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .starting => "STARTING",
+            .running => "RUNNING",
+            .stopping => "STOPPING",
+            .stopped => "STOPPED",
+            .succeeded => "SUCCEEDED",
+            .failed => "FAILED",
+            .timeout => "TIMEOUT",
+            .@"error" => "ERROR",
+            .waiting => "WAITING",
+            .expired => "EXPIRED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -232,7 +232,7 @@ pub fn deserializeHealthCheckRegionList(allocator: std.mem.Allocator, reader: *a
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(HealthCheckRegion, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (HealthCheckRegion.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -521,7 +521,7 @@ pub fn deserializeAccountLimit(allocator: std.mem.Allocator, reader: *aws.xml.Re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(AccountLimitType, try reader.readElementText());
+                    result.@"type" = AccountLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
@@ -543,7 +543,7 @@ pub fn deserializeAlarmIdentifier(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Region")) {
-                    result.region = std.meta.stringToEnum(CloudWatchRegion, try reader.readElementText());
+                    result.region = CloudWatchRegion.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -588,7 +588,7 @@ pub fn deserializeChangeInfo(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ChangeStatus, try reader.readElementText());
+                    result.status = ChangeStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SubmittedAt")) {
                     result.submitted_at = try aws.date.parseIso8601(try reader.readElementText());
                 } else {
@@ -679,7 +679,7 @@ pub fn deserializeCloudWatchAlarmConfiguration(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ComparisonOperator")) {
-                    result.comparison_operator = std.meta.stringToEnum(ComparisonOperator, try reader.readElementText());
+                    result.comparison_operator = ComparisonOperator.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Dimensions")) {
                     result.dimensions = try deserializeDimensionList(allocator, reader, "Dimension");
                 } else if (std.mem.eql(u8, e.local, "EvaluationPeriods")) {
@@ -691,7 +691,7 @@ pub fn deserializeCloudWatchAlarmConfiguration(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "Period")) {
                     result.period = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "Statistic")) {
-                    result.statistic = std.meta.stringToEnum(Statistic, try reader.readElementText());
+                    result.statistic = Statistic.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Threshold")) {
                     result.threshold = try std.fmt.parseFloat(f64, try reader.readElementText());
                 } else {
@@ -973,7 +973,7 @@ pub fn deserializeHealthCheckConfig(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "HealthThreshold")) {
                     result.health_threshold = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "InsufficientDataHealthStatus")) {
-                    result.insufficient_data_health_status = std.meta.stringToEnum(InsufficientDataHealthStatus, try reader.readElementText());
+                    result.insufficient_data_health_status = InsufficientDataHealthStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Inverted")) {
                     result.inverted = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "IPAddress")) {
@@ -993,7 +993,7 @@ pub fn deserializeHealthCheckConfig(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "SearchString")) {
                     result.search_string = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(HealthCheckType, try reader.readElementText());
+                    result.@"type" = HealthCheckType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1016,7 +1016,7 @@ pub fn deserializeHealthCheckObservation(allocator: std.mem.Allocator, reader: *
                 if (std.mem.eql(u8, e.local, "IPAddress")) {
                     result.ip_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Region")) {
-                    result.region = std.meta.stringToEnum(HealthCheckRegion, try reader.readElementText());
+                    result.region = HealthCheckRegion.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusReport")) {
                     result.status_report = try deserializeStatusReport(allocator, reader);
                 } else {
@@ -1113,7 +1113,7 @@ pub fn deserializeHostedZoneFeatures(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AcceleratedRecoveryStatus")) {
-                    result.accelerated_recovery_status = std.meta.stringToEnum(AcceleratedRecoveryStatus, try reader.readElementText());
+                    result.accelerated_recovery_status = AcceleratedRecoveryStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FailureReasons")) {
                     result.failure_reasons = try deserializeHostedZoneFailureReasons(allocator, reader);
                 } else {
@@ -1134,7 +1134,7 @@ pub fn deserializeHostedZoneLimit(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(HostedZoneLimitType, try reader.readElementText());
+                    result.@"type" = HostedZoneLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
@@ -1360,7 +1360,7 @@ pub fn deserializeResourceRecordSet(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "CidrRoutingConfig")) {
                     result.cidr_routing_config = try deserializeCidrRoutingConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Failover")) {
-                    result.failover = std.meta.stringToEnum(ResourceRecordSetFailover, try reader.readElementText());
+                    result.failover = ResourceRecordSetFailover.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GeoLocation")) {
                     result.geo_location = try deserializeGeoLocation(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "GeoProximityLocation")) {
@@ -1372,7 +1372,7 @@ pub fn deserializeResourceRecordSet(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Region")) {
-                    result.region = std.meta.stringToEnum(ResourceRecordSetRegion, try reader.readElementText());
+                    result.region = ResourceRecordSetRegion.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceRecords")) {
                     result.resource_records = try deserializeResourceRecords(allocator, reader, "ResourceRecord");
                 } else if (std.mem.eql(u8, e.local, "SetIdentifier")) {
@@ -1382,7 +1382,7 @@ pub fn deserializeResourceRecordSet(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "TTL")) {
                     result.ttl = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.@"type" = RRType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Weight")) {
                     result.weight = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else {
@@ -1407,7 +1407,7 @@ pub fn deserializeResourceTagSet(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "ResourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TagResourceType, try reader.readElementText());
+                    result.resource_type = TagResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try deserializeTagList(allocator, reader, "Tag");
                 } else {
@@ -1428,7 +1428,7 @@ pub fn deserializeReusableDelegationSetLimit(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(ReusableDelegationSetLimitType, try reader.readElementText());
+                    result.@"type" = ReusableDelegationSetLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
@@ -1501,7 +1501,7 @@ pub fn deserializeTrafficPolicy(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.@"type" = RRType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
                     result.version = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else {
@@ -1533,7 +1533,7 @@ pub fn deserializeTrafficPolicyInstance(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyId")) {
                     result.traffic_policy_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyType")) {
-                    result.traffic_policy_type = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.traffic_policy_type = RRType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyVersion")) {
                     result.traffic_policy_version = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "TTL")) {
@@ -1563,7 +1563,7 @@ pub fn deserializeTrafficPolicySummary(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyCount")) {
                     result.traffic_policy_count = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.@"type" = RRType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1585,7 +1585,7 @@ pub fn deserializeVPC(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !VP
                 if (std.mem.eql(u8, e.local, "VPCId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VPCRegion")) {
-                    result.vpc_region = std.meta.stringToEnum(VPCRegion, try reader.readElementText());
+                    result.vpc_region = VPCRegion.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1650,7 +1650,7 @@ pub fn serializeHealthCheckRegionList(allocator: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1662,7 +1662,7 @@ pub fn serializeResettableElementNameList(allocator: std.mem.Allocator, buf: *st
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1722,7 +1722,7 @@ pub fn serializeAlarmIdentifier(allocator: std.mem.Allocator, buf: *std.ArrayLis
     try aws.xml.appendXmlEscaped(allocator, buf, value.name);
     try buf.appendSlice(allocator, "</Name>");
     try buf.appendSlice(allocator, "<Region>");
-    try buf.appendSlice(allocator, @tagName(value.region));
+    try buf.appendSlice(allocator, value.region.wireName());
     try buf.appendSlice(allocator, "</Region>");
 }
 
@@ -1740,7 +1740,7 @@ pub fn serializeAliasTarget(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
 
 pub fn serializeChange(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Change) !void {
     try buf.appendSlice(allocator, "<Action>");
-    try buf.appendSlice(allocator, @tagName(value.action));
+    try buf.appendSlice(allocator, value.action.wireName());
     try buf.appendSlice(allocator, "</Action>");
     try buf.appendSlice(allocator, "<ResourceRecordSet>");
     try serializeResourceRecordSet(allocator, buf, value.resource_record_set);
@@ -1760,7 +1760,7 @@ pub fn serializeChangeBatch(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
 
 pub fn serializeCidrCollectionChange(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CidrCollectionChange) !void {
     try buf.appendSlice(allocator, "<Action>");
-    try buf.appendSlice(allocator, @tagName(value.action));
+    try buf.appendSlice(allocator, value.action.wireName());
     try buf.appendSlice(allocator, "</Action>");
     try buf.appendSlice(allocator, "<CidrList>");
     try serializeCidrList(allocator, buf, value.cidr_list, "Cidr");
@@ -1876,7 +1876,7 @@ pub fn serializeHealthCheckConfig(allocator: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.insufficient_data_health_status) |v| {
         try buf.appendSlice(allocator, "<InsufficientDataHealthStatus>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InsufficientDataHealthStatus>");
     }
     if (value.inverted) |v| {
@@ -1931,7 +1931,7 @@ pub fn serializeHealthCheckConfig(allocator: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(allocator, "</SearchString>");
     }
     try buf.appendSlice(allocator, "<Type>");
-    try buf.appendSlice(allocator, @tagName(value.@"type"));
+    try buf.appendSlice(allocator, value.@"type".wireName());
     try buf.appendSlice(allocator, "</Type>");
 }
 
@@ -1967,7 +1967,7 @@ pub fn serializeResourceRecordSet(allocator: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.failover) |v| {
         try buf.appendSlice(allocator, "<Failover>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Failover>");
     }
     if (value.geo_location) |v| {
@@ -1995,7 +1995,7 @@ pub fn serializeResourceRecordSet(allocator: std.mem.Allocator, buf: *std.ArrayL
     try buf.appendSlice(allocator, "</Name>");
     if (value.region) |v| {
         try buf.appendSlice(allocator, "<Region>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Region>");
     }
     if (value.resource_records) |v| {
@@ -2022,7 +2022,7 @@ pub fn serializeResourceRecordSet(allocator: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(allocator, "</TTL>");
     }
     try buf.appendSlice(allocator, "<Type>");
-    try buf.appendSlice(allocator, @tagName(value.@"type"));
+    try buf.appendSlice(allocator, value.@"type".wireName());
     try buf.appendSlice(allocator, "</Type>");
     if (value.weight) |v| {
         try buf.appendSlice(allocator, "<Weight>");
@@ -2055,7 +2055,7 @@ pub fn serializeVPC(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value
     }
     if (value.vpc_region) |v| {
         try buf.appendSlice(allocator, "<VPCRegion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VPCRegion>");
     }
 }

@@ -1,5 +1,28 @@
+const std = @import("std");
+
 /// The minimum required TLS version.
 pub const TLSSecurityPolicy = enum {
     policy_min_tls_1_0_2019_07,
     policy_min_tls_1_2_2019_07,
+
+    pub const json_field_names = .{
+        .policy_min_tls_1_0_2019_07 = "Policy-Min-TLS-1-0-2019-07",
+        .policy_min_tls_1_2_2019_07 = "Policy-Min-TLS-1-2-2019-07",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .policy_min_tls_1_0_2019_07 => "Policy-Min-TLS-1-0-2019-07",
+            .policy_min_tls_1_2_2019_07 => "Policy-Min-TLS-1-2-2019-07",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

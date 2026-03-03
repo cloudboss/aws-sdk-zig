@@ -252,7 +252,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BareMetal=", .{n}) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.bare_metal) |fv_4| {
-                                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_4));
+                                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                 }
                             }
                             if (sv_3.baseline_ebs_bandwidth_mbps) |sv_4| {
@@ -295,7 +295,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BurstablePerformance=", .{n}) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.burstable_performance) |fv_4| {
-                                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_4));
+                                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                 }
                             }
                             if (sv_3.cpu_manufacturers) |lst_4| {
@@ -336,7 +336,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorage=", .{n}) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.local_storage) |fv_4| {
-                                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_4));
+                                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                 }
                             }
                             if (sv_3.local_storage_types) |lst_4| {
@@ -577,7 +577,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
         }
         if (v.scale_in_protected_instances) |sv| {
             try body_buf.appendSlice(allocator, "&Preferences.ScaleInProtectedInstances=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.skip_matching) |sv| {
             try body_buf.appendSlice(allocator, "&Preferences.SkipMatching=");
@@ -585,12 +585,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
         }
         if (v.standby_instances) |sv| {
             try body_buf.appendSlice(allocator, "&Preferences.StandbyInstances=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.strategy) |v| {
         try body_buf.appendSlice(allocator, "&Strategy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

@@ -408,10 +408,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseI
         }
     }
     if (input.object_lock_legal_hold_status) |v| {
-        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-legal-hold", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-legal-hold", v.wireName());
     }
     if (input.object_lock_mode) |v| {
-        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-object-lock-mode", v.wireName());
     }
     if (input.object_lock_retain_until_date) |v| {
         {
@@ -426,10 +426,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseI
         }
     }
     if (input.replication_status) |v| {
-        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-replication-status", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-replication-status", v.wireName());
     }
     if (input.request_charged) |v| {
-        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-request-charged", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-request-charged", v.wireName());
     }
     try request.headers.put(allocator, "x-amz-request-route", input.request_route);
     try request.headers.put(allocator, "x-amz-request-token", input.request_token);
@@ -437,7 +437,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseI
         try request.headers.put(allocator, "x-amz-fwd-header-x-amz-restore", v);
     }
     if (input.server_side_encryption) |v| {
-        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm", v);
@@ -455,7 +455,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseI
         }
     }
     if (input.storage_class) |v| {
-        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-storage-class", @tagName(v));
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-storage-class", v.wireName());
     }
     if (input.tag_count) |v| {
         {

@@ -50,21 +50,21 @@ pub const DeploymentSuccessfulWaiter = struct {
 
         if (output.deployment_info) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Succeeded")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Succeeded")) {
                     return .success;
                 }
             }
         }
         if (output.deployment_info) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Failed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Failed")) {
                     return .failure;
                 }
             }
         }
         if (output.deployment_info) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Stopped")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Stopped")) {
                     return .failure;
                 }
             }

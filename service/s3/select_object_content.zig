@@ -151,7 +151,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SelectObjectContentInpu
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.expression);
     try body_buf.appendSlice(allocator, "</Expression>");
     try body_buf.appendSlice(allocator, "<ExpressionType>");
-    try body_buf.appendSlice(allocator, @tagName(input.expression_type));
+    try body_buf.appendSlice(allocator, input.expression_type.wireName());
     try body_buf.appendSlice(allocator, "</ExpressionType>");
     try body_buf.appendSlice(allocator, "<InputSerialization>");
     try serde.serializeInputSerialization(allocator, &body_buf, input.input_serialization);

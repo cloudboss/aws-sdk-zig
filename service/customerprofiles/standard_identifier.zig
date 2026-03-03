@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const StandardIdentifier = enum {
     profile,
     asset,
@@ -38,4 +40,36 @@ pub const StandardIdentifier = enum {
         .lookup_only = "LOOKUP_ONLY",
         .new_only = "NEW_ONLY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .profile => "PROFILE",
+            .asset => "ASSET",
+            .case => "CASE",
+            .order => "ORDER",
+            .communication_record => "COMMUNICATION_RECORD",
+            .air_preference => "AIR_PREFERENCE",
+            .hotel_preference => "HOTEL_PREFERENCE",
+            .air_booking => "AIR_BOOKING",
+            .air_segment => "AIR_SEGMENT",
+            .hotel_reservation => "HOTEL_RESERVATION",
+            .hotel_stay_revenue => "HOTEL_STAY_REVENUE",
+            .loyalty => "LOYALTY",
+            .loyalty_transaction => "LOYALTY_TRANSACTION",
+            .loyalty_promotion => "LOYALTY_PROMOTION",
+            .unique => "UNIQUE",
+            .secondary => "SECONDARY",
+            .lookup_only => "LOOKUP_ONLY",
+            .new_only => "NEW_ONLY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

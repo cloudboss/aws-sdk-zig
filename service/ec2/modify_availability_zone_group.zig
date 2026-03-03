@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyAvailabilityZoneG
     try body_buf.appendSlice(allocator, "&GroupName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.group_name);
     try body_buf.appendSlice(allocator, "&OptInStatus=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.opt_in_status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.opt_in_status.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

@@ -158,13 +158,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketLifecycleConfi
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.transition_default_minimum_object_size) |v| {
-        try request.headers.put(allocator, "x-amz-transition-default-minimum-object-size", @tagName(v));
+        try request.headers.put(allocator, "x-amz-transition-default-minimum-object-size", v.wireName());
     }
 
     return request;
@@ -176,7 +176,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = status;
     _ = body;
     if (headers.get("x-amz-transition-default-minimum-object-size")) |value| {
-        result.transition_default_minimum_object_size = std.meta.stringToEnum(TransitionDefaultMinimumObjectSize, value);
+        result.transition_default_minimum_object_size = TransitionDefaultMinimumObjectSize.fromWireName(value);
     }
 
     return result;

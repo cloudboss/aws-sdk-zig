@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConnectionPropertyKey = enum {
     host,
     port,
@@ -52,7 +54,7 @@ pub const ConnectionPropertyKey = enum {
     pub const json_field_names = .{
         .host = "HOST",
         .port = "PORT",
-        .user_name = "USER_NAME",
+        .user_name = "USERNAME",
         .password = "PASSWORD",
         .encrypted_password = "ENCRYPTED_PASSWORD",
         .jdbc_driver_jar_uri = "JDBC_DRIVER_JAR_URI",
@@ -100,4 +102,67 @@ pub const ConnectionPropertyKey = enum {
         .cluster_identifier = "CLUSTER_IDENTIFIER",
         .database = "DATABASE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .host => "HOST",
+            .port => "PORT",
+            .user_name => "USERNAME",
+            .password => "PASSWORD",
+            .encrypted_password => "ENCRYPTED_PASSWORD",
+            .jdbc_driver_jar_uri => "JDBC_DRIVER_JAR_URI",
+            .jdbc_driver_class_name => "JDBC_DRIVER_CLASS_NAME",
+            .jdbc_engine => "JDBC_ENGINE",
+            .jdbc_engine_version => "JDBC_ENGINE_VERSION",
+            .config_files => "CONFIG_FILES",
+            .instance_id => "INSTANCE_ID",
+            .jdbc_connection_url => "JDBC_CONNECTION_URL",
+            .jdbc_enforce_ssl => "JDBC_ENFORCE_SSL",
+            .custom_jdbc_cert => "CUSTOM_JDBC_CERT",
+            .skip_custom_jdbc_cert_validation => "SKIP_CUSTOM_JDBC_CERT_VALIDATION",
+            .custom_jdbc_cert_string => "CUSTOM_JDBC_CERT_STRING",
+            .connection_url => "CONNECTION_URL",
+            .kafka_bootstrap_servers => "KAFKA_BOOTSTRAP_SERVERS",
+            .kafka_ssl_enabled => "KAFKA_SSL_ENABLED",
+            .kafka_custom_cert => "KAFKA_CUSTOM_CERT",
+            .kafka_skip_custom_cert_validation => "KAFKA_SKIP_CUSTOM_CERT_VALIDATION",
+            .kafka_client_keystore => "KAFKA_CLIENT_KEYSTORE",
+            .kafka_client_keystore_password => "KAFKA_CLIENT_KEYSTORE_PASSWORD",
+            .kafka_client_key_password => "KAFKA_CLIENT_KEY_PASSWORD",
+            .encrypted_kafka_client_keystore_password => "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD",
+            .encrypted_kafka_client_key_password => "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD",
+            .kafka_sasl_mechanism => "KAFKA_SASL_MECHANISM",
+            .kafka_sasl_plain_username => "KAFKA_SASL_PLAIN_USERNAME",
+            .kafka_sasl_plain_password => "KAFKA_SASL_PLAIN_PASSWORD",
+            .encrypted_kafka_sasl_plain_password => "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD",
+            .kafka_sasl_scram_username => "KAFKA_SASL_SCRAM_USERNAME",
+            .kafka_sasl_scram_password => "KAFKA_SASL_SCRAM_PASSWORD",
+            .kafka_sasl_scram_secrets_arn => "KAFKA_SASL_SCRAM_SECRETS_ARN",
+            .encrypted_kafka_sasl_scram_password => "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD",
+            .kafka_sasl_gssapi_keytab => "KAFKA_SASL_GSSAPI_KEYTAB",
+            .kafka_sasl_gssapi_krb5_conf => "KAFKA_SASL_GSSAPI_KRB5_CONF",
+            .kafka_sasl_gssapi_service => "KAFKA_SASL_GSSAPI_SERVICE",
+            .kafka_sasl_gssapi_principal => "KAFKA_SASL_GSSAPI_PRINCIPAL",
+            .secret_id => "SECRET_ID",
+            .connector_url => "CONNECTOR_URL",
+            .connector_type => "CONNECTOR_TYPE",
+            .connector_class_name => "CONNECTOR_CLASS_NAME",
+            .endpoint => "ENDPOINT",
+            .endpoint_type => "ENDPOINT_TYPE",
+            .role_arn => "ROLE_ARN",
+            .region => "REGION",
+            .workgroup_name => "WORKGROUP_NAME",
+            .cluster_identifier => "CLUSTER_IDENTIFIER",
+            .database => "DATABASE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

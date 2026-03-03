@@ -74,7 +74,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPartnerAccountInput,
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "partnerType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.partner_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.partner_type.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

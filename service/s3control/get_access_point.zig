@@ -166,7 +166,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NetworkOrigin")) {
-                    result.network_origin = std.meta.stringToEnum(NetworkOrigin, try reader.readElementText());
+                    result.network_origin = NetworkOrigin.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublicAccessBlockConfiguration")) {
                     result.public_access_block_configuration = try serde.deserializePublicAccessBlockConfiguration(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "VpcConfiguration")) {

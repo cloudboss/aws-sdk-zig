@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SavingsPlansDataType = enum {
     attributes,
     utilization,
@@ -10,4 +12,22 @@ pub const SavingsPlansDataType = enum {
         .amortized_commitment = "AMORTIZED_COMMITMENT",
         .savings = "SAVINGS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .attributes => "ATTRIBUTES",
+            .utilization => "UTILIZATION",
+            .amortized_commitment => "AMORTIZED_COMMITMENT",
+            .savings => "SAVINGS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

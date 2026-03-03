@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourceType = enum {
     ec2_instance,
     auto_scaling_group,
@@ -11,15 +13,39 @@ pub const ResourceType = enum {
     idle,
 
     pub const json_field_names = .{
-        .ec2_instance = "EC2_INSTANCE",
-        .auto_scaling_group = "AUTO_SCALING_GROUP",
-        .ebs_volume = "EBS_VOLUME",
-        .lambda_function = "LAMBDA_FUNCTION",
-        .not_applicable = "NOT_APPLICABLE",
-        .ecs_service = "ECS_SERVICE",
-        .license = "LICENSE",
-        .rds_db_instance = "RDS_DB_INSTANCE",
-        .aurora_db_cluster_storage = "AURORA_DB_CLUSTER_STORAGE",
-        .idle = "IDLE",
+        .ec2_instance = "Ec2Instance",
+        .auto_scaling_group = "AutoScalingGroup",
+        .ebs_volume = "EbsVolume",
+        .lambda_function = "LambdaFunction",
+        .not_applicable = "NotApplicable",
+        .ecs_service = "EcsService",
+        .license = "License",
+        .rds_db_instance = "RdsDBInstance",
+        .aurora_db_cluster_storage = "AuroraDBClusterStorage",
+        .idle = "Idle",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ec2_instance => "Ec2Instance",
+            .auto_scaling_group => "AutoScalingGroup",
+            .ebs_volume => "EbsVolume",
+            .lambda_function => "LambdaFunction",
+            .not_applicable => "NotApplicable",
+            .ecs_service => "EcsService",
+            .license => "License",
+            .rds_db_instance => "RdsDBInstance",
+            .aurora_db_cluster_storage => "AuroraDBClusterStorage",
+            .idle => "Idle",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

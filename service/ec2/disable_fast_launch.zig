@@ -151,11 +151,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(FastLaunchResourceType, try reader.readElementText());
+                    result.resource_type = FastLaunchResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotConfiguration")) {
                     result.snapshot_configuration = try serde.deserializeFastLaunchSnapshotConfigurationResponse(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(FastLaunchStateCode, try reader.readElementText());
+                    result.state = FastLaunchStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionTime")) {

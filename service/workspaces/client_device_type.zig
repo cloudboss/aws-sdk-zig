@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ClientDeviceType = enum {
     device_type_windows,
     device_type_osx,
@@ -7,11 +9,31 @@ pub const ClientDeviceType = enum {
     device_type_web,
 
     pub const json_field_names = .{
-        .device_type_windows = "DEVICE_TYPE_WINDOWS",
-        .device_type_osx = "DEVICE_TYPE_OSX",
-        .device_type_android = "DEVICE_TYPE_ANDROID",
-        .device_type_ios = "DEVICE_TYPE_IOS",
-        .device_type_linux = "DEVICE_TYPE_LINUX",
-        .device_type_web = "DEVICE_TYPE_WEB",
+        .device_type_windows = "DeviceTypeWindows",
+        .device_type_osx = "DeviceTypeOsx",
+        .device_type_android = "DeviceTypeAndroid",
+        .device_type_ios = "DeviceTypeIos",
+        .device_type_linux = "DeviceTypeLinux",
+        .device_type_web = "DeviceTypeWeb",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .device_type_windows => "DeviceTypeWindows",
+            .device_type_osx => "DeviceTypeOsx",
+            .device_type_android => "DeviceTypeAndroid",
+            .device_type_ios => "DeviceTypeIos",
+            .device_type_linux => "DeviceTypeLinux",
+            .device_type_web => "DeviceTypeWeb",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

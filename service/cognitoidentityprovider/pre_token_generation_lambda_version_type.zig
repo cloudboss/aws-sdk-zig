@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PreTokenGenerationLambdaVersionType = enum {
     v1_0,
     v2_0,
@@ -8,4 +10,21 @@ pub const PreTokenGenerationLambdaVersionType = enum {
         .v2_0 = "V2_0",
         .v3_0 = "V3_0",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .v1_0 => "V1_0",
+            .v2_0 => "V2_0",
+            .v3_0 => "V3_0",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

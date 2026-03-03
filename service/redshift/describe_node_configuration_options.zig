@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeNodeConfigurati
 
     try body_buf.appendSlice(allocator, "Action=DescribeNodeConfigurationOptions&Version=2012-12-01");
     try body_buf.appendSlice(allocator, "&ActionType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.action_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.action_type.wireName());
     if (input.cluster_identifier) |v| {
         try body_buf.appendSlice(allocator, "&ClusterIdentifier=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
@@ -122,7 +122,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeNodeConfigurati
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.NodeConfigurationOptionsFilter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.name) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -130,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeNodeConfigurati
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.NodeConfigurationOptionsFilter.{d}.Operator=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.operator) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.values) |lst_1| {

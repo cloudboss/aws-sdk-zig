@@ -56,42 +56,42 @@ pub const CommandExecutedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Pending")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Pending")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "InProgress")) {
+            if (std.mem.eql(u8, val_0.wireName(), "InProgress")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Delayed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Delayed")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Success")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Success")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Cancelled")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Cancelled")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "TimedOut")) {
+            if (std.mem.eql(u8, val_0.wireName(), "TimedOut")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Cancelling")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Cancelling")) {
                 return .failure;
             }
         }

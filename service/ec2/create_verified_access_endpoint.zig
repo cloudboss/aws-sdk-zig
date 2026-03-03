@@ -131,7 +131,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&AttachmentType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.attachment_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.attachment_type.wireName());
     if (input.cidr_options) |v| {
         if (v.cidr) |sv| {
             try body_buf.appendSlice(allocator, "&CidrOptions.Cidr=");
@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(allocator, "&CidrOptions.Protocol=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -193,7 +193,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&EndpointType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.endpoint_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.endpoint_type.wireName());
     if (input.load_balancer_options) |v| {
         if (v.load_balancer_arn) |sv| {
             try body_buf.appendSlice(allocator, "&LoadBalancerOptions.LoadBalancerArn=");
@@ -226,7 +226,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(allocator, "&LoadBalancerOptions.Protocol=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -270,7 +270,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(allocator, "&NetworkInterfaceOptions.Protocol=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.policy_document) |v| {
@@ -284,7 +284,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(allocator, "&RdsOptions.Protocol=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.rds_db_cluster_arn) |sv| {
             try body_buf.appendSlice(allocator, "&RdsOptions.RdsDbClusterArn=");
@@ -339,7 +339,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

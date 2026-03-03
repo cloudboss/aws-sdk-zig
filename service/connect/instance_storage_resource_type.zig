@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const InstanceStorageResourceType = enum {
     chat_transcripts,
     call_recordings,
@@ -28,4 +30,31 @@ pub const InstanceStorageResourceType = enum {
         .real_time_contact_analysis_voice_segments = "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
         .email_messages = "EMAIL_MESSAGES",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .chat_transcripts => "CHAT_TRANSCRIPTS",
+            .call_recordings => "CALL_RECORDINGS",
+            .scheduled_reports => "SCHEDULED_REPORTS",
+            .media_streams => "MEDIA_STREAMS",
+            .contact_trace_records => "CONTACT_TRACE_RECORDS",
+            .agent_events => "AGENT_EVENTS",
+            .real_time_contact_analysis_segments => "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
+            .attachments => "ATTACHMENTS",
+            .contact_evaluations => "CONTACT_EVALUATIONS",
+            .screen_recordings => "SCREEN_RECORDINGS",
+            .real_time_contact_analysis_chat_segments => "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
+            .real_time_contact_analysis_voice_segments => "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
+            .email_messages => "EMAIL_MESSAGES",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCapacityManagerMetri
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.item.{d}.DimensionCondition.Comparison=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.comparison) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
@@ -117,7 +117,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCapacityManagerMetri
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.item.{d}.DimensionCondition.Dimension=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.dimension) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 if (sv_1.values) |lst_2| {

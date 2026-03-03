@@ -169,7 +169,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamPoolInput, co
 
     try body_buf.appendSlice(allocator, "Action=CreateIpamPool&Version=2016-11-15");
     try body_buf.appendSlice(allocator, "&AddressFamily=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.address_family));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.address_family.wireName());
     if (input.allocation_default_netmask_length) |v| {
         try body_buf.appendSlice(allocator, "&AllocationDefaultNetmaskLength=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
@@ -209,7 +209,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamPoolInput, co
     }
     if (input.aws_service) |v| {
         try body_buf.appendSlice(allocator, "&AwsService=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.client_token) |v| {
         try body_buf.appendSlice(allocator, "&ClientToken=");
@@ -231,7 +231,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamPoolInput, co
     }
     if (input.public_ip_source) |v| {
         try body_buf.appendSlice(allocator, "&PublicIpSource=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.publicly_advertisable) |v| {
         try body_buf.appendSlice(allocator, "&PubliclyAdvertisable=");
@@ -256,7 +256,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamPoolInput, co
         }
         if (v.resource_type) |sv| {
             try body_buf.appendSlice(allocator, "&SourceResource.ResourceType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.tag_specifications) |list| {
@@ -267,7 +267,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamPoolInput, co
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

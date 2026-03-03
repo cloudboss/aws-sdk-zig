@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourceCountGroupKey = enum {
     resource_type,
     account_id,
@@ -8,4 +10,21 @@ pub const ResourceCountGroupKey = enum {
         .account_id = "ACCOUNT_ID",
         .aws_region = "AWS_REGION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .resource_type => "RESOURCE_TYPE",
+            .account_id => "ACCOUNT_ID",
+            .aws_region => "AWS_REGION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

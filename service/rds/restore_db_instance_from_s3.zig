@@ -590,7 +590,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBInstanceFromS3
     }
     if (input.database_insights_mode) |v| {
         try body_buf.appendSlice(allocator, "&DatabaseInsightsMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&DBInstanceClass=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_instance_class);

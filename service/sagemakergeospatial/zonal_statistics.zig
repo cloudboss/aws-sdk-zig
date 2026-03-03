@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ZonalStatistics = enum {
     /// MEAN
     mean,
@@ -20,4 +22,24 @@ pub const ZonalStatistics = enum {
         .min = "MIN",
         .sum = "SUM",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .mean => "MEAN",
+            .median => "MEDIAN",
+            .standard_deviation => "STANDARD_DEVIATION",
+            .max => "MAX",
+            .min => "MIN",
+            .sum => "SUM",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

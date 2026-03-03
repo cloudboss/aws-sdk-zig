@@ -54,7 +54,7 @@ data class OperationContext(
     }
 
     fun scalarFormatExpr(shape: Shape, fieldName: String, accessor: String): String {
-        if (isEnumType(shape)) return "@tagName($accessor.$fieldName)"
+        if (isEnumType(shape)) return "$accessor.$fieldName.wireName()"
         val typeName = resolveBaseZigType(shape)
         return when (typeName) {
             "[]const u8" -> "$accessor.$fieldName"
@@ -66,7 +66,7 @@ data class OperationContext(
     }
 
     fun scalarFormatExprForOptional(shape: Shape, varName: String): String {
-        if (isEnumType(shape)) return "@tagName($varName)"
+        if (isEnumType(shape)) return "$varName.wireName()"
         val typeName = resolveBaseZigType(shape)
         return when (typeName) {
             "[]const u8" -> varName

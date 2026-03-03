@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// A list of the variables to use in searching or filtering `Evaluation`.
 ///
 /// * `CreatedAt` - Sets the search criteria to `Evaluation` creation date.
@@ -31,13 +33,35 @@ pub const EvaluationFilterVariable = enum {
     data_uri,
 
     pub const json_field_names = .{
-        .created_at = "CREATED_AT",
-        .last_updated_at = "LAST_UPDATED_AT",
-        .status = "STATUS",
-        .name = "NAME",
-        .iam_user = "IAM_USER",
-        .ml_model_id = "ML_MODEL_ID",
-        .datasource_id = "DATASOURCE_ID",
-        .data_uri = "DATA_URI",
+        .created_at = "CreatedAt",
+        .last_updated_at = "LastUpdatedAt",
+        .status = "Status",
+        .name = "Name",
+        .iam_user = "IAMUser",
+        .ml_model_id = "MLModelId",
+        .datasource_id = "DataSourceId",
+        .data_uri = "DataURI",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .created_at => "CreatedAt",
+            .last_updated_at => "LastUpdatedAt",
+            .status => "Status",
+            .name => "Name",
+            .iam_user => "IAMUser",
+            .ml_model_id => "MLModelId",
+            .datasource_id => "DataSourceId",
+            .data_uri => "DataURI",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

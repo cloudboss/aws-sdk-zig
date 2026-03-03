@@ -62,35 +62,35 @@ pub const FlowActiveWaiter = struct {
 
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STARTING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STARTING")) {
                     return .retry;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATING")) {
                     return .retry;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STANDBY")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STANDBY")) {
                     return .failure;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -157,14 +157,14 @@ pub const FlowDeletedWaiter = struct {
 
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETING")) {
                     return .retry;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -228,21 +228,21 @@ pub const FlowStandbyWaiter = struct {
 
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STANDBY")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STANDBY")) {
                     return .success;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STOPPING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STOPPING")) {
                     return .retry;
                 }
             }
         }
         if (output.flow) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -306,35 +306,35 @@ pub const InputActiveWaiter = struct {
 
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STARTING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STARTING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "MIGRATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "MIGRATING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -401,14 +401,14 @@ pub const InputDeletedWaiter = struct {
 
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -472,21 +472,21 @@ pub const InputStandbyWaiter = struct {
 
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STANDBY")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STANDBY")) {
                     return .success;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STOPPING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STOPPING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_input) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -550,35 +550,35 @@ pub const OutputActiveWaiter = struct {
 
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STARTING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STARTING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "MIGRATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "MIGRATING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -645,14 +645,14 @@ pub const OutputDeletedWaiter = struct {
 
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -716,14 +716,14 @@ pub const OutputRoutedWaiter = struct {
 
         if (output.router_output) |val_0| {
             if (val_0.routed_state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ROUTED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ROUTED")) {
                     return .success;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.routed_state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ROUTING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ROUTING")) {
                     return .retry;
                 }
             }
@@ -787,21 +787,21 @@ pub const OutputStandbyWaiter = struct {
 
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STANDBY")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STANDBY")) {
                     return .success;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STOPPING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STOPPING")) {
                     return .retry;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ERROR")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ERROR")) {
                     return .failure;
                 }
             }
@@ -865,14 +865,14 @@ pub const OutputUnroutedWaiter = struct {
 
         if (output.router_output) |val_0| {
             if (val_0.routed_state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UNROUTED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UNROUTED")) {
                     return .success;
                 }
             }
         }
         if (output.router_output) |val_0| {
             if (val_0.routed_state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ROUTING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ROUTING")) {
                     return .retry;
                 }
             }

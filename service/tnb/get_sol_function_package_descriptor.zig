@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSolFunctionPackageDe
     request.port = port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
-    try request.headers.put(allocator, "Accept", @tagName(input.accept));
+    try request.headers.put(allocator, "Accept", input.accept.wireName());
 
     return request;
 }
@@ -93,7 +93,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     }
     _ = status;
     if (headers.get("content-type")) |value| {
-        result.content_type = std.meta.stringToEnum(DescriptorContentType, value);
+        result.content_type = DescriptorContentType.fromWireName(value);
     }
 
     return result;

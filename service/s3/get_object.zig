@@ -644,7 +644,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectInput, config:
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_mode) |v| {
-        try request.headers.put(allocator, "x-amz-checksum-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-checksum-mode", v.wireName());
     }
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
@@ -671,7 +671,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectInput, config:
         try request.headers.put(allocator, "Range", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -714,7 +714,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.checksum_sha256 = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-checksum-type")) |value| {
-        result.checksum_type = std.meta.stringToEnum(ChecksumType, value);
+        result.checksum_type = ChecksumType.fromWireName(value);
     }
     if (stream_resp.headers.get("content-disposition")) |value| {
         result.content_disposition = try allocator.dupe(u8, value);
@@ -753,10 +753,10 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.missing_meta = std.fmt.parseInt(i32, value, 10) catch null;
     }
     if (stream_resp.headers.get("x-amz-object-lock-legal-hold")) |value| {
-        result.object_lock_legal_hold_status = std.meta.stringToEnum(ObjectLockLegalHoldStatus, value);
+        result.object_lock_legal_hold_status = ObjectLockLegalHoldStatus.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-object-lock-mode")) |value| {
-        result.object_lock_mode = std.meta.stringToEnum(ObjectLockMode, value);
+        result.object_lock_mode = ObjectLockMode.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-object-lock-retain-until-date")) |value| {
         result.object_lock_retain_until_date = std.fmt.parseInt(i64, value, 10) catch null;
@@ -765,16 +765,16 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.parts_count = std.fmt.parseInt(i32, value, 10) catch null;
     }
     if (stream_resp.headers.get("x-amz-replication-status")) |value| {
-        result.replication_status = std.meta.stringToEnum(ReplicationStatus, value);
+        result.replication_status = ReplicationStatus.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-restore")) |value| {
         result.restore = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
         result.sse_customer_algorithm = try allocator.dupe(u8, value);
@@ -786,7 +786,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.ssekms_key_id = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-storage-class")) |value| {
-        result.storage_class = std.meta.stringToEnum(StorageClass, value);
+        result.storage_class = StorageClass.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-tagging-count")) |value| {
         result.tag_count = std.fmt.parseInt(i32, value, 10) catch null;

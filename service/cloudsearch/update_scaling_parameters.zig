@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateScalingParameters
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.domain_name);
     if (input.scaling_parameters.desired_instance_type) |sv| {
         try body_buf.appendSlice(allocator, "&ScalingParameters.DesiredInstanceType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.scaling_parameters.desired_partition_count) |sv| {
         try body_buf.appendSlice(allocator, "&ScalingParameters.DesiredPartitionCount=");

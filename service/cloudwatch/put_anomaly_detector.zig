@@ -262,7 +262,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAnomalyDetectorInput
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_1.unit) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                 }

@@ -150,7 +150,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.AuthenticateCognitoConfig.OnUnauthenticatedRequest=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.on_unauthenticated_request) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
@@ -228,7 +228,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.AuthenticateOidcConfig.OnUnauthenticatedRequest=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.on_unauthenticated_request) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
@@ -349,7 +349,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
                             var prefix_buf: [256]u8 = undefined;
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Format=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item_2.format));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.format.wireName());
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
@@ -434,7 +434,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.RedirectConfig.StatusCode=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.status_code));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.status_code.wireName());
                 }
             }
             {
@@ -449,7 +449,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.Type=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.@"type"));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.@"type".wireName());
             }
         }
     }
@@ -458,7 +458,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
     if (input.mutual_authentication) |v| {
         if (v.advertise_trust_store_ca_names) |sv| {
             try body_buf.appendSlice(allocator, "&MutualAuthentication.AdvertiseTrustStoreCaNames=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.ignore_client_certificate_expiry) |sv| {
             try body_buf.appendSlice(allocator, "&MutualAuthentication.IgnoreClientCertificateExpiry=");
@@ -474,7 +474,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
         }
         if (v.trust_store_association_status) |sv| {
             try body_buf.appendSlice(allocator, "&MutualAuthentication.TrustStoreAssociationStatus=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.port) |v| {
@@ -483,7 +483,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyListenerInput, co
     }
     if (input.protocol) |v| {
         try body_buf.appendSlice(allocator, "&Protocol=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ssl_policy) |v| {
         try body_buf.appendSlice(allocator, "&SslPolicy=");

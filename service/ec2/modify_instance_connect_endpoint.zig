@@ -93,7 +93,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceConnectEn
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_connect_endpoint_id);
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&IpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.preserve_client_ip) |v| {
         try body_buf.appendSlice(allocator, "&PreserveClientIp=");

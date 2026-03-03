@@ -496,7 +496,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCacheClusterInput
     }
     if (input.az_mode) |v| {
         try body_buf.appendSlice(allocator, "&AZMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&CacheClusterId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.cache_cluster_id);
@@ -531,7 +531,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCacheClusterInput
     }
     if (input.ip_discovery) |v| {
         try body_buf.appendSlice(allocator, "&IpDiscovery=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.log_delivery_configurations) |list| {
         for (list, 0..) |item, idx| {
@@ -563,7 +563,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCacheClusterInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.destination_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -579,7 +579,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCacheClusterInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogFormat=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.log_format) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -587,14 +587,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCacheClusterInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.log_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
         }
     }
     if (input.network_type) |v| {
         try body_buf.appendSlice(allocator, "&NetworkType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.notification_topic_arn) |v| {
         try body_buf.appendSlice(allocator, "&NotificationTopicArn=");
@@ -606,7 +606,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCacheClusterInput
     }
     if (input.outpost_mode) |v| {
         try body_buf.appendSlice(allocator, "&OutpostMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.port) |v| {
         try body_buf.appendSlice(allocator, "&Port=");

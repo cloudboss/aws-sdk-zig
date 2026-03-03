@@ -93,7 +93,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "GeneratedTime")) {
                     result.generated_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ReportFormat")) {
-                    result.report_format = std.meta.stringToEnum(ReportFormatType, try reader.readElementText());
+                    result.report_format = ReportFormatType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

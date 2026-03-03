@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// If the sample range metadata in your input video is accurate, or if you
 /// don't know about sample range, keep the default value, Follow, for this
 /// setting. When you do, the service automatically detects your input sample
@@ -17,4 +19,21 @@ pub const InputSampleRange = enum {
         .full_range = "FULL_RANGE",
         .limited_range = "LIMITED_RANGE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .follow => "FOLLOW",
+            .full_range => "FULL_RANGE",
+            .limited_range => "LIMITED_RANGE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

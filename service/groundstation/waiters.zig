@@ -49,12 +49,12 @@ pub const ContactScheduledWaiter = struct {
         };
 
         if (output.contact_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED_TO_SCHEDULE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED_TO_SCHEDULE")) {
                 return .failure;
             }
         }
         if (output.contact_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "SCHEDULED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "SCHEDULED")) {
                 return .success;
             }
         }

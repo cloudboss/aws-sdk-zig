@@ -203,7 +203,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteObjectsInput, con
         try request.headers.put(allocator, "x-amz-bypass-governance-retention", if (v) "true" else "false");
     }
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
@@ -212,7 +212,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteObjectsInput, con
         try request.headers.put(allocator, "x-amz-mfa", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
 
     return request;
@@ -250,7 +250,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     result.deleted = if (deleted_list.items.len > 0) try deleted_list.toOwnedSlice(allocator) else null;
     result.errors = if (errors_list.items.len > 0) try errors_list.toOwnedSlice(allocator) else null;
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
 
     return result;

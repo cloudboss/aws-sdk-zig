@@ -59,12 +59,12 @@ pub const ChangeSetCreateCompleteWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_COMPLETE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
@@ -339,12 +339,12 @@ pub const StackRefactorCreateCompleteWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_COMPLETE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
@@ -403,17 +403,17 @@ pub const StackRefactorExecuteCompleteWaiter = struct {
         };
 
         if (output.execution_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "EXECUTE_COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "EXECUTE_COMPLETE")) {
                 return .success;
             }
         }
         if (output.execution_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "EXECUTE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "EXECUTE_FAILED")) {
                 return .failure;
             }
         }
         if (output.execution_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ROLLBACK_COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ROLLBACK_COMPLETE")) {
                 return .failure;
             }
         }
@@ -573,12 +573,12 @@ pub const TypeRegistrationCompleteWaiter = struct {
         };
 
         if (output.progress_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "COMPLETE")) {
                 return .success;
             }
         }
         if (output.progress_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }

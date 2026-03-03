@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RouteSpanAdditionalFeature = enum {
     best_case_duration,
     car_access,
@@ -25,29 +27,67 @@ pub const RouteSpanAdditionalFeature = enum {
     consumption,
 
     pub const json_field_names = .{
-        .best_case_duration = "BEST_CASE_DURATION",
-        .car_access = "CAR_ACCESS",
-        .country = "COUNTRY",
-        .distance = "DISTANCE",
-        .duration = "DURATION",
-        .dynamic_speed = "DYNAMIC_SPEED",
-        .functional_classification = "FUNCTIONAL_CLASSIFICATION",
-        .gates = "GATES",
-        .incidents = "INCIDENTS",
-        .names = "NAMES",
-        .notices = "NOTICES",
-        .pedestrian_access = "PEDESTRIAN_ACCESS",
-        .railway_crossings = "RAILWAY_CROSSINGS",
-        .region = "REGION",
-        .road_attributes = "ROAD_ATTRIBUTES",
-        .route_numbers = "ROUTE_NUMBERS",
-        .scooter_access = "SCOOTER_ACCESS",
-        .speed_limit = "SPEED_LIMIT",
-        .toll_systems = "TOLL_SYSTEMS",
-        .truck_access = "TRUCK_ACCESS",
-        .truck_road_types = "TRUCK_ROAD_TYPES",
-        .typical_duration = "TYPICAL_DURATION",
-        .zones = "ZONES",
-        .consumption = "CONSUMPTION",
+        .best_case_duration = "BestCaseDuration",
+        .car_access = "CarAccess",
+        .country = "Country",
+        .distance = "Distance",
+        .duration = "Duration",
+        .dynamic_speed = "DynamicSpeed",
+        .functional_classification = "FunctionalClassification",
+        .gates = "Gates",
+        .incidents = "Incidents",
+        .names = "Names",
+        .notices = "Notices",
+        .pedestrian_access = "PedestrianAccess",
+        .railway_crossings = "RailwayCrossings",
+        .region = "Region",
+        .road_attributes = "RoadAttributes",
+        .route_numbers = "RouteNumbers",
+        .scooter_access = "ScooterAccess",
+        .speed_limit = "SpeedLimit",
+        .toll_systems = "TollSystems",
+        .truck_access = "TruckAccess",
+        .truck_road_types = "TruckRoadTypes",
+        .typical_duration = "TypicalDuration",
+        .zones = "Zones",
+        .consumption = "Consumption",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .best_case_duration => "BestCaseDuration",
+            .car_access => "CarAccess",
+            .country => "Country",
+            .distance => "Distance",
+            .duration => "Duration",
+            .dynamic_speed => "DynamicSpeed",
+            .functional_classification => "FunctionalClassification",
+            .gates => "Gates",
+            .incidents => "Incidents",
+            .names => "Names",
+            .notices => "Notices",
+            .pedestrian_access => "PedestrianAccess",
+            .railway_crossings => "RailwayCrossings",
+            .region => "Region",
+            .road_attributes => "RoadAttributes",
+            .route_numbers => "RouteNumbers",
+            .scooter_access => "ScooterAccess",
+            .speed_limit => "SpeedLimit",
+            .toll_systems => "TollSystems",
+            .truck_access => "TruckAccess",
+            .truck_road_types => "TruckRoadTypes",
+            .typical_duration => "TypicalDuration",
+            .zones => "Zones",
+            .consumption => "Consumption",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

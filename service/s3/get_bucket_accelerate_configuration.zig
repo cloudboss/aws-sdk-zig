@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBucketAccelerateConf
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
 
     return request;
@@ -107,7 +107,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(BucketAccelerateStatus, try reader.readElementText());
+                    result.status = BucketAccelerateStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -117,7 +117,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         }
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
 
     return result;

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const IdleMetricName = enum {
     cpu,
     memory,
@@ -14,16 +16,42 @@ pub const IdleMetricName = enum {
 
     pub const json_field_names = .{
         .cpu = "CPU",
-        .memory = "MEMORY",
-        .network_out_bytes_per_second = "NETWORK_OUT_BYTES_PER_SECOND",
-        .network_in_bytes_per_second = "NETWORK_IN_BYTES_PER_SECOND",
-        .database_connections = "DATABASE_CONNECTIONS",
-        .ebs_volume_read_iops = "EBS_VOLUME_READ_IOPS",
-        .ebs_volume_write_iops = "EBS_VOLUME_WRITE_IOPS",
-        .volume_read_ops_per_second = "VOLUME_READ_OPS_PER_SECOND",
-        .volume_write_ops_per_second = "VOLUME_WRITE_OPS_PER_SECOND",
-        .active_connection_count = "ACTIVE_CONNECTION_COUNT",
-        .packets_in_from_source = "PACKETS_IN_FROM_SOURCE",
-        .packets_in_from_destination = "PACKETS_IN_FROM_DESTINATION",
+        .memory = "Memory",
+        .network_out_bytes_per_second = "NetworkOutBytesPerSecond",
+        .network_in_bytes_per_second = "NetworkInBytesPerSecond",
+        .database_connections = "DatabaseConnections",
+        .ebs_volume_read_iops = "EBSVolumeReadIOPS",
+        .ebs_volume_write_iops = "EBSVolumeWriteIOPS",
+        .volume_read_ops_per_second = "VolumeReadOpsPerSecond",
+        .volume_write_ops_per_second = "VolumeWriteOpsPerSecond",
+        .active_connection_count = "ActiveConnectionCount",
+        .packets_in_from_source = "PacketsInFromSource",
+        .packets_in_from_destination = "PacketsInFromDestination",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cpu => "CPU",
+            .memory => "Memory",
+            .network_out_bytes_per_second => "NetworkOutBytesPerSecond",
+            .network_in_bytes_per_second => "NetworkInBytesPerSecond",
+            .database_connections => "DatabaseConnections",
+            .ebs_volume_read_iops => "EBSVolumeReadIOPS",
+            .ebs_volume_write_iops => "EBSVolumeWriteIOPS",
+            .volume_read_ops_per_second => "VolumeReadOpsPerSecond",
+            .volume_write_ops_per_second => "VolumeWriteOpsPerSecond",
+            .active_connection_count => "ActiveConnectionCount",
+            .packets_in_from_source => "PacketsInFromSource",
+            .packets_in_from_destination => "PacketsInFromDestination",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

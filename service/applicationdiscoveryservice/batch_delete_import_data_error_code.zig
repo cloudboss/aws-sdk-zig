@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const BatchDeleteImportDataErrorCode = enum {
     not_found,
     internal_server_error,
@@ -8,4 +10,21 @@ pub const BatchDeleteImportDataErrorCode = enum {
         .internal_server_error = "INTERNAL_SERVER_ERROR",
         .over_limit = "OVER_LIMIT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .not_found => "NOT_FOUND",
+            .internal_server_error => "INTERNAL_SERVER_ERROR",
+            .over_limit => "OVER_LIMIT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

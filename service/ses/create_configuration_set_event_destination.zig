@@ -78,7 +78,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigurationSetE
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DimensionValueSource=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.dimension_value_source));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.dimension_value_source.wireName());
             }
         }
     }

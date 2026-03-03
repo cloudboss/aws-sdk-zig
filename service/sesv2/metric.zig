@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The metric to export, can be one of the following:
 ///
 /// * `SEND` - Emails sent eligible for tracking in the VDM
@@ -73,4 +75,28 @@ pub const Metric = enum {
         .delivery_click = "DELIVERY_CLICK",
         .delivery_complaint = "DELIVERY_COMPLAINT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .send => "SEND",
+            .complaint => "COMPLAINT",
+            .permanent_bounce => "PERMANENT_BOUNCE",
+            .transient_bounce => "TRANSIENT_BOUNCE",
+            .open => "OPEN",
+            .click => "CLICK",
+            .delivery => "DELIVERY",
+            .delivery_open => "DELIVERY_OPEN",
+            .delivery_click => "DELIVERY_CLICK",
+            .delivery_complaint => "DELIVERY_COMPLAINT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

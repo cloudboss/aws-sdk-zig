@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PublishPackageVersionIn
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "format=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.format));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.format.wireName());
     query_has_prev = true;
     if (input.namespace) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

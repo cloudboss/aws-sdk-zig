@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSSHPublicKeyInput, c
 
     try body_buf.appendSlice(allocator, "Action=GetSSHPublicKey&Version=2010-05-08");
     try body_buf.appendSlice(allocator, "&Encoding=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.encoding));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.encoding.wireName());
     try body_buf.appendSlice(allocator, "&SSHPublicKeyId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.ssh_public_key_id);
     try body_buf.appendSlice(allocator, "&UserName=");

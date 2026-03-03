@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Placeholder documentation for ConnectionMode
 pub const ConnectionMode = enum {
     caller,
@@ -7,4 +9,20 @@ pub const ConnectionMode = enum {
         .caller = "CALLER",
         .listener = "LISTENER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .caller => "CALLER",
+            .listener => "LISTENER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

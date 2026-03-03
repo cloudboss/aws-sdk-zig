@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySnapshotAttribute
     try body_buf.appendSlice(allocator, "Action=ModifySnapshotAttribute&Version=2016-11-15");
     if (input.attribute) |v| {
         try body_buf.appendSlice(allocator, "&Attribute=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.create_volume_permission) |v| {
         if (v.add) |list_d0| {
@@ -87,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySnapshotAttribute
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CreateVolumePermission.Add.item.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
@@ -108,7 +108,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySnapshotAttribute
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CreateVolumePermission.Remove.item.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
@@ -137,7 +137,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySnapshotAttribute
     }
     if (input.operation_type) |v| {
         try body_buf.appendSlice(allocator, "&OperationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&SnapshotId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.snapshot_id);

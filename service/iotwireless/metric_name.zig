@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MetricName = enum {
     device_rssi,
     device_snr,
@@ -66,4 +68,50 @@ pub const MetricName = enum {
         .aws_account_active_device_count = "AwsAccountActiveDeviceCount",
         .aws_account_active_gateway_count = "AwsAccountActiveGatewayCount",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .device_rssi => "DeviceRSSI",
+            .device_snr => "DeviceSNR",
+            .device_roaming_rssi => "DeviceRoamingRSSI",
+            .device_roaming_snr => "DeviceRoamingSNR",
+            .device_uplink_count => "DeviceUplinkCount",
+            .device_downlink_count => "DeviceDownlinkCount",
+            .device_uplink_lost_count => "DeviceUplinkLostCount",
+            .device_uplink_lost_rate => "DeviceUplinkLostRate",
+            .device_join_request_count => "DeviceJoinRequestCount",
+            .device_join_accept_count => "DeviceJoinAcceptCount",
+            .device_roaming_uplink_count => "DeviceRoamingUplinkCount",
+            .device_roaming_downlink_count => "DeviceRoamingDownlinkCount",
+            .gateway_up_time => "GatewayUpTime",
+            .gateway_down_time => "GatewayDownTime",
+            .gateway_rssi => "GatewayRSSI",
+            .gateway_snr => "GatewaySNR",
+            .gateway_uplink_count => "GatewayUplinkCount",
+            .gateway_downlink_count => "GatewayDownlinkCount",
+            .gateway_join_request_count => "GatewayJoinRequestCount",
+            .gateway_join_accept_count => "GatewayJoinAcceptCount",
+            .aws_account_uplink_count => "AwsAccountUplinkCount",
+            .aws_account_downlink_count => "AwsAccountDownlinkCount",
+            .aws_account_uplink_lost_count => "AwsAccountUplinkLostCount",
+            .aws_account_uplink_lost_rate => "AwsAccountUplinkLostRate",
+            .aws_account_join_request_count => "AwsAccountJoinRequestCount",
+            .aws_account_join_accept_count => "AwsAccountJoinAcceptCount",
+            .aws_account_roaming_uplink_count => "AwsAccountRoamingUplinkCount",
+            .aws_account_roaming_downlink_count => "AwsAccountRoamingDownlinkCount",
+            .aws_account_device_count => "AwsAccountDeviceCount",
+            .aws_account_gateway_count => "AwsAccountGatewayCount",
+            .aws_account_active_device_count => "AwsAccountActiveDeviceCount",
+            .aws_account_active_gateway_count => "AwsAccountActiveGatewayCount",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

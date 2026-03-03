@@ -1097,7 +1097,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBInstanceInput, 
     }
     if (input.automation_mode) |v| {
         try body_buf.appendSlice(allocator, "&AutomationMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.auto_minor_version_upgrade) |v| {
         try body_buf.appendSlice(allocator, "&AutoMinorVersionUpgrade=");
@@ -1145,7 +1145,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBInstanceInput, 
     }
     if (input.database_insights_mode) |v| {
         try body_buf.appendSlice(allocator, "&DatabaseInsightsMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.db_instance_class) |v| {
         try body_buf.appendSlice(allocator, "&DBInstanceClass=");
@@ -1249,7 +1249,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBInstanceInput, 
     }
     if (input.master_user_authentication_type) |v| {
         try body_buf.appendSlice(allocator, "&MasterUserAuthenticationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.master_user_password) |v| {
         try body_buf.appendSlice(allocator, "&MasterUserPassword=");
@@ -1338,7 +1338,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBInstanceInput, 
     }
     if (input.replica_mode) |v| {
         try body_buf.appendSlice(allocator, "&ReplicaMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.resume_full_automation_mode_minutes) |v| {
         try body_buf.appendSlice(allocator, "&ResumeFullAutomationModeMinutes=");

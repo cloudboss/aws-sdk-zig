@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MetricName = enum {
     cpu,
     memory,
@@ -17,8 +19,8 @@ pub const MetricName = enum {
     gpu_memory_percentage,
 
     pub const json_field_names = .{
-        .cpu = "CPU",
-        .memory = "MEMORY",
+        .cpu = "Cpu",
+        .memory = "Memory",
         .ebs_read_ops_per_second = "EBS_READ_OPS_PER_SECOND",
         .ebs_write_ops_per_second = "EBS_WRITE_OPS_PER_SECOND",
         .ebs_read_bytes_per_second = "EBS_READ_BYTES_PER_SECOND",
@@ -34,4 +36,34 @@ pub const MetricName = enum {
         .gpu_percentage = "GPU_PERCENTAGE",
         .gpu_memory_percentage = "GPU_MEMORY_PERCENTAGE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cpu => "Cpu",
+            .memory => "Memory",
+            .ebs_read_ops_per_second => "EBS_READ_OPS_PER_SECOND",
+            .ebs_write_ops_per_second => "EBS_WRITE_OPS_PER_SECOND",
+            .ebs_read_bytes_per_second => "EBS_READ_BYTES_PER_SECOND",
+            .ebs_write_bytes_per_second => "EBS_WRITE_BYTES_PER_SECOND",
+            .disk_read_ops_per_second => "DISK_READ_OPS_PER_SECOND",
+            .disk_write_ops_per_second => "DISK_WRITE_OPS_PER_SECOND",
+            .disk_read_bytes_per_second => "DISK_READ_BYTES_PER_SECOND",
+            .disk_write_bytes_per_second => "DISK_WRITE_BYTES_PER_SECOND",
+            .network_in_bytes_per_second => "NETWORK_IN_BYTES_PER_SECOND",
+            .network_out_bytes_per_second => "NETWORK_OUT_BYTES_PER_SECOND",
+            .network_packets_in_per_second => "NETWORK_PACKETS_IN_PER_SECOND",
+            .network_packets_out_per_second => "NETWORK_PACKETS_OUT_PER_SECOND",
+            .gpu_percentage => "GPU_PERCENTAGE",
+            .gpu_memory_percentage => "GPU_MEMORY_PERCENTAGE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

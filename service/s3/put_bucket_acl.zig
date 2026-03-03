@@ -136,10 +136,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketAclInput, conf
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.content_md5) |v| {
         try request.headers.put(allocator, "Content-MD5", v);

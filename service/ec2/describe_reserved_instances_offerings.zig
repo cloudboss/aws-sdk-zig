@@ -230,11 +230,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeReservedInstanc
     }
     if (input.instance_tenancy) |v| {
         try body_buf.appendSlice(allocator, "&InstanceTenancy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.instance_type) |v| {
         try body_buf.appendSlice(allocator, "&InstanceType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.max_duration) |v| {
         try body_buf.appendSlice(allocator, "&MaxDuration=");
@@ -258,15 +258,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeReservedInstanc
     }
     if (input.offering_class) |v| {
         try body_buf.appendSlice(allocator, "&OfferingClass=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.offering_type) |v| {
         try body_buf.appendSlice(allocator, "&OfferingType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.product_description) |v| {
         try body_buf.appendSlice(allocator, "&ProductDescription=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.reserved_instances_offering_ids) |list| {
         for (list, 0..) |item, idx| {

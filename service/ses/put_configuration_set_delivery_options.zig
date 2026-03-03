@@ -60,7 +60,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutConfigurationSetDeli
     if (input.delivery_options) |v| {
         if (v.tls_policy) |sv| {
             try body_buf.appendSlice(allocator, "&DeliveryOptions.TlsPolicy=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
 

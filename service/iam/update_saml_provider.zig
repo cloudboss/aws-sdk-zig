@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSAMLProviderInput
     }
     if (input.assertion_encryption_mode) |v| {
         try body_buf.appendSlice(allocator, "&AssertionEncryptionMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.remove_private_key) |v| {
         try body_buf.appendSlice(allocator, "&RemovePrivateKey=");

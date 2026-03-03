@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectAclInput, conf
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
 
     return request;
@@ -153,7 +153,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         }
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
 
     return result;

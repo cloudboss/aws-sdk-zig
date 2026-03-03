@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const OpsItemStatus = enum {
     open,
     in_progress,
@@ -21,25 +23,59 @@ pub const OpsItemStatus = enum {
     closed,
 
     pub const json_field_names = .{
-        .open = "OPEN",
-        .in_progress = "IN_PROGRESS",
-        .resolved = "RESOLVED",
-        .pending = "PENDING",
-        .timed_out = "TIMED_OUT",
-        .cancelling = "CANCELLING",
-        .cancelled = "CANCELLED",
-        .failed = "FAILED",
-        .completed_with_success = "COMPLETED_WITH_SUCCESS",
-        .completed_with_failure = "COMPLETED_WITH_FAILURE",
-        .scheduled = "SCHEDULED",
-        .runbook_in_progress = "RUNBOOK_IN_PROGRESS",
-        .pending_change_calendar_override = "PENDING_CHANGE_CALENDAR_OVERRIDE",
-        .change_calendar_override_approved = "CHANGE_CALENDAR_OVERRIDE_APPROVED",
-        .change_calendar_override_rejected = "CHANGE_CALENDAR_OVERRIDE_REJECTED",
-        .pending_approval = "PENDING_APPROVAL",
-        .approved = "APPROVED",
-        .revoked = "REVOKED",
-        .rejected = "REJECTED",
-        .closed = "CLOSED",
+        .open = "Open",
+        .in_progress = "InProgress",
+        .resolved = "Resolved",
+        .pending = "Pending",
+        .timed_out = "TimedOut",
+        .cancelling = "Cancelling",
+        .cancelled = "Cancelled",
+        .failed = "Failed",
+        .completed_with_success = "CompletedWithSuccess",
+        .completed_with_failure = "CompletedWithFailure",
+        .scheduled = "Scheduled",
+        .runbook_in_progress = "RunbookInProgress",
+        .pending_change_calendar_override = "PendingChangeCalendarOverride",
+        .change_calendar_override_approved = "ChangeCalendarOverrideApproved",
+        .change_calendar_override_rejected = "ChangeCalendarOverrideRejected",
+        .pending_approval = "PendingApproval",
+        .approved = "Approved",
+        .revoked = "Revoked",
+        .rejected = "Rejected",
+        .closed = "Closed",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .open => "Open",
+            .in_progress => "InProgress",
+            .resolved => "Resolved",
+            .pending => "Pending",
+            .timed_out => "TimedOut",
+            .cancelling => "Cancelling",
+            .cancelled => "Cancelled",
+            .failed => "Failed",
+            .completed_with_success => "CompletedWithSuccess",
+            .completed_with_failure => "CompletedWithFailure",
+            .scheduled => "Scheduled",
+            .runbook_in_progress => "RunbookInProgress",
+            .pending_change_calendar_override => "PendingChangeCalendarOverride",
+            .change_calendar_override_approved => "ChangeCalendarOverrideApproved",
+            .change_calendar_override_rejected => "ChangeCalendarOverrideRejected",
+            .pending_approval => "PendingApproval",
+            .approved => "Approved",
+            .revoked => "Revoked",
+            .rejected => "Rejected",
+            .closed => "Closed",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -87,17 +87,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUsageLimitInput, 
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.amount}) catch "");
     if (input.breach_action) |v| {
         try body_buf.appendSlice(allocator, "&BreachAction=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&ClusterIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.cluster_identifier);
     try body_buf.appendSlice(allocator, "&FeatureType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.feature_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.feature_type.wireName());
     try body_buf.appendSlice(allocator, "&LimitType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.limit_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.limit_type.wireName());
     if (input.period) |v| {
         try body_buf.appendSlice(allocator, "&Period=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.tags) |list| {
         for (list, 0..) |item, idx| {
@@ -155,15 +155,15 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Amount")) {
                     result.amount = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "BreachAction")) {
-                    result.breach_action = std.meta.stringToEnum(UsageLimitBreachAction, try reader.readElementText());
+                    result.breach_action = UsageLimitBreachAction.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ClusterIdentifier")) {
                     result.cluster_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FeatureType")) {
-                    result.feature_type = std.meta.stringToEnum(UsageLimitFeatureType, try reader.readElementText());
+                    result.feature_type = UsageLimitFeatureType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LimitType")) {
-                    result.limit_type = std.meta.stringToEnum(UsageLimitLimitType, try reader.readElementText());
+                    result.limit_type = UsageLimitLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Period")) {
-                    result.period = std.meta.stringToEnum(UsageLimitPeriod, try reader.readElementText());
+                    result.period = UsageLimitPeriod.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try serde.deserializeTagList(allocator, &reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "UsageLimitId")) {

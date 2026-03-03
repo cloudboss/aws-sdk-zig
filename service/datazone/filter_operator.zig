@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const FilterOperator = enum {
     eq,
     le,
@@ -14,4 +16,24 @@ pub const FilterOperator = enum {
         .gt = "GT",
         .text_search = "TEXT_SEARCH",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .eq => "EQ",
+            .le => "LE",
+            .lt => "LT",
+            .ge => "GE",
+            .gt => "GT",
+            .text_search => "TEXT_SEARCH",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

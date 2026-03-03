@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Keep the default value, Enabled, to adjust quantization within each frame
 /// based on spatial variation of content complexity. When you enable this
 /// feature, the encoder uses fewer bits on areas that can sustain more
@@ -21,4 +23,20 @@ pub const Mpeg2SpatialAdaptiveQuantization = enum {
         .disabled = "DISABLED",
         .enabled = "ENABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .enabled => "ENABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

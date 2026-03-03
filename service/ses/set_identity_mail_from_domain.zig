@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetIdentityMailFromDoma
     try body_buf.appendSlice(allocator, "Action=SetIdentityMailFromDomain&Version=2010-12-01");
     if (input.behavior_on_mx_failure) |v| {
         try body_buf.appendSlice(allocator, "&BehaviorOnMXFailure=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&Identity=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.identity);

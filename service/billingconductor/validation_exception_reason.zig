@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ValidationExceptionReason = enum {
     unknown_operation,
     cannot_parse,
@@ -134,4 +136,84 @@ pub const ValidationExceptionReason = enum {
         .illegal_computation_rule = "ILLEGAL_COMPUTATION_RULE",
         .illegal_line_item_filter = "ILLEGAL_LINE_ITEM_FILTER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .unknown_operation => "UNKNOWN_OPERATION",
+            .cannot_parse => "CANNOT_PARSE",
+            .field_validation_failed => "FIELD_VALIDATION_FAILED",
+            .other => "OTHER",
+            .primary_not_associated => "PRIMARY_NOT_ASSOCIATED",
+            .primary_cannot_disassociate => "PRIMARY_CANNOT_DISASSOCIATE",
+            .accounts_not_associated => "ACCOUNTS_NOT_ASSOCIATED",
+            .accounts_already_associated => "ACCOUNTS_ALREADY_ASSOCIATED",
+            .illegal_primary_account => "ILLEGAL_PRIMARY_ACCOUNT",
+            .illegal_accounts => "ILLEGAL_ACCOUNTS",
+            .mismatched_billinggroup_arn => "MISMATCHED_BILLINGGROUP_ARN",
+            .missing_billinggroup => "MISSING_BILLINGGROUP",
+            .mismatched_customlineitem_arn => "MISMATCHED_CUSTOMLINEITEM_ARN",
+            .illegal_billing_period => "ILLEGAL_BILLING_PERIOD",
+            .illegal_billing_period_range => "ILLEGAL_BILLING_PERIOD_RANGE",
+            .too_many_accounts_in_request => "TOO_MANY_ACCOUNTS_IN_REQUEST",
+            .duplicate_account => "DUPLICATE_ACCOUNT",
+            .invalid_billing_group_status => "INVALID_BILLING_GROUP_STATUS",
+            .mismatched_pricingplan_arn => "MISMATCHED_PRICINGPLAN_ARN",
+            .missing_pricingplan => "MISSING_PRICINGPLAN",
+            .mismatched_pricingrule_arn => "MISMATCHED_PRICINGRULE_ARN",
+            .duplicate_pricingrule_arns => "DUPLICATE_PRICINGRULE_ARNS",
+            .missing_costcategory => "MISSING_COSTCATEGORY",
+            .illegal_expression => "ILLEGAL_EXPRESSION",
+            .illegal_scope => "ILLEGAL_SCOPE",
+            .illegal_service => "ILLEGAL_SERVICE",
+            .pricingrules_not_exist => "PRICINGRULES_NOT_EXIST",
+            .pricingrules_already_associated => "PRICINGRULES_ALREADY_ASSOCIATED",
+            .pricingrules_not_associated => "PRICINGRULES_NOT_ASSOCIATED",
+            .invalid_time_range => "INVALID_TIME_RANGE",
+            .invalid_billingview_arn => "INVALID_BILLINGVIEW_ARN",
+            .mismatched_billingview_arn => "MISMATCHED_BILLINGVIEW_ARN",
+            .illegal_customlineitem => "ILLEGAL_CUSTOMLINEITEM",
+            .missing_customlineitem => "MISSING_CUSTOMLINEITEM",
+            .illegal_customlineitem_update => "ILLEGAL_CUSTOMLINEITEM_UPDATE",
+            .too_many_customlineitems_in_request => "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST",
+            .illegal_charge_details => "ILLEGAL_CHARGE_DETAILS",
+            .illegal_update_charge_details => "ILLEGAL_UPDATE_CHARGE_DETAILS",
+            .invalid_arn => "INVALID_ARN",
+            .illegal_resource_arns => "ILLEGAL_RESOURCE_ARNS",
+            .illegal_customlineitem_modification => "ILLEGAL_CUSTOMLINEITEM_MODIFICATION",
+            .missing_linked_account_ids => "MISSING_LINKED_ACCOUNT_IDS",
+            .multiple_linked_account_ids => "MULTIPLE_LINKED_ACCOUNT_IDS",
+            .missing_pricing_plan_arn => "MISSING_PRICING_PLAN_ARN",
+            .multiple_pricing_plan_arn => "MULTIPLE_PRICING_PLAN_ARN",
+            .illegal_child_associate_resource => "ILLEGAL_CHILD_ASSOCIATE_RESOURCE",
+            .custom_line_item_association_exists => "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS",
+            .invalid_billing_group => "INVALID_BILLING_GROUP",
+            .invalid_billing_period_for_operation => "INVALID_BILLING_PERIOD_FOR_OPERATION",
+            .illegal_billing_entity => "ILLEGAL_BILLING_ENTITY",
+            .illegal_modifier_percentage => "ILLEGAL_MODIFIER_PERCENTAGE",
+            .illegal_type => "ILLEGAL_TYPE",
+            .illegal_billing_group_type => "ILLEGAL_BILLING_GROUP_TYPE",
+            .illegal_billing_group_pricing_plan => "ILLEGAL_BILLING_GROUP_PRICING_PLAN",
+            .illegal_ended_billinggroup => "ILLEGAL_ENDED_BILLINGGROUP",
+            .illegal_tiering_input => "ILLEGAL_TIERING_INPUT",
+            .illegal_operation => "ILLEGAL_OPERATION",
+            .illegal_usage_type => "ILLEGAL_USAGE_TYPE",
+            .invalid_sku_combo => "INVALID_SKU_COMBO",
+            .invalid_filter => "INVALID_FILTER",
+            .too_many_auto_associate_billing_groups => "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS",
+            .cannot_delete_auto_associate_billing_group => "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP",
+            .illegal_account_id => "ILLEGAL_ACCOUNT_ID",
+            .billing_group_already_exist_in_current_billing_period => "BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD",
+            .illegal_computation_rule => "ILLEGAL_COMPUTATION_RULE",
+            .illegal_line_item_filter => "ILLEGAL_LINE_ITEM_FILTER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

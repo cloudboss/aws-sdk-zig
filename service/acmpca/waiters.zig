@@ -58,12 +58,12 @@ pub const AuditReportCreatedWaiter = struct {
         };
 
         if (output.audit_report_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "SUCCESS")) {
+            if (std.mem.eql(u8, val_0.wireName(), "SUCCESS")) {
                 return .success;
             }
         }
         if (output.audit_report_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }

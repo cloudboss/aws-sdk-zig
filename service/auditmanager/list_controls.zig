@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListControlsInput, conf
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "controlType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.control_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.control_type.wireName());
     query_has_prev = true;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

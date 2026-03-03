@@ -102,7 +102,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "capacityManagerStatus")) {
-                    result.capacity_manager_status = std.meta.stringToEnum(CapacityManagerStatus, try reader.readElementText());
+                    result.capacity_manager_status = CapacityManagerStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "organizationsAccess")) {
                     result.organizations_access = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {

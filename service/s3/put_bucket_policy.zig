@@ -146,7 +146,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketPolicyInput, c
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.confirm_remove_self_bucket_access) |v| {
         try request.headers.put(allocator, "x-amz-confirm-remove-self-bucket-access", if (v) "true" else "false");

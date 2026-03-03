@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ValidationExceptionReason = enum {
     invalid_realm,
     invalid_directory_type,
@@ -32,4 +34,33 @@ pub const ValidationExceptionReason = enum {
         .ldap_size_limit_exceeded = "LDAP_SIZE_LIMIT_EXCEEDED",
         .ldap_unsupported_operation = "LDAP_UNSUPPORTED_OPERATION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .invalid_realm => "INVALID_REALM",
+            .invalid_directory_type => "INVALID_DIRECTORY_TYPE",
+            .invalid_secondary_region => "INVALID_SECONDARY_REGION",
+            .invalid_next_token => "INVALID_NEXT_TOKEN",
+            .invalid_attribute_value => "INVALID_ATTRIBUTE_VALUE",
+            .invalid_attribute_name => "INVALID_ATTRIBUTE_NAME",
+            .invalid_attribute_for_user => "INVALID_ATTRIBUTE_FOR_USER",
+            .invalid_attribute_for_group => "INVALID_ATTRIBUTE_FOR_GROUP",
+            .invalid_attribute_for_search => "INVALID_ATTRIBUTE_FOR_SEARCH",
+            .invalid_attribute_for_modify => "INVALID_ATTRIBUTE_FOR_MODIFY",
+            .duplicate_attribute => "DUPLICATE_ATTRIBUTE",
+            .missing_attribute => "MISSING_ATTRIBUTE",
+            .attribute_exists => "ATTRIBUTE_EXISTS",
+            .ldap_size_limit_exceeded => "LDAP_SIZE_LIMIT_EXCEEDED",
+            .ldap_unsupported_operation => "LDAP_UNSUPPORTED_OPERATION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

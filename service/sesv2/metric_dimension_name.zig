@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The `BatchGetMetricDataQuery` dimension name. This can be one of the
 /// following:
 ///
@@ -18,4 +20,21 @@ pub const MetricDimensionName = enum {
         .configuration_set = "CONFIGURATION_SET",
         .isp = "ISP",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .email_identity => "EMAIL_IDENTITY",
+            .configuration_set => "CONFIGURATION_SET",
+            .isp => "ISP",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

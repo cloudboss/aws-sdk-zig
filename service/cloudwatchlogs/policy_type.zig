@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PolicyType = enum {
     data_protection_policy,
     subscription_filter_policy,
@@ -12,4 +14,23 @@ pub const PolicyType = enum {
         .transformer_policy = "TRANSFORMER_POLICY",
         .metric_extraction_policy = "METRIC_EXTRACTION_POLICY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .data_protection_policy => "DATA_PROTECTION_POLICY",
+            .subscription_filter_policy => "SUBSCRIPTION_FILTER_POLICY",
+            .field_index_policy => "FIELD_INDEX_POLICY",
+            .transformer_policy => "TRANSFORMER_POLICY",
+            .metric_extraction_policy => "METRIC_EXTRACTION_POLICY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

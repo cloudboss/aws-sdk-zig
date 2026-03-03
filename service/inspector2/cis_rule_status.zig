@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CisRuleStatus = enum {
     failed,
     passed,
@@ -16,4 +18,25 @@ pub const CisRuleStatus = enum {
         .not_applicable = "NOT_APPLICABLE",
         .@"error" = "ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .failed => "FAILED",
+            .passed => "PASSED",
+            .not_evaluated => "NOT_EVALUATED",
+            .informational => "INFORMATIONAL",
+            .unknown => "UNKNOWN",
+            .not_applicable => "NOT_APPLICABLE",
+            .@"error" => "ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

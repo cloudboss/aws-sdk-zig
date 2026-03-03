@@ -155,7 +155,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "DetectionStatus")) {
-                    result.detection_status = std.meta.stringToEnum(StackDriftDetectionStatus, try reader.readElementText());
+                    result.detection_status = StackDriftDetectionStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DetectionStatusReason")) {
                     result.detection_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DriftedStackResourceCount")) {
@@ -163,7 +163,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "StackDriftDetectionId")) {
                     result.stack_drift_detection_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackDriftStatus")) {
-                    result.stack_drift_status = std.meta.stringToEnum(StackDriftStatus, try reader.readElementText());
+                    result.stack_drift_status = StackDriftStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackId")) {
                     result.stack_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {

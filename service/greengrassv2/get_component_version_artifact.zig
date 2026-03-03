@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetComponentVersionArti
     if (input.s_3_endpoint_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "s3EndpointType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);
@@ -115,7 +115,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetComponentVersionArti
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.iot_endpoint_type) |v| {
-        try request.headers.put(allocator, "x-amz-iot-endpoint-type", @tagName(v));
+        try request.headers.put(allocator, "x-amz-iot-endpoint-type", v.wireName());
     }
 
     return request;

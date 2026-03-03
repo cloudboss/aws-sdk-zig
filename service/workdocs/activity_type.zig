@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ActivityType = enum {
     document_checked_in,
     document_checked_out,
@@ -68,4 +70,51 @@ pub const ActivityType = enum {
         .folder_shareable_link_permission_changed = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED",
         .folder_moved = "FOLDER_MOVED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .document_checked_in => "DOCUMENT_CHECKED_IN",
+            .document_checked_out => "DOCUMENT_CHECKED_OUT",
+            .document_renamed => "DOCUMENT_RENAMED",
+            .document_version_uploaded => "DOCUMENT_VERSION_UPLOADED",
+            .document_version_deleted => "DOCUMENT_VERSION_DELETED",
+            .document_version_viewed => "DOCUMENT_VERSION_VIEWED",
+            .document_version_downloaded => "DOCUMENT_VERSION_DOWNLOADED",
+            .document_recycled => "DOCUMENT_RECYCLED",
+            .document_restored => "DOCUMENT_RESTORED",
+            .document_reverted => "DOCUMENT_REVERTED",
+            .document_shared => "DOCUMENT_SHARED",
+            .document_unshared => "DOCUMENT_UNSHARED",
+            .document_share_permission_changed => "DOCUMENT_SHARE_PERMISSION_CHANGED",
+            .document_shareable_link_created => "DOCUMENT_SHAREABLE_LINK_CREATED",
+            .document_shareable_link_removed => "DOCUMENT_SHAREABLE_LINK_REMOVED",
+            .document_shareable_link_permission_changed => "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED",
+            .document_moved => "DOCUMENT_MOVED",
+            .document_comment_added => "DOCUMENT_COMMENT_ADDED",
+            .document_comment_deleted => "DOCUMENT_COMMENT_DELETED",
+            .document_annotation_added => "DOCUMENT_ANNOTATION_ADDED",
+            .document_annotation_deleted => "DOCUMENT_ANNOTATION_DELETED",
+            .folder_created => "FOLDER_CREATED",
+            .folder_deleted => "FOLDER_DELETED",
+            .folder_renamed => "FOLDER_RENAMED",
+            .folder_recycled => "FOLDER_RECYCLED",
+            .folder_restored => "FOLDER_RESTORED",
+            .folder_shared => "FOLDER_SHARED",
+            .folder_unshared => "FOLDER_UNSHARED",
+            .folder_share_permission_changed => "FOLDER_SHARE_PERMISSION_CHANGED",
+            .folder_shareable_link_created => "FOLDER_SHAREABLE_LINK_CREATED",
+            .folder_shareable_link_removed => "FOLDER_SHAREABLE_LINK_REMOVED",
+            .folder_shareable_link_permission_changed => "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED",
+            .folder_moved => "FOLDER_MOVED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

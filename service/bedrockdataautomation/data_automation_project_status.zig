@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Status of Data Automation Project
 pub const DataAutomationProjectStatus = enum {
     completed,
@@ -9,4 +11,21 @@ pub const DataAutomationProjectStatus = enum {
         .in_progress = "IN_PROGRESS",
         .failed = "FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .completed => "COMPLETED",
+            .in_progress => "IN_PROGRESS",
+            .failed => "FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

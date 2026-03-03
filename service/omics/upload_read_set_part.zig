@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadReadSetPartInput,
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "partSource=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.part_source));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.part_source.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableAllowedImagesSett
 
     try body_buf.appendSlice(allocator, "Action=EnableAllowedImagesSettings&Version=2016-11-15");
     try body_buf.appendSlice(allocator, "&AllowedImagesSettingsState=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.allowed_images_settings_state));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.allowed_images_settings_state.wireName());
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
@@ -100,7 +100,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allowedImagesSettingsState")) {
-                    result.allowed_images_settings_state = std.meta.stringToEnum(AllowedImagesSettingsEnabledState, try reader.readElementText());
+                    result.allowed_images_settings_state = AllowedImagesSettingsEnabledState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

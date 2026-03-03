@@ -188,7 +188,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "State")) {
-                    result.state = std.meta.stringToEnum(ScheduledActionState, try reader.readElementText());
+                    result.state = ScheduledActionState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetAction")) {
                     result.target_action = try serde.deserializeScheduledActionType(allocator, &reader);
                 } else {

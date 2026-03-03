@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use this setting if your input has video and audio durations that don't
 /// align, and your output or player has strict alignment requirements.
 /// Examples: Input audio track has a delayed start. Input video track ends
@@ -14,4 +16,20 @@ pub const PadVideo = enum {
         .disabled = "DISABLED",
         .black = "BLACK",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .black => "BLACK",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

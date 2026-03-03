@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use Source to set how timecodes are handled within this job. To make sure
 /// that your video, audio, captions, and markers are synchronized and that
 /// time-based features, such as image inserter, work correctly, choose the
@@ -18,4 +20,21 @@ pub const TimecodeSource = enum {
         .zerobased = "ZEROBASED",
         .specifiedstart = "SPECIFIEDSTART",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .embedded => "EMBEDDED",
+            .zerobased => "ZEROBASED",
+            .specifiedstart => "SPECIFIEDSTART",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

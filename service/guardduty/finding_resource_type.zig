@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const FindingResourceType = enum {
     ec2_instance,
     ec2_network_interface,
@@ -34,4 +36,34 @@ pub const FindingResourceType = enum {
         .ec2_vpc = "EC2_VPC",
         .ec2_image = "EC2_IMAGE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ec2_instance => "EC2_INSTANCE",
+            .ec2_network_interface => "EC2_NETWORK_INTERFACE",
+            .s3_bucket => "S3_BUCKET",
+            .s3_object => "S3_OBJECT",
+            .access_key => "ACCESS_KEY",
+            .eks_cluster => "EKS_CLUSTER",
+            .kubernetes_workload => "KUBERNETES_WORKLOAD",
+            .container => "CONTAINER",
+            .ecs_cluster => "ECS_CLUSTER",
+            .ecs_task => "ECS_TASK",
+            .autoscaling_auto_scaling_group => "AUTOSCALING_AUTO_SCALING_GROUP",
+            .iam_instance_profile => "IAM_INSTANCE_PROFILE",
+            .cloudformation_stack => "CLOUDFORMATION_STACK",
+            .ec2_launch_template => "EC2_LAUNCH_TEMPLATE",
+            .ec2_vpc => "EC2_VPC",
+            .ec2_image => "EC2_IMAGE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

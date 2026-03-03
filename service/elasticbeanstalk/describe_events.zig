@@ -147,7 +147,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeEventsInput, co
     }
     if (input.severity) |v| {
         try body_buf.appendSlice(allocator, "&Severity=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.start_time) |v| {
         try body_buf.appendSlice(allocator, "&StartTime=");

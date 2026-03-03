@@ -50,17 +50,17 @@ pub const FunctionActiveWaiter = struct {
         };
 
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Active")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Active")) {
                 return .success;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Pending")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Pending")) {
                 return .retry;
             }
         }
@@ -113,21 +113,21 @@ pub const FunctionActiveV2Waiter = struct {
 
         if (output.configuration) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Active")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Active")) {
                     return .success;
                 }
             }
         }
         if (output.configuration) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Failed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Failed")) {
                     return .failure;
                 }
             }
         }
         if (output.configuration) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Pending")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Pending")) {
                     return .retry;
                 }
             }
@@ -234,17 +234,17 @@ pub const FunctionUpdatedWaiter = struct {
         };
 
         if (output.last_update_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Successful")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Successful")) {
                 return .success;
             }
         }
         if (output.last_update_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.last_update_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "InProgress")) {
+            if (std.mem.eql(u8, val_0.wireName(), "InProgress")) {
                 return .retry;
             }
         }
@@ -297,21 +297,21 @@ pub const FunctionUpdatedV2Waiter = struct {
 
         if (output.configuration) |val_0| {
             if (val_0.last_update_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Successful")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Successful")) {
                     return .success;
                 }
             }
         }
         if (output.configuration) |val_0| {
             if (val_0.last_update_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "Failed")) {
+                if (std.mem.eql(u8, val_1.wireName(), "Failed")) {
                     return .failure;
                 }
             }
         }
         if (output.configuration) |val_0| {
             if (val_0.last_update_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "InProgress")) {
+                if (std.mem.eql(u8, val_1.wireName(), "InProgress")) {
                     return .retry;
                 }
             }
@@ -364,17 +364,17 @@ pub const PublishedVersionActiveWaiter = struct {
         };
 
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Active")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Active")) {
                 return .success;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Pending")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Pending")) {
                 return .retry;
             }
         }

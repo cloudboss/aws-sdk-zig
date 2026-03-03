@@ -141,7 +141,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestDNSAnswerInput, con
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "recordtype=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.record_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.record_type.wireName());
     query_has_prev = true;
     if (input.resolver_ip) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -189,7 +189,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "RecordName")) {
                     result.record_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RecordType")) {
-                    result.record_type = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.record_type = RRType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResponseCode")) {
                     result.response_code = try allocator.dupe(u8, try reader.readElementText());
                 } else {

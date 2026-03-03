@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointServic
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&PayerResponsibility=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.payer_responsibility));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.payer_responsibility.wireName());
     try body_buf.appendSlice(allocator, "&ServiceId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.service_id);
 

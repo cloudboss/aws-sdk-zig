@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const StackErrorCode = enum {
     storage_connector_error,
     internal_service_error,
@@ -6,4 +8,20 @@ pub const StackErrorCode = enum {
         .storage_connector_error = "STORAGE_CONNECTOR_ERROR",
         .internal_service_error = "INTERNAL_SERVICE_ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .storage_connector_error => "STORAGE_CONNECTOR_ERROR",
+            .internal_service_error => "INTERNAL_SERVICE_ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AutomationExecutionFilterKey = enum {
     document_name_prefix,
     execution_status,
@@ -13,17 +15,43 @@ pub const AutomationExecutionFilterKey = enum {
     ops_item_id,
 
     pub const json_field_names = .{
-        .document_name_prefix = "DOCUMENT_NAME_PREFIX",
-        .execution_status = "EXECUTION_STATUS",
-        .execution_id = "EXECUTION_ID",
-        .parent_execution_id = "PARENT_EXECUTION_ID",
-        .current_action = "CURRENT_ACTION",
-        .start_time_before = "START_TIME_BEFORE",
-        .start_time_after = "START_TIME_AFTER",
-        .automation_type = "AUTOMATION_TYPE",
-        .tag_key = "TAG_KEY",
-        .target_resource_group = "TARGET_RESOURCE_GROUP",
-        .automation_subtype = "AUTOMATION_SUBTYPE",
-        .ops_item_id = "OPS_ITEM_ID",
+        .document_name_prefix = "DocumentNamePrefix",
+        .execution_status = "ExecutionStatus",
+        .execution_id = "ExecutionId",
+        .parent_execution_id = "ParentExecutionId",
+        .current_action = "CurrentAction",
+        .start_time_before = "StartTimeBefore",
+        .start_time_after = "StartTimeAfter",
+        .automation_type = "AutomationType",
+        .tag_key = "TagKey",
+        .target_resource_group = "TargetResourceGroup",
+        .automation_subtype = "AutomationSubtype",
+        .ops_item_id = "OpsItemId",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .document_name_prefix => "DocumentNamePrefix",
+            .execution_status => "ExecutionStatus",
+            .execution_id => "ExecutionId",
+            .parent_execution_id => "ParentExecutionId",
+            .current_action => "CurrentAction",
+            .start_time_before => "StartTimeBefore",
+            .start_time_after => "StartTimeAfter",
+            .automation_type => "AutomationType",
+            .tag_key => "TagKey",
+            .target_resource_group => "TargetResourceGroup",
+            .automation_subtype => "AutomationSubtype",
+            .ops_item_id => "OpsItemId",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

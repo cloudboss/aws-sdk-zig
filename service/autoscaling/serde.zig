@@ -126,7 +126,7 @@ pub fn deserializeAcceleratorManufacturers(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(AcceleratorManufacturer, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (AcceleratorManufacturer.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -144,7 +144,7 @@ pub fn deserializeAcceleratorNames(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(AcceleratorName, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (AcceleratorName.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -162,7 +162,7 @@ pub fn deserializeAcceleratorTypes(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(AcceleratorType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (AcceleratorType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -432,7 +432,7 @@ pub fn deserializeCpuManufacturers(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(CpuManufacturer, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (CpuManufacturer.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -522,7 +522,7 @@ pub fn deserializeInstanceGenerations(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(InstanceGeneration, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (InstanceGeneration.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -720,7 +720,7 @@ pub fn deserializeLocalStorageTypes(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(LocalStorageType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (LocalStorageType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -1207,7 +1207,7 @@ pub fn deserializeActivity(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusCode")) {
-                    result.status_code = std.meta.stringToEnum(ScalingActivityStatusCode, try reader.readElementText());
+                    result.status_code = ScalingActivityStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1341,7 +1341,7 @@ pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "DefaultInstanceWarmup")) {
                     result.default_instance_warmup = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "DeletionProtection")) {
-                    result.deletion_protection = std.meta.stringToEnum(DeletionProtection, try reader.readElementText());
+                    result.deletion_protection = DeletionProtection.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DesiredCapacity")) {
                     result.desired_capacity = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "DesiredCapacityType")) {
@@ -1460,7 +1460,7 @@ pub fn deserializeAvailabilityZoneDistribution(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CapacityDistributionStrategy")) {
-                    result.capacity_distribution_strategy = std.meta.stringToEnum(CapacityDistributionStrategy, try reader.readElementText());
+                    result.capacity_distribution_strategy = CapacityDistributionStrategy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1481,7 +1481,7 @@ pub fn deserializeAvailabilityZoneImpairmentPolicy(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ImpairedZoneHealthCheckBehavior")) {
-                    result.impaired_zone_health_check_behavior = std.meta.stringToEnum(ImpairedZoneHealthCheckBehavior, try reader.readElementText());
+                    result.impaired_zone_health_check_behavior = ImpairedZoneHealthCheckBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ZonalShiftEnabled")) {
                     result.zonal_shift_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {
@@ -1592,7 +1592,7 @@ pub fn deserializeCapacityReservationSpecification(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CapacityReservationPreference")) {
-                    result.capacity_reservation_preference = std.meta.stringToEnum(CapacityReservationPreference, try reader.readElementText());
+                    result.capacity_reservation_preference = CapacityReservationPreference.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CapacityReservationTarget")) {
                     result.capacity_reservation_target = try deserializeCapacityReservationTarget(allocator, reader);
                 } else {
@@ -1670,7 +1670,7 @@ pub fn deserializeCustomizedMetricSpecification(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "Period")) {
                     result.period = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Statistic")) {
-                    result.statistic = std.meta.stringToEnum(MetricStatistic, try reader.readElementText());
+                    result.statistic = MetricStatistic.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Unit")) {
                     result.unit = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1814,7 +1814,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "LaunchTemplate")) {
                     result.launch_template = try deserializeLaunchTemplateSpecification(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "LifecycleState")) {
-                    result.lifecycle_state = std.meta.stringToEnum(LifecycleState, try reader.readElementText());
+                    result.lifecycle_state = LifecycleState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProtectedFromScaleIn")) {
                     result.protected_from_scale_in = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "WeightedCapacity")) {
@@ -1916,11 +1916,11 @@ pub fn deserializeInstanceMetadataOptions(allocator: std.mem.Allocator, reader: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "HttpEndpoint")) {
-                    result.http_endpoint = std.meta.stringToEnum(InstanceMetadataEndpointState, try reader.readElementText());
+                    result.http_endpoint = InstanceMetadataEndpointState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HttpPutResponseHopLimit")) {
                     result.http_put_response_hop_limit = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "HttpTokens")) {
-                    result.http_tokens = std.meta.stringToEnum(InstanceMetadataHttpTokensState, try reader.readElementText());
+                    result.http_tokens = InstanceMetadataHttpTokensState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1991,11 +1991,11 @@ pub fn deserializeInstanceRefresh(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(InstanceRefreshStatus, try reader.readElementText());
+                    result.status = InstanceRefreshStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusReason")) {
                     result.status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Strategy")) {
-                    result.strategy = std.meta.stringToEnum(RefreshStrategy, try reader.readElementText());
+                    result.strategy = RefreshStrategy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2116,13 +2116,13 @@ pub fn deserializeInstanceRequirements(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "AllowedInstanceTypes")) {
                     result.allowed_instance_types = try deserializeAllowedInstanceTypes(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "BareMetal")) {
-                    result.bare_metal = std.meta.stringToEnum(BareMetal, try reader.readElementText());
+                    result.bare_metal = BareMetal.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "BaselineEbsBandwidthMbps")) {
                     result.baseline_ebs_bandwidth_mbps = try deserializeBaselineEbsBandwidthMbpsRequest(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "BaselinePerformanceFactors")) {
                     result.baseline_performance_factors = try deserializeBaselinePerformanceFactorsRequest(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "BurstablePerformance")) {
-                    result.burstable_performance = std.meta.stringToEnum(BurstablePerformance, try reader.readElementText());
+                    result.burstable_performance = BurstablePerformance.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CpuManufacturers")) {
                     result.cpu_manufacturers = try deserializeCpuManufacturers(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ExcludedInstanceTypes")) {
@@ -2130,7 +2130,7 @@ pub fn deserializeInstanceRequirements(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "InstanceGenerations")) {
                     result.instance_generations = try deserializeInstanceGenerations(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LocalStorage")) {
-                    result.local_storage = std.meta.stringToEnum(LocalStorage, try reader.readElementText());
+                    result.local_storage = LocalStorage.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LocalStorageTypes")) {
                     result.local_storage_types = try deserializeLocalStorageTypes(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice")) {
@@ -2812,7 +2812,7 @@ pub fn deserializePredefinedMetricSpecification(allocator: std.mem.Allocator, re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = std.meta.stringToEnum(MetricType, try reader.readElementText());
+                    result.predefined_metric_type = MetricType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2836,13 +2836,13 @@ pub fn deserializePredictiveScalingConfiguration(allocator: std.mem.Allocator, r
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "MaxCapacityBreachBehavior")) {
-                    result.max_capacity_breach_behavior = std.meta.stringToEnum(PredictiveScalingMaxCapacityBreachBehavior, try reader.readElementText());
+                    result.max_capacity_breach_behavior = PredictiveScalingMaxCapacityBreachBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MaxCapacityBuffer")) {
                     result.max_capacity_buffer = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "MetricSpecifications")) {
                     result.metric_specifications = try deserializePredictiveScalingMetricSpecifications(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Mode")) {
-                    result.mode = std.meta.stringToEnum(PredictiveScalingMode, try reader.readElementText());
+                    result.mode = PredictiveScalingMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SchedulingBufferTime")) {
                     result.scheduling_buffer_time = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -2953,7 +2953,7 @@ pub fn deserializePredictiveScalingPredefinedLoadMetric(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = std.meta.stringToEnum(PredefinedLoadMetricType, try reader.readElementText());
+                    result.predefined_metric_type = PredefinedLoadMetricType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2974,7 +2974,7 @@ pub fn deserializePredictiveScalingPredefinedMetricPair(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = std.meta.stringToEnum(PredefinedMetricPairType, try reader.readElementText());
+                    result.predefined_metric_type = PredefinedMetricPairType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2995,7 +2995,7 @@ pub fn deserializePredictiveScalingPredefinedScalingMetric(allocator: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = std.meta.stringToEnum(PredefinedScalingMetricType, try reader.readElementText());
+                    result.predefined_metric_type = PredefinedScalingMetricType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -3060,11 +3060,11 @@ pub fn deserializeRefreshPreferences(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "MinHealthyPercentage")) {
                     result.min_healthy_percentage = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ScaleInProtectedInstances")) {
-                    result.scale_in_protected_instances = std.meta.stringToEnum(ScaleInProtectedInstances, try reader.readElementText());
+                    result.scale_in_protected_instances = ScaleInProtectedInstances.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SkipMatching")) {
                     result.skip_matching = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "StandbyInstances")) {
-                    result.standby_instances = std.meta.stringToEnum(StandbyInstances, try reader.readElementText());
+                    result.standby_instances = StandbyInstances.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3084,7 +3084,7 @@ pub fn deserializeRetentionTriggers(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "TerminateHookAbandon")) {
-                    result.terminate_hook_abandon = std.meta.stringToEnum(RetentionAction, try reader.readElementText());
+                    result.terminate_hook_abandon = RetentionAction.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3515,9 +3515,9 @@ pub fn deserializeWarmPoolConfiguration(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "MinSize")) {
                     result.min_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "PoolState")) {
-                    result.pool_state = std.meta.stringToEnum(WarmPoolState, try reader.readElementText());
+                    result.pool_state = WarmPoolState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(WarmPoolStatus, try reader.readElementText());
+                    result.status = WarmPoolStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3534,7 +3534,7 @@ pub fn serializeAcceleratorManufacturers(allocator: std.mem.Allocator, buf: *std
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -3546,7 +3546,7 @@ pub fn serializeAcceleratorNames(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -3558,7 +3558,7 @@ pub fn serializeAcceleratorTypes(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -3729,7 +3729,7 @@ pub fn serializeCpuManufacturers(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -3765,7 +3765,7 @@ pub fn serializeInstanceGenerations(allocator: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -3849,7 +3849,7 @@ pub fn serializeLocalStorageTypes(allocator: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4145,7 +4145,7 @@ pub fn serializeAlarmSpecification(allocator: std.mem.Allocator, buf: *std.Array
 pub fn serializeAvailabilityZoneDistribution(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AvailabilityZoneDistribution) !void {
     if (value.capacity_distribution_strategy) |v| {
         try buf.appendSlice(allocator, "<CapacityDistributionStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</CapacityDistributionStrategy>");
     }
 }
@@ -4153,7 +4153,7 @@ pub fn serializeAvailabilityZoneDistribution(allocator: std.mem.Allocator, buf: 
 pub fn serializeAvailabilityZoneImpairmentPolicy(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AvailabilityZoneImpairmentPolicy) !void {
     if (value.impaired_zone_health_check_behavior) |v| {
         try buf.appendSlice(allocator, "<ImpairedZoneHealthCheckBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ImpairedZoneHealthCheckBehavior>");
     }
     if (value.zonal_shift_enabled) |v| {
@@ -4214,7 +4214,7 @@ pub fn serializeBlockDeviceMapping(allocator: std.mem.Allocator, buf: *std.Array
 pub fn serializeCapacityReservationSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationSpecification) !void {
     if (value.capacity_reservation_preference) |v| {
         try buf.appendSlice(allocator, "<CapacityReservationPreference>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</CapacityReservationPreference>");
     }
     if (value.capacity_reservation_target) |v| {
@@ -4276,7 +4276,7 @@ pub fn serializeCustomizedMetricSpecification(allocator: std.mem.Allocator, buf:
     }
     if (value.statistic) |v| {
         try buf.appendSlice(allocator, "<Statistic>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Statistic>");
     }
     if (value.unit) |v| {
@@ -4389,7 +4389,7 @@ pub fn serializeInstanceMaintenancePolicy(allocator: std.mem.Allocator, buf: *st
 pub fn serializeInstanceMetadataOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMetadataOptions) !void {
     if (value.http_endpoint) |v| {
         try buf.appendSlice(allocator, "<HttpEndpoint>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpEndpoint>");
     }
     if (value.http_put_response_hop_limit) |v| {
@@ -4402,7 +4402,7 @@ pub fn serializeInstanceMetadataOptions(allocator: std.mem.Allocator, buf: *std.
     }
     if (value.http_tokens) |v| {
         try buf.appendSlice(allocator, "<HttpTokens>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpTokens>");
     }
 }
@@ -4448,7 +4448,7 @@ pub fn serializeInstanceRequirements(allocator: std.mem.Allocator, buf: *std.Arr
     }
     if (value.bare_metal) |v| {
         try buf.appendSlice(allocator, "<BareMetal>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BareMetal>");
     }
     if (value.baseline_ebs_bandwidth_mbps) |v| {
@@ -4463,7 +4463,7 @@ pub fn serializeInstanceRequirements(allocator: std.mem.Allocator, buf: *std.Arr
     }
     if (value.burstable_performance) |v| {
         try buf.appendSlice(allocator, "<BurstablePerformance>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BurstablePerformance>");
     }
     if (value.cpu_manufacturers) |v| {
@@ -4483,7 +4483,7 @@ pub fn serializeInstanceRequirements(allocator: std.mem.Allocator, buf: *std.Arr
     }
     if (value.local_storage) |v| {
         try buf.appendSlice(allocator, "<LocalStorage>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</LocalStorage>");
     }
     if (value.local_storage_types) |v| {
@@ -4854,7 +4854,7 @@ pub fn serializePerformanceFactorReferenceRequest(allocator: std.mem.Allocator, 
 
 pub fn serializePredefinedMetricSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PredefinedMetricSpecification) !void {
     try buf.appendSlice(allocator, "<PredefinedMetricType>");
-    try buf.appendSlice(allocator, @tagName(value.predefined_metric_type));
+    try buf.appendSlice(allocator, value.predefined_metric_type.wireName());
     try buf.appendSlice(allocator, "</PredefinedMetricType>");
     if (value.resource_label) |v| {
         try buf.appendSlice(allocator, "<ResourceLabel>");
@@ -4866,7 +4866,7 @@ pub fn serializePredefinedMetricSpecification(allocator: std.mem.Allocator, buf:
 pub fn serializePredictiveScalingConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PredictiveScalingConfiguration) !void {
     if (value.max_capacity_breach_behavior) |v| {
         try buf.appendSlice(allocator, "<MaxCapacityBreachBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</MaxCapacityBreachBehavior>");
     }
     if (value.max_capacity_buffer) |v| {
@@ -4882,7 +4882,7 @@ pub fn serializePredictiveScalingConfiguration(allocator: std.mem.Allocator, buf
     try buf.appendSlice(allocator, "</MetricSpecifications>");
     if (value.mode) |v| {
         try buf.appendSlice(allocator, "<Mode>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Mode>");
     }
     if (value.scheduling_buffer_time) |v| {
@@ -4954,7 +4954,7 @@ pub fn serializePredictiveScalingMetricSpecification(allocator: std.mem.Allocato
 
 pub fn serializePredictiveScalingPredefinedLoadMetric(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PredictiveScalingPredefinedLoadMetric) !void {
     try buf.appendSlice(allocator, "<PredefinedMetricType>");
-    try buf.appendSlice(allocator, @tagName(value.predefined_metric_type));
+    try buf.appendSlice(allocator, value.predefined_metric_type.wireName());
     try buf.appendSlice(allocator, "</PredefinedMetricType>");
     if (value.resource_label) |v| {
         try buf.appendSlice(allocator, "<ResourceLabel>");
@@ -4965,7 +4965,7 @@ pub fn serializePredictiveScalingPredefinedLoadMetric(allocator: std.mem.Allocat
 
 pub fn serializePredictiveScalingPredefinedMetricPair(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PredictiveScalingPredefinedMetricPair) !void {
     try buf.appendSlice(allocator, "<PredefinedMetricType>");
-    try buf.appendSlice(allocator, @tagName(value.predefined_metric_type));
+    try buf.appendSlice(allocator, value.predefined_metric_type.wireName());
     try buf.appendSlice(allocator, "</PredefinedMetricType>");
     if (value.resource_label) |v| {
         try buf.appendSlice(allocator, "<ResourceLabel>");
@@ -4976,7 +4976,7 @@ pub fn serializePredictiveScalingPredefinedMetricPair(allocator: std.mem.Allocat
 
 pub fn serializePredictiveScalingPredefinedScalingMetric(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PredictiveScalingPredefinedScalingMetric) !void {
     try buf.appendSlice(allocator, "<PredefinedMetricType>");
-    try buf.appendSlice(allocator, @tagName(value.predefined_metric_type));
+    try buf.appendSlice(allocator, value.predefined_metric_type.wireName());
     try buf.appendSlice(allocator, "</PredefinedMetricType>");
     if (value.resource_label) |v| {
         try buf.appendSlice(allocator, "<ResourceLabel>");
@@ -5043,7 +5043,7 @@ pub fn serializeRefreshPreferences(allocator: std.mem.Allocator, buf: *std.Array
     }
     if (value.scale_in_protected_instances) |v| {
         try buf.appendSlice(allocator, "<ScaleInProtectedInstances>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ScaleInProtectedInstances>");
     }
     if (value.skip_matching) |v| {
@@ -5053,7 +5053,7 @@ pub fn serializeRefreshPreferences(allocator: std.mem.Allocator, buf: *std.Array
     }
     if (value.standby_instances) |v| {
         try buf.appendSlice(allocator, "<StandbyInstances>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StandbyInstances>");
     }
 }
@@ -5061,7 +5061,7 @@ pub fn serializeRefreshPreferences(allocator: std.mem.Allocator, buf: *std.Array
 pub fn serializeRetentionTriggers(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: RetentionTriggers) !void {
     if (value.terminate_hook_abandon) |v| {
         try buf.appendSlice(allocator, "<TerminateHookAbandon>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TerminateHookAbandon>");
     }
 }

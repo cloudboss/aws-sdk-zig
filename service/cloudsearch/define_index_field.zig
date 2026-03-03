@@ -155,7 +155,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DefineIndexFieldInput, 
     try body_buf.appendSlice(allocator, "&IndexField.IndexFieldName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.index_field.index_field_name);
     try body_buf.appendSlice(allocator, "&IndexField.IndexFieldType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.index_field.index_field_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.index_field.index_field_type.wireName());
     if (input.index_field.int_array_options) |sv| {
         if (sv.default_value) |sv2| {
             try body_buf.appendSlice(allocator, "&IndexField.IntArrayOptions.DefaultValue=");

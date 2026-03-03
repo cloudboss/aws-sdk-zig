@@ -1207,7 +1207,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBInstanceInput, 
     }
     if (input.database_insights_mode) |v| {
         try body_buf.appendSlice(allocator, "&DatabaseInsightsMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.db_cluster_identifier) |v| {
         try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
@@ -1328,7 +1328,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBInstanceInput, 
     }
     if (input.master_user_authentication_type) |v| {
         try body_buf.appendSlice(allocator, "&MasterUserAuthenticationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.master_username) |v| {
         try body_buf.appendSlice(allocator, "&MasterUsername=");

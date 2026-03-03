@@ -103,7 +103,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPrefixListRes
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.Operation=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item_1.operation));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1.operation.wireName());
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
@@ -162,14 +162,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPrefixListRes
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.RuleType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.rule_type));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.rule_type.wireName());
             }
             {
                 var prefix_buf: [256]u8 = undefined;

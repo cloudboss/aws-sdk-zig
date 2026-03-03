@@ -78,7 +78,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeVpcAttributeInp
 
     try body_buf.appendSlice(allocator, "Action=DescribeVpcAttribute&Version=2016-11-15");
     try body_buf.appendSlice(allocator, "&Attribute=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.attribute));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.attribute.wireName());
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");

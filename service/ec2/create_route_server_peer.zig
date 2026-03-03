@@ -75,7 +75,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRouteServerPeerIn
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.bgp_options.peer_asn}) catch "");
     if (input.bgp_options.peer_liveness_detection) |sv| {
         try body_buf.appendSlice(allocator, "&BgpOptions.PeerLivenessDetection=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
@@ -93,7 +93,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRouteServerPeerIn
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

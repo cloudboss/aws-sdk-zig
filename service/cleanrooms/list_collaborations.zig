@@ -87,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCollaborationsInput
     if (input.member_status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "memberStatus=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.next_token) |v| {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how MediaConvert selects audio content within your input. The
 /// default is Track. PID: Select audio by specifying the Packet Identifier
 /// (PID) values for MPEG Transport Stream inputs. Use this when you know the
@@ -38,4 +40,24 @@ pub const AudioSelectorType = enum {
         .all_pcm = "ALL_PCM",
         .stream = "STREAM",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .pid => "PID",
+            .track => "TRACK",
+            .language_code => "LANGUAGE_CODE",
+            .hls_rendition_group => "HLS_RENDITION_GROUP",
+            .all_pcm => "ALL_PCM",
+            .stream => "STREAM",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

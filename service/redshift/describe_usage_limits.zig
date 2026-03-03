@@ -120,7 +120,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeUsageLimitsInpu
     }
     if (input.feature_type) |v| {
         try body_buf.appendSlice(allocator, "&FeatureType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.marker) |v| {
         try body_buf.appendSlice(allocator, "&Marker=");

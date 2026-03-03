@@ -53,7 +53,7 @@ pub const ExportTaskCancelledWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLED")) {
                 return .success;
             }
         }
@@ -105,22 +105,22 @@ pub const ExportTaskSuccessfulWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLING")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "SUCCEEDED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "SUCCEEDED")) {
                 return .success;
             }
         }
@@ -172,17 +172,17 @@ pub const GraphAvailableWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "AVAILABLE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "AVAILABLE")) {
                 return .success;
             }
         }
@@ -288,17 +288,17 @@ pub const GraphSnapshotAvailableWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "AVAILABLE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "AVAILABLE")) {
                 return .success;
             }
         }
@@ -404,7 +404,7 @@ pub const GraphStoppedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "STOPPED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "STOPPED")) {
                 return .success;
             }
         }
@@ -456,7 +456,7 @@ pub const ImportTaskCancelledWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLED")) {
                 return .success;
             }
         }
@@ -508,27 +508,27 @@ pub const ImportTaskSuccessfulWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLING")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ROLLING_BACK")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ROLLING_BACK")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "SUCCEEDED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "SUCCEEDED")) {
                 return .success;
             }
         }
@@ -580,17 +580,17 @@ pub const PrivateGraphEndpointAvailableWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "AVAILABLE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "AVAILABLE")) {
                 return .success;
             }
         }

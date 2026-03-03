@@ -1,4 +1,5 @@
 const std = @import("std");
+
 const aws = @import("aws");
 const ssm = @import("ssm");
 
@@ -99,6 +100,7 @@ test "GetParameter retrieves stored parameter value" {
         "shared-param-value",
         param.value orelse return error.MissingValue,
     );
+    try std.testing.expectEqual(.string, param.type orelse return error.MissingType);
 }
 
 test "DeleteParameter removes parameter" {
@@ -233,15 +235,16 @@ test "GetParametersByPath returns parameters under prefix" {
     }
 }
 
-test "PutParameter with SecureString type stores successfully" {
+test "PutParameter with SecureString type round trips successfully" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
+    const secret_value = "secret-value";
     const put_result = try shared_client.putParameter(
         arena.allocator(),
         .{
             .name = "/sdk-zig/secure-string-test",
-            .value = "secret-value",
+            .value = secret_value,
             .type = .secure_string,
             .overwrite = true,
         },
@@ -252,7 +255,7 @@ test "PutParameter with SecureString type stores successfully" {
 
     const get_result = try shared_client.getParameter(
         arena.allocator(),
-        .{ .name = "/sdk-zig/secure-string-test" },
+        .{ .name = "/sdk-zig/secure-string-test", .with_decryption = true },
         .{},
     );
 
@@ -261,7 +264,14 @@ test "PutParameter with SecureString type stores successfully" {
         "/sdk-zig/secure-string-test",
         param.name orelse return error.MissingName,
     );
-    try std.testing.expect(param.value != null);
+    try std.testing.expectEqualStrings(
+        secret_value,
+        param.value orelse return error.MissingValue,
+    );
+    try std.testing.expectEqual(
+        .secure_string,
+        param.type orelse return error.MissingType,
+    );
 
     // Cleanup
     {
@@ -313,11 +323,13 @@ test "PutParameter with StringList type stores list value" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
+    const name = "/sdk-zig/string-list-test";
+    const value = "item1,item2,item3";
     const put_result = try shared_client.putParameter(
         arena.allocator(),
         .{
-            .name = "/sdk-zig/string-list-test",
-            .value = "item1,item2,item3",
+            .name = name,
+            .value = value,
             .type = .string_list,
             .overwrite = true,
         },
@@ -325,6 +337,17 @@ test "PutParameter with StringList type stores list value" {
     );
 
     try std.testing.expect(put_result.version != null);
+
+    const get_result = try shared_client.getParameter(
+        arena.allocator(),
+        .{ .name = name },
+        .{},
+    );
+    const param = get_result.parameter orelse return error.MissingParameter;
+    try std.testing.expectEqualStrings(
+        value,
+        param.value orelse return error.MissingValue,
+    );
 
     // Cleanup
     {
@@ -515,7 +538,7 @@ test "DescribeParameters returns parameter metadata with type field" {
     for (params) |p| {
         const name = p.name orelse continue;
         if (std.mem.eql(u8, name, "/sdk-zig/describe-type-test")) {
-            try std.testing.expect(p.type != null);
+            try std.testing.expectEqual(.string, p.type orelse return error.MissingType);
             found = true;
             break;
         }

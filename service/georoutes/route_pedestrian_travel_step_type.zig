@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RoutePedestrianTravelStepType = enum {
     arrive,
     @"continue",
@@ -12,16 +14,41 @@ pub const RoutePedestrianTravelStepType = enum {
     u_turn,
 
     pub const json_field_names = .{
-        .arrive = "ARRIVE",
-        .@"continue" = "CONTINUE",
-        .depart = "DEPART",
-        .keep = "KEEP",
-        .roundabout_enter = "ROUNDABOUT_ENTER",
-        .roundabout_exit = "ROUNDABOUT_EXIT",
-        .roundabout_pass = "ROUNDABOUT_PASS",
-        .turn = "TURN",
-        .exit = "EXIT",
-        .ramp = "RAMP",
-        .u_turn = "U_TURN",
+        .arrive = "Arrive",
+        .@"continue" = "Continue",
+        .depart = "Depart",
+        .keep = "Keep",
+        .roundabout_enter = "RoundaboutEnter",
+        .roundabout_exit = "RoundaboutExit",
+        .roundabout_pass = "RoundaboutPass",
+        .turn = "Turn",
+        .exit = "Exit",
+        .ramp = "Ramp",
+        .u_turn = "UTurn",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .arrive => "Arrive",
+            .@"continue" => "Continue",
+            .depart => "Depart",
+            .keep => "Keep",
+            .roundabout_enter => "RoundaboutEnter",
+            .roundabout_exit => "RoundaboutExit",
+            .roundabout_pass => "RoundaboutPass",
+            .turn => "Turn",
+            .exit => "Exit",
+            .ramp => "Ramp",
+            .u_turn => "UTurn",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

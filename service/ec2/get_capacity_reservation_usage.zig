@@ -217,7 +217,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "nextToken")) {
                     result.next_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CapacityReservationState, try reader.readElementText());
+                    result.state = CapacityReservationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalInstanceCount")) {
                     result.total_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {

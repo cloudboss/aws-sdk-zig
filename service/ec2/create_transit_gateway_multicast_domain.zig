@@ -74,15 +74,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayMul
     if (input.options) |v| {
         if (v.auto_accept_shared_associations) |sv| {
             try body_buf.appendSlice(allocator, "&Options.AutoAcceptSharedAssociations=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.igmpv_2_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.Igmpv2Support=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.static_sources_support) |sv| {
             try body_buf.appendSlice(allocator, "&Options.StaticSourcesSupport=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.tag_specifications) |list| {
@@ -93,7 +93,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayMul
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const InvalidInputExceptionReason = enum {
     invalid_party_type_target,
     invalid_syntax_organization,
@@ -42,8 +44,8 @@ pub const InvalidInputExceptionReason = enum {
 
     pub const json_field_names = .{
         .invalid_party_type_target = "INVALID_PARTY_TYPE_TARGET",
-        .invalid_syntax_organization = "INVALID_SYNTAX_ORGANIZATION",
-        .invalid_syntax_policy = "INVALID_SYNTAX_POLICY",
+        .invalid_syntax_organization = "INVALID_SYNTAX_ORGANIZATION_ARN",
+        .invalid_syntax_policy = "INVALID_SYNTAX_POLICY_ID",
         .invalid_enum = "INVALID_ENUM",
         .invalid_enum_policy_type = "INVALID_ENUM_POLICY_TYPE",
         .invalid_list_member = "INVALID_LIST_MEMBER",
@@ -55,8 +57,8 @@ pub const InvalidInputExceptionReason = enum {
         .invalid_pattern = "INVALID_PATTERN",
         .invalid_pattern_target_id = "INVALID_PATTERN_TARGET_ID",
         .input_required = "INPUT_REQUIRED",
-        .invalid_pagination_token = "INVALID_PAGINATION_TOKEN",
-        .max_filter_limit_exceeded = "MAX_FILTER_LIMIT_EXCEEDED",
+        .invalid_pagination_token = "INVALID_NEXT_TOKEN",
+        .max_filter_limit_exceeded = "MAX_LIMIT_EXCEEDED_FILTER",
         .moving_account_between_different_roots = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS",
         .invalid_full_name_target = "INVALID_FULL_NAME_TARGET",
         .unrecognized_service_principal = "UNRECOGNIZED_SERVICE_PRINCIPAL",
@@ -82,4 +84,58 @@ pub const InvalidInputExceptionReason = enum {
         .end_date_too_early = "END_DATE_TOO_EARLY",
         .invalid_end_date = "INVALID_END_DATE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .invalid_party_type_target => "INVALID_PARTY_TYPE_TARGET",
+            .invalid_syntax_organization => "INVALID_SYNTAX_ORGANIZATION_ARN",
+            .invalid_syntax_policy => "INVALID_SYNTAX_POLICY_ID",
+            .invalid_enum => "INVALID_ENUM",
+            .invalid_enum_policy_type => "INVALID_ENUM_POLICY_TYPE",
+            .invalid_list_member => "INVALID_LIST_MEMBER",
+            .max_length_exceeded => "MAX_LENGTH_EXCEEDED",
+            .max_value_exceeded => "MAX_VALUE_EXCEEDED",
+            .min_length_exceeded => "MIN_LENGTH_EXCEEDED",
+            .min_value_exceeded => "MIN_VALUE_EXCEEDED",
+            .immutable_policy => "IMMUTABLE_POLICY",
+            .invalid_pattern => "INVALID_PATTERN",
+            .invalid_pattern_target_id => "INVALID_PATTERN_TARGET_ID",
+            .input_required => "INPUT_REQUIRED",
+            .invalid_pagination_token => "INVALID_NEXT_TOKEN",
+            .max_filter_limit_exceeded => "MAX_LIMIT_EXCEEDED_FILTER",
+            .moving_account_between_different_roots => "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS",
+            .invalid_full_name_target => "INVALID_FULL_NAME_TARGET",
+            .unrecognized_service_principal => "UNRECOGNIZED_SERVICE_PRINCIPAL",
+            .invalid_role_name => "INVALID_ROLE_NAME",
+            .invalid_system_tags_parameter => "INVALID_SYSTEM_TAGS_PARAMETER",
+            .duplicate_tag_key => "DUPLICATE_TAG_KEY",
+            .target_not_supported => "TARGET_NOT_SUPPORTED",
+            .invalid_email_address_target => "INVALID_EMAIL_ADDRESS_TARGET",
+            .invalid_resource_policy_json => "INVALID_RESOURCE_POLICY_JSON",
+            .invalid_principal => "INVALID_PRINCIPAL",
+            .unsupported_action_in_resource_policy => "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY",
+            .unsupported_policy_type_in_resource_policy => "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY",
+            .unsupported_resource_in_resource_policy => "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY",
+            .non_detachable_policy => "NON_DETACHABLE_POLICY",
+            .caller_required_field_missing => "CALLER_REQUIRED_FIELD_MISSING",
+            .unsupported_action_in_responsibility_transfer => "UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER",
+            .start_date_not_beginning_of_month => "START_DATE_NOT_BEGINNING_OF_MONTH",
+            .start_date_not_beginning_of_day => "START_DATE_NOT_BEGINNING_OF_DAY",
+            .start_date_too_early => "START_DATE_TOO_EARLY",
+            .start_date_too_late => "START_DATE_TOO_LATE",
+            .invalid_start_date => "INVALID_START_DATE",
+            .end_date_not_end_of_month => "END_DATE_NOT_END_OF_MONTH",
+            .end_date_too_early => "END_DATE_TOO_EARLY",
+            .invalid_end_date => "INVALID_END_DATE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

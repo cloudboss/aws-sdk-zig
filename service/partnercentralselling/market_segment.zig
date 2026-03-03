@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MarketSegment = enum {
     enterprise,
     large,
@@ -6,10 +8,29 @@ pub const MarketSegment = enum {
     micro,
 
     pub const json_field_names = .{
-        .enterprise = "ENTERPRISE",
-        .large = "LARGE",
-        .medium = "MEDIUM",
-        .small = "SMALL",
-        .micro = "MICRO",
+        .enterprise = "Enterprise",
+        .large = "Large",
+        .medium = "Medium",
+        .small = "Small",
+        .micro = "Micro",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .enterprise => "Enterprise",
+            .large => "Large",
+            .medium => "Medium",
+            .small => "Small",
+            .micro => "Micro",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

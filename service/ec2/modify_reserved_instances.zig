@@ -103,7 +103,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyReservedInstances
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.item.{d}.InstanceType=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.instance_type) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyReservedInstances
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.item.{d}.Scope=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.scope) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
     }

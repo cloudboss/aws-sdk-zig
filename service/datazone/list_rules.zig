@@ -128,7 +128,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRulesInput, config:
     if (input.action) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "ruleAction=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.asset_types) |v| {
@@ -173,7 +173,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRulesInput, config:
     if (input.rule_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "ruleType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);

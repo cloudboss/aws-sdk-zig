@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const WorkspacesPoolErrorCode = enum {
     iam_service_role_is_missing,
     iam_service_role_missing_eni_describe_action,
@@ -82,4 +84,58 @@ pub const WorkspacesPoolErrorCode = enum {
         .insufficient_permissions_error = "INSUFFICIENT_PERMISSIONS_ERROR",
         .default_ou_is_missing = "DEFAULT_OU_IS_MISSING",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .iam_service_role_is_missing => "IAM_SERVICE_ROLE_IS_MISSING",
+            .iam_service_role_missing_eni_describe_action => "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION",
+            .iam_service_role_missing_eni_create_action => "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION",
+            .iam_service_role_missing_eni_delete_action => "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION",
+            .network_interface_limit_exceeded => "NETWORK_INTERFACE_LIMIT_EXCEEDED",
+            .internal_service_error => "INTERNAL_SERVICE_ERROR",
+            .machine_role_is_missing => "MACHINE_ROLE_IS_MISSING",
+            .sts_disabled_in_region => "STS_DISABLED_IN_REGION",
+            .subnet_has_insufficient_ip_addresses => "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES",
+            .iam_service_role_missing_describe_subnet_action => "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
+            .subnet_not_found => "SUBNET_NOT_FOUND",
+            .image_not_found => "IMAGE_NOT_FOUND",
+            .invalid_subnet_configuration => "INVALID_SUBNET_CONFIGURATION",
+            .security_groups_not_found => "SECURITY_GROUPS_NOT_FOUND",
+            .igw_not_attached => "IGW_NOT_ATTACHED",
+            .iam_service_role_missing_describe_security_groups_action => "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION",
+            .workspaces_pool_stopped => "WORKSPACES_POOL_STOPPED",
+            .workspaces_pool_instance_provisioning_failure => "WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE",
+            .domain_join_error_file_not_found => "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND",
+            .domain_join_error_access_denied => "DOMAIN_JOIN_ERROR_ACCESS_DENIED",
+            .domain_join_error_logon_failure => "DOMAIN_JOIN_ERROR_LOGON_FAILURE",
+            .domain_join_error_invalid_parameter => "DOMAIN_JOIN_ERROR_INVALID_PARAMETER",
+            .domain_join_error_more_data => "DOMAIN_JOIN_ERROR_MORE_DATA",
+            .domain_join_error_no_such_domain => "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN",
+            .domain_join_error_not_supported => "DOMAIN_JOIN_ERROR_NOT_SUPPORTED",
+            .domain_join_nerr_invalid_workgroup_name => "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME",
+            .domain_join_nerr_workstation_not_started => "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED",
+            .domain_join_error_ds_machine_account_quota_exceeded => "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED",
+            .domain_join_nerr_password_expired => "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED",
+            .domain_join_internal_service_error => "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR",
+            .domain_join_error_secret_action_permission_is_missing => "DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING",
+            .domain_join_error_secret_decryption_failure => "DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE",
+            .domain_join_error_secret_state_invalid => "DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID",
+            .domain_join_error_secret_not_found => "DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND",
+            .domain_join_error_secret_value_key_not_found => "DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND",
+            .domain_join_error_secret_invalid => "DOMAIN_JOIN_ERROR_SECRET_INVALID",
+            .bundle_not_found => "BUNDLE_NOT_FOUND",
+            .directory_not_found => "DIRECTORY_NOT_FOUND",
+            .insufficient_permissions_error => "INSUFFICIENT_PERMISSIONS_ERROR",
+            .default_ou_is_missing => "DEFAULT_OU_IS_MISSING",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

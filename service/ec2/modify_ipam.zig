@@ -131,7 +131,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamInput, config
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.ipam_id);
     if (input.metered_account) |v| {
         try body_buf.appendSlice(allocator, "&MeteredAccount=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.remove_operating_regions) |list| {
         for (list, 0..) |item, idx| {
@@ -148,7 +148,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamInput, config
     }
     if (input.tier) |v| {
         try body_buf.appendSlice(allocator, "&Tier=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

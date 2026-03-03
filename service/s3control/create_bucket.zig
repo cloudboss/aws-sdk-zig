@@ -117,7 +117,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketInput, conf
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }
     if (input.grant_full_control) |v| {
         try request.headers.put(allocator, "x-amz-grant-full-control", v);

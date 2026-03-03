@@ -138,9 +138,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "DelegationRequest")) {
                     result.delegation_request = try serde.deserializeDelegationRequest(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "PermissionCheckResult")) {
-                    result.permission_check_result = std.meta.stringToEnum(permissionCheckResultType, try reader.readElementText());
+                    result.permission_check_result = permissionCheckResultType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PermissionCheckStatus")) {
-                    result.permission_check_status = std.meta.stringToEnum(permissionCheckStatusType, try reader.readElementText());
+                    result.permission_check_status = permissionCheckStatusType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

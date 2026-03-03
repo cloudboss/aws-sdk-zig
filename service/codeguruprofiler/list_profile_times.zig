@@ -148,12 +148,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListProfileTimesInput, 
     if (input.order_by) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "orderBy=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "period=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.period));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.period.wireName());
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "startTime=");

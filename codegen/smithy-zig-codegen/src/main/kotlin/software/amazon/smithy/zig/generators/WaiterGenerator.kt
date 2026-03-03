@@ -269,7 +269,7 @@ class WaiterGenerator(
             }
         }
 
-        // For stringEquals comparator, compare with @tagName for enums or std.mem.eql for strings
+        // For stringEquals comparator, compare with wireName() for enums
         // We generate the safe optional-unwrapping chain
         // Each level: if (parent.field) |val_N| { ... }
         // Level 0: parent is "output", capture is val_0
@@ -285,10 +285,9 @@ class WaiterGenerator(
     }
 
     private fun writeValueComparison(writer: ZigWriter, varName: String, expected: String, state: String) {
-        // Use @tagName for enums, std.mem.eql for strings
-        // Since we don't know if the field is an enum or string at codegen time,
-        // we generate code that handles both: try @tagName first (comptime check)
-        writer.openBlock("if (std.mem.eql(u8, @tagName(\$L), \"\$L\")) {", varName, expected)
+        // Use wireName() for enums to get the wire-format string for comparison.
+        // The expected value comes from the Smithy model and uses wire format.
+        writer.openBlock("if (std.mem.eql(u8, \$L.wireName(), \"\$L\")) {", varName, expected)
         writer.write("return .\$L;", state)
         writer.closeBlock("}")
     }

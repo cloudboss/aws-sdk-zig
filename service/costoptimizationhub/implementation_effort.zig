@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ImplementationEffort = enum {
     very_low,
     low,
@@ -6,10 +8,29 @@ pub const ImplementationEffort = enum {
     very_high,
 
     pub const json_field_names = .{
-        .very_low = "VERY_LOW",
-        .low = "LOW",
-        .medium = "MEDIUM",
-        .high = "HIGH",
-        .very_high = "VERY_HIGH",
+        .very_low = "VeryLow",
+        .low = "Low",
+        .medium = "Medium",
+        .high = "High",
+        .very_high = "VeryHigh",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .very_low => "VeryLow",
+            .low => "Low",
+            .medium => "Medium",
+            .high => "High",
+            .very_high => "VeryHigh",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -52,21 +52,21 @@ pub const FHIRDatastoreActiveWaiter = struct {
 
         if (output.datastore_properties) |val_0| {
             if (val_0.datastore_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.datastore_properties) |val_0| {
             if (val_0.datastore_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.datastore_properties) |val_0| {
             if (val_0.datastore_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETED")) {
                     return .failure;
                 }
             }
@@ -120,7 +120,7 @@ pub const FHIRDatastoreDeletedWaiter = struct {
 
         if (output.datastore_properties) |val_0| {
             if (val_0.datastore_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETED")) {
                     return .success;
                 }
             }
@@ -174,35 +174,35 @@ pub const FHIRExportJobCompletedWaiter = struct {
 
         if (output.export_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.export_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED_WITH_ERRORS")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED_WITH_ERRORS")) {
                     return .success;
                 }
             }
         }
         if (output.export_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CANCEL_COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CANCEL_COMPLETED")) {
                     return .failure;
                 }
             }
         }
         if (output.export_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.export_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CANCEL_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CANCEL_FAILED")) {
                     return .failure;
                 }
             }
@@ -256,21 +256,21 @@ pub const FHIRImportJobCompletedWaiter = struct {
 
         if (output.import_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.import_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED_WITH_ERRORS")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED_WITH_ERRORS")) {
                     return .success;
                 }
             }
         }
         if (output.import_job_properties) |val_0| {
             if (val_0.job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }

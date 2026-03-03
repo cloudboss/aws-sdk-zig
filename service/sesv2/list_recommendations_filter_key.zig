@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The `ListRecommendations` filter type. This can be one of the following:
 ///
 /// * `TYPE` – The recommendation type, with values like `DKIM`,
@@ -23,4 +25,22 @@ pub const ListRecommendationsFilterKey = enum {
         .status = "STATUS",
         .resource_arn = "RESOURCE_ARN",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .@"type" => "TYPE",
+            .impact => "IMPACT",
+            .status => "STATUS",
+            .resource_arn => "RESOURCE_ARN",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

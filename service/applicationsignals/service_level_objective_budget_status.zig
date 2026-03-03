@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ServiceLevelObjectiveBudgetStatus = enum {
     ok,
     warning,
@@ -10,4 +12,22 @@ pub const ServiceLevelObjectiveBudgetStatus = enum {
         .breached = "BREACHED",
         .insufficient_data = "INSUFFICIENT_DATA",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ok => "OK",
+            .warning => "WARNING",
+            .breached => "BREACHED",
+            .insufficient_data => "INSUFFICIENT_DATA",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

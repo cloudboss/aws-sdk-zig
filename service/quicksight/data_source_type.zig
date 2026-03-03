@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DataSourceType = enum {
     adobe_analytics,
     amazon_elasticsearch,
@@ -76,4 +78,55 @@ pub const DataSourceType = enum {
         .s3_knowledge_base = "S3_KNOWLEDGE_BASE",
         .qbusiness = "QBUSINESS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .adobe_analytics => "ADOBE_ANALYTICS",
+            .amazon_elasticsearch => "AMAZON_ELASTICSEARCH",
+            .athena => "ATHENA",
+            .aurora => "AURORA",
+            .aurora_postgresql => "AURORA_POSTGRESQL",
+            .aws_iot_analytics => "AWS_IOT_ANALYTICS",
+            .github => "GITHUB",
+            .jira => "JIRA",
+            .mariadb => "MARIADB",
+            .mysql => "MYSQL",
+            .oracle => "ORACLE",
+            .postgresql => "POSTGRESQL",
+            .presto => "PRESTO",
+            .redshift => "REDSHIFT",
+            .s3 => "S3",
+            .salesforce => "SALESFORCE",
+            .servicenow => "SERVICENOW",
+            .snowflake => "SNOWFLAKE",
+            .spark => "SPARK",
+            .sqlserver => "SQLSERVER",
+            .teradata => "TERADATA",
+            .twitter => "TWITTER",
+            .timestream => "TIMESTREAM",
+            .amazon_opensearch => "AMAZON_OPENSEARCH",
+            .exasol => "EXASOL",
+            .databricks => "DATABRICKS",
+            .starburst => "STARBURST",
+            .trino => "TRINO",
+            .bigquery => "BIGQUERY",
+            .googlesheets => "GOOGLESHEETS",
+            .google_drive => "GOOGLE_DRIVE",
+            .confluence => "CONFLUENCE",
+            .sharepoint => "SHAREPOINT",
+            .one_drive => "ONE_DRIVE",
+            .web_crawler => "WEB_CRAWLER",
+            .s3_knowledge_base => "S3_KNOWLEDGE_BASE",
+            .qbusiness => "QBUSINESS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadDocumentsInput, c
     request.body = body;
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
-    try request.headers.put(allocator, "Content-Type", @tagName(input.content_type));
+    try request.headers.put(allocator, "Content-Type", input.content_type.wireName());
 
     return request;
 }

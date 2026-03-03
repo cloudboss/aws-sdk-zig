@@ -95,7 +95,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Reason")) {
                     result.reason = try serde.deserializeDeletionTaskFailureReasonType(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(DeletionTaskStatusType, try reader.readElementText());
+                    result.status = DeletionTaskStatusType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

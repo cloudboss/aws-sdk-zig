@@ -112,7 +112,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZonesByVPCInp
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "vpcregion=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.vpc_region));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.vpc_region.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

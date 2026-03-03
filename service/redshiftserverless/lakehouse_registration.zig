@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const LakehouseRegistration = enum {
     register,
     deregister,
 
     pub const json_field_names = .{
-        .register = "REGISTER",
-        .deregister = "DEREGISTER",
+        .register = "Register",
+        .deregister = "Deregister",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .register => "Register",
+            .deregister => "Deregister",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

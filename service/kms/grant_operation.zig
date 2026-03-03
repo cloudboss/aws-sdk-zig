@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const GrantOperation = enum {
     decrypt,
     encrypt,
@@ -36,4 +38,35 @@ pub const GrantOperation = enum {
         .verify_mac = "VerifyMac",
         .derive_shared_secret = "DeriveSharedSecret",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .decrypt => "Decrypt",
+            .encrypt => "Encrypt",
+            .generate_data_key => "GenerateDataKey",
+            .generate_data_key_without_plaintext => "GenerateDataKeyWithoutPlaintext",
+            .re_encrypt_from => "ReEncryptFrom",
+            .re_encrypt_to => "ReEncryptTo",
+            .sign => "Sign",
+            .verify => "Verify",
+            .get_public_key => "GetPublicKey",
+            .create_grant => "CreateGrant",
+            .retire_grant => "RetireGrant",
+            .describe_key => "DescribeKey",
+            .generate_data_key_pair => "GenerateDataKeyPair",
+            .generate_data_key_pair_without_plaintext => "GenerateDataKeyPairWithoutPlaintext",
+            .generate_mac => "GenerateMac",
+            .verify_mac => "VerifyMac",
+            .derive_shared_secret => "DeriveSharedSecret",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

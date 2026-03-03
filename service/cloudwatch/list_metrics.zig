@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMetricsInput, confi
     }
     if (input.recently_active) |v| {
         try body_buf.appendSlice(allocator, "&RecentlyActive=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

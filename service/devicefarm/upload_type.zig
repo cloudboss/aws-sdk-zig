@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const UploadType = enum {
     android_app,
     ios_app,
@@ -66,4 +68,50 @@ pub const UploadType = enum {
         .instrumentation_test_spec = "INSTRUMENTATION_TEST_SPEC",
         .xctest_ui_test_spec = "XCTEST_UI_TEST_SPEC",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .android_app => "ANDROID_APP",
+            .ios_app => "IOS_APP",
+            .web_app => "WEB_APP",
+            .external_data => "EXTERNAL_DATA",
+            .appium_java_junit_test_package => "APPIUM_JAVA_JUNIT_TEST_PACKAGE",
+            .appium_java_testng_test_package => "APPIUM_JAVA_TESTNG_TEST_PACKAGE",
+            .appium_python_test_package => "APPIUM_PYTHON_TEST_PACKAGE",
+            .appium_node_test_package => "APPIUM_NODE_TEST_PACKAGE",
+            .appium_ruby_test_package => "APPIUM_RUBY_TEST_PACKAGE",
+            .appium_web_java_junit_test_package => "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE",
+            .appium_web_java_testng_test_package => "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE",
+            .appium_web_python_test_package => "APPIUM_WEB_PYTHON_TEST_PACKAGE",
+            .appium_web_node_test_package => "APPIUM_WEB_NODE_TEST_PACKAGE",
+            .appium_web_ruby_test_package => "APPIUM_WEB_RUBY_TEST_PACKAGE",
+            .calabash_test_package => "CALABASH_TEST_PACKAGE",
+            .instrumentation_test_package => "INSTRUMENTATION_TEST_PACKAGE",
+            .uiautomation_test_package => "UIAUTOMATION_TEST_PACKAGE",
+            .uiautomator_test_package => "UIAUTOMATOR_TEST_PACKAGE",
+            .xctest_test_package => "XCTEST_TEST_PACKAGE",
+            .xctest_ui_test_package => "XCTEST_UI_TEST_PACKAGE",
+            .appium_java_junit_test_spec => "APPIUM_JAVA_JUNIT_TEST_SPEC",
+            .appium_java_testng_test_spec => "APPIUM_JAVA_TESTNG_TEST_SPEC",
+            .appium_python_test_spec => "APPIUM_PYTHON_TEST_SPEC",
+            .appium_node_test_spec => "APPIUM_NODE_TEST_SPEC",
+            .appium_ruby_test_spec => "APPIUM_RUBY_TEST_SPEC",
+            .appium_web_java_junit_test_spec => "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC",
+            .appium_web_java_testng_test_spec => "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC",
+            .appium_web_python_test_spec => "APPIUM_WEB_PYTHON_TEST_SPEC",
+            .appium_web_node_test_spec => "APPIUM_WEB_NODE_TEST_SPEC",
+            .appium_web_ruby_test_spec => "APPIUM_WEB_RUBY_TEST_SPEC",
+            .instrumentation_test_spec => "INSTRUMENTATION_TEST_SPEC",
+            .xctest_ui_test_spec => "XCTEST_UI_TEST_SPEC",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

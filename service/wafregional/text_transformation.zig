@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const TextTransformation = enum {
     none,
     compress_white_space,
@@ -14,4 +16,24 @@ pub const TextTransformation = enum {
         .cmd_line = "CMD_LINE",
         .url_decode = "URL_DECODE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "NONE",
+            .compress_white_space => "COMPRESS_WHITE_SPACE",
+            .html_entity_decode => "HTML_ENTITY_DECODE",
+            .lowercase => "LOWERCASE",
+            .cmd_line => "CMD_LINE",
+            .url_decode => "URL_DECODE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The segmentation style parameter controls how segmentation markers are
 /// inserted into the transport stream. With avails, it is possible that
 /// segments may be truncated, which can influence where future segmentation
@@ -18,4 +20,20 @@ pub const M2tsSegmentationStyle = enum {
         .maintain_cadence = "MAINTAIN_CADENCE",
         .reset_cadence = "RESET_CADENCE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .maintain_cadence => "MAINTAIN_CADENCE",
+            .reset_cadence => "RESET_CADENCE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -403,7 +403,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadPartCopyInput, co
         try request.headers.put(allocator, "x-amz-source-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -429,10 +429,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.copy_source_version_id = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
         result.sse_customer_algorithm = try allocator.dupe(u8, value);

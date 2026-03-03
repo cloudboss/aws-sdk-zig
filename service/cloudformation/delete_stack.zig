@@ -110,7 +110,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteStackInput, confi
     }
     if (input.deletion_mode) |v| {
         try body_buf.appendSlice(allocator, "&DeletionMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.retain_resources) |list| {
         for (list, 0..) |item, idx| {

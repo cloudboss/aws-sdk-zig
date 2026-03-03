@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExecutionEventType = enum {
     unknown,
     execution_pending,
@@ -27,31 +29,71 @@ pub const ExecutionEventType = enum {
     plan_evaluation_warning,
 
     pub const json_field_names = .{
-        .unknown = "UNKNOWN",
-        .execution_pending = "EXECUTION_PENDING",
-        .execution_started = "EXECUTION_STARTED",
-        .execution_succeeded = "EXECUTION_SUCCEEDED",
-        .execution_failed = "EXECUTION_FAILED",
-        .execution_pausing = "EXECUTION_PAUSING",
-        .execution_paused = "EXECUTION_PAUSED",
-        .execution_canceling = "EXECUTION_CANCELING",
-        .execution_canceled = "EXECUTION_CANCELED",
-        .execution_pending_approval = "EXECUTION_PENDING_APPROVAL",
-        .execution_behavior_changed_to_ungraceful = "EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL",
-        .execution_behavior_changed_to_graceful = "EXECUTION_BEHAVIOR_CHANGED_TO_GRACEFUL",
-        .execution_pending_child_plan_manual_approval = "EXECUTION_PENDING_CHILD_PLAN_MANUAL_APPROVAL",
-        .execution_success_monitoring_application_health = "EXECUTION_SUCCESS_MONITORING_APPLICATION_HEALTH",
-        .step_started = "STEP_STARTED",
-        .step_update = "STEP_UPDATE",
-        .step_succeeded = "STEP_SUCCEEDED",
-        .step_failed = "STEP_FAILED",
-        .step_skipped = "STEP_SKIPPED",
-        .step_paused_by_error = "STEP_PAUSED_BY_ERROR",
-        .step_paused_by_operator = "STEP_PAUSED_BY_OPERATOR",
-        .step_canceled = "STEP_CANCELED",
-        .step_pending_approval = "STEP_PENDING_APPROVAL",
-        .step_execution_behavior_changed_to_ungraceful = "STEP_EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL",
-        .step_pending_application_health_monitor = "STEP_PENDING_APPLICATION_HEALTH_MONITOR",
-        .plan_evaluation_warning = "PLAN_EVALUATION_WARNING",
+        .unknown = "unknown",
+        .execution_pending = "executionPending",
+        .execution_started = "executionStarted",
+        .execution_succeeded = "executionSucceeded",
+        .execution_failed = "executionFailed",
+        .execution_pausing = "executionPausing",
+        .execution_paused = "executionPaused",
+        .execution_canceling = "executionCanceling",
+        .execution_canceled = "executionCanceled",
+        .execution_pending_approval = "executionPendingApproval",
+        .execution_behavior_changed_to_ungraceful = "executionBehaviorChangedToUngraceful",
+        .execution_behavior_changed_to_graceful = "executionBehaviorChangedToGraceful",
+        .execution_pending_child_plan_manual_approval = "executionPendingChildPlanManualApproval",
+        .execution_success_monitoring_application_health = "executionSuccessMonitoringApplicationHealth",
+        .step_started = "stepStarted",
+        .step_update = "stepUpdate",
+        .step_succeeded = "stepSucceeded",
+        .step_failed = "stepFailed",
+        .step_skipped = "stepSkipped",
+        .step_paused_by_error = "stepPausedByError",
+        .step_paused_by_operator = "stepPausedByOperator",
+        .step_canceled = "stepCanceled",
+        .step_pending_approval = "stepPendingApproval",
+        .step_execution_behavior_changed_to_ungraceful = "stepExecutionBehaviorChangedToUngraceful",
+        .step_pending_application_health_monitor = "stepPendingApplicationHealthMonitor",
+        .plan_evaluation_warning = "planEvaluationWarning",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .unknown => "unknown",
+            .execution_pending => "executionPending",
+            .execution_started => "executionStarted",
+            .execution_succeeded => "executionSucceeded",
+            .execution_failed => "executionFailed",
+            .execution_pausing => "executionPausing",
+            .execution_paused => "executionPaused",
+            .execution_canceling => "executionCanceling",
+            .execution_canceled => "executionCanceled",
+            .execution_pending_approval => "executionPendingApproval",
+            .execution_behavior_changed_to_ungraceful => "executionBehaviorChangedToUngraceful",
+            .execution_behavior_changed_to_graceful => "executionBehaviorChangedToGraceful",
+            .execution_pending_child_plan_manual_approval => "executionPendingChildPlanManualApproval",
+            .execution_success_monitoring_application_health => "executionSuccessMonitoringApplicationHealth",
+            .step_started => "stepStarted",
+            .step_update => "stepUpdate",
+            .step_succeeded => "stepSucceeded",
+            .step_failed => "stepFailed",
+            .step_skipped => "stepSkipped",
+            .step_paused_by_error => "stepPausedByError",
+            .step_paused_by_operator => "stepPausedByOperator",
+            .step_canceled => "stepCanceled",
+            .step_pending_approval => "stepPendingApproval",
+            .step_execution_behavior_changed_to_ungraceful => "stepExecutionBehaviorChangedToUngraceful",
+            .step_pending_application_health_monitor => "stepPendingApplicationHealthMonitor",
+            .plan_evaluation_warning => "planEvaluationWarning",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

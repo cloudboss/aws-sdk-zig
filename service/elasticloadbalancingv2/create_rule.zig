@@ -82,7 +82,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.AuthenticateCognitoConfig.OnUnauthenticatedRequest=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.on_unauthenticated_request) |fv_2| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                 }
             }
             {
@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.AuthenticateOidcConfig.OnUnauthenticatedRequest=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.on_unauthenticated_request) |fv_2| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                 }
             }
             {
@@ -281,7 +281,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Format=", .{n, n_2}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item_2.format));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.format.wireName());
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
@@ -366,7 +366,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.RedirectConfig.StatusCode=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.status_code));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.status_code.wireName());
             }
         }
         {
@@ -381,7 +381,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.Type=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.@"type"));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.@"type".wireName());
         }
     }
     for (input.conditions, 0..) |item, idx| {
@@ -595,7 +595,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.Type=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.@"type"));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.@"type".wireName());
             }
             if (item.url_rewrite_config) |sv_1| {
                 if (sv_1.rewrites) |lst_2| {

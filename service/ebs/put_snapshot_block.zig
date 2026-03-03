@@ -138,7 +138,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSnapshotBlockInput, 
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
     try request.headers.put(allocator, "x-amz-Checksum", input.checksum);
-    try request.headers.put(allocator, "x-amz-Checksum-Algorithm", @tagName(input.checksum_algorithm));
+    try request.headers.put(allocator, "x-amz-Checksum-Algorithm", input.checksum_algorithm.wireName());
     {
         const num_str = std.fmt.allocPrint(allocator, "{d}", .{input.data_length}) catch "";
         try request.headers.put(allocator, "x-amz-Data-Length", num_str);
@@ -161,7 +161,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.checksum = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-algorithm")) |value| {
-        result.checksum_algorithm = std.meta.stringToEnum(ChecksumAlgorithm, value);
+        result.checksum_algorithm = ChecksumAlgorithm.fromWireName(value);
     }
 
     return result;

@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSAMLProviderInput
     }
     if (input.assertion_encryption_mode) |v| {
         try body_buf.appendSlice(allocator, "&AssertionEncryptionMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&Name=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.name);

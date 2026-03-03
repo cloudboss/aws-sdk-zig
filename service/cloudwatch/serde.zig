@@ -761,11 +761,11 @@ pub fn deserializeAlarmHistoryItem(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "AlarmName")) {
                     result.alarm_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AlarmType")) {
-                    result.alarm_type = std.meta.stringToEnum(AlarmType, try reader.readElementText());
+                    result.alarm_type = AlarmType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HistoryData")) {
                     result.history_data = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HistoryItemType")) {
-                    result.history_item_type = std.meta.stringToEnum(HistoryItemType, try reader.readElementText());
+                    result.history_item_type = HistoryItemType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HistorySummary")) {
                     result.history_summary = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {
@@ -812,7 +812,7 @@ pub fn deserializeAnomalyDetector(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "Stat")) {
                     result.stat = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StateValue")) {
-                    result.state_value = std.meta.stringToEnum(AnomalyDetectorStateValue, try reader.readElementText());
+                    result.state_value = AnomalyDetectorStateValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -873,7 +873,7 @@ pub fn deserializeCompositeAlarm(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "ActionsEnabled")) {
                     result.actions_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "ActionsSuppressedBy")) {
-                    result.actions_suppressed_by = std.meta.stringToEnum(ActionsSuppressedBy, try reader.readElementText());
+                    result.actions_suppressed_by = ActionsSuppressedBy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ActionsSuppressedReason")) {
                     result.actions_suppressed_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ActionsSuppressor")) {
@@ -907,7 +907,7 @@ pub fn deserializeCompositeAlarm(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "StateUpdatedTimestamp")) {
                     result.state_updated_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "StateValue")) {
-                    result.state_value = std.meta.stringToEnum(StateValue, try reader.readElementText());
+                    result.state_value = StateValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -997,7 +997,7 @@ pub fn deserializeDatapoint(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {
                     result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Unit")) {
-                    result.unit = std.meta.stringToEnum(StandardUnit, try reader.readElementText());
+                    result.unit = StandardUnit.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1281,7 +1281,7 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "AlarmName")) {
                     result.alarm_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ComparisonOperator")) {
-                    result.comparison_operator = std.meta.stringToEnum(ComparisonOperator, try reader.readElementText());
+                    result.comparison_operator = ComparisonOperator.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DatapointsToAlarm")) {
                     result.datapoints_to_alarm = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Dimensions")) {
@@ -1291,7 +1291,7 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "EvaluationPeriods")) {
                     result.evaluation_periods = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "EvaluationState")) {
-                    result.evaluation_state = std.meta.stringToEnum(EvaluationState, try reader.readElementText());
+                    result.evaluation_state = EvaluationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExtendedStatistic")) {
                     result.extended_statistic = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InsufficientDataActions")) {
@@ -1315,9 +1315,9 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "StateUpdatedTimestamp")) {
                     result.state_updated_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "StateValue")) {
-                    result.state_value = std.meta.stringToEnum(StateValue, try reader.readElementText());
+                    result.state_value = StateValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Statistic")) {
-                    result.statistic = std.meta.stringToEnum(Statistic, try reader.readElementText());
+                    result.statistic = Statistic.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Threshold")) {
                     result.threshold = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ThresholdMetricId")) {
@@ -1325,7 +1325,7 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "TreatMissingData")) {
                     result.treat_missing_data = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Unit")) {
-                    result.unit = std.meta.stringToEnum(StandardUnit, try reader.readElementText());
+                    result.unit = StandardUnit.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1411,7 +1411,7 @@ pub fn deserializeMetricDataResult(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "Messages")) {
                     result.messages = try deserializeMetricDataResultMessages(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "StatusCode")) {
-                    result.status_code = std.meta.stringToEnum(StatusCode, try reader.readElementText());
+                    result.status_code = StatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Timestamps")) {
                     result.timestamps = try deserializeTimestamps(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Values")) {
@@ -1459,7 +1459,7 @@ pub fn deserializeMetricStat(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "Stat")) {
                     result.stat = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Unit")) {
-                    result.unit = std.meta.stringToEnum(StandardUnit, try reader.readElementText());
+                    result.unit = StandardUnit.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1494,7 +1494,7 @@ pub fn deserializeMetricStreamEntry(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OutputFormat")) {
-                    result.output_format = std.meta.stringToEnum(MetricStreamOutputFormat, try reader.readElementText());
+                    result.output_format = MetricStreamOutputFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "State")) {
                     result.state = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1687,7 +1687,7 @@ pub fn serializeAlarmTypes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1711,7 +1711,7 @@ pub fn serializeAnomalyDetectorTypes(allocator: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1942,7 +1942,7 @@ pub fn serializeStatistics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -2205,7 +2205,7 @@ pub fn serializeMetricDatum(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
     }
     if (value.unit) |v| {
         try buf.appendSlice(allocator, "<Unit>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Unit>");
     }
     if (value.value) |v| {
@@ -2246,7 +2246,7 @@ pub fn serializeMetricStat(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
     try buf.appendSlice(allocator, "</Stat>");
     if (value.unit) |v| {
         try buf.appendSlice(allocator, "<Unit>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Unit>");
     }
 }

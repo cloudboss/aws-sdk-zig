@@ -94,12 +94,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRepositoryEndpointIn
     if (input.endpoint_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "endpointType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "format=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.format));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.format.wireName());
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "repository=");

@@ -145,7 +145,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "StackName")) {
                     result.stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ChangeSetHooksStatus, try reader.readElementText());
+                    result.status = ChangeSetHooksStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

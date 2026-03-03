@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PlatformType = enum {
     debian,
     amazon_linux,
@@ -10,4 +12,22 @@ pub const PlatformType = enum {
         .ubuntu = "UBUNTU",
         .windows_server = "WINDOWS_SERVER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .debian => "DEBIAN",
+            .amazon_linux => "AMAZON_LINUX",
+            .ubuntu => "UBUNTU",
+            .windows_server => "WINDOWS_SERVER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

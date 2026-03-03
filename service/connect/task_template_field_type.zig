@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const TaskTemplateFieldType = enum {
     name,
     description,
@@ -30,4 +32,32 @@ pub const TaskTemplateFieldType = enum {
         .self_assign = "SELF_ASSIGN",
         .expiry_duration = "EXPIRY_DURATION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .name => "NAME",
+            .description => "DESCRIPTION",
+            .scheduled_time => "SCHEDULED_TIME",
+            .quick_connect => "QUICK_CONNECT",
+            .url => "URL",
+            .number => "NUMBER",
+            .text => "TEXT",
+            .text_area => "TEXT_AREA",
+            .date_time => "DATE_TIME",
+            .boolean => "BOOLEAN",
+            .single_select => "SINGLE_SELECT",
+            .email => "EMAIL",
+            .self_assign => "SELF_ASSIGN",
+            .expiry_duration => "EXPIRY_DURATION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

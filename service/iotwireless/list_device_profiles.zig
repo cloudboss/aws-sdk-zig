@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDeviceProfilesInput
     if (input.device_profile_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "deviceProfileType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.max_results) |v| {

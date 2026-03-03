@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The historical metric names.
 pub const HistoricalMetricName = enum {
     contacts_queued,
@@ -53,4 +55,43 @@ pub const HistoricalMetricName = enum {
         .interaction_and_hold_time = "INTERACTION_AND_HOLD_TIME",
         .service_level = "SERVICE_LEVEL",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .contacts_queued => "CONTACTS_QUEUED",
+            .contacts_handled => "CONTACTS_HANDLED",
+            .contacts_abandoned => "CONTACTS_ABANDONED",
+            .contacts_consulted => "CONTACTS_CONSULTED",
+            .contacts_agent_hung_up_first => "CONTACTS_AGENT_HUNG_UP_FIRST",
+            .contacts_handled_incoming => "CONTACTS_HANDLED_INCOMING",
+            .contacts_handled_outbound => "CONTACTS_HANDLED_OUTBOUND",
+            .contacts_hold_abandons => "CONTACTS_HOLD_ABANDONS",
+            .contacts_transferred_in => "CONTACTS_TRANSFERRED_IN",
+            .contacts_transferred_out => "CONTACTS_TRANSFERRED_OUT",
+            .contacts_transferred_in_from_queue => "CONTACTS_TRANSFERRED_IN_FROM_QUEUE",
+            .contacts_transferred_out_from_queue => "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE",
+            .contacts_missed => "CONTACTS_MISSED",
+            .callback_contacts_handled => "CALLBACK_CONTACTS_HANDLED",
+            .api_contacts_handled => "API_CONTACTS_HANDLED",
+            .occupancy => "OCCUPANCY",
+            .handle_time => "HANDLE_TIME",
+            .after_contact_work_time => "AFTER_CONTACT_WORK_TIME",
+            .queued_time => "QUEUED_TIME",
+            .abandon_time => "ABANDON_TIME",
+            .queue_answer_time => "QUEUE_ANSWER_TIME",
+            .hold_time => "HOLD_TIME",
+            .interaction_time => "INTERACTION_TIME",
+            .interaction_and_hold_time => "INTERACTION_AND_HOLD_TIME",
+            .service_level => "SERVICE_LEVEL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

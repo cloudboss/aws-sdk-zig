@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const KeyAlgorithm = enum {
     tdes_2_key,
     tdes_3_key,
@@ -32,4 +34,33 @@ pub const KeyAlgorithm = enum {
         .ecc_nist_p384 = "ECC_NIST_P384",
         .ecc_nist_p521 = "ECC_NIST_P521",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .tdes_2_key => "TDES_2KEY",
+            .tdes_3_key => "TDES_3KEY",
+            .aes_128 => "AES_128",
+            .aes_192 => "AES_192",
+            .aes_256 => "AES_256",
+            .hmac_sha256 => "HMAC_SHA256",
+            .hmac_sha384 => "HMAC_SHA384",
+            .hmac_sha512 => "HMAC_SHA512",
+            .hmac_sha224 => "HMAC_SHA224",
+            .rsa_2048 => "RSA_2048",
+            .rsa_3072 => "RSA_3072",
+            .rsa_4096 => "RSA_4096",
+            .ecc_nist_p256 => "ECC_NIST_P256",
+            .ecc_nist_p384 => "ECC_NIST_P384",
+            .ecc_nist_p521 => "ECC_NIST_P521",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

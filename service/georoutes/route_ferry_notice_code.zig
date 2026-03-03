@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RouteFerryNoticeCode = enum {
     accurate_polyline_unavailable,
     no_schedule,
@@ -8,12 +10,33 @@ pub const RouteFerryNoticeCode = enum {
     potential_violated_vehicle_restriction_usage,
 
     pub const json_field_names = .{
-        .accurate_polyline_unavailable = "ACCURATE_POLYLINE_UNAVAILABLE",
-        .no_schedule = "NO_SCHEDULE",
-        .other = "OTHER",
-        .violated_avoid_ferry = "VIOLATED_AVOID_FERRY",
-        .violated_avoid_rail_ferry = "VIOLATED_AVOID_RAIL_FERRY",
-        .seasonal_closure = "SEASONAL_CLOSURE",
-        .potential_violated_vehicle_restriction_usage = "POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE",
+        .accurate_polyline_unavailable = "AccuratePolylineUnavailable",
+        .no_schedule = "NoSchedule",
+        .other = "Other",
+        .violated_avoid_ferry = "ViolatedAvoidFerry",
+        .violated_avoid_rail_ferry = "ViolatedAvoidRailFerry",
+        .seasonal_closure = "SeasonalClosure",
+        .potential_violated_vehicle_restriction_usage = "PotentialViolatedVehicleRestrictionUsage",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .accurate_polyline_unavailable => "AccuratePolylineUnavailable",
+            .no_schedule => "NoSchedule",
+            .other => "Other",
+            .violated_avoid_ferry => "ViolatedAvoidFerry",
+            .violated_avoid_rail_ferry => "ViolatedAvoidRailFerry",
+            .seasonal_closure => "SeasonalClosure",
+            .potential_violated_vehicle_restriction_usage => "PotentialViolatedVehicleRestrictionUsage",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

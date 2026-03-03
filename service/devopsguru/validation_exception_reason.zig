@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ValidationExceptionReason = enum {
     unknown_operation,
     cannot_parse,
@@ -14,4 +16,24 @@ pub const ValidationExceptionReason = enum {
         .invalid_parameter_combination = "INVALID_PARAMETER_COMBINATION",
         .parameter_inconsistent_with_service_state = "PARAMETER_INCONSISTENT_WITH_SERVICE_STATE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .unknown_operation => "UNKNOWN_OPERATION",
+            .cannot_parse => "CANNOT_PARSE",
+            .field_validation_failed => "FIELD_VALIDATION_FAILED",
+            .other => "OTHER",
+            .invalid_parameter_combination => "INVALID_PARAMETER_COMBINATION",
+            .parameter_inconsistent_with_service_state => "PARAMETER_INCONSISTENT_WITH_SERVICE_STATE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

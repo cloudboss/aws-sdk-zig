@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EventErrorCode = enum {
     insufficient_capabilities,
     quota_exceeded,
@@ -30,4 +32,32 @@ pub const EventErrorCode = enum {
         .invalid_input = "INVALID_INPUT",
         .internal_server_exception = "INTERNAL_SERVER_EXCEPTION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .insufficient_capabilities => "INSUFFICIENT_CAPABILITIES",
+            .quota_exceeded => "QUOTA_EXCEEDED",
+            .publisher_not_found => "PUBLISHER_NOT_FOUND",
+            .bitrate_exceeded => "BITRATE_EXCEEDED",
+            .resolution_exceeded => "RESOLUTION_EXCEEDED",
+            .stream_duration_exceeded => "STREAM_DURATION_EXCEEDED",
+            .invalid_audio_codec => "INVALID_AUDIO_CODEC",
+            .invalid_video_codec => "INVALID_VIDEO_CODEC",
+            .invalid_protocol => "INVALID_PROTOCOL",
+            .invalid_stream_key => "INVALID_STREAM_KEY",
+            .reuse_of_stream_key => "REUSE_OF_STREAM_KEY",
+            .b_frame_present => "B_FRAME_PRESENT",
+            .invalid_input => "INVALID_INPUT",
+            .internal_server_exception => "INTERNAL_SERVER_EXCEPTION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

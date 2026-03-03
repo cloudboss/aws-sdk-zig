@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Describes the type of administrative action, as follows:
 ///
 /// * `FILE_SYSTEM_UPDATE` - A file system update administrative action
@@ -145,4 +147,33 @@ pub const AdministrativeActionType = enum {
         .volume_initialize_with_snapshot = "VOLUME_INITIALIZE_WITH_SNAPSHOT",
         .download_data_from_backup = "DOWNLOAD_DATA_FROM_BACKUP",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .file_system_update => "FILE_SYSTEM_UPDATE",
+            .storage_optimization => "STORAGE_OPTIMIZATION",
+            .file_system_alias_association => "FILE_SYSTEM_ALIAS_ASSOCIATION",
+            .file_system_alias_disassociation => "FILE_SYSTEM_ALIAS_DISASSOCIATION",
+            .volume_update => "VOLUME_UPDATE",
+            .snapshot_update => "SNAPSHOT_UPDATE",
+            .release_nfs_v3_locks => "RELEASE_NFS_V3_LOCKS",
+            .volume_restore => "VOLUME_RESTORE",
+            .throughput_optimization => "THROUGHPUT_OPTIMIZATION",
+            .iops_optimization => "IOPS_OPTIMIZATION",
+            .storage_type_optimization => "STORAGE_TYPE_OPTIMIZATION",
+            .misconfigured_state_recovery => "MISCONFIGURED_STATE_RECOVERY",
+            .volume_update_with_snapshot => "VOLUME_UPDATE_WITH_SNAPSHOT",
+            .volume_initialize_with_snapshot => "VOLUME_INITIALIZE_WITH_SNAPSHOT",
+            .download_data_from_backup => "DOWNLOAD_DATA_FROM_BACKUP",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

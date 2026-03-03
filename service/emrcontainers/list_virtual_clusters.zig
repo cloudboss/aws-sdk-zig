@@ -107,7 +107,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListVirtualClustersInpu
     if (input.container_provider_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "containerProviderType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.created_after) |v| {

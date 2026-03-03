@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specifies the bucket owner's access for objects that another account uploads
 /// to their
 /// Amazon S3 bucket. By default, only the account that uploads the objects to
@@ -51,4 +53,21 @@ pub const BucketOwnerAccess = enum {
         .read_only = "READ_ONLY",
         .full = "FULL",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "NONE",
+            .read_only => "READ_ONLY",
+            .full => "FULL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

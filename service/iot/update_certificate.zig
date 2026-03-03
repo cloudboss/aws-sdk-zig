@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCertificateInput,
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "newStatus=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.new_status));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.new_status.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

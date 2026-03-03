@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable
 /// Timecode insertion when the input frame rate is identical to the output
 /// frame rate. To include timecodes in this output, set Timecode insertion to
@@ -18,4 +20,20 @@ pub const VideoTimecodeInsertion = enum {
         .disabled = "DISABLED",
         .pic_timing_sei = "PIC_TIMING_SEI",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .pic_timing_sei => "PIC_TIMING_SEI",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

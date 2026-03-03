@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyActivityStreamInp
     try body_buf.appendSlice(allocator, "Action=ModifyActivityStream&Version=2014-10-31");
     if (input.audit_policy_state) |v| {
         try body_buf.appendSlice(allocator, "&AuditPolicyState=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.resource_arn) |v| {
         try body_buf.appendSlice(allocator, "&ResourceArn=");
@@ -126,11 +126,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "KmsKeyId")) {
                     result.kms_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Mode")) {
-                    result.mode = std.meta.stringToEnum(ActivityStreamMode, try reader.readElementText());
+                    result.mode = ActivityStreamMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PolicyStatus")) {
-                    result.policy_status = std.meta.stringToEnum(ActivityStreamPolicyStatus, try reader.readElementText());
+                    result.policy_status = ActivityStreamPolicyStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ActivityStreamStatus, try reader.readElementText());
+                    result.status = ActivityStreamStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

@@ -105,12 +105,12 @@ pub const ApplicationReadyWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "READY")) {
+            if (std.mem.eql(u8, val_0.wireName(), "READY")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }
@@ -162,22 +162,22 @@ pub const StreamGroupActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE_WITH_ERRORS")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE_WITH_ERRORS")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETING")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
                 return .failure;
             }
         }
@@ -283,12 +283,12 @@ pub const StreamSessionActiveWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ACTIVE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .failure;
             }
         }

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ClosedLostReason = enum {
     customer_deficiency,
     delay_cancellation_of_project,
@@ -20,24 +22,57 @@ pub const ClosedLostReason = enum {
     financialcommercial,
 
     pub const json_field_names = .{
-        .customer_deficiency = "CUSTOMER_DEFICIENCY",
-        .delay_cancellation_of_project = "DELAY_CANCELLATION_OF_PROJECT",
-        .legal_tax_regulatory = "LEGAL_TAX_REGULATORY",
-        .lost_to_competitor_google = "LOST_TO_COMPETITOR_GOOGLE",
-        .lost_to_competitor_microsoft = "LOST_TO_COMPETITOR_MICROSOFT",
-        .lost_to_competitor_softlayer = "LOST_TO_COMPETITOR_SOFTLAYER",
-        .lost_to_competitor_vmware = "LOST_TO_COMPETITOR_VMWARE",
-        .lost_to_competitor_other = "LOST_TO_COMPETITOR_OTHER",
-        .no_opportunity = "NO_OPPORTUNITY",
-        .on_premises_deployment = "ON_PREMISES_DEPLOYMENT",
-        .partner_gap = "PARTNER_GAP",
-        .price = "PRICE",
-        .security_compliance = "SECURITY_COMPLIANCE",
-        .technical_limitations = "TECHNICAL_LIMITATIONS",
-        .customer_experience = "CUSTOMER_EXPERIENCE",
-        .other = "OTHER",
-        .peoplerelationshipgovernance = "PEOPLERELATIONSHIPGOVERNANCE",
-        .producttechnology = "PRODUCTTECHNOLOGY",
-        .financialcommercial = "FINANCIALCOMMERCIAL",
+        .customer_deficiency = "Customer Deficiency",
+        .delay_cancellation_of_project = "Delay / Cancellation of Project",
+        .legal_tax_regulatory = "Legal / Tax / Regulatory",
+        .lost_to_competitor_google = "Lost to Competitor - Google",
+        .lost_to_competitor_microsoft = "Lost to Competitor - Microsoft",
+        .lost_to_competitor_softlayer = "Lost to Competitor - SoftLayer",
+        .lost_to_competitor_vmware = "Lost to Competitor - VMWare",
+        .lost_to_competitor_other = "Lost to Competitor - Other",
+        .no_opportunity = "No Opportunity",
+        .on_premises_deployment = "On Premises Deployment",
+        .partner_gap = "Partner Gap",
+        .price = "Price",
+        .security_compliance = "Security / Compliance",
+        .technical_limitations = "Technical Limitations",
+        .customer_experience = "Customer Experience",
+        .other = "Other",
+        .peoplerelationshipgovernance = "People/Relationship/Governance",
+        .producttechnology = "Product/Technology",
+        .financialcommercial = "Financial/Commercial",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .customer_deficiency => "Customer Deficiency",
+            .delay_cancellation_of_project => "Delay / Cancellation of Project",
+            .legal_tax_regulatory => "Legal / Tax / Regulatory",
+            .lost_to_competitor_google => "Lost to Competitor - Google",
+            .lost_to_competitor_microsoft => "Lost to Competitor - Microsoft",
+            .lost_to_competitor_softlayer => "Lost to Competitor - SoftLayer",
+            .lost_to_competitor_vmware => "Lost to Competitor - VMWare",
+            .lost_to_competitor_other => "Lost to Competitor - Other",
+            .no_opportunity => "No Opportunity",
+            .on_premises_deployment => "On Premises Deployment",
+            .partner_gap => "Partner Gap",
+            .price => "Price",
+            .security_compliance => "Security / Compliance",
+            .technical_limitations => "Technical Limitations",
+            .customer_experience => "Customer Experience",
+            .other => "Other",
+            .peoplerelationshipgovernance => "People/Relationship/Governance",
+            .producttechnology => "Product/Technology",
+            .financialcommercial => "Financial/Commercial",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

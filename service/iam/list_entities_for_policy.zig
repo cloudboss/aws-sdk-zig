@@ -143,7 +143,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEntitiesForPolicyIn
     try body_buf.appendSlice(allocator, "Action=ListEntitiesForPolicy&Version=2010-05-08");
     if (input.entity_filter) |v| {
         try body_buf.appendSlice(allocator, "&EntityFilter=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.marker) |v| {
         try body_buf.appendSlice(allocator, "&Marker=");
@@ -161,7 +161,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEntitiesForPolicyIn
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.policy_arn);
     if (input.policy_usage_filter) |v| {
         try body_buf.appendSlice(allocator, "&PolicyUsageFilter=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

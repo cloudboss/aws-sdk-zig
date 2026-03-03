@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const GeocodeAdditionalFeature = enum {
     time_zone,
     access,
@@ -5,9 +7,27 @@ pub const GeocodeAdditionalFeature = enum {
     intersections,
 
     pub const json_field_names = .{
-        .time_zone = "TIME_ZONE",
-        .access = "ACCESS",
-        .secondary_addresses = "SECONDARY_ADDRESSES",
-        .intersections = "INTERSECTIONS",
+        .time_zone = "TimeZone",
+        .access = "Access",
+        .secondary_addresses = "SecondaryAddresses",
+        .intersections = "Intersections",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .time_zone => "TimeZone",
+            .access => "Access",
+            .secondary_addresses => "SecondaryAddresses",
+            .intersections => "Intersections",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

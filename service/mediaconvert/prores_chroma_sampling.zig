@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs that you
 /// create from inputs that use 4:4:4 chroma sampling. Set Preserve 4:4:4
 /// sampling to allow outputs to also use 4:4:4 chroma sampling. You must
@@ -16,4 +18,20 @@ pub const ProresChromaSampling = enum {
         .preserve_444_sampling = "PRESERVE_444_SAMPLING",
         .subsample_to_422 = "SUBSAMPLE_TO_422",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .preserve_444_sampling => "PRESERVE_444_SAMPLING",
+            .subsample_to_422 => "SUBSAMPLE_TO_422",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

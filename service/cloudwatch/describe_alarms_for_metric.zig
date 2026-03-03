@@ -122,11 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAlarmsForMetric
     }
     if (input.statistic) |v| {
         try body_buf.appendSlice(allocator, "&Statistic=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.unit) |v| {
         try body_buf.appendSlice(allocator, "&Unit=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

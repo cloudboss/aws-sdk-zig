@@ -91,7 +91,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityManagerDa
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&OutputFormat=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.output_format));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.output_format.wireName());
     try body_buf.appendSlice(allocator, "&S3BucketName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.s3_bucket_name);
     if (input.s3_bucket_prefix) |v| {
@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityManagerDa
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&Schedule=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.schedule));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.schedule.wireName());
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
@@ -108,7 +108,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityManagerDa
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

@@ -83,7 +83,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveEnvironmentInfo
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&InfoType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.info_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.info_type.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

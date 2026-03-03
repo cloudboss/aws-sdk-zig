@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how you want your data keys managed. AWS uses data keys to encrypt
 /// your content. AWS also encrypts the data keys themselves, using a customer
 /// master key (CMK), and then stores the encrypted data keys alongside your
@@ -16,4 +18,20 @@ pub const S3ServerSideEncryptionType = enum {
         .server_side_encryption_s3 = "SERVER_SIDE_ENCRYPTION_S3",
         .server_side_encryption_kms = "SERVER_SIDE_ENCRYPTION_KMS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .server_side_encryption_s3 => "SERVER_SIDE_ENCRYPTION_S3",
+            .server_side_encryption_kms => "SERVER_SIDE_ENCRYPTION_KMS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

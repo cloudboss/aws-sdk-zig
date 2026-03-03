@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ActionPoint = enum {
     pre_create_hosted_configuration_version,
     pre_start_deployment,
@@ -18,4 +20,26 @@ pub const ActionPoint = enum {
         .on_deployment_complete = "ON_DEPLOYMENT_COMPLETE",
         .on_deployment_rolled_back = "ON_DEPLOYMENT_ROLLED_BACK",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .pre_create_hosted_configuration_version => "PRE_CREATE_HOSTED_CONFIGURATION_VERSION",
+            .pre_start_deployment => "PRE_START_DEPLOYMENT",
+            .at_deployment_tick => "AT_DEPLOYMENT_TICK",
+            .on_deployment_start => "ON_DEPLOYMENT_START",
+            .on_deployment_step => "ON_DEPLOYMENT_STEP",
+            .on_deployment_baking => "ON_DEPLOYMENT_BAKING",
+            .on_deployment_complete => "ON_DEPLOYMENT_COMPLETE",
+            .on_deployment_rolled_back => "ON_DEPLOYMENT_ROLLED_BACK",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

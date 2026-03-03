@@ -102,7 +102,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListFlowExecutionEvents
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "eventType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.event_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.event_type.wireName());
     query_has_prev = true;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

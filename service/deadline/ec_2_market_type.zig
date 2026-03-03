@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const Ec2MarketType = enum {
     on_demand,
     spot,
     wait_and_save,
 
     pub const json_field_names = .{
-        .on_demand = "ON_DEMAND",
-        .spot = "SPOT",
-        .wait_and_save = "WAIT_AND_SAVE",
+        .on_demand = "on-demand",
+        .spot = "spot",
+        .wait_and_save = "wait-and-save",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .on_demand => "on-demand",
+            .spot => "spot",
+            .wait_and_save => "wait-and-save",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

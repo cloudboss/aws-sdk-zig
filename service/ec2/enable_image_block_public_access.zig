@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableImageBlockPublicA
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&ImageBlockPublicAccessState=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.image_block_public_access_state));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.image_block_public_access_state.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -101,7 +101,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "imageBlockPublicAccessState")) {
-                    result.image_block_public_access_state = std.meta.stringToEnum(ImageBlockPublicAccessEnabledState, try reader.readElementText());
+                    result.image_block_public_access_state = ImageBlockPublicAccessEnabledState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

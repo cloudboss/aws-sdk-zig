@@ -50,28 +50,28 @@ pub const WaitForReplicationSetActiveWaiter = struct {
 
         if (output.replication_set) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.replication_set) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATING")) {
                     return .retry;
                 }
             }
         }
         if (output.replication_set) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATING")) {
                     return .retry;
                 }
             }
         }
         if (output.replication_set) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -132,14 +132,14 @@ pub const WaitForReplicationSetDeletedWaiter = struct {
 
         if (output.replication_set) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETING")) {
                     return .retry;
                 }
             }
         }
         if (output.replication_set) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }

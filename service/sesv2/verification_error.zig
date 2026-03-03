@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const VerificationError = enum {
     service_error,
     dns_server_error,
@@ -22,4 +24,28 @@ pub const VerificationError = enum {
         .replication_replica_as_primary_not_supported = "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED",
         .replication_primary_invalid_region = "REPLICATION_PRIMARY_INVALID_REGION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .service_error => "SERVICE_ERROR",
+            .dns_server_error => "DNS_SERVER_ERROR",
+            .host_not_found => "HOST_NOT_FOUND",
+            .type_not_found => "TYPE_NOT_FOUND",
+            .invalid_value => "INVALID_VALUE",
+            .replication_access_denied => "REPLICATION_ACCESS_DENIED",
+            .replication_primary_not_found => "REPLICATION_PRIMARY_NOT_FOUND",
+            .replication_primary_byo_dkim_not_supported => "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED",
+            .replication_replica_as_primary_not_supported => "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED",
+            .replication_primary_invalid_region => "REPLICATION_PRIMARY_INVALID_REGION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EventType = enum {
     execution_started,
     execution_succeeded,
@@ -50,4 +52,42 @@ pub const EventType = enum {
         .callback_timed_out = "CallbackTimedOut",
         .invocation_completed = "InvocationCompleted",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .execution_started => "ExecutionStarted",
+            .execution_succeeded => "ExecutionSucceeded",
+            .execution_failed => "ExecutionFailed",
+            .execution_timed_out => "ExecutionTimedOut",
+            .execution_stopped => "ExecutionStopped",
+            .context_started => "ContextStarted",
+            .context_succeeded => "ContextSucceeded",
+            .context_failed => "ContextFailed",
+            .wait_started => "WaitStarted",
+            .wait_succeeded => "WaitSucceeded",
+            .wait_cancelled => "WaitCancelled",
+            .step_started => "StepStarted",
+            .step_succeeded => "StepSucceeded",
+            .step_failed => "StepFailed",
+            .chained_invoke_started => "ChainedInvokeStarted",
+            .chained_invoke_succeeded => "ChainedInvokeSucceeded",
+            .chained_invoke_failed => "ChainedInvokeFailed",
+            .chained_invoke_timed_out => "ChainedInvokeTimedOut",
+            .chained_invoke_stopped => "ChainedInvokeStopped",
+            .callback_started => "CallbackStarted",
+            .callback_succeeded => "CallbackSucceeded",
+            .callback_failed => "CallbackFailed",
+            .callback_timed_out => "CallbackTimedOut",
+            .invocation_completed => "InvocationCompleted",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

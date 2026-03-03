@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConnectorType = enum {
     salesforce,
     singular,
@@ -25,29 +27,67 @@ pub const ConnectorType = enum {
     pardot,
 
     pub const json_field_names = .{
-        .salesforce = "SALESFORCE",
-        .singular = "SINGULAR",
-        .slack = "SLACK",
-        .redshift = "REDSHIFT",
+        .salesforce = "Salesforce",
+        .singular = "Singular",
+        .slack = "Slack",
+        .redshift = "Redshift",
         .s3 = "S3",
-        .marketo = "MARKETO",
-        .googleanalytics = "GOOGLEANALYTICS",
-        .zendesk = "ZENDESK",
-        .servicenow = "SERVICENOW",
-        .datadog = "DATADOG",
-        .trendmicro = "TRENDMICRO",
-        .snowflake = "SNOWFLAKE",
-        .dynatrace = "DYNATRACE",
-        .infornexus = "INFORNEXUS",
-        .amplitude = "AMPLITUDE",
-        .veeva = "VEEVA",
-        .eventbridge = "EVENTBRIDGE",
-        .lookoutmetrics = "LOOKOUTMETRICS",
-        .upsolver = "UPSOLVER",
-        .honeycode = "HONEYCODE",
-        .customerprofiles = "CUSTOMERPROFILES",
-        .sapodata = "SAPODATA",
-        .customconnector = "CUSTOMCONNECTOR",
-        .pardot = "PARDOT",
+        .marketo = "Marketo",
+        .googleanalytics = "Googleanalytics",
+        .zendesk = "Zendesk",
+        .servicenow = "Servicenow",
+        .datadog = "Datadog",
+        .trendmicro = "Trendmicro",
+        .snowflake = "Snowflake",
+        .dynatrace = "Dynatrace",
+        .infornexus = "Infornexus",
+        .amplitude = "Amplitude",
+        .veeva = "Veeva",
+        .eventbridge = "EventBridge",
+        .lookoutmetrics = "LookoutMetrics",
+        .upsolver = "Upsolver",
+        .honeycode = "Honeycode",
+        .customerprofiles = "CustomerProfiles",
+        .sapodata = "SAPOData",
+        .customconnector = "CustomConnector",
+        .pardot = "Pardot",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .salesforce => "Salesforce",
+            .singular => "Singular",
+            .slack => "Slack",
+            .redshift => "Redshift",
+            .s3 => "S3",
+            .marketo => "Marketo",
+            .googleanalytics => "Googleanalytics",
+            .zendesk => "Zendesk",
+            .servicenow => "Servicenow",
+            .datadog => "Datadog",
+            .trendmicro => "Trendmicro",
+            .snowflake => "Snowflake",
+            .dynatrace => "Dynatrace",
+            .infornexus => "Infornexus",
+            .amplitude => "Amplitude",
+            .veeva => "Veeva",
+            .eventbridge => "EventBridge",
+            .lookoutmetrics => "LookoutMetrics",
+            .upsolver => "Upsolver",
+            .honeycode => "Honeycode",
+            .customerprofiles => "CustomerProfiles",
+            .sapodata => "SAPOData",
+            .customconnector => "CustomConnector",
+            .pardot => "Pardot",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

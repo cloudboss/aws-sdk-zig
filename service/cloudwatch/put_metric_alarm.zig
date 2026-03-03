@@ -544,7 +544,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
     try body_buf.appendSlice(allocator, "&AlarmName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.alarm_name);
     try body_buf.appendSlice(allocator, "&ComparisonOperator=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.comparison_operator));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.comparison_operator.wireName());
     if (input.datapoints_to_alarm) |v| {
         try body_buf.appendSlice(allocator, "&DatapointsToAlarm=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
@@ -673,7 +673,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Metrics.member.{d}.MetricStat.Unit=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.unit) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
             }
@@ -714,7 +714,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
     }
     if (input.statistic) |v| {
         try body_buf.appendSlice(allocator, "&Statistic=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.tags) |list| {
         for (list, 0..) |item, idx| {
@@ -747,7 +747,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
     }
     if (input.unit) |v| {
         try body_buf.appendSlice(allocator, "&Unit=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

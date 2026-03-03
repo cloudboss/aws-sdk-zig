@@ -853,7 +853,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
     }
     if (input.cluster_scalability_type) |v| {
         try body_buf.appendSlice(allocator, "&ClusterScalabilityType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.copy_tags_to_snapshot) |v| {
         try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
@@ -861,7 +861,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
     }
     if (input.database_insights_mode) |v| {
         try body_buf.appendSlice(allocator, "&DatabaseInsightsMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.database_name) |v| {
         try body_buf.appendSlice(allocator, "&DatabaseName=");
@@ -962,7 +962,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
     }
     if (input.master_user_authentication_type) |v| {
         try body_buf.appendSlice(allocator, "&MasterUserAuthenticationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.master_username) |v| {
         try body_buf.appendSlice(allocator, "&MasterUsername=");
@@ -1027,7 +1027,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
         }
         if (v.replica_mode) |sv| {
             try body_buf.appendSlice(allocator, "&RdsCustomClusterConfiguration.ReplicaMode=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.transit_gateway_multicast_domain_id) |sv| {
             try body_buf.appendSlice(allocator, "&RdsCustomClusterConfiguration.TransitGatewayMulticastDomainId=");

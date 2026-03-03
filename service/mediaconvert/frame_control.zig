@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Choose how MediaConvert handles start and end times for input clipping with
 /// video passthrough. Your input video codec must be H.264 or H.265 to use
 /// IFRAME. To clip at the nearest IDR-frame: Choose Nearest IDR. If an
@@ -17,4 +19,20 @@ pub const FrameControl = enum {
         .nearest_idrframe = "NEAREST_IDRFRAME",
         .nearest_iframe = "NEAREST_IFRAME",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .nearest_idrframe => "NEAREST_IDRFRAME",
+            .nearest_iframe => "NEAREST_IFRAME",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

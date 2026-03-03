@@ -136,7 +136,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ProvisionByoipCidrInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PoolTagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

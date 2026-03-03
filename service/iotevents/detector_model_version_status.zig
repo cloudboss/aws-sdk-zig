@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DetectorModelVersionStatus = enum {
     active,
     activating,
@@ -16,4 +18,25 @@ pub const DetectorModelVersionStatus = enum {
         .paused = "PAUSED",
         .failed = "FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .active => "ACTIVE",
+            .activating => "ACTIVATING",
+            .inactive => "INACTIVE",
+            .deprecated => "DEPRECATED",
+            .draft => "DRAFT",
+            .paused => "PAUSED",
+            .failed => "FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -271,7 +271,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMultipartUploadsInp
     if (input.encoding_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "encoding-type=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.key_marker) |v| {
@@ -317,7 +317,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMultipartUploadsInp
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
 
     return request;
@@ -347,7 +347,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "Delimiter")) {
                     result.delimiter = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EncodingType")) {
-                    result.encoding_type = std.meta.stringToEnum(EncodingType, try reader.readElementText());
+                    result.encoding_type = EncodingType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "KeyMarker")) {
@@ -375,7 +375,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     result.common_prefixes = if (common_prefixes_list.items.len > 0) try common_prefixes_list.toOwnedSlice(allocator) else null;
     result.uploads = if (uploads_list.items.len > 0) try uploads_list.toOwnedSlice(allocator) else null;
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
 
     return result;

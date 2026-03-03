@@ -256,7 +256,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInterpolatedAssetPro
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "quality=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.quality));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.quality.wireName());
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "startTimeInSeconds=");

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AdsInteractionExcludeEventType = enum {
     ad_marker_found,
     non_ad_marker_found,
@@ -84,4 +86,59 @@ pub const AdsInteractionExcludeEventType = enum {
         .interstitial_vod_success = "INTERSTITIAL_VOD_SUCCESS",
         .interstitial_vod_failure = "INTERSTITIAL_VOD_FAILURE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ad_marker_found => "AD_MARKER_FOUND",
+            .non_ad_marker_found => "NON_AD_MARKER_FOUND",
+            .making_ads_request => "MAKING_ADS_REQUEST",
+            .modified_target_url => "MODIFIED_TARGET_URL",
+            .vast_redirect => "VAST_REDIRECT",
+            .empty_vast_response => "EMPTY_VAST_RESPONSE",
+            .empty_vmap_response => "EMPTY_VMAP_RESPONSE",
+            .vast_response => "VAST_RESPONSE",
+            .redirected_vast_response => "REDIRECTED_VAST_RESPONSE",
+            .filled_avail => "FILLED_AVAIL",
+            .filled_overlay_avail => "FILLED_OVERLAY_AVAIL",
+            .beacon_fired => "BEACON_FIRED",
+            .warning_no_advertisements => "WARNING_NO_ADVERTISEMENTS",
+            .warning_vpaid_ad_dropped => "WARNING_VPAID_AD_DROPPED",
+            .warning_url_variable_substitution_failed => "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED",
+            .error_unknown => "ERROR_UNKNOWN",
+            .error_unknown_host => "ERROR_UNKNOWN_HOST",
+            .error_disallowed_host => "ERROR_DISALLOWED_HOST",
+            .error_ads_io => "ERROR_ADS_IO",
+            .error_ads_timeout => "ERROR_ADS_TIMEOUT",
+            .error_ads_response_parse => "ERROR_ADS_RESPONSE_PARSE",
+            .error_ads_response_unknown_root_element => "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT",
+            .error_ads_invalid_response => "ERROR_ADS_INVALID_RESPONSE",
+            .error_vast_redirect_empty_response => "ERROR_VAST_REDIRECT_EMPTY_RESPONSE",
+            .error_vast_redirect_multiple_vast => "ERROR_VAST_REDIRECT_MULTIPLE_VAST",
+            .error_vast_redirect_failed => "ERROR_VAST_REDIRECT_FAILED",
+            .error_vast_missing_mediafiles => "ERROR_VAST_MISSING_MEDIAFILES",
+            .error_vast_missing_creatives => "ERROR_VAST_MISSING_CREATIVES",
+            .error_vast_missing_overlays => "ERROR_VAST_MISSING_OVERLAYS",
+            .error_vast_missing_impression => "ERROR_VAST_MISSING_IMPRESSION",
+            .error_vast_invalid_vast_ad_tag_uri => "ERROR_VAST_INVALID_VAST_AD_TAG_URI",
+            .error_vast_multiple_tracking_events => "ERROR_VAST_MULTIPLE_TRACKING_EVENTS",
+            .error_vast_multiple_linear => "ERROR_VAST_MULTIPLE_LINEAR",
+            .error_vast_invalid_media_file => "ERROR_VAST_INVALID_MEDIA_FILE",
+            .error_firing_beacon_failed => "ERROR_FIRING_BEACON_FAILED",
+            .error_personalization_disabled => "ERROR_PERSONALIZATION_DISABLED",
+            .vod_time_based_avail_plan_vast_response_for_offset => "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET",
+            .vod_time_based_avail_plan_success => "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS",
+            .vod_time_based_avail_plan_warning_no_advertisements => "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS",
+            .interstitial_vod_success => "INTERSTITIAL_VOD_SUCCESS",
+            .interstitial_vod_failure => "INTERSTITIAL_VOD_FAILURE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

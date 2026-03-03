@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The mode of authentication for a server. The default value is
 /// `SERVICE_MANAGED`, which allows you to store and access user credentials
 /// within the Transfer Family service.
@@ -29,4 +31,22 @@ pub const IdentityProviderType = enum {
         .aws_directory_service = "AWS_DIRECTORY_SERVICE",
         .aws_lambda = "AWS_LAMBDA",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .service_managed => "SERVICE_MANAGED",
+            .api_gateway => "API_GATEWAY",
+            .aws_directory_service => "AWS_DIRECTORY_SERVICE",
+            .aws_lambda => "AWS_LAMBDA",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

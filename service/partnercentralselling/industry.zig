@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Industry = enum {
     aerospace_satellite,
     agriculture,
@@ -29,33 +31,75 @@ pub const Industry = enum {
     other,
 
     pub const json_field_names = .{
-        .aerospace_satellite = "AEROSPACE_SATELLITE",
-        .agriculture = "AGRICULTURE",
-        .automotive = "AUTOMOTIVE",
-        .computers_electronics = "COMPUTERS_ELECTRONICS",
-        .consumer_goods = "CONSUMER_GOODS",
-        .education = "EDUCATION",
-        .energy_oil_gas = "ENERGY_OIL_GAS",
-        .energy_power_utilities = "ENERGY_POWER_UTILITIES",
-        .financial_services = "FINANCIAL_SERVICES",
-        .gaming = "GAMING",
-        .government = "GOVERNMENT",
-        .healthcare = "HEALTHCARE",
-        .hospitality = "HOSPITALITY",
-        .life_sciences = "LIFE_SCIENCES",
-        .manufacturing = "MANUFACTURING",
-        .marketing_advertising = "MARKETING_ADVERTISING",
-        .media_entertainment = "MEDIA_ENTERTAINMENT",
-        .mining = "MINING",
-        .non_profit_organization = "NON_PROFIT_ORGANIZATION",
-        .professional_services = "PROFESSIONAL_SERVICES",
-        .realestate_construction = "REALESTATE_CONSTRUCTION",
-        .retail = "RETAIL",
-        .software_internet = "SOFTWARE_INTERNET",
-        .telecommunications = "TELECOMMUNICATIONS",
-        .transportation_logistics = "TRANSPORTATION_LOGISTICS",
-        .travel = "TRAVEL",
-        .wholesale_distribution = "WHOLESALE_DISTRIBUTION",
-        .other = "OTHER",
+        .aerospace_satellite = "Aerospace",
+        .agriculture = "Agriculture",
+        .automotive = "Automotive",
+        .computers_electronics = "Computers and Electronics",
+        .consumer_goods = "Consumer Goods",
+        .education = "Education",
+        .energy_oil_gas = "Energy - Oil and Gas",
+        .energy_power_utilities = "Energy - Power and Utilities",
+        .financial_services = "Financial Services",
+        .gaming = "Gaming",
+        .government = "Government",
+        .healthcare = "Healthcare",
+        .hospitality = "Hospitality",
+        .life_sciences = "Life Sciences",
+        .manufacturing = "Manufacturing",
+        .marketing_advertising = "Marketing and Advertising",
+        .media_entertainment = "Media and Entertainment",
+        .mining = "Mining",
+        .non_profit_organization = "Non-Profit Organization",
+        .professional_services = "Professional Services",
+        .realestate_construction = "Real Estate and Construction",
+        .retail = "Retail",
+        .software_internet = "Software and Internet",
+        .telecommunications = "Telecommunications",
+        .transportation_logistics = "Transportation and Logistics",
+        .travel = "Travel",
+        .wholesale_distribution = "Wholesale and Distribution",
+        .other = "Other",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .aerospace_satellite => "Aerospace",
+            .agriculture => "Agriculture",
+            .automotive => "Automotive",
+            .computers_electronics => "Computers and Electronics",
+            .consumer_goods => "Consumer Goods",
+            .education => "Education",
+            .energy_oil_gas => "Energy - Oil and Gas",
+            .energy_power_utilities => "Energy - Power and Utilities",
+            .financial_services => "Financial Services",
+            .gaming => "Gaming",
+            .government => "Government",
+            .healthcare => "Healthcare",
+            .hospitality => "Hospitality",
+            .life_sciences => "Life Sciences",
+            .manufacturing => "Manufacturing",
+            .marketing_advertising => "Marketing and Advertising",
+            .media_entertainment => "Media and Entertainment",
+            .mining => "Mining",
+            .non_profit_organization => "Non-Profit Organization",
+            .professional_services => "Professional Services",
+            .realestate_construction => "Real Estate and Construction",
+            .retail => "Retail",
+            .software_internet => "Software and Internet",
+            .telecommunications => "Telecommunications",
+            .transportation_logistics => "Transportation and Logistics",
+            .travel => "Travel",
+            .wholesale_distribution => "Wholesale and Distribution",
+            .other => "Other",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

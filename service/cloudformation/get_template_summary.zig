@@ -168,7 +168,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTemplateSummaryInput
     try body_buf.appendSlice(allocator, "Action=GetTemplateSummary&Version=2010-05-15");
     if (input.call_as) |v| {
         try body_buf.appendSlice(allocator, "&CallAs=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.stack_name) |v| {
         try body_buf.appendSlice(allocator, "&StackName=");

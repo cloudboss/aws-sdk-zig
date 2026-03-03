@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EphemerisErrorCode = enum {
     internal_error,
     mismatched_satcat_id,
@@ -78,4 +80,56 @@ pub const EphemerisErrorCode = enum {
         .az_el_segment_end_time_too_late = "AZ_EL_SEGMENT_END_TIME_TOO_LATE",
         .az_el_total_duration_exceeded = "AZ_EL_TOTAL_DURATION_EXCEEDED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .internal_error => "INTERNAL_ERROR",
+            .mismatched_satcat_id => "MISMATCHED_SATCAT_ID",
+            .oem_version_unsupported => "OEM_VERSION_UNSUPPORTED",
+            .originator_missing => "ORIGINATOR_MISSING",
+            .creation_date_missing => "CREATION_DATE_MISSING",
+            .object_name_missing => "OBJECT_NAME_MISSING",
+            .object_id_missing => "OBJECT_ID_MISSING",
+            .ref_frame_unsupported => "REF_FRAME_UNSUPPORTED",
+            .ref_frame_epoch_unsupported => "REF_FRAME_EPOCH_UNSUPPORTED",
+            .time_system_unsupported => "TIME_SYSTEM_UNSUPPORTED",
+            .center_body_unsupported => "CENTER_BODY_UNSUPPORTED",
+            .interpolation_missing => "INTERPOLATION_MISSING",
+            .interpolation_degree_invalid => "INTERPOLATION_DEGREE_INVALID",
+            .az_el_segment_list_missing => "AZ_EL_SEGMENT_LIST_MISSING",
+            .insufficient_time_az_el => "INSUFFICIENT_TIME_AZ_EL",
+            .start_time_in_future => "START_TIME_IN_FUTURE",
+            .end_time_in_past => "END_TIME_IN_PAST",
+            .expiration_time_too_early => "EXPIRATION_TIME_TOO_EARLY",
+            .start_time_metadata_too_early => "START_TIME_METADATA_TOO_EARLY",
+            .stop_time_metadata_too_late => "STOP_TIME_METADATA_TOO_LATE",
+            .az_el_segment_end_time_before_start_time => "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME",
+            .az_el_segment_times_overlap => "AZ_EL_SEGMENT_TIMES_OVERLAP",
+            .az_el_segments_out_of_order => "AZ_EL_SEGMENTS_OUT_OF_ORDER",
+            .time_az_el_items_out_of_order => "TIME_AZ_EL_ITEMS_OUT_OF_ORDER",
+            .mean_motion_invalid => "MEAN_MOTION_INVALID",
+            .time_az_el_az_radian_range_invalid => "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID",
+            .time_az_el_el_radian_range_invalid => "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID",
+            .time_az_el_az_degree_range_invalid => "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID",
+            .time_az_el_el_degree_range_invalid => "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID",
+            .time_az_el_angle_units_invalid => "TIME_AZ_EL_ANGLE_UNITS_INVALID",
+            .insufficient_kms_permissions => "INSUFFICIENT_KMS_PERMISSIONS",
+            .file_format_invalid => "FILE_FORMAT_INVALID",
+            .az_el_segment_reference_epoch_invalid => "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID",
+            .az_el_segment_start_time_invalid => "AZ_EL_SEGMENT_START_TIME_INVALID",
+            .az_el_segment_end_time_invalid => "AZ_EL_SEGMENT_END_TIME_INVALID",
+            .az_el_segment_valid_time_range_invalid => "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID",
+            .az_el_segment_end_time_too_late => "AZ_EL_SEGMENT_END_TIME_TOO_LATE",
+            .az_el_total_duration_exceeded => "AZ_EL_TOTAL_DURATION_EXCEEDED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

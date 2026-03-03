@@ -101,7 +101,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBProxyInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.AuthScheme=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.auth_scheme) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBProxyInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.ClientPasswordAuthType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.client_password_auth_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -125,7 +125,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBProxyInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.IAMAuth=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.iam_auth) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBProxyInput, con
     }
     if (input.default_auth_scheme) |v| {
         try body_buf.appendSlice(allocator, "&DefaultAuthScheme=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.idle_client_timeout) |v| {
         try body_buf.appendSlice(allocator, "&IdleClientTimeout=");

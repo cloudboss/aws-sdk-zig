@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDefaultCreditSpecifi
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&InstanceFamily=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.instance_family));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_family.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

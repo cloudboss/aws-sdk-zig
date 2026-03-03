@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AutomatedReasoningPolicyBuildResultAssetType = enum {
     build_log,
     quality_report,
@@ -12,4 +14,23 @@ pub const AutomatedReasoningPolicyBuildResultAssetType = enum {
         .generated_test_cases = "GENERATED_TEST_CASES",
         .policy_scenarios = "POLICY_SCENARIOS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .build_log => "BUILD_LOG",
+            .quality_report => "QUALITY_REPORT",
+            .policy_definition => "POLICY_DEFINITION",
+            .generated_test_cases => "GENERATED_TEST_CASES",
+            .policy_scenarios => "POLICY_SCENARIOS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RecommendationPillar = enum {
     cost_optimizing,
     performance,
@@ -7,11 +9,31 @@ pub const RecommendationPillar = enum {
     operational_excellence,
 
     pub const json_field_names = .{
-        .cost_optimizing = "COST_OPTIMIZING",
-        .performance = "PERFORMANCE",
-        .security = "SECURITY",
-        .service_limits = "SERVICE_LIMITS",
-        .fault_tolerance = "FAULT_TOLERANCE",
-        .operational_excellence = "OPERATIONAL_EXCELLENCE",
+        .cost_optimizing = "cost_optimizing",
+        .performance = "performance",
+        .security = "security",
+        .service_limits = "service_limits",
+        .fault_tolerance = "fault_tolerance",
+        .operational_excellence = "operational_excellence",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cost_optimizing => "cost_optimizing",
+            .performance => "performance",
+            .security => "security",
+            .service_limits => "service_limits",
+            .fault_tolerance => "fault_tolerance",
+            .operational_excellence => "operational_excellence",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

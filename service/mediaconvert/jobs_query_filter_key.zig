@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify job details to filter for while performing a jobs query. You specify
 /// these filters as part of a key-value pair within the JobsQueryFilter array.
 /// The following list describes which keys are available and their possible
@@ -30,4 +32,25 @@ pub const JobsQueryFilterKey = enum {
         .audio_codec = "audioCodec",
         .video_codec = "videoCodec",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .queue => "queue",
+            .status => "status",
+            .file_input => "fileInput",
+            .job_engine_version_requested => "jobEngineVersionRequested",
+            .job_engine_version_used => "jobEngineVersionUsed",
+            .audio_codec => "audioCodec",
+            .video_codec => "videoCodec",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

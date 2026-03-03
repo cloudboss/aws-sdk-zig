@@ -49,12 +49,12 @@ pub const TransformerJobSucceededWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "succeeded")) {
+            if (std.mem.eql(u8, val_0.wireName(), "succeeded")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "failed")) {
                 return .failure;
             }
         }

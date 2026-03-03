@@ -354,7 +354,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreFromClusterSnaps
     }
     if (input.aqua_configuration_status) |v| {
         try body_buf.appendSlice(allocator, "&AquaConfigurationStatus=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.automated_snapshot_retention_period) |v| {
         try body_buf.appendSlice(allocator, "&AutomatedSnapshotRetentionPeriod=");

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConstraintViolationExceptionReason = enum {
     account_number_limit_exceeded,
     handshake_rate_limit_exceeded,
@@ -92,4 +94,63 @@ pub const ConstraintViolationExceptionReason = enum {
         .transfer_responsibility_source_deletion_in_progress = "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS",
         .unsupported_pricing = "UNSUPPORTED_PRICING",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .account_number_limit_exceeded => "ACCOUNT_NUMBER_LIMIT_EXCEEDED",
+            .handshake_rate_limit_exceeded => "HANDSHAKE_RATE_LIMIT_EXCEEDED",
+            .ou_number_limit_exceeded => "OU_NUMBER_LIMIT_EXCEEDED",
+            .ou_depth_limit_exceeded => "OU_DEPTH_LIMIT_EXCEEDED",
+            .policy_number_limit_exceeded => "POLICY_NUMBER_LIMIT_EXCEEDED",
+            .policy_content_limit_exceeded => "POLICY_CONTENT_LIMIT_EXCEEDED",
+            .max_policy_type_attachment_limit_exceeded => "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED",
+            .min_policy_type_attachment_limit_exceeded => "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED",
+            .account_cannot_leave_organization => "ACCOUNT_CANNOT_LEAVE_ORGANIZATION",
+            .account_cannot_leave_without_eula => "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA",
+            .account_cannot_leave_without_phone_verification => "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION",
+            .master_account_payment_instrument_required => "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED",
+            .member_account_payment_instrument_required => "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED",
+            .account_creation_rate_limit_exceeded => "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED",
+            .master_account_address_does_not_match_marketplace => "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE",
+            .master_account_missing_contact_info => "MASTER_ACCOUNT_MISSING_CONTACT_INFO",
+            .master_account_not_govcloud_enabled => "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED",
+            .organization_not_in_all_features_mode => "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE",
+            .create_organization_in_billing_mode_unsupported_region => "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION",
+            .email_verification_code_expired => "EMAIL_VERIFICATION_CODE_EXPIRED",
+            .wait_period_active => "WAIT_PERIOD_ACTIVE",
+            .max_tag_limit_exceeded => "MAX_TAG_LIMIT_EXCEEDED",
+            .tag_policy_violation => "TAG_POLICY_VIOLATION",
+            .max_delegated_administrators_for_service_limit_exceeded => "MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED",
+            .cannot_register_master_as_delegated_administrator => "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR",
+            .cannot_remove_delegated_administrator_from_org => "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG",
+            .delegated_administrator_exists_for_this_service => "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE",
+            .policy_type_enabled_for_this_service => "POLICY_TYPE_ENABLED_FOR_THIS_SERVICE",
+            .master_account_missing_business_license => "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE",
+            .cannot_close_management_account => "CANNOT_CLOSE_MANAGEMENT_ACCOUNT",
+            .close_account_quota_exceeded => "CLOSE_ACCOUNT_QUOTA_EXCEEDED",
+            .close_account_requests_limit_exceeded => "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED",
+            .service_access_not_enabled => "SERVICE_ACCESS_NOT_ENABLED",
+            .invalid_payment_instrument => "INVALID_PAYMENT_INSTRUMENT",
+            .account_creation_not_complete => "ACCOUNT_CREATION_NOT_COMPLETE",
+            .cannot_register_suspended_account_as_delegated_administrator => "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR",
+            .all_features_migration_organization_size_limit_exceeded => "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED",
+            .responsibility_transfer_max_level_violation => "RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION",
+            .responsibility_transfer_max_inbound_quota_violation => "RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION",
+            .responsibility_transfer_max_outbound_quota_violation => "RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION",
+            .responsibility_transfer_max_transfers_quota_violation => "RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION",
+            .active_responsibility_transfer_process => "ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS",
+            .transfer_responsibility_target_deletion_in_progress => "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS",
+            .transfer_responsibility_source_deletion_in_progress => "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS",
+            .unsupported_pricing => "UNSUPPORTED_PRICING",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

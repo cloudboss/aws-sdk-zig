@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddTrustStoreRevocation
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RevocationContents.member.{d}.RevocationType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.revocation_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {

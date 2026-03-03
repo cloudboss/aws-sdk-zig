@@ -1279,7 +1279,7 @@ pub fn deserializeAcceleratorManufacturerSet(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(AcceleratorManufacturer, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (AcceleratorManufacturer.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -1297,7 +1297,7 @@ pub fn deserializeAcceleratorNameSet(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(AcceleratorName, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (AcceleratorName.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -1315,7 +1315,7 @@ pub fn deserializeAcceleratorTypeSet(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(AcceleratorType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (AcceleratorType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -1585,7 +1585,7 @@ pub fn deserializeArchitectureTypeList(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(ArchitectureType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (ArchitectureType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -1819,7 +1819,7 @@ pub fn deserializeBandwidthWeightingTypeList(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(BandwidthWeightingType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (BandwidthWeightingType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -1873,7 +1873,7 @@ pub fn deserializeBootModeTypeList(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(BootModeType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (BootModeType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -2503,7 +2503,7 @@ pub fn deserializeCpuManufacturerSet(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(CpuManufacturer, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (CpuManufacturer.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -2845,7 +2845,7 @@ pub fn deserializeDeviceTrustProviderTypeList(allocator: std.mem.Allocator, read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(DeviceTrustProviderType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (DeviceTrustProviderType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -4123,7 +4123,7 @@ pub fn deserializeInstanceGenerationSet(allocator: std.mem.Allocator, reader: *a
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(InstanceGeneration, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (InstanceGeneration.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -5779,7 +5779,7 @@ pub fn deserializeLocalStorageTypeSet(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(LocalStorageType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (LocalStorageType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -6571,7 +6571,7 @@ pub fn deserializePlacementGroupStrategyList(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(PlacementGroupStrategy, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (PlacementGroupStrategy.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -6877,7 +6877,7 @@ pub fn deserializeProtocolList(allocator: std.mem.Allocator, reader: *aws.xml.Re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(Protocol, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (Protocol.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -7255,7 +7255,7 @@ pub fn deserializeRootDeviceTypeList(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(RootDeviceType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (RootDeviceType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -8155,7 +8155,7 @@ pub fn deserializeSupportedAdditionalProcessorFeatureList(allocator: std.mem.All
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(SupportedAdditionalProcessorFeature, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (SupportedAdditionalProcessorFeature.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -8173,7 +8173,7 @@ pub fn deserializeSupportedIpAddressTypes(allocator: std.mem.Allocator, reader: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(ServiceConnectivityType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (ServiceConnectivityType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -8425,7 +8425,7 @@ pub fn deserializeTrafficMirrorNetworkServiceList(allocator: std.mem.Allocator, 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(TrafficMirrorNetworkService, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (TrafficMirrorNetworkService.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -8983,7 +8983,7 @@ pub fn deserializeUsageClassTypeList(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(UsageClassType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (UsageClassType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -9289,7 +9289,7 @@ pub fn deserializeVirtualizationTypeList(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(VirtualizationType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (VirtualizationType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -9955,7 +9955,7 @@ pub fn deserializeActiveInstance(allocator: std.mem.Allocator, reader: *aws.xml.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "instanceHealth")) {
-                    result.instance_health = std.meta.stringToEnum(InstanceHealthStatus, try reader.readElementText());
+                    result.instance_health = InstanceHealthStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
@@ -10002,7 +10002,7 @@ pub fn deserializeActiveVpnTunnelStatus(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "phase2IntegrityAlgorithm")) {
                     result.phase_2_integrity_algorithm = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "provisioningStatus")) {
-                    result.provisioning_status = std.meta.stringToEnum(VpnTunnelProvisioningStatus, try reader.readElementText());
+                    result.provisioning_status = VpnTunnelProvisioningStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "provisioningStatusReason")) {
                     result.provisioning_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -10028,7 +10028,7 @@ pub fn deserializeAddedPrincipal(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "principal")) {
                     result.principal = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "principalType")) {
-                    result.principal_type = std.meta.stringToEnum(PrincipalType, try reader.readElementText());
+                    result.principal_type = PrincipalType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceId")) {
                     result.service_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "servicePermissionId")) {
@@ -10116,7 +10116,7 @@ pub fn deserializeAddress(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "customerOwnedIpv4Pool")) {
                     result.customer_owned_ipv_4_pool = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "domain")) {
-                    result.domain = std.meta.stringToEnum(DomainType, try reader.readElementText());
+                    result.domain = DomainType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkBorderGroup")) {
@@ -10132,7 +10132,7 @@ pub fn deserializeAddress(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "publicIpv4Pool")) {
                     result.public_ipv_4_pool = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceManaged")) {
-                    result.service_managed = std.meta.stringToEnum(ServiceManaged, try reader.readElementText());
+                    result.service_managed = ServiceManaged.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -10188,7 +10188,7 @@ pub fn deserializeAddressTransfer(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "addressTransferStatus")) {
-                    result.address_transfer_status = std.meta.stringToEnum(AddressTransferStatus, try reader.readElementText());
+                    result.address_transfer_status = AddressTransferStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "allocationId")) {
                     result.allocation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "publicIp")) {
@@ -10223,7 +10223,7 @@ pub fn deserializeAllowedPrincipal(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "principal")) {
                     result.principal = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "principalType")) {
-                    result.principal_type = std.meta.stringToEnum(PrincipalType, try reader.readElementText());
+                    result.principal_type = PrincipalType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceId")) {
                     result.service_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "servicePermissionId")) {
@@ -10513,7 +10513,7 @@ pub fn deserializeAsnAssociation(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "cidr")) {
                     result.cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(AsnAssociationState, try reader.readElementText());
+                    result.state = AsnAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -10584,7 +10584,7 @@ pub fn deserializeAssociatedTargetNetwork(allocator: std.mem.Allocator, reader: 
                 if (std.mem.eql(u8, e.local, "networkId")) {
                     result.network_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkType")) {
-                    result.network_type = std.meta.stringToEnum(AssociatedNetworkType, try reader.readElementText());
+                    result.network_type = AssociatedNetworkType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -10604,7 +10604,7 @@ pub fn deserializeAssociationStatus(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(AssociationStatusCode, try reader.readElementText());
+                    result.code = AssociationStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -10790,7 +10790,7 @@ pub fn deserializeAvailabilityZone(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "networkBorderGroup")) {
                     result.network_border_group = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "optInStatus")) {
-                    result.opt_in_status = std.meta.stringToEnum(AvailabilityZoneOptInStatus, try reader.readElementText());
+                    result.opt_in_status = AvailabilityZoneOptInStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "parentZoneId")) {
                     result.parent_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "parentZoneName")) {
@@ -10798,7 +10798,7 @@ pub fn deserializeAvailabilityZone(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "regionName")) {
                     result.region_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "zoneState")) {
-                    result.state = std.meta.stringToEnum(AvailabilityZoneState, try reader.readElementText());
+                    result.state = AvailabilityZoneState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "zoneId")) {
                     result.zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "zoneName")) {
@@ -10963,7 +10963,7 @@ pub fn deserializeBlockPublicAccessStates(allocator: std.mem.Allocator, reader: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "internetGatewayBlockMode")) {
-                    result.internet_gateway_block_mode = std.meta.stringToEnum(BlockPublicAccessMode, try reader.readElementText());
+                    result.internet_gateway_block_mode = BlockPublicAccessMode.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -10999,7 +10999,7 @@ pub fn deserializeBundleTask(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(BundleTaskState, try reader.readElementText());
+                    result.state = BundleTaskState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storage")) {
                     result.storage = try deserializeStorage(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "updateTime")) {
@@ -11051,7 +11051,7 @@ pub fn deserializeByoasn(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "ipamId")) {
                     result.ipam_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(AsnState, try reader.readElementText());
+                    result.state = AsnState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -11088,7 +11088,7 @@ pub fn deserializeByoipCidr(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "networkBorderGroup")) {
                     result.network_border_group = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(ByoipCidrState, try reader.readElementText());
+                    result.state = ByoipCidrState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -11132,7 +11132,7 @@ pub fn deserializeCancelSpotFleetRequestsError(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(CancelBatchErrorCode, try reader.readElementText());
+                    result.code = CancelBatchErrorCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -11177,9 +11177,9 @@ pub fn deserializeCancelSpotFleetRequestsSuccessItem(allocator: std.mem.Allocato
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "currentSpotFleetRequestState")) {
-                    result.current_spot_fleet_request_state = std.meta.stringToEnum(BatchState, try reader.readElementText());
+                    result.current_spot_fleet_request_state = BatchState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "previousSpotFleetRequestState")) {
-                    result.previous_spot_fleet_request_state = std.meta.stringToEnum(BatchState, try reader.readElementText());
+                    result.previous_spot_fleet_request_state = BatchState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestId")) {
                     result.spot_fleet_request_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -11203,7 +11203,7 @@ pub fn deserializeCancelledSpotInstanceRequest(allocator: std.mem.Allocator, rea
                 if (std.mem.eql(u8, e.local, "spotInstanceRequestId")) {
                     result.spot_instance_request_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CancelSpotInstanceRequestState, try reader.readElementText());
+                    result.state = CancelSpotInstanceRequestState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11224,7 +11224,7 @@ pub fn deserializeCapacityAllocation(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allocationType")) {
-                    result.allocation_type = std.meta.stringToEnum(AllocationType, try reader.readElementText());
+                    result.allocation_type = AllocationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "count")) {
                     result.count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -11268,7 +11268,7 @@ pub fn deserializeCapacityBlock(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
                     result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CapacityBlockResourceState, try reader.readElementText());
+                    result.state = CapacityBlockResourceState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ultraserverType")) {
@@ -11317,7 +11317,7 @@ pub fn deserializeCapacityBlockExtension(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionStartDate")) {
                     result.capacity_block_extension_start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionStatus")) {
-                    result.capacity_block_extension_status = std.meta.stringToEnum(CapacityBlockExtensionStatus, try reader.readElementText());
+                    result.capacity_block_extension_status = CapacityBlockExtensionStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityReservationId")) {
                     result.capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
@@ -11377,7 +11377,7 @@ pub fn deserializeCapacityBlockExtensionOffering(allocator: std.mem.Allocator, r
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
                     result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(CapacityReservationTenancy, try reader.readElementText());
+                    result.tenancy = CapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontFee")) {
                     result.upfront_fee = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -11428,7 +11428,7 @@ pub fn deserializeCapacityBlockOffering(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
                     result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(CapacityReservationTenancy, try reader.readElementText());
+                    result.tenancy = CapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ultraserverCount")) {
                     result.ultraserver_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ultraserverType")) {
@@ -11462,7 +11462,7 @@ pub fn deserializeCapacityBlockStatus(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "capacityReservationStatusSet")) {
                     result.capacity_reservation_statuses = try deserializeCapacityReservationStatusSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "interconnectStatus")) {
-                    result.interconnect_status = std.meta.stringToEnum(CapacityBlockInterconnectStatus, try reader.readElementText());
+                    result.interconnect_status = CapacityBlockInterconnectStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalAvailableCapacity")) {
                     result.total_available_capacity = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "totalCapacity")) {
@@ -11503,19 +11503,19 @@ pub fn deserializeCapacityManagerDataExportResponse(allocator: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryS3LocationUri")) {
                     result.latest_delivery_s3_location_uri = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryStatus")) {
-                    result.latest_delivery_status = std.meta.stringToEnum(CapacityManagerDataExportStatus, try reader.readElementText());
+                    result.latest_delivery_status = CapacityManagerDataExportStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryStatusMessage")) {
                     result.latest_delivery_status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryTime")) {
                     result.latest_delivery_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "outputFormat")) {
-                    result.output_format = std.meta.stringToEnum(OutputFormat, try reader.readElementText());
+                    result.output_format = OutputFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3BucketName")) {
                     result.s3_bucket_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3BucketPrefix")) {
                     result.s3_bucket_prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "schedule")) {
-                    result.schedule = std.meta.stringToEnum(Schedule, try reader.readElementText());
+                    result.schedule = Schedule.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -11566,7 +11566,7 @@ pub fn deserializeCapacityManagerDimension(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "reservationCreateTimestamp")) {
                     result.reservation_create_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reservationEndDateType")) {
-                    result.reservation_end_date_type = std.meta.stringToEnum(ReservationEndDateType, try reader.readElementText());
+                    result.reservation_end_date_type = ReservationEndDateType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationEndTimestamp")) {
                     result.reservation_end_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reservationId")) {
@@ -11576,15 +11576,15 @@ pub fn deserializeCapacityManagerDimension(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "reservationStartTimestamp")) {
                     result.reservation_start_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reservationState")) {
-                    result.reservation_state = std.meta.stringToEnum(ReservationState, try reader.readElementText());
+                    result.reservation_state = ReservationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationType")) {
-                    result.reservation_type = std.meta.stringToEnum(ReservationType, try reader.readElementText());
+                    result.reservation_type = ReservationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationUnusedFinancialOwner")) {
                     result.reservation_unused_financial_owner = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceRegion")) {
                     result.resource_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(CapacityTenancy, try reader.readElementText());
+                    result.tenancy = CapacityTenancy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11653,19 +11653,19 @@ pub fn deserializeCapacityReservation(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
                     result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deliveryPreference")) {
-                    result.delivery_preference = std.meta.stringToEnum(CapacityReservationDeliveryPreference, try reader.readElementText());
+                    result.delivery_preference = CapacityReservationDeliveryPreference.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ebsOptimized")) {
                     result.ebs_optimized = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
                     result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "endDateType")) {
-                    result.end_date_type = std.meta.stringToEnum(EndDateType, try reader.readElementText());
+                    result.end_date_type = EndDateType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ephemeralStorage")) {
                     result.ephemeral_storage = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "instanceMatchCriteria")) {
-                    result.instance_match_criteria = std.meta.stringToEnum(InstanceMatchCriteria, try reader.readElementText());
+                    result.instance_match_criteria = InstanceMatchCriteria.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instancePlatform")) {
-                    result.instance_platform = std.meta.stringToEnum(CapacityReservationInstancePlatform, try reader.readElementText());
+                    result.instance_platform = CapacityReservationInstancePlatform.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
                     result.instance_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "interruptible")) {
@@ -11681,15 +11681,15 @@ pub fn deserializeCapacityReservation(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "placementGroupArn")) {
                     result.placement_group_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationType")) {
-                    result.reservation_type = std.meta.stringToEnum(CapacityReservationType, try reader.readElementText());
+                    result.reservation_type = CapacityReservationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
                     result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CapacityReservationState, try reader.readElementText());
+                    result.state = CapacityReservationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(CapacityReservationTenancy, try reader.readElementText());
+                    result.tenancy = CapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalInstanceCount")) {
                     result.total_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "unusedReservationBillingOwnerId")) {
@@ -11726,7 +11726,7 @@ pub fn deserializeCapacityReservationBillingRequest(allocator: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "requestedBy")) {
                     result.requested_by = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(CapacityReservationBillingRequestStatus, try reader.readElementText());
+                    result.status = CapacityReservationBillingRequestStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "unusedReservationBillingOwnerId")) {
@@ -11793,15 +11793,15 @@ pub fn deserializeCapacityReservationFleet(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
                     result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceMatchCriteria")) {
-                    result.instance_match_criteria = std.meta.stringToEnum(FleetInstanceMatchCriteria, try reader.readElementText());
+                    result.instance_match_criteria = FleetInstanceMatchCriteria.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceTypeSpecificationSet")) {
                     result.instance_type_specifications = try deserializeFleetCapacityReservationSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CapacityReservationFleetState, try reader.readElementText());
+                    result.state = CapacityReservationFleetState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(FleetCapacityReservationTenancy, try reader.readElementText());
+                    result.tenancy = FleetCapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalFulfilledCapacity")) {
                     result.total_fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "totalTargetCapacity")) {
@@ -11828,9 +11828,9 @@ pub fn deserializeCapacityReservationFleetCancellationState(allocator: std.mem.A
                 if (std.mem.eql(u8, e.local, "capacityReservationFleetId")) {
                     result.capacity_reservation_fleet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "currentFleetState")) {
-                    result.current_fleet_state = std.meta.stringToEnum(CapacityReservationFleetState, try reader.readElementText());
+                    result.current_fleet_state = CapacityReservationFleetState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "previousFleetState")) {
-                    result.previous_fleet_state = std.meta.stringToEnum(CapacityReservationFleetState, try reader.readElementText());
+                    result.previous_fleet_state = CapacityReservationFleetState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11880,7 +11880,7 @@ pub fn deserializeCapacityReservationInfo(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
                     result.instance_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(CapacityReservationTenancy, try reader.readElementText());
+                    result.tenancy = CapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11900,7 +11900,7 @@ pub fn deserializeCapacityReservationOptions(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "usageStrategy")) {
-                    result.usage_strategy = std.meta.stringToEnum(FleetCapacityReservationUsageStrategy, try reader.readElementText());
+                    result.usage_strategy = FleetCapacityReservationUsageStrategy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11920,7 +11920,7 @@ pub fn deserializeCapacityReservationSpecificationResponse(allocator: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "capacityReservationPreference")) {
-                    result.capacity_reservation_preference = std.meta.stringToEnum(CapacityReservationPreference, try reader.readElementText());
+                    result.capacity_reservation_preference = CapacityReservationPreference.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityReservationTarget")) {
                     result.capacity_reservation_target = try deserializeCapacityReservationTargetResponse(allocator, reader);
                 } else {
@@ -12039,7 +12039,7 @@ pub fn deserializeCarrierGateway(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CarrierGatewayState, try reader.readElementText());
+                    result.state = CarrierGatewayState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -12189,7 +12189,7 @@ pub fn deserializeClientCertificateRevocationListStatus(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(ClientCertificateRevocationListStatusCode, try reader.readElementText());
+                    result.code = ClientCertificateRevocationListStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12286,7 +12286,7 @@ pub fn deserializeClientVpnAuthentication(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "mutualAuthentication")) {
                     result.mutual_authentication = try deserializeCertificateAuthentication(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(ClientVpnAuthenticationType, try reader.readElementText());
+                    result.@"type" = ClientVpnAuthenticationType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -12306,7 +12306,7 @@ pub fn deserializeClientVpnAuthorizationRuleStatus(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(ClientVpnAuthorizationRuleStatusCode, try reader.readElementText());
+                    result.code = ClientVpnAuthorizationRuleStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12389,7 +12389,7 @@ pub fn deserializeClientVpnConnectionStatus(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(ClientVpnConnectionStatusCode, try reader.readElementText());
+                    result.code = ClientVpnConnectionStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12464,7 +12464,7 @@ pub fn deserializeClientVpnEndpoint(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "dnsServer")) {
                     result.dns_servers = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "endpointIpAddressType")) {
-                    result.endpoint_ip_address_type = std.meta.stringToEnum(EndpointIpAddressType, try reader.readElementText());
+                    result.endpoint_ip_address_type = EndpointIpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "securityGroupIdSet")) {
                     result.security_group_ids = try deserializeClientVpnSecurityGroupIdSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "selfServicePortalUrl")) {
@@ -12480,15 +12480,15 @@ pub fn deserializeClientVpnEndpoint(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "trafficIpAddressType")) {
-                    result.traffic_ip_address_type = std.meta.stringToEnum(TrafficIpAddressType, try reader.readElementText());
+                    result.traffic_ip_address_type = TrafficIpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transportProtocol")) {
-                    result.transport_protocol = std.meta.stringToEnum(TransportProtocol, try reader.readElementText());
+                    result.transport_protocol = TransportProtocol.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpnPort")) {
                     result.vpn_port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "vpnProtocol")) {
-                    result.vpn_protocol = std.meta.stringToEnum(VpnProtocol, try reader.readElementText());
+                    result.vpn_protocol = VpnProtocol.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -12508,7 +12508,7 @@ pub fn deserializeClientVpnEndpointAttributeStatus(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(ClientVpnEndpointAttributeStatusCode, try reader.readElementText());
+                    result.code = ClientVpnEndpointAttributeStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12530,7 +12530,7 @@ pub fn deserializeClientVpnEndpointStatus(allocator: std.mem.Allocator, reader: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(ClientVpnEndpointStatusCode, try reader.readElementText());
+                    result.code = ClientVpnEndpointStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12589,7 +12589,7 @@ pub fn deserializeClientVpnRouteStatus(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(ClientVpnRouteStatusCode, try reader.readElementText());
+                    result.code = ClientVpnRouteStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12766,9 +12766,9 @@ pub fn deserializeConnectionNotification(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "connectionNotificationId")) {
                     result.connection_notification_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "connectionNotificationState")) {
-                    result.connection_notification_state = std.meta.stringToEnum(ConnectionNotificationState, try reader.readElementText());
+                    result.connection_notification_state = ConnectionNotificationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "connectionNotificationType")) {
-                    result.connection_notification_type = std.meta.stringToEnum(ConnectionNotificationType, try reader.readElementText());
+                    result.connection_notification_type = ConnectionNotificationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceId")) {
                     result.service_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceRegion")) {
@@ -12911,7 +12911,7 @@ pub fn deserializeConversionTask(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "importVolume")) {
                     result.import_volume = try deserializeImportVolumeTaskDetails(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(ConversionTaskState, try reader.readElementText());
+                    result.state = ConversionTaskState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -12937,7 +12937,7 @@ pub fn deserializeCpuOptions(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "amdSevSnp")) {
-                    result.amd_sev_snp = std.meta.stringToEnum(AmdSevSnpSpecification, try reader.readElementText());
+                    result.amd_sev_snp = AmdSevSnpSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "coreCount")) {
                     result.core_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "threadsPerCore")) {
@@ -12988,7 +12988,7 @@ pub fn deserializeCreateFleetError(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "launchTemplateAndOverrides")) {
                     result.launch_template_and_overrides = try deserializeLaunchTemplateAndOverridesResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "lifecycle")) {
-                    result.lifecycle = std.meta.stringToEnum(InstanceLifecycle, try reader.readElementText());
+                    result.lifecycle = InstanceLifecycle.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13014,13 +13014,13 @@ pub fn deserializeCreateFleetInstance(allocator: std.mem.Allocator, reader: *aws
                 if (std.mem.eql(u8, e.local, "instanceIds")) {
                     result.instance_ids = try deserializeInstanceIdsSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchTemplateAndOverrides")) {
                     result.launch_template_and_overrides = try deserializeLaunchTemplateAndOverridesResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "lifecycle")) {
-                    result.lifecycle = std.meta.stringToEnum(InstanceLifecycle, try reader.readElementText());
+                    result.lifecycle = InstanceLifecycle.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platform")) {
-                    result.platform = std.meta.stringToEnum(PlatformValues, try reader.readElementText());
+                    result.platform = PlatformValues.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13040,7 +13040,7 @@ pub fn deserializeCreateVolumePermission(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "group")) {
-                    result.group = std.meta.stringToEnum(PermissionGroup, try reader.readElementText());
+                    result.group = PermissionGroup.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "userId")) {
                     result.user_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -13153,15 +13153,15 @@ pub fn deserializeDataResponse(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "metric")) {
-                    result.metric = std.meta.stringToEnum(MetricType, try reader.readElementText());
+                    result.metric = MetricType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "metricPointSet")) {
                     result.metric_points = try deserializeMetricPoints(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "period")) {
-                    result.period = std.meta.stringToEnum(PeriodType, try reader.readElementText());
+                    result.period = PeriodType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "source")) {
                     result.source = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statistic")) {
-                    result.statistic = std.meta.stringToEnum(StatisticType, try reader.readElementText());
+                    result.statistic = StatisticType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13197,7 +13197,7 @@ pub fn deserializeDeclarativePoliciesReport(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(ReportState, try reader.readElementText());
+                    result.status = ReportState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "targetId")) {
@@ -13221,7 +13221,7 @@ pub fn deserializeDeleteFleetError(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(DeleteFleetErrorCode, try reader.readElementText());
+                    result.code = DeleteFleetErrorCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -13266,11 +13266,11 @@ pub fn deserializeDeleteFleetSuccessItem(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "currentFleetState")) {
-                    result.current_fleet_state = std.meta.stringToEnum(FleetStateCode, try reader.readElementText());
+                    result.current_fleet_state = FleetStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "fleetId")) {
                     result.fleet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "previousFleetState")) {
-                    result.previous_fleet_state = std.meta.stringToEnum(FleetStateCode, try reader.readElementText());
+                    result.previous_fleet_state = FleetStateCode.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13343,7 +13343,7 @@ pub fn deserializeDeleteQueuedReservedInstancesError(allocator: std.mem.Allocato
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(DeleteQueuedReservedInstancesErrorCode, try reader.readElementText());
+                    result.code = DeleteQueuedReservedInstancesErrorCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -13365,7 +13365,7 @@ pub fn deserializeDeleteSnapshotReturnCode(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "returnCode")) {
-                    result.return_code = std.meta.stringToEnum(SnapshotReturnCodes, try reader.readElementText());
+                    result.return_code = SnapshotReturnCodes.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -13422,11 +13422,11 @@ pub fn deserializeDescribeFastLaunchImagesSuccessItem(allocator: std.mem.Allocat
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(FastLaunchResourceType, try reader.readElementText());
+                    result.resource_type = FastLaunchResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotConfiguration")) {
                     result.snapshot_configuration = try deserializeFastLaunchSnapshotConfigurationResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(FastLaunchStateCode, try reader.readElementText());
+                    result.state = FastLaunchStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionTime")) {
@@ -13480,7 +13480,7 @@ pub fn deserializeDescribeFastSnapshotRestoreSuccessItem(allocator: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(FastSnapshotRestoreStateCode, try reader.readElementText());
+                    result.state = FastSnapshotRestoreStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -13510,7 +13510,7 @@ pub fn deserializeDescribeFleetError(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "launchTemplateAndOverrides")) {
                     result.launch_template_and_overrides = try deserializeLaunchTemplateAndOverridesResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "lifecycle")) {
-                    result.lifecycle = std.meta.stringToEnum(InstanceLifecycle, try reader.readElementText());
+                    result.lifecycle = InstanceLifecycle.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13536,13 +13536,13 @@ pub fn deserializeDescribeFleetsInstances(allocator: std.mem.Allocator, reader: 
                 if (std.mem.eql(u8, e.local, "instanceIds")) {
                     result.instance_ids = try deserializeInstanceIdsSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchTemplateAndOverrides")) {
                     result.launch_template_and_overrides = try deserializeLaunchTemplateAndOverridesResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "lifecycle")) {
-                    result.lifecycle = std.meta.stringToEnum(InstanceLifecycle, try reader.readElementText());
+                    result.lifecycle = InstanceLifecycle.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platform")) {
-                    result.platform = std.meta.stringToEnum(PlatformValues, try reader.readElementText());
+                    result.platform = PlatformValues.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13564,7 +13564,7 @@ pub fn deserializeDestinationOptionsResponse(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "fileFormat")) {
-                    result.file_format = std.meta.stringToEnum(DestinationFileFormat, try reader.readElementText());
+                    result.file_format = DestinationFileFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "hiveCompatiblePartitions")) {
                     result.hive_compatible_partitions = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "perHourPartition")) {
@@ -13778,7 +13778,7 @@ pub fn deserializeDisableFastSnapshotRestoreSuccessItem(allocator: std.mem.Alloc
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(FastSnapshotRestoreStateCode, try reader.readElementText());
+                    result.state = FastSnapshotRestoreStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -13804,7 +13804,7 @@ pub fn deserializeDiskImageDescription(allocator: std.mem.Allocator, reader: *aw
                 if (std.mem.eql(u8, e.local, "checksum")) {
                     result.checksum = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "format")) {
-                    result.format = std.meta.stringToEnum(DiskImageFormat, try reader.readElementText());
+                    result.format = DiskImageFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "importManifestUrl")) {
                     result.import_manifest_url = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "size")) {
@@ -13856,7 +13856,7 @@ pub fn deserializeDiskInfo(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "sizeInGB")) {
                     result.size_in_gb = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(DiskType, try reader.readElementText());
+                    result.@"type" = DiskType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13900,7 +13900,7 @@ pub fn deserializeDnsOptions(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "dnsRecordIpType")) {
-                    result.dns_record_ip_type = std.meta.stringToEnum(DnsRecordIpType, try reader.readElementText());
+                    result.dns_record_ip_type = DnsRecordIpType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "privateDnsOnlyForInboundResolverEndpoint")) {
                     result.private_dns_only_for_inbound_resolver_endpoint = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "privateDnsPreference")) {
@@ -13961,7 +13961,7 @@ pub fn deserializeEbsBlockDevice(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {
                     result.volume_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "volumeType")) {
-                    result.volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14001,7 +14001,7 @@ pub fn deserializeEbsBlockDeviceResponse(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {
                     result.volume_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "volumeType")) {
-                    result.volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14065,21 +14065,21 @@ pub fn deserializeEbsInfo(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "attachmentLimitType")) {
-                    result.attachment_limit_type = std.meta.stringToEnum(AttachmentLimitType, try reader.readElementText());
+                    result.attachment_limit_type = AttachmentLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ebsCardSet")) {
                     result.ebs_cards = try deserializeEbsCardInfoList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ebsOptimizedInfo")) {
                     result.ebs_optimized_info = try deserializeEbsOptimizedInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ebsOptimizedSupport")) {
-                    result.ebs_optimized_support = std.meta.stringToEnum(EbsOptimizedSupport, try reader.readElementText());
+                    result.ebs_optimized_support = EbsOptimizedSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encryptionSupport")) {
-                    result.encryption_support = std.meta.stringToEnum(EbsEncryptionSupport, try reader.readElementText());
+                    result.encryption_support = EbsEncryptionSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "maximumEbsAttachments")) {
                     result.maximum_ebs_attachments = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "maximumEbsCards")) {
                     result.maximum_ebs_cards = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "nvmeSupport")) {
-                    result.nvme_support = std.meta.stringToEnum(EbsNvmeSupport, try reader.readElementText());
+                    result.nvme_support = EbsNvmeSupport.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14115,7 +14115,7 @@ pub fn deserializeEbsInstanceBlockDevice(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "operator")) {
                     result.operator = try deserializeOperatorResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(AttachmentStatus, try reader.readElementText());
+                    result.status = AttachmentStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeOwnerId")) {
@@ -14178,9 +14178,9 @@ pub fn deserializeEbsStatusDetails(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "impairedSince")) {
                     result.impaired_since = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "name")) {
-                    result.name = std.meta.stringToEnum(StatusName, try reader.readElementText());
+                    result.name = StatusName.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(StatusType, try reader.readElementText());
+                    result.status = StatusType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14202,7 +14202,7 @@ pub fn deserializeEbsStatusSummary(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "details")) {
                     result.details = try deserializeEbsStatusDetailsList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(SummaryStatus, try reader.readElementText());
+                    result.status = SummaryStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14252,7 +14252,7 @@ pub fn deserializeEc2InstanceConnectEndpoint(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "instanceConnectEndpointId")) {
                     result.instance_connect_endpoint_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipAddressType")) {
-                    result.ip_address_type = std.meta.stringToEnum(IpAddressType, try reader.readElementText());
+                    result.ip_address_type = IpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInterfaceIdSet")) {
                     result.network_interface_ids = try deserializeNetworkInterfaceIdSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -14264,7 +14264,7 @@ pub fn deserializeEc2InstanceConnectEndpoint(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "securityGroupIdSet")) {
                     result.security_group_ids = try deserializeSecurityGroupIdSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(Ec2InstanceConnectEndpointState, try reader.readElementText());
+                    result.state = Ec2InstanceConnectEndpointState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
@@ -14365,7 +14365,7 @@ pub fn deserializeElasticGpuHealth(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(ElasticGpuStatus, try reader.readElementText());
+                    result.status = ElasticGpuStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14415,7 +14415,7 @@ pub fn deserializeElasticGpus(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "elasticGpuId")) {
                     result.elastic_gpu_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "elasticGpuState")) {
-                    result.elastic_gpu_state = std.meta.stringToEnum(ElasticGpuState, try reader.readElementText());
+                    result.elastic_gpu_state = ElasticGpuState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "elasticGpuType")) {
                     result.elastic_gpu_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
@@ -14610,7 +14610,7 @@ pub fn deserializeEnableFastSnapshotRestoreSuccessItem(allocator: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(FastSnapshotRestoreStateCode, try reader.readElementText());
+                    result.state = FastSnapshotRestoreStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -14652,7 +14652,7 @@ pub fn deserializeEncryptionSupport(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "encryptionState")) {
-                    result.encryption_state = std.meta.stringToEnum(EncryptionStateValue, try reader.readElementText());
+                    result.encryption_state = EncryptionStateValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -14930,7 +14930,7 @@ pub fn deserializeExportTask(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "instanceExport")) {
                     result.instance_export_details = try deserializeInstanceExportDetails(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(ExportTaskState, try reader.readElementText());
+                    result.state = ExportTaskState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -14978,9 +14978,9 @@ pub fn deserializeExportToS3Task(allocator: std.mem.Allocator, reader: *aws.xml.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "containerFormat")) {
-                    result.container_format = std.meta.stringToEnum(ContainerFormat, try reader.readElementText());
+                    result.container_format = ContainerFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "diskImageFormat")) {
-                    result.disk_image_format = std.meta.stringToEnum(DiskImageFormat, try reader.readElementText());
+                    result.disk_image_format = DiskImageFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Bucket")) {
                     result.s3_bucket = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Key")) {
@@ -15240,9 +15240,9 @@ pub fn deserializeFleetCapacityReservation(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "fulfilledCapacity")) {
                     result.fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instancePlatform")) {
-                    result.instance_platform = std.meta.stringToEnum(CapacityReservationInstancePlatform, try reader.readElementText());
+                    result.instance_platform = CapacityReservationInstancePlatform.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "priority")) {
                     result.priority = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "totalInstanceCount")) {
@@ -15287,7 +15287,7 @@ pub fn deserializeFleetData(allocator: std.mem.Allocator, reader: *aws.xml.Reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "activityStatus")) {
-                    result.activity_status = std.meta.stringToEnum(FleetActivityStatus, try reader.readElementText());
+                    result.activity_status = FleetActivityStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "clientToken")) {
                     result.client_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "context")) {
@@ -15297,11 +15297,11 @@ pub fn deserializeFleetData(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "errorSet")) {
                     result.errors = try deserializeDescribeFleetsErrorSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "excessCapacityTerminationPolicy")) {
-                    result.excess_capacity_termination_policy = std.meta.stringToEnum(FleetExcessCapacityTerminationPolicy, try reader.readElementText());
+                    result.excess_capacity_termination_policy = FleetExcessCapacityTerminationPolicy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "fleetId")) {
                     result.fleet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "fleetState")) {
-                    result.fleet_state = std.meta.stringToEnum(FleetStateCode, try reader.readElementText());
+                    result.fleet_state = FleetStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "fulfilledCapacity")) {
                     result.fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "fulfilledOnDemandCapacity")) {
@@ -15323,7 +15323,7 @@ pub fn deserializeFleetData(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "terminateInstancesWithExpiration")) {
                     result.terminate_instances_with_expiration = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(FleetType, try reader.readElementText());
+                    result.@"type" = FleetType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
                     result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
@@ -15389,7 +15389,7 @@ pub fn deserializeFleetLaunchTemplateOverrides(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "instanceRequirements")) {
                     result.instance_requirements = try deserializeInstanceRequirements(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "maxPrice")) {
                     result.max_price = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "placement")) {
@@ -15445,7 +15445,7 @@ pub fn deserializeFleetSpotCapacityRebalance(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "replacementStrategy")) {
-                    result.replacement_strategy = std.meta.stringToEnum(FleetReplacementStrategy, try reader.readElementText());
+                    result.replacement_strategy = FleetReplacementStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "terminationDelay")) {
                     result.termination_delay = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -15518,7 +15518,7 @@ pub fn deserializeFlowLog(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "logDestination")) {
                     result.log_destination = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "logDestinationType")) {
-                    result.log_destination_type = std.meta.stringToEnum(LogDestinationType, try reader.readElementText());
+                    result.log_destination_type = LogDestinationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "logFormat")) {
                     result.log_format = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "logGroupName")) {
@@ -15530,7 +15530,7 @@ pub fn deserializeFlowLog(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "trafficType")) {
-                    result.traffic_type = std.meta.stringToEnum(TrafficType, try reader.readElementText());
+                    result.traffic_type = TrafficType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -15693,7 +15693,7 @@ pub fn deserializeFpgaImageState(allocator: std.mem.Allocator, reader: *aws.xml.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(FpgaImageStateCode, try reader.readElementText());
+                    result.code = FpgaImageStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -15861,7 +15861,7 @@ pub fn deserializeHistoryRecord(allocator: std.mem.Allocator, reader: *aws.xml.R
                 if (std.mem.eql(u8, e.local, "eventInformation")) {
                     result.event_information = try deserializeEventInformation(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "eventType")) {
-                    result.event_type = std.meta.stringToEnum(EventType, try reader.readElementText());
+                    result.event_type = EventType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
                     result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -15886,7 +15886,7 @@ pub fn deserializeHistoryRecordEntry(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "eventInformation")) {
                     result.event_information = try deserializeEventInformation(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "eventType")) {
-                    result.event_type = std.meta.stringToEnum(FleetEventType, try reader.readElementText());
+                    result.event_type = FleetEventType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
                     result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -15928,11 +15928,11 @@ pub fn deserializeHost(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !H
                 if (std.mem.eql(u8, e.local, "allocationTime")) {
                     result.allocation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "allowsMultipleInstanceTypes")) {
-                    result.allows_multiple_instance_types = std.meta.stringToEnum(AllowsMultipleInstanceTypes, try reader.readElementText());
+                    result.allows_multiple_instance_types = AllowsMultipleInstanceTypes.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "assetId")) {
                     result.asset_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "autoPlacement")) {
-                    result.auto_placement = std.meta.stringToEnum(AutoPlacement, try reader.readElementText());
+                    result.auto_placement = AutoPlacement.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "availabilityZone")) {
                     result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
@@ -15944,11 +15944,11 @@ pub fn deserializeHost(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !H
                 } else if (std.mem.eql(u8, e.local, "hostId")) {
                     result.host_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "hostMaintenance")) {
-                    result.host_maintenance = std.meta.stringToEnum(HostMaintenance, try reader.readElementText());
+                    result.host_maintenance = HostMaintenance.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "hostProperties")) {
                     result.host_properties = try deserializeHostProperties(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "hostRecovery")) {
-                    result.host_recovery = std.meta.stringToEnum(HostRecovery, try reader.readElementText());
+                    result.host_recovery = HostRecovery.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "hostReservationId")) {
                     result.host_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instances")) {
@@ -15962,7 +15962,7 @@ pub fn deserializeHost(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !H
                 } else if (std.mem.eql(u8, e.local, "releaseTime")) {
                     result.release_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(AllocationState, try reader.readElementText());
+                    result.state = AllocationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -16014,7 +16014,7 @@ pub fn deserializeHostOffering(allocator: std.mem.Allocator, reader: *aws.xml.Re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "hourlyPrice")) {
@@ -16024,7 +16024,7 @@ pub fn deserializeHostOffering(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "offeringId")) {
                     result.offering_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "paymentOption")) {
-                    result.payment_option = std.meta.stringToEnum(PaymentOption, try reader.readElementText());
+                    result.payment_option = PaymentOption.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontPrice")) {
                     result.upfront_price = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -16091,7 +16091,7 @@ pub fn deserializeHostReservation(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "count")) {
                     result.count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "end")) {
@@ -16107,11 +16107,11 @@ pub fn deserializeHostReservation(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "offeringId")) {
                     result.offering_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "paymentOption")) {
-                    result.payment_option = std.meta.stringToEnum(PaymentOption, try reader.readElementText());
+                    result.payment_option = PaymentOption.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "start")) {
                     result.start = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(ReservationState, try reader.readElementText());
+                    result.state = ReservationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "upfrontPrice")) {
@@ -16185,7 +16185,7 @@ pub fn deserializeIamInstanceProfileAssociation(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IamInstanceProfileAssociationState, try reader.readElementText());
+                    result.state = IamInstanceProfileAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
                     result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -16312,11 +16312,11 @@ pub fn deserializeImage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "architecture")) {
-                    result.architecture = std.meta.stringToEnum(ArchitectureValues, try reader.readElementText());
+                    result.architecture = ArchitectureValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "blockDeviceMapping")) {
                     result.block_device_mappings = try deserializeBlockDeviceMappingList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "bootMode")) {
-                    result.boot_mode = std.meta.stringToEnum(BootModeValues, try reader.readElementText());
+                    result.boot_mode = BootModeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "creationDate")) {
                     result.creation_date = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "deprecationTime")) {
@@ -16330,7 +16330,7 @@ pub fn deserializeImage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "freeTierEligible")) {
                     result.free_tier_eligible = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "hypervisor")) {
-                    result.hypervisor = std.meta.stringToEnum(HypervisorType, try reader.readElementText());
+                    result.hypervisor = HypervisorType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imageAllowed")) {
                     result.image_allowed = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
@@ -16340,9 +16340,9 @@ pub fn deserializeImage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "imageOwnerAlias")) {
                     result.image_owner_alias = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imageType")) {
-                    result.image_type = std.meta.stringToEnum(ImageTypeValues, try reader.readElementText());
+                    result.image_type = ImageTypeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imdsSupport")) {
-                    result.imds_support = std.meta.stringToEnum(ImdsSupportValues, try reader.readElementText());
+                    result.imds_support = ImdsSupportValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "kernelId")) {
                     result.kernel_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastLaunchedTime")) {
@@ -16352,7 +16352,7 @@ pub fn deserializeImage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "imageOwnerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platform")) {
-                    result.platform = std.meta.stringToEnum(PlatformValues, try reader.readElementText());
+                    result.platform = PlatformValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platformDetails")) {
                     result.platform_details = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "productCodes")) {
@@ -16364,7 +16364,7 @@ pub fn deserializeImage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "rootDeviceName")) {
                     result.root_device_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "rootDeviceType")) {
-                    result.root_device_type = std.meta.stringToEnum(DeviceType, try reader.readElementText());
+                    result.root_device_type = DeviceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceImageId")) {
                     result.source_image_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceImageRegion")) {
@@ -16374,17 +16374,17 @@ pub fn deserializeImage(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "sriovNetSupport")) {
                     result.sriov_net_support = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imageState")) {
-                    result.state = std.meta.stringToEnum(ImageState, try reader.readElementText());
+                    result.state = ImageState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateReason")) {
                     result.state_reason = try deserializeStateReason(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tpmSupport")) {
-                    result.tpm_support = std.meta.stringToEnum(TpmSupportValues, try reader.readElementText());
+                    result.tpm_support = TpmSupportValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "usageOperation")) {
                     result.usage_operation = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "virtualizationType")) {
-                    result.virtualization_type = std.meta.stringToEnum(VirtualizationType, try reader.readElementText());
+                    result.virtualization_type = VirtualizationType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -16489,7 +16489,7 @@ pub fn deserializeImageMetadata(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "imageOwnerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imageState")) {
-                    result.state = std.meta.stringToEnum(ImageState, try reader.readElementText());
+                    result.state = ImageState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -16545,7 +16545,7 @@ pub fn deserializeImageReference(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
                     result.image_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(ImageReferenceResourceType, try reader.readElementText());
+                    result.resource_type = ImageReferenceResourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -16722,7 +16722,7 @@ pub fn deserializeImportImageTask(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "architecture")) {
                     result.architecture = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "bootMode")) {
-                    result.boot_mode = std.meta.stringToEnum(BootModeValues, try reader.readElementText());
+                    result.boot_mode = BootModeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encrypted")) {
@@ -16778,7 +16778,7 @@ pub fn deserializeImportInstanceTaskDetails(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platform")) {
-                    result.platform = std.meta.stringToEnum(PlatformValues, try reader.readElementText());
+                    result.platform = PlatformValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumes")) {
                     result.volumes = try deserializeImportInstanceVolumeDetailSet(allocator, reader, "item");
                 } else {
@@ -16976,7 +16976,7 @@ pub fn deserializeInitializationStatusDetails(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "estimatedTimeToCompleteInSeconds")) {
                     result.estimated_time_to_complete_in_seconds = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "initializationType")) {
-                    result.initialization_type = std.meta.stringToEnum(InitializationType, try reader.readElementText());
+                    result.initialization_type = InitializationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else {
@@ -17059,11 +17059,11 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 if (std.mem.eql(u8, e.local, "amiLaunchIndex")) {
                     result.ami_launch_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "architecture")) {
-                    result.architecture = std.meta.stringToEnum(ArchitectureValues, try reader.readElementText());
+                    result.architecture = ArchitectureValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "blockDeviceMapping")) {
                     result.block_device_mappings = try deserializeInstanceBlockDeviceMappingList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "bootMode")) {
-                    result.boot_mode = std.meta.stringToEnum(BootModeValues, try reader.readElementText());
+                    result.boot_mode = BootModeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityBlockId")) {
                     result.capacity_block_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityReservationId")) {
@@ -17075,7 +17075,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "cpuOptions")) {
                     result.cpu_options = try deserializeCpuOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "currentInstanceBootMode")) {
-                    result.current_instance_boot_mode = std.meta.stringToEnum(InstanceBootModeValues, try reader.readElementText());
+                    result.current_instance_boot_mode = InstanceBootModeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ebsOptimized")) {
                     result.ebs_optimized = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "elasticGpuAssociationSet")) {
@@ -17089,7 +17089,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "hibernationOptions")) {
                     result.hibernation_options = try deserializeHibernationOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "hypervisor")) {
-                    result.hypervisor = std.meta.stringToEnum(HypervisorType, try reader.readElementText());
+                    result.hypervisor = HypervisorType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "iamInstanceProfile")) {
                     result.iam_instance_profile = try deserializeIamInstanceProfile(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
@@ -17097,9 +17097,9 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceLifecycle")) {
-                    result.instance_lifecycle = std.meta.stringToEnum(InstanceLifecycleType, try reader.readElementText());
+                    result.instance_lifecycle = InstanceLifecycleType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6Address")) {
                     result.ipv_6_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "kernelId")) {
@@ -17127,7 +17127,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "placement")) {
                     result.placement = try deserializePlacement(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "platform")) {
-                    result.platform = std.meta.stringToEnum(PlatformValues, try reader.readElementText());
+                    result.platform = PlatformValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platformDetails")) {
                     result.platform_details = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "privateDnsName")) {
@@ -17147,7 +17147,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "rootDeviceName")) {
                     result.root_device_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "rootDeviceType")) {
-                    result.root_device_type = std.meta.stringToEnum(DeviceType, try reader.readElementText());
+                    result.root_device_type = DeviceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "groupSet")) {
                     result.security_groups = try deserializeGroupIdentifierList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
@@ -17173,7 +17173,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "usageOperationUpdateTime")) {
                     result.usage_operation_update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "virtualizationType")) {
-                    result.virtualization_type = std.meta.stringToEnum(VirtualizationType, try reader.readElementText());
+                    result.virtualization_type = VirtualizationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -17331,7 +17331,7 @@ pub fn deserializeInstanceCount(allocator: std.mem.Allocator, reader: *aws.xml.R
                 if (std.mem.eql(u8, e.local, "instanceCount")) {
                     result.instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(ListingState, try reader.readElementText());
+                    result.state = ListingState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17386,7 +17386,7 @@ pub fn deserializeInstanceEventWindow(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(InstanceEventWindowState, try reader.readElementText());
+                    result.state = InstanceEventWindowState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "timeRangeSet")) {
@@ -17437,7 +17437,7 @@ pub fn deserializeInstanceEventWindowStateChange(allocator: std.mem.Allocator, r
                 if (std.mem.eql(u8, e.local, "instanceEventWindowId")) {
                     result.instance_event_window_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(InstanceEventWindowState, try reader.readElementText());
+                    result.state = InstanceEventWindowState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17462,11 +17462,11 @@ pub fn deserializeInstanceEventWindowTimeRange(allocator: std.mem.Allocator, rea
                 if (std.mem.eql(u8, e.local, "endHour")) {
                     result.end_hour = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "endWeekDay")) {
-                    result.end_week_day = std.meta.stringToEnum(WeekDay, try reader.readElementText());
+                    result.end_week_day = WeekDay.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startHour")) {
                     result.start_hour = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "startWeekDay")) {
-                    result.start_week_day = std.meta.stringToEnum(WeekDay, try reader.readElementText());
+                    result.start_week_day = WeekDay.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17488,7 +17488,7 @@ pub fn deserializeInstanceExportDetails(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "targetEnvironment")) {
-                    result.target_environment = std.meta.stringToEnum(ExportEnvironment, try reader.readElementText());
+                    result.target_environment = ExportEnvironment.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17510,7 +17510,7 @@ pub fn deserializeInstanceFamilyCreditSpecification(allocator: std.mem.Allocator
                 if (std.mem.eql(u8, e.local, "cpuCredits")) {
                     result.cpu_credits = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceFamily")) {
-                    result.instance_family = std.meta.stringToEnum(UnlimitedSupportedInstanceFamily, try reader.readElementText());
+                    result.instance_family = UnlimitedSupportedInstanceFamily.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17545,7 +17545,7 @@ pub fn deserializeInstanceImageMetadata(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchTime")) {
                     result.launch_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "operator")) {
@@ -17638,9 +17638,9 @@ pub fn deserializeInstanceMaintenanceOptions(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "autoRecovery")) {
-                    result.auto_recovery = std.meta.stringToEnum(InstanceAutoRecoveryState, try reader.readElementText());
+                    result.auto_recovery = InstanceAutoRecoveryState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "rebootMigration")) {
-                    result.reboot_migration = std.meta.stringToEnum(InstanceRebootMigrationState, try reader.readElementText());
+                    result.reboot_migration = InstanceRebootMigrationState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17664,15 +17664,15 @@ pub fn deserializeInstanceMetadataDefaultsResponse(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "httpEndpoint")) {
-                    result.http_endpoint = std.meta.stringToEnum(InstanceMetadataEndpointState, try reader.readElementText());
+                    result.http_endpoint = InstanceMetadataEndpointState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "httpPutResponseHopLimit")) {
                     result.http_put_response_hop_limit = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "httpTokens")) {
-                    result.http_tokens = std.meta.stringToEnum(HttpTokensState, try reader.readElementText());
+                    result.http_tokens = HttpTokensState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceMetadataTags")) {
-                    result.instance_metadata_tags = std.meta.stringToEnum(InstanceMetadataTagsState, try reader.readElementText());
+                    result.instance_metadata_tags = InstanceMetadataTagsState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "managedBy")) {
-                    result.managed_by = std.meta.stringToEnum(ManagedBy, try reader.readElementText());
+                    result.managed_by = ManagedBy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "managedExceptionMessage")) {
                     result.managed_exception_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -17699,17 +17699,17 @@ pub fn deserializeInstanceMetadataOptionsResponse(allocator: std.mem.Allocator, 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "httpEndpoint")) {
-                    result.http_endpoint = std.meta.stringToEnum(InstanceMetadataEndpointState, try reader.readElementText());
+                    result.http_endpoint = InstanceMetadataEndpointState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "httpProtocolIpv6")) {
-                    result.http_protocol_ipv_6 = std.meta.stringToEnum(InstanceMetadataProtocolState, try reader.readElementText());
+                    result.http_protocol_ipv_6 = InstanceMetadataProtocolState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "httpPutResponseHopLimit")) {
                     result.http_put_response_hop_limit = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "httpTokens")) {
-                    result.http_tokens = std.meta.stringToEnum(HttpTokensState, try reader.readElementText());
+                    result.http_tokens = HttpTokensState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceMetadataTags")) {
-                    result.instance_metadata_tags = std.meta.stringToEnum(InstanceMetadataTagsState, try reader.readElementText());
+                    result.instance_metadata_tags = InstanceMetadataTagsState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(InstanceMetadataOptionsState, try reader.readElementText());
+                    result.state = InstanceMetadataOptionsState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17803,7 +17803,7 @@ pub fn deserializeInstanceNetworkInterface(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
                     result.source_dest_check = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(NetworkInterfaceStatus, try reader.readElementText());
+                    result.status = NetworkInterfaceStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -17878,7 +17878,7 @@ pub fn deserializeInstanceNetworkInterfaceAttachment(allocator: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "networkCardIndex")) {
                     result.network_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(AttachmentStatus, try reader.readElementText());
+                    result.status = AttachmentStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -17983,7 +17983,7 @@ pub fn deserializeInstanceNetworkPerformanceOptions(allocator: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "bandwidthWeighting")) {
-                    result.bandwidth_weighting = std.meta.stringToEnum(InstanceBandwidthWeighting, try reader.readElementText());
+                    result.bandwidth_weighting = InstanceBandwidthWeighting.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -18067,13 +18067,13 @@ pub fn deserializeInstanceRequirements(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "allowedInstanceTypeSet")) {
                     result.allowed_instance_types = try deserializeAllowedInstanceTypeSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "bareMetal")) {
-                    result.bare_metal = std.meta.stringToEnum(BareMetal, try reader.readElementText());
+                    result.bare_metal = BareMetal.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "baselineEbsBandwidthMbps")) {
                     result.baseline_ebs_bandwidth_mbps = try deserializeBaselineEbsBandwidthMbps(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "baselinePerformanceFactors")) {
                     result.baseline_performance_factors = try deserializeBaselinePerformanceFactors(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "burstablePerformance")) {
-                    result.burstable_performance = std.meta.stringToEnum(BurstablePerformance, try reader.readElementText());
+                    result.burstable_performance = BurstablePerformance.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "cpuManufacturerSet")) {
                     result.cpu_manufacturers = try deserializeCpuManufacturerSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "excludedInstanceTypeSet")) {
@@ -18081,7 +18081,7 @@ pub fn deserializeInstanceRequirements(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "instanceGenerationSet")) {
                     result.instance_generations = try deserializeInstanceGenerationSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "localStorage")) {
-                    result.local_storage = std.meta.stringToEnum(LocalStorage, try reader.readElementText());
+                    result.local_storage = LocalStorage.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "localStorageTypeSet")) {
                     result.local_storage_types = try deserializeLocalStorageTypeSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "maxSpotPriceAsPercentageOfOptimalOnDemandPrice")) {
@@ -18128,7 +18128,7 @@ pub fn deserializeInstanceState(allocator: std.mem.Allocator, reader: *aws.xml.R
                 if (std.mem.eql(u8, e.local, "code")) {
                     result.code = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "name")) {
-                    result.name = std.meta.stringToEnum(InstanceStateName, try reader.readElementText());
+                    result.name = InstanceStateName.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -18223,9 +18223,9 @@ pub fn deserializeInstanceStatusDetails(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "impairedSince")) {
                     result.impaired_since = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "name")) {
-                    result.name = std.meta.stringToEnum(StatusName, try reader.readElementText());
+                    result.name = StatusName.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(StatusType, try reader.readElementText());
+                    result.status = StatusType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -18249,7 +18249,7 @@ pub fn deserializeInstanceStatusEvent(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(EventCode, try reader.readElementText());
+                    result.code = EventCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceEventId")) {
@@ -18281,7 +18281,7 @@ pub fn deserializeInstanceStatusSummary(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "details")) {
                     result.details = try deserializeInstanceStatusDetailsList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(SummaryStatus, try reader.readElementText());
+                    result.status = SummaryStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -18305,9 +18305,9 @@ pub fn deserializeInstanceStorageInfo(allocator: std.mem.Allocator, reader: *aws
                 if (std.mem.eql(u8, e.local, "disks")) {
                     result.disks = try deserializeDiskInfoList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "encryptionSupport")) {
-                    result.encryption_support = std.meta.stringToEnum(InstanceStorageEncryptionSupport, try reader.readElementText());
+                    result.encryption_support = InstanceStorageEncryptionSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "nvmeSupport")) {
-                    result.nvme_support = std.meta.stringToEnum(EphemeralNvmeSupport, try reader.readElementText());
+                    result.nvme_support = EphemeralNvmeSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalSizeInGB")) {
                     result.total_size_in_gb = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else {
@@ -18438,7 +18438,7 @@ pub fn deserializeInstanceTypeInfo(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "hibernationSupported")) {
                     result.hibernation_supported = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "hypervisor")) {
-                    result.hypervisor = std.meta.stringToEnum(InstanceTypeHypervisor, try reader.readElementText());
+                    result.hypervisor = InstanceTypeHypervisor.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "inferenceAcceleratorInfo")) {
                     result.inference_accelerator_info = try deserializeInferenceAcceleratorInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceStorageInfo")) {
@@ -18446,7 +18446,7 @@ pub fn deserializeInstanceTypeInfo(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "instanceStorageSupported")) {
                     result.instance_storage_supported = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "mediaAcceleratorInfo")) {
                     result.media_accelerator_info = try deserializeMediaAcceleratorInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "memoryInfo")) {
@@ -18456,19 +18456,19 @@ pub fn deserializeInstanceTypeInfo(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "neuronInfo")) {
                     result.neuron_info = try deserializeNeuronInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "nitroEnclavesSupport")) {
-                    result.nitro_enclaves_support = std.meta.stringToEnum(NitroEnclavesSupport, try reader.readElementText());
+                    result.nitro_enclaves_support = NitroEnclavesSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "nitroTpmInfo")) {
                     result.nitro_tpm_info = try deserializeNitroTpmInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "nitroTpmSupport")) {
-                    result.nitro_tpm_support = std.meta.stringToEnum(NitroTpmSupport, try reader.readElementText());
+                    result.nitro_tpm_support = NitroTpmSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "phcSupport")) {
-                    result.phc_support = std.meta.stringToEnum(PhcSupport, try reader.readElementText());
+                    result.phc_support = PhcSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "placementGroupInfo")) {
                     result.placement_group_info = try deserializePlacementGroupInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "processorInfo")) {
                     result.processor_info = try deserializeProcessorInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "rebootMigrationSupport")) {
-                    result.reboot_migration_support = std.meta.stringToEnum(RebootMigrationSupport, try reader.readElementText());
+                    result.reboot_migration_support = RebootMigrationSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "supportedBootModes")) {
                     result.supported_boot_modes = try deserializeBootModeTypeList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "supportedRootDeviceTypes")) {
@@ -18519,11 +18519,11 @@ pub fn deserializeInstanceTypeOffering(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "location")) {
                     result.location = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "locationType")) {
-                    result.location_type = std.meta.stringToEnum(LocationType, try reader.readElementText());
+                    result.location_type = LocationType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -18593,7 +18593,7 @@ pub fn deserializeInternetGatewayAttachment(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(AttachmentStatus, try reader.readElementText());
+                    result.state = AttachmentStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -18622,9 +18622,9 @@ pub fn deserializeInterruptibleCapacityAllocation(allocator: std.mem.Allocator, 
                 } else if (std.mem.eql(u8, e.local, "interruptibleCapacityReservationId")) {
                     result.interruptible_capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "interruptionType")) {
-                    result.interruption_type = std.meta.stringToEnum(InterruptionType, try reader.readElementText());
+                    result.interruption_type = InterruptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(InterruptibleCapacityReservationAllocationStatus, try reader.readElementText());
+                    result.status = InterruptibleCapacityReservationAllocationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "targetInstanceCount")) {
                     result.target_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -18646,7 +18646,7 @@ pub fn deserializeInterruptionInfo(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "interruptionType")) {
-                    result.interruption_type = std.meta.stringToEnum(InterruptionType, try reader.readElementText());
+                    result.interruption_type = InterruptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceCapacityReservationId")) {
                     result.source_capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -18757,7 +18757,7 @@ pub fn deserializeIpam(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !I
                 } else if (std.mem.eql(u8, e.local, "ipamRegion")) {
                     result.ipam_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "meteredAccount")) {
-                    result.metered_account = std.meta.stringToEnum(IpamMeteredAccount, try reader.readElementText());
+                    result.metered_account = IpamMeteredAccount.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "operatingRegionSet")) {
                     result.operating_regions = try deserializeIpamOperatingRegionSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -18771,13 +18771,13 @@ pub fn deserializeIpam(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !I
                 } else if (std.mem.eql(u8, e.local, "scopeCount")) {
                     result.scope_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamState, try reader.readElementText());
+                    result.state = IpamState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tier")) {
-                    result.tier = std.meta.stringToEnum(IpamTier, try reader.readElementText());
+                    result.tier = IpamTier.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -18808,19 +18808,19 @@ pub fn deserializeIpamAddressHistoryRecord(allocator: std.mem.Allocator, reader:
                 if (std.mem.eql(u8, e.local, "resourceCidr")) {
                     result.resource_cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceComplianceStatus")) {
-                    result.resource_compliance_status = std.meta.stringToEnum(IpamComplianceStatus, try reader.readElementText());
+                    result.resource_compliance_status = IpamComplianceStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceName")) {
                     result.resource_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceOverlapStatus")) {
-                    result.resource_overlap_status = std.meta.stringToEnum(IpamOverlapStatus, try reader.readElementText());
+                    result.resource_overlap_status = IpamOverlapStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceOwnerId")) {
                     result.resource_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceRegion")) {
                     result.resource_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamAddressHistoryResourceType, try reader.readElementText());
+                    result.resource_type = IpamAddressHistoryResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sampledEndTime")) {
                     result.sampled_end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "sampledStartTime")) {
@@ -18905,9 +18905,9 @@ pub fn deserializeIpamDiscoveredPublicAddress(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "addressRegion")) {
                     result.address_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "addressType")) {
-                    result.address_type = std.meta.stringToEnum(IpamPublicAddressType, try reader.readElementText());
+                    result.address_type = IpamPublicAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "associationStatus")) {
-                    result.association_status = std.meta.stringToEnum(IpamPublicAddressAssociationStatus, try reader.readElementText());
+                    result.association_status = IpamPublicAddressAssociationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamResourceDiscoveryId")) {
@@ -18925,7 +18925,7 @@ pub fn deserializeIpamDiscoveredPublicAddress(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "securityGroupSet")) {
                     result.security_groups = try deserializeIpamPublicAddressSecurityGroupList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "service")) {
-                    result.service = std.meta.stringToEnum(IpamPublicAddressAwsService, try reader.readElementText());
+                    result.service = IpamPublicAddressAwsService.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceResource")) {
                     result.service_resource = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
@@ -18969,11 +18969,11 @@ pub fn deserializeIpamDiscoveredResourceCidr(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "ipamResourceDiscoveryId")) {
                     result.ipam_resource_discovery_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipSource")) {
-                    result.ip_source = std.meta.stringToEnum(IpamResourceCidrIpSource, try reader.readElementText());
+                    result.ip_source = IpamResourceCidrIpSource.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipUsage")) {
                     result.ip_usage = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "networkInterfaceAttachmentStatus")) {
-                    result.network_interface_attachment_status = std.meta.stringToEnum(IpamNetworkInterfaceAttachmentStatus, try reader.readElementText());
+                    result.network_interface_attachment_status = IpamNetworkInterfaceAttachmentStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceCidr")) {
                     result.resource_cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
@@ -18985,7 +18985,7 @@ pub fn deserializeIpamDiscoveredResourceCidr(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "resourceTagSet")) {
                     result.resource_tags = try deserializeIpamResourceTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamResourceType, try reader.readElementText());
+                    result.resource_type = IpamResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sampleTime")) {
                     result.sample_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
@@ -19011,7 +19011,7 @@ pub fn deserializeIpamDiscoveryFailureReason(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(IpamDiscoveryFailureCode, try reader.readElementText());
+                    result.code = IpamDiscoveryFailureCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -19054,9 +19054,9 @@ pub fn deserializeIpamExternalResourceVerificationToken(allocator: std.mem.Alloc
                 } else if (std.mem.eql(u8, e.local, "notAfter")) {
                     result.not_after = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamExternalResourceVerificationTokenState, try reader.readElementText());
+                    result.state = IpamExternalResourceVerificationTokenState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(TokenState, try reader.readElementText());
+                    result.status = TokenState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tokenName")) {
@@ -19136,7 +19136,7 @@ pub fn deserializeIpamPolicy(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamPolicyState, try reader.readElementText());
+                    result.state = IpamPolicyState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -19187,7 +19187,7 @@ pub fn deserializeIpamPolicyDocument(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "locale")) {
                     result.locale = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamPolicyResourceType, try reader.readElementText());
+                    result.resource_type = IpamPolicyResourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -19248,7 +19248,7 @@ pub fn deserializeIpamPool(allocator: std.mem.Allocator, reader: *aws.xml.Reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "addressFamily")) {
-                    result.address_family = std.meta.stringToEnum(AddressFamily, try reader.readElementText());
+                    result.address_family = AddressFamily.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "allocationDefaultNetmaskLength")) {
                     result.allocation_default_netmask_length = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "allocationMaxNetmaskLength")) {
@@ -19260,7 +19260,7 @@ pub fn deserializeIpamPool(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "autoImport")) {
                     result.auto_import = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "awsService")) {
-                    result.aws_service = std.meta.stringToEnum(IpamPoolAwsService, try reader.readElementText());
+                    result.aws_service = IpamPoolAwsService.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamArn")) {
@@ -19274,7 +19274,7 @@ pub fn deserializeIpamPool(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "ipamScopeArn")) {
                     result.ipam_scope_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamScopeType")) {
-                    result.ipam_scope_type = std.meta.stringToEnum(IpamScopeType, try reader.readElementText());
+                    result.ipam_scope_type = IpamScopeType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "locale")) {
                     result.locale = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -19282,7 +19282,7 @@ pub fn deserializeIpamPool(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "poolDepth")) {
                     result.pool_depth = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "publicIpSource")) {
-                    result.public_ip_source = std.meta.stringToEnum(IpamPoolPublicIpSource, try reader.readElementText());
+                    result.public_ip_source = IpamPoolPublicIpSource.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "publiclyAdvertisable")) {
                     result.publicly_advertisable = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "sourceIpamPoolId")) {
@@ -19290,7 +19290,7 @@ pub fn deserializeIpamPool(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "sourceResource")) {
                     result.source_resource = try deserializeIpamPoolSourceResource(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamPoolState, try reader.readElementText());
+                    result.state = IpamPoolState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -19331,7 +19331,7 @@ pub fn deserializeIpamPoolAllocation(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "resourceRegion")) {
                     result.resource_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamPoolAllocationResourceType, try reader.readElementText());
+                    result.resource_type = IpamPoolAllocationResourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -19362,7 +19362,7 @@ pub fn deserializeIpamPoolCidr(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "netmaskLength")) {
                     result.netmask_length = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamPoolCidrState, try reader.readElementText());
+                    result.state = IpamPoolCidrState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -19382,7 +19382,7 @@ pub fn deserializeIpamPoolCidrFailureReason(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(IpamPoolCidrFailureCode, try reader.readElementText());
+                    result.code = IpamPoolCidrFailureCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -19412,7 +19412,7 @@ pub fn deserializeIpamPoolSourceResource(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "resourceRegion")) {
                     result.resource_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamPoolSourceResourceType, try reader.readElementText());
+                    result.resource_type = IpamPoolSourceResourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -19441,7 +19441,7 @@ pub fn deserializeIpamPrefixListResolver(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "addressFamily")) {
-                    result.address_family = std.meta.stringToEnum(AddressFamily, try reader.readElementText());
+                    result.address_family = AddressFamily.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamArn")) {
@@ -19453,13 +19453,13 @@ pub fn deserializeIpamPrefixListResolver(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "ipamRegion")) {
                     result.ipam_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastVersionCreationStatus")) {
-                    result.last_version_creation_status = std.meta.stringToEnum(IpamPrefixListResolverVersionCreationStatus, try reader.readElementText());
+                    result.last_version_creation_status = IpamPrefixListResolverVersionCreationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastVersionCreationStatusMessage")) {
                     result.last_version_creation_status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamPrefixListResolverState, try reader.readElementText());
+                    result.state = IpamPrefixListResolverState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -19488,9 +19488,9 @@ pub fn deserializeIpamPrefixListResolverRule(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "ipamScopeId")) {
                     result.ipam_scope_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamResourceType, try reader.readElementText());
+                    result.resource_type = IpamResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ruleType")) {
-                    result.rule_type = std.meta.stringToEnum(IpamPrefixListResolverRuleType, try reader.readElementText());
+                    result.rule_type = IpamPrefixListResolverRuleType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "staticCidr")) {
                     result.static_cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -19521,7 +19521,7 @@ pub fn deserializeIpamPrefixListResolverRuleCondition(allocator: std.mem.Allocat
                 } else if (std.mem.eql(u8, e.local, "ipamPoolId")) {
                     result.ipam_pool_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "operation")) {
-                    result.operation = std.meta.stringToEnum(IpamPrefixListResolverRuleConditionOperation, try reader.readElementText());
+                    result.operation = IpamPrefixListResolverRuleConditionOperation.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceOwner")) {
@@ -19575,7 +19575,7 @@ pub fn deserializeIpamPrefixListResolverTarget(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "prefixListRegion")) {
                     result.prefix_list_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamPrefixListResolverTargetState, try reader.readElementText());
+                    result.state = IpamPrefixListResolverTargetState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -19719,7 +19719,7 @@ pub fn deserializeIpamResourceCidr(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "complianceStatus")) {
-                    result.compliance_status = std.meta.stringToEnum(IpamComplianceStatus, try reader.readElementText());
+                    result.compliance_status = IpamComplianceStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamId")) {
                     result.ipam_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamPoolId")) {
@@ -19729,9 +19729,9 @@ pub fn deserializeIpamResourceCidr(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "ipUsage")) {
                     result.ip_usage = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "managementState")) {
-                    result.management_state = std.meta.stringToEnum(IpamManagementState, try reader.readElementText());
+                    result.management_state = IpamManagementState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "overlapStatus")) {
-                    result.overlap_status = std.meta.stringToEnum(IpamOverlapStatus, try reader.readElementText());
+                    result.overlap_status = IpamOverlapStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceCidr")) {
                     result.resource_cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
@@ -19745,7 +19745,7 @@ pub fn deserializeIpamResourceCidr(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "resourceTagSet")) {
                     result.resource_tags = try deserializeIpamResourceTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(IpamResourceType, try reader.readElementText());
+                    result.resource_type = IpamResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -19791,7 +19791,7 @@ pub fn deserializeIpamResourceDiscovery(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamResourceDiscoveryState, try reader.readElementText());
+                    result.state = IpamResourceDiscoveryState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -19838,9 +19838,9 @@ pub fn deserializeIpamResourceDiscoveryAssociation(allocator: std.mem.Allocator,
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceDiscoveryStatus")) {
-                    result.resource_discovery_status = std.meta.stringToEnum(IpamAssociatedResourceDiscoveryStatus, try reader.readElementText());
+                    result.resource_discovery_status = IpamAssociatedResourceDiscoveryStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamResourceDiscoveryAssociationState, try reader.readElementText());
+                    result.state = IpamResourceDiscoveryAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -19906,7 +19906,7 @@ pub fn deserializeIpamScope(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "ipamScopeId")) {
                     result.ipam_scope_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipamScopeType")) {
-                    result.ipam_scope_type = std.meta.stringToEnum(IpamScopeType, try reader.readElementText());
+                    result.ipam_scope_type = IpamScopeType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "isDefault")) {
                     result.is_default = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -19914,7 +19914,7 @@ pub fn deserializeIpamScope(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "poolCount")) {
                     result.pool_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(IpamScopeState, try reader.readElementText());
+                    result.state = IpamScopeState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -19938,7 +19938,7 @@ pub fn deserializeIpamScopeExternalAuthorityConfiguration(allocator: std.mem.All
                 if (std.mem.eql(u8, e.local, "externalResourceIdentifier")) {
                     result.external_resource_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(IpamScopeExternalAuthorityType, try reader.readElementText());
+                    result.@"type" = IpamScopeExternalAuthorityType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20176,7 +20176,7 @@ pub fn deserializeKeyPairInfo(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "keyPairId")) {
                     result.key_pair_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyType")) {
-                    result.key_type = std.meta.stringToEnum(KeyType, try reader.readElementText());
+                    result.key_type = KeyType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "publicKey")) {
                     result.public_key = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -20224,7 +20224,7 @@ pub fn deserializeLaunchPermission(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "group")) {
-                    result.group = std.meta.stringToEnum(PermissionGroup, try reader.readElementText());
+                    result.group = PermissionGroup.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "organizationalUnitArn")) {
                     result.organizational_unit_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "organizationArn")) {
@@ -20274,7 +20274,7 @@ pub fn deserializeLaunchSpecification(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
                     result.image_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "kernelId")) {
                     result.kernel_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyName")) {
@@ -20402,7 +20402,7 @@ pub fn deserializeLaunchTemplateCapacityReservationSpecificationResponse(allocat
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "capacityReservationPreference")) {
-                    result.capacity_reservation_preference = std.meta.stringToEnum(CapacityReservationPreference, try reader.readElementText());
+                    result.capacity_reservation_preference = CapacityReservationPreference.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityReservationTarget")) {
                     result.capacity_reservation_target = try deserializeCapacityReservationTargetResponse(allocator, reader);
                 } else {
@@ -20448,7 +20448,7 @@ pub fn deserializeLaunchTemplateCpuOptions(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "amdSevSnp")) {
-                    result.amd_sev_snp = std.meta.stringToEnum(AmdSevSnpSpecification, try reader.readElementText());
+                    result.amd_sev_snp = AmdSevSnpSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "coreCount")) {
                     result.core_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "threadsPerCore")) {
@@ -20498,7 +20498,7 @@ pub fn deserializeLaunchTemplateEbsBlockDevice(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {
                     result.volume_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "volumeType")) {
-                    result.volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20644,7 +20644,7 @@ pub fn deserializeLaunchTemplateInstanceMaintenanceOptions(allocator: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "autoRecovery")) {
-                    result.auto_recovery = std.meta.stringToEnum(LaunchTemplateAutoRecoveryState, try reader.readElementText());
+                    result.auto_recovery = LaunchTemplateAutoRecoveryState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20664,7 +20664,7 @@ pub fn deserializeLaunchTemplateInstanceMarketOptions(allocator: std.mem.Allocat
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "marketType")) {
-                    result.market_type = std.meta.stringToEnum(MarketType, try reader.readElementText());
+                    result.market_type = MarketType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotOptions")) {
                     result.spot_options = try deserializeLaunchTemplateSpotMarketOptions(allocator, reader);
                 } else {
@@ -20691,17 +20691,17 @@ pub fn deserializeLaunchTemplateInstanceMetadataOptions(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "httpEndpoint")) {
-                    result.http_endpoint = std.meta.stringToEnum(LaunchTemplateInstanceMetadataEndpointState, try reader.readElementText());
+                    result.http_endpoint = LaunchTemplateInstanceMetadataEndpointState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "httpProtocolIpv6")) {
-                    result.http_protocol_ipv_6 = std.meta.stringToEnum(LaunchTemplateInstanceMetadataProtocolIpv6, try reader.readElementText());
+                    result.http_protocol_ipv_6 = LaunchTemplateInstanceMetadataProtocolIpv6.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "httpPutResponseHopLimit")) {
                     result.http_put_response_hop_limit = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "httpTokens")) {
-                    result.http_tokens = std.meta.stringToEnum(LaunchTemplateHttpTokensState, try reader.readElementText());
+                    result.http_tokens = LaunchTemplateHttpTokensState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceMetadataTags")) {
-                    result.instance_metadata_tags = std.meta.stringToEnum(LaunchTemplateInstanceMetadataTagsState, try reader.readElementText());
+                    result.instance_metadata_tags = LaunchTemplateInstanceMetadataTagsState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(LaunchTemplateInstanceMetadataOptionsState, try reader.readElementText());
+                    result.state = LaunchTemplateInstanceMetadataOptionsState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20825,7 +20825,7 @@ pub fn deserializeLaunchTemplateNetworkPerformanceOptions(allocator: std.mem.All
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "bandwidthWeighting")) {
-                    result.bandwidth_weighting = std.meta.stringToEnum(InstanceBandwidthWeighting, try reader.readElementText());
+                    result.bandwidth_weighting = InstanceBandwidthWeighting.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20858,7 +20858,7 @@ pub fn deserializeLaunchTemplateOverrides(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "instanceRequirements")) {
                     result.instance_requirements = try deserializeInstanceRequirements(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "priority")) {
                     result.priority = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "spotPrice")) {
@@ -20912,7 +20912,7 @@ pub fn deserializeLaunchTemplatePlacement(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "spreadDomain")) {
                     result.spread_domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(Tenancy, try reader.readElementText());
+                    result.tenancy = Tenancy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20938,7 +20938,7 @@ pub fn deserializeLaunchTemplatePrivateDnsNameOptions(allocator: std.mem.Allocat
                 } else if (std.mem.eql(u8, e.local, "enableResourceNameDnsARecord")) {
                     result.enable_resource_name_dns_a_record = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "hostnameType")) {
-                    result.hostname_type = std.meta.stringToEnum(HostnameType, try reader.readElementText());
+                    result.hostname_type = HostnameType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20963,11 +20963,11 @@ pub fn deserializeLaunchTemplateSpotMarketOptions(allocator: std.mem.Allocator, 
                 if (std.mem.eql(u8, e.local, "blockDurationMinutes")) {
                     result.block_duration_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceInterruptionBehavior")) {
-                    result.instance_interruption_behavior = std.meta.stringToEnum(InstanceInterruptionBehavior, try reader.readElementText());
+                    result.instance_interruption_behavior = InstanceInterruptionBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "maxPrice")) {
                     result.max_price = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotInstanceType")) {
-                    result.spot_instance_type = std.meta.stringToEnum(SpotInstanceType, try reader.readElementText());
+                    result.spot_instance_type = SpotInstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
                     result.valid_until = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -20989,7 +20989,7 @@ pub fn deserializeLaunchTemplateTagSpecification(allocator: std.mem.Allocator, r
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(ResourceType, try reader.readElementText());
+                    result.resource_type = ResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -21115,7 +21115,7 @@ pub fn deserializeLoadPermission(allocator: std.mem.Allocator, reader: *aws.xml.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "group")) {
-                    result.group = std.meta.stringToEnum(PermissionGroup, try reader.readElementText());
+                    result.group = PermissionGroup.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "userId")) {
                     result.user_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -21193,11 +21193,11 @@ pub fn deserializeLocalGatewayRoute(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(LocalGatewayRouteState, try reader.readElementText());
+                    result.state = LocalGatewayRouteState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(LocalGatewayRouteType, try reader.readElementText());
+                    result.@"type" = LocalGatewayRouteType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -21230,7 +21230,7 @@ pub fn deserializeLocalGatewayRouteTable(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "localGatewayRouteTableId")) {
                     result.local_gateway_route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "mode")) {
-                    result.mode = std.meta.stringToEnum(LocalGatewayRouteTableMode, try reader.readElementText());
+                    result.mode = LocalGatewayRouteTableMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "outpostArn")) {
                     result.outpost_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -21352,7 +21352,7 @@ pub fn deserializeLocalGatewayVirtualInterface(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "configurationState")) {
-                    result.configuration_state = std.meta.stringToEnum(LocalGatewayVirtualInterfaceConfigurationState, try reader.readElementText());
+                    result.configuration_state = LocalGatewayVirtualInterfaceConfigurationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "localAddress")) {
                     result.local_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "localBgpAsn")) {
@@ -21405,7 +21405,7 @@ pub fn deserializeLocalGatewayVirtualInterfaceGroup(allocator: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "configurationState")) {
-                    result.configuration_state = std.meta.stringToEnum(LocalGatewayVirtualInterfaceGroupConfigurationState, try reader.readElementText());
+                    result.configuration_state = LocalGatewayVirtualInterfaceGroupConfigurationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "localBgpAsn")) {
                     result.local_bgp_asn = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "localBgpAsnExtended")) {
@@ -21460,7 +21460,7 @@ pub fn deserializeLockedSnapshotsInfo(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "lockExpiresOn")) {
                     result.lock_expires_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockState")) {
-                    result.lock_state = std.meta.stringToEnum(LockState, try reader.readElementText());
+                    result.lock_state = LockState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
@@ -21521,9 +21521,9 @@ pub fn deserializeMacModificationTask(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "taskState")) {
-                    result.task_state = std.meta.stringToEnum(MacModificationTaskState, try reader.readElementText());
+                    result.task_state = MacModificationTaskState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "taskType")) {
-                    result.task_type = std.meta.stringToEnum(MacModificationTaskType, try reader.readElementText());
+                    result.task_type = MacModificationTaskType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -21550,21 +21550,21 @@ pub fn deserializeMacSystemIntegrityProtectionConfiguration(allocator: std.mem.A
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "appleInternal")) {
-                    result.apple_internal = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.apple_internal = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "baseSystem")) {
-                    result.base_system = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.base_system = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "debuggingRestrictions")) {
-                    result.debugging_restrictions = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.debugging_restrictions = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "dTraceRestrictions")) {
-                    result.d_trace_restrictions = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.d_trace_restrictions = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "filesystemProtections")) {
-                    result.filesystem_protections = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.filesystem_protections = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "kextSigning")) {
-                    result.kext_signing = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.kext_signing = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "nvramProtections")) {
-                    result.nvram_protections = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.nvram_protections = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(MacSystemIntegrityProtectionSettingStatus, try reader.readElementText());
+                    result.status = MacSystemIntegrityProtectionSettingStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -21635,7 +21635,7 @@ pub fn deserializeManagedPrefixList(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "prefixListName")) {
                     result.prefix_list_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(PrefixListState, try reader.readElementText());
+                    result.state = PrefixListState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -21851,7 +21851,7 @@ pub fn deserializeMetricValue(allocator: std.mem.Allocator, reader: *aws.xml.Rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "metric")) {
-                    result.metric = std.meta.stringToEnum(Metric, try reader.readElementText());
+                    result.metric = Metric.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "value")) {
                     result.value = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else {
@@ -21873,7 +21873,7 @@ pub fn deserializeMonitoring(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(MonitoringState, try reader.readElementText());
+                    result.state = MonitoringState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -21893,7 +21893,7 @@ pub fn deserializeMovingAddressStatus(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "moveStatus")) {
-                    result.move_status = std.meta.stringToEnum(MoveStatus, try reader.readElementText());
+                    result.move_status = MoveStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "publicIp")) {
                     result.public_ip = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -21932,13 +21932,13 @@ pub fn deserializeNatGateway(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 if (std.mem.eql(u8, e.local, "attachedApplianceSet")) {
                     result.attached_appliances = try deserializeNatGatewayAttachedApplianceList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "autoProvisionZones")) {
-                    result.auto_provision_zones = std.meta.stringToEnum(AutoProvisionZonesState, try reader.readElementText());
+                    result.auto_provision_zones = AutoProvisionZonesState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "autoScalingIps")) {
-                    result.auto_scaling_ips = std.meta.stringToEnum(AutoScalingIpsState, try reader.readElementText());
+                    result.auto_scaling_ips = AutoScalingIpsState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "availabilityMode")) {
-                    result.availability_mode = std.meta.stringToEnum(AvailabilityMode, try reader.readElementText());
+                    result.availability_mode = AvailabilityMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "connectivityType")) {
-                    result.connectivity_type = std.meta.stringToEnum(ConnectivityType, try reader.readElementText());
+                    result.connectivity_type = ConnectivityType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
                     result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteTime")) {
@@ -21956,7 +21956,7 @@ pub fn deserializeNatGateway(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "routeTableId")) {
                     result.route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(NatGatewayState, try reader.readElementText());
+                    result.state = NatGatewayState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -22008,7 +22008,7 @@ pub fn deserializeNatGatewayAddress(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "publicIp")) {
                     result.public_ip = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(NatGatewayAddressStatus, try reader.readElementText());
+                    result.status = NatGatewayAddressStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -22035,15 +22035,15 @@ pub fn deserializeNatGatewayAttachedAppliance(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "applianceArn")) {
                     result.appliance_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachmentState")) {
-                    result.attachment_state = std.meta.stringToEnum(NatGatewayApplianceState, try reader.readElementText());
+                    result.attachment_state = NatGatewayApplianceState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "failureCode")) {
                     result.failure_code = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "failureMessage")) {
                     result.failure_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "modificationState")) {
-                    result.modification_state = std.meta.stringToEnum(NatGatewayApplianceModifyState, try reader.readElementText());
+                    result.modification_state = NatGatewayApplianceModifyState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(NatGatewayApplianceType, try reader.readElementText());
+                    result.@"type" = NatGatewayApplianceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcEndpointId")) {
                     result.vpc_endpoint_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -22182,7 +22182,7 @@ pub fn deserializeNetworkAclEntry(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
                     result.protocol = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ruleAction")) {
-                    result.rule_action = std.meta.stringToEnum(RuleAction, try reader.readElementText());
+                    result.rule_action = RuleAction.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ruleNumber")) {
                     result.rule_number = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -22293,11 +22293,11 @@ pub fn deserializeNetworkInfo(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "enaSrdSupported")) {
                     result.ena_srd_supported = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "enaSupport")) {
-                    result.ena_support = std.meta.stringToEnum(EnaSupport, try reader.readElementText());
+                    result.ena_support = EnaSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encryptionInTransitSupported")) {
                     result.encryption_in_transit_supported = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "flexibleEnaQueuesSupport")) {
-                    result.flexible_ena_queues_support = std.meta.stringToEnum(FlexibleEnaQueuesSupport, try reader.readElementText());
+                    result.flexible_ena_queues_support = FlexibleEnaQueuesSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv4AddressesPerInterface")) {
                     result.ipv_4_addresses_per_interface = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ipv6AddressesPerInterface")) {
@@ -22375,7 +22375,7 @@ pub fn deserializeNetworkInsightsAccessScopeAnalysis(allocator: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
                     result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "findingsFound")) {
-                    result.findings_found = std.meta.stringToEnum(FindingsFound, try reader.readElementText());
+                    result.findings_found = FindingsFound.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeAnalysisArn")) {
                     result.network_insights_access_scope_analysis_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeAnalysisId")) {
@@ -22385,7 +22385,7 @@ pub fn deserializeNetworkInsightsAccessScopeAnalysis(allocator: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
                     result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(AnalysisStatus, try reader.readElementText());
+                    result.status = AnalysisStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -22475,7 +22475,7 @@ pub fn deserializeNetworkInsightsAnalysis(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
                     result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(AnalysisStatus, try reader.readElementText());
+                    result.status = AnalysisStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "suggestedAccountSet")) {
@@ -22533,7 +22533,7 @@ pub fn deserializeNetworkInsightsPath(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "networkInsightsPathId")) {
                     result.network_insights_path_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(Protocol, try reader.readElementText());
+                    result.protocol = Protocol.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "source")) {
                     result.source = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceArn")) {
@@ -22609,7 +22609,7 @@ pub fn deserializeNetworkInterface(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "groupSet")) {
                     result.groups = try deserializeGroupIdentifierList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "interfaceType")) {
-                    result.interface_type = std.meta.stringToEnum(NetworkInterfaceType, try reader.readElementText());
+                    result.interface_type = NetworkInterfaceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv4PrefixSet")) {
                     result.ipv_4_prefixes = try deserializeIpv4PrefixesList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ipv6Address")) {
@@ -22647,7 +22647,7 @@ pub fn deserializeNetworkInterface(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
                     result.source_dest_check = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(NetworkInterfaceStatus, try reader.readElementText());
+                    result.status = NetworkInterfaceStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -22736,7 +22736,7 @@ pub fn deserializeNetworkInterfaceAttachment(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "networkCardIndex")) {
                     result.network_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(AttachmentStatus, try reader.readElementText());
+                    result.status = AttachmentStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -22816,7 +22816,7 @@ pub fn deserializeNetworkInterfacePermission(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "networkInterfacePermissionId")) {
                     result.network_interface_permission_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "permission")) {
-                    result.permission = std.meta.stringToEnum(InterfacePermissionType, try reader.readElementText());
+                    result.permission = InterfacePermissionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "permissionState")) {
                     result.permission_state = try deserializeNetworkInterfacePermissionState(allocator, reader);
                 } else {
@@ -22838,7 +22838,7 @@ pub fn deserializeNetworkInterfacePermissionState(allocator: std.mem.Allocator, 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(NetworkInterfacePermissionStateCode, try reader.readElementText());
+                    result.state = NetworkInterfacePermissionStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -23041,7 +23041,7 @@ pub fn deserializeOnDemandOptions(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allocationStrategy")) {
-                    result.allocation_strategy = std.meta.stringToEnum(FleetOnDemandAllocationStrategy, try reader.readElementText());
+                    result.allocation_strategy = FleetOnDemandAllocationStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityReservationOptions")) {
                     result.capacity_reservation_options = try deserializeCapacityReservationOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "maxTotalPrice")) {
@@ -23558,7 +23558,7 @@ pub fn deserializePlacement(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "spreadDomain")) {
                     result.spread_domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(Tenancy, try reader.readElementText());
+                    result.tenancy = Tenancy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -23595,11 +23595,11 @@ pub fn deserializePlacementGroup(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "partitionCount")) {
                     result.partition_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "spreadLevel")) {
-                    result.spread_level = std.meta.stringToEnum(SpreadLevel, try reader.readElementText());
+                    result.spread_level = SpreadLevel.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(PlacementGroupState, try reader.readElementText());
+                    result.state = PlacementGroupState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "strategy")) {
-                    result.strategy = std.meta.stringToEnum(PlacementStrategy, try reader.readElementText());
+                    result.strategy = PlacementStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -23797,7 +23797,7 @@ pub fn deserializePriceSchedule(allocator: std.mem.Allocator, reader: *aws.xml.R
                 if (std.mem.eql(u8, e.local, "active")) {
                     result.active = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "price")) {
                     result.price = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "term")) {
@@ -23889,7 +23889,7 @@ pub fn deserializePrivateDnsNameConfiguration(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(DnsNameState, try reader.readElementText());
+                    result.state = DnsNameState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
                     result.@"type" = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "value")) {
@@ -23919,7 +23919,7 @@ pub fn deserializePrivateDnsNameOptionsOnLaunch(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "enableResourceNameDnsARecord")) {
                     result.enable_resource_name_dns_a_record = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "hostnameType")) {
-                    result.hostname_type = std.meta.stringToEnum(HostnameType, try reader.readElementText());
+                    result.hostname_type = HostnameType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -23945,7 +23945,7 @@ pub fn deserializePrivateDnsNameOptionsResponse(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "enableResourceNameDnsARecord")) {
                     result.enable_resource_name_dns_a_record = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "hostnameType")) {
-                    result.hostname_type = std.meta.stringToEnum(HostnameType, try reader.readElementText());
+                    result.hostname_type = HostnameType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -24017,7 +24017,7 @@ pub fn deserializeProductCode(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 if (std.mem.eql(u8, e.local, "productCode")) {
                     result.product_code_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.product_code_type = std.meta.stringToEnum(ProductCodeValues, try reader.readElementText());
+                    result.product_code_type = ProductCodeValues.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -24211,7 +24211,7 @@ pub fn deserializePurchase(allocator: std.mem.Allocator, reader: *aws.xml.Reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "hostIdSet")) {
@@ -24223,7 +24223,7 @@ pub fn deserializePurchase(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "instanceFamily")) {
                     result.instance_family = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "paymentOption")) {
-                    result.payment_option = std.meta.stringToEnum(PaymentOption, try reader.readElementText());
+                    result.payment_option = PaymentOption.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontPrice")) {
                     result.upfront_price = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -24248,7 +24248,7 @@ pub fn deserializeRecurringCharge(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "amount")) {
                     result.amount = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "frequency")) {
-                    result.frequency = std.meta.stringToEnum(RecurringChargeFrequency, try reader.readElementText());
+                    result.frequency = RecurringChargeFrequency.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -24354,7 +24354,7 @@ pub fn deserializeRegisteredInstance(allocator: std.mem.Allocator, reader: *aws.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "haStatus")) {
-                    result.ha_status = std.meta.stringToEnum(HaStatus, try reader.readElementText());
+                    result.ha_status = HaStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdatedTime")) {
@@ -24364,7 +24364,7 @@ pub fn deserializeRegisteredInstance(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "sqlServerCredentials")) {
                     result.sql_server_credentials = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sqlServerLicenseUsage")) {
-                    result.sql_server_license_usage = std.meta.stringToEnum(SqlServerLicenseUsage, try reader.readElementText());
+                    result.sql_server_license_usage = SqlServerLicenseUsage.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -24409,7 +24409,7 @@ pub fn deserializeReplaceRootVolumeTask(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "taskState")) {
-                    result.task_state = std.meta.stringToEnum(ReplaceRootVolumeTaskState, try reader.readElementText());
+                    result.task_state = ReplaceRootVolumeTaskState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -24529,7 +24529,7 @@ pub fn deserializeReservedInstances(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "end")) {
@@ -24539,25 +24539,25 @@ pub fn deserializeReservedInstances(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "instanceCount")) {
                     result.instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceTenancy")) {
-                    result.instance_tenancy = std.meta.stringToEnum(Tenancy, try reader.readElementText());
+                    result.instance_tenancy = Tenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "offeringClass")) {
-                    result.offering_class = std.meta.stringToEnum(OfferingClassType, try reader.readElementText());
+                    result.offering_class = OfferingClassType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "offeringType")) {
-                    result.offering_type = std.meta.stringToEnum(OfferingTypeValues, try reader.readElementText());
+                    result.offering_type = OfferingTypeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "productDescription")) {
-                    result.product_description = std.meta.stringToEnum(RIProductDescription, try reader.readElementText());
+                    result.product_description = RIProductDescription.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "recurringCharges")) {
                     result.recurring_charges = try deserializeRecurringChargesList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "reservedInstancesId")) {
                     result.reserved_instances_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "scope")) {
-                    result.scope = std.meta.stringToEnum(scope, try reader.readElementText());
+                    result.scope = scope.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "start")) {
                     result.start = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(ReservedInstanceState, try reader.readElementText());
+                    result.state = ReservedInstanceState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "usagePrice")) {
@@ -24592,11 +24592,11 @@ pub fn deserializeReservedInstancesConfiguration(allocator: std.mem.Allocator, r
                 } else if (std.mem.eql(u8, e.local, "instanceCount")) {
                     result.instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "platform")) {
                     result.platform = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "scope")) {
-                    result.scope = std.meta.stringToEnum(scope, try reader.readElementText());
+                    result.scope = scope.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -24655,7 +24655,7 @@ pub fn deserializeReservedInstancesListing(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "reservedInstancesListingId")) {
                     result.reserved_instances_listing_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(ListingStatus, try reader.readElementText());
+                    result.status = ListingStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -24765,31 +24765,31 @@ pub fn deserializeReservedInstancesOffering(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
-                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                    result.currency_code = CurrencyCodeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "fixedPrice")) {
                     result.fixed_price = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceTenancy")) {
-                    result.instance_tenancy = std.meta.stringToEnum(Tenancy, try reader.readElementText());
+                    result.instance_tenancy = Tenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "marketplace")) {
                     result.marketplace = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "offeringClass")) {
-                    result.offering_class = std.meta.stringToEnum(OfferingClassType, try reader.readElementText());
+                    result.offering_class = OfferingClassType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "offeringType")) {
-                    result.offering_type = std.meta.stringToEnum(OfferingTypeValues, try reader.readElementText());
+                    result.offering_type = OfferingTypeValues.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "pricingDetailsSet")) {
                     result.pricing_details = try deserializePricingDetailsList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "productDescription")) {
-                    result.product_description = std.meta.stringToEnum(RIProductDescription, try reader.readElementText());
+                    result.product_description = RIProductDescription.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "recurringCharges")) {
                     result.recurring_charges = try deserializeRecurringChargesList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "reservedInstancesOfferingId")) {
                     result.reserved_instances_offering_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "scope")) {
-                    result.scope = std.meta.stringToEnum(scope, try reader.readElementText());
+                    result.scope = scope.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "usagePrice")) {
                     result.usage_price = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;
                 } else {
@@ -24833,7 +24833,7 @@ pub fn deserializeResponseError(allocator: std.mem.Allocator, reader: *aws.xml.R
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(LaunchTemplateErrorCode, try reader.readElementText());
+                    result.code = LaunchTemplateErrorCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -24913,13 +24913,13 @@ pub fn deserializeResponseLaunchTemplateData(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
                     result.image_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceInitiatedShutdownBehavior")) {
-                    result.instance_initiated_shutdown_behavior = std.meta.stringToEnum(ShutdownBehavior, try reader.readElementText());
+                    result.instance_initiated_shutdown_behavior = ShutdownBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceMarketOptions")) {
                     result.instance_market_options = try deserializeLaunchTemplateInstanceMarketOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceRequirements")) {
                     result.instance_requirements = try deserializeInstanceRequirements(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "kernelId")) {
                     result.kernel_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyName")) {
@@ -25064,9 +25064,9 @@ pub fn deserializeRoute(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "odbNetworkArn")) {
                     result.odb_network_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "origin")) {
-                    result.origin = std.meta.stringToEnum(RouteOrigin, try reader.readElementText());
+                    result.origin = RouteOrigin.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteState, try reader.readElementText());
+                    result.state = RouteState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
                     result.transit_gateway_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcPeeringConnectionId")) {
@@ -25100,7 +25100,7 @@ pub fn deserializeRouteServer(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "persistRoutesDuration")) {
                     result.persist_routes_duration = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "persistRoutesState")) {
-                    result.persist_routes_state = std.meta.stringToEnum(RouteServerPersistRoutesState, try reader.readElementText());
+                    result.persist_routes_state = RouteServerPersistRoutesState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "routeServerId")) {
                     result.route_server_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snsNotificationsEnabled")) {
@@ -25108,7 +25108,7 @@ pub fn deserializeRouteServer(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "snsTopicArn")) {
                     result.sns_topic_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteServerState, try reader.readElementText());
+                    result.state = RouteServerState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -25133,7 +25133,7 @@ pub fn deserializeRouteServerAssociation(allocator: std.mem.Allocator, reader: *
                 if (std.mem.eql(u8, e.local, "routeServerId")) {
                     result.route_server_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteServerAssociationState, try reader.readElementText());
+                    result.state = RouteServerAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -25155,7 +25155,7 @@ pub fn deserializeRouteServerBfdStatus(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(RouteServerBfdState, try reader.readElementText());
+                    result.status = RouteServerBfdState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -25178,7 +25178,7 @@ pub fn deserializeRouteServerBgpOptions(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "peerAsn")) {
                     result.peer_asn = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "peerLivenessDetection")) {
-                    result.peer_liveness_detection = std.meta.stringToEnum(RouteServerPeerLivenessMode, try reader.readElementText());
+                    result.peer_liveness_detection = RouteServerPeerLivenessMode.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -25198,7 +25198,7 @@ pub fn deserializeRouteServerBgpStatus(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(RouteServerBgpState, try reader.readElementText());
+                    result.status = RouteServerBgpState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -25235,7 +25235,7 @@ pub fn deserializeRouteServerEndpoint(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "routeServerId")) {
                     result.route_server_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteServerEndpointState, try reader.readElementText());
+                    result.state = RouteServerEndpointState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -25293,7 +25293,7 @@ pub fn deserializeRouteServerPeer(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "routeServerPeerId")) {
                     result.route_server_peer_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteServerPeerState, try reader.readElementText());
+                    result.state = RouteServerPeerState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -25324,7 +25324,7 @@ pub fn deserializeRouteServerPropagation(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "routeTableId")) {
                     result.route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteServerPropagationState, try reader.readElementText());
+                    result.state = RouteServerPropagationState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -25364,7 +25364,7 @@ pub fn deserializeRouteServerRoute(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "routeServerPeerId")) {
                     result.route_server_peer_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "routeStatus")) {
-                    result.route_status = std.meta.stringToEnum(RouteServerRouteStatus, try reader.readElementText());
+                    result.route_status = RouteServerRouteStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -25385,7 +25385,7 @@ pub fn deserializeRouteServerRouteInstallationDetail(allocator: std.mem.Allocato
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "routeInstallationStatus")) {
-                    result.route_installation_status = std.meta.stringToEnum(RouteServerRouteInstallationStatus, try reader.readElementText());
+                    result.route_installation_status = RouteServerRouteInstallationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "routeInstallationStatusReason")) {
                     result.route_installation_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "routeTableId")) {
@@ -25483,7 +25483,7 @@ pub fn deserializeRouteTableAssociationState(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(RouteTableAssociationStateCode, try reader.readElementText());
+                    result.state = RouteTableAssociationStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -25961,7 +25961,7 @@ pub fn deserializeSecurityGroupVpcAssociation(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "groupOwnerId")) {
                     result.group_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SecurityGroupVpcAssociationState, try reader.readElementText());
+                    result.state = SecurityGroupVpcAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateReason")) {
                     result.state_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -26017,7 +26017,7 @@ pub fn deserializeServiceConfiguration(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "networkLoadBalancerArnSet")) {
                     result.network_load_balancer_arns = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "payerResponsibility")) {
-                    result.payer_responsibility = std.meta.stringToEnum(PayerResponsibility, try reader.readElementText());
+                    result.payer_responsibility = PayerResponsibility.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "privateDnsName")) {
                     result.private_dns_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "privateDnsNameConfiguration")) {
@@ -26029,7 +26029,7 @@ pub fn deserializeServiceConfiguration(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "serviceName")) {
                     result.service_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceState")) {
-                    result.service_state = std.meta.stringToEnum(ServiceState, try reader.readElementText());
+                    result.service_state = ServiceState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceType")) {
                     result.service_type = try deserializeServiceTypeDetailSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "supportedIpAddressTypeSet")) {
@@ -26084,13 +26084,13 @@ pub fn deserializeServiceDetail(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "owner")) {
                     result.owner = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "payerResponsibility")) {
-                    result.payer_responsibility = std.meta.stringToEnum(PayerResponsibility, try reader.readElementText());
+                    result.payer_responsibility = PayerResponsibility.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "privateDnsName")) {
                     result.private_dns_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "privateDnsNameSet")) {
                     result.private_dns_names = try deserializePrivateDnsDetailsSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "privateDnsNameVerificationState")) {
-                    result.private_dns_name_verification_state = std.meta.stringToEnum(DnsNameState, try reader.readElementText());
+                    result.private_dns_name_verification_state = DnsNameState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceId")) {
                     result.service_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "serviceName")) {
@@ -26134,7 +26134,7 @@ pub fn deserializeServiceLinkVirtualInterface(allocator: std.mem.Allocator, read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "configurationState")) {
-                    result.configuration_state = std.meta.stringToEnum(ServiceLinkVirtualInterfaceConfigurationState, try reader.readElementText());
+                    result.configuration_state = ServiceLinkVirtualInterfaceConfigurationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "localAddress")) {
                     result.local_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "outpostArn")) {
@@ -26176,7 +26176,7 @@ pub fn deserializeServiceTypeDetail(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "serviceType")) {
-                    result.service_type = std.meta.stringToEnum(ServiceType, try reader.readElementText());
+                    result.service_type = ServiceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -26245,19 +26245,19 @@ pub fn deserializeSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                    result.state = SnapshotState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storageTier")) {
-                    result.storage_tier = std.meta.stringToEnum(StorageTier, try reader.readElementText());
+                    result.storage_tier = StorageTier.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transferType")) {
-                    result.transfer_type = std.meta.stringToEnum(TransferType, try reader.readElementText());
+                    result.transfer_type = TransferType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {
@@ -26352,11 +26352,11 @@ pub fn deserializeSnapshotInfo(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                    result.state = SnapshotState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
@@ -26474,7 +26474,7 @@ pub fn deserializeSnapshotTierStatus(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "archivalCompleteTime")) {
                     result.archival_complete_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lastTieringOperationStatus")) {
-                    result.last_tiering_operation_status = std.meta.stringToEnum(TieringOperationStatus, try reader.readElementText());
+                    result.last_tiering_operation_status = TieringOperationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastTieringOperationStatusDetail")) {
                     result.last_tiering_operation_status_detail = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastTieringProgress")) {
@@ -26488,9 +26488,9 @@ pub fn deserializeSnapshotTierStatus(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                    result.status = SnapshotState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storageTier")) {
-                    result.storage_tier = std.meta.stringToEnum(StorageTier, try reader.readElementText());
+                    result.storage_tier = StorageTier.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
@@ -26515,7 +26515,7 @@ pub fn deserializeSpotCapacityRebalance(allocator: std.mem.Allocator, reader: *a
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "replacementStrategy")) {
-                    result.replacement_strategy = std.meta.stringToEnum(ReplacementStrategy, try reader.readElementText());
+                    result.replacement_strategy = ReplacementStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "terminationDelay")) {
                     result.termination_delay = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -26548,7 +26548,7 @@ pub fn deserializeSpotDatafeedSubscription(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(DatafeedSubscriptionState, try reader.readElementText());
+                    result.state = DatafeedSubscriptionState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -26598,7 +26598,7 @@ pub fn deserializeSpotFleetLaunchSpecification(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "instanceRequirements")) {
                     result.instance_requirements = try deserializeInstanceRequirements(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "kernelId")) {
                     result.kernel_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyName")) {
@@ -26666,7 +26666,7 @@ pub fn deserializeSpotFleetRequestConfig(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "activityStatus")) {
-                    result.activity_status = std.meta.stringToEnum(ActivityStatus, try reader.readElementText());
+                    result.activity_status = ActivityStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
                     result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestConfig")) {
@@ -26674,7 +26674,7 @@ pub fn deserializeSpotFleetRequestConfig(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestId")) {
                     result.spot_fleet_request_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestState")) {
-                    result.spot_fleet_request_state = std.meta.stringToEnum(BatchState, try reader.readElementText());
+                    result.spot_fleet_request_state = BatchState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -26718,19 +26718,19 @@ pub fn deserializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allocationStrategy")) {
-                    result.allocation_strategy = std.meta.stringToEnum(AllocationStrategy, try reader.readElementText());
+                    result.allocation_strategy = AllocationStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "clientToken")) {
                     result.client_token = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "context")) {
                     result.context = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "excessCapacityTerminationPolicy")) {
-                    result.excess_capacity_termination_policy = std.meta.stringToEnum(ExcessCapacityTerminationPolicy, try reader.readElementText());
+                    result.excess_capacity_termination_policy = ExcessCapacityTerminationPolicy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "fulfilledCapacity")) {
                     result.fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "iamFleetRole")) {
                     result.iam_fleet_role = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceInterruptionBehavior")) {
-                    result.instance_interruption_behavior = std.meta.stringToEnum(InstanceInterruptionBehavior, try reader.readElementText());
+                    result.instance_interruption_behavior = InstanceInterruptionBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instancePoolsToUseCount")) {
                     result.instance_pools_to_use_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "launchSpecifications")) {
@@ -26740,7 +26740,7 @@ pub fn deserializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "loadBalancersConfig")) {
                     result.load_balancers_config = try deserializeLoadBalancersConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "onDemandAllocationStrategy")) {
-                    result.on_demand_allocation_strategy = std.meta.stringToEnum(OnDemandAllocationStrategy, try reader.readElementText());
+                    result.on_demand_allocation_strategy = OnDemandAllocationStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "onDemandFulfilledCapacity")) {
                     result.on_demand_fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "onDemandMaxTotalPrice")) {
@@ -26760,11 +26760,11 @@ pub fn deserializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "targetCapacity")) {
                     result.target_capacity = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "targetCapacityUnitType")) {
-                    result.target_capacity_unit_type = std.meta.stringToEnum(TargetCapacityUnitType, try reader.readElementText());
+                    result.target_capacity_unit_type = TargetCapacityUnitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "terminateInstancesWithExpiration")) {
                     result.terminate_instances_with_expiration = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(FleetType, try reader.readElementText());
+                    result.@"type" = FleetType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
                     result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
@@ -26788,7 +26788,7 @@ pub fn deserializeSpotFleetTagSpecification(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(ResourceType, try reader.readElementText());
+                    result.resource_type = ResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tag")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -26840,7 +26840,7 @@ pub fn deserializeSpotInstanceRequest(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceInterruptionBehavior")) {
-                    result.instance_interruption_behavior = std.meta.stringToEnum(InstanceInterruptionBehavior, try reader.readElementText());
+                    result.instance_interruption_behavior = InstanceInterruptionBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchedAvailabilityZone")) {
                     result.launched_availability_zone = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchedAvailabilityZoneId")) {
@@ -26850,19 +26850,19 @@ pub fn deserializeSpotInstanceRequest(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "launchSpecification")) {
                     result.launch_specification = try deserializeLaunchSpecification(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "productDescription")) {
-                    result.product_description = std.meta.stringToEnum(RIProductDescription, try reader.readElementText());
+                    result.product_description = RIProductDescription.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotInstanceRequestId")) {
                     result.spot_instance_request_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotPrice")) {
                     result.spot_price = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SpotInstanceState, try reader.readElementText());
+                    result.state = SpotInstanceState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try deserializeSpotInstanceStatus(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(SpotInstanceType, try reader.readElementText());
+                    result.@"type" = SpotInstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
                     result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
@@ -26958,9 +26958,9 @@ pub fn deserializeSpotOptions(allocator: std.mem.Allocator, reader: *aws.xml.Rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allocationStrategy")) {
-                    result.allocation_strategy = std.meta.stringToEnum(SpotAllocationStrategy, try reader.readElementText());
+                    result.allocation_strategy = SpotAllocationStrategy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceInterruptionBehavior")) {
-                    result.instance_interruption_behavior = std.meta.stringToEnum(SpotInstanceInterruptionBehavior, try reader.readElementText());
+                    result.instance_interruption_behavior = SpotInstanceInterruptionBehavior.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instancePoolsToUseCount")) {
                     result.instance_pools_to_use_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "maintenanceStrategies")) {
@@ -27000,7 +27000,7 @@ pub fn deserializeSpotPlacement(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "groupName")) {
                     result.group_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(Tenancy, try reader.readElementText());
+                    result.tenancy = Tenancy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -27054,9 +27054,9 @@ pub fn deserializeSpotPrice(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
-                    result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
+                    result.instance_type = InstanceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "productDescription")) {
-                    result.product_description = std.meta.stringToEnum(RIProductDescription, try reader.readElementText());
+                    result.product_description = RIProductDescription.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotPrice")) {
                     result.spot_price = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
@@ -27281,7 +27281,7 @@ pub fn deserializeSubnet(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "privateDnsNameOptionsOnLaunch")) {
                     result.private_dns_name_options_on_launch = try deserializePrivateDnsNameOptionsOnLaunch(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SubnetState, try reader.readElementText());
+                    result.state = SubnetState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetArn")) {
                     result.subnet_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
@@ -27311,7 +27311,7 @@ pub fn deserializeSubnetAssociation(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayMulitcastDomainAssociationState, try reader.readElementText());
+                    result.state = TransitGatewayMulitcastDomainAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -27333,7 +27333,7 @@ pub fn deserializeSubnetCidrBlockState(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SubnetCidrBlockStateCode, try reader.readElementText());
+                    result.state = SubnetCidrBlockStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -27366,7 +27366,7 @@ pub fn deserializeSubnetCidrReservation(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationType")) {
-                    result.reservation_type = std.meta.stringToEnum(SubnetCidrReservationType, try reader.readElementText());
+                    result.reservation_type = SubnetCidrReservationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetCidrReservationId")) {
                     result.subnet_cidr_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
@@ -27419,9 +27419,9 @@ pub fn deserializeSubnetIpv6CidrBlockAssociation(allocator: std.mem.Allocator, r
                 if (std.mem.eql(u8, e.local, "associationId")) {
                     result.association_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipSource")) {
-                    result.ip_source = std.meta.stringToEnum(IpSource, try reader.readElementText());
+                    result.ip_source = IpSource.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6AddressAttribute")) {
-                    result.ipv_6_address_attribute = std.meta.stringToEnum(Ipv6AddressAttribute, try reader.readElementText());
+                    result.ipv_6_address_attribute = Ipv6AddressAttribute.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6CidrBlock")) {
                     result.ipv_6_cidr_block = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6CidrBlockState")) {
@@ -27450,13 +27450,13 @@ pub fn deserializeSubscription(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 if (std.mem.eql(u8, e.local, "destination")) {
                     result.destination = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "metric")) {
-                    result.metric = std.meta.stringToEnum(MetricType, try reader.readElementText());
+                    result.metric = MetricType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "period")) {
-                    result.period = std.meta.stringToEnum(PeriodType, try reader.readElementText());
+                    result.period = PeriodType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "source")) {
                     result.source = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statistic")) {
-                    result.statistic = std.meta.stringToEnum(StatisticType, try reader.readElementText());
+                    result.statistic = StatisticType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -27564,7 +27564,7 @@ pub fn deserializeTagDescription(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(ResourceType, try reader.readElementText());
+                    result.resource_type = ResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "value")) {
                     result.value = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -27586,7 +27586,7 @@ pub fn deserializeTagSpecification(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(ResourceType, try reader.readElementText());
+                    result.resource_type = ResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tag")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -27612,13 +27612,13 @@ pub fn deserializeTargetCapacitySpecification(allocator: std.mem.Allocator, read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "defaultTargetCapacityType")) {
-                    result.default_target_capacity_type = std.meta.stringToEnum(DefaultTargetCapacityType, try reader.readElementText());
+                    result.default_target_capacity_type = DefaultTargetCapacityType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "onDemandTargetCapacity")) {
                     result.on_demand_target_capacity = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "spotTargetCapacity")) {
                     result.spot_target_capacity = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "targetCapacityUnitType")) {
-                    result.target_capacity_unit_type = std.meta.stringToEnum(TargetCapacityUnitType, try reader.readElementText());
+                    result.target_capacity_unit_type = TargetCapacityUnitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalTargetCapacity")) {
                     result.total_target_capacity = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -27875,7 +27875,7 @@ pub fn deserializeTrafficMirrorFilterRule(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
                     result.protocol = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ruleAction")) {
-                    result.rule_action = std.meta.stringToEnum(TrafficMirrorRuleAction, try reader.readElementText());
+                    result.rule_action = TrafficMirrorRuleAction.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ruleNumber")) {
                     result.rule_number = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "sourceCidrBlock")) {
@@ -27885,7 +27885,7 @@ pub fn deserializeTrafficMirrorFilterRule(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "trafficDirection")) {
-                    result.traffic_direction = std.meta.stringToEnum(TrafficDirection, try reader.readElementText());
+                    result.traffic_direction = TrafficDirection.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "trafficMirrorFilterId")) {
                     result.traffic_mirror_filter_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "trafficMirrorFilterRuleId")) {
@@ -27998,7 +27998,7 @@ pub fn deserializeTrafficMirrorTarget(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "trafficMirrorTargetId")) {
                     result.traffic_mirror_target_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(TrafficMirrorTargetType, try reader.readElementText());
+                    result.@"type" = TrafficMirrorTargetType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -28032,7 +28032,7 @@ pub fn deserializeTransitGateway(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayState, try reader.readElementText());
+                    result.state = TransitGatewayState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayArn")) {
@@ -28063,9 +28063,9 @@ pub fn deserializeTransitGatewayAssociation(allocator: std.mem.Allocator, reader
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAssociationState, try reader.readElementText());
+                    result.state = TransitGatewayAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableId")) {
@@ -28105,9 +28105,9 @@ pub fn deserializeTransitGatewayAttachment(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "resourceOwnerId")) {
                     result.resource_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAttachmentState, try reader.readElementText());
+                    result.state = TransitGatewayAttachmentState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
@@ -28135,7 +28135,7 @@ pub fn deserializeTransitGatewayAttachmentAssociation(allocator: std.mem.Allocat
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAssociationState, try reader.readElementText());
+                    result.state = TransitGatewayAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableId")) {
                     result.transit_gateway_route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -28160,7 +28160,7 @@ pub fn deserializeTransitGatewayAttachmentBgpConfiguration(allocator: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "bgpStatus")) {
-                    result.bgp_status = std.meta.stringToEnum(BgpStatus, try reader.readElementText());
+                    result.bgp_status = BgpStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "peerAddress")) {
                     result.peer_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "peerAsn")) {
@@ -28188,7 +28188,7 @@ pub fn deserializeTransitGatewayAttachmentPropagation(allocator: std.mem.Allocat
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayPropagationState, try reader.readElementText());
+                    result.state = TransitGatewayPropagationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableId")) {
                     result.transit_gateway_route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -28219,7 +28219,7 @@ pub fn deserializeTransitGatewayConnect(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeTransitGatewayConnectOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAttachmentState, try reader.readElementText());
+                    result.state = TransitGatewayAttachmentState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
@@ -28247,7 +28247,7 @@ pub fn deserializeTransitGatewayConnectOptions(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(ProtocolValue, try reader.readElementText());
+                    result.protocol = ProtocolValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -28275,7 +28275,7 @@ pub fn deserializeTransitGatewayConnectPeer(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
                     result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayConnectPeerState, try reader.readElementText());
+                    result.state = TransitGatewayConnectPeerState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
@@ -28310,7 +28310,7 @@ pub fn deserializeTransitGatewayConnectPeerConfiguration(allocator: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "peerAddress")) {
                     result.peer_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(ProtocolValue, try reader.readElementText());
+                    result.protocol = ProtocolValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAddress")) {
                     result.transit_gateway_address = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -28338,7 +28338,7 @@ pub fn deserializeTransitGatewayMeteringPolicy(allocator: std.mem.Allocator, rea
                 if (std.mem.eql(u8, e.local, "middleboxAttachmentIdSet")) {
                     result.middlebox_attachment_ids = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayMeteringPolicyState, try reader.readElementText());
+                    result.state = TransitGatewayMeteringPolicyState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
@@ -28370,13 +28370,13 @@ pub fn deserializeTransitGatewayMeteringPolicyEntry(allocator: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "meteredAccount")) {
-                    result.metered_account = std.meta.stringToEnum(TransitGatewayMeteringPayerType, try reader.readElementText());
+                    result.metered_account = TransitGatewayMeteringPayerType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "meteringPolicyRule")) {
                     result.metering_policy_rule = try deserializeTransitGatewayMeteringPolicyRule(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "policyRuleNumber")) {
                     result.policy_rule_number = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayMeteringPolicyEntryState, try reader.readElementText());
+                    result.state = TransitGatewayMeteringPolicyEntryState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "updatedAt")) {
                     result.updated_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "updateEffectiveAt")) {
@@ -28413,7 +28413,7 @@ pub fn deserializeTransitGatewayMeteringPolicyRule(allocator: std.mem.Allocator,
                 } else if (std.mem.eql(u8, e.local, "destinationTransitGatewayAttachmentId")) {
                     result.destination_transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "destinationTransitGatewayAttachmentType")) {
-                    result.destination_transit_gateway_attachment_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.destination_transit_gateway_attachment_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
                     result.protocol = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceCidrBlock")) {
@@ -28423,7 +28423,7 @@ pub fn deserializeTransitGatewayMeteringPolicyRule(allocator: std.mem.Allocator,
                 } else if (std.mem.eql(u8, e.local, "sourceTransitGatewayAttachmentId")) {
                     result.source_transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceTransitGatewayAttachmentType")) {
-                    result.source_transit_gateway_attachment_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.source_transit_gateway_attachment_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -28505,7 +28505,7 @@ pub fn deserializeTransitGatewayMulticastDomain(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayMulticastDomainState, try reader.readElementText());
+                    result.state = TransitGatewayMulticastDomainState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
@@ -28540,7 +28540,7 @@ pub fn deserializeTransitGatewayMulticastDomainAssociation(allocator: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "resourceOwnerId")) {
                     result.resource_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnet")) {
                     result.subnet = try deserializeSubnetAssociation(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
@@ -28572,7 +28572,7 @@ pub fn deserializeTransitGatewayMulticastDomainAssociations(allocator: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "resourceOwnerId")) {
                     result.resource_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnets")) {
                     result.subnets = try deserializeSubnetAssociationList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
@@ -28600,11 +28600,11 @@ pub fn deserializeTransitGatewayMulticastDomainOptions(allocator: std.mem.Alloca
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "autoAcceptSharedAssociations")) {
-                    result.auto_accept_shared_associations = std.meta.stringToEnum(AutoAcceptSharedAssociationsValue, try reader.readElementText());
+                    result.auto_accept_shared_associations = AutoAcceptSharedAssociationsValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "igmpv2Support")) {
-                    result.igmpv_2_support = std.meta.stringToEnum(Igmpv2SupportValue, try reader.readElementText());
+                    result.igmpv_2_support = Igmpv2SupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "staticSourcesSupport")) {
-                    result.static_sources_support = std.meta.stringToEnum(StaticSourcesSupportValue, try reader.readElementText());
+                    result.static_sources_support = StaticSourcesSupportValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -28639,7 +28639,7 @@ pub fn deserializeTransitGatewayMulticastGroup(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "groupSource")) {
                     result.group_source = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "memberType")) {
-                    result.member_type = std.meta.stringToEnum(MembershipType, try reader.readElementText());
+                    result.member_type = MembershipType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInterfaceId")) {
                     result.network_interface_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
@@ -28647,9 +28647,9 @@ pub fn deserializeTransitGatewayMulticastGroup(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "resourceOwnerId")) {
                     result.resource_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceType")) {
-                    result.source_type = std.meta.stringToEnum(MembershipType, try reader.readElementText());
+                    result.source_type = MembershipType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
@@ -28737,25 +28737,25 @@ pub fn deserializeTransitGatewayOptions(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "associationDefaultRouteTableId")) {
                     result.association_default_route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "autoAcceptSharedAttachments")) {
-                    result.auto_accept_shared_attachments = std.meta.stringToEnum(AutoAcceptSharedAttachmentsValue, try reader.readElementText());
+                    result.auto_accept_shared_attachments = AutoAcceptSharedAttachmentsValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "defaultRouteTableAssociation")) {
-                    result.default_route_table_association = std.meta.stringToEnum(DefaultRouteTableAssociationValue, try reader.readElementText());
+                    result.default_route_table_association = DefaultRouteTableAssociationValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "defaultRouteTablePropagation")) {
-                    result.default_route_table_propagation = std.meta.stringToEnum(DefaultRouteTablePropagationValue, try reader.readElementText());
+                    result.default_route_table_propagation = DefaultRouteTablePropagationValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "dnsSupport")) {
-                    result.dns_support = std.meta.stringToEnum(DnsSupportValue, try reader.readElementText());
+                    result.dns_support = DnsSupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encryptionSupport")) {
                     result.encryption_support = try deserializeEncryptionSupport(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "multicastSupport")) {
-                    result.multicast_support = std.meta.stringToEnum(MulticastSupportValue, try reader.readElementText());
+                    result.multicast_support = MulticastSupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "propagationDefaultRouteTableId")) {
                     result.propagation_default_route_table_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "securityGroupReferencingSupport")) {
-                    result.security_group_referencing_support = std.meta.stringToEnum(SecurityGroupReferencingSupportValue, try reader.readElementText());
+                    result.security_group_referencing_support = SecurityGroupReferencingSupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayCidrBlocks")) {
                     result.transit_gateway_cidr_blocks = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "vpnEcmpSupport")) {
-                    result.vpn_ecmp_support = std.meta.stringToEnum(VpnEcmpSupportValue, try reader.readElementText());
+                    result.vpn_ecmp_support = VpnEcmpSupportValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -28792,7 +28792,7 @@ pub fn deserializeTransitGatewayPeeringAttachment(allocator: std.mem.Allocator, 
                 } else if (std.mem.eql(u8, e.local, "requesterTgwInfo")) {
                     result.requester_tgw_info = try deserializePeeringTgwInfo(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAttachmentState, try reader.readElementText());
+                    result.state = TransitGatewayAttachmentState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try deserializePeeringAttachmentStatus(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -28818,7 +28818,7 @@ pub fn deserializeTransitGatewayPeeringAttachmentOptions(allocator: std.mem.Allo
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "dynamicRouting")) {
-                    result.dynamic_routing = std.meta.stringToEnum(DynamicRoutingValue, try reader.readElementText());
+                    result.dynamic_routing = DynamicRoutingValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -28899,7 +28899,7 @@ pub fn deserializeTransitGatewayPolicyTable(allocator: std.mem.Allocator, reader
                 if (std.mem.eql(u8, e.local, "creationTime")) {
                     result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayPolicyTableState, try reader.readElementText());
+                    result.state = TransitGatewayPolicyTableState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
@@ -28930,9 +28930,9 @@ pub fn deserializeTransitGatewayPolicyTableAssociation(allocator: std.mem.Alloca
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAssociationState, try reader.readElementText());
+                    result.state = TransitGatewayAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayPolicyTableId")) {
@@ -28984,7 +28984,7 @@ pub fn deserializeTransitGatewayPrefixListAttachment(allocator: std.mem.Allocato
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -29016,7 +29016,7 @@ pub fn deserializeTransitGatewayPrefixListReference(allocator: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "prefixListOwnerId")) {
                     result.prefix_list_owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayPrefixListReferenceState, try reader.readElementText());
+                    result.state = TransitGatewayPrefixListReferenceState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachment")) {
                     result.transit_gateway_attachment = try deserializeTransitGatewayPrefixListAttachment(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableId")) {
@@ -29046,9 +29046,9 @@ pub fn deserializeTransitGatewayPropagation(allocator: std.mem.Allocator, reader
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayPropagationState, try reader.readElementText());
+                    result.state = TransitGatewayPropagationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableAnnouncementId")) {
@@ -29082,13 +29082,13 @@ pub fn deserializeTransitGatewayRoute(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "prefixListId")) {
                     result.prefix_list_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayRouteState, try reader.readElementText());
+                    result.state = TransitGatewayRouteState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachments")) {
                     result.transit_gateway_attachments = try deserializeTransitGatewayRouteAttachmentList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableAnnouncementId")) {
                     result.transit_gateway_route_table_announcement_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(TransitGatewayRouteType, try reader.readElementText());
+                    result.@"type" = TransitGatewayRouteType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -29111,7 +29111,7 @@ pub fn deserializeTransitGatewayRouteAttachment(allocator: std.mem.Allocator, re
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -29144,7 +29144,7 @@ pub fn deserializeTransitGatewayRouteTable(allocator: std.mem.Allocator, reader:
                 } else if (std.mem.eql(u8, e.local, "defaultPropagationRouteTable")) {
                     result.default_propagation_route_table = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayRouteTableState, try reader.readElementText());
+                    result.state = TransitGatewayRouteTableState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
@@ -29179,7 +29179,7 @@ pub fn deserializeTransitGatewayRouteTableAnnouncement(allocator: std.mem.Alloca
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "announcementDirection")) {
-                    result.announcement_direction = std.meta.stringToEnum(TransitGatewayRouteTableAnnouncementDirection, try reader.readElementText());
+                    result.announcement_direction = TransitGatewayRouteTableAnnouncementDirection.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "coreNetworkId")) {
                     result.core_network_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
@@ -29191,7 +29191,7 @@ pub fn deserializeTransitGatewayRouteTableAnnouncement(allocator: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "peerTransitGatewayId")) {
                     result.peer_transit_gateway_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayRouteTableAnnouncementState, try reader.readElementText());
+                    result.state = TransitGatewayRouteTableAnnouncementState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
@@ -29223,9 +29223,9 @@ pub fn deserializeTransitGatewayRouteTableAssociation(allocator: std.mem.Allocat
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAssociationState, try reader.readElementText());
+                    result.state = TransitGatewayAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -29252,9 +29252,9 @@ pub fn deserializeTransitGatewayRouteTablePropagation(allocator: std.mem.Allocat
                 if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
-                    result.resource_type = std.meta.stringToEnum(TransitGatewayAttachmentResourceType, try reader.readElementText());
+                    result.resource_type = TransitGatewayAttachmentResourceType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayPropagationState, try reader.readElementText());
+                    result.state = TransitGatewayPropagationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
                     result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableAnnouncementId")) {
@@ -29326,7 +29326,7 @@ pub fn deserializeTransitGatewayVpcAttachment(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeTransitGatewayVpcAttachmentOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(TransitGatewayAttachmentState, try reader.readElementText());
+                    result.state = TransitGatewayAttachmentState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetIds")) {
                     result.subnet_ids = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -29361,13 +29361,13 @@ pub fn deserializeTransitGatewayVpcAttachmentOptions(allocator: std.mem.Allocato
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "applianceModeSupport")) {
-                    result.appliance_mode_support = std.meta.stringToEnum(ApplianceModeSupportValue, try reader.readElementText());
+                    result.appliance_mode_support = ApplianceModeSupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "dnsSupport")) {
-                    result.dns_support = std.meta.stringToEnum(DnsSupportValue, try reader.readElementText());
+                    result.dns_support = DnsSupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6Support")) {
-                    result.ipv_6_support = std.meta.stringToEnum(Ipv6SupportValue, try reader.readElementText());
+                    result.ipv_6_support = Ipv6SupportValue.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "securityGroupReferencingSupport")) {
-                    result.security_group_referencing_support = std.meta.stringToEnum(SecurityGroupReferencingSupportValue, try reader.readElementText());
+                    result.security_group_referencing_support = SecurityGroupReferencingSupportValue.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -29398,7 +29398,7 @@ pub fn deserializeTrunkInterfaceAssociation(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "greKey")) {
                     result.gre_key = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "interfaceProtocol")) {
-                    result.interface_protocol = std.meta.stringToEnum(InterfaceProtocolType, try reader.readElementText());
+                    result.interface_protocol = InterfaceProtocolType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "trunkInterfaceId")) {
@@ -29525,7 +29525,7 @@ pub fn deserializeUnsuccessfulInstanceCreditSpecificationItemError(allocator: st
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(UnsuccessfulInstanceCreditSpecificationErrorCode, try reader.readElementText());
+                    result.code = UnsuccessfulInstanceCreditSpecificationErrorCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -29766,7 +29766,7 @@ pub fn deserializeVerifiedAccessEndpoint(allocator: std.mem.Allocator, reader: *
                 if (std.mem.eql(u8, e.local, "applicationDomain")) {
                     result.application_domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachmentType")) {
-                    result.attachment_type = std.meta.stringToEnum(VerifiedAccessEndpointAttachmentType, try reader.readElementText());
+                    result.attachment_type = VerifiedAccessEndpointAttachmentType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "cidrOptions")) {
                     result.cidr_options = try deserializeVerifiedAccessEndpointCidrOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
@@ -29782,7 +29782,7 @@ pub fn deserializeVerifiedAccessEndpoint(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "endpointDomain")) {
                     result.endpoint_domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "endpointType")) {
-                    result.endpoint_type = std.meta.stringToEnum(VerifiedAccessEndpointType, try reader.readElementText());
+                    result.endpoint_type = VerifiedAccessEndpointType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdatedTime")) {
                     result.last_updated_time = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "loadBalancerOptions")) {
@@ -29830,7 +29830,7 @@ pub fn deserializeVerifiedAccessEndpointCidrOptions(allocator: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "portRangeSet")) {
                     result.port_ranges = try deserializeVerifiedAccessEndpointPortRangeList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(VerifiedAccessEndpointProtocol, try reader.readElementText());
+                    result.protocol = VerifiedAccessEndpointProtocol.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetIdSet")) {
                     result.subnet_ids = try deserializeVerifiedAccessEndpointSubnetIdList(allocator, reader, "item");
                 } else {
@@ -29860,7 +29860,7 @@ pub fn deserializeVerifiedAccessEndpointEniOptions(allocator: std.mem.Allocator,
                 } else if (std.mem.eql(u8, e.local, "portRangeSet")) {
                     result.port_ranges = try deserializeVerifiedAccessEndpointPortRangeList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(VerifiedAccessEndpointProtocol, try reader.readElementText());
+                    result.protocol = VerifiedAccessEndpointProtocol.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -29889,7 +29889,7 @@ pub fn deserializeVerifiedAccessEndpointLoadBalancerOptions(allocator: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "portRangeSet")) {
                     result.port_ranges = try deserializeVerifiedAccessEndpointPortRangeList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(VerifiedAccessEndpointProtocol, try reader.readElementText());
+                    result.protocol = VerifiedAccessEndpointProtocol.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetIdSet")) {
                     result.subnet_ids = try deserializeVerifiedAccessEndpointSubnetIdList(allocator, reader, "item");
                 } else {
@@ -29941,7 +29941,7 @@ pub fn deserializeVerifiedAccessEndpointRdsOptions(allocator: std.mem.Allocator,
                 if (std.mem.eql(u8, e.local, "port")) {
                     result.port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "protocol")) {
-                    result.protocol = std.meta.stringToEnum(VerifiedAccessEndpointProtocol, try reader.readElementText());
+                    result.protocol = VerifiedAccessEndpointProtocol.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "rdsDbClusterArn")) {
                     result.rds_db_cluster_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "rdsDbInstanceArn")) {
@@ -29971,7 +29971,7 @@ pub fn deserializeVerifiedAccessEndpointStatus(allocator: std.mem.Allocator, rea
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(VerifiedAccessEndpointStatusCode, try reader.readElementText());
+                    result.code = VerifiedAccessEndpointStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30213,7 +30213,7 @@ pub fn deserializeVerifiedAccessInstanceUserTrustProviderClientConfiguration(all
                 } else if (std.mem.eql(u8, e.local, "tokenEndpoint")) {
                     result.token_endpoint = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(UserTrustProviderType, try reader.readElementText());
+                    result.@"type" = UserTrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "userInfoEndpoint")) {
                     result.user_info_endpoint = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30260,7 +30260,7 @@ pub fn deserializeVerifiedAccessLogDeliveryStatus(allocator: std.mem.Allocator, 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(VerifiedAccessLogDeliveryStatusCode, try reader.readElementText());
+                    result.code = VerifiedAccessLogDeliveryStatusCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30408,7 +30408,7 @@ pub fn deserializeVerifiedAccessTrustProvider(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "deviceOptions")) {
                     result.device_options = try deserializeDeviceOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "deviceTrustProviderType")) {
-                    result.device_trust_provider_type = std.meta.stringToEnum(DeviceTrustProviderType, try reader.readElementText());
+                    result.device_trust_provider_type = DeviceTrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdatedTime")) {
                     result.last_updated_time = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "nativeApplicationOidcOptions")) {
@@ -30422,9 +30422,9 @@ pub fn deserializeVerifiedAccessTrustProvider(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "trustProviderType")) {
-                    result.trust_provider_type = std.meta.stringToEnum(TrustProviderType, try reader.readElementText());
+                    result.trust_provider_type = TrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "userTrustProviderType")) {
-                    result.user_trust_provider_type = std.meta.stringToEnum(UserTrustProviderType, try reader.readElementText());
+                    result.user_trust_provider_type = UserTrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "verifiedAccessTrustProviderId")) {
                     result.verified_access_trust_provider_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30451,11 +30451,11 @@ pub fn deserializeVerifiedAccessTrustProviderCondensed(allocator: std.mem.Alloca
                 if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "deviceTrustProviderType")) {
-                    result.device_trust_provider_type = std.meta.stringToEnum(DeviceTrustProviderType, try reader.readElementText());
+                    result.device_trust_provider_type = DeviceTrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "trustProviderType")) {
-                    result.trust_provider_type = std.meta.stringToEnum(TrustProviderType, try reader.readElementText());
+                    result.trust_provider_type = TrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "userTrustProviderType")) {
-                    result.user_trust_provider_type = std.meta.stringToEnum(UserTrustProviderType, try reader.readElementText());
+                    result.user_trust_provider_type = UserTrustProviderType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "verifiedAccessTrustProviderId")) {
                     result.verified_access_trust_provider_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30489,7 +30489,7 @@ pub fn deserializeVgwTelemetry(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "outsideIpAddress")) {
                     result.outside_ip_address = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(TelemetryStatus, try reader.readElementText());
+                    result.status = TelemetryStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30558,9 +30558,9 @@ pub fn deserializeVolume(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "sourceVolumeId")) {
                     result.source_volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(VolumeState, try reader.readElementText());
+                    result.state = VolumeState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "throughput")) {
@@ -30570,7 +30570,7 @@ pub fn deserializeVolume(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "volumeInitializationRate")) {
                     result.volume_initialization_rate = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "volumeType")) {
-                    result.volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -30611,7 +30611,7 @@ pub fn deserializeVolumeAttachment(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "instanceOwningService")) {
                     result.instance_owning_service = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(VolumeAttachmentState, try reader.readElementText());
+                    result.state = VolumeAttachmentState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30649,7 +30649,7 @@ pub fn deserializeVolumeModification(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "endTime")) {
                     result.end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "modificationState")) {
-                    result.modification_state = std.meta.stringToEnum(VolumeModificationState, try reader.readElementText());
+                    result.modification_state = VolumeModificationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "originalIops")) {
                     result.original_iops = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "originalMultiAttachEnabled")) {
@@ -30659,7 +30659,7 @@ pub fn deserializeVolumeModification(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "originalThroughput")) {
                     result.original_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "originalVolumeType")) {
-                    result.original_volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.original_volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
@@ -30675,7 +30675,7 @@ pub fn deserializeVolumeModification(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "targetThroughput")) {
                     result.target_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "targetVolumeType")) {
-                    result.target_volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.target_volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30732,13 +30732,13 @@ pub fn deserializeVolumeRecycleBinInfo(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "sourceVolumeId")) {
                     result.source_volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VolumeState, try reader.readElementText());
+                    result.state = VolumeState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "throughput")) {
                     result.throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeType")) {
-                    result.volume_type = std.meta.stringToEnum(VolumeType, try reader.readElementText());
+                    result.volume_type = VolumeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -30808,7 +30808,7 @@ pub fn deserializeVolumeStatusDetails(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "name")) {
-                    result.name = std.meta.stringToEnum(VolumeStatusName, try reader.readElementText());
+                    result.name = VolumeStatusName.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -30866,7 +30866,7 @@ pub fn deserializeVolumeStatusInfo(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "details")) {
                     result.details = try deserializeVolumeStatusDetailsList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(VolumeStatusInfoStatus, try reader.readElementText());
+                    result.status = VolumeStatusInfoStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -30949,7 +30949,7 @@ pub fn deserializeVpc(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Vp
                 } else if (std.mem.eql(u8, e.local, "encryptionControl")) {
                     result.encryption_control = try deserializeVpcEncryptionControl(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "instanceTenancy")) {
-                    result.instance_tenancy = std.meta.stringToEnum(Tenancy, try reader.readElementText());
+                    result.instance_tenancy = Tenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6CidrBlockAssociationSet")) {
                     result.ipv_6_cidr_block_association_set = try deserializeVpcIpv6CidrBlockAssociationSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "isDefault")) {
@@ -30957,7 +30957,7 @@ pub fn deserializeVpc(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Vp
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpcState, try reader.readElementText());
+                    result.state = VpcState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -30981,7 +30981,7 @@ pub fn deserializeVpcAttachment(allocator: std.mem.Allocator, reader: *aws.xml.R
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(AttachmentStatus, try reader.readElementText());
+                    result.state = AttachmentStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -31016,7 +31016,7 @@ pub fn deserializeVpcBlockPublicAccessExclusion(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "exclusionId")) {
                     result.exclusion_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "internetGatewayExclusionMode")) {
-                    result.internet_gateway_exclusion_mode = std.meta.stringToEnum(InternetGatewayExclusionMode, try reader.readElementText());
+                    result.internet_gateway_exclusion_mode = InternetGatewayExclusionMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdateTimestamp")) {
                     result.last_update_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reason")) {
@@ -31024,7 +31024,7 @@ pub fn deserializeVpcBlockPublicAccessExclusion(allocator: std.mem.Allocator, re
                 } else if (std.mem.eql(u8, e.local, "resourceArn")) {
                     result.resource_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpcBlockPublicAccessExclusionState, try reader.readElementText());
+                    result.state = VpcBlockPublicAccessExclusionState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else {
@@ -31056,17 +31056,17 @@ pub fn deserializeVpcBlockPublicAccessOptions(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "awsRegion")) {
                     result.aws_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "exclusionsAllowed")) {
-                    result.exclusions_allowed = std.meta.stringToEnum(VpcBlockPublicAccessExclusionsAllowed, try reader.readElementText());
+                    result.exclusions_allowed = VpcBlockPublicAccessExclusionsAllowed.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "internetGatewayBlockMode")) {
-                    result.internet_gateway_block_mode = std.meta.stringToEnum(InternetGatewayBlockMode, try reader.readElementText());
+                    result.internet_gateway_block_mode = InternetGatewayBlockMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdateTimestamp")) {
                     result.last_update_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "managedBy")) {
-                    result.managed_by = std.meta.stringToEnum(ManagedBy, try reader.readElementText());
+                    result.managed_by = ManagedBy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reason")) {
                     result.reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpcBlockPublicAccessState, try reader.readElementText());
+                    result.state = VpcBlockPublicAccessState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -31111,7 +31111,7 @@ pub fn deserializeVpcCidrBlockState(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpcCidrBlockStateCode, try reader.readElementText());
+                    result.state = VpcCidrBlockStateCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -31163,11 +31163,11 @@ pub fn deserializeVpcEncryptionControl(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "mode")) {
-                    result.mode = std.meta.stringToEnum(VpcEncryptionControlMode, try reader.readElementText());
+                    result.mode = VpcEncryptionControlMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceExclusions")) {
                     result.resource_exclusions = try deserializeVpcEncryptionControlExclusions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpcEncryptionControlState, try reader.readElementText());
+                    result.state = VpcEncryptionControlState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -31195,7 +31195,7 @@ pub fn deserializeVpcEncryptionControlExclusion(allocator: std.mem.Allocator, re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpcEncryptionControlExclusionState, try reader.readElementText());
+                    result.state = VpcEncryptionControlExclusionState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -31318,7 +31318,7 @@ pub fn deserializeVpcEndpoint(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "groupSet")) {
                     result.groups = try deserializeGroupIdentifierSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ipAddressType")) {
-                    result.ip_address_type = std.meta.stringToEnum(IpAddressType, try reader.readElementText());
+                    result.ip_address_type = IpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv4PrefixSet")) {
                     result.ipv_4_prefixes = try deserializeSubnetIpPrefixesList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ipv6PrefixSet")) {
@@ -31346,7 +31346,7 @@ pub fn deserializeVpcEndpoint(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "serviceRegion")) {
                     result.service_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(State, try reader.readElementText());
+                    result.state = State.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "subnetIdSet")) {
                     result.subnet_ids = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -31354,7 +31354,7 @@ pub fn deserializeVpcEndpoint(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "vpcEndpointId")) {
                     result.vpc_endpoint_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcEndpointType")) {
-                    result.vpc_endpoint_type = std.meta.stringToEnum(VpcEndpointType, try reader.readElementText());
+                    result.vpc_endpoint_type = VpcEndpointType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -31444,7 +31444,7 @@ pub fn deserializeVpcEndpointConnection(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "gatewayLoadBalancerArnSet")) {
                     result.gateway_load_balancer_arns = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "ipAddressType")) {
-                    result.ip_address_type = std.meta.stringToEnum(IpAddressType, try reader.readElementText());
+                    result.ip_address_type = IpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkLoadBalancerArnSet")) {
                     result.network_load_balancer_arns = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "serviceId")) {
@@ -31460,7 +31460,7 @@ pub fn deserializeVpcEndpointConnection(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "vpcEndpointRegion")) {
                     result.vpc_endpoint_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcEndpointState")) {
-                    result.vpc_endpoint_state = std.meta.stringToEnum(State, try reader.readElementText());
+                    result.vpc_endpoint_state = State.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -31487,9 +31487,9 @@ pub fn deserializeVpcIpv6CidrBlockAssociation(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "associationId")) {
                     result.association_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipSource")) {
-                    result.ip_source = std.meta.stringToEnum(IpSource, try reader.readElementText());
+                    result.ip_source = IpSource.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6AddressAttribute")) {
-                    result.ipv_6_address_attribute = std.meta.stringToEnum(Ipv6AddressAttribute, try reader.readElementText());
+                    result.ipv_6_address_attribute = Ipv6AddressAttribute.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6CidrBlock")) {
                     result.ipv_6_cidr_block = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv6CidrBlockState")) {
@@ -31577,7 +31577,7 @@ pub fn deserializeVpcPeeringConnectionStateReason(allocator: std.mem.Allocator, 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
-                    result.code = std.meta.stringToEnum(VpcPeeringConnectionStateReasonCode, try reader.readElementText());
+                    result.code = VpcPeeringConnectionStateReasonCode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -31695,7 +31695,7 @@ pub fn deserializeVpnConnection(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "customerGatewayId")) {
                     result.customer_gateway_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "gatewayAssociationState")) {
-                    result.gateway_association_state = std.meta.stringToEnum(GatewayAssociationState, try reader.readElementText());
+                    result.gateway_association_state = GatewayAssociationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeVpnConnectionOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "preSharedKeyArn")) {
@@ -31703,13 +31703,13 @@ pub fn deserializeVpnConnection(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "routes")) {
                     result.routes = try deserializeVpnStaticRouteList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpnState, try reader.readElementText());
+                    result.state = VpnState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
                     result.transit_gateway_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(GatewayType, try reader.readElementText());
+                    result.@"type" = GatewayType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vgwTelemetry")) {
                     result.vgw_telemetry = try deserializeVgwTelemetryList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "vpnConcentratorId")) {
@@ -31790,9 +31790,9 @@ pub fn deserializeVpnConnectionOptions(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "transportTransitGatewayAttachmentId")) {
                     result.transport_transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tunnelBandwidth")) {
-                    result.tunnel_bandwidth = std.meta.stringToEnum(VpnTunnelBandwidth, try reader.readElementText());
+                    result.tunnel_bandwidth = VpnTunnelBandwidth.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tunnelInsideIpVersion")) {
-                    result.tunnel_inside_ip_version = std.meta.stringToEnum(TunnelInsideIpVersion, try reader.readElementText());
+                    result.tunnel_inside_ip_version = TunnelInsideIpVersion.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tunnelOptionSet")) {
                     result.tunnel_options = try deserializeTunnelOptionsList(allocator, reader, "item");
                 } else {
@@ -31823,11 +31823,11 @@ pub fn deserializeVpnGateway(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "availabilityZone")) {
                     result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpnState, try reader.readElementText());
+                    result.state = VpnState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.@"type" = std.meta.stringToEnum(GatewayType, try reader.readElementText());
+                    result.@"type" = GatewayType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachments")) {
                     result.vpc_attachments = try deserializeVpcAttachmentList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "vpnGatewayId")) {
@@ -31854,9 +31854,9 @@ pub fn deserializeVpnStaticRoute(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "destinationCidrBlock")) {
                     result.destination_cidr_block = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "source")) {
-                    result.source = std.meta.stringToEnum(VpnStaticRouteSource, try reader.readElementText());
+                    result.source = VpnStaticRouteSource.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(VpnState, try reader.readElementText());
+                    result.state = VpnState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -31892,7 +31892,7 @@ pub fn serializeAcceleratorManufacturerSet(allocator: std.mem.Allocator, buf: *s
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -31904,7 +31904,7 @@ pub fn serializeAcceleratorNameSet(allocator: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -31916,7 +31916,7 @@ pub fn serializeAcceleratorTypeSet(allocator: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -31940,7 +31940,7 @@ pub fn serializeAccountAttributeNameStringList(allocator: std.mem.Allocator, buf
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -32024,7 +32024,7 @@ pub fn serializeArchitectureTypeSet(allocator: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -32336,7 +32336,7 @@ pub fn serializeCpuManufacturerSet(allocator: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -32732,7 +32732,7 @@ pub fn serializeGroupBySet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -33044,7 +33044,7 @@ pub fn serializeInstanceGenerationSet(allocator: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -33140,7 +33140,7 @@ pub fn serializeInstanceTypeList(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -33611,7 +33611,7 @@ pub fn serializeLocalStorageTypeSet(allocator: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -33647,7 +33647,7 @@ pub fn serializeMetricSet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34082,7 +34082,7 @@ pub fn serializeProtocolList(allocator: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34130,7 +34130,7 @@ pub fn serializeReasonCodesList(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34238,7 +34238,7 @@ pub fn serializeRequestInstanceTypeList(allocator: std.mem.Allocator, buf: *std.
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34802,7 +34802,7 @@ pub fn serializeTrafficMirrorFilterRuleFieldList(allocator: std.mem.Allocator, b
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34826,7 +34826,7 @@ pub fn serializeTrafficMirrorNetworkServiceList(allocator: std.mem.Allocator, bu
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34838,7 +34838,7 @@ pub fn serializeTrafficMirrorSessionFieldList(allocator: std.mem.Allocator, buf:
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -35126,7 +35126,7 @@ pub fn serializeVirtualizationTypeSet(allocator: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -35480,7 +35480,7 @@ pub fn serializeAthenaIntegration(allocator: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(allocator, "</PartitionEndDate>");
     }
     try buf.appendSlice(allocator, "<PartitionLoadFrequency>");
-    try buf.appendSlice(allocator, @tagName(value.partition_load_frequency));
+    try buf.appendSlice(allocator, value.partition_load_frequency.wireName());
     try buf.appendSlice(allocator, "</PartitionLoadFrequency>");
     if (value.partition_start_date) |v| {
         try buf.appendSlice(allocator, "<PartitionStartDate>");
@@ -35620,7 +35620,7 @@ pub fn serializeCapacityManagerCondition(allocator: std.mem.Allocator, buf: *std
 pub fn serializeCapacityReservationOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationOptionsRequest) !void {
     if (value.usage_strategy) |v| {
         try buf.appendSlice(allocator, "<UsageStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</UsageStrategy>");
     }
 }
@@ -35628,7 +35628,7 @@ pub fn serializeCapacityReservationOptionsRequest(allocator: std.mem.Allocator, 
 pub fn serializeCapacityReservationSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationSpecification) !void {
     if (value.capacity_reservation_preference) |v| {
         try buf.appendSlice(allocator, "<CapacityReservationPreference>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</CapacityReservationPreference>");
     }
     if (value.capacity_reservation_target) |v| {
@@ -35768,7 +35768,7 @@ pub fn serializeClientVpnAuthenticationRequest(allocator: std.mem.Allocator, buf
     }
     if (value.@"type") |v| {
         try buf.appendSlice(allocator, "<Type>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
     }
 }
@@ -35854,7 +35854,7 @@ pub fn serializeConnectionTrackingSpecificationRequest(allocator: std.mem.Alloca
 pub fn serializeCpuOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CpuOptionsRequest) !void {
     if (value.amd_sev_snp) |v| {
         try buf.appendSlice(allocator, "<AmdSevSnp>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AmdSevSnp>");
     }
     if (value.core_count) |v| {
@@ -35893,24 +35893,24 @@ pub fn serializeCpuPerformanceFactorRequest(allocator: std.mem.Allocator, buf: *
 
 pub fn serializeCreateTransitGatewayConnectRequestOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayConnectRequestOptions) !void {
     try buf.appendSlice(allocator, "<Protocol>");
-    try buf.appendSlice(allocator, @tagName(value.protocol));
+    try buf.appendSlice(allocator, value.protocol.wireName());
     try buf.appendSlice(allocator, "</Protocol>");
 }
 
 pub fn serializeCreateTransitGatewayMulticastDomainRequestOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayMulticastDomainRequestOptions) !void {
     if (value.auto_accept_shared_associations) |v| {
         try buf.appendSlice(allocator, "<AutoAcceptSharedAssociations>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AutoAcceptSharedAssociations>");
     }
     if (value.igmpv_2_support) |v| {
         try buf.appendSlice(allocator, "<Igmpv2Support>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Igmpv2Support>");
     }
     if (value.static_sources_support) |v| {
         try buf.appendSlice(allocator, "<StaticSourcesSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StaticSourcesSupport>");
     }
 }
@@ -35918,7 +35918,7 @@ pub fn serializeCreateTransitGatewayMulticastDomainRequestOptions(allocator: std
 pub fn serializeCreateTransitGatewayPeeringAttachmentRequestOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayPeeringAttachmentRequestOptions) !void {
     if (value.dynamic_routing) |v| {
         try buf.appendSlice(allocator, "<DynamicRouting>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DynamicRouting>");
     }
 }
@@ -35926,22 +35926,22 @@ pub fn serializeCreateTransitGatewayPeeringAttachmentRequestOptions(allocator: s
 pub fn serializeCreateTransitGatewayVpcAttachmentRequestOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayVpcAttachmentRequestOptions) !void {
     if (value.appliance_mode_support) |v| {
         try buf.appendSlice(allocator, "<ApplianceModeSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ApplianceModeSupport>");
     }
     if (value.dns_support) |v| {
         try buf.appendSlice(allocator, "<DnsSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DnsSupport>");
     }
     if (value.ipv_6_support) |v| {
         try buf.appendSlice(allocator, "<Ipv6Support>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Ipv6Support>");
     }
     if (value.security_group_referencing_support) |v| {
         try buf.appendSlice(allocator, "<SecurityGroupReferencingSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SecurityGroupReferencingSupport>");
     }
 }
@@ -35959,7 +35959,7 @@ pub fn serializeCreateVerifiedAccessEndpointCidrOptions(allocator: std.mem.Alloc
     }
     if (value.protocol) |v| {
         try buf.appendSlice(allocator, "<Protocol>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Protocol>");
     }
     if (value.subnet_ids) |v| {
@@ -35990,7 +35990,7 @@ pub fn serializeCreateVerifiedAccessEndpointEniOptions(allocator: std.mem.Alloca
     }
     if (value.protocol) |v| {
         try buf.appendSlice(allocator, "<Protocol>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Protocol>");
     }
 }
@@ -36016,7 +36016,7 @@ pub fn serializeCreateVerifiedAccessEndpointLoadBalancerOptions(allocator: std.m
     }
     if (value.protocol) |v| {
         try buf.appendSlice(allocator, "<Protocol>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Protocol>");
     }
     if (value.subnet_ids) |v| {
@@ -36056,7 +36056,7 @@ pub fn serializeCreateVerifiedAccessEndpointRdsOptions(allocator: std.mem.Alloca
     }
     if (value.protocol) |v| {
         try buf.appendSlice(allocator, "<Protocol>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Protocol>");
     }
     if (value.rds_db_cluster_arn) |v| {
@@ -36183,7 +36183,7 @@ pub fn serializeCreateVerifiedAccessTrustProviderOidcOptions(allocator: std.mem.
 pub fn serializeCreateVolumePermission(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVolumePermission) !void {
     if (value.group) |v| {
         try buf.appendSlice(allocator, "<group>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</group>");
     }
     if (value.user_id) |v| {
@@ -36236,12 +36236,12 @@ pub fn serializeDataQuery(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.metric) |v| {
         try buf.appendSlice(allocator, "<Metric>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Metric>");
     }
     if (value.period) |v| {
         try buf.appendSlice(allocator, "<Period>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Period>");
     }
     if (value.source) |v| {
@@ -36251,7 +36251,7 @@ pub fn serializeDataQuery(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.statistic) |v| {
         try buf.appendSlice(allocator, "<Statistic>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Statistic>");
     }
 }
@@ -36283,7 +36283,7 @@ pub fn serializeDeregisterInstanceTagAttributeRequest(allocator: std.mem.Allocat
 pub fn serializeDestinationOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DestinationOptionsRequest) !void {
     if (value.file_format) |v| {
         try buf.appendSlice(allocator, "<FileFormat>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</FileFormat>");
     }
     if (value.hive_compatible_partitions) |v| {
@@ -36301,12 +36301,12 @@ pub fn serializeDestinationOptionsRequest(allocator: std.mem.Allocator, buf: *st
 pub fn serializeDimensionCondition(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DimensionCondition) !void {
     if (value.comparison) |v| {
         try buf.appendSlice(allocator, "<Comparison>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Comparison>");
     }
     if (value.dimension) |v| {
         try buf.appendSlice(allocator, "<Dimension>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Dimension>");
     }
     if (value.values) |v| {
@@ -36350,7 +36350,7 @@ pub fn serializeDiskImageDetail(allocator: std.mem.Allocator, buf: *std.ArrayLis
     }
     try buf.appendSlice(allocator, "</bytes>");
     try buf.appendSlice(allocator, "<format>");
-    try buf.appendSlice(allocator, @tagName(value.format));
+    try buf.appendSlice(allocator, value.format.wireName());
     try buf.appendSlice(allocator, "</format>");
     try buf.appendSlice(allocator, "<importManifestUrl>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.import_manifest_url);
@@ -36360,7 +36360,7 @@ pub fn serializeDiskImageDetail(allocator: std.mem.Allocator, buf: *std.ArrayLis
 pub fn serializeDnsOptionsSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DnsOptionsSpecification) !void {
     if (value.dns_record_ip_type) |v| {
         try buf.appendSlice(allocator, "<DnsRecordIpType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DnsRecordIpType>");
     }
     if (value.private_dns_only_for_inbound_resolver_endpoint) |v| {
@@ -36471,7 +36471,7 @@ pub fn serializeEbsBlockDevice(allocator: std.mem.Allocator, buf: *std.ArrayList
     }
     if (value.volume_type) |v| {
         try buf.appendSlice(allocator, "<volumeType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</volumeType>");
     }
 }
@@ -36573,12 +36573,12 @@ pub fn serializeExportTaskS3LocationRequest(allocator: std.mem.Allocator, buf: *
 pub fn serializeExportToS3TaskSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExportToS3TaskSpecification) !void {
     if (value.container_format) |v| {
         try buf.appendSlice(allocator, "<containerFormat>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</containerFormat>");
     }
     if (value.disk_image_format) |v| {
         try buf.appendSlice(allocator, "<diskImageFormat>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</diskImageFormat>");
     }
     if (value.s3_bucket) |v| {
@@ -36601,7 +36601,7 @@ pub fn serializeExternalAuthorityConfiguration(allocator: std.mem.Allocator, buf
     }
     if (value.@"type") |v| {
         try buf.appendSlice(allocator, "<Type>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
     }
 }
@@ -36729,7 +36729,7 @@ pub fn serializeFleetEbsBlockDeviceRequest(allocator: std.mem.Allocator, buf: *s
     }
     if (value.volume_type) |v| {
         try buf.appendSlice(allocator, "<VolumeType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VolumeType>");
     }
 }
@@ -36775,7 +36775,7 @@ pub fn serializeFleetLaunchTemplateOverridesRequest(allocator: std.mem.Allocator
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<InstanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceType>");
     }
     if (value.max_price) |v| {
@@ -36850,7 +36850,7 @@ pub fn serializeFleetLaunchTemplateSpecificationRequest(allocator: std.mem.Alloc
 pub fn serializeFleetSpotCapacityRebalanceRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetSpotCapacityRebalanceRequest) !void {
     if (value.replacement_strategy) |v| {
         try buf.appendSlice(allocator, "<ReplacementStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ReplacementStrategy>");
     }
     if (value.termination_delay) |v| {
@@ -37035,7 +37035,7 @@ pub fn serializeImportInstanceLaunchSpecification(allocator: std.mem.Allocator, 
     }
     if (value.architecture) |v| {
         try buf.appendSlice(allocator, "<architecture>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</architecture>");
     }
     if (value.group_ids) |v| {
@@ -37050,12 +37050,12 @@ pub fn serializeImportInstanceLaunchSpecification(allocator: std.mem.Allocator, 
     }
     if (value.instance_initiated_shutdown_behavior) |v| {
         try buf.appendSlice(allocator, "<instanceInitiatedShutdownBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceInitiatedShutdownBehavior>");
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<instanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceType>");
     }
     if (value.monitoring) |v| {
@@ -37166,7 +37166,7 @@ pub fn serializeInstanceEventWindowTimeRangeRequest(allocator: std.mem.Allocator
     }
     if (value.end_week_day) |v| {
         try buf.appendSlice(allocator, "<EndWeekDay>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</EndWeekDay>");
     }
     if (value.start_hour) |v| {
@@ -37179,7 +37179,7 @@ pub fn serializeInstanceEventWindowTimeRangeRequest(allocator: std.mem.Allocator
     }
     if (value.start_week_day) |v| {
         try buf.appendSlice(allocator, "<StartWeekDay>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</StartWeekDay>");
     }
 }
@@ -37208,7 +37208,7 @@ pub fn serializeInstanceIpv6AddressRequest(allocator: std.mem.Allocator, buf: *s
 pub fn serializeInstanceMaintenanceOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMaintenanceOptionsRequest) !void {
     if (value.auto_recovery) |v| {
         try buf.appendSlice(allocator, "<AutoRecovery>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AutoRecovery>");
     }
 }
@@ -37216,7 +37216,7 @@ pub fn serializeInstanceMaintenanceOptionsRequest(allocator: std.mem.Allocator, 
 pub fn serializeInstanceMarketOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMarketOptionsRequest) !void {
     if (value.market_type) |v| {
         try buf.appendSlice(allocator, "<MarketType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</MarketType>");
     }
     if (value.spot_options) |v| {
@@ -37229,12 +37229,12 @@ pub fn serializeInstanceMarketOptionsRequest(allocator: std.mem.Allocator, buf: 
 pub fn serializeInstanceMetadataOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMetadataOptionsRequest) !void {
     if (value.http_endpoint) |v| {
         try buf.appendSlice(allocator, "<HttpEndpoint>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpEndpoint>");
     }
     if (value.http_protocol_ipv_6) |v| {
         try buf.appendSlice(allocator, "<HttpProtocolIpv6>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpProtocolIpv6>");
     }
     if (value.http_put_response_hop_limit) |v| {
@@ -37247,12 +37247,12 @@ pub fn serializeInstanceMetadataOptionsRequest(allocator: std.mem.Allocator, buf
     }
     if (value.http_tokens) |v| {
         try buf.appendSlice(allocator, "<HttpTokens>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpTokens>");
     }
     if (value.instance_metadata_tags) |v| {
         try buf.appendSlice(allocator, "<InstanceMetadataTags>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceMetadataTags>");
     }
 }
@@ -37399,7 +37399,7 @@ pub fn serializeInstanceNetworkInterfaceSpecification(allocator: std.mem.Allocat
 pub fn serializeInstanceNetworkPerformanceOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceNetworkPerformanceOptionsRequest) !void {
     if (value.bandwidth_weighting) |v| {
         try buf.appendSlice(allocator, "<BandwidthWeighting>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BandwidthWeighting>");
     }
 }
@@ -37437,7 +37437,7 @@ pub fn serializeInstanceRequirements(allocator: std.mem.Allocator, buf: *std.Arr
     }
     if (value.bare_metal) |v| {
         try buf.appendSlice(allocator, "<bareMetal>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</bareMetal>");
     }
     if (value.baseline_ebs_bandwidth_mbps) |v| {
@@ -37452,7 +37452,7 @@ pub fn serializeInstanceRequirements(allocator: std.mem.Allocator, buf: *std.Arr
     }
     if (value.burstable_performance) |v| {
         try buf.appendSlice(allocator, "<burstablePerformance>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</burstablePerformance>");
     }
     if (value.cpu_manufacturers) |v| {
@@ -37472,7 +37472,7 @@ pub fn serializeInstanceRequirements(allocator: std.mem.Allocator, buf: *std.Arr
     }
     if (value.local_storage) |v| {
         try buf.appendSlice(allocator, "<localStorage>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</localStorage>");
     }
     if (value.local_storage_types) |v| {
@@ -37579,7 +37579,7 @@ pub fn serializeInstanceRequirementsRequest(allocator: std.mem.Allocator, buf: *
     }
     if (value.bare_metal) |v| {
         try buf.appendSlice(allocator, "<BareMetal>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BareMetal>");
     }
     if (value.baseline_ebs_bandwidth_mbps) |v| {
@@ -37594,7 +37594,7 @@ pub fn serializeInstanceRequirementsRequest(allocator: std.mem.Allocator, buf: *
     }
     if (value.burstable_performance) |v| {
         try buf.appendSlice(allocator, "<BurstablePerformance>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BurstablePerformance>");
     }
     if (value.cpu_manufacturers) |v| {
@@ -37614,7 +37614,7 @@ pub fn serializeInstanceRequirementsRequest(allocator: std.mem.Allocator, buf: *
     }
     if (value.local_storage) |v| {
         try buf.appendSlice(allocator, "<LocalStorage>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</LocalStorage>");
     }
     if (value.local_storage_types) |v| {
@@ -37822,7 +37822,7 @@ pub fn serializeIpamPoolSourceResourceRequest(allocator: std.mem.Allocator, buf:
     }
     if (value.resource_type) |v| {
         try buf.appendSlice(allocator, "<ResourceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ResourceType>");
     }
 }
@@ -37839,7 +37839,7 @@ pub fn serializeIpamPrefixListResolverRuleConditionRequest(allocator: std.mem.Al
         try buf.appendSlice(allocator, "</IpamPoolId>");
     }
     try buf.appendSlice(allocator, "<Operation>");
-    try buf.appendSlice(allocator, @tagName(value.operation));
+    try buf.appendSlice(allocator, value.operation.wireName());
     try buf.appendSlice(allocator, "</Operation>");
     if (value.resource_id) |v| {
         try buf.appendSlice(allocator, "<ResourceId>");
@@ -37876,11 +37876,11 @@ pub fn serializeIpamPrefixListResolverRuleRequest(allocator: std.mem.Allocator, 
     }
     if (value.resource_type) |v| {
         try buf.appendSlice(allocator, "<ResourceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ResourceType>");
     }
     try buf.appendSlice(allocator, "<RuleType>");
-    try buf.appendSlice(allocator, @tagName(value.rule_type));
+    try buf.appendSlice(allocator, value.rule_type.wireName());
     try buf.appendSlice(allocator, "</RuleType>");
     if (value.static_cidr) |v| {
         try buf.appendSlice(allocator, "<StaticCidr>");
@@ -37921,7 +37921,7 @@ pub fn serializeIpv6Range(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
 pub fn serializeLaunchPermission(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchPermission) !void {
     if (value.group) |v| {
         try buf.appendSlice(allocator, "<group>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</group>");
     }
     if (value.organizational_unit_arn) |v| {
@@ -37980,7 +37980,7 @@ pub fn serializeLaunchTemplateBlockDeviceMappingRequest(allocator: std.mem.Alloc
 pub fn serializeLaunchTemplateCapacityReservationSpecificationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateCapacityReservationSpecificationRequest) !void {
     if (value.capacity_reservation_preference) |v| {
         try buf.appendSlice(allocator, "<CapacityReservationPreference>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</CapacityReservationPreference>");
     }
     if (value.capacity_reservation_target) |v| {
@@ -38006,7 +38006,7 @@ pub fn serializeLaunchTemplateConfig(allocator: std.mem.Allocator, buf: *std.Arr
 pub fn serializeLaunchTemplateCpuOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateCpuOptionsRequest) !void {
     if (value.amd_sev_snp) |v| {
         try buf.appendSlice(allocator, "<AmdSevSnp>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AmdSevSnp>");
     }
     if (value.core_count) |v| {
@@ -38090,7 +38090,7 @@ pub fn serializeLaunchTemplateEbsBlockDeviceRequest(allocator: std.mem.Allocator
     }
     if (value.volume_type) |v| {
         try buf.appendSlice(allocator, "<VolumeType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VolumeType>");
     }
 }
@@ -38141,7 +38141,7 @@ pub fn serializeLaunchTemplateIamInstanceProfileSpecificationRequest(allocator: 
 pub fn serializeLaunchTemplateInstanceMaintenanceOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceMaintenanceOptionsRequest) !void {
     if (value.auto_recovery) |v| {
         try buf.appendSlice(allocator, "<AutoRecovery>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AutoRecovery>");
     }
 }
@@ -38149,7 +38149,7 @@ pub fn serializeLaunchTemplateInstanceMaintenanceOptionsRequest(allocator: std.m
 pub fn serializeLaunchTemplateInstanceMarketOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceMarketOptionsRequest) !void {
     if (value.market_type) |v| {
         try buf.appendSlice(allocator, "<MarketType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</MarketType>");
     }
     if (value.spot_options) |v| {
@@ -38162,12 +38162,12 @@ pub fn serializeLaunchTemplateInstanceMarketOptionsRequest(allocator: std.mem.Al
 pub fn serializeLaunchTemplateInstanceMetadataOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceMetadataOptionsRequest) !void {
     if (value.http_endpoint) |v| {
         try buf.appendSlice(allocator, "<HttpEndpoint>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpEndpoint>");
     }
     if (value.http_protocol_ipv_6) |v| {
         try buf.appendSlice(allocator, "<HttpProtocolIpv6>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpProtocolIpv6>");
     }
     if (value.http_put_response_hop_limit) |v| {
@@ -38180,12 +38180,12 @@ pub fn serializeLaunchTemplateInstanceMetadataOptionsRequest(allocator: std.mem.
     }
     if (value.http_tokens) |v| {
         try buf.appendSlice(allocator, "<HttpTokens>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HttpTokens>");
     }
     if (value.instance_metadata_tags) |v| {
         try buf.appendSlice(allocator, "<InstanceMetadataTags>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceMetadataTags>");
     }
 }
@@ -38340,7 +38340,7 @@ pub fn serializeLaunchTemplateLicenseConfigurationRequest(allocator: std.mem.All
 pub fn serializeLaunchTemplateNetworkPerformanceOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateNetworkPerformanceOptionsRequest) !void {
     if (value.bandwidth_weighting) |v| {
         try buf.appendSlice(allocator, "<BandwidthWeighting>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BandwidthWeighting>");
     }
 }
@@ -38363,7 +38363,7 @@ pub fn serializeLaunchTemplateOverrides(allocator: std.mem.Allocator, buf: *std.
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<instanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceType>");
     }
     if (value.priority) |v| {
@@ -38445,7 +38445,7 @@ pub fn serializeLaunchTemplatePlacementRequest(allocator: std.mem.Allocator, buf
     }
     if (value.tenancy) |v| {
         try buf.appendSlice(allocator, "<Tenancy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Tenancy>");
     }
 }
@@ -38463,7 +38463,7 @@ pub fn serializeLaunchTemplatePrivateDnsNameOptionsRequest(allocator: std.mem.Al
     }
     if (value.hostname_type) |v| {
         try buf.appendSlice(allocator, "<HostnameType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HostnameType>");
     }
 }
@@ -38497,7 +38497,7 @@ pub fn serializeLaunchTemplateSpotMarketOptionsRequest(allocator: std.mem.Alloca
     }
     if (value.instance_interruption_behavior) |v| {
         try buf.appendSlice(allocator, "<InstanceInterruptionBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceInterruptionBehavior>");
     }
     if (value.max_price) |v| {
@@ -38507,7 +38507,7 @@ pub fn serializeLaunchTemplateSpotMarketOptionsRequest(allocator: std.mem.Alloca
     }
     if (value.spot_instance_type) |v| {
         try buf.appendSlice(allocator, "<SpotInstanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SpotInstanceType>");
     }
     if (value.valid_until) |v| {
@@ -38523,7 +38523,7 @@ pub fn serializeLaunchTemplateSpotMarketOptionsRequest(allocator: std.mem.Alloca
 pub fn serializeLaunchTemplateTagSpecificationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateTagSpecificationRequest) !void {
     if (value.resource_type) |v| {
         try buf.appendSlice(allocator, "<ResourceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ResourceType>");
     }
     if (value.tags) |v| {
@@ -38578,7 +38578,7 @@ pub fn serializeLoadPermissionModifications(allocator: std.mem.Allocator, buf: *
 pub fn serializeLoadPermissionRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LoadPermissionRequest) !void {
     if (value.group) |v| {
         try buf.appendSlice(allocator, "<Group>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Group>");
     }
     if (value.user_id) |v| {
@@ -38591,37 +38591,37 @@ pub fn serializeLoadPermissionRequest(allocator: std.mem.Allocator, buf: *std.Ar
 pub fn serializeMacSystemIntegrityProtectionConfigurationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: MacSystemIntegrityProtectionConfigurationRequest) !void {
     if (value.apple_internal) |v| {
         try buf.appendSlice(allocator, "<AppleInternal>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AppleInternal>");
     }
     if (value.base_system) |v| {
         try buf.appendSlice(allocator, "<BaseSystem>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BaseSystem>");
     }
     if (value.debugging_restrictions) |v| {
         try buf.appendSlice(allocator, "<DebuggingRestrictions>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DebuggingRestrictions>");
     }
     if (value.d_trace_restrictions) |v| {
         try buf.appendSlice(allocator, "<DTraceRestrictions>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DTraceRestrictions>");
     }
     if (value.filesystem_protections) |v| {
         try buf.appendSlice(allocator, "<FilesystemProtections>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</FilesystemProtections>");
     }
     if (value.kext_signing) |v| {
         try buf.appendSlice(allocator, "<KextSigning>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</KextSigning>");
     }
     if (value.nvram_protections) |v| {
         try buf.appendSlice(allocator, "<NvramProtections>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</NvramProtections>");
     }
 }
@@ -38721,27 +38721,27 @@ pub fn serializeModifyTransitGatewayOptions(allocator: std.mem.Allocator, buf: *
     }
     if (value.auto_accept_shared_attachments) |v| {
         try buf.appendSlice(allocator, "<AutoAcceptSharedAttachments>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AutoAcceptSharedAttachments>");
     }
     if (value.default_route_table_association) |v| {
         try buf.appendSlice(allocator, "<DefaultRouteTableAssociation>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DefaultRouteTableAssociation>");
     }
     if (value.default_route_table_propagation) |v| {
         try buf.appendSlice(allocator, "<DefaultRouteTablePropagation>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DefaultRouteTablePropagation>");
     }
     if (value.dns_support) |v| {
         try buf.appendSlice(allocator, "<DnsSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DnsSupport>");
     }
     if (value.encryption_support) |v| {
         try buf.appendSlice(allocator, "<EncryptionSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</EncryptionSupport>");
     }
     if (value.propagation_default_route_table_id) |v| {
@@ -38756,12 +38756,12 @@ pub fn serializeModifyTransitGatewayOptions(allocator: std.mem.Allocator, buf: *
     }
     if (value.security_group_referencing_support) |v| {
         try buf.appendSlice(allocator, "<SecurityGroupReferencingSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SecurityGroupReferencingSupport>");
     }
     if (value.vpn_ecmp_support) |v| {
         try buf.appendSlice(allocator, "<VpnEcmpSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VpnEcmpSupport>");
     }
 }
@@ -38769,22 +38769,22 @@ pub fn serializeModifyTransitGatewayOptions(allocator: std.mem.Allocator, buf: *
 pub fn serializeModifyTransitGatewayVpcAttachmentRequestOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyTransitGatewayVpcAttachmentRequestOptions) !void {
     if (value.appliance_mode_support) |v| {
         try buf.appendSlice(allocator, "<ApplianceModeSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ApplianceModeSupport>");
     }
     if (value.dns_support) |v| {
         try buf.appendSlice(allocator, "<DnsSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DnsSupport>");
     }
     if (value.ipv_6_support) |v| {
         try buf.appendSlice(allocator, "<Ipv6Support>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Ipv6Support>");
     }
     if (value.security_group_referencing_support) |v| {
         try buf.appendSlice(allocator, "<SecurityGroupReferencingSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SecurityGroupReferencingSupport>");
     }
 }
@@ -38813,7 +38813,7 @@ pub fn serializeModifyVerifiedAccessEndpointEniOptions(allocator: std.mem.Alloca
     }
     if (value.protocol) |v| {
         try buf.appendSlice(allocator, "<Protocol>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Protocol>");
     }
 }
@@ -38834,7 +38834,7 @@ pub fn serializeModifyVerifiedAccessEndpointLoadBalancerOptions(allocator: std.m
     }
     if (value.protocol) |v| {
         try buf.appendSlice(allocator, "<Protocol>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Protocol>");
     }
     if (value.subnet_ids) |v| {
@@ -39212,7 +39212,7 @@ pub fn serializeNewDhcpConfiguration(allocator: std.mem.Allocator, buf: *std.Arr
 pub fn serializeOnDemandOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: OnDemandOptionsRequest) !void {
     if (value.allocation_strategy) |v| {
         try buf.appendSlice(allocator, "<AllocationStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AllocationStrategy>");
     }
     if (value.capacity_reservation_options) |v| {
@@ -39466,7 +39466,7 @@ pub fn serializePlacement(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.tenancy) |v| {
         try buf.appendSlice(allocator, "<tenancy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</tenancy>");
     }
 }
@@ -39506,7 +39506,7 @@ pub fn serializePrefixListId(allocator: std.mem.Allocator, buf: *std.ArrayList(u
 pub fn serializePriceScheduleSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PriceScheduleSpecification) !void {
     if (value.currency_code) |v| {
         try buf.appendSlice(allocator, "<currencyCode>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</currencyCode>");
     }
     if (value.price) |v| {
@@ -39540,7 +39540,7 @@ pub fn serializePrivateDnsNameOptionsRequest(allocator: std.mem.Allocator, buf: 
     }
     if (value.hostname_type) |v| {
         try buf.appendSlice(allocator, "<HostnameType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</HostnameType>");
     }
 }
@@ -39705,7 +39705,7 @@ pub fn serializeRequestLaunchTemplateData(allocator: std.mem.Allocator, buf: *st
     }
     if (value.instance_initiated_shutdown_behavior) |v| {
         try buf.appendSlice(allocator, "<InstanceInitiatedShutdownBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceInitiatedShutdownBehavior>");
     }
     if (value.instance_market_options) |v| {
@@ -39720,7 +39720,7 @@ pub fn serializeRequestLaunchTemplateData(allocator: std.mem.Allocator, buf: *st
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<InstanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceType>");
     }
     if (value.kernel_id) |v| {
@@ -39833,7 +39833,7 @@ pub fn serializeRequestSpotLaunchSpecification(allocator: std.mem.Allocator, buf
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<instanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceType>");
     }
     if (value.kernel_id) |v| {
@@ -39906,12 +39906,12 @@ pub fn serializeReservationFleetInstanceSpecification(allocator: std.mem.Allocat
     }
     if (value.instance_platform) |v| {
         try buf.appendSlice(allocator, "<InstancePlatform>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstancePlatform>");
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<InstanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceType>");
     }
     if (value.priority) |v| {
@@ -39943,7 +39943,7 @@ pub fn serializeReservedInstanceLimitPrice(allocator: std.mem.Allocator, buf: *s
     }
     if (value.currency_code) |v| {
         try buf.appendSlice(allocator, "<currencyCode>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</currencyCode>");
     }
 }
@@ -39969,7 +39969,7 @@ pub fn serializeReservedInstancesConfiguration(allocator: std.mem.Allocator, buf
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<instanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceType>");
     }
     if (value.platform) |v| {
@@ -39979,7 +39979,7 @@ pub fn serializeReservedInstancesConfiguration(allocator: std.mem.Allocator, buf
     }
     if (value.scope) |v| {
         try buf.appendSlice(allocator, "<scope>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</scope>");
     }
 }
@@ -40000,7 +40000,7 @@ pub fn serializeResourceStatementRequest(allocator: std.mem.Allocator, buf: *std
 pub fn serializeResourceTypeOption(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceTypeOption) !void {
     if (value.option_name) |v| {
         try buf.appendSlice(allocator, "<OptionName>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</OptionName>");
     }
     if (value.option_values) |v| {
@@ -40013,7 +40013,7 @@ pub fn serializeResourceTypeOption(allocator: std.mem.Allocator, buf: *std.Array
 pub fn serializeResourceTypeRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceTypeRequest) !void {
     if (value.resource_type) |v| {
         try buf.appendSlice(allocator, "<ResourceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ResourceType>");
     }
     if (value.resource_type_options) |v| {
@@ -40032,7 +40032,7 @@ pub fn serializeRouteServerBgpOptionsRequest(allocator: std.mem.Allocator, buf: 
     try buf.appendSlice(allocator, "</PeerAsn>");
     if (value.peer_liveness_detection) |v| {
         try buf.appendSlice(allocator, "<PeerLivenessDetection>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</PeerLivenessDetection>");
     }
 }
@@ -40503,7 +40503,7 @@ pub fn serializeSnapshotDiskContainer(allocator: std.mem.Allocator, buf: *std.Ar
 pub fn serializeSpotCapacityRebalance(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotCapacityRebalance) !void {
     if (value.replacement_strategy) |v| {
         try buf.appendSlice(allocator, "<replacementStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</replacementStrategy>");
     }
     if (value.termination_delay) |v| {
@@ -40549,7 +40549,7 @@ pub fn serializeSpotFleetLaunchSpecification(allocator: std.mem.Allocator, buf: 
     }
     if (value.instance_type) |v| {
         try buf.appendSlice(allocator, "<instanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceType>");
     }
     if (value.kernel_id) |v| {
@@ -40628,7 +40628,7 @@ pub fn serializeSpotFleetMonitoring(allocator: std.mem.Allocator, buf: *std.Arra
 pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetRequestConfigData) !void {
     if (value.allocation_strategy) |v| {
         try buf.appendSlice(allocator, "<allocationStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</allocationStrategy>");
     }
     if (value.client_token) |v| {
@@ -40643,7 +40643,7 @@ pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *s
     }
     if (value.excess_capacity_termination_policy) |v| {
         try buf.appendSlice(allocator, "<excessCapacityTerminationPolicy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</excessCapacityTerminationPolicy>");
     }
     if (value.fulfilled_capacity) |v| {
@@ -40659,7 +40659,7 @@ pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *s
     try buf.appendSlice(allocator, "</iamFleetRole>");
     if (value.instance_interruption_behavior) |v| {
         try buf.appendSlice(allocator, "<instanceInterruptionBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</instanceInterruptionBehavior>");
     }
     if (value.instance_pools_to_use_count) |v| {
@@ -40687,7 +40687,7 @@ pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *s
     }
     if (value.on_demand_allocation_strategy) |v| {
         try buf.appendSlice(allocator, "<onDemandAllocationStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</onDemandAllocationStrategy>");
     }
     if (value.on_demand_fulfilled_capacity) |v| {
@@ -40744,7 +40744,7 @@ pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *s
     try buf.appendSlice(allocator, "</targetCapacity>");
     if (value.target_capacity_unit_type) |v| {
         try buf.appendSlice(allocator, "<targetCapacityUnitType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</targetCapacityUnitType>");
     }
     if (value.terminate_instances_with_expiration) |v| {
@@ -40754,7 +40754,7 @@ pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *s
     }
     if (value.@"type") |v| {
         try buf.appendSlice(allocator, "<type>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</type>");
     }
     if (value.valid_from) |v| {
@@ -40778,7 +40778,7 @@ pub fn serializeSpotFleetRequestConfigData(allocator: std.mem.Allocator, buf: *s
 pub fn serializeSpotFleetTagSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetTagSpecification) !void {
     if (value.resource_type) |v| {
         try buf.appendSlice(allocator, "<resourceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</resourceType>");
     }
     if (value.tags) |v| {
@@ -40807,7 +40807,7 @@ pub fn serializeSpotMarketOptions(allocator: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.instance_interruption_behavior) |v| {
         try buf.appendSlice(allocator, "<InstanceInterruptionBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceInterruptionBehavior>");
     }
     if (value.max_price) |v| {
@@ -40817,7 +40817,7 @@ pub fn serializeSpotMarketOptions(allocator: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.spot_instance_type) |v| {
         try buf.appendSlice(allocator, "<SpotInstanceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SpotInstanceType>");
     }
     if (value.valid_until) |v| {
@@ -40833,12 +40833,12 @@ pub fn serializeSpotMarketOptions(allocator: std.mem.Allocator, buf: *std.ArrayL
 pub fn serializeSpotOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotOptionsRequest) !void {
     if (value.allocation_strategy) |v| {
         try buf.appendSlice(allocator, "<AllocationStrategy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AllocationStrategy>");
     }
     if (value.instance_interruption_behavior) |v| {
         try buf.appendSlice(allocator, "<InstanceInterruptionBehavior>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InstanceInterruptionBehavior>");
     }
     if (value.instance_pools_to_use_count) |v| {
@@ -40897,7 +40897,7 @@ pub fn serializeSpotPlacement(allocator: std.mem.Allocator, buf: *std.ArrayList(
     }
     if (value.tenancy) |v| {
         try buf.appendSlice(allocator, "<tenancy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</tenancy>");
     }
 }
@@ -40957,7 +40957,7 @@ pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value
 pub fn serializeTagSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: TagSpecification) !void {
     if (value.resource_type) |v| {
         try buf.appendSlice(allocator, "<resourceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</resourceType>");
     }
     if (value.tags) |v| {
@@ -40970,7 +40970,7 @@ pub fn serializeTagSpecification(allocator: std.mem.Allocator, buf: *std.ArrayLi
 pub fn serializeTargetCapacitySpecificationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetCapacitySpecificationRequest) !void {
     if (value.default_target_capacity_type) |v| {
         try buf.appendSlice(allocator, "<DefaultTargetCapacityType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DefaultTargetCapacityType>");
     }
     if (value.on_demand_target_capacity) |v| {
@@ -40991,7 +40991,7 @@ pub fn serializeTargetCapacitySpecificationRequest(allocator: std.mem.Allocator,
     }
     if (value.target_capacity_unit_type) |v| {
         try buf.appendSlice(allocator, "<TargetCapacityUnitType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TargetCapacityUnitType>");
     }
     try buf.appendSlice(allocator, "<TotalTargetCapacity>");
@@ -41119,32 +41119,32 @@ pub fn serializeTransitGatewayRequestOptions(allocator: std.mem.Allocator, buf: 
     }
     if (value.auto_accept_shared_attachments) |v| {
         try buf.appendSlice(allocator, "<AutoAcceptSharedAttachments>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</AutoAcceptSharedAttachments>");
     }
     if (value.default_route_table_association) |v| {
         try buf.appendSlice(allocator, "<DefaultRouteTableAssociation>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DefaultRouteTableAssociation>");
     }
     if (value.default_route_table_propagation) |v| {
         try buf.appendSlice(allocator, "<DefaultRouteTablePropagation>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DefaultRouteTablePropagation>");
     }
     if (value.dns_support) |v| {
         try buf.appendSlice(allocator, "<DnsSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DnsSupport>");
     }
     if (value.multicast_support) |v| {
         try buf.appendSlice(allocator, "<MulticastSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</MulticastSupport>");
     }
     if (value.security_group_referencing_support) |v| {
         try buf.appendSlice(allocator, "<SecurityGroupReferencingSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SecurityGroupReferencingSupport>");
     }
     if (value.transit_gateway_cidr_blocks) |v| {
@@ -41154,7 +41154,7 @@ pub fn serializeTransitGatewayRequestOptions(allocator: std.mem.Allocator, buf: 
     }
     if (value.vpn_ecmp_support) |v| {
         try buf.appendSlice(allocator, "<VpnEcmpSupport>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VpnEcmpSupport>");
     }
 }
@@ -41350,45 +41350,45 @@ pub fn serializeVolumeDetail(allocator: std.mem.Allocator, buf: *std.ArrayList(u
 pub fn serializeVpcEncryptionControlConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: VpcEncryptionControlConfiguration) !void {
     if (value.egress_only_internet_gateway_exclusion) |v| {
         try buf.appendSlice(allocator, "<EgressOnlyInternetGatewayExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</EgressOnlyInternetGatewayExclusion>");
     }
     if (value.elastic_file_system_exclusion) |v| {
         try buf.appendSlice(allocator, "<ElasticFileSystemExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ElasticFileSystemExclusion>");
     }
     if (value.internet_gateway_exclusion) |v| {
         try buf.appendSlice(allocator, "<InternetGatewayExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InternetGatewayExclusion>");
     }
     if (value.lambda_exclusion) |v| {
         try buf.appendSlice(allocator, "<LambdaExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</LambdaExclusion>");
     }
     try buf.appendSlice(allocator, "<Mode>");
-    try buf.appendSlice(allocator, @tagName(value.mode));
+    try buf.appendSlice(allocator, value.mode.wireName());
     try buf.appendSlice(allocator, "</Mode>");
     if (value.nat_gateway_exclusion) |v| {
         try buf.appendSlice(allocator, "<NatGatewayExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</NatGatewayExclusion>");
     }
     if (value.virtual_private_gateway_exclusion) |v| {
         try buf.appendSlice(allocator, "<VirtualPrivateGatewayExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VirtualPrivateGatewayExclusion>");
     }
     if (value.vpc_lattice_exclusion) |v| {
         try buf.appendSlice(allocator, "<VpcLatticeExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VpcLatticeExclusion>");
     }
     if (value.vpc_peering_exclusion) |v| {
         try buf.appendSlice(allocator, "<VpcPeeringExclusion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</VpcPeeringExclusion>");
     }
 }
@@ -41436,12 +41436,12 @@ pub fn serializeVpnConnectionOptionsSpecification(allocator: std.mem.Allocator, 
     }
     if (value.tunnel_bandwidth) |v| {
         try buf.appendSlice(allocator, "<TunnelBandwidth>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TunnelBandwidth>");
     }
     if (value.tunnel_inside_ip_version) |v| {
         try buf.appendSlice(allocator, "<TunnelInsideIpVersion>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TunnelInsideIpVersion>");
     }
     if (value.tunnel_options) |v| {

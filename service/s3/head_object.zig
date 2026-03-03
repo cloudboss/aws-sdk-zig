@@ -674,7 +674,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: HeadObjectInput, config
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_mode) |v| {
-        try request.headers.put(allocator, "x-amz-checksum-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-checksum-mode", v.wireName());
     }
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
@@ -701,7 +701,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: HeadObjectInput, config
         try request.headers.put(allocator, "Range", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -745,7 +745,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.accept_ranges = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-archive-status")) |value| {
-        result.archive_status = std.meta.stringToEnum(ArchiveStatus, value);
+        result.archive_status = ArchiveStatus.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
         result.bucket_key_enabled = std.mem.eql(u8, value, "true");
@@ -769,7 +769,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.checksum_sha256 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-type")) |value| {
-        result.checksum_type = std.meta.stringToEnum(ChecksumType, value);
+        result.checksum_type = ChecksumType.fromWireName(value);
     }
     if (headers.get("content-disposition")) |value| {
         result.content_disposition = try allocator.dupe(u8, value);
@@ -808,10 +808,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.missing_meta = std.fmt.parseInt(i32, value, 10) catch null;
     }
     if (headers.get("x-amz-object-lock-legal-hold")) |value| {
-        result.object_lock_legal_hold_status = std.meta.stringToEnum(ObjectLockLegalHoldStatus, value);
+        result.object_lock_legal_hold_status = ObjectLockLegalHoldStatus.fromWireName(value);
     }
     if (headers.get("x-amz-object-lock-mode")) |value| {
-        result.object_lock_mode = std.meta.stringToEnum(ObjectLockMode, value);
+        result.object_lock_mode = ObjectLockMode.fromWireName(value);
     }
     if (headers.get("x-amz-object-lock-retain-until-date")) |value| {
         result.object_lock_retain_until_date = std.fmt.parseInt(i64, value, 10) catch null;
@@ -820,16 +820,16 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.parts_count = std.fmt.parseInt(i32, value, 10) catch null;
     }
     if (headers.get("x-amz-replication-status")) |value| {
-        result.replication_status = std.meta.stringToEnum(ReplicationStatus, value);
+        result.replication_status = ReplicationStatus.fromWireName(value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-restore")) |value| {
         result.restore = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
         result.sse_customer_algorithm = try allocator.dupe(u8, value);
@@ -841,7 +841,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.ssekms_key_id = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-storage-class")) |value| {
-        result.storage_class = std.meta.stringToEnum(StorageClass, value);
+        result.storage_class = StorageClass.fromWireName(value);
     }
     if (headers.get("x-amz-tagging-count")) |value| {
         result.tag_count = std.fmt.parseInt(i32, value, 10) catch null;

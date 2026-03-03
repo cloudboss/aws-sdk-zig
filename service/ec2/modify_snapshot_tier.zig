@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySnapshotTierInput
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.snapshot_id);
     if (input.storage_tier) |v| {
         try body_buf.appendSlice(allocator, "&StorageTier=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

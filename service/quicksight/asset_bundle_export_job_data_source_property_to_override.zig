@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AssetBundleExportJobDataSourcePropertyToOverride = enum {
     name,
     disable_ssl,
@@ -19,23 +21,55 @@ pub const AssetBundleExportJobDataSourcePropertyToOverride = enum {
     product_type,
 
     pub const json_field_names = .{
-        .name = "NAME",
-        .disable_ssl = "DISABLE_SSL",
-        .secret_arn = "SECRET_ARN",
-        .username = "USERNAME",
-        .password = "PASSWORD",
-        .domain = "DOMAIN",
-        .work_group = "WORK_GROUP",
-        .host = "HOST",
-        .port = "PORT",
-        .database = "DATABASE",
-        .data_set_name = "DATA_SET_NAME",
-        .catalog = "CATALOG",
-        .instance_id = "INSTANCE_ID",
-        .cluster_id = "CLUSTER_ID",
-        .manifest_file_location = "MANIFEST_FILE_LOCATION",
-        .warehouse = "WAREHOUSE",
-        .role_arn = "ROLE_ARN",
-        .product_type = "PRODUCT_TYPE",
+        .name = "Name",
+        .disable_ssl = "DisableSsl",
+        .secret_arn = "SecretArn",
+        .username = "Username",
+        .password = "Password",
+        .domain = "Domain",
+        .work_group = "WorkGroup",
+        .host = "Host",
+        .port = "Port",
+        .database = "Database",
+        .data_set_name = "DataSetName",
+        .catalog = "Catalog",
+        .instance_id = "InstanceId",
+        .cluster_id = "ClusterId",
+        .manifest_file_location = "ManifestFileLocation",
+        .warehouse = "Warehouse",
+        .role_arn = "RoleArn",
+        .product_type = "ProductType",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .name => "Name",
+            .disable_ssl => "DisableSsl",
+            .secret_arn => "SecretArn",
+            .username => "Username",
+            .password => "Password",
+            .domain => "Domain",
+            .work_group => "WorkGroup",
+            .host => "Host",
+            .port => "Port",
+            .database => "Database",
+            .data_set_name => "DataSetName",
+            .catalog => "Catalog",
+            .instance_id => "InstanceId",
+            .cluster_id => "ClusterId",
+            .manifest_file_location => "ManifestFileLocation",
+            .warehouse => "Warehouse",
+            .role_arn => "RoleArn",
+            .product_type => "ProductType",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

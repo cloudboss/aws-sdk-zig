@@ -235,7 +235,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectAttributesInpu
         var header_buf: std.ArrayList(u8) = .{};
         for (input.object_attributes) |item| {
             if (header_buf.items.len > 0) try header_buf.appendSlice(allocator, ", ");
-            try header_buf.appendSlice(allocator, @tagName(item));
+            try header_buf.appendSlice(allocator, item.wireName());
         }
         try request.headers.put(allocator, "x-amz-object-attributes", header_buf.items);
     }
@@ -243,7 +243,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectAttributesInpu
         try request.headers.put(allocator, "x-amz-part-number-marker", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -282,7 +282,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "ObjectSize")) {
                     result.object_size = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
-                    result.storage_class = std.meta.stringToEnum(StorageClass, try reader.readElementText());
+                    result.storage_class = StorageClass.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -298,7 +298,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.last_modified = std.fmt.parseInt(i64, value, 10) catch null;
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-version-id")) |value| {
         result.version_id = try allocator.dupe(u8, value);

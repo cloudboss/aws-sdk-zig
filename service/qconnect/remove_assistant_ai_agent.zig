@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveAssistantAIAgentI
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "aiAgentType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.ai_agent_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.ai_agent_type.wireName());
     query_has_prev = true;
     if (input.orchestrator_use_case) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

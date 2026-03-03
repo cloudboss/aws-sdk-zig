@@ -77,7 +77,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateJobStatusInput, c
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "requestedJobStatus=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.requested_job_status));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.requested_job_status.wireName());
     query_has_prev = true;
     if (input.status_update_reason) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -120,7 +120,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "JobId")) {
                     result.job_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(JobStatus, try reader.readElementText());
+                    result.status = JobStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusUpdateReason")) {
                     result.status_update_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {

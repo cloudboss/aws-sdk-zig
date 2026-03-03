@@ -62,7 +62,7 @@ pub const ComponentDeletedWaiter = struct {
 
         if (output.component) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETE_FAILED")) {
                     return .failure;
                 }
             }
@@ -116,14 +116,14 @@ pub const ComponentDeployedWaiter = struct {
 
         if (output.component) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "SUCCEEDED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "SUCCEEDED")) {
                     return .success;
                 }
             }
         }
         if (output.component) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -177,14 +177,14 @@ pub const EnvironmentDeployedWaiter = struct {
 
         if (output.environment) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "SUCCEEDED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "SUCCEEDED")) {
                     return .success;
                 }
             }
         }
         if (output.environment) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -238,21 +238,21 @@ pub const EnvironmentTemplateVersionRegisteredWaiter = struct {
 
         if (output.environment_template_version) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DRAFT")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DRAFT")) {
                     return .success;
                 }
             }
         }
         if (output.environment_template_version) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PUBLISHED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PUBLISHED")) {
                     return .success;
                 }
             }
         }
         if (output.environment_template_version) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "REGISTRATION_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "REGISTRATION_FAILED")) {
                     return .failure;
                 }
             }
@@ -306,28 +306,28 @@ pub const ServiceCreatedWaiter = struct {
 
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED_CLEANUP_COMPLETE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED_CLEANUP_COMPLETE")) {
                     return .failure;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED_CLEANUP_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED_CLEANUP_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED")) {
                     return .failure;
                 }
             }
@@ -388,7 +388,7 @@ pub const ServiceDeletedWaiter = struct {
 
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETE_FAILED")) {
                     return .failure;
                 }
             }
@@ -442,14 +442,14 @@ pub const ServiceInstanceDeployedWaiter = struct {
 
         if (output.service_instance) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "SUCCEEDED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "SUCCEEDED")) {
                     return .success;
                 }
             }
         }
         if (output.service_instance) |val_0| {
             if (val_0.deployment_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -504,7 +504,7 @@ pub const ServicePipelineDeployedWaiter = struct {
         if (output.service) |val_0| {
             if (val_0.pipeline) |val_1| {
                 if (val_1.deployment_status) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "SUCCEEDED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "SUCCEEDED")) {
                         return .success;
                     }
                 }
@@ -513,7 +513,7 @@ pub const ServicePipelineDeployedWaiter = struct {
         if (output.service) |val_0| {
             if (val_0.pipeline) |val_1| {
                 if (val_1.deployment_status) |val_2| {
-                    if (std.mem.eql(u8, @tagName(val_2), "FAILED")) {
+                    if (std.mem.eql(u8, val_2.wireName(), "FAILED")) {
                         return .failure;
                     }
                 }
@@ -568,21 +568,21 @@ pub const ServiceTemplateVersionRegisteredWaiter = struct {
 
         if (output.service_template_version) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DRAFT")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DRAFT")) {
                     return .success;
                 }
             }
         }
         if (output.service_template_version) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PUBLISHED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PUBLISHED")) {
                     return .success;
                 }
             }
         }
         if (output.service_template_version) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "REGISTRATION_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "REGISTRATION_FAILED")) {
                     return .failure;
                 }
             }
@@ -636,35 +636,35 @@ pub const ServiceUpdatedWaiter = struct {
 
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATE_FAILED_CLEANUP_COMPLETE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATE_FAILED_CLEANUP_COMPLETE")) {
                     return .failure;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATE_FAILED_CLEANUP_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATE_FAILED_CLEANUP_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATE_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.service) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "UPDATE_COMPLETE_CLEANUP_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "UPDATE_COMPLETE_CLEANUP_FAILED")) {
                     return .failure;
                 }
             }

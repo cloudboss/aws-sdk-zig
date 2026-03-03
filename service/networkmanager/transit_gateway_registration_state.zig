@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const TransitGatewayRegistrationState = enum {
     pending,
     available,
@@ -6,10 +8,29 @@ pub const TransitGatewayRegistrationState = enum {
     failed,
 
     pub const json_field_names = .{
-        .pending = "pending",
-        .available = "available",
-        .deleting = "deleting",
-        .deleted = "deleted",
-        .failed = "failed",
+        .pending = "PENDING",
+        .available = "AVAILABLE",
+        .deleting = "DELETING",
+        .deleted = "DELETED",
+        .failed = "FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .pending => "PENDING",
+            .available => "AVAILABLE",
+            .deleting => "DELETING",
+            .deleted => "DELETED",
+            .failed => "FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

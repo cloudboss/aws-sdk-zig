@@ -150,7 +150,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNatGatewayInput, 
     }
     if (input.availability_mode) |v| {
         try body_buf.appendSlice(allocator, "&AvailabilityMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.availability_zone_addresses) |list| {
         for (list, 0..) |item, idx| {
@@ -190,7 +190,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNatGatewayInput, 
     }
     if (input.connectivity_type) |v| {
         try body_buf.appendSlice(allocator, "&ConnectivityType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
@@ -234,7 +234,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNatGatewayInput, 
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

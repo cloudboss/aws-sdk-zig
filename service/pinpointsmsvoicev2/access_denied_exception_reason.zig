@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AccessDeniedExceptionReason = enum {
     insufficient_account_reputation,
     account_disabled,
@@ -6,4 +8,20 @@ pub const AccessDeniedExceptionReason = enum {
         .insufficient_account_reputation = "INSUFFICIENT_ACCOUNT_REPUTATION",
         .account_disabled = "ACCOUNT_DISABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .insufficient_account_reputation => "INSUFFICIENT_ACCOUNT_REPUTATION",
+            .account_disabled => "ACCOUNT_DISABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

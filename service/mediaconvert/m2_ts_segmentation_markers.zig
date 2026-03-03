@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Inserts segmentation markers at each segmentation_time period. rai_segstart
 /// sets the Random Access Indicator bit in the adaptation field. rai_adapt sets
 /// the RAI bit and adds the current timecode in the private data bytes.
@@ -21,4 +23,24 @@ pub const M2tsSegmentationMarkers = enum {
         .ebp = "EBP",
         .ebp_legacy = "EBP_LEGACY",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "NONE",
+            .rai_segstart => "RAI_SEGSTART",
+            .rai_adapt => "RAI_ADAPT",
+            .psi_segstart => "PSI_SEGSTART",
+            .ebp => "EBP",
+            .ebp_legacy => "EBP_LEGACY",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

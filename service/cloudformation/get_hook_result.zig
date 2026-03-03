@@ -151,19 +151,19 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Annotations")) {
                     result.annotations = try serde.deserializeAnnotationList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "FailureMode")) {
-                    result.failure_mode = std.meta.stringToEnum(HookFailureMode, try reader.readElementText());
+                    result.failure_mode = HookFailureMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HookResultId")) {
                     result.hook_result_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HookStatusReason")) {
                     result.hook_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InvocationPoint")) {
-                    result.invocation_point = std.meta.stringToEnum(HookInvocationPoint, try reader.readElementText());
+                    result.invocation_point = HookInvocationPoint.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InvokedAt")) {
                     result.invoked_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "OriginalTypeName")) {
                     result.original_type_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(HookStatus, try reader.readElementText());
+                    result.status = HookStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Target")) {
                     result.target = try serde.deserializeHookTarget(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "TypeArn")) {

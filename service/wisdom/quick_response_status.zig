@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const QuickResponseStatus = enum {
     create_in_progress,
     create_failed,
@@ -18,4 +20,26 @@ pub const QuickResponseStatus = enum {
         .update_in_progress = "UPDATE_IN_PROGRESS",
         .update_failed = "UPDATE_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .create_in_progress => "CREATE_IN_PROGRESS",
+            .create_failed => "CREATE_FAILED",
+            .created => "CREATED",
+            .delete_in_progress => "DELETE_IN_PROGRESS",
+            .delete_failed => "DELETE_FAILED",
+            .deleted => "DELETED",
+            .update_in_progress => "UPDATE_IN_PROGRESS",
+            .update_failed => "UPDATE_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

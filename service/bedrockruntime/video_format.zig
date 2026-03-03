@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const VideoFormat = enum {
     mkv,
     mov,
@@ -10,14 +12,37 @@ pub const VideoFormat = enum {
     three_gp,
 
     pub const json_field_names = .{
-        .mkv = "MKV",
-        .mov = "MOV",
-        .mp4 = "MP4",
-        .webm = "WEBM",
-        .flv = "FLV",
-        .mpeg = "MPEG",
-        .mpg = "MPG",
-        .wmv = "WMV",
-        .three_gp = "THREE_GP",
+        .mkv = "mkv",
+        .mov = "mov",
+        .mp4 = "mp4",
+        .webm = "webm",
+        .flv = "flv",
+        .mpeg = "mpeg",
+        .mpg = "mpg",
+        .wmv = "wmv",
+        .three_gp = "three_gp",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .mkv => "mkv",
+            .mov => "mov",
+            .mp4 => "mp4",
+            .webm => "webm",
+            .flv => "flv",
+            .mpeg => "mpeg",
+            .mpg => "mpg",
+            .wmv => "wmv",
+            .three_gp => "three_gp",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

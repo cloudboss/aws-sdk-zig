@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CoreDeviceOperatingSystem = enum {
     linux_aarch64,
     linux_amd64,
@@ -8,4 +10,21 @@ pub const CoreDeviceOperatingSystem = enum {
         .linux_amd64 = "LINUX_AMD64",
         .windows_amd64 = "WINDOWS_AMD64",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .linux_aarch64 => "LINUX_AARCH64",
+            .linux_amd64 => "LINUX_AMD64",
+            .windows_amd64 => "WINDOWS_AMD64",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const BillingViewStatusReason = enum {
     source_view_unhealthy,
     source_view_updating,
@@ -18,4 +20,26 @@ pub const BillingViewStatusReason = enum {
         .aggregate_source = "AGGREGATE_SOURCE",
         .view_owner_not_management_account = "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .source_view_unhealthy => "SOURCE_VIEW_UNHEALTHY",
+            .source_view_updating => "SOURCE_VIEW_UPDATING",
+            .source_view_access_denied => "SOURCE_VIEW_ACCESS_DENIED",
+            .source_view_not_found => "SOURCE_VIEW_NOT_FOUND",
+            .cyclic_dependency => "CYCLIC_DEPENDENCY",
+            .source_view_depth_exceeded => "SOURCE_VIEW_DEPTH_EXCEEDED",
+            .aggregate_source => "AGGREGATE_SOURCE",
+            .view_owner_not_management_account => "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

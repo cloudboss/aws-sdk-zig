@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AccountType = enum {
     team,
     enterprise_directory,
@@ -10,4 +12,22 @@ pub const AccountType = enum {
         .enterprise_lwa = "EnterpriseLWA",
         .enterprise_oidc = "EnterpriseOIDC",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .team => "Team",
+            .enterprise_directory => "EnterpriseDirectory",
+            .enterprise_lwa => "EnterpriseLWA",
+            .enterprise_oidc => "EnterpriseOIDC",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

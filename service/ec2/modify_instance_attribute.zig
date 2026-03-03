@@ -195,7 +195,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
     try body_buf.appendSlice(allocator, "Action=ModifyInstanceAttribute&Version=2016-11-15");
     if (input.attribute) |v| {
         try body_buf.appendSlice(allocator, "&Attribute=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.block_device_mappings) |list| {
         for (list, 0..) |item, idx| {

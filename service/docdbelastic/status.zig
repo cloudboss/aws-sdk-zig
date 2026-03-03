@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Status = enum {
     creating,
     active,
@@ -44,4 +46,39 @@ pub const Status = enum {
         .maintenance = "MAINTENANCE",
         .inaccessible_encryption_credentials_recoverable = "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .creating => "CREATING",
+            .active => "ACTIVE",
+            .deleting => "DELETING",
+            .updating => "UPDATING",
+            .vpc_endpoint_limit_exceeded => "VPC_ENDPOINT_LIMIT_EXCEEDED",
+            .ip_address_limit_exceeded => "IP_ADDRESS_LIMIT_EXCEEDED",
+            .invalid_security_group_id => "INVALID_SECURITY_GROUP_ID",
+            .invalid_subnet_id => "INVALID_SUBNET_ID",
+            .inaccessible_encryption_creds => "INACCESSIBLE_ENCRYPTION_CREDS",
+            .inaccessible_secret_arn => "INACCESSIBLE_SECRET_ARN",
+            .inaccessible_vpc_endpoint => "INACCESSIBLE_VPC_ENDPOINT",
+            .incompatible_network => "INCOMPATIBLE_NETWORK",
+            .merging => "MERGING",
+            .modifying => "MODIFYING",
+            .splitting => "SPLITTING",
+            .copying => "COPYING",
+            .starting => "STARTING",
+            .stopping => "STOPPING",
+            .stopped => "STOPPED",
+            .maintenance => "MAINTENANCE",
+            .inaccessible_encryption_credentials_recoverable => "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

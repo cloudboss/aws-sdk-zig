@@ -56,17 +56,17 @@ pub const CodeBindingExistsWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_COMPLETE")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_IN_PROGRESS")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_IN_PROGRESS")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }

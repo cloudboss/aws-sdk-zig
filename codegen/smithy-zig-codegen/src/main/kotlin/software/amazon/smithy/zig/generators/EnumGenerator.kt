@@ -17,13 +17,15 @@ class EnumGenerator(
 
         // Collect enum members: works for both Smithy 2.0 enum shapes and
         // Smithy 1.0 string shapes with the deprecated @enum trait.
-        data class EnumMember(val name: String, val docs: String?)
+        data class EnumMember(val name: String, val wireValue: String, val docs: String?)
 
         val members: List<EnumMember> = if (shape.isEnumShape()) {
             val enumShape = directive.expectEnumShape()
+            val wireValues = enumShape.enumValues
             enumShape.members().map { member ->
                 EnumMember(
                     member.memberName,
+                    wireValues[member.memberName] ?: member.memberName,
                     member.getTrait(DocumentationTrait::class.java)
                         .map { it.value }.orElse(null),
                 )
@@ -33,12 +35,17 @@ class EnumGenerator(
             enumTrait.values.map { definition ->
                 EnumMember(
                     definition.name.orElse(definition.value),
+                    definition.value,
                     definition.documentation.orElse(null),
                 )
             }
         }
 
         context.writerDelegator().useShapeWriter(shape) { writer ->
+            if (members.isNotEmpty()) {
+                writer.importContainer.addImport("std", "std")
+            }
+
             val docs = shape.getTrait(DocumentationTrait::class.java)
                 .map { it.value }
                 .orElse(null)
@@ -54,27 +61,47 @@ class EnumGenerator(
                 writer.write("\$L,", variantName)
             }
 
-            // Emit json_field_names for JSON protocol services
-            if (isJsonProtocol(context)) {
-                if (members.isNotEmpty()) {
-                    writer.blankLine()
-                    writer.openBlock("pub const json_field_names = .{")
-                    for (member in members) {
-                        val variantName = NamingUtil.toFieldName(member.name)
-                        writer.write(".\$L = \"\$L\",", variantName, member.name)
-                    }
-                    writer.closeBlock("};");
+            // Emit json_field_names mapping Zig variant names to wire values.
+            // Used by JSON runtime (parseEnum/writeEnum) and XML/query serialization.
+            if (members.isNotEmpty()) {
+                writer.blankLine()
+                writer.openBlock("pub const json_field_names = .{")
+                for (member in members) {
+                    val variantName = NamingUtil.toFieldName(member.name)
+                    writer.write(".\$L = \"\$L\",", variantName, member.wireValue)
                 }
+                writer.closeBlock("};")
+
+                // wireName: convert enum variant to wire string
+                writer.blankLine()
+                writer.openBlock("pub fn wireName(self: @This()) []const u8 {")
+                writer.openBlock("return switch (self) {")
+                for (member in members) {
+                    val variantName = NamingUtil.toFieldName(member.name)
+                    writer.write(".\$L => \"\$L\",", variantName, member.wireValue)
+                }
+                writer.closeBlock("};")
+                writer.closeBlock("}")
+
+                // fromWireName: convert wire string to enum variant
+                writer.blankLine()
+                writer.openBlock("pub fn fromWireName(str: []const u8) ?@This() {")
+                // inline for + stringToEnum each cost ~N branches per variant.
+                // Zig's default comptime branch quota is 1000.
+                val branchCost = members.size * 3 // inline for + eql + stringToEnum
+                if (branchCost > 1000) {
+                    writer.write("@setEvalBranchQuota(\$L);", branchCost + 100)
+                }
+                writer.openBlock("inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {")
+                writer.openBlock("if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {")
+                writer.write("return @field(@This(), field.name);")
+                writer.closeBlock("}")
+                writer.closeBlock("}")
+                writer.write("return std.meta.stringToEnum(@This(), str);")
+                writer.closeBlock("}")
             }
 
-            writer.closeBlock("};");
+            writer.closeBlock("};")
         }
-    }
-
-    private fun isJsonProtocol(context: ZigContext): Boolean {
-        val service = context.service
-        return service.hasTrait("aws.protocols#awsJson1_0") ||
-            service.hasTrait("aws.protocols#awsJson1_1") ||
-            service.hasTrait("aws.protocols#restJson1")
     }
 }

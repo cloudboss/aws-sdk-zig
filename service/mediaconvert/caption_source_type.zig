@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use Source to identify the format of your input captions. The service cannot
 /// auto-detect caption format.
 pub const CaptionSourceType = enum {
@@ -34,4 +36,33 @@ pub const CaptionSourceType = enum {
         .webvtt = "WEBVTT",
         .tt_3_gpp = "TT_3GPP",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ancillary => "ANCILLARY",
+            .dvb_sub => "DVB_SUB",
+            .embedded => "EMBEDDED",
+            .scte20 => "SCTE20",
+            .scc => "SCC",
+            .ttml => "TTML",
+            .stl => "STL",
+            .srt => "SRT",
+            .smi => "SMI",
+            .smpte_tt => "SMPTE_TT",
+            .teletext => "TELETEXT",
+            .null_source => "NULL_SOURCE",
+            .imsc => "IMSC",
+            .webvtt => "WEBVTT",
+            .tt_3_gpp => "TT_3GPP",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

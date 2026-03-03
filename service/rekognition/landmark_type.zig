@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const LandmarkType = enum {
     eye_left,
     eye_right,
@@ -62,4 +64,48 @@ pub const LandmarkType = enum {
         .mid_jawline_right = "midJawlineRight",
         .upper_jawline_right = "upperJawlineRight",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .eye_left => "eyeLeft",
+            .eye_right => "eyeRight",
+            .nose => "nose",
+            .mouth_left => "mouthLeft",
+            .mouth_right => "mouthRight",
+            .left_eye_brow_left => "leftEyeBrowLeft",
+            .left_eye_brow_right => "leftEyeBrowRight",
+            .left_eye_brow_up => "leftEyeBrowUp",
+            .right_eye_brow_left => "rightEyeBrowLeft",
+            .right_eye_brow_right => "rightEyeBrowRight",
+            .right_eye_brow_up => "rightEyeBrowUp",
+            .left_eye_left => "leftEyeLeft",
+            .left_eye_right => "leftEyeRight",
+            .left_eye_up => "leftEyeUp",
+            .left_eye_down => "leftEyeDown",
+            .right_eye_left => "rightEyeLeft",
+            .right_eye_right => "rightEyeRight",
+            .right_eye_up => "rightEyeUp",
+            .right_eye_down => "rightEyeDown",
+            .nose_left => "noseLeft",
+            .nose_right => "noseRight",
+            .mouth_up => "mouthUp",
+            .mouth_down => "mouthDown",
+            .left_pupil => "leftPupil",
+            .right_pupil => "rightPupil",
+            .upper_jawline_left => "upperJawlineLeft",
+            .mid_jawline_left => "midJawlineLeft",
+            .chin_bottom => "chinBottom",
+            .mid_jawline_right => "midJawlineRight",
+            .upper_jawline_right => "upperJawlineRight",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourceRecordSetRegion = enum {
     us_east_1,
     us_east_2,
@@ -38,4 +40,99 @@ pub const ResourceRecordSetRegion = enum {
     ap_east_2,
     ap_southeast_6,
     eusc_de_east_1,
+
+    pub const json_field_names = .{
+        .us_east_1 = "us-east-1",
+        .us_east_2 = "us-east-2",
+        .us_west_1 = "us-west-1",
+        .us_west_2 = "us-west-2",
+        .ca_central_1 = "ca-central-1",
+        .eu_west_1 = "eu-west-1",
+        .eu_west_2 = "eu-west-2",
+        .eu_west_3 = "eu-west-3",
+        .eu_central_1 = "eu-central-1",
+        .eu_central_2 = "eu-central-2",
+        .ap_southeast_1 = "ap-southeast-1",
+        .ap_southeast_2 = "ap-southeast-2",
+        .ap_southeast_3 = "ap-southeast-3",
+        .ap_northeast_1 = "ap-northeast-1",
+        .ap_northeast_2 = "ap-northeast-2",
+        .ap_northeast_3 = "ap-northeast-3",
+        .eu_north_1 = "eu-north-1",
+        .sa_east_1 = "sa-east-1",
+        .cn_north_1 = "cn-north-1",
+        .cn_northwest_1 = "cn-northwest-1",
+        .ap_east_1 = "ap-east-1",
+        .me_south_1 = "me-south-1",
+        .me_central_1 = "me-central-1",
+        .ap_south_1 = "ap-south-1",
+        .ap_south_2 = "ap-south-2",
+        .af_south_1 = "af-south-1",
+        .eu_south_1 = "eu-south-1",
+        .eu_south_2 = "eu-south-2",
+        .ap_southeast_4 = "ap-southeast-4",
+        .il_central_1 = "il-central-1",
+        .ca_west_1 = "ca-west-1",
+        .ap_southeast_5 = "ap-southeast-5",
+        .mx_central_1 = "mx-central-1",
+        .ap_southeast_7 = "ap-southeast-7",
+        .us_gov_east_1 = "us-gov-east-1",
+        .us_gov_west_1 = "us-gov-west-1",
+        .ap_east_2 = "ap-east-2",
+        .ap_southeast_6 = "ap-southeast-6",
+        .eusc_de_east_1 = "eusc-de-east-1",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .us_east_1 => "us-east-1",
+            .us_east_2 => "us-east-2",
+            .us_west_1 => "us-west-1",
+            .us_west_2 => "us-west-2",
+            .ca_central_1 => "ca-central-1",
+            .eu_west_1 => "eu-west-1",
+            .eu_west_2 => "eu-west-2",
+            .eu_west_3 => "eu-west-3",
+            .eu_central_1 => "eu-central-1",
+            .eu_central_2 => "eu-central-2",
+            .ap_southeast_1 => "ap-southeast-1",
+            .ap_southeast_2 => "ap-southeast-2",
+            .ap_southeast_3 => "ap-southeast-3",
+            .ap_northeast_1 => "ap-northeast-1",
+            .ap_northeast_2 => "ap-northeast-2",
+            .ap_northeast_3 => "ap-northeast-3",
+            .eu_north_1 => "eu-north-1",
+            .sa_east_1 => "sa-east-1",
+            .cn_north_1 => "cn-north-1",
+            .cn_northwest_1 => "cn-northwest-1",
+            .ap_east_1 => "ap-east-1",
+            .me_south_1 => "me-south-1",
+            .me_central_1 => "me-central-1",
+            .ap_south_1 => "ap-south-1",
+            .ap_south_2 => "ap-south-2",
+            .af_south_1 => "af-south-1",
+            .eu_south_1 => "eu-south-1",
+            .eu_south_2 => "eu-south-2",
+            .ap_southeast_4 => "ap-southeast-4",
+            .il_central_1 => "il-central-1",
+            .ca_west_1 => "ca-west-1",
+            .ap_southeast_5 => "ap-southeast-5",
+            .mx_central_1 => "mx-central-1",
+            .ap_southeast_7 => "ap-southeast-7",
+            .us_gov_east_1 => "us-gov-east-1",
+            .us_gov_west_1 => "us-gov-west-1",
+            .ap_east_2 => "ap-east-2",
+            .ap_southeast_6 => "ap-southeast-6",
+            .eusc_de_east_1 => "eusc-de-east-1",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Applies only to 608 Embedded output captions. Insert: Include
 /// CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the
 /// CC1 Language Code field. One CLOSED-CAPTION line is added for each Language
@@ -17,4 +19,21 @@ pub const HlsCaptionLanguageSetting = enum {
         .omit = "OMIT",
         .none = "NONE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .insert => "INSERT",
+            .omit => "OMIT",
+            .none => "NONE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

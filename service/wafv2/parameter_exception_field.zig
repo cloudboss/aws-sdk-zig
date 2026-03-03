@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ParameterExceptionField = enum {
     web_acl,
     rule_group,
@@ -146,4 +148,90 @@ pub const ParameterExceptionField = enum {
         .data_protection_config = "DATA_PROTECTION_CONFIG",
         .low_reputation_mode = "LOW_REPUTATION_MODE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .web_acl => "WEB_ACL",
+            .rule_group => "RULE_GROUP",
+            .regex_pattern_set => "REGEX_PATTERN_SET",
+            .ip_set => "IP_SET",
+            .managed_rule_set => "MANAGED_RULE_SET",
+            .rule => "RULE",
+            .excluded_rule => "EXCLUDED_RULE",
+            .statement => "STATEMENT",
+            .byte_match_statement => "BYTE_MATCH_STATEMENT",
+            .sqli_match_statement => "SQLI_MATCH_STATEMENT",
+            .xss_match_statement => "XSS_MATCH_STATEMENT",
+            .size_constraint_statement => "SIZE_CONSTRAINT_STATEMENT",
+            .geo_match_statement => "GEO_MATCH_STATEMENT",
+            .rate_based_statement => "RATE_BASED_STATEMENT",
+            .rule_group_reference_statement => "RULE_GROUP_REFERENCE_STATEMENT",
+            .regex_pattern_reference_statement => "REGEX_PATTERN_REFERENCE_STATEMENT",
+            .ip_set_reference_statement => "IP_SET_REFERENCE_STATEMENT",
+            .managed_rule_set_statement => "MANAGED_RULE_SET_STATEMENT",
+            .label_match_statement => "LABEL_MATCH_STATEMENT",
+            .and_statement => "AND_STATEMENT",
+            .or_statement => "OR_STATEMENT",
+            .not_statement => "NOT_STATEMENT",
+            .ip_address => "IP_ADDRESS",
+            .ip_address_version => "IP_ADDRESS_VERSION",
+            .field_to_match => "FIELD_TO_MATCH",
+            .text_transformation => "TEXT_TRANSFORMATION",
+            .single_query_argument => "SINGLE_QUERY_ARGUMENT",
+            .single_header => "SINGLE_HEADER",
+            .default_action => "DEFAULT_ACTION",
+            .rule_action => "RULE_ACTION",
+            .entity_limit => "ENTITY_LIMIT",
+            .override_action => "OVERRIDE_ACTION",
+            .scope_value => "SCOPE_VALUE",
+            .resource_arn => "RESOURCE_ARN",
+            .resource_type => "RESOURCE_TYPE",
+            .tags => "TAGS",
+            .tag_keys => "TAG_KEYS",
+            .metric_name => "METRIC_NAME",
+            .firewall_manager_statement => "FIREWALL_MANAGER_STATEMENT",
+            .fallback_behavior => "FALLBACK_BEHAVIOR",
+            .position => "POSITION",
+            .forwarded_ip_config => "FORWARDED_IP_CONFIG",
+            .ip_set_forwarded_ip_config => "IP_SET_FORWARDED_IP_CONFIG",
+            .header_name => "HEADER_NAME",
+            .custom_request_handling => "CUSTOM_REQUEST_HANDLING",
+            .response_content_type => "RESPONSE_CONTENT_TYPE",
+            .custom_response => "CUSTOM_RESPONSE",
+            .custom_response_body => "CUSTOM_RESPONSE_BODY",
+            .json_match_pattern => "JSON_MATCH_PATTERN",
+            .json_match_scope => "JSON_MATCH_SCOPE",
+            .body_parsing_fallback_behavior => "BODY_PARSING_FALLBACK_BEHAVIOR",
+            .logging_filter => "LOGGING_FILTER",
+            .filter_condition => "FILTER_CONDITION",
+            .expire_timestamp => "EXPIRE_TIMESTAMP",
+            .change_propagation_status => "CHANGE_PROPAGATION_STATUS",
+            .associable_resource => "ASSOCIABLE_RESOURCE",
+            .log_destination => "LOG_DESTINATION",
+            .managed_rule_group_config => "MANAGED_RULE_GROUP_CONFIG",
+            .payload_type => "PAYLOAD_TYPE",
+            .header_match_pattern => "HEADER_MATCH_PATTERN",
+            .cookie_match_pattern => "COOKIE_MATCH_PATTERN",
+            .map_match_scope => "MAP_MATCH_SCOPE",
+            .oversize_handling => "OVERSIZE_HANDLING",
+            .challenge_config => "CHALLENGE_CONFIG",
+            .token_domain => "TOKEN_DOMAIN",
+            .atp_rule_set_response_inspection => "ATP_RULE_SET_RESPONSE_INSPECTION",
+            .associated_resource_type => "ASSOCIATED_RESOURCE_TYPE",
+            .scope_down => "SCOPE_DOWN",
+            .custom_keys => "CUSTOM_KEYS",
+            .acp_rule_set_response_inspection => "ACP_RULE_SET_RESPONSE_INSPECTION",
+            .data_protection_config => "DATA_PROTECTION_CONFIG",
+            .low_reputation_mode => "LOW_REPUTATION_MODE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

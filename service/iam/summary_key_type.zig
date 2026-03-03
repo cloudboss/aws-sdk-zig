@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const summaryKeyType = enum {
     users,
     users_quota,
@@ -33,4 +35,89 @@ pub const summaryKeyType = enum {
     role_policy_size_quota,
     roles,
     roles_quota,
+
+    pub const json_field_names = .{
+        .users = "Users",
+        .users_quota = "UsersQuota",
+        .groups = "Groups",
+        .groups_quota = "GroupsQuota",
+        .server_certificates = "ServerCertificates",
+        .server_certificates_quota = "ServerCertificatesQuota",
+        .user_policy_size_quota = "UserPolicySizeQuota",
+        .group_policy_size_quota = "GroupPolicySizeQuota",
+        .groups_per_user_quota = "GroupsPerUserQuota",
+        .signing_certificates_per_user_quota = "SigningCertificatesPerUserQuota",
+        .access_keys_per_user_quota = "AccessKeysPerUserQuota",
+        .mfa_devices = "MFADevices",
+        .mfa_devices_in_use = "MFADevicesInUse",
+        .account_mfa_enabled = "AccountMFAEnabled",
+        .account_access_keys_present = "AccountAccessKeysPresent",
+        .account_password_present = "AccountPasswordPresent",
+        .account_signing_certificates_present = "AccountSigningCertificatesPresent",
+        .attached_policies_per_group_quota = "AttachedPoliciesPerGroupQuota",
+        .attached_policies_per_role_quota = "AttachedPoliciesPerRoleQuota",
+        .attached_policies_per_user_quota = "AttachedPoliciesPerUserQuota",
+        .policies = "Policies",
+        .policies_quota = "PoliciesQuota",
+        .policy_size_quota = "PolicySizeQuota",
+        .policy_versions_in_use = "PolicyVersionsInUse",
+        .policy_versions_in_use_quota = "PolicyVersionsInUseQuota",
+        .versions_per_policy_quota = "VersionsPerPolicyQuota",
+        .global_endpoint_token_version = "GlobalEndpointTokenVersion",
+        .assume_role_policy_size_quota = "AssumeRolePolicySizeQuota",
+        .instance_profiles = "InstanceProfiles",
+        .instance_profiles_quota = "InstanceProfilesQuota",
+        .providers = "Providers",
+        .role_policy_size_quota = "RolePolicySizeQuota",
+        .roles = "Roles",
+        .roles_quota = "RolesQuota",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .users => "Users",
+            .users_quota => "UsersQuota",
+            .groups => "Groups",
+            .groups_quota => "GroupsQuota",
+            .server_certificates => "ServerCertificates",
+            .server_certificates_quota => "ServerCertificatesQuota",
+            .user_policy_size_quota => "UserPolicySizeQuota",
+            .group_policy_size_quota => "GroupPolicySizeQuota",
+            .groups_per_user_quota => "GroupsPerUserQuota",
+            .signing_certificates_per_user_quota => "SigningCertificatesPerUserQuota",
+            .access_keys_per_user_quota => "AccessKeysPerUserQuota",
+            .mfa_devices => "MFADevices",
+            .mfa_devices_in_use => "MFADevicesInUse",
+            .account_mfa_enabled => "AccountMFAEnabled",
+            .account_access_keys_present => "AccountAccessKeysPresent",
+            .account_password_present => "AccountPasswordPresent",
+            .account_signing_certificates_present => "AccountSigningCertificatesPresent",
+            .attached_policies_per_group_quota => "AttachedPoliciesPerGroupQuota",
+            .attached_policies_per_role_quota => "AttachedPoliciesPerRoleQuota",
+            .attached_policies_per_user_quota => "AttachedPoliciesPerUserQuota",
+            .policies => "Policies",
+            .policies_quota => "PoliciesQuota",
+            .policy_size_quota => "PolicySizeQuota",
+            .policy_versions_in_use => "PolicyVersionsInUse",
+            .policy_versions_in_use_quota => "PolicyVersionsInUseQuota",
+            .versions_per_policy_quota => "VersionsPerPolicyQuota",
+            .global_endpoint_token_version => "GlobalEndpointTokenVersion",
+            .assume_role_policy_size_quota => "AssumeRolePolicySizeQuota",
+            .instance_profiles => "InstanceProfiles",
+            .instance_profiles_quota => "InstanceProfilesQuota",
+            .providers => "Providers",
+            .role_policy_size_quota => "RolePolicySizeQuota",
+            .roles => "Roles",
+            .roles_quota => "RolesQuota",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

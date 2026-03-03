@@ -158,7 +158,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ActivateTypeInput, conf
     }
     if (input.@"type") |v| {
         try body_buf.appendSlice(allocator, "&Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.type_name) |v| {
         try body_buf.appendSlice(allocator, "&TypeName=");
@@ -170,7 +170,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ActivateTypeInput, conf
     }
     if (input.version_bump) |v| {
         try body_buf.appendSlice(allocator, "&VersionBump=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

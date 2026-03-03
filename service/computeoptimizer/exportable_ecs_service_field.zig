@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExportableECSServiceField = enum {
     account_id,
     service_arn,
@@ -29,33 +31,75 @@ pub const ExportableECSServiceField = enum {
     recommendation_options_estimated_monthly_savings_value_after_discounts,
 
     pub const json_field_names = .{
-        .account_id = "ACCOUNT_ID",
-        .service_arn = "SERVICE_ARN",
-        .lookback_period_in_days = "LOOKBACK_PERIOD_IN_DAYS",
-        .last_refresh_timestamp = "LAST_REFRESH_TIMESTAMP",
-        .launch_type = "LAUNCH_TYPE",
-        .current_performance_risk = "CURRENT_PERFORMANCE_RISK",
-        .current_service_configuration_memory = "CURRENT_SERVICE_CONFIGURATION_MEMORY",
-        .current_service_configuration_cpu = "CURRENT_SERVICE_CONFIGURATION_CPU",
-        .current_service_configuration_task_definition_arn = "CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN",
-        .current_service_configuration_auto_scaling_configuration = "CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION",
-        .current_service_container_configurations = "CURRENT_SERVICE_CONTAINER_CONFIGURATIONS",
-        .utilization_metrics_cpu_maximum = "UTILIZATION_METRICS_CPU_MAXIMUM",
-        .utilization_metrics_memory_maximum = "UTILIZATION_METRICS_MEMORY_MAXIMUM",
-        .finding = "FINDING",
-        .finding_reason_codes = "FINDING_REASON_CODES",
-        .recommendation_options_memory = "RECOMMENDATION_OPTIONS_MEMORY",
-        .recommendation_options_cpu = "RECOMMENDATION_OPTIONS_CPU",
-        .recommendation_options_savings_opportunity_percentage = "RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE",
-        .recommendation_options_estimated_monthly_savings_currency = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY",
-        .recommendation_options_estimated_monthly_savings_value = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE",
-        .recommendation_options_container_recommendations = "RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS",
-        .recommendation_options_projected_utilization_metrics_cpu_maximum = "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM",
-        .recommendation_options_projected_utilization_metrics_memory_maximum = "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM",
-        .tags = "TAGS",
-        .effective_recommendation_preferences_savings_estimation_mode = "EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE",
-        .recommendation_options_savings_opportunity_after_discounts_percentage = "RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE",
-        .recommendation_options_estimated_monthly_savings_currency_after_discounts = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS",
-        .recommendation_options_estimated_monthly_savings_value_after_discounts = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS",
+        .account_id = "AccountId",
+        .service_arn = "ServiceArn",
+        .lookback_period_in_days = "LookbackPeriodInDays",
+        .last_refresh_timestamp = "LastRefreshTimestamp",
+        .launch_type = "LaunchType",
+        .current_performance_risk = "CurrentPerformanceRisk",
+        .current_service_configuration_memory = "CurrentServiceConfigurationMemory",
+        .current_service_configuration_cpu = "CurrentServiceConfigurationCpu",
+        .current_service_configuration_task_definition_arn = "CurrentServiceConfigurationTaskDefinitionArn",
+        .current_service_configuration_auto_scaling_configuration = "CurrentServiceConfigurationAutoScalingConfiguration",
+        .current_service_container_configurations = "CurrentServiceContainerConfigurations",
+        .utilization_metrics_cpu_maximum = "UtilizationMetricsCpuMaximum",
+        .utilization_metrics_memory_maximum = "UtilizationMetricsMemoryMaximum",
+        .finding = "Finding",
+        .finding_reason_codes = "FindingReasonCodes",
+        .recommendation_options_memory = "RecommendationOptionsMemory",
+        .recommendation_options_cpu = "RecommendationOptionsCpu",
+        .recommendation_options_savings_opportunity_percentage = "RecommendationOptionsSavingsOpportunityPercentage",
+        .recommendation_options_estimated_monthly_savings_currency = "RecommendationOptionsEstimatedMonthlySavingsCurrency",
+        .recommendation_options_estimated_monthly_savings_value = "RecommendationOptionsEstimatedMonthlySavingsValue",
+        .recommendation_options_container_recommendations = "RecommendationOptionsContainerRecommendations",
+        .recommendation_options_projected_utilization_metrics_cpu_maximum = "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+        .recommendation_options_projected_utilization_metrics_memory_maximum = "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+        .tags = "Tags",
+        .effective_recommendation_preferences_savings_estimation_mode = "EffectiveRecommendationPreferencesSavingsEstimationMode",
+        .recommendation_options_savings_opportunity_after_discounts_percentage = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
+        .recommendation_options_estimated_monthly_savings_currency_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
+        .recommendation_options_estimated_monthly_savings_value_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .account_id => "AccountId",
+            .service_arn => "ServiceArn",
+            .lookback_period_in_days => "LookbackPeriodInDays",
+            .last_refresh_timestamp => "LastRefreshTimestamp",
+            .launch_type => "LaunchType",
+            .current_performance_risk => "CurrentPerformanceRisk",
+            .current_service_configuration_memory => "CurrentServiceConfigurationMemory",
+            .current_service_configuration_cpu => "CurrentServiceConfigurationCpu",
+            .current_service_configuration_task_definition_arn => "CurrentServiceConfigurationTaskDefinitionArn",
+            .current_service_configuration_auto_scaling_configuration => "CurrentServiceConfigurationAutoScalingConfiguration",
+            .current_service_container_configurations => "CurrentServiceContainerConfigurations",
+            .utilization_metrics_cpu_maximum => "UtilizationMetricsCpuMaximum",
+            .utilization_metrics_memory_maximum => "UtilizationMetricsMemoryMaximum",
+            .finding => "Finding",
+            .finding_reason_codes => "FindingReasonCodes",
+            .recommendation_options_memory => "RecommendationOptionsMemory",
+            .recommendation_options_cpu => "RecommendationOptionsCpu",
+            .recommendation_options_savings_opportunity_percentage => "RecommendationOptionsSavingsOpportunityPercentage",
+            .recommendation_options_estimated_monthly_savings_currency => "RecommendationOptionsEstimatedMonthlySavingsCurrency",
+            .recommendation_options_estimated_monthly_savings_value => "RecommendationOptionsEstimatedMonthlySavingsValue",
+            .recommendation_options_container_recommendations => "RecommendationOptionsContainerRecommendations",
+            .recommendation_options_projected_utilization_metrics_cpu_maximum => "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+            .recommendation_options_projected_utilization_metrics_memory_maximum => "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+            .tags => "Tags",
+            .effective_recommendation_preferences_savings_estimation_mode => "EffectiveRecommendationPreferencesSavingsEstimationMode",
+            .recommendation_options_savings_opportunity_after_discounts_percentage => "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
+            .recommendation_options_estimated_monthly_savings_currency_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
+            .recommendation_options_estimated_monthly_savings_value_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

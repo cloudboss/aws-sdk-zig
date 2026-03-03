@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const rs = enum {
     single_region,
     multi_region,
@@ -6,4 +8,20 @@ pub const rs = enum {
         .single_region = "SINGLE_REGION",
         .multi_region = "MULTI_REGION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .single_region => "SINGLE_REGION",
+            .multi_region => "MULTI_REGION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

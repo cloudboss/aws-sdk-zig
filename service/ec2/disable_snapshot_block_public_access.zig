@@ -91,7 +91,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SnapshotBlockPublicAccessState, try reader.readElementText());
+                    result.state = SnapshotBlockPublicAccessState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

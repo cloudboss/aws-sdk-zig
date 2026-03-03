@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify whether MediaConvert generates images for trick play. Keep the
 /// default value, None, to not generate any images. Choose Thumbnail to
 /// generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled
@@ -20,4 +22,22 @@ pub const HlsImageBasedTrickPlay = enum {
         .thumbnail_and_fullframe = "THUMBNAIL_AND_FULLFRAME",
         .advanced = "ADVANCED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "NONE",
+            .thumbnail => "THUMBNAIL",
+            .thumbnail_and_fullframe => "THUMBNAIL_AND_FULLFRAME",
+            .advanced => "ADVANCED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

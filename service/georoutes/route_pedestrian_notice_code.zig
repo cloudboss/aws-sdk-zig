@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RoutePedestrianNoticeCode = enum {
     accurate_polyline_unavailable,
     other,
@@ -6,10 +8,29 @@ pub const RoutePedestrianNoticeCode = enum {
     violated_pedestrian_option,
 
     pub const json_field_names = .{
-        .accurate_polyline_unavailable = "ACCURATE_POLYLINE_UNAVAILABLE",
-        .other = "OTHER",
-        .violated_avoid_dirt_road = "VIOLATED_AVOID_DIRT_ROAD",
-        .violated_avoid_tunnel = "VIOLATED_AVOID_TUNNEL",
-        .violated_pedestrian_option = "VIOLATED_PEDESTRIAN_OPTION",
+        .accurate_polyline_unavailable = "AccuratePolylineUnavailable",
+        .other = "Other",
+        .violated_avoid_dirt_road = "ViolatedAvoidDirtRoad",
+        .violated_avoid_tunnel = "ViolatedAvoidTunnel",
+        .violated_pedestrian_option = "ViolatedPedestrianOption",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .accurate_polyline_unavailable => "AccuratePolylineUnavailable",
+            .other => "Other",
+            .violated_avoid_dirt_road => "ViolatedAvoidDirtRoad",
+            .violated_avoid_tunnel => "ViolatedAvoidTunnel",
+            .violated_pedestrian_option => "ViolatedPedestrianOption",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

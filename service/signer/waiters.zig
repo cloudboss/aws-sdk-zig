@@ -56,12 +56,12 @@ pub const SuccessfulSigningJobWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Succeeded")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Succeeded")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }

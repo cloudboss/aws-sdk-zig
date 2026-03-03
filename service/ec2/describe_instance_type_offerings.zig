@@ -132,7 +132,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTypeOff
     }
     if (input.location_type) |v| {
         try body_buf.appendSlice(allocator, "&LocationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.max_results) |v| {
         try body_buf.appendSlice(allocator, "&MaxResults=");

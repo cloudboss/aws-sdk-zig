@@ -217,7 +217,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricStreamInput, c
     try body_buf.appendSlice(allocator, "&Name=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.name);
     try body_buf.appendSlice(allocator, "&OutputFormat=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.output_format));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.output_format.wireName());
     try body_buf.appendSlice(allocator, "&RoleArn=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.role_arn);
     if (input.statistics_configurations) |list| {

@@ -105,13 +105,13 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "IdentityProvider")) {
-                    result.identity_provider = std.meta.stringToEnum(IdentityProvider, try reader.readElementText());
+                    result.identity_provider = IdentityProvider.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublisherId")) {
                     result.publisher_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublisherProfile")) {
                     result.publisher_profile = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PublisherStatus")) {
-                    result.publisher_status = std.meta.stringToEnum(PublisherStatus, try reader.readElementText());
+                    result.publisher_status = PublisherStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

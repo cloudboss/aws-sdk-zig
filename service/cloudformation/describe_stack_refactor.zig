@@ -112,7 +112,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExecutionStatus")) {
-                    result.execution_status = std.meta.stringToEnum(StackRefactorExecutionStatus, try reader.readElementText());
+                    result.execution_status = StackRefactorExecutionStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExecutionStatusReason")) {
                     result.execution_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackIds")) {
@@ -120,7 +120,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "StackRefactorId")) {
                     result.stack_refactor_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(StackRefactorStatus, try reader.readElementText());
+                    result.status = StackRefactorStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusReason")) {
                     result.status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {

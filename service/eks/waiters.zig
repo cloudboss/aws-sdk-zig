@@ -53,21 +53,21 @@ pub const AddonActiveWaiter = struct {
 
         if (output.addon) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.addon) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DEGRADED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DEGRADED")) {
                     return .failure;
                 }
             }
         }
         if (output.addon) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
@@ -128,7 +128,7 @@ pub const AddonDeletedWaiter = struct {
 
         if (output.addon) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETE_FAILED")) {
                     return .failure;
                 }
             }
@@ -182,21 +182,21 @@ pub const ClusterActiveWaiter = struct {
 
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETING")) {
                     return .failure;
                 }
             }
         }
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
@@ -257,21 +257,21 @@ pub const ClusterDeletedWaiter = struct {
 
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .failure;
                 }
             }
         }
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATING")) {
                     return .failure;
                 }
             }
         }
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING")) {
                     return .failure;
                 }
             }
@@ -325,14 +325,14 @@ pub const FargateProfileActiveWaiter = struct {
 
         if (output.fargate_profile) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.fargate_profile) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
@@ -393,7 +393,7 @@ pub const FargateProfileDeletedWaiter = struct {
 
         if (output.fargate_profile) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETE_FAILED")) {
                     return .failure;
                 }
             }
@@ -447,14 +447,14 @@ pub const NodegroupActiveWaiter = struct {
 
         if (output.nodegroup) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CREATE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CREATE_FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.nodegroup) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
@@ -515,7 +515,7 @@ pub const NodegroupDeletedWaiter = struct {
 
         if (output.nodegroup) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DELETE_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DELETE_FAILED")) {
                     return .failure;
                 }
             }

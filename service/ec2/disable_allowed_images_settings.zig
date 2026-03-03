@@ -92,7 +92,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allowedImagesSettingsState")) {
-                    result.allowed_images_settings_state = std.meta.stringToEnum(AllowedImagesSettingsDisabledState, try reader.readElementText());
+                    result.allowed_images_settings_state = AllowedImagesSettingsDisabledState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

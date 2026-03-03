@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const MatchingStrategy = enum {
     match_any,
     match_most_significant_road,
 
     pub const json_field_names = .{
-        .match_any = "MATCH_ANY",
-        .match_most_significant_road = "MATCH_MOST_SIGNIFICANT_ROAD",
+        .match_any = "MatchAny",
+        .match_most_significant_road = "MatchMostSignificantRoad",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .match_any => "MatchAny",
+            .match_most_significant_road => "MatchMostSignificantRoad",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

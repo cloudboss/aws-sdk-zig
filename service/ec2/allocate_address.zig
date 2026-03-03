@@ -127,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateAddressInput, c
     }
     if (input.domain) |v| {
         try body_buf.appendSlice(allocator, "&Domain=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
@@ -153,7 +153,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateAddressInput, c
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -218,7 +218,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "customerOwnedIpv4Pool")) {
                     result.customer_owned_ipv_4_pool = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "domain")) {
-                    result.domain = std.meta.stringToEnum(DomainType, try reader.readElementText());
+                    result.domain = DomainType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkBorderGroup")) {
                     result.network_border_group = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "publicIp")) {

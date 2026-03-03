@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExportableLicenseField = enum {
     account_id,
     resource_arn,
@@ -22,26 +24,61 @@ pub const ExportableLicenseField = enum {
     tags,
 
     pub const json_field_names = .{
-        .account_id = "ACCOUNT_ID",
-        .resource_arn = "RESOURCE_ARN",
-        .lookback_period_in_days = "LOOKBACK_PERIOD_IN_DAYS",
-        .last_refresh_timestamp = "LAST_REFRESH_TIMESTAMP",
-        .license_finding = "LICENSE_FINDING",
-        .license_finding_reason_codes = "LICENSE_FINDING_REASON_CODES",
-        .current_license_configuration_number_of_cores = "CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES",
-        .current_license_configuration_instance_type = "CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE",
-        .current_license_configuration_operating_system = "CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM",
-        .current_license_configuration_license_name = "CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME",
-        .current_license_configuration_license_edition = "CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION",
-        .current_license_configuration_license_model = "CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL",
-        .current_license_configuration_license_version = "CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION",
-        .current_license_configuration_metrics_source = "CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE",
-        .recommendation_options_operating_system = "RECOMMENDATION_OPTIONS_OPERATING_SYSTEM",
-        .recommendation_options_license_edition = "RECOMMENDATION_OPTIONS_LICENSE_EDITION",
-        .recommendation_options_license_model = "RECOMMENDATION_OPTIONS_LICENSE_MODEL",
-        .recommendation_options_savings_opportunity_percentage = "RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE",
-        .recommendation_options_estimated_monthly_savings_currency = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY",
-        .recommendation_options_estimated_monthly_savings_value = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE",
-        .tags = "TAGS",
+        .account_id = "AccountId",
+        .resource_arn = "ResourceArn",
+        .lookback_period_in_days = "LookbackPeriodInDays",
+        .last_refresh_timestamp = "LastRefreshTimestamp",
+        .license_finding = "Finding",
+        .license_finding_reason_codes = "FindingReasonCodes",
+        .current_license_configuration_number_of_cores = "CurrentLicenseConfigurationNumberOfCores",
+        .current_license_configuration_instance_type = "CurrentLicenseConfigurationInstanceType",
+        .current_license_configuration_operating_system = "CurrentLicenseConfigurationOperatingSystem",
+        .current_license_configuration_license_name = "CurrentLicenseConfigurationLicenseName",
+        .current_license_configuration_license_edition = "CurrentLicenseConfigurationLicenseEdition",
+        .current_license_configuration_license_model = "CurrentLicenseConfigurationLicenseModel",
+        .current_license_configuration_license_version = "CurrentLicenseConfigurationLicenseVersion",
+        .current_license_configuration_metrics_source = "CurrentLicenseConfigurationMetricsSource",
+        .recommendation_options_operating_system = "RecommendationOptionsOperatingSystem",
+        .recommendation_options_license_edition = "RecommendationOptionsLicenseEdition",
+        .recommendation_options_license_model = "RecommendationOptionsLicenseModel",
+        .recommendation_options_savings_opportunity_percentage = "RecommendationOptionsSavingsOpportunityPercentage",
+        .recommendation_options_estimated_monthly_savings_currency = "RecommendationOptionsEstimatedMonthlySavingsCurrency",
+        .recommendation_options_estimated_monthly_savings_value = "RecommendationOptionsEstimatedMonthlySavingsValue",
+        .tags = "Tags",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .account_id => "AccountId",
+            .resource_arn => "ResourceArn",
+            .lookback_period_in_days => "LookbackPeriodInDays",
+            .last_refresh_timestamp => "LastRefreshTimestamp",
+            .license_finding => "Finding",
+            .license_finding_reason_codes => "FindingReasonCodes",
+            .current_license_configuration_number_of_cores => "CurrentLicenseConfigurationNumberOfCores",
+            .current_license_configuration_instance_type => "CurrentLicenseConfigurationInstanceType",
+            .current_license_configuration_operating_system => "CurrentLicenseConfigurationOperatingSystem",
+            .current_license_configuration_license_name => "CurrentLicenseConfigurationLicenseName",
+            .current_license_configuration_license_edition => "CurrentLicenseConfigurationLicenseEdition",
+            .current_license_configuration_license_model => "CurrentLicenseConfigurationLicenseModel",
+            .current_license_configuration_license_version => "CurrentLicenseConfigurationLicenseVersion",
+            .current_license_configuration_metrics_source => "CurrentLicenseConfigurationMetricsSource",
+            .recommendation_options_operating_system => "RecommendationOptionsOperatingSystem",
+            .recommendation_options_license_edition => "RecommendationOptionsLicenseEdition",
+            .recommendation_options_license_model => "RecommendationOptionsLicenseModel",
+            .recommendation_options_savings_opportunity_percentage => "RecommendationOptionsSavingsOpportunityPercentage",
+            .recommendation_options_estimated_monthly_savings_currency => "RecommendationOptionsEstimatedMonthlySavingsCurrency",
+            .recommendation_options_estimated_monthly_savings_value => "RecommendationOptionsEstimatedMonthlySavingsValue",
+            .tags => "Tags",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

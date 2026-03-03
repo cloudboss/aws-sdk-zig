@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHookResultsInput, c
     }
     if (input.status) |v| {
         try body_buf.appendSlice(allocator, "&Status=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.target_id) |v| {
         try body_buf.appendSlice(allocator, "&TargetId=");
@@ -117,7 +117,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHookResultsInput, c
     }
     if (input.target_type) |v| {
         try body_buf.appendSlice(allocator, "&TargetType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.type_arn) |v| {
         try body_buf.appendSlice(allocator, "&TypeArn=");
@@ -162,7 +162,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "TargetId")) {
                     result.target_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetType")) {
-                    result.target_type = std.meta.stringToEnum(ListHookResultsTargetType, try reader.readElementText());
+                    result.target_type = ListHookResultsTargetType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

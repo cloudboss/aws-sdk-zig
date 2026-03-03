@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const StyleType = enum {
     default,
     spell_by_letter,
     spell_by_word,
 
     pub const json_field_names = .{
-        .default = "DEFAULT",
-        .spell_by_letter = "SPELL_BY_LETTER",
-        .spell_by_word = "SPELL_BY_WORD",
+        .default = "Default",
+        .spell_by_letter = "SpellByLetter",
+        .spell_by_word = "SpellByWord",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .default => "Default",
+            .spell_by_letter => "SpellByLetter",
+            .spell_by_word => "SpellByWord",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

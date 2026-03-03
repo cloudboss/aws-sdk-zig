@@ -734,7 +734,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBInstanceReadRep
     }
     if (input.database_insights_mode) |v| {
         try body_buf.appendSlice(allocator, "&DatabaseInsightsMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.db_instance_class) |v| {
         try body_buf.appendSlice(allocator, "&DBInstanceClass=");
@@ -883,7 +883,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBInstanceReadRep
     }
     if (input.replica_mode) |v| {
         try body_buf.appendSlice(allocator, "&ReplicaMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.source_db_cluster_identifier) |v| {
         try body_buf.appendSlice(allocator, "&SourceDBClusterIdentifier=");

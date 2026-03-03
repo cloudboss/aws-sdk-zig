@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ShareStatus = enum {
     shared,
     pending_acceptance,
@@ -10,14 +12,37 @@ pub const ShareStatus = enum {
     deleting,
 
     pub const json_field_names = .{
-        .shared = "SHARED",
-        .pending_acceptance = "PENDING_ACCEPTANCE",
-        .rejected = "REJECTED",
-        .rejecting = "REJECTING",
-        .reject_failed = "REJECT_FAILED",
-        .sharing = "SHARING",
-        .share_failed = "SHARE_FAILED",
-        .deleted = "DELETED",
-        .deleting = "DELETING",
+        .shared = "Shared",
+        .pending_acceptance = "PendingAcceptance",
+        .rejected = "Rejected",
+        .rejecting = "Rejecting",
+        .reject_failed = "RejectFailed",
+        .sharing = "Sharing",
+        .share_failed = "ShareFailed",
+        .deleted = "Deleted",
+        .deleting = "Deleting",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .shared => "Shared",
+            .pending_acceptance => "PendingAcceptance",
+            .rejected => "Rejected",
+            .rejecting => "Rejecting",
+            .reject_failed => "RejectFailed",
+            .sharing => "Sharing",
+            .share_failed => "ShareFailed",
+            .deleted => "Deleted",
+            .deleting => "Deleting",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const TextTransformationType = enum {
     none,
     compress_white_space,
@@ -44,4 +46,39 @@ pub const TextTransformationType = enum {
         .url_decode_uni = "URL_DECODE_UNI",
         .utf8_to_unicode = "UTF8_TO_UNICODE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "NONE",
+            .compress_white_space => "COMPRESS_WHITE_SPACE",
+            .html_entity_decode => "HTML_ENTITY_DECODE",
+            .lowercase => "LOWERCASE",
+            .cmd_line => "CMD_LINE",
+            .url_decode => "URL_DECODE",
+            .base64_decode => "BASE64_DECODE",
+            .hex_decode => "HEX_DECODE",
+            .md5 => "MD5",
+            .replace_comments => "REPLACE_COMMENTS",
+            .escape_seq_decode => "ESCAPE_SEQ_DECODE",
+            .sql_hex_decode => "SQL_HEX_DECODE",
+            .css_decode => "CSS_DECODE",
+            .js_decode => "JS_DECODE",
+            .normalize_path => "NORMALIZE_PATH",
+            .normalize_path_win => "NORMALIZE_PATH_WIN",
+            .remove_nulls => "REMOVE_NULLS",
+            .replace_nulls => "REPLACE_NULLS",
+            .base64_decode_ext => "BASE64_DECODE_EXT",
+            .url_decode_uni => "URL_DECODE_UNI",
+            .utf8_to_unicode => "UTF8_TO_UNICODE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

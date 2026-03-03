@@ -50,14 +50,14 @@ pub const ServerOfflineWaiter = struct {
 
         if (output.server) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "OFFLINE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "OFFLINE")) {
                     return .success;
                 }
             }
         }
         if (output.server) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "STOP_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "STOP_FAILED")) {
                     return .failure;
                 }
             }
@@ -111,14 +111,14 @@ pub const ServerOnlineWaiter = struct {
 
         if (output.server) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ONLINE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ONLINE")) {
                     return .success;
                 }
             }
         }
         if (output.server) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "START_FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "START_FAILED")) {
                     return .failure;
                 }
             }

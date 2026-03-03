@@ -111,7 +111,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetExportInput, config:
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "exportType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.export_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.export_type.wireName());
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "name=");
@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetExportInput, config:
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "resourceType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.resource_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.resource_type.wireName());
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "version=");

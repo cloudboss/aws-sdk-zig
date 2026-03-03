@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Describes the condition of a file transfer protocol-enabled server with
 /// respect to its ability to perform file operations. There are six possible
 /// states: `OFFLINE`, `ONLINE`, `STARTING`, `STOPPING`, `START_FAILED`, and
@@ -25,4 +27,24 @@ pub const State = enum {
         .start_failed = "START_FAILED",
         .stop_failed = "STOP_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .offline => "OFFLINE",
+            .online => "ONLINE",
+            .starting => "STARTING",
+            .stopping => "STOPPING",
+            .start_failed => "START_FAILED",
+            .stop_failed => "STOP_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

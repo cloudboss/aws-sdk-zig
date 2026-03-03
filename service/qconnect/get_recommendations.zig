@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommendationsInput
     if (input.recommendation_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "recommendationType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.wait_time_seconds) |v| {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// A predefined code indicating the error that caused the failure.
 pub const FailureCode = enum {
     /// The request failed to satisfy the constraints specified by the service
@@ -10,9 +12,27 @@ pub const FailureCode = enum {
     buffer_limit_exceeded,
 
     pub const json_field_names = .{
-        .invalid_input = "INVALID_INPUT",
-        .request_throttled = "REQUEST_THROTTLED",
-        .unknown_error = "UNKNOWN_ERROR",
-        .buffer_limit_exceeded = "BUFFER_LIMIT_EXCEEDED",
+        .invalid_input = "InvalidInput",
+        .request_throttled = "RequestThrottled",
+        .unknown_error = "UnknownError",
+        .buffer_limit_exceeded = "BufferLimitExceeded",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .invalid_input => "InvalidInput",
+            .request_throttled => "RequestThrottled",
+            .unknown_error => "UnknownError",
+            .buffer_limit_exceeded => "BufferLimitExceeded",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Supports HbbTV specification as indicated
 pub const DashIsoHbbtvCompliance = enum {
     hbbtv_1_5,
@@ -7,4 +9,20 @@ pub const DashIsoHbbtvCompliance = enum {
         .hbbtv_1_5 = "HBBTV_1_5",
         .none = "NONE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .hbbtv_1_5 => "HBBTV_1_5",
+            .none => "NONE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

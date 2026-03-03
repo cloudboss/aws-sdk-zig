@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Required when you enable Dolby Vision. Use Profile 5 to include
 /// frame-interleaved Dolby Vision metadata in your output. Your input must
 /// include Dolby Vision metadata or an HDR10 YUV color space. Use Profile 8.1
@@ -11,4 +13,20 @@ pub const DolbyVisionProfile = enum {
         .profile_5 = "PROFILE_5",
         .profile_8_1 = "PROFILE_8_1",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .profile_5 => "PROFILE_5",
+            .profile_8_1 => "PROFILE_8_1",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Returns the size of the CacheCluster.
 pub const CacheClusterSize = enum {
     size_0_point_5_gb,
@@ -10,13 +12,35 @@ pub const CacheClusterSize = enum {
     size_237_gb,
 
     pub const json_field_names = .{
-        .size_0_point_5_gb = "SIZE_0_POINT_5_GB",
-        .size_1_point_6_gb = "SIZE_1_POINT_6_GB",
-        .size_6_point_1_gb = "SIZE_6_POINT_1_GB",
-        .size_13_point_5_gb = "SIZE_13_POINT_5_GB",
-        .size_28_point_4_gb = "SIZE_28_POINT_4_GB",
-        .size_58_point_2_gb = "SIZE_58_POINT_2_GB",
-        .size_118_gb = "SIZE_118_GB",
-        .size_237_gb = "SIZE_237_GB",
+        .size_0_point_5_gb = "0.5",
+        .size_1_point_6_gb = "1.6",
+        .size_6_point_1_gb = "6.1",
+        .size_13_point_5_gb = "13.5",
+        .size_28_point_4_gb = "28.4",
+        .size_58_point_2_gb = "58.2",
+        .size_118_gb = "118",
+        .size_237_gb = "237",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .size_0_point_5_gb => "0.5",
+            .size_1_point_6_gb => "1.6",
+            .size_6_point_1_gb => "6.1",
+            .size_13_point_5_gb => "13.5",
+            .size_28_point_4_gb => "28.4",
+            .size_58_point_2_gb => "58.2",
+            .size_118_gb => "118",
+            .size_237_gb => "237",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConflictExceptionReason = enum {
     conflict_client_token,
     duplicate_partner,
@@ -26,4 +28,30 @@ pub const ConflictExceptionReason = enum {
         .account_already_verified = "ACCOUNT_ALREADY_VERIFIED",
         .verification_already_in_progress = "VERIFICATION_ALREADY_IN_PROGRESS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .conflict_client_token => "CONFLICT_CLIENT_TOKEN",
+            .duplicate_partner => "DUPLICATE_PARTNER",
+            .incompatible_profile_state => "INCOMPATIBLE_PROFILE_STATE",
+            .incompatible_partner_profile_task_state => "INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE",
+            .duplicate_connection_invitation => "DUPLICATE_CONNECTION_INVITATION",
+            .incompatible_connection_invitation_state => "INCOMPATIBLE_CONNECTION_INVITATION_STATE",
+            .incompatible_connection_invitation_receiver => "INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER",
+            .duplicate_connection => "DUPLICATE_CONNECTION",
+            .incompatible_connection_state => "INCOMPATIBLE_CONNECTION_STATE",
+            .incompatible_connection_preferences_revision => "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION",
+            .account_already_verified => "ACCOUNT_ALREADY_VERIFIED",
+            .verification_already_in_progress => "VERIFICATION_ALREADY_IN_PROGRESS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

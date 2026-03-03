@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const HeterogeneousTargetDatabaseEngine = enum {
     none_specified,
     amazon_aurora,
@@ -11,15 +13,39 @@ pub const HeterogeneousTargetDatabaseEngine = enum {
     mongo_db,
 
     pub const json_field_names = .{
-        .none_specified = "NONE_SPECIFIED",
-        .amazon_aurora = "AMAZON_AURORA",
-        .aws_postgresql = "AWS_POSTGRESQL",
-        .mysql = "MYSQL",
-        .microsoft_sql_server = "MICROSOFT_SQL_SERVER",
-        .oracle_database = "ORACLE_DATABASE",
-        .maria_db = "MARIA_DB",
+        .none_specified = "None specified",
+        .amazon_aurora = "Amazon Aurora",
+        .aws_postgresql = "AWS PostgreSQL",
+        .mysql = "MySQL",
+        .microsoft_sql_server = "Microsoft SQL Server",
+        .oracle_database = "Oracle Database",
+        .maria_db = "MariaDB",
         .sap = "SAP",
-        .db2_luw = "DB2_LUW",
-        .mongo_db = "MONGO_DB",
+        .db2_luw = "Db2 LUW",
+        .mongo_db = "MongoDB",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none_specified => "None specified",
+            .amazon_aurora => "Amazon Aurora",
+            .aws_postgresql => "AWS PostgreSQL",
+            .mysql => "MySQL",
+            .microsoft_sql_server => "Microsoft SQL Server",
+            .oracle_database => "Oracle Database",
+            .maria_db => "MariaDB",
+            .sap => "SAP",
+            .db2_luw => "Db2 LUW",
+            .mongo_db => "MongoDB",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

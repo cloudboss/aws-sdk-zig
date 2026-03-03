@@ -131,7 +131,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeImageReferences
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.resource_type_options) |lst_1| {
@@ -142,7 +142,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeImageReferences
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionName=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.option_name) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     if (item_1.option_values) |lst_2| {

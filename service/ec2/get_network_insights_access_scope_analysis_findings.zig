@@ -125,7 +125,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "analysisFindingSet")) {
                     result.analysis_findings = try serde.deserializeAccessScopeAnalysisFindingList(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "analysisStatus")) {
-                    result.analysis_status = std.meta.stringToEnum(AnalysisStatus, try reader.readElementText());
+                    result.analysis_status = AnalysisStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeAnalysisId")) {
                     result.network_insights_access_scope_analysis_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "nextToken")) {

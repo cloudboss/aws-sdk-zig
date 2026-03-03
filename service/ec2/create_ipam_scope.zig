@@ -106,7 +106,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamScopeInput, c
         }
         if (v.@"type") |sv| {
             try body_buf.appendSlice(allocator, "&ExternalAuthorityConfiguration.Type=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     try body_buf.appendSlice(allocator, "&IpamId=");
@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIpamScopeInput, c
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

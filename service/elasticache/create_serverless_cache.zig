@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServerlessCacheIn
                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
             }
             try body_buf.appendSlice(allocator, "&CacheUsageLimits.DataStorage.Unit=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv.unit));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.unit.wireName());
         }
         if (v.ecpu_per_second) |sv| {
             if (sv.maximum) |sv2| {

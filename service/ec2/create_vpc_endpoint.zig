@@ -155,7 +155,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcEndpointInput,
     if (input.dns_options) |v| {
         if (v.dns_record_ip_type) |sv| {
             try body_buf.appendSlice(allocator, "&DnsOptions.DnsRecordIpType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.private_dns_only_for_inbound_resolver_endpoint) |sv| {
             try body_buf.appendSlice(allocator, "&DnsOptions.PrivateDnsOnlyForInboundResolverEndpoint=");
@@ -181,7 +181,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcEndpointInput,
     }
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&IpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.policy_document) |v| {
         try body_buf.appendSlice(allocator, "&PolicyDocument=");
@@ -271,7 +271,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcEndpointInput,
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -299,7 +299,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcEndpointInput,
     }
     if (input.vpc_endpoint_type) |v| {
         try body_buf.appendSlice(allocator, "&VpcEndpointType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&VpcId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.vpc_id);

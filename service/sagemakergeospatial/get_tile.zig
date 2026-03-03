@@ -142,7 +142,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTileInput, config: *
     if (input.output_data_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "OutputDataType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.output_format) |v| {
@@ -159,7 +159,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTileInput, config: *
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "Target=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.target));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.target.wireName());
     query_has_prev = true;
     if (input.time_range_filter) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

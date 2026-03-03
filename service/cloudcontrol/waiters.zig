@@ -50,21 +50,21 @@ pub const ResourceRequestSuccessWaiter = struct {
 
         if (output.progress_event) |val_0| {
             if (val_0.operation_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "SUCCESS")) {
+                if (std.mem.eql(u8, val_1.wireName(), "SUCCESS")) {
                     return .success;
                 }
             }
         }
         if (output.progress_event) |val_0| {
             if (val_0.operation_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
         }
         if (output.progress_event) |val_0| {
             if (val_0.operation_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "CANCEL_COMPLETE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "CANCEL_COMPLETE")) {
                     return .failure;
                 }
             }

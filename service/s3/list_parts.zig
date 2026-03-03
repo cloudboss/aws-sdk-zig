@@ -284,7 +284,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPartsInput, config:
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -318,9 +318,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Bucket")) {
                     result.bucket = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumAlgorithm")) {
-                    result.checksum_algorithm = std.meta.stringToEnum(ChecksumAlgorithm, try reader.readElementText());
+                    result.checksum_algorithm = ChecksumAlgorithm.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
-                    result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
+                    result.checksum_type = ChecksumType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Initiator")) {
                     result.initiator = try serde.deserializeInitiator(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
@@ -338,7 +338,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "Part")) {
                     try parts_list.append(allocator, try serde.deserializePart(allocator, &reader));
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
-                    result.storage_class = std.meta.stringToEnum(StorageClass, try reader.readElementText());
+                    result.storage_class = StorageClass.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadId")) {
                     result.upload_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -357,7 +357,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.abort_rule_id = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
 
     return result;

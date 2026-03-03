@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Whether the domain name can be transferred to Route 53.
 ///
 /// You can transfer only domains that have a value of `TRANSFERABLE` or
@@ -44,4 +46,24 @@ pub const Transferable = enum {
         .domain_in_another_account = "DOMAIN_IN_ANOTHER_ACCOUNT",
         .premium_domain = "PREMIUM_DOMAIN",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .transferable => "TRANSFERABLE",
+            .untransferable => "UNTRANSFERABLE",
+            .dont_know => "DONT_KNOW",
+            .domain_in_own_account => "DOMAIN_IN_OWN_ACCOUNT",
+            .domain_in_another_account => "DOMAIN_IN_ANOTHER_ACCOUNT",
+            .premium_domain => "PREMIUM_DOMAIN",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -195,7 +195,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: LockSnapshotInput, conf
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     try body_buf.appendSlice(allocator, "&LockMode=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.lock_mode));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.lock_mode.wireName());
     try body_buf.appendSlice(allocator, "&SnapshotId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.snapshot_id);
 
@@ -241,7 +241,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "lockExpiresOn")) {
                     result.lock_expires_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockState")) {
-                    result.lock_state = std.meta.stringToEnum(LockState, try reader.readElementText());
+                    result.lock_state = LockState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {

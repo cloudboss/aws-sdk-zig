@@ -115,7 +115,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "LocationConstraint")) {
-                    result.location_constraint = std.meta.stringToEnum(BucketLocationConstraint, try reader.readElementText());
+                    result.location_constraint = BucketLocationConstraint.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

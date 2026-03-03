@@ -382,7 +382,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchConfigurati
     if (input.metadata_options) |v| {
         if (v.http_endpoint) |sv| {
             try body_buf.appendSlice(allocator, "&MetadataOptions.HttpEndpoint=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.http_put_response_hop_limit) |sv| {
             try body_buf.appendSlice(allocator, "&MetadataOptions.HttpPutResponseHopLimit=");
@@ -390,7 +390,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchConfigurati
         }
         if (v.http_tokens) |sv| {
             try body_buf.appendSlice(allocator, "&MetadataOptions.HttpTokens=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.placement_tenancy) |v| {

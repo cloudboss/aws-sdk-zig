@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The state that a PR-based deployment can be updated to.
 pub const ResourceDeploymentStatus = enum {
     in_progress,
@@ -9,4 +11,21 @@ pub const ResourceDeploymentStatus = enum {
         .failed = "FAILED",
         .succeeded = "SUCCEEDED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .in_progress => "IN_PROGRESS",
+            .failed => "FAILED",
+            .succeeded => "SUCCEEDED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

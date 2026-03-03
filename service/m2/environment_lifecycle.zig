@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EnvironmentLifecycle = enum {
     creating,
     available,
@@ -7,11 +9,31 @@ pub const EnvironmentLifecycle = enum {
     unhealthy,
 
     pub const json_field_names = .{
-        .creating = "CREATING",
-        .available = "AVAILABLE",
-        .updating = "UPDATING",
-        .deleting = "DELETING",
-        .failed = "FAILED",
-        .unhealthy = "UNHEALTHY",
+        .creating = "Creating",
+        .available = "Available",
+        .updating = "Updating",
+        .deleting = "Deleting",
+        .failed = "Failed",
+        .unhealthy = "UnHealthy",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .creating => "Creating",
+            .available => "Available",
+            .updating => "Updating",
+            .deleting => "Deleting",
+            .failed => "Failed",
+            .unhealthy => "UnHealthy",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

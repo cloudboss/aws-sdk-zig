@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Event = enum {
     website_interact,
     file_download_from_secure_browser_to_remote_disk,
@@ -18,22 +20,53 @@ pub const Event = enum {
     url_block_by_content_filter,
 
     pub const json_field_names = .{
-        .website_interact = "WEBSITE_INTERACT",
-        .file_download_from_secure_browser_to_remote_disk = "FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK",
-        .file_transfer_from_remote_to_local_disk = "FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK",
-        .file_transfer_from_local_to_remote_disk = "FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK",
-        .file_upload_from_remote_disk_to_secure_browser = "FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER",
-        .content_paste_to_website = "CONTENT_PASTE_TO_WEBSITE",
-        .content_transfer_from_local_to_remote_clipboard = "CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD",
-        .content_copy_from_website = "CONTENT_COPY_FROM_WEBSITE",
-        .url_load = "URL_LOAD",
-        .tab_open = "TAB_OPEN",
-        .tab_close = "TAB_CLOSE",
-        .print_job_submit = "PRINT_JOB_SUBMIT",
-        .session_connect = "SESSION_CONNECT",
-        .session_start = "SESSION_START",
-        .session_disconnect = "SESSION_DISCONNECT",
-        .session_end = "SESSION_END",
-        .url_block_by_content_filter = "URL_BLOCK_BY_CONTENT_FILTER",
+        .website_interact = "WebsiteInteract",
+        .file_download_from_secure_browser_to_remote_disk = "FileDownloadFromSecureBrowserToRemoteDisk",
+        .file_transfer_from_remote_to_local_disk = "FileTransferFromRemoteToLocalDisk",
+        .file_transfer_from_local_to_remote_disk = "FileTransferFromLocalToRemoteDisk",
+        .file_upload_from_remote_disk_to_secure_browser = "FileUploadFromRemoteDiskToSecureBrowser",
+        .content_paste_to_website = "ContentPasteToWebsite",
+        .content_transfer_from_local_to_remote_clipboard = "ContentTransferFromLocalToRemoteClipboard",
+        .content_copy_from_website = "ContentCopyFromWebsite",
+        .url_load = "UrlLoad",
+        .tab_open = "TabOpen",
+        .tab_close = "TabClose",
+        .print_job_submit = "PrintJobSubmit",
+        .session_connect = "SessionConnect",
+        .session_start = "SessionStart",
+        .session_disconnect = "SessionDisconnect",
+        .session_end = "SessionEnd",
+        .url_block_by_content_filter = "UrlBlockByContentFilter",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .website_interact => "WebsiteInteract",
+            .file_download_from_secure_browser_to_remote_disk => "FileDownloadFromSecureBrowserToRemoteDisk",
+            .file_transfer_from_remote_to_local_disk => "FileTransferFromRemoteToLocalDisk",
+            .file_transfer_from_local_to_remote_disk => "FileTransferFromLocalToRemoteDisk",
+            .file_upload_from_remote_disk_to_secure_browser => "FileUploadFromRemoteDiskToSecureBrowser",
+            .content_paste_to_website => "ContentPasteToWebsite",
+            .content_transfer_from_local_to_remote_clipboard => "ContentTransferFromLocalToRemoteClipboard",
+            .content_copy_from_website => "ContentCopyFromWebsite",
+            .url_load => "UrlLoad",
+            .tab_open => "TabOpen",
+            .tab_close => "TabClose",
+            .print_job_submit => "PrintJobSubmit",
+            .session_connect => "SessionConnect",
+            .session_start => "SessionStart",
+            .session_disconnect => "SessionDisconnect",
+            .session_end => "SessionEnd",
+            .url_block_by_content_filter => "UrlBlockByContentFilter",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

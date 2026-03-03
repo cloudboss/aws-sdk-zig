@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The visibility status of a machine learning product. Valid values are:
 ///
 /// * `Limited` - The product is available to a limited set of buyers.
@@ -19,4 +21,22 @@ pub const MachineLearningProductVisibilityString = enum {
         .restricted = "Restricted",
         .draft = "Draft",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .limited => "Limited",
+            .public => "Public",
+            .restricted => "Restricted",
+            .draft => "Draft",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

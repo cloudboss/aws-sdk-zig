@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceMetadataD
     }
     if (input.http_endpoint) |v| {
         try body_buf.appendSlice(allocator, "&HttpEndpoint=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.http_put_response_hop_limit) |v| {
         try body_buf.appendSlice(allocator, "&HttpPutResponseHopLimit=");
@@ -102,11 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceMetadataD
     }
     if (input.http_tokens) |v| {
         try body_buf.appendSlice(allocator, "&HttpTokens=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.instance_metadata_tags) |v| {
         try body_buf.appendSlice(allocator, "&InstanceMetadataTags=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

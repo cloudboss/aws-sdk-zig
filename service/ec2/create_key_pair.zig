@@ -100,13 +100,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKeyPairInput, con
     }
     if (input.key_format) |v| {
         try body_buf.appendSlice(allocator, "&KeyFormat=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&KeyName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.key_name);
     if (input.key_type) |v| {
         try body_buf.appendSlice(allocator, "&KeyType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKeyPairInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

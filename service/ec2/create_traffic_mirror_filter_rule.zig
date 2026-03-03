@@ -137,7 +137,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrafficMirrorFilt
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     try body_buf.appendSlice(allocator, "&RuleAction=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.rule_action));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.rule_action.wireName());
     try body_buf.appendSlice(allocator, "&RuleNumber=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.rule_number}) catch "");
     try body_buf.appendSlice(allocator, "&SourceCidrBlock=");
@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrafficMirrorFilt
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -187,7 +187,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrafficMirrorFilt
         }
     }
     try body_buf.appendSlice(allocator, "&TrafficDirection=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.traffic_direction));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.traffic_direction.wireName());
     try body_buf.appendSlice(allocator, "&TrafficMirrorFilterId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.traffic_mirror_filter_id);
 

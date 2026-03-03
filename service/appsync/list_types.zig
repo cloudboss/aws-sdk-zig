@@ -87,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTypesInput, config:
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "format=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.format));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.format.wireName());
     query_has_prev = true;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

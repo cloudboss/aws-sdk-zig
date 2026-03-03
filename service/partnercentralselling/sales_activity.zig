@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SalesActivity = enum {
     initialized_discussions_with_customer,
     customer_has_shown_interest,
@@ -9,13 +11,35 @@ pub const SalesActivity = enum {
     sow_signed,
 
     pub const json_field_names = .{
-        .initialized_discussions_with_customer = "INITIALIZED_DISCUSSIONS_WITH_CUSTOMER",
-        .customer_has_shown_interest = "CUSTOMER_HAS_SHOWN_INTEREST",
-        .conducted_poc_demo = "CONDUCTED_POC_DEMO",
-        .in_evaluation_planning_stage = "IN_EVALUATION_PLANNING_STAGE",
-        .agreed_on_solution_to_business_problem = "AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM",
-        .completed_action_plan = "COMPLETED_ACTION_PLAN",
-        .finalized_deployment_needs = "FINALIZED_DEPLOYMENT_NEEDS",
-        .sow_signed = "SOW_SIGNED",
+        .initialized_discussions_with_customer = "Initialized discussions with customer",
+        .customer_has_shown_interest = "Customer has shown interest in solution",
+        .conducted_poc_demo = "Conducted POC / Demo",
+        .in_evaluation_planning_stage = "In evaluation / planning stage",
+        .agreed_on_solution_to_business_problem = "Agreed on solution to Business Problem",
+        .completed_action_plan = "Completed Action Plan",
+        .finalized_deployment_needs = "Finalized Deployment Need",
+        .sow_signed = "SOW Signed",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .initialized_discussions_with_customer => "Initialized discussions with customer",
+            .customer_has_shown_interest => "Customer has shown interest in solution",
+            .conducted_poc_demo => "Conducted POC / Demo",
+            .in_evaluation_planning_stage => "In evaluation / planning stage",
+            .agreed_on_solution_to_business_problem => "Agreed on solution to Business Problem",
+            .completed_action_plan => "Completed Action Plan",
+            .finalized_deployment_needs => "Finalized Deployment Need",
+            .sow_signed => "SOW Signed",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

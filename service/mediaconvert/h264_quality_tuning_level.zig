@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The Quality tuning level you choose represents a trade-off between the
 /// encoding speed of your job and the output video quality. For the fastest
 /// encoding speed at the cost of video quality: Choose Single pass. For a good
@@ -16,4 +18,21 @@ pub const H264QualityTuningLevel = enum {
         .single_pass_hq = "SINGLE_PASS_HQ",
         .multi_pass_hq = "MULTI_PASS_HQ",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .single_pass => "SINGLE_PASS",
+            .single_pass_hq => "SINGLE_PASS_HQ",
+            .multi_pass_hq => "MULTI_PASS_HQ",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EventType = enum {
     workflow_execution_started,
     workflow_execution_cancel_requested,
@@ -110,4 +112,72 @@ pub const EventType = enum {
         .schedule_lambda_function_failed = "ScheduleLambdaFunctionFailed",
         .start_lambda_function_failed = "StartLambdaFunctionFailed",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .workflow_execution_started => "WorkflowExecutionStarted",
+            .workflow_execution_cancel_requested => "WorkflowExecutionCancelRequested",
+            .workflow_execution_completed => "WorkflowExecutionCompleted",
+            .complete_workflow_execution_failed => "CompleteWorkflowExecutionFailed",
+            .workflow_execution_failed => "WorkflowExecutionFailed",
+            .fail_workflow_execution_failed => "FailWorkflowExecutionFailed",
+            .workflow_execution_timed_out => "WorkflowExecutionTimedOut",
+            .workflow_execution_canceled => "WorkflowExecutionCanceled",
+            .cancel_workflow_execution_failed => "CancelWorkflowExecutionFailed",
+            .workflow_execution_continued_as_new => "WorkflowExecutionContinuedAsNew",
+            .continue_as_new_workflow_execution_failed => "ContinueAsNewWorkflowExecutionFailed",
+            .workflow_execution_terminated => "WorkflowExecutionTerminated",
+            .decision_task_scheduled => "DecisionTaskScheduled",
+            .decision_task_started => "DecisionTaskStarted",
+            .decision_task_completed => "DecisionTaskCompleted",
+            .decision_task_timed_out => "DecisionTaskTimedOut",
+            .activity_task_scheduled => "ActivityTaskScheduled",
+            .schedule_activity_task_failed => "ScheduleActivityTaskFailed",
+            .activity_task_started => "ActivityTaskStarted",
+            .activity_task_completed => "ActivityTaskCompleted",
+            .activity_task_failed => "ActivityTaskFailed",
+            .activity_task_timed_out => "ActivityTaskTimedOut",
+            .activity_task_canceled => "ActivityTaskCanceled",
+            .activity_task_cancel_requested => "ActivityTaskCancelRequested",
+            .request_cancel_activity_task_failed => "RequestCancelActivityTaskFailed",
+            .workflow_execution_signaled => "WorkflowExecutionSignaled",
+            .marker_recorded => "MarkerRecorded",
+            .record_marker_failed => "RecordMarkerFailed",
+            .timer_started => "TimerStarted",
+            .start_timer_failed => "StartTimerFailed",
+            .timer_fired => "TimerFired",
+            .timer_canceled => "TimerCanceled",
+            .cancel_timer_failed => "CancelTimerFailed",
+            .start_child_workflow_execution_initiated => "StartChildWorkflowExecutionInitiated",
+            .start_child_workflow_execution_failed => "StartChildWorkflowExecutionFailed",
+            .child_workflow_execution_started => "ChildWorkflowExecutionStarted",
+            .child_workflow_execution_completed => "ChildWorkflowExecutionCompleted",
+            .child_workflow_execution_failed => "ChildWorkflowExecutionFailed",
+            .child_workflow_execution_timed_out => "ChildWorkflowExecutionTimedOut",
+            .child_workflow_execution_canceled => "ChildWorkflowExecutionCanceled",
+            .child_workflow_execution_terminated => "ChildWorkflowExecutionTerminated",
+            .signal_external_workflow_execution_initiated => "SignalExternalWorkflowExecutionInitiated",
+            .signal_external_workflow_execution_failed => "SignalExternalWorkflowExecutionFailed",
+            .external_workflow_execution_signaled => "ExternalWorkflowExecutionSignaled",
+            .request_cancel_external_workflow_execution_initiated => "RequestCancelExternalWorkflowExecutionInitiated",
+            .request_cancel_external_workflow_execution_failed => "RequestCancelExternalWorkflowExecutionFailed",
+            .external_workflow_execution_cancel_requested => "ExternalWorkflowExecutionCancelRequested",
+            .lambda_function_scheduled => "LambdaFunctionScheduled",
+            .lambda_function_started => "LambdaFunctionStarted",
+            .lambda_function_completed => "LambdaFunctionCompleted",
+            .lambda_function_failed => "LambdaFunctionFailed",
+            .lambda_function_timed_out => "LambdaFunctionTimedOut",
+            .schedule_lambda_function_failed => "ScheduleLambdaFunctionFailed",
+            .start_lambda_function_failed => "StartLambdaFunctionFailed",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

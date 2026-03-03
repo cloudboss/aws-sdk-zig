@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ShardIteratorType = enum {
     trim_horizon,
     latest,
@@ -10,4 +12,22 @@ pub const ShardIteratorType = enum {
         .at_sequence_number = "AT_SEQUENCE_NUMBER",
         .after_sequence_number = "AFTER_SEQUENCE_NUMBER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .trim_horizon => "TRIM_HORIZON",
+            .latest => "LATEST",
+            .at_sequence_number => "AT_SEQUENCE_NUMBER",
+            .after_sequence_number => "AFTER_SEQUENCE_NUMBER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

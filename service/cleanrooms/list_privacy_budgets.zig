@@ -115,7 +115,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPrivacyBudgetsInput
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "privacyBudgetType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.privacy_budget_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.privacy_budget_type.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

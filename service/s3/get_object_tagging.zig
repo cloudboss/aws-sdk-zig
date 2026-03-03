@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectTaggingInput, 
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
 
     return request;

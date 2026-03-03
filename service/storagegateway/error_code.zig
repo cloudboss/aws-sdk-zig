@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ErrorCode = enum {
     activation_key_expired,
     activation_key_invalid,
@@ -92,7 +94,7 @@ pub const ErrorCode = enum {
         .invalid_parameters = "InvalidParameters",
         .invalid_schedule = "InvalidSchedule",
         .local_storage_limit_exceeded = "LocalStorageLimitExceeded",
-        .lun_already_allocated_ = "LunAlreadyAllocated_",
+        .lun_already_allocated_ = "LunAlreadyAllocated ",
         .lun_invalid = "LunInvalid",
         .join_domain_in_progress = "JoinDomainInProgress",
         .maximum_content_length_exceeded = "MaximumContentLengthExceeded",
@@ -126,4 +128,80 @@ pub const ErrorCode = enum {
         .volume_not_found = "VolumeNotFound",
         .volume_not_ready = "VolumeNotReady",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .activation_key_expired => "ActivationKeyExpired",
+            .activation_key_invalid => "ActivationKeyInvalid",
+            .activation_key_not_found => "ActivationKeyNotFound",
+            .gateway_internal_error => "GatewayInternalError",
+            .gateway_not_connected => "GatewayNotConnected",
+            .gateway_not_found => "GatewayNotFound",
+            .gateway_proxy_network_connection_busy => "GatewayProxyNetworkConnectionBusy",
+            .authentication_failure => "AuthenticationFailure",
+            .bandwidth_throttle_schedule_not_found => "BandwidthThrottleScheduleNotFound",
+            .blocked => "Blocked",
+            .cannot_export_snapshot => "CannotExportSnapshot",
+            .chap_credential_not_found => "ChapCredentialNotFound",
+            .disk_already_allocated => "DiskAlreadyAllocated",
+            .disk_does_not_exist => "DiskDoesNotExist",
+            .disk_size_greater_than_volume_max_size => "DiskSizeGreaterThanVolumeMaxSize",
+            .disk_size_less_than_volume_size => "DiskSizeLessThanVolumeSize",
+            .disk_size_not_gig_aligned => "DiskSizeNotGigAligned",
+            .duplicate_certificate_info => "DuplicateCertificateInfo",
+            .duplicate_schedule => "DuplicateSchedule",
+            .endpoint_not_found => "EndpointNotFound",
+            .iam_not_supported => "IAMNotSupported",
+            .initiator_invalid => "InitiatorInvalid",
+            .initiator_not_found => "InitiatorNotFound",
+            .internal_error => "InternalError",
+            .invalid_gateway => "InvalidGateway",
+            .invalid_endpoint => "InvalidEndpoint",
+            .invalid_parameters => "InvalidParameters",
+            .invalid_schedule => "InvalidSchedule",
+            .local_storage_limit_exceeded => "LocalStorageLimitExceeded",
+            .lun_already_allocated_ => "LunAlreadyAllocated ",
+            .lun_invalid => "LunInvalid",
+            .join_domain_in_progress => "JoinDomainInProgress",
+            .maximum_content_length_exceeded => "MaximumContentLengthExceeded",
+            .maximum_tape_cartridge_count_exceeded => "MaximumTapeCartridgeCountExceeded",
+            .maximum_volume_count_exceeded => "MaximumVolumeCountExceeded",
+            .network_configuration_changed => "NetworkConfigurationChanged",
+            .no_disks_available => "NoDisksAvailable",
+            .not_implemented => "NotImplemented",
+            .not_supported => "NotSupported",
+            .operation_aborted => "OperationAborted",
+            .outdated_gateway => "OutdatedGateway",
+            .parameters_not_implemented => "ParametersNotImplemented",
+            .region_invalid => "RegionInvalid",
+            .request_timeout => "RequestTimeout",
+            .service_unavailable => "ServiceUnavailable",
+            .snapshot_deleted => "SnapshotDeleted",
+            .snapshot_id_invalid => "SnapshotIdInvalid",
+            .snapshot_in_progress => "SnapshotInProgress",
+            .snapshot_not_found => "SnapshotNotFound",
+            .snapshot_schedule_not_found => "SnapshotScheduleNotFound",
+            .staging_area_full => "StagingAreaFull",
+            .storage_failure => "StorageFailure",
+            .tape_cartridge_not_found => "TapeCartridgeNotFound",
+            .target_already_exists => "TargetAlreadyExists",
+            .target_invalid => "TargetInvalid",
+            .target_not_found => "TargetNotFound",
+            .unauthorized_operation => "UnauthorizedOperation",
+            .volume_already_exists => "VolumeAlreadyExists",
+            .volume_id_invalid => "VolumeIdInvalid",
+            .volume_in_use => "VolumeInUse",
+            .volume_not_found => "VolumeNotFound",
+            .volume_not_ready => "VolumeNotReady",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

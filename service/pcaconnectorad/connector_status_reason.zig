@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConnectorStatusReason = enum {
     ca_certificate_registration_failed,
     directory_access_denied,
@@ -24,4 +26,29 @@ pub const ConnectorStatusReason = enum {
         .vpc_endpoint_limit_exceeded = "VPC_ENDPOINT_LIMIT_EXCEEDED",
         .vpc_resource_not_found = "VPC_RESOURCE_NOT_FOUND",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ca_certificate_registration_failed => "CA_CERTIFICATE_REGISTRATION_FAILED",
+            .directory_access_denied => "DIRECTORY_ACCESS_DENIED",
+            .internal_failure => "INTERNAL_FAILURE",
+            .insufficient_free_addresses => "INSUFFICIENT_FREE_ADDRESSES",
+            .invalid_subnet_ip_protocol => "INVALID_SUBNET_IP_PROTOCOL",
+            .privateca_access_denied => "PRIVATECA_ACCESS_DENIED",
+            .privateca_resource_not_found => "PRIVATECA_RESOURCE_NOT_FOUND",
+            .security_group_not_in_vpc => "SECURITY_GROUP_NOT_IN_VPC",
+            .vpc_access_denied => "VPC_ACCESS_DENIED",
+            .vpc_endpoint_limit_exceeded => "VPC_ENDPOINT_LIMIT_EXCEEDED",
+            .vpc_resource_not_found => "VPC_RESOURCE_NOT_FOUND",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

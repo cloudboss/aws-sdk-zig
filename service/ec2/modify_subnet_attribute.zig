@@ -180,7 +180,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySubnetAttributeIn
     }
     if (input.private_dns_hostname_type_on_launch) |v| {
         try body_buf.appendSlice(allocator, "&PrivateDnsHostnameTypeOnLaunch=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&SubnetId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.subnet_id);

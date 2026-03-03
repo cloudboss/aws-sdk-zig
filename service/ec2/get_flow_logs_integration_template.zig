@@ -95,7 +95,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowLogsIntegrationT
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegrations.item.{d}.PartitionLoadFrequency=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(item.partition_load_frequency));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.partition_load_frequency.wireName());
             }
             {
                 var prefix_buf: [256]u8 = undefined;

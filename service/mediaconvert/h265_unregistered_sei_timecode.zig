@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
 pub const H265UnregisteredSeiTimecode = enum {
     disabled,
@@ -7,4 +9,20 @@ pub const H265UnregisteredSeiTimecode = enum {
         .disabled = "DISABLED",
         .enabled = "ENABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .enabled => "ENABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

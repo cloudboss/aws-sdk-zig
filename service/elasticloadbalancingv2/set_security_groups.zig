@@ -69,7 +69,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetSecurityGroupsInput,
     try body_buf.appendSlice(allocator, "Action=SetSecurityGroups&Version=2015-12-01");
     if (input.enforce_security_group_inbound_rules_on_private_link_traffic) |v| {
         try body_buf.appendSlice(allocator, "&EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&LoadBalancerArn=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.load_balancer_arn);
@@ -113,7 +113,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic")) {
-                    result.enforce_security_group_inbound_rules_on_private_link_traffic = std.meta.stringToEnum(EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, try reader.readElementText());
+                    result.enforce_security_group_inbound_rules_on_private_link_traffic = EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SecurityGroupIds")) {
                     result.security_group_ids = try serde.deserializeSecurityGroups(allocator, &reader, "member");
                 } else {

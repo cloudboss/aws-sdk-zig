@@ -181,11 +181,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLoadBalancerInput
     }
     if (input.enable_prefix_for_ipv_6_source_nat) |v| {
         try body_buf.appendSlice(allocator, "&EnablePrefixForIpv6SourceNat=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&IpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ipam_pools) |v| {
         if (v.ipv_4_ipam_pool_id) |sv| {
@@ -197,7 +197,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLoadBalancerInput
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.name);
     if (input.scheme) |v| {
         try body_buf.appendSlice(allocator, "&Scheme=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.security_groups) |list| {
         for (list, 0..) |item, idx| {
@@ -283,7 +283,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLoadBalancerInput
     }
     if (input.@"type") |v| {
         try body_buf.appendSlice(allocator, "&Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

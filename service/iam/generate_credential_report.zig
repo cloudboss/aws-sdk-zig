@@ -87,7 +87,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "State")) {
-                    result.state = std.meta.stringToEnum(ReportStateType, try reader.readElementText());
+                    result.state = ReportStateType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

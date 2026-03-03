@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EnvironmentHealthAttribute = enum {
     status,
     color,
@@ -7,4 +9,37 @@ pub const EnvironmentHealthAttribute = enum {
     all,
     health_status,
     refreshed_at,
+
+    pub const json_field_names = .{
+        .status = "Status",
+        .color = "Color",
+        .causes = "Causes",
+        .application_metrics = "ApplicationMetrics",
+        .instances_health = "InstancesHealth",
+        .all = "All",
+        .health_status = "HealthStatus",
+        .refreshed_at = "RefreshedAt",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .status => "Status",
+            .color => "Color",
+            .causes => "Causes",
+            .application_metrics => "ApplicationMetrics",
+            .instances_health => "InstancesHealth",
+            .all => "All",
+            .health_status => "HealthStatus",
+            .refreshed_at => "RefreshedAt",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const TemplateFormat = enum {
     cfn_yaml,
     cfn_json,
 
     pub const json_field_names = .{
-        .cfn_yaml = "CFN_YAML",
-        .cfn_json = "CFN_JSON",
+        .cfn_yaml = "CfnYaml",
+        .cfn_json = "CfnJson",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cfn_yaml => "CfnYaml",
+            .cfn_json => "CfnJson",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

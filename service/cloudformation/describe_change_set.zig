@@ -263,11 +263,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "CreationTime")) {
                     result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DeploymentMode")) {
-                    result.deployment_mode = std.meta.stringToEnum(DeploymentMode, try reader.readElementText());
+                    result.deployment_mode = DeploymentMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExecutionStatus")) {
-                    result.execution_status = std.meta.stringToEnum(ExecutionStatus, try reader.readElementText());
+                    result.execution_status = ExecutionStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ImportExistingResources")) {
                     result.import_existing_resources = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "IncludeNestedStacks")) {
@@ -277,7 +277,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "NotificationARNs")) {
                     result.notification_ar_ns = try serde.deserializeNotificationARNs(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "OnStackFailure")) {
-                    result.on_stack_failure = std.meta.stringToEnum(OnStackFailure, try reader.readElementText());
+                    result.on_stack_failure = OnStackFailure.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Parameters")) {
                     result.parameters = try serde.deserializeParameters(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "ParentChangeSetId")) {
@@ -287,13 +287,13 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "RootChangeSetId")) {
                     result.root_change_set_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackDriftStatus")) {
-                    result.stack_drift_status = std.meta.stringToEnum(StackDriftStatus, try reader.readElementText());
+                    result.stack_drift_status = StackDriftStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackId")) {
                     result.stack_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackName")) {
                     result.stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ChangeSetStatus, try reader.readElementText());
+                    result.status = ChangeSetStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusReason")) {
                     result.status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {

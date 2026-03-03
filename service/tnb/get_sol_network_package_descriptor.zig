@@ -86,7 +86,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     }
     _ = status;
     if (headers.get("content-type")) |value| {
-        result.content_type = std.meta.stringToEnum(DescriptorContentType, value);
+        result.content_type = DescriptorContentType.fromWireName(value);
     }
 
     return result;

@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserInput, config
         }
         if (v.@"type") |sv| {
             try body_buf.appendSlice(allocator, "&AuthenticationMode.Type=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     try body_buf.appendSlice(allocator, "&Engine=");

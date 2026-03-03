@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotInput, co
     }
     if (input.location) |v| {
         try body_buf.appendSlice(allocator, "&Location=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.outpost_arn) |v| {
         try body_buf.appendSlice(allocator, "&OutpostArn=");
@@ -123,7 +123,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotInput, co
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -210,19 +210,19 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                    result.state = SnapshotState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.state_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storageTier")) {
-                    result.storage_tier = std.meta.stringToEnum(StorageTier, try reader.readElementText());
+                    result.storage_tier = StorageTier.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try serde.deserializeTagList(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "transferType")) {
-                    result.transfer_type = std.meta.stringToEnum(TransferType, try reader.readElementText());
+                    result.transfer_type = TransferType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {

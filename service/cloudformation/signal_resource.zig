@@ -74,7 +74,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SignalResourceInput, co
     try body_buf.appendSlice(allocator, "&StackName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.stack_name);
     try body_buf.appendSlice(allocator, "&Status=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.status.wireName());
     try body_buf.appendSlice(allocator, "&UniqueId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.unique_id);
 

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResiliencyScoreType = enum {
     compliance,
     @"test",
@@ -5,9 +7,27 @@ pub const ResiliencyScoreType = enum {
     sop,
 
     pub const json_field_names = .{
-        .compliance = "COMPLIANCE",
-        .@"test" = "TEST",
-        .alarm = "ALARM",
-        .sop = "SOP",
+        .compliance = "Compliance",
+        .@"test" = "Test",
+        .alarm = "Alarm",
+        .sop = "Sop",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .compliance => "Compliance",
+            .@"test" => "Test",
+            .alarm => "Alarm",
+            .sop => "Sop",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

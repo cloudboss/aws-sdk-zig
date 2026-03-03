@@ -262,7 +262,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMetricDataInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricDataQueries.member.{d}.MetricStat.Unit=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.unit) |fv_2| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                 }
             }
         }
@@ -289,7 +289,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMetricDataInput, con
     }
     if (input.scan_by) |v| {
         try body_buf.appendSlice(allocator, "&ScanBy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&StartTime=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.start_time}) catch "");

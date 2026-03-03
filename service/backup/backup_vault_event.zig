@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const BackupVaultEvent = enum {
     backup_job_started,
     backup_job_completed,
@@ -44,4 +46,39 @@ pub const BackupVaultEvent = enum {
         .recovery_point_index_deleted = "RECOVERY_POINT_INDEX_DELETED",
         .recovery_point_indexing_failed = "RECOVERY_POINT_INDEXING_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .backup_job_started => "BACKUP_JOB_STARTED",
+            .backup_job_completed => "BACKUP_JOB_COMPLETED",
+            .backup_job_successful => "BACKUP_JOB_SUCCESSFUL",
+            .backup_job_failed => "BACKUP_JOB_FAILED",
+            .backup_job_expired => "BACKUP_JOB_EXPIRED",
+            .restore_job_started => "RESTORE_JOB_STARTED",
+            .restore_job_completed => "RESTORE_JOB_COMPLETED",
+            .restore_job_successful => "RESTORE_JOB_SUCCESSFUL",
+            .restore_job_failed => "RESTORE_JOB_FAILED",
+            .copy_job_started => "COPY_JOB_STARTED",
+            .copy_job_successful => "COPY_JOB_SUCCESSFUL",
+            .copy_job_failed => "COPY_JOB_FAILED",
+            .recovery_point_modified => "RECOVERY_POINT_MODIFIED",
+            .backup_plan_created => "BACKUP_PLAN_CREATED",
+            .backup_plan_modified => "BACKUP_PLAN_MODIFIED",
+            .s3_backup_object_failed => "S3_BACKUP_OBJECT_FAILED",
+            .s3_restore_object_failed => "S3_RESTORE_OBJECT_FAILED",
+            .continuous_backup_interrupted => "CONTINUOUS_BACKUP_INTERRUPTED",
+            .recovery_point_index_completed => "RECOVERY_POINT_INDEX_COMPLETED",
+            .recovery_point_index_deleted => "RECOVERY_POINT_INDEX_DELETED",
+            .recovery_point_indexing_failed => "RECOVERY_POINT_INDEXING_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

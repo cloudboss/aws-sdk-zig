@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNetworkInterfaceP
     try body_buf.appendSlice(allocator, "&NetworkInterfaceId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.network_interface_id);
     try body_buf.appendSlice(allocator, "&Permission=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.permission));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.permission.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

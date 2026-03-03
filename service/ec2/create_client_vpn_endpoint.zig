@@ -252,7 +252,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.member.{d}.Type=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.@"type") |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
     }
@@ -325,7 +325,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
     }
     if (input.endpoint_ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&EndpointIpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.security_group_ids) |list| {
         for (list, 0..) |item, idx| {
@@ -338,7 +338,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
     }
     if (input.self_service_portal) |v| {
         try body_buf.appendSlice(allocator, "&SelfServicePortal=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&ServerCertificateArn=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.server_certificate_arn);
@@ -358,7 +358,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -386,11 +386,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
     }
     if (input.traffic_ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&TrafficIpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.transport_protocol) |v| {
         try body_buf.appendSlice(allocator, "&TransportProtocol=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.vpc_id) |v| {
         try body_buf.appendSlice(allocator, "&VpcId=");

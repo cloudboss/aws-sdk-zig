@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MetricName = enum {
     amortized_cost,
     blended_cost,
@@ -24,4 +26,29 @@ pub const MetricName = enum {
         .unit = "Unit",
         .cost = "Cost",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .amortized_cost => "AmortizedCost",
+            .blended_cost => "BlendedCost",
+            .net_amortized_cost => "NetAmortizedCost",
+            .net_unblended_cost => "NetUnblendedCost",
+            .normalized_usage_amount => "NormalizedUsageAmount",
+            .unblended_cost => "UnblendedCost",
+            .usage_quantity => "UsageQuantity",
+            .spend_covered_by_savings_plans => "SpendCoveredBySavingsPlans",
+            .hour => "Hour",
+            .unit => "Unit",
+            .cost => "Cost",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

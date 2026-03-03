@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Types of PII entities that can be detected, we will support every types that
 /// Guardrails can support
 pub const PIIEntityType = enum {
@@ -111,4 +113,50 @@ pub const PIIEntityType = enum {
         .uk_national_insurance_number = "UK_NATIONAL_INSURANCE_NUMBER",
         .uk_unique_taxpayer_reference_number = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .all => "ALL",
+            .address => "ADDRESS",
+            .age => "AGE",
+            .name => "NAME",
+            .email => "EMAIL",
+            .phone => "PHONE",
+            .username => "USERNAME",
+            .password => "PASSWORD",
+            .driver_id => "DRIVER_ID",
+            .license_plate => "LICENSE_PLATE",
+            .vehicle_identification_number => "VEHICLE_IDENTIFICATION_NUMBER",
+            .credit_debit_card_cvv => "CREDIT_DEBIT_CARD_CVV",
+            .credit_debit_card_expiry => "CREDIT_DEBIT_CARD_EXPIRY",
+            .credit_debit_card_number => "CREDIT_DEBIT_CARD_NUMBER",
+            .pin => "PIN",
+            .international_bank_account_number => "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+            .swift_code => "SWIFT_CODE",
+            .ip_address => "IP_ADDRESS",
+            .mac_address => "MAC_ADDRESS",
+            .url => "URL",
+            .aws_access_key => "AWS_ACCESS_KEY",
+            .aws_secret_key => "AWS_SECRET_KEY",
+            .us_bank_account_number => "US_BANK_ACCOUNT_NUMBER",
+            .us_bank_routing_number => "US_BANK_ROUTING_NUMBER",
+            .us_individual_tax_identification_number => "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+            .us_passport_number => "US_PASSPORT_NUMBER",
+            .us_social_security_number => "US_SOCIAL_SECURITY_NUMBER",
+            .ca_health_number => "CA_HEALTH_NUMBER",
+            .ca_social_insurance_number => "CA_SOCIAL_INSURANCE_NUMBER",
+            .uk_national_health_service_number => "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+            .uk_national_insurance_number => "UK_NATIONAL_INSURANCE_NUMBER",
+            .uk_unique_taxpayer_reference_number => "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

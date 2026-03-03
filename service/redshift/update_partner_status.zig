@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePartnerStatusInpu
     try body_buf.appendSlice(allocator, "&PartnerName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.partner_name);
     try body_buf.appendSlice(allocator, "&Status=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.status.wireName());
     if (input.status_message) |v| {
         try body_buf.appendSlice(allocator, "&StatusMessage=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);

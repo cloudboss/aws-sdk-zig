@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Determines the level of detail about either provisioned or on-demand
 /// throughput
 /// consumption that is returned in the response:
@@ -27,4 +29,21 @@ pub const ReturnConsumedCapacity = enum {
         .total = "TOTAL",
         .none = "NONE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .indexes => "INDEXES",
+            .total => "TOTAL",
+            .none => "NONE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

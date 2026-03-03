@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStackInstancesInput
     try body_buf.appendSlice(allocator, "Action=ListStackInstances&Version=2010-05-15");
     if (input.call_as) |v| {
         try body_buf.appendSlice(allocator, "&CallAs=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.filters) |list| {
         for (list, 0..) |item, idx| {
@@ -123,7 +123,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStackInstancesInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.name) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {

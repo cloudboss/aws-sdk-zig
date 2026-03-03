@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AwsOpportunityStage = enum {
     not_started,
     in_progress,
@@ -25,29 +27,67 @@ pub const AwsOpportunityStage = enum {
     closed_incomplete,
 
     pub const json_field_names = .{
-        .not_started = "NOT_STARTED",
-        .in_progress = "IN_PROGRESS",
-        .prospect = "PROSPECT",
-        .engaged = "ENGAGED",
-        .identified = "IDENTIFIED",
-        .qualify = "QUALIFY",
-        .research = "RESEARCH",
-        .seller_engaged = "SELLER_ENGAGED",
-        .evaluating = "EVALUATING",
-        .seller_registered = "SELLER_REGISTERED",
-        .term_sheet_negotiation = "TERM_SHEET_NEGOTIATION",
-        .contract_negotiation = "CONTRACT_NEGOTIATION",
-        .onboarding = "ONBOARDING",
-        .building_integration = "BUILDING_INTEGRATION",
-        .qualified = "QUALIFIED",
-        .on_hold = "ON_HOLD",
-        .technical_validation = "TECHNICAL_VALIDATION",
-        .business_validation = "BUSINESS_VALIDATION",
-        .committed = "COMMITTED",
-        .launched = "LAUNCHED",
-        .deferred_to_partner = "DEFERRED_TO_PARTNER",
-        .closed_lost = "CLOSED_LOST",
-        .completed = "COMPLETED",
-        .closed_incomplete = "CLOSED_INCOMPLETE",
+        .not_started = "Not Started",
+        .in_progress = "In Progress",
+        .prospect = "Prospect",
+        .engaged = "Engaged",
+        .identified = "Identified",
+        .qualify = "Qualify",
+        .research = "Research",
+        .seller_engaged = "Seller Engaged",
+        .evaluating = "Evaluating",
+        .seller_registered = "Seller Registered",
+        .term_sheet_negotiation = "Term Sheet Negotiation",
+        .contract_negotiation = "Contract Negotiation",
+        .onboarding = "Onboarding",
+        .building_integration = "Building Integration",
+        .qualified = "Qualified",
+        .on_hold = "On-hold",
+        .technical_validation = "Technical Validation",
+        .business_validation = "Business Validation",
+        .committed = "Committed",
+        .launched = "Launched",
+        .deferred_to_partner = "Deferred to Partner",
+        .closed_lost = "Closed Lost",
+        .completed = "Completed",
+        .closed_incomplete = "Closed Incomplete",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .not_started => "Not Started",
+            .in_progress => "In Progress",
+            .prospect => "Prospect",
+            .engaged => "Engaged",
+            .identified => "Identified",
+            .qualify => "Qualify",
+            .research => "Research",
+            .seller_engaged => "Seller Engaged",
+            .evaluating => "Evaluating",
+            .seller_registered => "Seller Registered",
+            .term_sheet_negotiation => "Term Sheet Negotiation",
+            .contract_negotiation => "Contract Negotiation",
+            .onboarding => "Onboarding",
+            .building_integration => "Building Integration",
+            .qualified => "Qualified",
+            .on_hold => "On-hold",
+            .technical_validation => "Technical Validation",
+            .business_validation => "Business Validation",
+            .committed => "Committed",
+            .launched => "Launched",
+            .deferred_to_partner => "Deferred to Partner",
+            .closed_lost => "Closed Lost",
+            .completed => "Completed",
+            .closed_incomplete => "Closed Incomplete",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

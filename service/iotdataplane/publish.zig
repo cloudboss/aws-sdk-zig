@@ -180,7 +180,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PublishInput, config: *
         try request.headers.put(allocator, "x-amz-mqtt5-correlation-data", v);
     }
     if (input.payload_format_indicator) |v| {
-        try request.headers.put(allocator, "x-amz-mqtt5-payload-format-indicator", @tagName(v));
+        try request.headers.put(allocator, "x-amz-mqtt5-payload-format-indicator", v.wireName());
     }
     if (input.user_properties) |v| {
         try request.headers.put(allocator, "x-amz-mqtt5-user-properties", v);

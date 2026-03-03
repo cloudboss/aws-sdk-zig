@@ -607,7 +607,7 @@ class SerdeGenerator(
                 if (isEnumType(targetShape)) {
                     val enumName = targetShape.id.name
                     writer.write(
-                        "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                        "result.\$L = \$L.fromWireName(try reader.readElementText());",
                         fieldName, enumName,
                     )
                 } else {
@@ -678,7 +678,7 @@ class SerdeGenerator(
             is EnumShape, is IntEnumShape -> {
                 val enumName = targetShape.id.name
                 writer.write(
-                    "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                    "result.\$L = \$L.fromWireName(try reader.readElementText());",
                     fieldName, enumName,
                 )
             }
@@ -758,7 +758,7 @@ class SerdeGenerator(
                 if (isEnumType(elementShape)) {
                     val enumName = elementShape.id.name
                     writer.write(
-                        "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| try list.append(allocator, v);",
+                        "if (\$L.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);",
                         enumName,
                     )
                 } else {
@@ -768,7 +768,7 @@ class SerdeGenerator(
             is EnumShape, is IntEnumShape -> {
                 val enumName = elementShape.id.name
                 writer.write(
-                    "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| try list.append(allocator, v);",
+                    "if (\$L.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);",
                     enumName,
                 )
             }
@@ -918,7 +918,7 @@ class SerdeGenerator(
             is StringShape -> {
                 if (isEnumType(valueShape)) {
                     writer.write(
-                        "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| { entry_value = v; }",
+                        "if (\$L.fromWireName(try reader.readElementText())) |v| { entry_value = v; }",
                         valueShape.id.name,
                     )
                 } else {
@@ -945,7 +945,7 @@ class SerdeGenerator(
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write(
-                    "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| { entry_value = v; }",
+                    "if (\$L.fromWireName(try reader.readElementText())) |v| { entry_value = v; }",
                     valueShape.id.name,
                 )
             }
@@ -998,7 +998,7 @@ class SerdeGenerator(
             is StringShape -> {
                 if (isEnumType(valueShape)) {
                     writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
-                    writer.write("try buf.appendSlice(allocator, @tagName(entry.value));")
+                    writer.write("try buf.appendSlice(allocator, entry.value.wireName());")
                     writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
                 } else {
                     writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
@@ -1021,7 +1021,7 @@ class SerdeGenerator(
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write("try buf.appendSlice(allocator, \"<\$L>\");", valueTag)
-                writer.write("try buf.appendSlice(allocator, @tagName(entry.value));")
+                writer.write("try buf.appendSlice(allocator, entry.value.wireName());")
                 writer.write("try buf.appendSlice(allocator, \"</\$L>\");", valueTag)
             }
             is StructureShape -> {
@@ -1097,7 +1097,7 @@ class SerdeGenerator(
             is StringShape -> {
                 if (isEnumType(targetShape)) {
                     writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
-                    writer.write("try buf.appendSlice(allocator, @tagName(\$L));", accessor)
+                    writer.write("try buf.appendSlice(allocator, \$L.wireName());", accessor)
                     writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
                 } else {
                     writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
@@ -1120,7 +1120,7 @@ class SerdeGenerator(
             }
             is EnumShape, is IntEnumShape -> {
                 writer.write("try buf.appendSlice(allocator, \"<\$L>\");", xmlName)
-                writer.write("try buf.appendSlice(allocator, @tagName(\$L));", accessor)
+                writer.write("try buf.appendSlice(allocator, \$L.wireName());", accessor)
                 writer.write("try buf.appendSlice(allocator, \"</\$L>\");", xmlName)
             }
             is TimestampShape -> {
@@ -1188,13 +1188,13 @@ class SerdeGenerator(
             }
             is StringShape -> {
                 if (isEnumType(elementShape)) {
-                    writer.write("try buf.appendSlice(allocator, @tagName(item));")
+                    writer.write("try buf.appendSlice(allocator, item.wireName());")
                 } else {
                     writer.write("try aws.xml.appendXmlEscaped(allocator, buf, item);")
                 }
             }
             is EnumShape, is IntEnumShape -> {
-                writer.write("try buf.appendSlice(allocator, @tagName(item));")
+                writer.write("try buf.appendSlice(allocator, item.wireName());")
             }
             is BooleanShape -> {
                 writer.write("try buf.appendSlice(allocator, if (item) \"true\" else \"false\");")

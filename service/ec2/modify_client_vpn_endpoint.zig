@@ -231,7 +231,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClientVpnEndpoint
     }
     if (input.self_service_portal) |v| {
         try body_buf.appendSlice(allocator, "&SelfServicePortal=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.server_certificate_arn) |v| {
         try body_buf.appendSlice(allocator, "&ServerCertificateArn=");

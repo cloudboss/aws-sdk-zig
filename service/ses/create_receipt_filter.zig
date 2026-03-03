@@ -55,7 +55,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptFilterInpu
     try body_buf.appendSlice(allocator, "&Filter.IpFilter.Cidr=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.filter.ip_filter.cidr);
     try body_buf.appendSlice(allocator, "&Filter.IpFilter.Policy=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.filter.ip_filter.policy));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.filter.ip_filter.policy.wireName());
     try body_buf.appendSlice(allocator, "&Filter.Name=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.filter.name);
 

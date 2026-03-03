@@ -222,7 +222,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPlaceInput, config: 
     if (input.intended_use) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "intended-use=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.key) |v| {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ServicePrincipalNameStatusReason = enum {
     directory_access_denied,
     directory_not_reachable,
@@ -14,4 +16,24 @@ pub const ServicePrincipalNameStatusReason = enum {
         .spn_limit_exceeded = "SPN_LIMIT_EXCEEDED",
         .internal_failure = "INTERNAL_FAILURE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .directory_access_denied => "DIRECTORY_ACCESS_DENIED",
+            .directory_not_reachable => "DIRECTORY_NOT_REACHABLE",
+            .directory_resource_not_found => "DIRECTORY_RESOURCE_NOT_FOUND",
+            .spn_exists_on_different_ad_object => "SPN_EXISTS_ON_DIFFERENT_AD_OBJECT",
+            .spn_limit_exceeded => "SPN_LIMIT_EXCEEDED",
+            .internal_failure => "INTERNAL_FAILURE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// If your input video has accurate color space metadata, or if you don't know
 /// about color space: Keep the default value, Follow. MediaConvert will
 /// automatically detect your input color space. If your input video has
@@ -36,4 +38,26 @@ pub const ColorSpace = enum {
         .p3_d65_sdr = "P3D65_SDR",
         .p3_d65_hdr = "P3D65_HDR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .follow => "FOLLOW",
+            .rec_601 => "REC_601",
+            .rec_709 => "REC_709",
+            .hdr10 => "HDR10",
+            .hlg_2020 => "HLG_2020",
+            .p3_dci => "P3DCI",
+            .p3_d65_sdr => "P3D65_SDR",
+            .p3_d65_hdr => "P3D65_HDR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

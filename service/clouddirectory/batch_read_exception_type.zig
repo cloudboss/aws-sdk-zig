@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const BatchReadExceptionType = enum {
     validation_exception,
     invalid_arn_exception,
@@ -28,4 +30,31 @@ pub const BatchReadExceptionType = enum {
         .limit_exceeded_exception = "LimitExceededException",
         .internal_service_exception = "InternalServiceException",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .validation_exception => "ValidationException",
+            .invalid_arn_exception => "InvalidArnException",
+            .resource_not_found_exception => "ResourceNotFoundException",
+            .invalid_next_token_exception => "InvalidNextTokenException",
+            .access_denied_exception => "AccessDeniedException",
+            .not_node_exception => "NotNodeException",
+            .facet_validation_exception => "FacetValidationException",
+            .cannot_list_parent_of_root_exception => "CannotListParentOfRootException",
+            .not_index_exception => "NotIndexException",
+            .not_policy_exception => "NotPolicyException",
+            .directory_not_enabled_exception => "DirectoryNotEnabledException",
+            .limit_exceeded_exception => "LimitExceededException",
+            .internal_service_exception => "InternalServiceException",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

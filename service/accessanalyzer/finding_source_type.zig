@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const FindingSourceType = enum {
     policy,
     bucket_acl,
@@ -10,4 +12,22 @@ pub const FindingSourceType = enum {
         .s3_access_point = "S3_ACCESS_POINT",
         .s3_access_point_account = "S3_ACCESS_POINT_ACCOUNT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .policy => "POLICY",
+            .bucket_acl => "BUCKET_ACL",
+            .s3_access_point => "S3_ACCESS_POINT",
+            .s3_access_point_account => "S3_ACCESS_POINT_ACCOUNT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

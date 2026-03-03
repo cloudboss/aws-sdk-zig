@@ -56,7 +56,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DefineAnalysisSchemeInp
     if (input.analysis_scheme.analysis_options) |sv| {
         if (sv.algorithmic_stemming) |sv2| {
             try body_buf.appendSlice(allocator, "&AnalysisScheme.AnalysisOptions.AlgorithmicStemming=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.japanese_tokenization_dictionary) |sv2| {
             try body_buf.appendSlice(allocator, "&AnalysisScheme.AnalysisOptions.JapaneseTokenizationDictionary=");
@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DefineAnalysisSchemeInp
         }
     }
     try body_buf.appendSlice(allocator, "&AnalysisScheme.AnalysisSchemeLanguage=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.analysis_scheme.analysis_scheme_language));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.analysis_scheme.analysis_scheme_language.wireName());
     try body_buf.appendSlice(allocator, "&AnalysisScheme.AnalysisSchemeName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.analysis_scheme.analysis_scheme_name);
     try body_buf.appendSlice(allocator, "&DomainName=");

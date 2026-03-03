@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify a fallback audio selector for this input. Use to ensure outputs have
 /// audio even when the audio selector you specify in your output is missing
 /// from the source. DEFAULT (Checked in the MediaConvert console): If your
@@ -15,4 +17,20 @@ pub const AudioDefaultSelection = enum {
         .default = "DEFAULT",
         .not_default = "NOT_DEFAULT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .default => "DEFAULT",
+            .not_default => "NOT_DEFAULT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

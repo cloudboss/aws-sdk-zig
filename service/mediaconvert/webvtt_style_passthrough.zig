@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how MediaConvert writes style information in your output WebVTT
 /// captions. To use the available style, color, and position information from
 /// your input captions: Choose Enabled. MediaConvert uses default settings when
@@ -23,4 +25,22 @@ pub const WebvttStylePassthrough = enum {
         .strict = "STRICT",
         .merge = "MERGE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .enabled => "ENABLED",
+            .disabled => "DISABLED",
+            .strict => "STRICT",
+            .merge => "MERGE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

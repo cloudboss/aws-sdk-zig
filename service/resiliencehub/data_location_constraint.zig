@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const DataLocationConstraint = enum {
     any_location,
     same_continent,
     same_country,
 
     pub const json_field_names = .{
-        .any_location = "ANY_LOCATION",
-        .same_continent = "SAME_CONTINENT",
-        .same_country = "SAME_COUNTRY",
+        .any_location = "AnyLocation",
+        .same_continent = "SameContinent",
+        .same_country = "SameCountry",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .any_location => "AnyLocation",
+            .same_continent => "SameContinent",
+            .same_country => "SameCountry",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

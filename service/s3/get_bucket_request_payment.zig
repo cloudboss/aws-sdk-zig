@@ -98,7 +98,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Payer")) {
-                    result.payer = std.meta.stringToEnum(Payer, try reader.readElementText());
+                    result.payer = Payer.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

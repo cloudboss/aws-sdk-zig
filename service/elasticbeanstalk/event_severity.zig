@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EventSeverity = enum {
     trace,
     debug,
@@ -5,4 +7,33 @@ pub const EventSeverity = enum {
     warn,
     @"error",
     fatal,
+
+    pub const json_field_names = .{
+        .trace = "TRACE",
+        .debug = "DEBUG",
+        .info = "INFO",
+        .warn = "WARN",
+        .@"error" = "ERROR",
+        .fatal = "FATAL",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .trace => "TRACE",
+            .debug => "DEBUG",
+            .info => "INFO",
+            .warn => "WARN",
+            .@"error" => "ERROR",
+            .fatal => "FATAL",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

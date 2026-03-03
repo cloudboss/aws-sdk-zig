@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const IntentState = enum {
     failed,
     fulfilled,
@@ -7,11 +9,31 @@ pub const IntentState = enum {
     fulfillment_in_progress,
 
     pub const json_field_names = .{
-        .failed = "FAILED",
-        .fulfilled = "FULFILLED",
-        .in_progress = "IN_PROGRESS",
-        .ready_for_fulfillment = "READY_FOR_FULFILLMENT",
-        .waiting = "WAITING",
-        .fulfillment_in_progress = "FULFILLMENT_IN_PROGRESS",
+        .failed = "Failed",
+        .fulfilled = "Fulfilled",
+        .in_progress = "InProgress",
+        .ready_for_fulfillment = "ReadyForFulfillment",
+        .waiting = "Waiting",
+        .fulfillment_in_progress = "FulfillmentInProgress",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .failed => "Failed",
+            .fulfilled => "Fulfilled",
+            .in_progress => "InProgress",
+            .ready_for_fulfillment => "ReadyForFulfillment",
+            .waiting => "Waiting",
+            .fulfillment_in_progress => "FulfillmentInProgress",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

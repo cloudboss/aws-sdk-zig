@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ActionConnectorType = enum {
     generic_http,
     servicenow_now_platform,
@@ -56,4 +58,45 @@ pub const ActionConnectorType = enum {
         .asana = "ASANA",
         .bamboo_hr = "BAMBOO_HR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .generic_http => "GENERIC_HTTP",
+            .servicenow_now_platform => "SERVICENOW_NOW_PLATFORM",
+            .salesforce_crm => "SALESFORCE_CRM",
+            .microsoft_outlook => "MICROSOFT_OUTLOOK",
+            .pagerduty_advance => "PAGERDUTY_ADVANCE",
+            .jira_cloud => "JIRA_CLOUD",
+            .atlassian_confluence => "ATLASSIAN_CONFLUENCE",
+            .amazon_s3 => "AMAZON_S3",
+            .amazon_bedrock_agent_runtime => "AMAZON_BEDROCK_AGENT_RUNTIME",
+            .amazon_bedrock_runtime => "AMAZON_BEDROCK_RUNTIME",
+            .amazon_bedrock_data_automation_runtime => "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME",
+            .amazon_textract => "AMAZON_TEXTRACT",
+            .amazon_comprehend => "AMAZON_COMPREHEND",
+            .amazon_comprehend_medical => "AMAZON_COMPREHEND_MEDICAL",
+            .microsoft_onedrive => "MICROSOFT_ONEDRIVE",
+            .microsoft_sharepoint => "MICROSOFT_SHAREPOINT",
+            .microsoft_teams => "MICROSOFT_TEAMS",
+            .sap_businesspartner => "SAP_BUSINESSPARTNER",
+            .sap_productmasterdata => "SAP_PRODUCTMASTERDATA",
+            .sap_physicalinventory => "SAP_PHYSICALINVENTORY",
+            .sap_billofmaterials => "SAP_BILLOFMATERIALS",
+            .sap_materialstock => "SAP_MATERIALSTOCK",
+            .zendesk_suite => "ZENDESK_SUITE",
+            .smartsheet => "SMARTSHEET",
+            .slack => "SLACK",
+            .asana => "ASANA",
+            .bamboo_hr => "BAMBOO_HR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

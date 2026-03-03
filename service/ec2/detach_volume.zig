@@ -138,7 +138,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "instanceOwningService")) {
                     result.instance_owning_service = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(VolumeAttachmentState, try reader.readElementText());
+                    result.state = VolumeAttachmentState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {

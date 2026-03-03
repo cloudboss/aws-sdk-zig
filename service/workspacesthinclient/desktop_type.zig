@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const DesktopType = enum {
     workspaces,
     appstream,
     workspaces_web,
 
     pub const json_field_names = .{
-        .workspaces = "WORKSPACES",
-        .appstream = "APPSTREAM",
-        .workspaces_web = "WORKSPACES_WEB",
+        .workspaces = "workspaces",
+        .appstream = "appstream",
+        .workspaces_web = "workspaces-web",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .workspaces => "workspaces",
+            .appstream => "appstream",
+            .workspaces_web => "workspaces-web",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

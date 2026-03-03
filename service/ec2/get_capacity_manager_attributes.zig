@@ -116,13 +116,13 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "capacityManagerStatus")) {
-                    result.capacity_manager_status = std.meta.stringToEnum(CapacityManagerStatus, try reader.readElementText());
+                    result.capacity_manager_status = CapacityManagerStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "dataExportCount")) {
                     result.data_export_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "earliestDatapointTimestamp")) {
                     result.earliest_datapoint_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ingestionStatus")) {
-                    result.ingestion_status = std.meta.stringToEnum(IngestionStatus, try reader.readElementText());
+                    result.ingestion_status = IngestionStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ingestionStatusMessage")) {
                     result.ingestion_status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDatapointTimestamp")) {

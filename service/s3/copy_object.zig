@@ -908,7 +908,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
-        try request.headers.put(allocator, "x-amz-acl", @tagName(v));
+        try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }
     if (input.bucket_key_enabled) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
@@ -917,7 +917,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
         try request.headers.put(allocator, "Cache-Control", v);
     }
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-checksum-algorithm", v.wireName());
     }
     if (input.content_disposition) |v| {
         try request.headers.put(allocator, "Content-Disposition", v);
@@ -987,13 +987,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
         try request.headers.put(allocator, "If-None-Match", v);
     }
     if (input.metadata_directive) |v| {
-        try request.headers.put(allocator, "x-amz-metadata-directive", @tagName(v));
+        try request.headers.put(allocator, "x-amz-metadata-directive", v.wireName());
     }
     if (input.object_lock_legal_hold_status) |v| {
-        try request.headers.put(allocator, "x-amz-object-lock-legal-hold", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-lock-legal-hold", v.wireName());
     }
     if (input.object_lock_mode) |v| {
-        try request.headers.put(allocator, "x-amz-object-lock-mode", @tagName(v));
+        try request.headers.put(allocator, "x-amz-object-lock-mode", v.wireName());
     }
     if (input.object_lock_retain_until_date) |v| {
         {
@@ -1002,10 +1002,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
         }
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.server_side_encryption) |v| {
-        try request.headers.put(allocator, "x-amz-server-side-encryption", @tagName(v));
+        try request.headers.put(allocator, "x-amz-server-side-encryption", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -1023,13 +1023,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
         try request.headers.put(allocator, "x-amz-server-side-encryption-aws-kms-key-id", v);
     }
     if (input.storage_class) |v| {
-        try request.headers.put(allocator, "x-amz-storage-class", @tagName(v));
+        try request.headers.put(allocator, "x-amz-storage-class", v.wireName());
     }
     if (input.tagging) |v| {
         try request.headers.put(allocator, "x-amz-tagging", v);
     }
     if (input.tagging_directive) |v| {
-        try request.headers.put(allocator, "x-amz-tagging-directive", @tagName(v));
+        try request.headers.put(allocator, "x-amz-tagging-directive", v.wireName());
     }
     if (input.website_redirect_location) |v| {
         try request.headers.put(allocator, "x-amz-website-redirect-location", v);
@@ -1052,10 +1052,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.expiration = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
         result.sse_customer_algorithm = try allocator.dupe(u8, value);

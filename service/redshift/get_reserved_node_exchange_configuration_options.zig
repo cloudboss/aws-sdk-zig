@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReservedNodeExchange
 
     try body_buf.appendSlice(allocator, "Action=GetReservedNodeExchangeConfigurationOptions&Version=2012-12-01");
     try body_buf.appendSlice(allocator, "&ActionType=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.action_type));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.action_type.wireName());
     if (input.cluster_identifier) |v| {
         try body_buf.appendSlice(allocator, "&ClusterIdentifier=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);

@@ -157,7 +157,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.AuthScheme=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.auth_scheme) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -165,7 +165,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.ClientPasswordAuthType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.client_password_auth_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -181,7 +181,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.IAMAuth=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.iam_auth) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -210,14 +210,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyInput, con
     }
     if (input.default_auth_scheme) |v| {
         try body_buf.appendSlice(allocator, "&DefaultAuthScheme=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.endpoint_network_type) |v| {
         try body_buf.appendSlice(allocator, "&EndpointNetworkType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&EngineFamily=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.engine_family));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.engine_family.wireName());
     if (input.idle_client_timeout) |v| {
         try body_buf.appendSlice(allocator, "&IdleClientTimeout=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
@@ -251,7 +251,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBProxyInput, con
     }
     if (input.target_connection_network_type) |v| {
         try body_buf.appendSlice(allocator, "&TargetConnectionNetworkType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.vpc_security_group_ids) |list| {
         for (list, 0..) |item, idx| {

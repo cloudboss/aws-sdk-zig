@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const FindingDetailsErrorCode = enum {
     internal_error,
     access_denied,
@@ -10,4 +12,22 @@ pub const FindingDetailsErrorCode = enum {
         .finding_details_not_found = "FINDING_DETAILS_NOT_FOUND",
         .invalid_input = "INVALID_INPUT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .internal_error => "INTERNAL_ERROR",
+            .access_denied => "ACCESS_DENIED",
+            .finding_details_not_found => "FINDING_DETAILS_NOT_FOUND",
+            .invalid_input => "INVALID_INPUT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -98,7 +98,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportVolumeInput, conf
     try body_buf.appendSlice(allocator, "&Image.Bytes=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.image.bytes}) catch "");
     try body_buf.appendSlice(allocator, "&Image.Format=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.image.format));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.image.format.wireName());
     try body_buf.appendSlice(allocator, "&Image.ImportManifestUrl=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.image.import_manifest_url);
     try body_buf.appendSlice(allocator, "&Volume.Size=");

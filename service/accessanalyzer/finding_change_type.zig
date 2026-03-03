@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const FindingChangeType = enum {
     changed,
     new,
@@ -8,4 +10,21 @@ pub const FindingChangeType = enum {
         .new = "NEW",
         .unchanged = "UNCHANGED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .changed => "CHANGED",
+            .new => "NEW",
+            .unchanged => "UNCHANGED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

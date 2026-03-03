@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Choose the scan line type for the output. Keep the default value,
 /// Progressive to create a progressive output, regardless of the scan type of
 /// your input. Use Top field first or Bottom field first to create an output
@@ -23,4 +25,23 @@ pub const AvcIntraInterlaceMode = enum {
         .follow_top_field = "FOLLOW_TOP_FIELD",
         .follow_bottom_field = "FOLLOW_BOTTOM_FIELD",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .progressive => "PROGRESSIVE",
+            .top_field => "TOP_FIELD",
+            .bottom_field => "BOTTOM_FIELD",
+            .follow_top_field => "FOLLOW_TOP_FIELD",
+            .follow_bottom_field => "FOLLOW_BOTTOM_FIELD",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

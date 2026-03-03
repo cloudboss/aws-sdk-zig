@@ -144,7 +144,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectTaggingInput, 
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_algorithm) |v| {
-        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", @tagName(v));
+        try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }
     if (input.content_md5) |v| {
         try request.headers.put(allocator, "Content-MD5", v);
@@ -153,7 +153,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectTaggingInput, 
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
 
     return request;

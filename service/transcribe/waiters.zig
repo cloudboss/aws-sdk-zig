@@ -56,14 +56,14 @@ pub const CallAnalyticsJobCompletedWaiter = struct {
 
         if (output.call_analytics_job) |val_0| {
             if (val_0.call_analytics_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.call_analytics_job) |val_0| {
             if (val_0.call_analytics_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -117,14 +117,14 @@ pub const LanguageModelCompletedWaiter = struct {
 
         if (output.language_model) |val_0| {
             if (val_0.model_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.language_model) |val_0| {
             if (val_0.model_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -178,14 +178,14 @@ pub const MedicalScribeJobCompletedWaiter = struct {
 
         if (output.medical_scribe_job) |val_0| {
             if (val_0.medical_scribe_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.medical_scribe_job) |val_0| {
             if (val_0.medical_scribe_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -239,14 +239,14 @@ pub const MedicalTranscriptionJobCompletedWaiter = struct {
 
         if (output.medical_transcription_job) |val_0| {
             if (val_0.transcription_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.medical_transcription_job) |val_0| {
             if (val_0.transcription_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -299,12 +299,12 @@ pub const MedicalVocabularyReadyWaiter = struct {
         };
 
         if (output.vocabulary_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "READY")) {
+            if (std.mem.eql(u8, val_0.wireName(), "READY")) {
                 return .success;
             }
         }
         if (output.vocabulary_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
@@ -357,14 +357,14 @@ pub const TranscriptionJobCompletedWaiter = struct {
 
         if (output.transcription_job) |val_0| {
             if (val_0.transcription_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "COMPLETED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "COMPLETED")) {
                     return .success;
                 }
             }
         }
         if (output.transcription_job) |val_0| {
             if (val_0.transcription_job_status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -417,12 +417,12 @@ pub const VocabularyReadyWaiter = struct {
         };
 
         if (output.vocabulary_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "READY")) {
+            if (std.mem.eql(u8, val_0.wireName(), "READY")) {
                 return .success;
             }
         }
         if (output.vocabulary_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }

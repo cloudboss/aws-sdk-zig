@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how MediaConvert limits the color sample range for this output. To
 /// create a limited range output from a full range input: Choose Limited range
 /// squeeze. For full range inputs, MediaConvert performs a linear offset to
@@ -23,4 +25,21 @@ pub const SampleRangeConversion = enum {
         .none = "NONE",
         .limited_range_clip = "LIMITED_RANGE_CLIP",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .limited_range_squeeze => "LIMITED_RANGE_SQUEEZE",
+            .none => "NONE",
+            .limited_range_clip => "LIMITED_RANGE_CLIP",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

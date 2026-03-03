@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DelegationStatus = enum {
     in_progress,
     under_review,
@@ -8,4 +10,21 @@ pub const DelegationStatus = enum {
         .under_review = "UNDER_REVIEW",
         .complete = "COMPLETE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .in_progress => "IN_PROGRESS",
+            .under_review => "UNDER_REVIEW",
+            .complete => "COMPLETE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

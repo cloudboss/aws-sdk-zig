@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// To use the available style, color, and position information from your input
 /// captions: Set Style passthrough to Enabled. Note that MediaConvert uses
 /// default settings for any missing style or position information in your input
@@ -16,4 +18,20 @@ pub const DvbSubtitleStylePassthrough = enum {
         .enabled = "ENABLED",
         .disabled = "DISABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .enabled => "ENABLED",
+            .disabled => "DISABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

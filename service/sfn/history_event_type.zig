@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const HistoryEventType = enum {
     activity_failed,
     activity_scheduled,
@@ -126,4 +128,80 @@ pub const HistoryEventType = enum {
         .map_run_redriven = "MapRunRedriven",
         .evaluation_failed = "EvaluationFailed",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .activity_failed => "ActivityFailed",
+            .activity_scheduled => "ActivityScheduled",
+            .activity_schedule_failed => "ActivityScheduleFailed",
+            .activity_started => "ActivityStarted",
+            .activity_succeeded => "ActivitySucceeded",
+            .activity_timed_out => "ActivityTimedOut",
+            .choice_state_entered => "ChoiceStateEntered",
+            .choice_state_exited => "ChoiceStateExited",
+            .execution_aborted => "ExecutionAborted",
+            .execution_failed => "ExecutionFailed",
+            .execution_started => "ExecutionStarted",
+            .execution_succeeded => "ExecutionSucceeded",
+            .execution_timed_out => "ExecutionTimedOut",
+            .fail_state_entered => "FailStateEntered",
+            .lambda_function_failed => "LambdaFunctionFailed",
+            .lambda_function_scheduled => "LambdaFunctionScheduled",
+            .lambda_function_schedule_failed => "LambdaFunctionScheduleFailed",
+            .lambda_function_started => "LambdaFunctionStarted",
+            .lambda_function_start_failed => "LambdaFunctionStartFailed",
+            .lambda_function_succeeded => "LambdaFunctionSucceeded",
+            .lambda_function_timed_out => "LambdaFunctionTimedOut",
+            .map_iteration_aborted => "MapIterationAborted",
+            .map_iteration_failed => "MapIterationFailed",
+            .map_iteration_started => "MapIterationStarted",
+            .map_iteration_succeeded => "MapIterationSucceeded",
+            .map_state_aborted => "MapStateAborted",
+            .map_state_entered => "MapStateEntered",
+            .map_state_exited => "MapStateExited",
+            .map_state_failed => "MapStateFailed",
+            .map_state_started => "MapStateStarted",
+            .map_state_succeeded => "MapStateSucceeded",
+            .parallel_state_aborted => "ParallelStateAborted",
+            .parallel_state_entered => "ParallelStateEntered",
+            .parallel_state_exited => "ParallelStateExited",
+            .parallel_state_failed => "ParallelStateFailed",
+            .parallel_state_started => "ParallelStateStarted",
+            .parallel_state_succeeded => "ParallelStateSucceeded",
+            .pass_state_entered => "PassStateEntered",
+            .pass_state_exited => "PassStateExited",
+            .succeed_state_entered => "SucceedStateEntered",
+            .succeed_state_exited => "SucceedStateExited",
+            .task_failed => "TaskFailed",
+            .task_scheduled => "TaskScheduled",
+            .task_started => "TaskStarted",
+            .task_start_failed => "TaskStartFailed",
+            .task_state_aborted => "TaskStateAborted",
+            .task_state_entered => "TaskStateEntered",
+            .task_state_exited => "TaskStateExited",
+            .task_submit_failed => "TaskSubmitFailed",
+            .task_submitted => "TaskSubmitted",
+            .task_succeeded => "TaskSucceeded",
+            .task_timed_out => "TaskTimedOut",
+            .wait_state_aborted => "WaitStateAborted",
+            .wait_state_entered => "WaitStateEntered",
+            .wait_state_exited => "WaitStateExited",
+            .map_run_aborted => "MapRunAborted",
+            .map_run_failed => "MapRunFailed",
+            .map_run_started => "MapRunStarted",
+            .map_run_succeeded => "MapRunSucceeded",
+            .execution_redriven => "ExecutionRedriven",
+            .map_run_redriven => "MapRunRedriven",
+            .evaluation_failed => "EvaluationFailed",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

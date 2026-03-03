@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// The function used to train an `MLModel`. Training choices supported by
 /// Amazon ML include the following:
 ///
@@ -8,6 +10,21 @@ pub const Algorithm = enum {
     sgd,
 
     pub const json_field_names = .{
-        .sgd = "SGD",
+        .sgd = "sgd",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .sgd => "sgd",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

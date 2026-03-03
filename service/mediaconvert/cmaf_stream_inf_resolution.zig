@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
 /// variant manifest.
 pub const CmafStreamInfResolution = enum {
@@ -8,4 +10,20 @@ pub const CmafStreamInfResolution = enum {
         .include = "INCLUDE",
         .exclude = "EXCLUDE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .include => "INCLUDE",
+            .exclude => "EXCLUDE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

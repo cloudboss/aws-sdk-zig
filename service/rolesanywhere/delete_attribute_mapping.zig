@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAttributeMappingI
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "certificateField=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.certificate_field));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.certificate_field.wireName());
     query_has_prev = true;
     if (input.specifiers) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

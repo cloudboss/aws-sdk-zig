@@ -49,27 +49,27 @@ pub const HarvestJobFinishedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "COMPLETED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "COMPLETED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CANCELLED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CANCELLED")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "QUEUED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "QUEUED")) {
                 return .retry;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "IN_PROGRESS")) {
+            if (std.mem.eql(u8, val_0.wireName(), "IN_PROGRESS")) {
                 return .retry;
             }
         }

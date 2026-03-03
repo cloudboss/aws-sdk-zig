@@ -651,7 +651,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
     }
     if (input.cluster_mode) |v| {
         try body_buf.appendSlice(allocator, "&ClusterMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.data_tiering_enabled) |v| {
         try body_buf.appendSlice(allocator, "&DataTieringEnabled=");
@@ -671,7 +671,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
     }
     if (input.ip_discovery) |v| {
         try body_buf.appendSlice(allocator, "&IpDiscovery=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.kms_key_id) |v| {
         try body_buf.appendSlice(allocator, "&KmsKeyId=");
@@ -707,7 +707,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.destination_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -723,7 +723,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogFormat=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.log_format) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -731,7 +731,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.log_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
         }
@@ -742,7 +742,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
     }
     if (input.network_type) |v| {
         try body_buf.appendSlice(allocator, "&NetworkType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.node_group_configuration) |list| {
         for (list, 0..) |item, idx| {
@@ -913,7 +913,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
     }
     if (input.transit_encryption_mode) |v| {
         try body_buf.appendSlice(allocator, "&TransitEncryptionMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.user_group_ids) |list| {
         for (list, 0..) |item, idx| {

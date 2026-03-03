@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ActionType = enum {
     rightsize,
     stop,
@@ -9,13 +11,35 @@ pub const ActionType = enum {
     scale_in,
 
     pub const json_field_names = .{
-        .rightsize = "RIGHTSIZE",
-        .stop = "STOP",
-        .upgrade = "UPGRADE",
-        .purchase_savings_plans = "PURCHASE_SAVINGS_PLANS",
-        .purchase_reserved_instances = "PURCHASE_RESERVED_INSTANCES",
-        .migrate_to_graviton = "MIGRATE_TO_GRAVITON",
-        .delete = "DELETE",
-        .scale_in = "SCALE_IN",
+        .rightsize = "Rightsize",
+        .stop = "Stop",
+        .upgrade = "Upgrade",
+        .purchase_savings_plans = "PurchaseSavingsPlans",
+        .purchase_reserved_instances = "PurchaseReservedInstances",
+        .migrate_to_graviton = "MigrateToGraviton",
+        .delete = "Delete",
+        .scale_in = "ScaleIn",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .rightsize => "Rightsize",
+            .stop => "Stop",
+            .upgrade => "Upgrade",
+            .purchase_savings_plans => "PurchaseSavingsPlans",
+            .purchase_reserved_instances => "PurchaseReservedInstances",
+            .migrate_to_graviton => "MigrateToGraviton",
+            .delete => "Delete",
+            .scale_in => "ScaleIn",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

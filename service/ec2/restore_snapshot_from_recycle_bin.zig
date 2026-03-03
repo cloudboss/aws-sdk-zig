@@ -141,11 +141,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
-                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                    result.sse_type = SSEType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                    result.state = SnapshotState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeSize")) {

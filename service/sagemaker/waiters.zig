@@ -62,7 +62,7 @@ pub const EndpointDeletedWaiter = struct {
         };
 
         if (output.endpoint_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -121,12 +121,12 @@ pub const EndpointInServiceWaiter = struct {
         };
 
         if (output.endpoint_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "InService")) {
+            if (std.mem.eql(u8, val_0.wireName(), "InService")) {
                 return .success;
             }
         }
         if (output.endpoint_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -185,12 +185,12 @@ pub const ImageCreatedWaiter = struct {
         };
 
         if (output.image_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATED")) {
                 return .success;
             }
         }
         if (output.image_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
@@ -252,7 +252,7 @@ pub const ImageDeletedWaiter = struct {
         };
 
         if (output.image_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
@@ -311,12 +311,12 @@ pub const ImageUpdatedWaiter = struct {
         };
 
         if (output.image_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATED")) {
                 return .success;
             }
         }
         if (output.image_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "UPDATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "UPDATE_FAILED")) {
                 return .failure;
             }
         }
@@ -375,12 +375,12 @@ pub const ImageVersionCreatedWaiter = struct {
         };
 
         if (output.image_version_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATED")) {
                 return .success;
             }
         }
         if (output.image_version_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "CREATE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "CREATE_FAILED")) {
                 return .failure;
             }
         }
@@ -442,7 +442,7 @@ pub const ImageVersionDeletedWaiter = struct {
         };
 
         if (output.image_version_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "DELETE_FAILED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETE_FAILED")) {
                 return .failure;
             }
         }
@@ -501,7 +501,7 @@ pub const NotebookInstanceDeletedWaiter = struct {
         };
 
         if (output.notebook_instance_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -553,12 +553,12 @@ pub const NotebookInstanceInServiceWaiter = struct {
         };
 
         if (output.notebook_instance_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "InService")) {
+            if (std.mem.eql(u8, val_0.wireName(), "InService")) {
                 return .success;
             }
         }
         if (output.notebook_instance_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -610,12 +610,12 @@ pub const NotebookInstanceStoppedWaiter = struct {
         };
 
         if (output.notebook_instance_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Stopped")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Stopped")) {
                 return .success;
             }
         }
         if (output.notebook_instance_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -674,17 +674,17 @@ pub const ProcessingJobCompletedOrStoppedWaiter = struct {
         };
 
         if (output.processing_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Completed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Completed")) {
                 return .success;
             }
         }
         if (output.processing_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Stopped")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Stopped")) {
                 return .success;
             }
         }
         if (output.processing_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -743,17 +743,17 @@ pub const TrainingJobCompletedOrStoppedWaiter = struct {
         };
 
         if (output.training_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Completed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Completed")) {
                 return .success;
             }
         }
         if (output.training_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Stopped")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Stopped")) {
                 return .success;
             }
         }
         if (output.training_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }
@@ -812,17 +812,17 @@ pub const TransformJobCompletedOrStoppedWaiter = struct {
         };
 
         if (output.transform_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Completed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Completed")) {
                 return .success;
             }
         }
         if (output.transform_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Stopped")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Stopped")) {
                 return .success;
             }
         }
         if (output.transform_job_status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Failed")) {
                 return .failure;
             }
         }

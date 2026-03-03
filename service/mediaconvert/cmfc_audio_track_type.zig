@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use this setting to control the values that MediaConvert puts in your HLS
 /// parent playlist to control how the client player selects which audio track
 /// to play. Choose Audio-only variant stream (AUDIO_ONLY_VARIANT_STREAM) for
@@ -20,4 +22,22 @@ pub const CmfcAudioTrackType = enum {
         .alternate_audio_not_auto_select = "ALTERNATE_AUDIO_NOT_AUTO_SELECT",
         .audio_only_variant_stream = "AUDIO_ONLY_VARIANT_STREAM",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .alternate_audio_auto_select_default => "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
+            .alternate_audio_auto_select => "ALTERNATE_AUDIO_AUTO_SELECT",
+            .alternate_audio_not_auto_select => "ALTERNATE_AUDIO_NOT_AUTO_SELECT",
+            .audio_only_variant_stream => "AUDIO_ONLY_VARIANT_STREAM",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

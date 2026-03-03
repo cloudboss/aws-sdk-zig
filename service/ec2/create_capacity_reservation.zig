@@ -259,7 +259,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
     }
     if (input.delivery_preference) |v| {
         try body_buf.appendSlice(allocator, "&DeliveryPreference=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
@@ -275,7 +275,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
     }
     if (input.end_date_type) |v| {
         try body_buf.appendSlice(allocator, "&EndDateType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ephemeral_storage) |v| {
         try body_buf.appendSlice(allocator, "&EphemeralStorage=");
@@ -285,10 +285,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.instance_count}) catch "");
     if (input.instance_match_criteria) |v| {
         try body_buf.appendSlice(allocator, "&InstanceMatchCriteria=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&InstancePlatform=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.instance_platform));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_platform.wireName());
     try body_buf.appendSlice(allocator, "&InstanceType=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_type);
     if (input.outpost_arn) |v| {
@@ -311,7 +311,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -339,7 +339,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
     }
     if (input.tenancy) |v| {
         try body_buf.appendSlice(allocator, "&Tenancy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const KmsGrantOperation = enum {
     create_grant,
     decrypt,
@@ -15,19 +17,47 @@ pub const KmsGrantOperation = enum {
     verify,
 
     pub const json_field_names = .{
-        .create_grant = "CREATE_GRANT",
-        .decrypt = "DECRYPT",
-        .describe_key = "DESCRIBE_KEY",
-        .encrypt = "ENCRYPT",
-        .generate_data_key = "GENERATE_DATA_KEY",
-        .generate_data_key_pair = "GENERATE_DATA_KEY_PAIR",
-        .generate_data_key_pair_without_plaintext = "GENERATE_DATA_KEY_PAIR_WITHOUT_PLAINTEXT",
-        .generate_data_key_without_plaintext = "GENERATE_DATA_KEY_WITHOUT_PLAINTEXT",
-        .get_public_key = "GET_PUBLIC_KEY",
-        .reencrypt_from = "REENCRYPT_FROM",
-        .reencrypt_to = "REENCRYPT_TO",
-        .retire_grant = "RETIRE_GRANT",
-        .sign = "SIGN",
-        .verify = "VERIFY",
+        .create_grant = "CreateGrant",
+        .decrypt = "Decrypt",
+        .describe_key = "DescribeKey",
+        .encrypt = "Encrypt",
+        .generate_data_key = "GenerateDataKey",
+        .generate_data_key_pair = "GenerateDataKeyPair",
+        .generate_data_key_pair_without_plaintext = "GenerateDataKeyPairWithoutPlaintext",
+        .generate_data_key_without_plaintext = "GenerateDataKeyWithoutPlaintext",
+        .get_public_key = "GetPublicKey",
+        .reencrypt_from = "ReEncryptFrom",
+        .reencrypt_to = "ReEncryptTo",
+        .retire_grant = "RetireGrant",
+        .sign = "Sign",
+        .verify = "Verify",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .create_grant => "CreateGrant",
+            .decrypt => "Decrypt",
+            .describe_key => "DescribeKey",
+            .encrypt => "Encrypt",
+            .generate_data_key => "GenerateDataKey",
+            .generate_data_key_pair => "GenerateDataKeyPair",
+            .generate_data_key_pair_without_plaintext => "GenerateDataKeyPairWithoutPlaintext",
+            .generate_data_key_without_plaintext => "GenerateDataKeyWithoutPlaintext",
+            .get_public_key => "GetPublicKey",
+            .reencrypt_from => "ReEncryptFrom",
+            .reencrypt_to => "ReEncryptTo",
+            .retire_grant => "RetireGrant",
+            .sign => "Sign",
+            .verify => "Verify",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

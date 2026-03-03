@@ -104,7 +104,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "SourceArn")) {
                     result.source_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(IntegrationStatus, try reader.readElementText());
+                    result.status = IntegrationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try serde.deserializeTagList(allocator, &reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "TargetArn")) {

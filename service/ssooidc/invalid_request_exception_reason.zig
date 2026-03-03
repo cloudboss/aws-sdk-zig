@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const InvalidRequestExceptionReason = enum {
     kms_key_not_found,
     kms_invalid_key_usage,
@@ -5,9 +7,27 @@ pub const InvalidRequestExceptionReason = enum {
     kms_disabled_key,
 
     pub const json_field_names = .{
-        .kms_key_not_found = "KMS_KEY_NOT_FOUND",
-        .kms_invalid_key_usage = "KMS_INVALID_KEY_USAGE",
-        .kms_invalid_state = "KMS_INVALID_STATE",
-        .kms_disabled_key = "KMS_DISABLED_KEY",
+        .kms_key_not_found = "KMS_NotFoundException",
+        .kms_invalid_key_usage = "KMS_InvalidKeyUsageException",
+        .kms_invalid_state = "KMS_InvalidStateException",
+        .kms_disabled_key = "KMS_DisabledException",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .kms_key_not_found => "KMS_NotFoundException",
+            .kms_invalid_key_usage => "KMS_InvalidKeyUsageException",
+            .kms_invalid_state => "KMS_InvalidStateException",
+            .kms_disabled_key => "KMS_DisabledException",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

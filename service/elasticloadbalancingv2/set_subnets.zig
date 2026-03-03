@@ -137,11 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetSubnetsInput, config
     try body_buf.appendSlice(allocator, "Action=SetSubnets&Version=2015-12-01");
     if (input.enable_prefix_for_ipv_6_source_nat) |v| {
         try body_buf.appendSlice(allocator, "&EnablePrefixForIpv6SourceNat=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&IpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&LoadBalancerArn=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.load_balancer_arn);
@@ -234,9 +234,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "AvailabilityZones")) {
                     result.availability_zones = try serde.deserializeAvailabilityZones(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "EnablePrefixForIpv6SourceNat")) {
-                    result.enable_prefix_for_ipv_6_source_nat = std.meta.stringToEnum(EnablePrefixForIpv6SourceNatEnum, try reader.readElementText());
+                    result.enable_prefix_for_ipv_6_source_nat = EnablePrefixForIpv6SourceNatEnum.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IpAddressType")) {
-                    result.ip_address_type = std.meta.stringToEnum(IpAddressType, try reader.readElementText());
+                    result.ip_address_type = IpAddressType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

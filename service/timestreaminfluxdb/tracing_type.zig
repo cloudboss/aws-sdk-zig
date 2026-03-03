@@ -1,11 +1,30 @@
+const std = @import("std");
+
 pub const TracingType = enum {
     log,
     jaeger,
     disabled,
 
     pub const json_field_names = .{
-        .log = "LOG",
-        .jaeger = "JAEGER",
-        .disabled = "DISABLED",
+        .log = "log",
+        .jaeger = "jaeger",
+        .disabled = "disabled",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .log => "log",
+            .jaeger => "jaeger",
+            .disabled => "disabled",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

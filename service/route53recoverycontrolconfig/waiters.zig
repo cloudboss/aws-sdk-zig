@@ -59,14 +59,14 @@ pub const ClusterCreatedWaiter = struct {
 
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DEPLOYED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DEPLOYED")) {
                     return .success;
                 }
             }
         }
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING")) {
                     return .retry;
                 }
             }
@@ -130,7 +130,7 @@ pub const ClusterDeletedWaiter = struct {
 
         if (output.cluster) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING_DELETION")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING_DELETION")) {
                     return .retry;
                 }
             }
@@ -191,14 +191,14 @@ pub const ControlPanelCreatedWaiter = struct {
 
         if (output.control_panel) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DEPLOYED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DEPLOYED")) {
                     return .success;
                 }
             }
         }
         if (output.control_panel) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING")) {
                     return .retry;
                 }
             }
@@ -262,7 +262,7 @@ pub const ControlPanelDeletedWaiter = struct {
 
         if (output.control_panel) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING_DELETION")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING_DELETION")) {
                     return .retry;
                 }
             }
@@ -323,14 +323,14 @@ pub const RoutingControlCreatedWaiter = struct {
 
         if (output.routing_control) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "DEPLOYED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "DEPLOYED")) {
                     return .success;
                 }
             }
         }
         if (output.routing_control) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING")) {
                     return .retry;
                 }
             }
@@ -394,7 +394,7 @@ pub const RoutingControlDeletedWaiter = struct {
 
         if (output.routing_control) |val_0| {
             if (val_0.status) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "PENDING_DELETION")) {
+                if (std.mem.eql(u8, val_1.wireName(), "PENDING_DELETION")) {
                     return .retry;
                 }
             }

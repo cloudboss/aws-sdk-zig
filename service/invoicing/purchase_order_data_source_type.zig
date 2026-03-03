@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PurchaseOrderDataSourceType = enum {
     associated_purchase_order_required,
     purchase_order_not_required,
@@ -6,4 +8,20 @@ pub const PurchaseOrderDataSourceType = enum {
         .associated_purchase_order_required = "ASSOCIATED_PURCHASE_ORDER_REQUIRED",
         .purchase_order_not_required = "PURCHASE_ORDER_NOT_REQUIRED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .associated_purchase_order_required => "ASSOCIATED_PURCHASE_ORDER_REQUIRED",
+            .purchase_order_not_required => "PURCHASE_ORDER_NOT_REQUIRED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

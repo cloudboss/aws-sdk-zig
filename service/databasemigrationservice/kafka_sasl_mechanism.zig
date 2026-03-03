@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const KafkaSaslMechanism = enum {
     scram_sha_512,
     plain,
 
     pub const json_field_names = .{
-        .scram_sha_512 = "SCRAM_SHA_512",
-        .plain = "PLAIN",
+        .scram_sha_512 = "scram-sha-512",
+        .plain = "plain",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .scram_sha_512 => "scram-sha-512",
+            .plain => "plain",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

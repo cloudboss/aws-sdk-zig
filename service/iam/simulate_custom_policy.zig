@@ -334,7 +334,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SimulateCustomPolicyInp
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ContextEntries.member.{d}.ContextKeyType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.context_key_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.context_key_values) |lst_1| {

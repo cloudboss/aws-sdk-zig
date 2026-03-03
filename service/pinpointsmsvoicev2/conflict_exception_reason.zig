@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ConflictExceptionReason = enum {
     create_registration_version_not_allowed,
     deletion_protection_enabled,
@@ -74,4 +76,54 @@ pub const ConflictExceptionReason = enum {
         .destination_country_blocked_by_protect_configuration = "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
         .destination_phone_number_blocked_by_protect_number_override = "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .create_registration_version_not_allowed => "CREATE_REGISTRATION_VERSION_NOT_ALLOWED",
+            .deletion_protection_enabled => "DELETION_PROTECTION_ENABLED",
+            .destination_phone_number_not_verified => "DESTINATION_PHONE_NUMBER_NOT_VERIFIED",
+            .destination_phone_number_opted_out => "DESTINATION_PHONE_NUMBER_OPTED_OUT",
+            .disassociate_registration_not_allowed => "DISASSOCIATE_REGISTRATION_NOT_ALLOWED",
+            .discard_registration_version_not_allowed => "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED",
+            .edit_registration_field_values_not_allowed => "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED",
+            .event_destination_mismatch => "EVENT_DESTINATION_MISMATCH",
+            .keyword_mismatch => "KEYWORD_MISMATCH",
+            .last_phone_number => "LAST_PHONE_NUMBER",
+            .number_capabilities_mismatch => "NUMBER_CAPABILITIES_MISMATCH",
+            .message_type_mismatch => "MESSAGE_TYPE_MISMATCH",
+            .no_origination_identities_found => "NO_ORIGINATION_IDENTITIES_FOUND",
+            .opt_out_list_mismatch => "OPT_OUT_LIST_MISMATCH",
+            .phone_number_associated_to_pool => "PHONE_NUMBER_ASSOCIATED_TO_POOL",
+            .phone_number_associated_to_registration => "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION",
+            .phone_number_not_associated_to_pool => "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL",
+            .phone_number_not_in_registration_region => "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION",
+            .registration_already_submitted => "REGISTRATION_ALREADY_SUBMITTED",
+            .registration_not_complete => "REGISTRATION_NOT_COMPLETE",
+            .sender_id_associated_to_pool => "SENDER_ID_ASSOCIATED_TO_POOL",
+            .resource_already_exists => "RESOURCE_ALREADY_EXISTS",
+            .resource_deletion_not_allowed => "RESOURCE_DELETION_NOT_ALLOWED",
+            .resource_modification_not_allowed => "RESOURCE_MODIFICATION_NOT_ALLOWED",
+            .resource_not_active => "RESOURCE_NOT_ACTIVE",
+            .resource_not_empty => "RESOURCE_NOT_EMPTY",
+            .self_managed_opt_outs_mismatch => "SELF_MANAGED_OPT_OUTS_MISMATCH",
+            .submit_registration_version_not_allowed => "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED",
+            .two_way_config_mismatch => "TWO_WAY_CONFIG_MISMATCH",
+            .verification_code_expired => "VERIFICATION_CODE_EXPIRED",
+            .verification_already_complete => "VERIFICATION_ALREADY_COMPLETE",
+            .protect_configuration_is_account_default => "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT",
+            .protect_configuration_associated_with_configuration_set => "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET",
+            .protect_configuration_not_associated_with_configuration_set => "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
+            .destination_country_blocked_by_protect_configuration => "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
+            .destination_phone_number_blocked_by_protect_number_override => "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

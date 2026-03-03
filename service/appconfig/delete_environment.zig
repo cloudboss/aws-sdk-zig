@@ -95,7 +95,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteEnvironmentInput,
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
     if (input.deletion_protection_check) |v| {
-        try request.headers.put(allocator, "x-amzn-deletion-protection-check", @tagName(v));
+        try request.headers.put(allocator, "x-amzn-deletion-protection-check", v.wireName());
     }
 
     return request;

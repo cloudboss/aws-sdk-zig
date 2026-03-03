@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const EphemerisInvalidReason = enum {
     /// Provided spacecraft identifiers such as spacecraft NORAD Id are invalid
     metadata_invalid,
@@ -17,4 +19,23 @@ pub const EphemerisInvalidReason = enum {
         .kms_key_invalid = "KMS_KEY_INVALID",
         .validation_error = "VALIDATION_ERROR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .metadata_invalid => "METADATA_INVALID",
+            .time_range_invalid => "TIME_RANGE_INVALID",
+            .trajectory_invalid => "TRAJECTORY_INVALID",
+            .kms_key_invalid => "KMS_KEY_INVALID",
+            .validation_error => "VALIDATION_ERROR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

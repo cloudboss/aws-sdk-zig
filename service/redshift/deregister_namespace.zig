@@ -102,7 +102,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(NamespaceRegistrationStatus, try reader.readElementText());
+                    result.status = NamespaceRegistrationStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

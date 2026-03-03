@@ -118,7 +118,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAllowedRepositories
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "originRestrictionType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.origin_restriction_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.origin_restriction_type.wireName());
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "package-group=");

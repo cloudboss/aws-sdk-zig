@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SavingsPlanRateUnit = enum {
     hours,
     lambda_gb_second,
@@ -16,20 +18,49 @@ pub const SavingsPlanRateUnit = enum {
     ncu_hr,
 
     pub const json_field_names = .{
-        .hours = "HOURS",
-        .lambda_gb_second = "LAMBDA_GB_SECOND",
-        .request = "REQUEST",
-        .acu_hr = "ACU_HR",
-        .read_request_units = "READ_REQUEST_UNITS",
-        .write_request_units = "WRITE_REQUEST_UNITS",
-        .read_capacity_unit_hrs = "READ_CAPACITY_UNIT_HRS",
-        .write_capacity_unit_hrs = "WRITE_CAPACITY_UNIT_HRS",
-        .replicated_write_request_units = "REPLICATED_WRITE_REQUEST_UNITS",
-        .replicated_write_capacity_unit_hrs = "REPLICATED_WRITE_CAPACITY_UNIT_HRS",
-        .gb_hours = "GB_HOURS",
+        .hours = "Hrs",
+        .lambda_gb_second = "Lambda-GB-Second",
+        .request = "Request",
+        .acu_hr = "ACU-Hr",
+        .read_request_units = "ReadRequestUnits",
+        .write_request_units = "WriteRequestUnits",
+        .read_capacity_unit_hrs = "ReadCapacityUnit-Hrs",
+        .write_capacity_unit_hrs = "WriteCapacityUnit-Hrs",
+        .replicated_write_request_units = "ReplicatedWriteRequestUnits",
+        .replicated_write_capacity_unit_hrs = "ReplicatedWriteCapacityUnit-Hrs",
+        .gb_hours = "GB-Hours",
         .dpu = "DPU",
-        .elasti_cache_processing_unit = "ELASTI_CACHE_PROCESSING_UNIT",
-        .dcu_hr = "DCU_HR",
-        .ncu_hr = "NCU_HR",
+        .elasti_cache_processing_unit = "ElastiCacheProcessingUnit",
+        .dcu_hr = "DCU-Hr",
+        .ncu_hr = "NCU-hr",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .hours => "Hrs",
+            .lambda_gb_second => "Lambda-GB-Second",
+            .request => "Request",
+            .acu_hr => "ACU-Hr",
+            .read_request_units => "ReadRequestUnits",
+            .write_request_units => "WriteRequestUnits",
+            .read_capacity_unit_hrs => "ReadCapacityUnit-Hrs",
+            .write_capacity_unit_hrs => "WriteCapacityUnit-Hrs",
+            .replicated_write_request_units => "ReplicatedWriteRequestUnits",
+            .replicated_write_capacity_unit_hrs => "ReplicatedWriteCapacityUnit-Hrs",
+            .gb_hours => "GB-Hours",
+            .dpu => "DPU",
+            .elasti_cache_processing_unit => "ElastiCacheProcessingUnit",
+            .dcu_hr => "DCU-Hr",
+            .ncu_hr => "NCU-hr",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

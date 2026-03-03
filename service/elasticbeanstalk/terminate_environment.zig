@@ -162,9 +162,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
                     result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Health")) {
-                    result.health = std.meta.stringToEnum(EnvironmentHealth, try reader.readElementText());
+                    result.health = EnvironmentHealth.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HealthStatus")) {
-                    result.health_status = std.meta.stringToEnum(EnvironmentHealthStatus, try reader.readElementText());
+                    result.health_status = EnvironmentHealthStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OperationsRole")) {
                     result.operations_role = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PlatformArn")) {
@@ -174,7 +174,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "SolutionStackName")) {
                     result.solution_stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(EnvironmentStatus, try reader.readElementText());
+                    result.status = EnvironmentStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateName")) {
                     result.template_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tier")) {

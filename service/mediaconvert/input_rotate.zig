@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use Rotate to specify how the service rotates your video. You can choose
 /// automatic rotation or specify a rotation. You can specify a clockwise
 /// rotation of 0, 90, 180, or 270 degrees. If your input video container is
@@ -22,4 +24,23 @@ pub const InputRotate = enum {
         .degrees_270 = "DEGREES_270",
         .auto = "AUTO",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .degree_0 => "DEGREE_0",
+            .degrees_90 => "DEGREES_90",
+            .degrees_180 => "DEGREES_180",
+            .degrees_270 => "DEGREES_270",
+            .auto => "AUTO",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

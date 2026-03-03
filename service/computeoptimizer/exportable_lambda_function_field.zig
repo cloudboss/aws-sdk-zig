@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExportableLambdaFunctionField = enum {
     account_id,
     function_arn,
@@ -32,36 +34,81 @@ pub const ExportableLambdaFunctionField = enum {
     recommendation_options_estimated_monthly_savings_value_after_discounts,
 
     pub const json_field_names = .{
-        .account_id = "ACCOUNT_ID",
-        .function_arn = "FUNCTION_ARN",
-        .function_version = "FUNCTION_VERSION",
-        .finding = "FINDING",
-        .finding_reason_codes = "FINDING_REASON_CODES",
-        .number_of_invocations = "NUMBER_OF_INVOCATIONS",
-        .utilization_metrics_duration_maximum = "UTILIZATION_METRICS_DURATION_MAXIMUM",
-        .utilization_metrics_duration_average = "UTILIZATION_METRICS_DURATION_AVERAGE",
-        .utilization_metrics_memory_maximum = "UTILIZATION_METRICS_MEMORY_MAXIMUM",
-        .utilization_metrics_memory_average = "UTILIZATION_METRICS_MEMORY_AVERAGE",
-        .lookback_period_in_days = "LOOKBACK_PERIOD_IN_DAYS",
-        .current_configuration_memory_size = "CURRENT_CONFIGURATION_MEMORY_SIZE",
-        .current_configuration_timeout = "CURRENT_CONFIGURATION_TIMEOUT",
-        .current_cost_total = "CURRENT_COST_TOTAL",
-        .current_cost_average = "CURRENT_COST_AVERAGE",
-        .recommendation_options_configuration_memory_size = "RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE",
-        .recommendation_options_cost_low = "RECOMMENDATION_OPTIONS_COST_LOW",
-        .recommendation_options_cost_high = "RECOMMENDATION_OPTIONS_COST_HIGH",
-        .recommendation_options_projected_utilization_metrics_duration_lower_bound = "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND",
-        .recommendation_options_projected_utilization_metrics_duration_upper_bound = "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND",
-        .recommendation_options_projected_utilization_metrics_duration_expected = "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED",
-        .last_refresh_timestamp = "LAST_REFRESH_TIMESTAMP",
-        .current_performance_risk = "CURRENT_PERFORMANCE_RISK",
-        .recommendation_options_savings_opportunity_percentage = "RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE",
-        .recommendation_options_estimated_monthly_savings_currency = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY",
-        .recommendation_options_estimated_monthly_savings_value = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE",
-        .tags = "TAGS",
-        .effective_recommendation_preferences_savings_estimation_mode = "EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE",
-        .recommendation_options_savings_opportunity_after_discounts_percentage = "RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE",
-        .recommendation_options_estimated_monthly_savings_currency_after_discounts = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS",
-        .recommendation_options_estimated_monthly_savings_value_after_discounts = "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS",
+        .account_id = "AccountId",
+        .function_arn = "FunctionArn",
+        .function_version = "FunctionVersion",
+        .finding = "Finding",
+        .finding_reason_codes = "FindingReasonCodes",
+        .number_of_invocations = "NumberOfInvocations",
+        .utilization_metrics_duration_maximum = "UtilizationMetricsDurationMaximum",
+        .utilization_metrics_duration_average = "UtilizationMetricsDurationAverage",
+        .utilization_metrics_memory_maximum = "UtilizationMetricsMemoryMaximum",
+        .utilization_metrics_memory_average = "UtilizationMetricsMemoryAverage",
+        .lookback_period_in_days = "LookbackPeriodInDays",
+        .current_configuration_memory_size = "CurrentConfigurationMemorySize",
+        .current_configuration_timeout = "CurrentConfigurationTimeout",
+        .current_cost_total = "CurrentCostTotal",
+        .current_cost_average = "CurrentCostAverage",
+        .recommendation_options_configuration_memory_size = "RecommendationOptionsConfigurationMemorySize",
+        .recommendation_options_cost_low = "RecommendationOptionsCostLow",
+        .recommendation_options_cost_high = "RecommendationOptionsCostHigh",
+        .recommendation_options_projected_utilization_metrics_duration_lower_bound = "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound",
+        .recommendation_options_projected_utilization_metrics_duration_upper_bound = "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound",
+        .recommendation_options_projected_utilization_metrics_duration_expected = "RecommendationOptionsProjectedUtilizationMetricsDurationExpected",
+        .last_refresh_timestamp = "LastRefreshTimestamp",
+        .current_performance_risk = "CurrentPerformanceRisk",
+        .recommendation_options_savings_opportunity_percentage = "RecommendationOptionsSavingsOpportunityPercentage",
+        .recommendation_options_estimated_monthly_savings_currency = "RecommendationOptionsEstimatedMonthlySavingsCurrency",
+        .recommendation_options_estimated_monthly_savings_value = "RecommendationOptionsEstimatedMonthlySavingsValue",
+        .tags = "Tags",
+        .effective_recommendation_preferences_savings_estimation_mode = "EffectiveRecommendationPreferencesSavingsEstimationMode",
+        .recommendation_options_savings_opportunity_after_discounts_percentage = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
+        .recommendation_options_estimated_monthly_savings_currency_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
+        .recommendation_options_estimated_monthly_savings_value_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .account_id => "AccountId",
+            .function_arn => "FunctionArn",
+            .function_version => "FunctionVersion",
+            .finding => "Finding",
+            .finding_reason_codes => "FindingReasonCodes",
+            .number_of_invocations => "NumberOfInvocations",
+            .utilization_metrics_duration_maximum => "UtilizationMetricsDurationMaximum",
+            .utilization_metrics_duration_average => "UtilizationMetricsDurationAverage",
+            .utilization_metrics_memory_maximum => "UtilizationMetricsMemoryMaximum",
+            .utilization_metrics_memory_average => "UtilizationMetricsMemoryAverage",
+            .lookback_period_in_days => "LookbackPeriodInDays",
+            .current_configuration_memory_size => "CurrentConfigurationMemorySize",
+            .current_configuration_timeout => "CurrentConfigurationTimeout",
+            .current_cost_total => "CurrentCostTotal",
+            .current_cost_average => "CurrentCostAverage",
+            .recommendation_options_configuration_memory_size => "RecommendationOptionsConfigurationMemorySize",
+            .recommendation_options_cost_low => "RecommendationOptionsCostLow",
+            .recommendation_options_cost_high => "RecommendationOptionsCostHigh",
+            .recommendation_options_projected_utilization_metrics_duration_lower_bound => "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound",
+            .recommendation_options_projected_utilization_metrics_duration_upper_bound => "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound",
+            .recommendation_options_projected_utilization_metrics_duration_expected => "RecommendationOptionsProjectedUtilizationMetricsDurationExpected",
+            .last_refresh_timestamp => "LastRefreshTimestamp",
+            .current_performance_risk => "CurrentPerformanceRisk",
+            .recommendation_options_savings_opportunity_percentage => "RecommendationOptionsSavingsOpportunityPercentage",
+            .recommendation_options_estimated_monthly_savings_currency => "RecommendationOptionsEstimatedMonthlySavingsCurrency",
+            .recommendation_options_estimated_monthly_savings_value => "RecommendationOptionsEstimatedMonthlySavingsValue",
+            .tags => "Tags",
+            .effective_recommendation_preferences_savings_estimation_mode => "EffectiveRecommendationPreferencesSavingsEstimationMode",
+            .recommendation_options_savings_opportunity_after_discounts_percentage => "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
+            .recommendation_options_estimated_monthly_savings_currency_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
+            .recommendation_options_estimated_monthly_savings_value_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

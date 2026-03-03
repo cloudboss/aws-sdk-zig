@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const TargetGroupProtocol = enum {
     /// Indicates HTTP protocol
     http,
@@ -11,4 +13,21 @@ pub const TargetGroupProtocol = enum {
         .https = "HTTPS",
         .tcp = "TCP",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .http => "HTTP",
+            .https => "HTTPS",
+            .tcp => "TCP",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

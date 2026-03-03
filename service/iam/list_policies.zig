@@ -152,11 +152,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPoliciesInput, conf
     }
     if (input.policy_usage_filter) |v| {
         try body_buf.appendSlice(allocator, "&PolicyUsageFilter=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.scope) |v| {
         try body_buf.appendSlice(allocator, "&Scope=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

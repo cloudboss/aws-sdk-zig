@@ -50,17 +50,17 @@ pub const DeploymentCompleteWaiter = struct {
         };
 
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "COMPLETE")) {
+            if (std.mem.eql(u8, val_0.wireName(), "COMPLETE")) {
                 return .success;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ROLLED_BACK")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ROLLED_BACK")) {
                 return .failure;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "REVERTED")) {
+            if (std.mem.eql(u8, val_0.wireName(), "REVERTED")) {
                 return .failure;
             }
         }
@@ -112,17 +112,17 @@ pub const EnvironmentReadyForDeploymentWaiter = struct {
         };
 
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ReadyForDeployment")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ReadyForDeployment")) {
                 return .success;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "RolledBack")) {
+            if (std.mem.eql(u8, val_0.wireName(), "RolledBack")) {
                 return .failure;
             }
         }
         if (output.state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "Reverted")) {
+            if (std.mem.eql(u8, val_0.wireName(), "Reverted")) {
                 return .failure;
             }
         }

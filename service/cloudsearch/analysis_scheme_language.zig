@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// An [IETF RFC 4646](http://tools.ietf.org/html/rfc4646) language code or
 /// `mul` for multiple languages.
 pub const AnalysisSchemeLanguage = enum {
@@ -36,4 +38,91 @@ pub const AnalysisSchemeLanguage = enum {
     tr,
     zh_hans,
     zh_hant,
+
+    pub const json_field_names = .{
+        .ar = "ar",
+        .bg = "bg",
+        .ca = "ca",
+        .cs = "cs",
+        .da = "da",
+        .de = "de",
+        .el = "el",
+        .en = "en",
+        .es = "es",
+        .eu = "eu",
+        .fa = "fa",
+        .fi = "fi",
+        .fr = "fr",
+        .ga = "ga",
+        .gl = "gl",
+        .he = "he",
+        .hi = "hi",
+        .hu = "hu",
+        .hy = "hy",
+        .id = "id",
+        .it = "it",
+        .ja = "ja",
+        .ko = "ko",
+        .lv = "lv",
+        .mul = "mul",
+        .nl = "nl",
+        .no = "no",
+        .pt = "pt",
+        .ro = "ro",
+        .ru = "ru",
+        .sv = "sv",
+        .th = "th",
+        .tr = "tr",
+        .zh_hans = "zh-Hans",
+        .zh_hant = "zh-Hant",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ar => "ar",
+            .bg => "bg",
+            .ca => "ca",
+            .cs => "cs",
+            .da => "da",
+            .de => "de",
+            .el => "el",
+            .en => "en",
+            .es => "es",
+            .eu => "eu",
+            .fa => "fa",
+            .fi => "fi",
+            .fr => "fr",
+            .ga => "ga",
+            .gl => "gl",
+            .he => "he",
+            .hi => "hi",
+            .hu => "hu",
+            .hy => "hy",
+            .id => "id",
+            .it => "it",
+            .ja => "ja",
+            .ko => "ko",
+            .lv => "lv",
+            .mul => "mul",
+            .nl => "nl",
+            .no => "no",
+            .pt => "pt",
+            .ro => "ro",
+            .ru => "ru",
+            .sv => "sv",
+            .th => "th",
+            .tr => "tr",
+            .zh_hans => "zh-Hans",
+            .zh_hant => "zh-Hant",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

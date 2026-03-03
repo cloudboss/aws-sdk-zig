@@ -106,7 +106,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
     try body_buf.appendSlice(allocator, "Action=CreateSnapshots&Version=2016-11-15");
     if (input.copy_tags_from_source) |v| {
         try body_buf.appendSlice(allocator, "&CopyTagsFromSource=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_specification.instance_id);
     if (input.location) |v| {
         try body_buf.appendSlice(allocator, "&Location=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.outpost_arn) |v| {
         try body_buf.appendSlice(allocator, "&OutpostArn=");
@@ -147,7 +147,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

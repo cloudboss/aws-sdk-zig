@@ -49,12 +49,12 @@ pub const FindingRevealedWaiter = struct {
         };
 
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "SUCCESS")) {
+            if (std.mem.eql(u8, val_0.wireName(), "SUCCESS")) {
                 return .success;
             }
         }
         if (output.status) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "ERROR")) {
+            if (std.mem.eql(u8, val_0.wireName(), "ERROR")) {
                 return .success;
             }
         }

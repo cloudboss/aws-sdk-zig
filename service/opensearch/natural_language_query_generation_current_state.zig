@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const NaturalLanguageQueryGenerationCurrentState = enum {
     not_enabled,
     enable_complete,
@@ -8,12 +10,33 @@ pub const NaturalLanguageQueryGenerationCurrentState = enum {
     disable_failed,
 
     pub const json_field_names = .{
-        .not_enabled = "NotEnabled",
-        .enable_complete = "EnableComplete",
-        .enable_in_progress = "EnableInProgress",
-        .enable_failed = "EnableFailed",
-        .disable_complete = "DisableComplete",
-        .disable_in_progress = "DisableInProgress",
-        .disable_failed = "DisableFailed",
+        .not_enabled = "NOT_ENABLED",
+        .enable_complete = "ENABLE_COMPLETE",
+        .enable_in_progress = "ENABLE_IN_PROGRESS",
+        .enable_failed = "ENABLE_FAILED",
+        .disable_complete = "DISABLE_COMPLETE",
+        .disable_in_progress = "DISABLE_IN_PROGRESS",
+        .disable_failed = "DISABLE_FAILED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .not_enabled => "NOT_ENABLED",
+            .enable_complete => "ENABLE_COMPLETE",
+            .enable_in_progress => "ENABLE_IN_PROGRESS",
+            .enable_failed => "ENABLE_FAILED",
+            .disable_complete => "DISABLE_COMPLETE",
+            .disable_in_progress => "DISABLE_IN_PROGRESS",
+            .disable_failed => "DISABLE_FAILED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

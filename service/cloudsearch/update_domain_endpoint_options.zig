@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDomainEndpointOpt
     }
     if (input.domain_endpoint_options.tls_security_policy) |sv| {
         try body_buf.appendSlice(allocator, "&DomainEndpointOptions.TLSSecurityPolicy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     try body_buf.appendSlice(allocator, "&DomainName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.domain_name);

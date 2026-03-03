@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ApplicationPolicyType = enum {
     all_application_policies,
     any_purpose,
@@ -136,4 +138,85 @@ pub const ApplicationPolicyType = enum {
         .windows_third_party_application_component = "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT",
         .windows_update = "WINDOWS_UPDATE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .all_application_policies => "ALL_APPLICATION_POLICIES",
+            .any_purpose => "ANY_PURPOSE",
+            .attestation_identity_key_certificate => "ATTESTATION_IDENTITY_KEY_CERTIFICATE",
+            .certificate_request_agent => "CERTIFICATE_REQUEST_AGENT",
+            .client_authentication => "CLIENT_AUTHENTICATION",
+            .code_signing => "CODE_SIGNING",
+            .ctl_usage => "CTL_USAGE",
+            .digital_rights => "DIGITAL_RIGHTS",
+            .directory_service_email_replication => "DIRECTORY_SERVICE_EMAIL_REPLICATION",
+            .disallowed_list => "DISALLOWED_LIST",
+            .dns_server_trust => "DNS_SERVER_TRUST",
+            .document_encryption => "DOCUMENT_ENCRYPTION",
+            .document_signing => "DOCUMENT_SIGNING",
+            .dynamic_code_generator => "DYNAMIC_CODE_GENERATOR",
+            .early_launch_antimalware_driver => "EARLY_LAUNCH_ANTIMALWARE_DRIVER",
+            .embedded_windows_system_component_verification => "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
+            .enclave => "ENCLAVE",
+            .encrypting_file_system => "ENCRYPTING_FILE_SYSTEM",
+            .endorsement_key_certificate => "ENDORSEMENT_KEY_CERTIFICATE",
+            .file_recovery => "FILE_RECOVERY",
+            .hal_extension => "HAL_EXTENSION",
+            .ip_security_end_system => "IP_SECURITY_END_SYSTEM",
+            .ip_security_ike_intermediate => "IP_SECURITY_IKE_INTERMEDIATE",
+            .ip_security_tunnel_termination => "IP_SECURITY_TUNNEL_TERMINATION",
+            .ip_security_user => "IP_SECURITY_USER",
+            .isolated_user_mode => "ISOLATED_USER_MODE",
+            .kdc_authentication => "KDC_AUTHENTICATION",
+            .kernel_mode_code_signing => "KERNEL_MODE_CODE_SIGNING",
+            .key_pack_licenses => "KEY_PACK_LICENSES",
+            .key_recovery => "KEY_RECOVERY",
+            .key_recovery_agent => "KEY_RECOVERY_AGENT",
+            .license_server_verification => "LICENSE_SERVER_VERIFICATION",
+            .lifetime_signing => "LIFETIME_SIGNING",
+            .microsoft_publisher => "MICROSOFT_PUBLISHER",
+            .microsoft_time_stamping => "MICROSOFT_TIME_STAMPING",
+            .microsoft_trust_list_signing => "MICROSOFT_TRUST_LIST_SIGNING",
+            .ocsp_signing => "OCSP_SIGNING",
+            .oem_windows_system_component_verification => "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
+            .platform_certificate => "PLATFORM_CERTIFICATE",
+            .preview_build_signing => "PREVIEW_BUILD_SIGNING",
+            .private_key_archival => "PRIVATE_KEY_ARCHIVAL",
+            .protected_process_light_verification => "PROTECTED_PROCESS_LIGHT_VERIFICATION",
+            .protected_process_verification => "PROTECTED_PROCESS_VERIFICATION",
+            .qualified_subordination => "QUALIFIED_SUBORDINATION",
+            .revoked_list_signer => "REVOKED_LIST_SIGNER",
+            .root_program_auto_update_ca_revocation => "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION",
+            .root_program_auto_update_end_revocation => "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION",
+            .root_program_no_oscp_failover_to_crl => "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL",
+            .root_list_signer => "ROOT_LIST_SIGNER",
+            .secure_email => "SECURE_EMAIL",
+            .server_authentication => "SERVER_AUTHENTICATION",
+            .smart_card_login => "SMART_CARD_LOGIN",
+            .spc_encrypted_digest_retry_count => "SPC_ENCRYPTED_DIGEST_RETRY_COUNT",
+            .spc_relaxed_pe_marker_check => "SPC_RELAXED_PE_MARKER_CHECK",
+            .time_stamping => "TIME_STAMPING",
+            .windows_hardware_driver_attested_verification => "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION",
+            .windows_hardware_driver_extended_verification => "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION",
+            .windows_hardware_driver_verification => "WINDOWS_HARDWARE_DRIVER_VERIFICATION",
+            .windows_hello_recovery_key_encryption => "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION",
+            .windows_kits_component => "WINDOWS_KITS_COMPONENT",
+            .windows_rt_verification => "WINDOWS_RT_VERIFICATION",
+            .windows_software_extension_verification => "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION",
+            .windows_store => "WINDOWS_STORE",
+            .windows_system_component_verification => "WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
+            .windows_tcb_component => "WINDOWS_TCB_COMPONENT",
+            .windows_third_party_application_component => "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT",
+            .windows_update => "WINDOWS_UPDATE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

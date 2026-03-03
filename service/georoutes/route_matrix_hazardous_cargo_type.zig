@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const RouteMatrixHazardousCargoType = enum {
     combustible,
     corrosive,
@@ -12,16 +14,41 @@ pub const RouteMatrixHazardousCargoType = enum {
     radioactive,
 
     pub const json_field_names = .{
-        .combustible = "COMBUSTIBLE",
-        .corrosive = "CORROSIVE",
-        .explosive = "EXPLOSIVE",
-        .flammable = "FLAMMABLE",
-        .gas = "GAS",
-        .harmful_to_water = "HARMFUL_TO_WATER",
-        .organic = "ORGANIC",
-        .other = "OTHER",
-        .poison = "POISON",
-        .poisonous_inhalation = "POISONOUS_INHALATION",
-        .radioactive = "RADIOACTIVE",
+        .combustible = "Combustible",
+        .corrosive = "Corrosive",
+        .explosive = "Explosive",
+        .flammable = "Flammable",
+        .gas = "Gas",
+        .harmful_to_water = "HarmfulToWater",
+        .organic = "Organic",
+        .other = "Other",
+        .poison = "Poison",
+        .poisonous_inhalation = "PoisonousInhalation",
+        .radioactive = "Radioactive",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .combustible => "Combustible",
+            .corrosive => "Corrosive",
+            .explosive => "Explosive",
+            .flammable => "Flammable",
+            .gas => "Gas",
+            .harmful_to_water => "HarmfulToWater",
+            .organic => "Organic",
+            .other => "Other",
+            .poison => "Poison",
+            .poisonous_inhalation => "PoisonousInhalation",
+            .radioactive => "Radioactive",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

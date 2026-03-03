@@ -112,7 +112,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableLoggingInput, con
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.cluster_identifier);
     if (input.log_destination_type) |v| {
         try body_buf.appendSlice(allocator, "&LogDestinationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.log_exports) |list| {
         for (list, 0..) |item, idx| {
@@ -168,7 +168,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "LastSuccessfulDeliveryTime")) {
                     result.last_successful_delivery_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "LogDestinationType")) {
-                    result.log_destination_type = std.meta.stringToEnum(LogDestinationType, try reader.readElementText());
+                    result.log_destination_type = LogDestinationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LogExports")) {
                     result.log_exports = try serde.deserializeLogTypeList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LoggingEnabled")) {

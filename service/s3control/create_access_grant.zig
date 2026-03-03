@@ -167,11 +167,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessGrantInput,
     try serde.serializeGrantee(allocator, &body_buf, input.grantee);
     try body_buf.appendSlice(allocator, "</Grantee>");
     try body_buf.appendSlice(allocator, "<Permission>");
-    try body_buf.appendSlice(allocator, @tagName(input.permission));
+    try body_buf.appendSlice(allocator, input.permission.wireName());
     try body_buf.appendSlice(allocator, "</Permission>");
     if (input.s3_prefix_type) |v| {
         try body_buf.appendSlice(allocator, "<S3PrefixType>");
-        try body_buf.appendSlice(allocator, @tagName(v));
+        try body_buf.appendSlice(allocator, v.wireName());
         try body_buf.appendSlice(allocator, "</S3PrefixType>");
     }
     if (input.tags) |v| {
@@ -226,7 +226,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "GrantScope")) {
                     result.grant_scope = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Permission")) {
-                    result.permission = std.meta.stringToEnum(Permission, try reader.readElementText());
+                    result.permission = Permission.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

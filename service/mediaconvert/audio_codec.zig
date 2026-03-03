@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Choose the audio codec for this output. Note that the option Dolby Digital
 /// passthrough applies only to Dolby Digital and Dolby Digital Plus audio
 /// inputs. Make sure that you choose a codec that's supported with your output
@@ -31,4 +33,30 @@ pub const AudioCodec = enum {
         .passthrough = "PASSTHROUGH",
         .flac = "FLAC",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .aac => "AAC",
+            .mp2 => "MP2",
+            .mp3 => "MP3",
+            .wav => "WAV",
+            .aiff => "AIFF",
+            .ac3 => "AC3",
+            .eac3 => "EAC3",
+            .eac3_atmos => "EAC3_ATMOS",
+            .vorbis => "VORBIS",
+            .opus => "OPUS",
+            .passthrough => "PASSTHROUGH",
+            .flac => "FLAC",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

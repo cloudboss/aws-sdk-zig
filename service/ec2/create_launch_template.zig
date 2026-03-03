@@ -197,7 +197,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_type) |fv_2| {
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
             }
@@ -222,7 +222,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     if (input.launch_template_data.capacity_reservation_specification) |sv| {
         if (sv.capacity_reservation_preference) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.CapacityReservationSpecification.CapacityReservationPreference=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.capacity_reservation_target) |sv2| {
             if (sv2.capacity_reservation_id) |sv3| {
@@ -238,7 +238,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     if (input.launch_template_data.cpu_options) |sv| {
         if (sv.amd_sev_snp) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.CpuOptions.AmdSevSnp=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.core_count) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.CpuOptions.CoreCount=");
@@ -323,12 +323,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     }
     if (input.launch_template_data.instance_initiated_shutdown_behavior) |sv| {
         try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceInitiatedShutdownBehavior=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.launch_template_data.instance_market_options) |sv| {
         if (sv.market_type) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceMarketOptions.MarketType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.spot_options) |sv2| {
             if (sv2.block_duration_minutes) |sv3| {
@@ -337,7 +337,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
             }
             if (sv2.instance_interruption_behavior) |sv3| {
                 try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceMarketOptions.SpotOptions.InstanceInterruptionBehavior=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv3));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv3.wireName());
             }
             if (sv2.max_price) |sv3| {
                 try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceMarketOptions.SpotOptions.MaxPrice=");
@@ -345,7 +345,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
             }
             if (sv2.spot_instance_type) |sv3| {
                 try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceMarketOptions.SpotOptions.SpotInstanceType=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv3));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv3.wireName());
             }
             if (sv2.valid_until) |sv3| {
                 try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceMarketOptions.SpotOptions.ValidUntil=");
@@ -412,7 +412,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
         }
         if (sv.bare_metal) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceRequirements.BareMetal=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.baseline_ebs_bandwidth_mbps) |sv2| {
             if (sv2.max) |sv3| {
@@ -443,7 +443,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
         }
         if (sv.burstable_performance) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceRequirements.BurstablePerformance=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.cpu_manufacturers) |list_d1| {
             for (list_d1, 0..) |item, idx| {
@@ -474,7 +474,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
         }
         if (sv.local_storage) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceRequirements.LocalStorage=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.local_storage_types) |list_d1| {
             for (list_d1, 0..) |item, idx| {
@@ -560,7 +560,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     }
     if (input.launch_template_data.instance_type) |sv| {
         try body_buf.appendSlice(allocator, "&LaunchTemplateData.InstanceType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.launch_template_data.kernel_id) |sv| {
         try body_buf.appendSlice(allocator, "&LaunchTemplateData.KernelId=");
@@ -586,17 +586,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     if (input.launch_template_data.maintenance_options) |sv| {
         if (sv.auto_recovery) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.MaintenanceOptions.AutoRecovery=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
     }
     if (input.launch_template_data.metadata_options) |sv| {
         if (sv.http_endpoint) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.MetadataOptions.HttpEndpoint=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.http_protocol_ipv_6) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.MetadataOptions.HttpProtocolIpv6=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.http_put_response_hop_limit) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.MetadataOptions.HttpPutResponseHopLimit=");
@@ -604,11 +604,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
         }
         if (sv.http_tokens) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.MetadataOptions.HttpTokens=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
         if (sv.instance_metadata_tags) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.MetadataOptions.InstanceMetadataTags=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
     }
     if (input.launch_template_data.monitoring) |sv| {
@@ -870,7 +870,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     if (input.launch_template_data.network_performance_options) |sv| {
         if (sv.bandwidth_weighting) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.NetworkPerformanceOptions.BandwidthWeighting=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
     }
     if (input.launch_template_data.operator) |sv| {
@@ -918,7 +918,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
         }
         if (sv.tenancy) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.Placement.Tenancy=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
     }
     if (input.launch_template_data.private_dns_name_options) |sv| {
@@ -932,7 +932,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
         }
         if (sv.hostname_type) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.PrivateDnsNameOptions.HostnameType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
         }
     }
     if (input.launch_template_data.ram_disk_id) |sv| {
@@ -965,7 +965,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.TagSpecifications.LaunchTemplateTagSpecificationRequest.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -1011,7 +1011,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

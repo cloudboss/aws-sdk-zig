@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AssociationType = enum {
     knowledge_base,
     external_bedrock_knowledge_base,
@@ -6,4 +8,20 @@ pub const AssociationType = enum {
         .knowledge_base = "KNOWLEDGE_BASE",
         .external_bedrock_knowledge_base = "EXTERNAL_BEDROCK_KNOWLEDGE_BASE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .knowledge_base => "KNOWLEDGE_BASE",
+            .external_bedrock_knowledge_base => "EXTERNAL_BEDROCK_KNOWLEDGE_BASE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

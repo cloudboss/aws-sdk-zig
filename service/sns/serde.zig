@@ -76,7 +76,7 @@ pub fn deserializeNumberCapabilityList(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(NumberCapability, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (NumberCapability.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -386,7 +386,7 @@ pub fn deserializePhoneNumberInformation(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "PhoneNumber")) {
                     result.phone_number = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RouteType")) {
-                    result.route_type = std.meta.stringToEnum(RouteType, try reader.readElementText());
+                    result.route_type = RouteType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -457,7 +457,7 @@ pub fn deserializeSMSSandboxPhoneNumber(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "PhoneNumber")) {
                     result.phone_number = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(SMSSandboxPhoneNumberVerificationStatus, try reader.readElementText());
+                    result.status = SMSSandboxPhoneNumberVerificationStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

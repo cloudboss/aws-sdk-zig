@@ -50,17 +50,17 @@ pub const PlanEvaluationStatusPassedWaiter = struct {
         };
 
         if (output.evaluation_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "passed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "passed")) {
                 return .success;
             }
         }
         if (output.evaluation_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "actionRequired")) {
+            if (std.mem.eql(u8, val_0.wireName(), "actionRequired")) {
                 return .failure;
             }
         }
         if (output.evaluation_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "pendingEvaluation")) {
+            if (std.mem.eql(u8, val_0.wireName(), "pendingEvaluation")) {
                 return .retry;
             }
         }
@@ -112,27 +112,27 @@ pub const PlanExecutionCompletedWaiter = struct {
         };
 
         if (output.execution_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "completed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "completed")) {
                 return .success;
             }
         }
         if (output.execution_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "completedWithExceptions")) {
+            if (std.mem.eql(u8, val_0.wireName(), "completedWithExceptions")) {
                 return .success;
             }
         }
         if (output.execution_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "failed")) {
+            if (std.mem.eql(u8, val_0.wireName(), "failed")) {
                 return .failure;
             }
         }
         if (output.execution_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "canceled")) {
+            if (std.mem.eql(u8, val_0.wireName(), "canceled")) {
                 return .failure;
             }
         }
         if (output.execution_state) |val_0| {
-            if (std.mem.eql(u8, @tagName(val_0), "planExecutionTimedOut")) {
+            if (std.mem.eql(u8, val_0.wireName(), "planExecutionTimedOut")) {
                 return .failure;
             }
         }

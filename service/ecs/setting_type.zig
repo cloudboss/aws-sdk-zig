@@ -1,9 +1,27 @@
+const std = @import("std");
+
 pub const SettingType = enum {
     user,
     aws_managed,
 
     pub const json_field_names = .{
-        .user = "USER",
-        .aws_managed = "AWS_MANAGED",
+        .user = "user",
+        .aws_managed = "aws_managed",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .user => "user",
+            .aws_managed => "aws_managed",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

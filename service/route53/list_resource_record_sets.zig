@@ -173,7 +173,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourceRecordSetsI
     if (input.start_record_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);
@@ -216,7 +216,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "NextRecordName")) {
                     result.next_record_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NextRecordType")) {
-                    result.next_record_type = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.next_record_type = RRType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceRecordSets")) {
                     result.resource_record_sets = try serde.deserializeResourceRecordSets(allocator, &reader, "ResourceRecordSet");
                 } else {

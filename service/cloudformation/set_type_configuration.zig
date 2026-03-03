@@ -101,7 +101,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetTypeConfigurationInp
     }
     if (input.@"type") |v| {
         try body_buf.appendSlice(allocator, "&Type=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.type_arn) |v| {
         try body_buf.appendSlice(allocator, "&TypeArn=");

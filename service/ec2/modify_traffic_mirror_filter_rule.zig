@@ -137,7 +137,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTrafficMirrorFilt
     }
     if (input.rule_action) |v| {
         try body_buf.appendSlice(allocator, "&RuleAction=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.rule_number) |v| {
         try body_buf.appendSlice(allocator, "&RuleNumber=");
@@ -159,7 +159,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTrafficMirrorFilt
     }
     if (input.traffic_direction) |v| {
         try body_buf.appendSlice(allocator, "&TrafficDirection=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&TrafficMirrorFilterRuleId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.traffic_mirror_filter_rule_id);

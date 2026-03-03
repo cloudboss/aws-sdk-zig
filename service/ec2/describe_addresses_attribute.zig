@@ -85,7 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAddressesAttrib
     }
     if (input.attribute) |v| {
         try body_buf.appendSlice(allocator, "&Attribute=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");

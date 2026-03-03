@@ -121,7 +121,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "LastSuccessfulDeliveryTime")) {
                     result.last_successful_delivery_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "LogDestinationType")) {
-                    result.log_destination_type = std.meta.stringToEnum(LogDestinationType, try reader.readElementText());
+                    result.log_destination_type = LogDestinationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LogExports")) {
                     result.log_exports = try serde.deserializeLogTypeList(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "LoggingEnabled")) {

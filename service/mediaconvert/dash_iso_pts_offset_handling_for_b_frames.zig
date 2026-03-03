@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use this setting only when your output video stream has B-frames, which
 /// causes the initial presentation time stamp (PTS) to be offset from the
 /// initial decode time stamp (DTS). Specify how MediaConvert handles PTS when
@@ -15,4 +17,20 @@ pub const DashIsoPtsOffsetHandlingForBFrames = enum {
         .zero_based = "ZERO_BASED",
         .match_initial_pts = "MATCH_INITIAL_PTS",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .zero_based => "ZERO_BASED",
+            .match_initial_pts => "MATCH_INITIAL_PTS",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

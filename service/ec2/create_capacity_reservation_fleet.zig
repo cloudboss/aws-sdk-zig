@@ -188,7 +188,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
     }
     if (input.instance_match_criteria) |v| {
         try body_buf.appendSlice(allocator, "&InstanceMatchCriteria=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     for (input.instance_type_specifications, 0..) |item, idx| {
         const n = idx + 1;
@@ -221,7 +221,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.member.{d}.InstancePlatform=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.instance_platform) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
@@ -229,7 +229,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.member.{d}.InstanceType=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.instance_type) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
@@ -257,7 +257,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -285,7 +285,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
     }
     if (input.tenancy) |v| {
         try body_buf.appendSlice(allocator, "&Tenancy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&TotalTargetCapacity=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.total_target_capacity}) catch "");
@@ -330,13 +330,13 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "fleetCapacityReservationSet")) {
                     result.fleet_capacity_reservations = try serde.deserializeFleetCapacityReservationSet(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "instanceMatchCriteria")) {
-                    result.instance_match_criteria = std.meta.stringToEnum(FleetInstanceMatchCriteria, try reader.readElementText());
+                    result.instance_match_criteria = FleetInstanceMatchCriteria.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(CapacityReservationFleetState, try reader.readElementText());
+                    result.state = CapacityReservationFleetState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try serde.deserializeTagList(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
-                    result.tenancy = std.meta.stringToEnum(FleetCapacityReservationTenancy, try reader.readElementText());
+                    result.tenancy = FleetCapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "totalFulfilledCapacity")) {
                     result.total_fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "totalTargetCapacity")) {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Specify how you want MediaConvert to determine segment lengths in this
 /// output group. To use the exact value that you specify under Segment length:
 /// Choose Exact. Note that this might result in additional I-frames in the
@@ -25,4 +27,21 @@ pub const HlsSegmentLengthControl = enum {
         .gop_multiple = "GOP_MULTIPLE",
         .match = "MATCH",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .exact => "EXACT",
+            .gop_multiple => "GOP_MULTIPLE",
+            .match => "MATCH",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

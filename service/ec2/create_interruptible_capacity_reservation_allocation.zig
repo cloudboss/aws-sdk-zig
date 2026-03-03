@@ -102,7 +102,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInterruptibleCapa
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -159,11 +159,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "interruptionType")) {
-                    result.interruption_type = std.meta.stringToEnum(InterruptionType, try reader.readElementText());
+                    result.interruption_type = InterruptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sourceCapacityReservationId")) {
                     result.source_capacity_reservation_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
-                    result.status = std.meta.stringToEnum(InterruptibleCapacityReservationAllocationStatus, try reader.readElementText());
+                    result.status = InterruptibleCapacityReservationAllocationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "targetInstanceCount")) {
                     result.target_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {

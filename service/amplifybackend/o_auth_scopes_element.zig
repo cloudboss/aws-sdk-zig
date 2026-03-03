@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const OAuthScopesElement = enum {
     phone,
     email,
@@ -12,4 +14,23 @@ pub const OAuthScopesElement = enum {
         .profile = "PROFILE",
         .aws_cognito_signin_user_admin = "AWS_COGNITO_SIGNIN_USER_ADMIN",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .phone => "PHONE",
+            .email => "EMAIL",
+            .openid => "OPENID",
+            .profile => "PROFILE",
+            .aws_cognito_signin_user_admin => "AWS_COGNITO_SIGNIN_USER_ADMIN",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

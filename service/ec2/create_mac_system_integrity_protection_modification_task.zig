@@ -129,35 +129,35 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMacSystemIntegrit
     if (input.mac_system_integrity_protection_configuration) |v| {
         if (v.apple_internal) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.AppleInternal=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.base_system) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.BaseSystem=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.debugging_restrictions) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.DebuggingRestrictions=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.d_trace_restrictions) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.DTraceRestrictions=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.filesystem_protections) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.FilesystemProtections=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.kext_signing) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.KextSigning=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.nvram_protections) |sv| {
             try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionConfiguration.NvramProtections=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     try body_buf.appendSlice(allocator, "&MacSystemIntegrityProtectionStatus=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.mac_system_integrity_protection_status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.mac_system_integrity_protection_status.wireName());
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
@@ -166,7 +166,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMacSystemIntegrit
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

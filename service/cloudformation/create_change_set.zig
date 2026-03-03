@@ -373,7 +373,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChangeSetInput, c
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.change_set_name);
     if (input.change_set_type) |v| {
         try body_buf.appendSlice(allocator, "&ChangeSetType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.client_token) |v| {
         try body_buf.appendSlice(allocator, "&ClientToken=");
@@ -381,7 +381,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChangeSetInput, c
     }
     if (input.deployment_mode) |v| {
         try body_buf.appendSlice(allocator, "&DeploymentMode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
@@ -406,7 +406,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChangeSetInput, c
     }
     if (input.on_stack_failure) |v| {
         try body_buf.appendSlice(allocator, "&OnStackFailure=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.parameters) |list| {
         for (list, 0..) |item, idx| {

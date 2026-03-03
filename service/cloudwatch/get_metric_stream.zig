@@ -178,7 +178,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OutputFormat")) {
-                    result.output_format = std.meta.stringToEnum(MetricStreamOutputFormat, try reader.readElementText());
+                    result.output_format = MetricStreamOutputFormat.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RoleArn")) {
                     result.role_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "State")) {

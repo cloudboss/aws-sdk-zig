@@ -105,7 +105,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAwsNetworkPerformanc
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Metric=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.metric) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAwsNetworkPerformanc
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Period=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.period) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
@@ -129,7 +129,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAwsNetworkPerformanc
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Statistic=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.statistic) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
         }

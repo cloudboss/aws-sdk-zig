@@ -74,11 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceExportTas
     }
     if (input.export_to_s3_task.container_format) |sv| {
         try body_buf.appendSlice(allocator, "&ExportToS3.ContainerFormat=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.export_to_s3_task.disk_image_format) |sv| {
         try body_buf.appendSlice(allocator, "&ExportToS3.DiskImageFormat=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.export_to_s3_task.s3_bucket) |sv| {
         try body_buf.appendSlice(allocator, "&ExportToS3.S3Bucket=");
@@ -98,7 +98,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceExportTas
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {
@@ -125,7 +125,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceExportTas
         }
     }
     try body_buf.appendSlice(allocator, "&TargetEnvironment=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.target_environment));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.target_environment.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

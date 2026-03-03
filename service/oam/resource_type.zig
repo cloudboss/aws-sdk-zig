@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ResourceType = enum {
     aws_cloudwatch_metric,
     aws_logs_loggroup,
@@ -8,12 +10,33 @@ pub const ResourceType = enum {
     aws_application_signals_slo,
 
     pub const json_field_names = .{
-        .aws_cloudwatch_metric = "AWS_CLOUDWATCH_METRIC",
-        .aws_logs_loggroup = "AWS_LOGS_LOGGROUP",
-        .aws_xray_trace = "AWS_XRAY_TRACE",
-        .aws_applicationinsights_application = "AWS_APPLICATIONINSIGHTS_APPLICATION",
-        .aws_internetmonitor_monitor = "AWS_INTERNETMONITOR_MONITOR",
-        .aws_application_signals_service = "AWS_APPLICATION_SIGNALS_SERVICE",
-        .aws_application_signals_slo = "AWS_APPLICATION_SIGNALS_SLO",
+        .aws_cloudwatch_metric = "AWS::CloudWatch::Metric",
+        .aws_logs_loggroup = "AWS::Logs::LogGroup",
+        .aws_xray_trace = "AWS::XRay::Trace",
+        .aws_applicationinsights_application = "AWS::ApplicationInsights::Application",
+        .aws_internetmonitor_monitor = "AWS::InternetMonitor::Monitor",
+        .aws_application_signals_service = "AWS::ApplicationSignals::Service",
+        .aws_application_signals_slo = "AWS::ApplicationSignals::ServiceLevelObjective",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .aws_cloudwatch_metric => "AWS::CloudWatch::Metric",
+            .aws_logs_loggroup => "AWS::Logs::LogGroup",
+            .aws_xray_trace => "AWS::XRay::Trace",
+            .aws_applicationinsights_application => "AWS::ApplicationInsights::Application",
+            .aws_internetmonitor_monitor => "AWS::InternetMonitor::Monitor",
+            .aws_application_signals_service => "AWS::ApplicationSignals::Service",
+            .aws_application_signals_slo => "AWS::ApplicationSignals::ServiceLevelObjective",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ValidationExceptionReason = enum {
     cannot_add_opted_out_number,
     cannot_parse,
@@ -84,4 +86,59 @@ pub const ValidationExceptionReason = enum {
         .unspecified_parameter_not_supported = "UNSPECIFIED_PARAMETER_NOT_SUPPORTED",
         .other = "OTHER",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .cannot_add_opted_out_number => "CANNOT_ADD_OPTED_OUT_NUMBER",
+            .cannot_parse => "CANNOT_PARSE",
+            .country_code_mismatch => "COUNTRY_CODE_MISMATCH",
+            .destination_country_blocked => "DESTINATION_COUNTRY_BLOCKED",
+            .field_validation_failed => "FIELD_VALIDATION_FAILED",
+            .attachment_type_not_supported => "ATTACHMENT_TYPE_NOT_SUPPORTED",
+            .international_sending_not_supported => "INTERNATIONAL_SENDING_NOT_SUPPORTED",
+            .invalid_arn => "INVALID_ARN",
+            .invalid_filter_values => "INVALID_FILTER_VALUES",
+            .invalid_identity_for_destination_country => "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY",
+            .invalid_next_token => "INVALID_NEXT_TOKEN",
+            .invalid_parameter => "INVALID_PARAMETER",
+            .invalid_request => "INVALID_REQUEST",
+            .invalid_registration_association => "INVALID_REGISTRATION_ASSOCIATION",
+            .maximum_size_exceeded => "MAXIMUM_SIZE_EXCEEDED",
+            .media_type_not_supported => "MEDIA_TYPE_NOT_SUPPORTED",
+            .missing_parameter => "MISSING_PARAMETER",
+            .parameters_cannot_be_used_together => "PARAMETERS_CANNOT_BE_USED_TOGETHER",
+            .phone_number_cannot_be_opted_in => "PHONE_NUMBER_CANNOT_BE_OPTED_IN",
+            .phone_number_cannot_be_released => "PHONE_NUMBER_CANNOT_BE_RELEASED",
+            .price_over_threshold => "PRICE_OVER_THRESHOLD",
+            .resource_not_accessible => "RESOURCE_NOT_ACCESSIBLE",
+            .requested_spend_limit_higher_than_service_limit => "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT",
+            .sender_id_not_registered => "SENDER_ID_NOT_REGISTERED",
+            .sender_id_not_supported => "SENDER_ID_NOT_SUPPORTED",
+            .sender_id_requires_registration => "SENDER_ID_REQUIRES_REGISTRATION",
+            .two_way_topic_not_present => "TWO_WAY_TOPIC_NOT_PRESENT",
+            .two_way_not_enabled => "TWO_WAY_NOT_ENABLED",
+            .two_way_not_supported_in_country => "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY",
+            .two_way_not_supported_in_region => "TWO_WAY_NOT_SUPPORTED_IN_REGION",
+            .two_way_channel_not_present => "TWO_WAY_CHANNEL_NOT_PRESENT",
+            .unknown_registration_field => "UNKNOWN_REGISTRATION_FIELD",
+            .unknown_registration_section => "UNKNOWN_REGISTRATION_SECTION",
+            .unknown_registration_type => "UNKNOWN_REGISTRATION_TYPE",
+            .unknown_registration_version => "UNKNOWN_REGISTRATION_VERSION",
+            .unknown_operation => "UNKNOWN_OPERATION",
+            .registration_field_cannot_be_deleted => "REGISTRATION_FIELD_CANNOT_BE_DELETED",
+            .verification_code_mismatch => "VERIFICATION_CODE_MISMATCH",
+            .voice_capability_not_available => "VOICE_CAPABILITY_NOT_AVAILABLE",
+            .unspecified_parameter_not_supported => "UNSPECIFIED_PARAMETER_NOT_SUPPORTED",
+            .other => "OTHER",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1737,9 +1737,9 @@ pub fn deserializeAquaConfiguration(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AquaConfigurationStatus")) {
-                    result.aqua_configuration_status = std.meta.stringToEnum(AquaConfigurationStatus, try reader.readElementText());
+                    result.aqua_configuration_status = AquaConfigurationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AquaStatus")) {
-                    result.aqua_status = std.meta.stringToEnum(AquaStatus, try reader.readElementText());
+                    result.aqua_status = AquaStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2068,7 +2068,7 @@ pub fn deserializeCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "SnapshotScheduleIdentifier")) {
                     result.snapshot_schedule_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SnapshotScheduleState")) {
-                    result.snapshot_schedule_state = std.meta.stringToEnum(ScheduleState, try reader.readElementText());
+                    result.snapshot_schedule_state = ScheduleState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try deserializeTagList(allocator, reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "TotalStorageCapacityInMegaBytes")) {
@@ -2098,7 +2098,7 @@ pub fn deserializeClusterAssociatedToSchedule(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "ClusterIdentifier")) {
                     result.cluster_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ScheduleAssociationState")) {
-                    result.schedule_association_state = std.meta.stringToEnum(ScheduleState, try reader.readElementText());
+                    result.schedule_association_state = ScheduleState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2424,7 +2424,7 @@ pub fn deserializeDataShare(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "DataShareAssociations")) {
                     result.data_share_associations = try deserializeDataShareAssociationList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DataShareType")) {
-                    result.data_share_type = std.meta.stringToEnum(DataShareType, try reader.readElementText());
+                    result.data_share_type = DataShareType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ManagedBy")) {
                     result.managed_by = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProducerArn")) {
@@ -2463,7 +2463,7 @@ pub fn deserializeDataShareAssociation(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "ProducerAllowedWrites")) {
                     result.producer_allowed_writes = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(DataShareStatus, try reader.readElementText());
+                    result.status = DataShareStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusChangeDate")) {
                     result.status_change_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
@@ -2713,7 +2713,7 @@ pub fn deserializeEndpointAuthorization(allocator: std.mem.Allocator, reader: *a
                 } else if (std.mem.eql(u8, e.local, "Grantor")) {
                     result.grantor = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(AuthorizationStatus, try reader.readElementText());
+                    result.status = AuthorizationStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2750,7 +2750,7 @@ pub fn deserializeEvent(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "SourceIdentifier")) {
                     result.source_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceType")) {
-                    result.source_type = std.meta.stringToEnum(SourceType, try reader.readElementText());
+                    result.source_type = SourceType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2987,7 +2987,7 @@ pub fn deserializeInboundIntegration(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "SourceArn")) {
                     result.source_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ZeroETLIntegrationStatus, try reader.readElementText());
+                    result.status = ZeroETLIntegrationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetArn")) {
                     result.target_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -3034,7 +3034,7 @@ pub fn deserializeIntegration(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "SourceArn")) {
                     result.source_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ZeroETLIntegrationStatus, try reader.readElementText());
+                    result.status = ZeroETLIntegrationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try deserializeTagList(allocator, reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "TargetArn")) {
@@ -3139,7 +3139,7 @@ pub fn deserializeNodeConfigurationOption(allocator: std.mem.Allocator, reader: 
                 if (std.mem.eql(u8, e.local, "EstimatedDiskUtilizationPercent")) {
                     result.estimated_disk_utilization_percent = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Mode")) {
-                    result.mode = std.meta.stringToEnum(Mode, try reader.readElementText());
+                    result.mode = Mode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NodeType")) {
                     result.node_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NumberOfNodes")) {
@@ -3200,7 +3200,7 @@ pub fn deserializeParameter(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 if (std.mem.eql(u8, e.local, "AllowedValues")) {
                     result.allowed_values = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ApplyType")) {
-                    result.apply_type = std.meta.stringToEnum(ParameterApplyType, try reader.readElementText());
+                    result.apply_type = ParameterApplyType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DataType")) {
                     result.data_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
@@ -3244,7 +3244,7 @@ pub fn deserializePartnerIntegrationInfo(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "PartnerName")) {
                     result.partner_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(PartnerIntegrationStatus, try reader.readElementText());
+                    result.status = PartnerIntegrationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UpdatedAt")) {
@@ -3353,7 +3353,7 @@ pub fn deserializeRecommendation(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ImpactRanking")) {
-                    result.impact_ranking = std.meta.stringToEnum(ImpactRankingType, try reader.readElementText());
+                    result.impact_ranking = ImpactRankingType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NamespaceArn")) {
                     result.namespace_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Observation")) {
@@ -3395,7 +3395,7 @@ pub fn deserializeRecommendedAction(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "Text")) {
                     result.text = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(RecommendedActionType, try reader.readElementText());
+                    result.@"type" = RecommendedActionType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3448,7 +3448,7 @@ pub fn deserializeRedshiftIdcApplication(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApplicationType")) {
-                    result.application_type = std.meta.stringToEnum(ApplicationType, try reader.readElementText());
+                    result.application_type = ApplicationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AuthorizedTokenIssuerList")) {
                     result.authorized_token_issuer_list = try deserializeAuthorizedTokenIssuerList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "IamRoleArn")) {
@@ -3543,7 +3543,7 @@ pub fn deserializeReservedNode(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "ReservedNodeOfferingId")) {
                     result.reserved_node_offering_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ReservedNodeOfferingType")) {
-                    result.reserved_node_offering_type = std.meta.stringToEnum(ReservedNodeOfferingType, try reader.readElementText());
+                    result.reserved_node_offering_type = ReservedNodeOfferingType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "State")) {
@@ -3611,7 +3611,7 @@ pub fn deserializeReservedNodeExchangeStatus(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "SourceReservedNodeType")) {
                     result.source_reserved_node_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(ReservedNodeExchangeStatusType, try reader.readElementText());
+                    result.status = ReservedNodeExchangeStatusType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetReservedNodeCount")) {
                     result.target_reserved_node_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "TargetReservedNodeOfferingId")) {
@@ -3658,7 +3658,7 @@ pub fn deserializeReservedNodeOffering(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "ReservedNodeOfferingId")) {
                     result.reserved_node_offering_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ReservedNodeOfferingType")) {
-                    result.reserved_node_offering_type = std.meta.stringToEnum(ReservedNodeOfferingType, try reader.readElementText());
+                    result.reserved_node_offering_type = ReservedNodeOfferingType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UsagePrice")) {
                     result.usage_price = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else {
@@ -3858,7 +3858,7 @@ pub fn deserializeScheduledAction(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "State")) {
-                    result.state = std.meta.stringToEnum(ScheduledActionState, try reader.readElementText());
+                    result.state = ScheduledActionState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetAction")) {
                     result.target_action = try deserializeScheduledActionType(allocator, reader);
                 } else {
@@ -4237,7 +4237,7 @@ pub fn deserializeTableRestoreStatus(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "SourceTableName")) {
                     result.source_table_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(TableRestoreStatusType, try reader.readElementText());
+                    result.status = TableRestoreStatusType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TableRestoreRequestId")) {
                     result.table_restore_request_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetDatabaseName")) {
@@ -4345,15 +4345,15 @@ pub fn deserializeUsageLimit(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 if (std.mem.eql(u8, e.local, "Amount")) {
                     result.amount = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "BreachAction")) {
-                    result.breach_action = std.meta.stringToEnum(UsageLimitBreachAction, try reader.readElementText());
+                    result.breach_action = UsageLimitBreachAction.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ClusterIdentifier")) {
                     result.cluster_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "FeatureType")) {
-                    result.feature_type = std.meta.stringToEnum(UsageLimitFeatureType, try reader.readElementText());
+                    result.feature_type = UsageLimitFeatureType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LimitType")) {
-                    result.limit_type = std.meta.stringToEnum(UsageLimitLimitType, try reader.readElementText());
+                    result.limit_type = UsageLimitLimitType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Period")) {
-                    result.period = std.meta.stringToEnum(UsageLimitPeriod, try reader.readElementText());
+                    result.period = UsageLimitPeriod.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try deserializeTagList(allocator, reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "UsageLimitId")) {
@@ -4795,7 +4795,7 @@ pub fn serializeDeleteClusterSnapshotMessage(allocator: std.mem.Allocator, buf: 
 
 pub fn serializeDescribeIntegrationsFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DescribeIntegrationsFilter) !void {
     try buf.appendSlice(allocator, "<Name>");
-    try buf.appendSlice(allocator, @tagName(value.name));
+    try buf.appendSlice(allocator, value.name.wireName());
     try buf.appendSlice(allocator, "</Name>");
     try buf.appendSlice(allocator, "<Values>");
     try serializeDescribeIntegrationsFilterValueList(allocator, buf, value.values, "Value");
@@ -4805,12 +4805,12 @@ pub fn serializeDescribeIntegrationsFilter(allocator: std.mem.Allocator, buf: *s
 pub fn serializeNodeConfigurationOptionsFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: NodeConfigurationOptionsFilter) !void {
     if (value.name) |v| {
         try buf.appendSlice(allocator, "<Name>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Name>");
     }
     if (value.operator) |v| {
         try buf.appendSlice(allocator, "<Operator>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Operator>");
     }
     if (value.values) |v| {
@@ -4828,7 +4828,7 @@ pub fn serializeParameter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
     }
     if (value.apply_type) |v| {
         try buf.appendSlice(allocator, "<ApplyType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</ApplyType>");
     }
     if (value.data_type) |v| {
@@ -4921,7 +4921,7 @@ pub fn serializeResumeClusterMessage(allocator: std.mem.Allocator, buf: *std.Arr
 
 pub fn serializeScheduledActionFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledActionFilter) !void {
     try buf.appendSlice(allocator, "<Name>");
-    try buf.appendSlice(allocator, @tagName(value.name));
+    try buf.appendSlice(allocator, value.name.wireName());
     try buf.appendSlice(allocator, "</Name>");
     try buf.appendSlice(allocator, "<Values>");
     try serializeValueStringList(allocator, buf, value.values, "item");
@@ -4948,11 +4948,11 @@ pub fn serializeScheduledActionType(allocator: std.mem.Allocator, buf: *std.Arra
 
 pub fn serializeSnapshotSortingEntity(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SnapshotSortingEntity) !void {
     try buf.appendSlice(allocator, "<Attribute>");
-    try buf.appendSlice(allocator, @tagName(value.attribute));
+    try buf.appendSlice(allocator, value.attribute.wireName());
     try buf.appendSlice(allocator, "</Attribute>");
     if (value.sort_order) |v| {
         try buf.appendSlice(allocator, "<SortOrder>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</SortOrder>");
     }
 }

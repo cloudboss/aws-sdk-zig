@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const CaEnrollmentPolicyStatus = enum {
     in_progress,
     success,
@@ -7,11 +9,31 @@ pub const CaEnrollmentPolicyStatus = enum {
     impaired,
 
     pub const json_field_names = .{
-        .in_progress = "IN_PROGRESS",
-        .success = "SUCCESS",
-        .failed = "FAILED",
-        .disabling = "DISABLING",
-        .disabled = "DISABLED",
-        .impaired = "IMPAIRED",
+        .in_progress = "InProgress",
+        .success = "Success",
+        .failed = "Failed",
+        .disabling = "Disabling",
+        .disabled = "Disabled",
+        .impaired = "Impaired",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .in_progress => "InProgress",
+            .success => "Success",
+            .failed => "Failed",
+            .disabling => "Disabling",
+            .disabled => "Disabled",
+            .impaired => "Impaired",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

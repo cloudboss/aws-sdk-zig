@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const VoiceId = enum {
     amy,
     astrid,
@@ -120,4 +122,77 @@ pub const VoiceId = enum {
         .zeina = "ZEINA",
         .zhiyu = "ZHIYU",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .amy => "AMY",
+            .astrid => "ASTRID",
+            .bianca => "BIANCA",
+            .brian => "BRIAN",
+            .camila => "CAMILA",
+            .carla => "CARLA",
+            .carmen => "CARMEN",
+            .celine => "CELINE",
+            .chantal => "CHANTAL",
+            .conchita => "CONCHITA",
+            .cristiano => "CRISTIANO",
+            .dora => "DORA",
+            .emma => "EMMA",
+            .enrique => "ENRIQUE",
+            .ewa => "EWA",
+            .filiz => "FILIZ",
+            .geraint => "GERAINT",
+            .giorgio => "GIORGIO",
+            .gwyneth => "GWYNETH",
+            .hans => "HANS",
+            .ines => "INES",
+            .ivy => "IVY",
+            .jacek => "JACEK",
+            .jan => "JAN",
+            .joanna => "JOANNA",
+            .joey => "JOEY",
+            .justin => "JUSTIN",
+            .karl => "KARL",
+            .kendra => "KENDRA",
+            .kimberly => "KIMBERLY",
+            .lea => "LEA",
+            .liv => "LIV",
+            .lotte => "LOTTE",
+            .lucia => "LUCIA",
+            .lupe => "LUPE",
+            .mads => "MADS",
+            .maja => "MAJA",
+            .marlene => "MARLENE",
+            .mathieu => "MATHIEU",
+            .matthew => "MATTHEW",
+            .maxim => "MAXIM",
+            .mia => "MIA",
+            .miguel => "MIGUEL",
+            .mizuki => "MIZUKI",
+            .naja => "NAJA",
+            .nicole => "NICOLE",
+            .penelope => "PENELOPE",
+            .raveena => "RAVEENA",
+            .ricardo => "RICARDO",
+            .ruben => "RUBEN",
+            .russell => "RUSSELL",
+            .salli => "SALLI",
+            .seoyeon => "SEOYEON",
+            .takumi => "TAKUMI",
+            .tatyana => "TATYANA",
+            .vicki => "VICKI",
+            .vitoria => "VITORIA",
+            .zeina => "ZEINA",
+            .zhiyu => "ZHIYU",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

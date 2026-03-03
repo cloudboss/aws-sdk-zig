@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PurchaseReservedInstanc
         }
         if (v.currency_code) |sv| {
             try body_buf.appendSlice(allocator, "&LimitPrice.CurrencyCode=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.purchase_time) |v| {

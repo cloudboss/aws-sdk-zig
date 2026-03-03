@@ -52,14 +52,14 @@ pub const AssetActiveWaiter = struct {
 
         if (output.asset_status) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.asset_status) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -113,14 +113,14 @@ pub const AssetModelActiveWaiter = struct {
 
         if (output.asset_model_status) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }
         }
         if (output.asset_model_status) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "FAILED")) {
+                if (std.mem.eql(u8, val_1.wireName(), "FAILED")) {
                     return .failure;
                 }
             }
@@ -282,7 +282,7 @@ pub const PortalActiveWaiter = struct {
 
         if (output.portal_status) |val_0| {
             if (val_0.state) |val_1| {
-                if (std.mem.eql(u8, @tagName(val_1), "ACTIVE")) {
+                if (std.mem.eql(u8, val_1.wireName(), "ACTIVE")) {
                     return .success;
                 }
             }

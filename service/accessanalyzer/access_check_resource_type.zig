@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AccessCheckResourceType = enum {
     dynamodb_table,
     dynamodb_stream,
@@ -27,31 +29,71 @@ pub const AccessCheckResourceType = enum {
     s3_express_access_point,
 
     pub const json_field_names = .{
-        .dynamodb_table = "DYNAMODB_TABLE",
-        .dynamodb_stream = "DYNAMODB_STREAM",
-        .efs_filesystem = "EFS_FILESYSTEM",
-        .opensearchservice_domain = "OPENSEARCHSERVICE_DOMAIN",
-        .kinesis_data_stream = "KINESIS_DATA_STREAM",
-        .kinesis_stream_consumer = "KINESIS_STREAM_CONSUMER",
-        .kms_key = "KMS_KEY",
-        .lambda_function = "LAMBDA_FUNCTION",
-        .s3_bucket = "S3_BUCKET",
-        .s3_access_point = "S3_ACCESS_POINT",
-        .s3_express_directorybucket = "S3EXPRESS_DIRECTORYBUCKET",
-        .s3_glacier = "S3_GLACIER",
-        .s3_outposts_bucket = "S3_OUTPOSTS_BUCKET",
-        .s3_outposts_access_point = "S3_OUTPOSTS_ACCESS_POINT",
-        .secretsmanager_secret = "SECRETSMANAGER_SECRET",
-        .sns_topic = "SNS_TOPIC",
-        .sqs_queue = "SQS_QUEUE",
-        .role_trust = "ROLE_TRUST",
-        .s3_table_bucket = "S3_TABLE_BUCKET",
-        .api_gateway_rest_api = "API_GATEWAY_REST_API",
-        .code_artifact_domain = "CODE_ARTIFACT_DOMAIN",
-        .backup_vault = "BACKUP_VAULT",
-        .cloudtrail_dashboard = "CLOUDTRAIL_DASHBOARD",
-        .cloudtrail_event_data_store = "CLOUDTRAIL_EVENT_DATA_STORE",
-        .s3_table = "S3_TABLE",
-        .s3_express_access_point = "S3_EXPRESS_ACCESS_POINT",
+        .dynamodb_table = "AWS::DynamoDB::Table",
+        .dynamodb_stream = "AWS::DynamoDB::Stream",
+        .efs_filesystem = "AWS::EFS::FileSystem",
+        .opensearchservice_domain = "AWS::OpenSearchService::Domain",
+        .kinesis_data_stream = "AWS::Kinesis::Stream",
+        .kinesis_stream_consumer = "AWS::Kinesis::StreamConsumer",
+        .kms_key = "AWS::KMS::Key",
+        .lambda_function = "AWS::Lambda::Function",
+        .s3_bucket = "AWS::S3::Bucket",
+        .s3_access_point = "AWS::S3::AccessPoint",
+        .s3_express_directorybucket = "AWS::S3Express::DirectoryBucket",
+        .s3_glacier = "AWS::S3::Glacier",
+        .s3_outposts_bucket = "AWS::S3Outposts::Bucket",
+        .s3_outposts_access_point = "AWS::S3Outposts::AccessPoint",
+        .secretsmanager_secret = "AWS::SecretsManager::Secret",
+        .sns_topic = "AWS::SNS::Topic",
+        .sqs_queue = "AWS::SQS::Queue",
+        .role_trust = "AWS::IAM::AssumeRolePolicyDocument",
+        .s3_table_bucket = "AWS::S3Tables::TableBucket",
+        .api_gateway_rest_api = "AWS::ApiGateway::RestApi",
+        .code_artifact_domain = "AWS::CodeArtifact::Domain",
+        .backup_vault = "AWS::Backup::BackupVault",
+        .cloudtrail_dashboard = "AWS::CloudTrail::Dashboard",
+        .cloudtrail_event_data_store = "AWS::CloudTrail::EventDataStore",
+        .s3_table = "AWS::S3Tables::Table",
+        .s3_express_access_point = "AWS::S3Express::AccessPoint",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .dynamodb_table => "AWS::DynamoDB::Table",
+            .dynamodb_stream => "AWS::DynamoDB::Stream",
+            .efs_filesystem => "AWS::EFS::FileSystem",
+            .opensearchservice_domain => "AWS::OpenSearchService::Domain",
+            .kinesis_data_stream => "AWS::Kinesis::Stream",
+            .kinesis_stream_consumer => "AWS::Kinesis::StreamConsumer",
+            .kms_key => "AWS::KMS::Key",
+            .lambda_function => "AWS::Lambda::Function",
+            .s3_bucket => "AWS::S3::Bucket",
+            .s3_access_point => "AWS::S3::AccessPoint",
+            .s3_express_directorybucket => "AWS::S3Express::DirectoryBucket",
+            .s3_glacier => "AWS::S3::Glacier",
+            .s3_outposts_bucket => "AWS::S3Outposts::Bucket",
+            .s3_outposts_access_point => "AWS::S3Outposts::AccessPoint",
+            .secretsmanager_secret => "AWS::SecretsManager::Secret",
+            .sns_topic => "AWS::SNS::Topic",
+            .sqs_queue => "AWS::SQS::Queue",
+            .role_trust => "AWS::IAM::AssumeRolePolicyDocument",
+            .s3_table_bucket => "AWS::S3Tables::TableBucket",
+            .api_gateway_rest_api => "AWS::ApiGateway::RestApi",
+            .code_artifact_domain => "AWS::CodeArtifact::Domain",
+            .backup_vault => "AWS::Backup::BackupVault",
+            .cloudtrail_dashboard => "AWS::CloudTrail::Dashboard",
+            .cloudtrail_event_data_store => "AWS::CloudTrail::EventDataStore",
+            .s3_table => "AWS::S3Tables::Table",
+            .s3_express_access_point => "AWS::S3Express::AccessPoint",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAgentMemoryInput, co
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "memoryType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.memory_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.memory_type.wireName());
     query_has_prev = true;
     if (input.next_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

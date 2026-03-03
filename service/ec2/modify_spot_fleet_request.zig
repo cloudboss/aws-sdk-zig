@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySpotFleetRequestI
     }
     if (input.excess_capacity_termination_policy) |v| {
         try body_buf.appendSlice(allocator, "&ExcessCapacityTerminationPolicy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.launch_template_configs) |list| {
         for (list, 0..) |item, idx| {
@@ -220,7 +220,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySpotFleetRequestI
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceRequirements.BareMetal=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bare_metal) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.baseline_ebs_bandwidth_mbps) |sv_3| {
@@ -263,7 +263,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySpotFleetRequestI
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceRequirements.BurstablePerformance=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.burstable_performance) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.cpu_manufacturers) |lst_3| {
@@ -304,7 +304,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySpotFleetRequestI
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceRequirements.LocalStorage=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.local_storage) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.local_storage_types) |lst_3| {
@@ -472,7 +472,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySpotFleetRequestI
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.item.{d}.Overrides.item.{d}.InstanceType=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.instance_type) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     {

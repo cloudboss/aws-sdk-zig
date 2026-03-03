@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Embedded Convert608 To708
 pub const EmbeddedConvert608To708 = enum {
     disabled,
@@ -7,4 +9,20 @@ pub const EmbeddedConvert608To708 = enum {
         .disabled = "DISABLED",
         .upconvert = "UPCONVERT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .upconvert => "UPCONVERT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

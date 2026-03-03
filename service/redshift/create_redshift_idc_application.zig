@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRedshiftIdcApplic
     try body_buf.appendSlice(allocator, "Action=CreateRedshiftIdcApplication&Version=2012-12-01");
     if (input.application_type) |v| {
         try body_buf.appendSlice(allocator, "&ApplicationType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.authorized_token_issuer_list) |list| {
         for (list, 0..) |item, idx| {

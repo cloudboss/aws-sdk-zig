@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const PluginType = enum {
     service_now,
     salesforce,
@@ -36,4 +38,35 @@ pub const PluginType = enum {
         .smartsheet = "SMARTSHEET",
         .asana = "ASANA",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .service_now => "SERVICE_NOW",
+            .salesforce => "SALESFORCE",
+            .jira => "JIRA",
+            .zendesk => "ZENDESK",
+            .custom => "CUSTOM",
+            .quicksight => "QUICKSIGHT",
+            .servicenow_now_platform => "SERVICENOW_NOW_PLATFORM",
+            .jira_cloud => "JIRA_CLOUD",
+            .salesforce_crm => "SALESFORCE_CRM",
+            .zendesk_suite => "ZENDESK_SUITE",
+            .atlassian_confluence => "ATLASSIAN_CONFLUENCE",
+            .google_calendar => "GOOGLE_CALENDAR",
+            .microsoft_teams => "MICROSOFT_TEAMS",
+            .microsoft_exchange => "MICROSOFT_EXCHANGE",
+            .pagerduty_advance => "PAGERDUTY_ADVANCE",
+            .smartsheet => "SMARTSHEET",
+            .asana => "ASANA",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

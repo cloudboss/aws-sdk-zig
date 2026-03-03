@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const DeploymentStatus = enum {
     created,
     queued,
@@ -9,13 +11,35 @@ pub const DeploymentStatus = enum {
     ready,
 
     pub const json_field_names = .{
-        .created = "CREATED",
-        .queued = "QUEUED",
-        .in_progress = "IN_PROGRESS",
-        .baking = "BAKING",
-        .succeeded = "SUCCEEDED",
-        .failed = "FAILED",
-        .stopped = "STOPPED",
-        .ready = "READY",
+        .created = "Created",
+        .queued = "Queued",
+        .in_progress = "InProgress",
+        .baking = "Baking",
+        .succeeded = "Succeeded",
+        .failed = "Failed",
+        .stopped = "Stopped",
+        .ready = "Ready",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .created => "Created",
+            .queued => "Queued",
+            .in_progress => "InProgress",
+            .baking => "Baking",
+            .succeeded => "Succeeded",
+            .failed => "Failed",
+            .stopped => "Stopped",
+            .ready => "Ready",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

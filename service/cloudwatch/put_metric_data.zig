@@ -212,7 +212,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Unit=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.unit) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_2));
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     {
@@ -322,7 +322,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Unit=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.unit) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SchemaStatusReasonCode = enum {
     analysis_rule_missing,
     analysis_templates_not_configured,
@@ -24,4 +26,29 @@ pub const SchemaStatusReasonCode = enum {
         .result_receivers_not_allowed = "RESULT_RECEIVERS_NOT_ALLOWED",
         .analysis_rule_types_not_compatible = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .analysis_rule_missing => "ANALYSIS_RULE_MISSING",
+            .analysis_templates_not_configured => "ANALYSIS_TEMPLATES_NOT_CONFIGURED",
+            .analysis_providers_not_configured => "ANALYSIS_PROVIDERS_NOT_CONFIGURED",
+            .differential_privacy_policy_not_configured => "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED",
+            .id_mapping_table_not_populated => "ID_MAPPING_TABLE_NOT_POPULATED",
+            .collaboration_analysis_rule_not_configured => "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED",
+            .additional_analyses_not_configured => "ADDITIONAL_ANALYSES_NOT_CONFIGURED",
+            .result_receivers_not_configured => "RESULT_RECEIVERS_NOT_CONFIGURED",
+            .additional_analyses_not_allowed => "ADDITIONAL_ANALYSES_NOT_ALLOWED",
+            .result_receivers_not_allowed => "RESULT_RECEIVERS_NOT_ALLOWED",
+            .analysis_rule_types_not_compatible => "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

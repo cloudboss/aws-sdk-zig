@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSupportedPhoneNumbe
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "product-type=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.product_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.product_type.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

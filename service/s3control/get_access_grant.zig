@@ -150,7 +150,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "GrantScope")) {
                     result.grant_scope = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Permission")) {
-                    result.permission = std.meta.stringToEnum(Permission, try reader.readElementText());
+                    result.permission = Permission.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

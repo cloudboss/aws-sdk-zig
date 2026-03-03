@@ -172,7 +172,7 @@ pub fn deserializeEventTypes(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
-                    if (std.meta.stringToEnum(EventType, try reader.readElementText())) |v| try list.append(allocator, v);
+                    if (EventType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -600,7 +600,7 @@ pub fn deserializeBulkEmailDestinationStatus(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "MessageId")) {
                     result.message_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(BulkEmailStatus, try reader.readElementText());
+                    result.status = BulkEmailStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -640,7 +640,7 @@ pub fn deserializeCloudWatchDimensionConfiguration(allocator: std.mem.Allocator,
                 } else if (std.mem.eql(u8, e.local, "DimensionName")) {
                     result.dimension_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DimensionValueSource")) {
-                    result.dimension_value_source = std.meta.stringToEnum(DimensionValueSource, try reader.readElementText());
+                    result.dimension_value_source = DimensionValueSource.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -729,7 +729,7 @@ pub fn deserializeDeliveryOptions(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "TlsPolicy")) {
-                    result.tls_policy = std.meta.stringToEnum(TlsPolicy, try reader.readElementText());
+                    result.tls_policy = TlsPolicy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -784,7 +784,7 @@ pub fn deserializeIdentityDkimAttributes(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "DkimTokens")) {
                     result.dkim_tokens = try deserializeVerificationTokenList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DkimVerificationStatus")) {
-                    result.dkim_verification_status = std.meta.stringToEnum(VerificationStatus, try reader.readElementText());
+                    result.dkim_verification_status = VerificationStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -802,11 +802,11 @@ pub fn deserializeIdentityMailFromDomainAttributes(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "BehaviorOnMXFailure")) {
-                    result.behavior_on_mx_failure = std.meta.stringToEnum(BehaviorOnMXFailure, try reader.readElementText());
+                    result.behavior_on_mx_failure = BehaviorOnMXFailure.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MailFromDomain")) {
                     result.mail_from_domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MailFromDomainStatus")) {
-                    result.mail_from_domain_status = std.meta.stringToEnum(CustomMailFromStatus, try reader.readElementText());
+                    result.mail_from_domain_status = CustomMailFromStatus.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -858,7 +858,7 @@ pub fn deserializeIdentityVerificationAttributes(allocator: std.mem.Allocator, r
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "VerificationStatus")) {
-                    result.verification_status = std.meta.stringToEnum(VerificationStatus, try reader.readElementText());
+                    result.verification_status = VerificationStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VerificationToken")) {
                     result.verification_token = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -902,7 +902,7 @@ pub fn deserializeLambdaAction(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 if (std.mem.eql(u8, e.local, "FunctionArn")) {
                     result.function_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InvocationType")) {
-                    result.invocation_type = std.meta.stringToEnum(InvocationType, try reader.readElementText());
+                    result.invocation_type = InvocationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TopicArn")) {
                     result.topic_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -984,7 +984,7 @@ pub fn deserializeReceiptIpFilter(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Cidr")) {
                     result.cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Policy")) {
-                    result.policy = std.meta.stringToEnum(ReceiptFilterPolicy, try reader.readElementText());
+                    result.policy = ReceiptFilterPolicy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1017,7 +1017,7 @@ pub fn deserializeReceiptRule(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "ScanEnabled")) {
                     result.scan_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "TlsPolicy")) {
-                    result.tls_policy = std.meta.stringToEnum(TlsPolicy, try reader.readElementText());
+                    result.tls_policy = TlsPolicy.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1114,7 +1114,7 @@ pub fn deserializeSNSAction(allocator: std.mem.Allocator, reader: *aws.xml.Reade
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Encoding")) {
-                    result.encoding = std.meta.stringToEnum(SNSActionEncoding, try reader.readElementText());
+                    result.encoding = SNSActionEncoding.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TopicArn")) {
                     result.topic_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1185,7 +1185,7 @@ pub fn deserializeStopAction(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Scope")) {
-                    result.scope = std.meta.stringToEnum(StopScope, try reader.readElementText());
+                    result.scope = StopScope.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TopicArn")) {
                     result.topic_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1341,7 +1341,7 @@ pub fn serializeConfigurationSetAttributeList(allocator: std.mem.Allocator, buf:
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1353,7 +1353,7 @@ pub fn serializeEventTypes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
-        try buf.appendSlice(allocator, @tagName(item));
+        try buf.appendSlice(allocator, item.wireName());
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1491,7 +1491,7 @@ pub fn serializeBounceAction(allocator: std.mem.Allocator, buf: *std.ArrayList(u
 pub fn serializeBouncedRecipientInfo(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: BouncedRecipientInfo) !void {
     if (value.bounce_type) |v| {
         try buf.appendSlice(allocator, "<BounceType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</BounceType>");
     }
     try buf.appendSlice(allocator, "<Recipient>");
@@ -1539,7 +1539,7 @@ pub fn serializeCloudWatchDimensionConfiguration(allocator: std.mem.Allocator, b
     try aws.xml.appendXmlEscaped(allocator, buf, value.dimension_name);
     try buf.appendSlice(allocator, "</DimensionName>");
     try buf.appendSlice(allocator, "<DimensionValueSource>");
-    try buf.appendSlice(allocator, @tagName(value.dimension_value_source));
+    try buf.appendSlice(allocator, value.dimension_value_source.wireName());
     try buf.appendSlice(allocator, "</DimensionValueSource>");
 }
 
@@ -1572,7 +1572,7 @@ pub fn serializeContent(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), v
 pub fn serializeDeliveryOptions(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DeliveryOptions) !void {
     if (value.tls_policy) |v| {
         try buf.appendSlice(allocator, "<TlsPolicy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TlsPolicy>");
     }
 }
@@ -1648,7 +1648,7 @@ pub fn serializeLambdaAction(allocator: std.mem.Allocator, buf: *std.ArrayList(u
     try buf.appendSlice(allocator, "</FunctionArn>");
     if (value.invocation_type) |v| {
         try buf.appendSlice(allocator, "<InvocationType>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</InvocationType>");
     }
     if (value.topic_arn) |v| {
@@ -1758,7 +1758,7 @@ pub fn serializeReceiptIpFilter(allocator: std.mem.Allocator, buf: *std.ArrayLis
     try aws.xml.appendXmlEscaped(allocator, buf, value.cidr);
     try buf.appendSlice(allocator, "</Cidr>");
     try buf.appendSlice(allocator, "<Policy>");
-    try buf.appendSlice(allocator, @tagName(value.policy));
+    try buf.appendSlice(allocator, value.policy.wireName());
     try buf.appendSlice(allocator, "</Policy>");
 }
 
@@ -1788,14 +1788,14 @@ pub fn serializeReceiptRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
     }
     if (value.tls_policy) |v| {
         try buf.appendSlice(allocator, "<TlsPolicy>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</TlsPolicy>");
     }
 }
 
 pub fn serializeRecipientDsnFields(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: RecipientDsnFields) !void {
     try buf.appendSlice(allocator, "<Action>");
-    try buf.appendSlice(allocator, @tagName(value.action));
+    try buf.appendSlice(allocator, value.action.wireName());
     try buf.appendSlice(allocator, "</Action>");
     if (value.diagnostic_code) |v| {
         try buf.appendSlice(allocator, "<DiagnosticCode>");
@@ -1859,7 +1859,7 @@ pub fn serializeS3Action(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), 
 pub fn serializeSNSAction(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SNSAction) !void {
     if (value.encoding) |v| {
         try buf.appendSlice(allocator, "<Encoding>");
-        try buf.appendSlice(allocator, @tagName(v));
+        try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Encoding>");
     }
     try buf.appendSlice(allocator, "<TopicArn>");
@@ -1875,7 +1875,7 @@ pub fn serializeSNSDestination(allocator: std.mem.Allocator, buf: *std.ArrayList
 
 pub fn serializeStopAction(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: StopAction) !void {
     try buf.appendSlice(allocator, "<Scope>");
-    try buf.appendSlice(allocator, @tagName(value.scope));
+    try buf.appendSlice(allocator, value.scope.wireName());
     try buf.appendSlice(allocator, "</Scope>");
     if (value.topic_arn) |v| {
         try buf.appendSlice(allocator, "<TopicArn>");

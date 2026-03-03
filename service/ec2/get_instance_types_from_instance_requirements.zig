@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     }
     if (input.instance_requirements.bare_metal) |sv| {
         try body_buf.appendSlice(allocator, "&InstanceRequirements.BareMetal=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.instance_requirements.baseline_ebs_bandwidth_mbps) |sv| {
         if (sv.max) |sv2| {
@@ -191,7 +191,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     }
     if (input.instance_requirements.burstable_performance) |sv| {
         try body_buf.appendSlice(allocator, "&InstanceRequirements.BurstablePerformance=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.instance_requirements.cpu_manufacturers) |list_d0| {
         for (list_d0, 0..) |item, idx| {
@@ -222,7 +222,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     }
     if (input.instance_requirements.local_storage) |sv| {
         try body_buf.appendSlice(allocator, "&InstanceRequirements.LocalStorage=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
     }
     if (input.instance_requirements.local_storage_types) |list_d0| {
         for (list_d0, 0..) |item, idx| {

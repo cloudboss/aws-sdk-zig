@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIpamResourceCidrsInp
     }
     if (input.resource_type) |v| {
         try body_buf.appendSlice(allocator, "&ResourceType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

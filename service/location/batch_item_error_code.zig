@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const BatchItemErrorCode = enum {
     /// Access to the resource was denied.
     access_denied_error,
@@ -20,4 +22,24 @@ pub const BatchItemErrorCode = enum {
         .throttling_error = "ThrottlingError",
         .validation_error = "ValidationError",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .access_denied_error => "AccessDeniedError",
+            .conflict_error => "ConflictError",
+            .internal_server_error => "InternalServerError",
+            .resource_not_found_error => "ResourceNotFoundError",
+            .throttling_error => "ThrottlingError",
+            .validation_error => "ValidationError",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

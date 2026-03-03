@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBounceInput, config
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.BounceType=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.bounce_type) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
@@ -112,7 +112,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBounceInput, config
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.Action=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv_1.action));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.action.wireName());
             }
             {
                 var prefix_buf: [256]u8 = undefined;

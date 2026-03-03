@@ -100,7 +100,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecyclePoliciesInp
     if (input.default_policy_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "defaultPolicyType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.policy_ids) |v| {
@@ -118,7 +118,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecyclePoliciesInp
     if (input.state) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "state=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.tags_to_add) |v| {

@@ -209,7 +209,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
             }
             if (sv.bare_metal) |sv2| {
                 try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.BareMetal=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
             if (sv.baseline_ebs_bandwidth_mbps) |sv2| {
                 if (sv2.max) |sv3| {
@@ -240,7 +240,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
             }
             if (sv.burstable_performance) |sv2| {
                 try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.BurstablePerformance=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
             if (sv.cpu_manufacturers) |list_d1| {
                 for (list_d1, 0..) |item, idx| {
@@ -271,7 +271,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
             }
             if (sv.local_storage) |sv2| {
                 try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.LocalStorage=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
             if (sv.local_storage_types) |list_d1| {
                 for (list_d1, 0..) |item, idx| {
@@ -399,7 +399,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.target_capacity}) catch "");
     if (input.target_capacity_unit_type) |v| {
         try body_buf.appendSlice(allocator, "&TargetCapacityUnitType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

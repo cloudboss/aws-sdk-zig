@@ -133,7 +133,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
         result.checksum = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amz-checksum-algorithm")) |value| {
-        result.checksum_algorithm = std.meta.stringToEnum(ChecksumAlgorithm, value);
+        result.checksum_algorithm = ChecksumAlgorithm.fromWireName(value);
     }
     if (stream_resp.headers.get("x-amz-data-length")) |value| {
         result.data_length = std.fmt.parseInt(i32, value, 10) catch null;

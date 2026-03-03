@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const GroupByField = enum {
     activity_name,
     cloud_account_uid,
@@ -24,28 +26,65 @@ pub const GroupByField = enum {
     vendor_attributes_severity,
 
     pub const json_field_names = .{
-        .activity_name = "ACTIVITY_NAME",
-        .cloud_account_uid = "CLOUD_ACCOUNT_UID",
-        .cloud_provider = "CLOUD_PROVIDER",
-        .cloud_region = "CLOUD_REGION",
-        .compliance_assessments_name = "COMPLIANCE_ASSESSMENTS_NAME",
-        .compliance_status = "COMPLIANCE_STATUS",
-        .compliance_control = "COMPLIANCE_CONTROL",
-        .finding_info_title = "FINDING_INFO_TITLE",
-        .finding_info_related_events_traits_category = "FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY",
-        .finding_info_types = "FINDING_INFO_TYPES",
-        .metadata_product_name = "METADATA_PRODUCT_NAME",
-        .metadata_product_uid = "METADATA_PRODUCT_UID",
-        .resources_type = "RESOURCES_TYPE",
-        .resources_uid = "RESOURCES_UID",
-        .severity = "SEVERITY",
-        .status = "STATUS",
-        .vulnerabilities_fix_coverage = "VULNERABILITIES_FIX_COVERAGE",
-        .class_name = "CLASS_NAME",
-        .vulnerabilities_affected_packages_name = "VULNERABILITIES_AFFECTED_PACKAGES_NAME",
-        .finding_info_analytic_name = "FINDING_INFO_ANALYTIC_NAME",
-        .compliance_standards = "COMPLIANCE_STANDARDS",
-        .cloud_account_name = "CLOUD_ACCOUNT_NAME",
-        .vendor_attributes_severity = "VENDOR_ATTRIBUTES_SEVERITY",
+        .activity_name = "activity_name",
+        .cloud_account_uid = "cloud.account.uid",
+        .cloud_provider = "cloud.provider",
+        .cloud_region = "cloud.region",
+        .compliance_assessments_name = "compliance.assessments.name",
+        .compliance_status = "compliance.status",
+        .compliance_control = "compliance.control",
+        .finding_info_title = "finding_info.title",
+        .finding_info_related_events_traits_category = "finding_info.related_events.traits.category",
+        .finding_info_types = "finding_info.types",
+        .metadata_product_name = "metadata.product.name",
+        .metadata_product_uid = "metadata.product.uid",
+        .resources_type = "resources.type",
+        .resources_uid = "resources.uid",
+        .severity = "severity",
+        .status = "status",
+        .vulnerabilities_fix_coverage = "vulnerabilities.fix_coverage",
+        .class_name = "class_name",
+        .vulnerabilities_affected_packages_name = "vulnerabilities.affected_packages.name",
+        .finding_info_analytic_name = "finding_info.analytic.name",
+        .compliance_standards = "compliance.standards",
+        .cloud_account_name = "cloud.account.name",
+        .vendor_attributes_severity = "vendor_attributes.severity",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .activity_name => "activity_name",
+            .cloud_account_uid => "cloud.account.uid",
+            .cloud_provider => "cloud.provider",
+            .cloud_region => "cloud.region",
+            .compliance_assessments_name => "compliance.assessments.name",
+            .compliance_status => "compliance.status",
+            .compliance_control => "compliance.control",
+            .finding_info_title => "finding_info.title",
+            .finding_info_related_events_traits_category => "finding_info.related_events.traits.category",
+            .finding_info_types => "finding_info.types",
+            .metadata_product_name => "metadata.product.name",
+            .metadata_product_uid => "metadata.product.uid",
+            .resources_type => "resources.type",
+            .resources_uid => "resources.uid",
+            .severity => "severity",
+            .status => "status",
+            .vulnerabilities_fix_coverage => "vulnerabilities.fix_coverage",
+            .class_name => "class_name",
+            .vulnerabilities_affected_packages_name => "vulnerabilities.affected_packages.name",
+            .finding_info_analytic_name => "finding_info.analytic.name",
+            .compliance_standards => "compliance.standards",
+            .cloud_account_name => "cloud.account.name",
+            .vendor_attributes_severity => "vendor_attributes.severity",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

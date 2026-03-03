@@ -124,7 +124,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: LaunchInstancesInput, c
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.requested_capacity}) catch "");
     if (input.retry_strategy) |v| {
         try body_buf.appendSlice(allocator, "&RetryStrategy=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.subnet_ids) |list| {
         for (list, 0..) |item, idx| {

@@ -82,7 +82,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceNetworkPe
 
     try body_buf.appendSlice(allocator, "Action=ModifyInstanceNetworkPerformanceOptions&Version=2016-11-15");
     try body_buf.appendSlice(allocator, "&BandwidthWeighting=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.bandwidth_weighting));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.bandwidth_weighting.wireName());
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
@@ -120,7 +120,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "bandwidthWeighting")) {
-                    result.bandwidth_weighting = std.meta.stringToEnum(InstanceBandwidthWeighting, try reader.readElementText());
+                    result.bandwidth_weighting = InstanceBandwidthWeighting.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {

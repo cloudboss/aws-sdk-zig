@@ -318,8 +318,8 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("result.status = std.meta.stringToEnum(StatusType, try reader.readElementText());"),
-            "Should deserialize enum with stringToEnum",
+            serde.contains("result.status = StatusType.fromWireName(try reader.readElementText());"),
+            "Should deserialize enum with fromWireName",
         )
     }
 
@@ -545,8 +545,8 @@ class SerdeGeneratorTest {
         val serde = files["serde.zig"]!!
         // Status is optional, so unwrapped as v
         assertTrue(
-            serde.contains("@tagName(v)"),
-            "Enum fields should use @tagName",
+            serde.contains("v.wireName()"),
+            "Enum fields should use wireName()",
         )
     }
 

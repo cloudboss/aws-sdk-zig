@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const AlgorithmSpec = enum {
     rsaes_pkcs1_v1_5,
     rsaes_oaep_sha_1,
@@ -14,4 +16,24 @@ pub const AlgorithmSpec = enum {
         .rsa_aes_key_wrap_sha_256 = "RSA_AES_KEY_WRAP_SHA_256",
         .sm2_pke = "SM2PKE",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .rsaes_pkcs1_v1_5 => "RSAES_PKCS1_V1_5",
+            .rsaes_oaep_sha_1 => "RSAES_OAEP_SHA_1",
+            .rsaes_oaep_sha_256 => "RSAES_OAEP_SHA_256",
+            .rsa_aes_key_wrap_sha_1 => "RSA_AES_KEY_WRAP_SHA_1",
+            .rsa_aes_key_wrap_sha_256 => "RSA_AES_KEY_WRAP_SHA_256",
+            .sm2_pke => "SM2PKE",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

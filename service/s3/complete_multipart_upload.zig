@@ -415,7 +415,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteMultipartUpload
         try request.headers.put(allocator, "x-amz-checksum-sha256", v);
     }
     if (input.checksum_type) |v| {
-        try request.headers.put(allocator, "x-amz-checksum-type", @tagName(v));
+        try request.headers.put(allocator, "x-amz-checksum-type", v.wireName());
     }
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
@@ -433,7 +433,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteMultipartUpload
         }
     }
     if (input.request_payer) |v| {
-        try request.headers.put(allocator, "x-amz-request-payer", @tagName(v));
+        try request.headers.put(allocator, "x-amz-request-payer", v.wireName());
     }
     if (input.sse_customer_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-customer-algorithm", v);
@@ -476,7 +476,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
-                    result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
+                    result.checksum_type = ChecksumType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Key")) {
@@ -498,10 +498,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.expiration = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-request-charged")) |value| {
-        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+        result.request_charged = RequestCharged.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption")) |value| {
-        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+        result.server_side_encryption = ServerSideEncryption.fromWireName(value);
     }
     if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
         result.ssekms_key_id = try allocator.dupe(u8, value);

@@ -143,7 +143,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNetworkAclEntryIn
     try body_buf.appendSlice(allocator, "&Protocol=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.protocol);
     try body_buf.appendSlice(allocator, "&RuleAction=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.rule_action));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.rule_action.wireName());
     try body_buf.appendSlice(allocator, "&RuleNumber=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.rule_number}) catch "");
 

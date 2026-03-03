@@ -139,7 +139,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeUsersInput, con
     if (input.include) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "include=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.limit) |v| {
@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeUsersInput, con
     if (input.order) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "order=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.organization_id) |v| {
@@ -178,7 +178,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeUsersInput, con
     if (input.sort) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "sort=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.user_ids) |v| {

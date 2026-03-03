@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const JDBCDataType = enum {
     array,
     bigint,
@@ -80,4 +82,57 @@ pub const JDBCDataType = enum {
         .varbinary = "VARBINARY",
         .varchar = "VARCHAR",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .array => "ARRAY",
+            .bigint => "BIGINT",
+            .binary => "BINARY",
+            .bit => "BIT",
+            .blob => "BLOB",
+            .boolean => "BOOLEAN",
+            .char => "CHAR",
+            .clob => "CLOB",
+            .datalink => "DATALINK",
+            .date => "DATE",
+            .decimal => "DECIMAL",
+            .distinct => "DISTINCT",
+            .double => "DOUBLE",
+            .float => "FLOAT",
+            .integer => "INTEGER",
+            .java_object => "JAVA_OBJECT",
+            .longnvarchar => "LONGNVARCHAR",
+            .longvarbinary => "LONGVARBINARY",
+            .longvarchar => "LONGVARCHAR",
+            .nchar => "NCHAR",
+            .nclob => "NCLOB",
+            .@"null" => "NULL",
+            .numeric => "NUMERIC",
+            .nvarchar => "NVARCHAR",
+            .other => "OTHER",
+            .real => "REAL",
+            .ref => "REF",
+            .ref_cursor => "REF_CURSOR",
+            .rowid => "ROWID",
+            .smallint => "SMALLINT",
+            .sqlxml => "SQLXML",
+            .@"struct" => "STRUCT",
+            .time => "TIME",
+            .time_with_timezone => "TIME_WITH_TIMEZONE",
+            .timestamp => "TIMESTAMP",
+            .timestamp_with_timezone => "TIMESTAMP_WITH_TIMEZONE",
+            .tinyint => "TINYINT",
+            .varbinary => "VARBINARY",
+            .varchar => "VARCHAR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

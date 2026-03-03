@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ImageFailureCode = enum {
     invalid_image_digest,
     invalid_image_tag,
@@ -16,4 +18,25 @@ pub const ImageFailureCode = enum {
         .image_referenced_by_manifest_list = "ImageReferencedByManifestList",
         .kms_error = "KmsError",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .invalid_image_digest => "InvalidImageDigest",
+            .invalid_image_tag => "InvalidImageTag",
+            .image_tag_does_not_match_digest => "ImageTagDoesNotMatchDigest",
+            .image_not_found => "ImageNotFound",
+            .missing_digest_and_tag => "MissingDigestAndTag",
+            .image_referenced_by_manifest_list => "ImageReferencedByManifestList",
+            .kms_error => "KmsError",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const MetadataField = enum {
     /// Compute platform on which agent is running.
     compute_platform,
@@ -19,14 +21,37 @@ pub const MetadataField = enum {
     lambda_previous_execution_time_in_milliseconds,
 
     pub const json_field_names = .{
-        .compute_platform = "COMPUTE_PLATFORM",
-        .agent_id = "AGENT_ID",
-        .aws_request_id = "AWS_REQUEST_ID",
-        .execution_environment = "EXECUTION_ENVIRONMENT",
-        .lambda_function_arn = "LAMBDA_FUNCTION_ARN",
-        .lambda_memory_limit_in_mb = "LAMBDA_MEMORY_LIMIT_IN_MB",
-        .lambda_remaining_time_in_milliseconds = "LAMBDA_REMAINING_TIME_IN_MILLISECONDS",
-        .lambda_time_gap_between_invokes_in_milliseconds = "LAMBDA_TIME_GAP_BETWEEN_INVOKES_IN_MILLISECONDS",
-        .lambda_previous_execution_time_in_milliseconds = "LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS",
+        .compute_platform = "ComputePlatform",
+        .agent_id = "AgentId",
+        .aws_request_id = "AwsRequestId",
+        .execution_environment = "ExecutionEnvironment",
+        .lambda_function_arn = "LambdaFunctionArn",
+        .lambda_memory_limit_in_mb = "LambdaMemoryLimitInMB",
+        .lambda_remaining_time_in_milliseconds = "LambdaRemainingTimeInMilliseconds",
+        .lambda_time_gap_between_invokes_in_milliseconds = "LambdaTimeGapBetweenInvokesInMilliseconds",
+        .lambda_previous_execution_time_in_milliseconds = "LambdaPreviousExecutionTimeInMilliseconds",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .compute_platform => "ComputePlatform",
+            .agent_id => "AgentId",
+            .aws_request_id => "AwsRequestId",
+            .execution_environment => "ExecutionEnvironment",
+            .lambda_function_arn => "LambdaFunctionArn",
+            .lambda_memory_limit_in_mb => "LambdaMemoryLimitInMB",
+            .lambda_remaining_time_in_milliseconds => "LambdaRemainingTimeInMilliseconds",
+            .lambda_time_gap_between_invokes_in_milliseconds => "LambdaTimeGapBetweenInvokesInMilliseconds",
+            .lambda_previous_execution_time_in_milliseconds => "LambdaPreviousExecutionTimeInMilliseconds",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

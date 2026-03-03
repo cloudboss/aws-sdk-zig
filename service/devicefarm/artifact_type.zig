@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ArtifactType = enum {
     unknown,
     screenshot,
@@ -58,4 +60,46 @@ pub const ArtifactType = enum {
         .customer_artifact_log = "CUSTOMER_ARTIFACT_LOG",
         .testspec_output = "TESTSPEC_OUTPUT",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .unknown => "UNKNOWN",
+            .screenshot => "SCREENSHOT",
+            .device_log => "DEVICE_LOG",
+            .message_log => "MESSAGE_LOG",
+            .video_log => "VIDEO_LOG",
+            .result_log => "RESULT_LOG",
+            .service_log => "SERVICE_LOG",
+            .webkit_log => "WEBKIT_LOG",
+            .instrumentation_output => "INSTRUMENTATION_OUTPUT",
+            .exerciser_monkey_output => "EXERCISER_MONKEY_OUTPUT",
+            .calabash_json_output => "CALABASH_JSON_OUTPUT",
+            .calabash_pretty_output => "CALABASH_PRETTY_OUTPUT",
+            .calabash_standard_output => "CALABASH_STANDARD_OUTPUT",
+            .calabash_java_xml_output => "CALABASH_JAVA_XML_OUTPUT",
+            .automation_output => "AUTOMATION_OUTPUT",
+            .appium_server_output => "APPIUM_SERVER_OUTPUT",
+            .appium_java_output => "APPIUM_JAVA_OUTPUT",
+            .appium_java_xml_output => "APPIUM_JAVA_XML_OUTPUT",
+            .appium_python_output => "APPIUM_PYTHON_OUTPUT",
+            .appium_python_xml_output => "APPIUM_PYTHON_XML_OUTPUT",
+            .explorer_event_log => "EXPLORER_EVENT_LOG",
+            .explorer_summary_log => "EXPLORER_SUMMARY_LOG",
+            .application_crash_report => "APPLICATION_CRASH_REPORT",
+            .xctest_log => "XCTEST_LOG",
+            .video => "VIDEO",
+            .customer_artifact => "CUSTOMER_ARTIFACT",
+            .customer_artifact_log => "CUSTOMER_ARTIFACT_LOG",
+            .testspec_output => "TESTSPEC_OUTPUT",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -576,7 +576,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
         }
         if (v.replica_mode) |sv| {
             try body_buf.appendSlice(allocator, "&RdsCustomClusterConfiguration.ReplicaMode=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.transit_gateway_multicast_domain_id) |sv| {
             try body_buf.appendSlice(allocator, "&RdsCustomClusterConfiguration.TransitGatewayMulticastDomainId=");

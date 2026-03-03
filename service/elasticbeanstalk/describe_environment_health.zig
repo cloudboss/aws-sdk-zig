@@ -159,7 +159,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "RefreshedAt")) {
                     result.refreshed_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = std.meta.stringToEnum(EnvironmentHealth, try reader.readElementText());
+                    result.status = EnvironmentHealth.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

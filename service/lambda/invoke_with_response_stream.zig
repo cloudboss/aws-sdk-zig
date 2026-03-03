@@ -155,10 +155,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeWithResponseStrea
         try request.headers.put(allocator, "X-Amz-Client-Context", v);
     }
     if (input.invocation_type) |v| {
-        try request.headers.put(allocator, "X-Amz-Invocation-Type", @tagName(v));
+        try request.headers.put(allocator, "X-Amz-Invocation-Type", v.wireName());
     }
     if (input.log_type) |v| {
-        try request.headers.put(allocator, "X-Amz-Log-Type", @tagName(v));
+        try request.headers.put(allocator, "X-Amz-Log-Type", v.wireName());
     }
     if (input.tenant_id) |v| {
         try request.headers.put(allocator, "X-Amz-Tenant-Id", v);

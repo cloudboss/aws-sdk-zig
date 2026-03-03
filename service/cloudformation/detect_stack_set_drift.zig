@@ -91,7 +91,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DetectStackSetDriftInpu
     try body_buf.appendSlice(allocator, "Action=DetectStackSetDrift&Version=2010-05-15");
     if (input.call_as) |v| {
         try body_buf.appendSlice(allocator, "&CallAs=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.operation_id) |v| {
         try body_buf.appendSlice(allocator, "&OperationId=");
@@ -100,7 +100,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DetectStackSetDriftInpu
     if (input.operation_preferences) |v| {
         if (v.concurrency_mode) |sv| {
             try body_buf.appendSlice(allocator, "&OperationPreferences.ConcurrencyMode=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.failure_tolerance_count) |sv| {
             try body_buf.appendSlice(allocator, "&OperationPreferences.FailureToleranceCount=");
@@ -120,7 +120,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DetectStackSetDriftInpu
         }
         if (v.region_concurrency_type) |sv| {
             try body_buf.appendSlice(allocator, "&OperationPreferences.RegionConcurrencyType=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.region_order) |list_d0| {
             for (list_d0, 0..) |item, idx| {

@@ -100,7 +100,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDataSharesForCo
     }
     if (input.status) |v| {
         try body_buf.appendSlice(allocator, "&Status=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

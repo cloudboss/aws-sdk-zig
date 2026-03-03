@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// If the IMSC captions track is intended to provide accessibility for people
 /// who are deaf or hard of hearing: Set Accessibility subtitles to Enabled.
 /// When you do, MediaConvert adds accessibility attributes to your output HLS
@@ -12,4 +14,20 @@ pub const ImscAccessibilitySubs = enum {
         .disabled = "DISABLED",
         .enabled = "ENABLED",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .disabled => "DISABLED",
+            .enabled => "ENABLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

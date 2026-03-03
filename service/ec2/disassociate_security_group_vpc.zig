@@ -101,7 +101,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "state")) {
-                    result.state = std.meta.stringToEnum(SecurityGroupVpcAssociationState, try reader.readElementText());
+                    result.state = SecurityGroupVpcAssociationState.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

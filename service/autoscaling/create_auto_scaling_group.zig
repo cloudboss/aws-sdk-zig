@@ -401,13 +401,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
     if (input.availability_zone_distribution) |v| {
         if (v.capacity_distribution_strategy) |sv| {
             try body_buf.appendSlice(allocator, "&AvailabilityZoneDistribution.CapacityDistributionStrategy=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.availability_zone_impairment_policy) |v| {
         if (v.impaired_zone_health_check_behavior) |sv| {
             try body_buf.appendSlice(allocator, "&AvailabilityZoneImpairmentPolicy.ImpairedZoneHealthCheckBehavior=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.zonal_shift_enabled) |sv| {
             try body_buf.appendSlice(allocator, "&AvailabilityZoneImpairmentPolicy.ZonalShiftEnabled=");
@@ -430,7 +430,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
     if (input.capacity_reservation_specification) |v| {
         if (v.capacity_reservation_preference) |sv| {
             try body_buf.appendSlice(allocator, "&CapacityReservationSpecification.CapacityReservationPreference=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.capacity_reservation_target) |sv| {
             if (sv.capacity_reservation_ids) |list_d1| {
@@ -467,7 +467,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
     }
     if (input.deletion_protection) |v| {
         try body_buf.appendSlice(allocator, "&DeletionProtection=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.desired_capacity) |v| {
         try body_buf.appendSlice(allocator, "&DesiredCapacity=");
@@ -493,7 +493,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
         if (v.retention_triggers) |sv| {
             if (sv.terminate_hook_abandon) |sv2| {
                 try body_buf.appendSlice(allocator, "&InstanceLifecyclePolicy.RetentionTriggers.TerminateHookAbandon=");
-                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }
         }
     }
@@ -738,7 +738,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BareMetal=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bare_metal) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.baseline_ebs_bandwidth_mbps) |sv_3| {
@@ -781,7 +781,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BurstablePerformance=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.burstable_performance) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.cpu_manufacturers) |lst_3| {
@@ -822,7 +822,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorage=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.local_storage) |fv_3| {
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_3));
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
                             }
                         }
                         if (sv_2.local_storage_types) |lst_3| {

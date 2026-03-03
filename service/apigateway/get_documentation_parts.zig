@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDocumentationPartsIn
     if (input.location_status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "locationStatus=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.name_query) |v| {
@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDocumentationPartsIn
     if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     const query = try query_buf.toOwnedSlice(allocator);

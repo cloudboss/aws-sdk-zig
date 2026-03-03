@@ -83,14 +83,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RecordHandlerProgressIn
     }
     if (input.current_operation_status) |v| {
         try body_buf.appendSlice(allocator, "&CurrentOperationStatus=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.error_code) |v| {
         try body_buf.appendSlice(allocator, "&ErrorCode=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&OperationStatus=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.operation_status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.operation_status.wireName());
     if (input.resource_model) |v| {
         try body_buf.appendSlice(allocator, "&ResourceModel=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);

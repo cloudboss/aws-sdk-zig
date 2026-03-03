@@ -256,7 +256,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNetworkInterfaceI
     }
     if (input.interface_type) |v| {
         try body_buf.appendSlice(allocator, "&InterfaceType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.ipv_4_prefix_count) |v| {
         try body_buf.appendSlice(allocator, "&Ipv4PrefixCount=");
@@ -362,7 +362,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNetworkInterfaceI
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             if (item.tags) |lst_1| {

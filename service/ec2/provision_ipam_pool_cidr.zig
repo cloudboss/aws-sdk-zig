@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ProvisionIpamPoolCidrIn
     }
     if (input.verification_method) |v| {
         try body_buf.appendSlice(allocator, "&VerificationMethod=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

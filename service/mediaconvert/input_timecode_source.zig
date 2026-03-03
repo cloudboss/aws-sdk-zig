@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// Use this Timecode source setting, located under the input settings, to
 /// specify how the service counts input video frames. This input frame count
 /// affects only the behavior of features that apply to a single input at a
@@ -18,4 +20,21 @@ pub const InputTimecodeSource = enum {
         .zerobased = "ZEROBASED",
         .specifiedstart = "SPECIFIEDSTART",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .embedded => "EMBEDDED",
+            .zerobased => "ZEROBASED",
+            .specifiedstart => "SPECIFIEDSTART",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

@@ -121,7 +121,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListExecutionsInput, co
     if (input.resolve_to_resource_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "resolveToResourceType=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -130,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListExecutionsInput, co
     query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "targetResourceType=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, @tagName(input.target_resource_type));
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.target_resource_type.wireName());
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

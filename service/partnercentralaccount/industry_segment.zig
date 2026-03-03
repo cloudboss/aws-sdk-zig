@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const IndustrySegment = enum {
     agriculture_mining,
     biotechnology,
@@ -76,4 +78,55 @@ pub const IndustrySegment = enum {
         .travel_hospitality = "TRAVEL_HOSPITALITY",
         .wholesale_distribution = "WHOLESALE_DISTRIBUTION",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .agriculture_mining => "AGRICULTURE_MINING",
+            .biotechnology => "BIOTECHNOLOGY",
+            .business_consumer_services => "BUSINESS_CONSUMER_SERVICES",
+            .business_serv => "BUSINESS_SERV",
+            .communications => "COMMUNICATIONS",
+            .computer_hardware => "COMPUTER_HARDWARE",
+            .computers_electronics => "COMPUTERS_ELECTRONICS",
+            .computer_software => "COMPUTER_SOFTWARE",
+            .consumer_goods => "CONSUMER_GOODS",
+            .consumer_related => "CONSUMER_RELATED",
+            .education => "EDUCATION",
+            .energy_utilities => "ENERGY_UTILITIES",
+            .financial_services => "FINANCIAL_SERVICES",
+            .gaming => "GAMING",
+            .government => "GOVERNMENT",
+            .government_education_public_services => "GOVERNMENT_EDUCATION_PUBLIC_SERVICES",
+            .healthcare => "HEALTHCARE",
+            .healthcare_pharmaceuticals_biotech => "HEALTHCARE_PHARMACEUTICALS_BIOTECH",
+            .industrial_energy => "INDUSTRIAL_ENERGY",
+            .internet_specific => "INTERNET_SPECIFIC",
+            .life_sciences => "LIFE_SCIENCES",
+            .manufacturing => "MANUFACTURING",
+            .media_entertainment_leisure => "MEDIA_ENTERTAINMENT_LEISURE",
+            .media_entertainment => "MEDIA_ENTERTAINMENT",
+            .medical_health => "MEDICAL_HEALTH",
+            .non_profit_organization => "NON_PROFIT_ORGANIZATION",
+            .other => "OTHER",
+            .professional_services => "PROFESSIONAL_SERVICES",
+            .real_estate_construction => "REAL_ESTATE_CONSTRUCTION",
+            .retail => "RETAIL",
+            .retail_wholesale_distribution => "RETAIL_WHOLESALE_DISTRIBUTION",
+            .semiconductor_electr => "SEMICONDUCTOR_ELECTR",
+            .software_internet => "SOFTWARE_INTERNET",
+            .telecommunications => "TELECOMMUNICATIONS",
+            .transportation_logistics => "TRANSPORTATION_LOGISTICS",
+            .travel_hospitality => "TRAVEL_HOSPITALITY",
+            .wholesale_distribution => "WHOLESALE_DISTRIBUTION",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

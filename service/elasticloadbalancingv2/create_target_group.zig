@@ -223,7 +223,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTargetGroupInput,
     }
     if (input.health_check_protocol) |v| {
         try body_buf.appendSlice(allocator, "&HealthCheckProtocol=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.health_check_timeout_seconds) |v| {
         try body_buf.appendSlice(allocator, "&HealthCheckTimeoutSeconds=");
@@ -235,7 +235,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTargetGroupInput,
     }
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&IpAddressType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.matcher) |v| {
         if (v.grpc_code) |sv| {
@@ -255,7 +255,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTargetGroupInput,
     }
     if (input.protocol) |v| {
         try body_buf.appendSlice(allocator, "&Protocol=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.protocol_version) |v| {
         try body_buf.appendSlice(allocator, "&ProtocolVersion=");
@@ -286,7 +286,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTargetGroupInput,
     }
     if (input.target_type) |v| {
         try body_buf.appendSlice(allocator, "&TargetType=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.unhealthy_threshold_count) |v| {
         try body_buf.appendSlice(allocator, "&UnhealthyThresholdCount=");

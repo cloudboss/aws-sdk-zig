@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSSHPublicKeyInput
     try body_buf.appendSlice(allocator, "&SSHPublicKeyId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.ssh_public_key_id);
     try body_buf.appendSlice(allocator, "&Status=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(input.status));
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.status.wireName());
     try body_buf.appendSlice(allocator, "&UserName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.user_name);
 

@@ -151,7 +151,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(allocator, "&LoadBalancerOptions.Protocol=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -191,7 +191,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(allocator, "&NetworkInterfaceOptions.Protocol=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
     }
     if (input.rds_options) |v| {

@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const ExtraParamName = enum {
     duns_number,
     brand_number,
@@ -52,7 +54,7 @@ pub const ExtraParamName = enum {
         .es_identification_type = "ES_IDENTIFICATION_TYPE",
         .es_legal_form = "ES_LEGAL_FORM",
         .fi_business_number = "FI_BUSINESS_NUMBER",
-        .onwer_fi_id_number = "ONWER_FI_ID_NUMBER",
+        .onwer_fi_id_number = "FI_ID_NUMBER",
         .fi_nationality = "FI_NATIONALITY",
         .fi_organization_type = "FI_ORGANIZATION_TYPE",
         .it_nationality = "IT_NATIONALITY",
@@ -70,4 +72,52 @@ pub const ExtraParamName = enum {
         .au_policy_reason = "AU_POLICY_REASON",
         .au_registrant_name = "AU_REGISTRANT_NAME",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .duns_number => "DUNS_NUMBER",
+            .brand_number => "BRAND_NUMBER",
+            .birth_department => "BIRTH_DEPARTMENT",
+            .birth_date_in_yyyy_mm_dd => "BIRTH_DATE_IN_YYYY_MM_DD",
+            .birth_country => "BIRTH_COUNTRY",
+            .birth_city => "BIRTH_CITY",
+            .document_number => "DOCUMENT_NUMBER",
+            .au_id_number => "AU_ID_NUMBER",
+            .au_id_type => "AU_ID_TYPE",
+            .ca_legal_type => "CA_LEGAL_TYPE",
+            .ca_business_entity_type => "CA_BUSINESS_ENTITY_TYPE",
+            .ca_legal_representative => "CA_LEGAL_REPRESENTATIVE",
+            .ca_legal_representative_capacity => "CA_LEGAL_REPRESENTATIVE_CAPACITY",
+            .es_identification => "ES_IDENTIFICATION",
+            .es_identification_type => "ES_IDENTIFICATION_TYPE",
+            .es_legal_form => "ES_LEGAL_FORM",
+            .fi_business_number => "FI_BUSINESS_NUMBER",
+            .onwer_fi_id_number => "FI_ID_NUMBER",
+            .fi_nationality => "FI_NATIONALITY",
+            .fi_organization_type => "FI_ORGANIZATION_TYPE",
+            .it_nationality => "IT_NATIONALITY",
+            .it_pin => "IT_PIN",
+            .it_registrant_entity_type => "IT_REGISTRANT_ENTITY_TYPE",
+            .ru_passport_data => "RU_PASSPORT_DATA",
+            .se_id_number => "SE_ID_NUMBER",
+            .sg_id_number => "SG_ID_NUMBER",
+            .vat_number => "VAT_NUMBER",
+            .uk_contact_type => "UK_CONTACT_TYPE",
+            .uk_company_number => "UK_COMPANY_NUMBER",
+            .eu_country_of_citizenship => "EU_COUNTRY_OF_CITIZENSHIP",
+            .au_priority_token => "AU_PRIORITY_TOKEN",
+            .au_eligibility_type => "AU_ELIGIBILITY_TYPE",
+            .au_policy_reason => "AU_POLICY_REASON",
+            .au_registrant_name => "AU_REGISTRANT_NAME",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

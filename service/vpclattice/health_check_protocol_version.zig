@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const HealthCheckProtocolVersion = enum {
     /// Indicates use of HTTP/1.1 to send requests to target
     http1,
@@ -8,4 +10,20 @@ pub const HealthCheckProtocolVersion = enum {
         .http1 = "HTTP1",
         .http2 = "HTTP2",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .http1 => "HTTP1",
+            .http2 => "HTTP2",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };

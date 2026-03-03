@@ -309,7 +309,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateStackSetInput, co
     }
     if (input.call_as) |v| {
         try body_buf.appendSlice(allocator, "&CallAs=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.capabilities) |list| {
         for (list, 0..) |item, idx| {
@@ -377,7 +377,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateStackSetInput, co
     }
     if (input.permission_model) |v| {
         try body_buf.appendSlice(allocator, "&PermissionModel=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.stack_id) |v| {
         try body_buf.appendSlice(allocator, "&StackId=");

@@ -126,7 +126,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         result.id = try allocator.dupe(u8, value);
     }
     if (headers.get("processing-status")) |value| {
-        result.processing_status = std.meta.stringToEnum(LineageEventProcessingStatus, value);
+        result.processing_status = LineageEventProcessingStatus.fromWireName(value);
     }
 
     return result;

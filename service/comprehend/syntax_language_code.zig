@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const SyntaxLanguageCode = enum {
     en,
     es,
@@ -7,11 +9,31 @@ pub const SyntaxLanguageCode = enum {
     pt,
 
     pub const json_field_names = .{
-        .en = "EN",
-        .es = "ES",
-        .fr = "FR",
-        .de = "DE",
-        .it = "IT",
-        .pt = "PT",
+        .en = "en",
+        .es = "es",
+        .fr = "fr",
+        .de = "de",
+        .it = "it",
+        .pt = "pt",
     };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .en => "en",
+            .es => "es",
+            .fr => "fr",
+            .de => "de",
+            .it => "it",
+            .pt => "pt",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
 };
